@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -255,15 +270,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.Service()
       );
@@ -271,11 +280,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await client.getService(request);
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getService without error using callback', async () => {
@@ -288,15 +300,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.Service()
       );
@@ -320,11 +326,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const response = await promise;
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getService with error', async () => {
@@ -337,15 +346,9 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getService = stubSimpleCall(
         undefined,
@@ -353,11 +356,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       await assert.rejects(client.getService(request), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.getService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getService with closed client', async () => {
@@ -370,7 +376,8 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -388,15 +395,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaMetricRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
       );
@@ -404,11 +408,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getConsumerQuotaMetric(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConsumerQuotaMetric without error using callback', async () => {
@@ -420,15 +427,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaMetricRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
       );
@@ -451,11 +455,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConsumerQuotaMetric with error', async () => {
@@ -467,15 +474,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaMetricRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConsumerQuotaMetric = stubSimpleCall(
         undefined,
@@ -485,11 +489,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.getConsumerQuotaMetric(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getConsumerQuotaMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConsumerQuotaMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConsumerQuotaMetric with closed client', async () => {
@@ -501,7 +508,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaMetricRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -521,15 +532,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaLimitRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ConsumerQuotaLimit()
       );
@@ -537,11 +545,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getConsumerQuotaLimit(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConsumerQuotaLimit without error using callback', async () => {
@@ -553,15 +564,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaLimitRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ConsumerQuotaLimit()
       );
@@ -584,11 +592,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConsumerQuotaLimit with error', async () => {
@@ -600,15 +611,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaLimitRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConsumerQuotaLimit = stubSimpleCall(
         undefined,
@@ -618,11 +626,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.getConsumerQuotaLimit(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getConsumerQuotaLimit as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConsumerQuotaLimit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConsumerQuotaLimit with closed client', async () => {
@@ -634,7 +645,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConsumerQuotaLimitRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -655,15 +670,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -673,11 +684,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await operation.promise();
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableService without error using callback', async () => {
@@ -690,15 +704,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -729,11 +739,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await operation.promise();
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableService with call error', async () => {
@@ -746,15 +759,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableService = stubLongRunningCall(
         undefined,
@@ -762,11 +771,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       await assert.rejects(client.enableService(request), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.enableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableService with LRO error', async () => {
@@ -779,15 +791,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableService = stubLongRunningCall(
         undefined,
@@ -797,11 +805,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.enableService(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.enableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkEnableServiceProgress without error', async () => {
@@ -861,15 +872,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -879,11 +886,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await operation.promise();
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.disableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableService without error using callback', async () => {
@@ -896,15 +906,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -935,11 +941,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await operation.promise();
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.disableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableService with call error', async () => {
@@ -952,15 +961,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableService = stubLongRunningCall(
         undefined,
@@ -968,11 +973,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       await assert.rejects(client.disableService(request), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.disableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableService with LRO error', async () => {
@@ -985,15 +993,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableService = stubLongRunningCall(
         undefined,
@@ -1003,11 +1007,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.disableService(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.disableService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDisableServiceProgress without error', async () => {
@@ -1067,15 +1074,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1085,11 +1088,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await operation.promise();
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchEnableServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchEnableServices without error using callback', async () => {
@@ -1102,15 +1108,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1141,11 +1143,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await operation.promise();
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchEnableServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchEnableServices with call error', async () => {
@@ -1158,15 +1163,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchEnableServices = stubLongRunningCall(
         undefined,
@@ -1174,11 +1175,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       await assert.rejects(client.batchEnableServices(request), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.batchEnableServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchEnableServices with LRO error', async () => {
@@ -1191,15 +1195,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchEnableServices = stubLongRunningCall(
         undefined,
@@ -1209,11 +1209,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.batchEnableServices(request);
       await assert.rejects(operation.promise(), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.batchEnableServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchEnableServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkBatchEnableServicesProgress without error', async () => {
@@ -1272,15 +1275,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1289,11 +1288,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.createAdminOverride(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAdminOverride without error using callback', async () => {
@@ -1305,15 +1307,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1343,11 +1341,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAdminOverride with call error', async () => {
@@ -1359,26 +1360,25 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAdminOverride = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAdminOverride(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAdminOverride with LRO error', async () => {
@@ -1390,15 +1390,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAdminOverride = stubLongRunningCall(
         undefined,
@@ -1407,11 +1403,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.createAdminOverride(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateAdminOverrideProgress without error', async () => {
@@ -1466,15 +1465,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1483,11 +1478,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.updateAdminOverride(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAdminOverride without error using callback', async () => {
@@ -1499,15 +1497,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1537,11 +1531,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAdminOverride with call error', async () => {
@@ -1553,26 +1550,25 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAdminOverride = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAdminOverride(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAdminOverride with LRO error', async () => {
@@ -1584,15 +1580,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAdminOverride = stubLongRunningCall(
         undefined,
@@ -1601,11 +1593,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.updateAdminOverride(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateAdminOverrideProgress without error', async () => {
@@ -1660,15 +1655,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1677,11 +1668,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.deleteAdminOverride(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAdminOverride without error using callback', async () => {
@@ -1693,15 +1687,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1731,11 +1721,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAdminOverride with call error', async () => {
@@ -1747,26 +1740,25 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAdminOverride = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAdminOverride(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAdminOverride with LRO error', async () => {
@@ -1778,15 +1770,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAdminOverride = stubLongRunningCall(
         undefined,
@@ -1795,11 +1783,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.deleteAdminOverride(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAdminOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAdminOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteAdminOverrideProgress without error', async () => {
@@ -1854,15 +1845,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1871,11 +1858,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.importAdminOverrides(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importAdminOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importAdminOverrides without error using callback', async () => {
@@ -1887,15 +1877,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1925,11 +1911,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importAdminOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importAdminOverrides with call error', async () => {
@@ -1941,26 +1930,25 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importAdminOverrides = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.importAdminOverrides(request), expectedError);
-      assert(
-        (client.innerApiCalls.importAdminOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importAdminOverrides with LRO error', async () => {
@@ -1972,15 +1960,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importAdminOverrides = stubLongRunningCall(
         undefined,
@@ -1989,11 +1973,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.importAdminOverrides(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.importAdminOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importAdminOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkImportAdminOverridesProgress without error', async () => {
@@ -2048,15 +2035,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConsumerOverrideRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2065,11 +2049,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.createConsumerOverride(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConsumerOverride without error using callback', async () => {
@@ -2081,15 +2068,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConsumerOverrideRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2119,11 +2103,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConsumerOverride with call error', async () => {
@@ -2135,15 +2122,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConsumerOverrideRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConsumerOverride = stubLongRunningCall(
         undefined,
@@ -2153,11 +2137,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.createConsumerOverride(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConsumerOverride with LRO error', async () => {
@@ -2169,15 +2156,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConsumerOverrideRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConsumerOverride = stubLongRunningCall(
         undefined,
@@ -2186,11 +2170,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.createConsumerOverride(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateConsumerOverrideProgress without error', async () => {
@@ -2245,15 +2232,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2262,11 +2246,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.updateConsumerOverride(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConsumerOverride without error using callback', async () => {
@@ -2278,15 +2265,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2316,11 +2300,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConsumerOverride with call error', async () => {
@@ -2332,15 +2319,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConsumerOverride = stubLongRunningCall(
         undefined,
@@ -2350,11 +2334,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.updateConsumerOverride(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConsumerOverride with LRO error', async () => {
@@ -2366,15 +2353,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConsumerOverride = stubLongRunningCall(
         undefined,
@@ -2383,11 +2367,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.updateConsumerOverride(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateConsumerOverrideProgress without error', async () => {
@@ -2442,15 +2429,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2459,11 +2443,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.deleteConsumerOverride(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConsumerOverride without error using callback', async () => {
@@ -2475,15 +2462,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2513,11 +2497,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConsumerOverride with call error', async () => {
@@ -2529,15 +2516,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConsumerOverride = stubLongRunningCall(
         undefined,
@@ -2547,11 +2531,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.deleteConsumerOverride(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConsumerOverride with LRO error', async () => {
@@ -2563,15 +2550,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConsumerOverrideRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConsumerOverride = stubLongRunningCall(
         undefined,
@@ -2580,11 +2564,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.deleteConsumerOverride(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteConsumerOverride as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConsumerOverride as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteConsumerOverrideProgress without error', async () => {
@@ -2639,15 +2626,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2656,11 +2640,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.importConsumerOverrides(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importConsumerOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importConsumerOverrides without error using callback', async () => {
@@ -2672,15 +2659,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2710,11 +2694,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importConsumerOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importConsumerOverrides with call error', async () => {
@@ -2726,15 +2713,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importConsumerOverrides = stubLongRunningCall(
         undefined,
@@ -2744,11 +2728,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.importConsumerOverrides(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.importConsumerOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importConsumerOverrides with LRO error', async () => {
@@ -2760,15 +2747,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importConsumerOverrides = stubLongRunningCall(
         undefined,
@@ -2777,11 +2761,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.importConsumerOverrides(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.importConsumerOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importConsumerOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkImportConsumerOverridesProgress without error', async () => {
@@ -2837,15 +2824,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GenerateServiceIdentityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2854,11 +2838,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [operation] = await client.generateServiceIdentity(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateServiceIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateServiceIdentity without error using callback', async () => {
@@ -2870,15 +2857,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GenerateServiceIdentityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2908,11 +2892,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateServiceIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateServiceIdentity with call error', async () => {
@@ -2924,15 +2911,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GenerateServiceIdentityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateServiceIdentity = stubLongRunningCall(
         undefined,
@@ -2942,11 +2926,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.generateServiceIdentity(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.generateServiceIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateServiceIdentity with LRO error', async () => {
@@ -2958,15 +2945,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GenerateServiceIdentityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateServiceIdentity = stubLongRunningCall(
         undefined,
@@ -2975,11 +2959,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.generateServiceIdentity(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.generateServiceIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateServiceIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkGenerateServiceIdentityProgress without error', async () => {
@@ -3036,15 +3023,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.Service()
@@ -3060,11 +3043,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const [response] = await client.listServices(request);
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServices without error using callback', async () => {
@@ -3077,15 +3063,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.Service()
@@ -3117,11 +3099,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       const response = await promise;
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServices with error', async () => {
@@ -3134,15 +3119,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServices = stubSimpleCall(
         undefined,
@@ -3150,11 +3131,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       await assert.rejects(client.listServices(request), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.listServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServicesStream without error', async () => {
@@ -3167,8 +3151,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.Service()
@@ -3206,11 +3193,12 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServices, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServices.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServices.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3224,8 +3212,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.createStream = stubPageStreamingCall(
         undefined,
@@ -3254,11 +3245,12 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServices, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServices.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServices.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3272,8 +3264,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.Service()
@@ -3300,11 +3295,12 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServices.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3318,8 +3314,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServices.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3337,11 +3336,12 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServices.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServices.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3356,15 +3356,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerQuotaMetricsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
@@ -3380,11 +3377,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listConsumerQuotaMetrics(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConsumerQuotaMetrics without error using callback', async () => {
@@ -3396,15 +3396,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerQuotaMetricsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
@@ -3437,11 +3434,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConsumerQuotaMetrics with error', async () => {
@@ -3453,15 +3453,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerQuotaMetricsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConsumerQuotaMetrics = stubSimpleCall(
         undefined,
@@ -3471,11 +3468,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.listConsumerQuotaMetrics(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listConsumerQuotaMetrics as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConsumerQuotaMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConsumerQuotaMetricsStream without error', async () => {
@@ -3487,8 +3487,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerQuotaMetricsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
@@ -3531,12 +3535,15 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConsumerQuotaMetrics, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerQuotaMetrics
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3549,8 +3556,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerQuotaMetricsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConsumerQuotaMetrics.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3582,12 +3593,15 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConsumerQuotaMetrics, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerQuotaMetrics
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3600,8 +3614,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerQuotaMetricsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.ConsumerQuotaMetric()
@@ -3629,12 +3647,15 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerQuotaMetrics
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3647,8 +3668,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerQuotaMetricsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConsumerQuotaMetrics.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3667,12 +3692,15 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerQuotaMetrics
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3687,15 +3715,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -3711,11 +3735,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listAdminOverrides(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAdminOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAdminOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdminOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAdminOverrides without error using callback', async () => {
@@ -3727,15 +3754,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -3768,11 +3791,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAdminOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAdminOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdminOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAdminOverrides with error', async () => {
@@ -3784,26 +3810,25 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAdminOverrides = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAdminOverrides(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAdminOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAdminOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAdminOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAdminOverridesStream without error', async () => {
@@ -3815,8 +3840,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -3854,11 +3882,12 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAdminOverrides, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAdminOverrides.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3871,8 +3900,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdminOverrides.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3899,11 +3931,12 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAdminOverrides, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAdminOverrides.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAdminOverrides.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3916,8 +3949,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -3944,11 +3980,12 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3961,8 +3998,11 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAdminOverrides.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3980,11 +4020,12 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAdminOverrides.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3999,15 +4040,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -4023,11 +4061,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listConsumerOverrides(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConsumerOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConsumerOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConsumerOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConsumerOverrides without error using callback', async () => {
@@ -4039,15 +4080,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -4080,11 +4118,14 @@ describe('v1beta1.ServiceUsageClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConsumerOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConsumerOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConsumerOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConsumerOverrides with error', async () => {
@@ -4096,15 +4137,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConsumerOverrides = stubSimpleCall(
         undefined,
@@ -4114,11 +4152,14 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.listConsumerOverrides(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listConsumerOverrides as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConsumerOverrides as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConsumerOverrides as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConsumerOverridesStream without error', async () => {
@@ -4130,8 +4171,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -4172,12 +4217,15 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConsumerOverrides, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerOverrides
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4190,8 +4238,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConsumerOverrides.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4221,12 +4273,15 @@ describe('v1beta1.ServiceUsageClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConsumerOverrides, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerOverrides
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4239,8 +4294,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.serviceusage.v1beta1.QuotaOverride()
@@ -4268,12 +4327,15 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerOverrides
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4286,8 +4348,12 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConsumerOverridesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConsumerOverrides.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4306,12 +4372,15 @@ describe('v1beta1.ServiceUsageClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConsumerOverrides
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
