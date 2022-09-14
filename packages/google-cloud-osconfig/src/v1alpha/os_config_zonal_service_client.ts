@@ -559,7 +559,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getOsPolicyAssignment(request, options, callback);
@@ -666,7 +666,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     this.warn(
@@ -781,7 +781,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getOsPolicyAssignmentReport(
@@ -887,7 +887,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getInventory(request, options, callback);
@@ -992,7 +992,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getVulnerabilityReport(
@@ -1120,7 +1120,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createOsPolicyAssignment(
@@ -1272,7 +1272,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'os_policy_assignment.name': request.osPolicyAssignment!.name || '',
+        'os_policy_assignment.name': request.osPolicyAssignment!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateOsPolicyAssignment(
@@ -1425,7 +1425,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteOsPolicyAssignment(
@@ -1566,7 +1566,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listOsPolicyAssignments(
@@ -1610,7 +1610,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1659,7 +1659,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignments'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1765,7 +1765,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listOsPolicyAssignmentRevisions(
@@ -1809,7 +1809,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
@@ -1859,7 +1859,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     const defaultCallSettings =
       this._defaults['listOsPolicyAssignmentRevisions'];
@@ -1976,7 +1976,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     this.warn(
@@ -2034,7 +2034,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listInstanceOsPoliciesCompliances'];
@@ -2098,7 +2098,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listInstanceOsPoliciesCompliances'];
@@ -2234,7 +2234,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listOsPolicyAssignmentReports(
@@ -2301,7 +2301,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2373,7 +2373,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listOsPolicyAssignmentReports'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2489,7 +2489,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listInventories(request, options, callback);
@@ -2539,7 +2539,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2598,7 +2598,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listInventories'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2711,7 +2711,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listVulnerabilityReports(
@@ -2762,7 +2762,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2818,7 +2818,7 @@ export class OsConfigZonalServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listVulnerabilityReports'];
     const callSettings = defaultCallSettings.merge(options);
