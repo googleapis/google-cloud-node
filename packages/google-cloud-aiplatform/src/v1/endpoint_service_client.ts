@@ -1532,7 +1532,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEndpoint(request, options, callback);
@@ -1625,7 +1625,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'endpoint.name': request.endpoint!.name || '',
+        'endpoint.name': request.endpoint!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateEndpoint(request, options, callback);
@@ -1741,7 +1741,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createEndpoint(request, options, callback);
@@ -1881,7 +1881,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteEndpoint(request, options, callback);
@@ -2038,7 +2038,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
+        endpoint: request.endpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deployModel(request, options, callback);
@@ -2189,7 +2189,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
+        endpoint: request.endpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.undeployModel(request, options, callback);
@@ -2353,7 +2353,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listEndpoints(request, options, callback);
@@ -2422,7 +2422,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2500,7 +2500,7 @@ export class EndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEndpoints'];
     const callSettings = defaultCallSettings.merge(options);

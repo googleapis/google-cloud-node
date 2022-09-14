@@ -33,6 +33,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -260,26 +275,23 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Dataset()
       );
       client.innerApiCalls.getDataset = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataset(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataset without error using callback', async () => {
@@ -291,15 +303,9 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Dataset()
       );
@@ -322,11 +328,14 @@ describe('v1.DatasetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataset with error', async () => {
@@ -338,26 +347,23 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataset = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDataset(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataset with closed client', async () => {
@@ -369,7 +375,8 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetDatasetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataset(request), expectedError);
@@ -386,27 +393,27 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
-      request.dataset = {};
-      request.dataset.name = '';
-      const expectedHeaderRequestParams = 'dataset.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataset ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
+        'dataset',
+        'name',
+      ]);
+      request.dataset.name = defaultValue1;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Dataset()
       );
       client.innerApiCalls.updateDataset = stubSimpleCall(expectedResponse);
       const [response] = await client.updateDataset(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataset without error using callback', async () => {
@@ -418,16 +425,13 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
-      request.dataset = {};
-      request.dataset.name = '';
-      const expectedHeaderRequestParams = 'dataset.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataset ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
+        'dataset',
+        'name',
+      ]);
+      request.dataset.name = defaultValue1;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.Dataset()
       );
@@ -450,11 +454,14 @@ describe('v1.DatasetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataset with error', async () => {
@@ -466,27 +473,27 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
-      request.dataset = {};
-      request.dataset.name = '';
-      const expectedHeaderRequestParams = 'dataset.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataset ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
+        'dataset',
+        'name',
+      ]);
+      request.dataset.name = defaultValue1;
+      const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataset = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDataset(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataset with closed client', async () => {
@@ -498,8 +505,12 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UpdateDatasetRequest()
       );
-      request.dataset = {};
-      request.dataset.name = '';
+      request.dataset ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
+        'dataset',
+        'name',
+      ]);
+      request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDataset(request), expectedError);
@@ -516,26 +527,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.AnnotationSpec()
       );
       client.innerApiCalls.getAnnotationSpec = stubSimpleCall(expectedResponse);
       const [response] = await client.getAnnotationSpec(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAnnotationSpec as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAnnotationSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnnotationSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAnnotationSpec without error using callback', async () => {
@@ -547,15 +557,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.AnnotationSpec()
       );
@@ -578,11 +584,14 @@ describe('v1.DatasetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAnnotationSpec as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAnnotationSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnnotationSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAnnotationSpec with error', async () => {
@@ -594,26 +603,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAnnotationSpec = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAnnotationSpec as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAnnotationSpec as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAnnotationSpec as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAnnotationSpec with closed client', async () => {
@@ -625,7 +633,10 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetAnnotationSpecRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAnnotationSpec(request), expectedError);
@@ -642,15 +653,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -659,11 +666,14 @@ describe('v1.DatasetServiceClient', () => {
       const [operation] = await client.createDataset(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataset without error using callback', async () => {
@@ -675,15 +685,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -713,11 +719,14 @@ describe('v1.DatasetServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataset with call error', async () => {
@@ -729,26 +738,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createDataset(request), expectedError);
-      assert(
-        (client.innerApiCalls.createDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataset with LRO error', async () => {
@@ -760,15 +768,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateDatasetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataset = stubLongRunningCall(
         undefined,
@@ -777,11 +781,14 @@ describe('v1.DatasetServiceClient', () => {
       );
       const [operation] = await client.createDataset(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateDatasetProgress without error', async () => {
@@ -836,15 +843,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -853,11 +856,14 @@ describe('v1.DatasetServiceClient', () => {
       const [operation] = await client.deleteDataset(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataset without error using callback', async () => {
@@ -869,15 +875,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -907,11 +909,14 @@ describe('v1.DatasetServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataset with call error', async () => {
@@ -923,26 +928,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDataset(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataset with LRO error', async () => {
@@ -954,15 +958,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteDatasetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataset = stubLongRunningCall(
         undefined,
@@ -971,11 +971,14 @@ describe('v1.DatasetServiceClient', () => {
       );
       const [operation] = await client.deleteDataset(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDataset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteDatasetProgress without error', async () => {
@@ -1030,15 +1033,9 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1046,11 +1043,14 @@ describe('v1.DatasetServiceClient', () => {
       const [operation] = await client.importData(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importData without error using callback', async () => {
@@ -1062,15 +1062,9 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1100,11 +1094,14 @@ describe('v1.DatasetServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importData with call error', async () => {
@@ -1116,26 +1113,23 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.importData(request), expectedError);
-      assert(
-        (client.innerApiCalls.importData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importData with LRO error', async () => {
@@ -1147,15 +1141,9 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ImportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importData = stubLongRunningCall(
         undefined,
@@ -1164,11 +1152,14 @@ describe('v1.DatasetServiceClient', () => {
       );
       const [operation] = await client.importData(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.importData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkImportDataProgress without error', async () => {
@@ -1220,15 +1211,9 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1236,11 +1221,14 @@ describe('v1.DatasetServiceClient', () => {
       const [operation] = await client.exportData(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportData without error using callback', async () => {
@@ -1252,15 +1240,9 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1290,11 +1272,14 @@ describe('v1.DatasetServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportData with call error', async () => {
@@ -1306,26 +1291,23 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.exportData(request), expectedError);
-      assert(
-        (client.innerApiCalls.exportData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportData with LRO error', async () => {
@@ -1337,15 +1319,9 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportDataRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportData = stubLongRunningCall(
         undefined,
@@ -1354,11 +1330,14 @@ describe('v1.DatasetServiceClient', () => {
       );
       const [operation] = await client.exportData(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.exportData as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportData as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkExportDataProgress without error', async () => {
@@ -1410,15 +1389,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -1427,11 +1402,14 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.listDatasets = stubSimpleCall(expectedResponse);
       const [response] = await client.listDatasets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDatasets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDatasets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatasets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDatasets without error using callback', async () => {
@@ -1443,15 +1421,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -1476,11 +1450,14 @@ describe('v1.DatasetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDatasets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDatasets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatasets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDatasets with error', async () => {
@@ -1492,26 +1469,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDatasets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDatasets(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDatasets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDatasets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDatasets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDatasetsStream without error', async () => {
@@ -1523,8 +1499,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -1555,11 +1534,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDatasets.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDatasets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1572,8 +1552,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
         undefined,
@@ -1601,11 +1584,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDatasets.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDatasets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1618,8 +1602,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.Dataset()),
@@ -1639,11 +1626,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1656,8 +1644,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDatasetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDatasets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1674,11 +1665,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDatasets.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDatasets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1693,15 +1685,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -1710,11 +1698,14 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.listDataItems = stubSimpleCall(expectedResponse);
       const [response] = await client.listDataItems(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataItems as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataItems without error using callback', async () => {
@@ -1726,15 +1717,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -1759,11 +1746,14 @@ describe('v1.DatasetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataItems as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataItems with error', async () => {
@@ -1775,26 +1765,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataItems = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDataItems(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDataItems as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataItems as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataItems as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataItemsStream without error', async () => {
@@ -1806,8 +1795,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -1838,11 +1830,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataItems, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataItems.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataItems.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1855,8 +1848,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataItems.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1882,11 +1878,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataItems, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataItems.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataItems.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1899,8 +1896,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
         generateSampleMessage(new protos.google.cloud.aiplatform.v1.DataItem()),
@@ -1920,11 +1920,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataItems.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1937,8 +1938,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListDataItemsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataItems.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1955,11 +1959,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataItems.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataItems.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1974,15 +1979,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.SavedQuery()
@@ -1997,11 +1998,14 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.listSavedQueries = stubSimpleCall(expectedResponse);
       const [response] = await client.listSavedQueries(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSavedQueries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSavedQueries without error using callback', async () => {
@@ -2013,15 +2017,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.SavedQuery()
@@ -2052,11 +2052,14 @@ describe('v1.DatasetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSavedQueries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSavedQueries with error', async () => {
@@ -2068,26 +2071,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSavedQueries = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listSavedQueries(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSavedQueries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSavedQueriesStream without error', async () => {
@@ -2099,8 +2101,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.SavedQuery()
@@ -2137,11 +2142,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSavedQueries, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2154,8 +2160,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2181,11 +2190,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSavedQueries, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2198,8 +2208,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.SavedQuery()
@@ -2225,11 +2238,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2242,8 +2256,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2260,11 +2277,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2279,15 +2297,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.Annotation()
@@ -2302,11 +2316,14 @@ describe('v1.DatasetServiceClient', () => {
       client.innerApiCalls.listAnnotations = stubSimpleCall(expectedResponse);
       const [response] = await client.listAnnotations(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAnnotations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAnnotations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnnotations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAnnotations without error using callback', async () => {
@@ -2318,15 +2335,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.Annotation()
@@ -2357,11 +2370,14 @@ describe('v1.DatasetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAnnotations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAnnotations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnnotations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAnnotations with error', async () => {
@@ -2373,26 +2389,25 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAnnotations = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAnnotations(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAnnotations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAnnotations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAnnotations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAnnotationsStream without error', async () => {
@@ -2404,8 +2419,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.Annotation()
@@ -2442,11 +2460,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnnotations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnnotations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnnotations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2459,8 +2478,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2486,11 +2508,12 @@ describe('v1.DatasetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAnnotations, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnnotations.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnnotations.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2503,8 +2526,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.Annotation()
@@ -2530,11 +2556,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnnotations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2547,8 +2574,11 @@ describe('v1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListAnnotationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAnnotations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2565,11 +2595,12 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAnnotations.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAnnotations.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3044,12 +3075,15 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -3080,12 +3114,15 @@ describe('v1.DatasetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

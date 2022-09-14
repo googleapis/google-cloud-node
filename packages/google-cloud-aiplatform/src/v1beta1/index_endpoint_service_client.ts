@@ -1625,7 +1625,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIndexEndpoint(request, options, callback);
@@ -1724,7 +1724,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'index_endpoint.name': request.indexEndpoint!.name || '',
+        'index_endpoint.name': request.indexEndpoint!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateIndexEndpoint(request, options, callback);
@@ -1831,7 +1831,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createIndexEndpoint(request, options, callback);
@@ -1971,7 +1971,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteIndexEndpoint(request, options, callback);
@@ -2115,7 +2115,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        index_endpoint: request.indexEndpoint || '',
+        index_endpoint: request.indexEndpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deployIndex(request, options, callback);
@@ -2258,7 +2258,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        index_endpoint: request.indexEndpoint || '',
+        index_endpoint: request.indexEndpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.undeployIndex(request, options, callback);
@@ -2402,7 +2402,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        index_endpoint: request.indexEndpoint || '',
+        index_endpoint: request.indexEndpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.mutateDeployedIndex(request, options, callback);
@@ -2560,7 +2560,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listIndexEndpoints(request, options, callback);
@@ -2623,7 +2623,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2695,7 +2695,7 @@ export class IndexEndpointServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexEndpoints'];
     const callSettings = defaultCallSettings.merge(options);

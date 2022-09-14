@@ -1595,7 +1595,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIndex(request, options, callback);
@@ -1696,7 +1696,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        index: request.index || '',
+        index: request.index ?? '',
       });
     this.initialize();
     return this.innerApiCalls.upsertDatapoints(request, options, callback);
@@ -1797,7 +1797,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        index: request.index || '',
+        index: request.index ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeDatapoints(request, options, callback);
@@ -1904,7 +1904,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createIndex(request, options, callback);
@@ -2045,7 +2045,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'index.name': request.index!.name || '',
+        'index.name': request.index!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateIndex(request, options, callback);
@@ -2187,7 +2187,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteIndex(request, options, callback);
@@ -2328,7 +2328,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listIndexes(request, options, callback);
@@ -2374,7 +2374,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2429,7 +2429,7 @@ export class IndexServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);

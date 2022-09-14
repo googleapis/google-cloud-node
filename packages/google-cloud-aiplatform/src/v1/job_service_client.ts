@@ -1629,7 +1629,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createCustomJob(request, options, callback);
@@ -1716,7 +1716,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getCustomJob(request, options, callback);
@@ -1818,7 +1818,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelCustomJob(request, options, callback);
@@ -1918,7 +1918,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createDataLabelingJob(request, options, callback);
@@ -2011,7 +2011,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getDataLabelingJob(request, options, callback);
@@ -2110,7 +2110,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelDataLabelingJob(request, options, callback);
@@ -2210,7 +2210,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createHyperparameterTuningJob(
@@ -2313,7 +2313,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getHyperparameterTuningJob(
@@ -2425,7 +2425,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelHyperparameterTuningJob(
@@ -2530,7 +2530,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createBatchPredictionJob(
@@ -2633,7 +2633,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getBatchPredictionJob(request, options, callback);
@@ -2741,7 +2741,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelBatchPredictionJob(
@@ -2846,7 +2846,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createModelDeploymentMonitoringJob(
@@ -2949,7 +2949,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getModelDeploymentMonitoringJob(
@@ -3054,7 +3054,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.pauseModelDeploymentMonitoringJob(
@@ -3159,7 +3159,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resumeModelDeploymentMonitoringJob(
@@ -3269,7 +3269,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteCustomJob(request, options, callback);
@@ -3409,7 +3409,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteDataLabelingJob(request, options, callback);
@@ -3549,7 +3549,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteHyperparameterTuningJob(
@@ -3694,7 +3694,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteBatchPredictionJob(
@@ -3866,7 +3866,7 @@ export class JobServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         'model_deployment_monitoring_job.name':
-          request.modelDeploymentMonitoringJob!.name || '',
+          request.modelDeploymentMonitoringJob!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateModelDeploymentMonitoringJob(
@@ -4010,7 +4010,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteModelDeploymentMonitoringJob(
@@ -4169,7 +4169,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listCustomJobs(request, options, callback);
@@ -4229,7 +4229,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4298,7 +4298,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4428,7 +4428,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listDataLabelingJobs(request, options, callback);
@@ -4492,7 +4492,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4565,7 +4565,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listDataLabelingJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4691,7 +4691,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listHyperparameterTuningJobs(
@@ -4755,7 +4755,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4824,7 +4824,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listHyperparameterTuningJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4951,7 +4951,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listBatchPredictionJobs(
@@ -5016,7 +5016,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5086,7 +5086,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listBatchPredictionJobs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5211,7 +5211,7 @@ export class JobServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         model_deployment_monitoring_job:
-          request.modelDeploymentMonitoringJob || '',
+          request.modelDeploymentMonitoringJob ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies(
@@ -5274,7 +5274,7 @@ export class JobServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         model_deployment_monitoring_job:
-          request.modelDeploymentMonitoringJob || '',
+          request.modelDeploymentMonitoringJob ?? '',
       });
     const defaultCallSettings =
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
@@ -5344,7 +5344,7 @@ export class JobServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         model_deployment_monitoring_job:
-          request.modelDeploymentMonitoringJob || '',
+          request.modelDeploymentMonitoringJob ?? '',
       });
     const defaultCallSettings =
       this._defaults['searchModelDeploymentMonitoringStatsAnomalies'];
@@ -5470,7 +5470,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listModelDeploymentMonitoringJobs(
@@ -5531,7 +5531,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listModelDeploymentMonitoringJobs'];
@@ -5598,7 +5598,7 @@ export class JobServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listModelDeploymentMonitoringJobs'];

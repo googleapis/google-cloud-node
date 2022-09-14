@@ -1543,7 +1543,7 @@ export class PredictionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
+        endpoint: request.endpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.predict(request, options, callback);
@@ -1658,7 +1658,7 @@ export class PredictionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
+        endpoint: request.endpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.rawPredict(request, options, callback);
@@ -1781,7 +1781,7 @@ export class PredictionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        endpoint: request.endpoint || '',
+        endpoint: request.endpoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.explain(request, options, callback);

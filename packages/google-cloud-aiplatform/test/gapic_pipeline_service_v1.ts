@@ -33,6 +33,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -260,15 +275,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTrainingPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.TrainingPipeline()
       );
@@ -276,11 +288,14 @@ describe('v1.PipelineServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createTrainingPipeline(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTrainingPipeline without error using callback', async () => {
@@ -292,15 +307,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTrainingPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.TrainingPipeline()
       );
@@ -323,11 +335,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTrainingPipeline with error', async () => {
@@ -339,15 +354,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTrainingPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTrainingPipeline = stubSimpleCall(
         undefined,
@@ -357,11 +369,14 @@ describe('v1.PipelineServiceClient', () => {
         client.createTrainingPipeline(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTrainingPipeline with closed client', async () => {
@@ -373,7 +388,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateTrainingPipelineRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTrainingPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -393,15 +412,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.TrainingPipeline()
       );
@@ -409,11 +424,14 @@ describe('v1.PipelineServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getTrainingPipeline(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTrainingPipeline without error using callback', async () => {
@@ -425,15 +443,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.TrainingPipeline()
       );
@@ -456,11 +470,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTrainingPipeline with error', async () => {
@@ -472,26 +489,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTrainingPipeline = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getTrainingPipeline(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTrainingPipeline with closed client', async () => {
@@ -503,7 +519,10 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetTrainingPipelineRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTrainingPipeline(request), expectedError);
@@ -520,15 +539,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -536,11 +552,14 @@ describe('v1.PipelineServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.cancelTrainingPipeline(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelTrainingPipeline without error using callback', async () => {
@@ -552,15 +571,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -583,11 +599,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelTrainingPipeline with error', async () => {
@@ -599,15 +618,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelTrainingPipeline = stubSimpleCall(
         undefined,
@@ -617,11 +633,14 @@ describe('v1.PipelineServiceClient', () => {
         client.cancelTrainingPipeline(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.cancelTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelTrainingPipeline with closed client', async () => {
@@ -633,7 +652,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelTrainingPipelineRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -653,26 +676,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.PipelineJob()
       );
       client.innerApiCalls.createPipelineJob = stubSimpleCall(expectedResponse);
       const [response] = await client.createPipelineJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPipelineJob without error using callback', async () => {
@@ -684,15 +706,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.PipelineJob()
       );
@@ -715,11 +733,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPipelineJob with error', async () => {
@@ -731,26 +752,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPipelineJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createPipelineJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.createPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPipelineJob with closed client', async () => {
@@ -762,7 +782,10 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPipelineJob(request), expectedError);
@@ -779,26 +802,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.PipelineJob()
       );
       client.innerApiCalls.getPipelineJob = stubSimpleCall(expectedResponse);
       const [response] = await client.getPipelineJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPipelineJob without error using callback', async () => {
@@ -810,15 +832,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.PipelineJob()
       );
@@ -841,11 +859,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPipelineJob with error', async () => {
@@ -857,26 +878,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPipelineJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getPipelineJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPipelineJob with closed client', async () => {
@@ -888,7 +908,10 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPipelineJob(request), expectedError);
@@ -905,26 +928,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.cancelPipelineJob = stubSimpleCall(expectedResponse);
       const [response] = await client.cancelPipelineJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelPipelineJob without error using callback', async () => {
@@ -936,15 +958,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -967,11 +985,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelPipelineJob with error', async () => {
@@ -983,26 +1004,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelPipelineJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.cancelPipelineJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.cancelPipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelPipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelPipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelPipelineJob with closed client', async () => {
@@ -1014,7 +1034,10 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelPipelineJob(request), expectedError);
@@ -1031,15 +1054,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1048,11 +1068,14 @@ describe('v1.PipelineServiceClient', () => {
       const [operation] = await client.deleteTrainingPipeline(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTrainingPipeline without error using callback', async () => {
@@ -1064,15 +1087,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1102,11 +1122,14 @@ describe('v1.PipelineServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTrainingPipeline with call error', async () => {
@@ -1118,15 +1141,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrainingPipeline = stubLongRunningCall(
         undefined,
@@ -1136,11 +1156,14 @@ describe('v1.PipelineServiceClient', () => {
         client.deleteTrainingPipeline(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTrainingPipeline with LRO error', async () => {
@@ -1152,15 +1175,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteTrainingPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTrainingPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTrainingPipeline = stubLongRunningCall(
         undefined,
@@ -1169,11 +1189,14 @@ describe('v1.PipelineServiceClient', () => {
       );
       const [operation] = await client.deleteTrainingPipeline(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTrainingPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTrainingPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteTrainingPipelineProgress without error', async () => {
@@ -1228,15 +1251,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1245,11 +1264,14 @@ describe('v1.PipelineServiceClient', () => {
       const [operation] = await client.deletePipelineJob(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePipelineJob without error using callback', async () => {
@@ -1261,15 +1283,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1299,11 +1317,14 @@ describe('v1.PipelineServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePipelineJob with call error', async () => {
@@ -1315,26 +1336,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePipelineJob = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deletePipelineJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.deletePipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePipelineJob with LRO error', async () => {
@@ -1346,15 +1366,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePipelineJob = stubLongRunningCall(
         undefined,
@@ -1363,11 +1379,14 @@ describe('v1.PipelineServiceClient', () => {
       );
       const [operation] = await client.deletePipelineJob(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deletePipelineJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePipelineJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeletePipelineJobProgress without error', async () => {
@@ -1422,15 +1441,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTrainingPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.TrainingPipeline()
@@ -1446,11 +1462,14 @@ describe('v1.PipelineServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listTrainingPipelines(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTrainingPipelines as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTrainingPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTrainingPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTrainingPipelines without error using callback', async () => {
@@ -1462,15 +1481,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTrainingPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.TrainingPipeline()
@@ -1503,11 +1519,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTrainingPipelines as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTrainingPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTrainingPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTrainingPipelines with error', async () => {
@@ -1519,15 +1538,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTrainingPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTrainingPipelines = stubSimpleCall(
         undefined,
@@ -1537,11 +1553,14 @@ describe('v1.PipelineServiceClient', () => {
         client.listTrainingPipelines(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listTrainingPipelines as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTrainingPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTrainingPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTrainingPipelinesStream without error', async () => {
@@ -1553,8 +1572,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTrainingPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.TrainingPipeline()
@@ -1595,12 +1618,15 @@ describe('v1.PipelineServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTrainingPipelines, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTrainingPipelines
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1613,8 +1639,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTrainingPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTrainingPipelines.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1644,12 +1674,15 @@ describe('v1.PipelineServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTrainingPipelines, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTrainingPipelines
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1662,8 +1695,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTrainingPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.TrainingPipeline()
@@ -1691,12 +1728,15 @@ describe('v1.PipelineServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTrainingPipelines
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1709,8 +1749,12 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListTrainingPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTrainingPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTrainingPipelines.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1729,12 +1773,15 @@ describe('v1.PipelineServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTrainingPipelines
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1749,15 +1796,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.PipelineJob()
@@ -1772,11 +1815,14 @@ describe('v1.PipelineServiceClient', () => {
       client.innerApiCalls.listPipelineJobs = stubSimpleCall(expectedResponse);
       const [response] = await client.listPipelineJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPipelineJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPipelineJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPipelineJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPipelineJobs without error using callback', async () => {
@@ -1788,15 +1834,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.PipelineJob()
@@ -1827,11 +1869,14 @@ describe('v1.PipelineServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPipelineJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPipelineJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPipelineJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPipelineJobs with error', async () => {
@@ -1843,26 +1888,25 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPipelineJobs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listPipelineJobs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listPipelineJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPipelineJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPipelineJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPipelineJobsStream without error', async () => {
@@ -1874,8 +1918,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.PipelineJob()
@@ -1912,11 +1959,12 @@ describe('v1.PipelineServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPipelineJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPipelineJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1929,8 +1977,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPipelineJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1956,11 +2007,12 @@ describe('v1.PipelineServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPipelineJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPipelineJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1973,8 +2025,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1.PipelineJob()
@@ -2000,11 +2055,12 @@ describe('v1.PipelineServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2017,8 +2073,11 @@ describe('v1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPipelineJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2035,11 +2094,12 @@ describe('v1.PipelineServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2514,12 +2574,15 @@ describe('v1.PipelineServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -2550,12 +2613,15 @@ describe('v1.PipelineServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

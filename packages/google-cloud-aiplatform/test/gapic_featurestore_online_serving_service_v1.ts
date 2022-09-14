@@ -32,6 +32,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -242,26 +257,25 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ReadFeatureValuesRequest()
       );
-      request.entityType = '';
-      const expectedHeaderRequestParams = 'entity_type=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReadFeatureValuesRequest', [
+        'entityType',
+      ]);
+      request.entityType = defaultValue1;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ReadFeatureValuesResponse()
       );
       client.innerApiCalls.readFeatureValues = stubSimpleCall(expectedResponse);
       const [response] = await client.readFeatureValues(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.readFeatureValues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readFeatureValues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readFeatureValues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readFeatureValues without error using callback', async () => {
@@ -276,15 +290,11 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ReadFeatureValuesRequest()
       );
-      request.entityType = '';
-      const expectedHeaderRequestParams = 'entity_type=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReadFeatureValuesRequest', [
+        'entityType',
+      ]);
+      request.entityType = defaultValue1;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ReadFeatureValuesResponse()
       );
@@ -307,11 +317,14 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.readFeatureValues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readFeatureValues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readFeatureValues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readFeatureValues with error', async () => {
@@ -326,26 +339,25 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ReadFeatureValuesRequest()
       );
-      request.entityType = '';
-      const expectedHeaderRequestParams = 'entity_type=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReadFeatureValuesRequest', [
+        'entityType',
+      ]);
+      request.entityType = defaultValue1;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readFeatureValues = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.readFeatureValues(request), expectedError);
-      assert(
-        (client.innerApiCalls.readFeatureValues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readFeatureValues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readFeatureValues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readFeatureValues with closed client', async () => {
@@ -360,7 +372,10 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ReadFeatureValuesRequest()
       );
-      request.entityType = '';
+      const defaultValue1 = getTypeDefaultValue('ReadFeatureValuesRequest', [
+        'entityType',
+      ]);
+      request.entityType = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.readFeatureValues(request), expectedError);
@@ -380,15 +395,12 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.StreamingReadFeatureValuesRequest()
       );
-      request.entityType = '';
-      const expectedHeaderRequestParams = 'entity_type=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StreamingReadFeatureValuesRequest',
+        ['entityType']
+      );
+      request.entityType = defaultValue1;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ReadFeatureValuesResponse()
       );
@@ -410,11 +422,14 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.streamingReadFeatureValues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions)
-      );
+      const actualRequest = (
+        client.innerApiCalls.streamingReadFeatureValues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamingReadFeatureValues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes streamingReadFeatureValues with error', async () => {
@@ -429,15 +444,12 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.StreamingReadFeatureValuesRequest()
       );
-      request.entityType = '';
-      const expectedHeaderRequestParams = 'entity_type=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StreamingReadFeatureValuesRequest',
+        ['entityType']
+      );
+      request.entityType = defaultValue1;
+      const expectedHeaderRequestParams = `entity_type=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.streamingReadFeatureValues = stubServerStreamingCall(
         undefined,
@@ -458,11 +470,14 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
-      assert(
-        (client.innerApiCalls.streamingReadFeatureValues as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions)
-      );
+      const actualRequest = (
+        client.innerApiCalls.streamingReadFeatureValues as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.streamingReadFeatureValues as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes streamingReadFeatureValues with closed client', async () => {
@@ -477,7 +492,11 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.StreamingReadFeatureValuesRequest()
       );
-      request.entityType = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'StreamingReadFeatureValuesRequest',
+        ['entityType']
+      );
+      request.entityType = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.streamingReadFeatureValues(request);
@@ -1007,12 +1026,15 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -1046,12 +1068,15 @@ describe('v1.FeaturestoreOnlineServingServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

@@ -33,6 +33,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -271,26 +286,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
       client.innerApiCalls.getIndexEndpoint = stubSimpleCall(expectedResponse);
       const [response] = await client.getIndexEndpoint(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIndexEndpoint without error using callback', async () => {
@@ -303,15 +317,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
@@ -334,11 +344,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIndexEndpoint with error', async () => {
@@ -351,26 +364,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIndexEndpoint = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIndexEndpoint(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIndexEndpoint with closed client', async () => {
@@ -383,7 +395,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIndexEndpoint(request), expectedError);
@@ -401,16 +416,13 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
-      request.indexEndpoint = {};
-      request.indexEndpoint.name = '';
-      const expectedHeaderRequestParams = 'index_endpoint.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.indexEndpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
+        'indexEndpoint',
+        'name',
+      ]);
+      request.indexEndpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
@@ -418,11 +430,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateIndexEndpoint(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIndexEndpoint without error using callback', async () => {
@@ -435,16 +450,13 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
-      request.indexEndpoint = {};
-      request.indexEndpoint.name = '';
-      const expectedHeaderRequestParams = 'index_endpoint.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.indexEndpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
+        'indexEndpoint',
+        'name',
+      ]);
+      request.indexEndpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
       );
@@ -467,11 +479,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIndexEndpoint with error', async () => {
@@ -484,27 +499,27 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
-      request.indexEndpoint = {};
-      request.indexEndpoint.name = '';
-      const expectedHeaderRequestParams = 'index_endpoint.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.indexEndpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
+        'indexEndpoint',
+        'name',
+      ]);
+      request.indexEndpoint.name = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIndexEndpoint = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateIndexEndpoint(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIndexEndpoint with closed client', async () => {
@@ -517,8 +532,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
-      request.indexEndpoint = {};
-      request.indexEndpoint.name = '';
+      request.indexEndpoint ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
+        'indexEndpoint',
+        'name',
+      ]);
+      request.indexEndpoint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIndexEndpoint(request), expectedError);
@@ -536,15 +555,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -553,11 +568,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const [operation] = await client.createIndexEndpoint(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createIndexEndpoint without error using callback', async () => {
@@ -570,15 +588,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -608,11 +622,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createIndexEndpoint with call error', async () => {
@@ -625,26 +642,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIndexEndpoint = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createIndexEndpoint(request), expectedError);
-      assert(
-        (client.innerApiCalls.createIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createIndexEndpoint with LRO error', async () => {
@@ -657,15 +673,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createIndexEndpoint = stubLongRunningCall(
         undefined,
@@ -674,11 +686,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       );
       const [operation] = await client.createIndexEndpoint(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateIndexEndpointProgress without error', async () => {
@@ -736,15 +751,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -753,11 +764,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const [operation] = await client.deleteIndexEndpoint(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteIndexEndpoint without error using callback', async () => {
@@ -770,15 +784,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -808,11 +818,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteIndexEndpoint with call error', async () => {
@@ -825,26 +838,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteIndexEndpoint(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteIndexEndpoint with LRO error', async () => {
@@ -857,15 +869,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteIndexEndpoint = stubLongRunningCall(
         undefined,
@@ -874,11 +882,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       );
       const [operation] = await client.deleteIndexEndpoint(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteIndexEndpoint as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteIndexEndpoint as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteIndexEndpointProgress without error', async () => {
@@ -936,15 +947,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -952,11 +959,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const [operation] = await client.deployIndex(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployIndex without error using callback', async () => {
@@ -969,15 +979,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1007,11 +1013,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployIndex with call error', async () => {
@@ -1024,26 +1033,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIndex = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deployIndex(request), expectedError);
-      assert(
-        (client.innerApiCalls.deployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployIndex with LRO error', async () => {
@@ -1056,15 +1064,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployIndex = stubLongRunningCall(
         undefined,
@@ -1073,11 +1077,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       );
       const [operation] = await client.deployIndex(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeployIndexProgress without error', async () => {
@@ -1132,15 +1139,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1149,11 +1152,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const [operation] = await client.undeployIndex(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployIndex without error using callback', async () => {
@@ -1166,15 +1172,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1204,11 +1206,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployIndex with call error', async () => {
@@ -1221,26 +1226,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIndex = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.undeployIndex(request), expectedError);
-      assert(
-        (client.innerApiCalls.undeployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployIndex with LRO error', async () => {
@@ -1253,15 +1257,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployIndex = stubLongRunningCall(
         undefined,
@@ -1270,11 +1270,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       );
       const [operation] = await client.undeployIndex(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.undeployIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUndeployIndexProgress without error', async () => {
@@ -1332,15 +1335,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1349,11 +1348,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const [operation] = await client.mutateDeployedIndex(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes mutateDeployedIndex without error using callback', async () => {
@@ -1366,15 +1368,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1404,11 +1402,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes mutateDeployedIndex with call error', async () => {
@@ -1421,26 +1422,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.mutateDeployedIndex = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.mutateDeployedIndex(request), expectedError);
-      assert(
-        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes mutateDeployedIndex with LRO error', async () => {
@@ -1453,15 +1453,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      request.indexEndpoint = '';
-      const expectedHeaderRequestParams = 'index_endpoint=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
+        'indexEndpoint',
+      ]);
+      request.indexEndpoint = defaultValue1;
+      const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.mutateDeployedIndex = stubLongRunningCall(
         undefined,
@@ -1470,11 +1466,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       );
       const [operation] = await client.mutateDeployedIndex(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.mutateDeployedIndex as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.mutateDeployedIndex as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkMutateDeployedIndexProgress without error', async () => {
@@ -1532,15 +1531,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1556,11 +1551,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listIndexEndpoints(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listIndexEndpoints as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIndexEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIndexEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIndexEndpoints without error using callback', async () => {
@@ -1573,15 +1571,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1614,11 +1608,14 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listIndexEndpoints as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIndexEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIndexEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIndexEndpoints with error', async () => {
@@ -1631,26 +1628,25 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listIndexEndpoints = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listIndexEndpoints(request), expectedError);
-      assert(
-        (client.innerApiCalls.listIndexEndpoints as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listIndexEndpoints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listIndexEndpoints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listIndexEndpointsStream without error', async () => {
@@ -1663,8 +1659,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1702,11 +1701,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listIndexEndpoints, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1720,8 +1720,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIndexEndpoints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1748,11 +1751,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listIndexEndpoints, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listIndexEndpoints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1766,8 +1770,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.aiplatform.v1beta1.IndexEndpoint()
@@ -1794,11 +1801,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1812,8 +1820,11 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listIndexEndpoints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1831,11 +1842,12 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listIndexEndpoints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2323,12 +2335,15 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -2360,12 +2375,15 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

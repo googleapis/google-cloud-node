@@ -1606,7 +1606,7 @@ export class SpecialistPoolServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getSpecialistPool(request, options, callback);
@@ -1713,7 +1713,7 @@ export class SpecialistPoolServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createSpecialistPool(request, options, callback);
@@ -1856,7 +1856,7 @@ export class SpecialistPoolServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteSpecialistPool(request, options, callback);
@@ -1996,7 +1996,7 @@ export class SpecialistPoolServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'specialist_pool.name': request.specialistPool!.name || '',
+        'specialist_pool.name': request.specialistPool!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateSpecialistPool(request, options, callback);
@@ -2135,7 +2135,7 @@ export class SpecialistPoolServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSpecialistPools(request, options, callback);
@@ -2179,7 +2179,7 @@ export class SpecialistPoolServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2232,7 +2232,7 @@ export class SpecialistPoolServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSpecialistPools'];
     const callSettings = defaultCallSettings.merge(options);

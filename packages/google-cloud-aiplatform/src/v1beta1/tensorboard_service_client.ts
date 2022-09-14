@@ -1703,7 +1703,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTensorboard(request, options, callback);
@@ -1810,7 +1810,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTensorboardExperiment(
@@ -1913,7 +1913,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTensorboardExperiment(
@@ -2024,7 +2024,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         'tensorboard_experiment.name':
-          request.tensorboardExperiment!.name || '',
+          request.tensorboardExperiment!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTensorboardExperiment(
@@ -2135,7 +2135,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTensorboardRun(request, options, callback);
@@ -2239,7 +2239,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchCreateTensorboardRuns(
@@ -2342,7 +2342,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTensorboardRun(request, options, callback);
@@ -2448,7 +2448,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'tensorboard_run.name': request.tensorboardRun!.name || '',
+        'tensorboard_run.name': request.tensorboardRun!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTensorboardRun(request, options, callback);
@@ -2554,7 +2554,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchCreateTensorboardTimeSeries(
@@ -2665,7 +2665,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTensorboardTimeSeries(
@@ -2768,7 +2768,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTensorboardTimeSeries(
@@ -2880,7 +2880,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         'tensorboard_time_series.name':
-          request.tensorboardTimeSeries!.name || '',
+          request.tensorboardTimeSeries!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTensorboardTimeSeries(
@@ -2992,7 +2992,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        tensorboard: request.tensorboard || '',
+        tensorboard: request.tensorboard ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchReadTensorboardTimeSeriesData(
@@ -3106,7 +3106,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        tensorboard_time_series: request.tensorboardTimeSeries || '',
+        tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
     this.initialize();
     return this.innerApiCalls.readTensorboardTimeSeriesData(
@@ -3213,7 +3213,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        tensorboard_experiment: request.tensorboardExperiment || '',
+        tensorboard_experiment: request.tensorboardExperiment ?? '',
       });
     this.initialize();
     return this.innerApiCalls.writeTensorboardExperimentData(
@@ -3324,7 +3324,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        tensorboard_run: request.tensorboardRun || '',
+        tensorboard_run: request.tensorboardRun ?? '',
       });
     this.initialize();
     return this.innerApiCalls.writeTensorboardRunData(
@@ -3368,7 +3368,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        time_series: request.timeSeries || '',
+        time_series: request.timeSeries ?? '',
       });
     this.initialize();
     return this.innerApiCalls.readTensorboardBlobData(request, options);
@@ -3475,7 +3475,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTensorboard(request, options, callback);
@@ -3622,7 +3622,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'tensorboard.name': request.tensorboard!.name || '',
+        'tensorboard.name': request.tensorboard!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTensorboard(request, options, callback);
@@ -3762,7 +3762,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTensorboard(request, options, callback);
@@ -3902,7 +3902,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTensorboardExperiment(
@@ -4046,7 +4046,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTensorboardRun(request, options, callback);
@@ -4186,7 +4186,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTensorboardTimeSeries(
@@ -4340,7 +4340,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTensorboards(request, options, callback);
@@ -4395,7 +4395,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboards'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4459,7 +4459,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboards'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4580,7 +4580,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTensorboardExperiments(
@@ -4639,7 +4639,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboardExperiments'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4703,7 +4703,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboardExperiments'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4824,7 +4824,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTensorboardRuns(request, options, callback);
@@ -4879,7 +4879,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboardRuns'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4943,7 +4943,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboardRuns'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5064,7 +5064,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTensorboardTimeSeries(
@@ -5123,7 +5123,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboardTimeSeries'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5187,7 +5187,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTensorboardTimeSeries'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5308,7 +5308,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        tensorboard_time_series: request.tensorboardTimeSeries || '',
+        tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
     this.initialize();
     return this.innerApiCalls.exportTensorboardTimeSeriesData(
@@ -5366,7 +5366,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        tensorboard_time_series: request.tensorboardTimeSeries || '',
+        tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
     const defaultCallSettings =
       this._defaults['exportTensorboardTimeSeriesData'];
@@ -5430,7 +5430,7 @@ export class TensorboardServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        tensorboard_time_series: request.tensorboardTimeSeries || '',
+        tensorboard_time_series: request.tensorboardTimeSeries ?? '',
       });
     const defaultCallSettings =
       this._defaults['exportTensorboardTimeSeriesData'];

@@ -1648,7 +1648,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getFeaturestore(request, options, callback);
@@ -1741,7 +1741,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEntityType(request, options, callback);
@@ -1855,7 +1855,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'entity_type.name': request.entityType!.name || '',
+        'entity_type.name': request.entityType!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateEntityType(request, options, callback);
@@ -1942,7 +1942,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getFeature(request, options, callback);
@@ -2050,7 +2050,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'feature.name': request.feature!.name || '',
+        'feature.name': request.feature!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateFeature(request, options, callback);
@@ -2166,7 +2166,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createFeaturestore(request, options, callback);
@@ -2321,7 +2321,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'featurestore.name': request.featurestore!.name || '',
+        'featurestore.name': request.featurestore!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateFeaturestore(request, options, callback);
@@ -2466,7 +2466,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteFeaturestore(request, options, callback);
@@ -2616,7 +2616,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createEntityType(request, options, callback);
@@ -2760,7 +2760,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteEntityType(request, options, callback);
@@ -2910,7 +2910,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createFeature(request, options, callback);
@@ -3055,7 +3055,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchCreateFeatures(request, options, callback);
@@ -3195,7 +3195,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteFeature(request, options, callback);
@@ -3383,7 +3383,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        entity_type: request.entityType || '',
+        entity_type: request.entityType ?? '',
       });
     this.initialize();
     return this.innerApiCalls.importFeatureValues(request, options, callback);
@@ -3571,7 +3571,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        featurestore: request.featurestore || '',
+        featurestore: request.featurestore ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchReadFeatureValues(
@@ -3727,7 +3727,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        entity_type: request.entityType || '',
+        entity_type: request.entityType ?? '',
       });
     this.initialize();
     return this.innerApiCalls.exportFeatureValues(request, options, callback);
@@ -3901,7 +3901,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listFeaturestores(request, options, callback);
@@ -3980,7 +3980,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listFeaturestores'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4068,7 +4068,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listFeaturestores'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4213,7 +4213,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listEntityTypes(request, options, callback);
@@ -4292,7 +4292,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4380,7 +4380,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4532,7 +4532,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listFeatures(request, options, callback);
@@ -4618,7 +4618,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4713,7 +4713,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listFeatures'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4888,7 +4888,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchFeatures(request, options, callback);
@@ -4997,7 +4997,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     const defaultCallSettings = this._defaults['searchFeatures'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5115,7 +5115,7 @@ export class FeaturestoreServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     const defaultCallSettings = this._defaults['searchFeatures'];
     const callSettings = defaultCallSettings.merge(options);

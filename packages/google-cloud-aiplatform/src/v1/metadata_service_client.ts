@@ -1629,7 +1629,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getMetadataStore(request, options, callback);
@@ -1733,7 +1733,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createArtifact(request, options, callback);
@@ -1820,7 +1820,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getArtifact(request, options, callback);
@@ -1921,7 +1921,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'artifact.name': request.artifact!.name || '',
+        'artifact.name': request.artifact!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateArtifact(request, options, callback);
@@ -2025,7 +2025,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createContext(request, options, callback);
@@ -2112,7 +2112,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getContext(request, options, callback);
@@ -2213,7 +2213,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'context.name': request.context!.name || '',
+        'context.name': request.context!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateContext(request, options, callback);
@@ -2326,7 +2326,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        context: request.context || '',
+        context: request.context ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addContextArtifactsAndExecutions(
@@ -2430,7 +2430,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        context: request.context || '',
+        context: request.context ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addContextChildren(request, options, callback);
@@ -2535,7 +2535,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        context: request.context || '',
+        context: request.context ?? '',
       });
     this.initialize();
     return this.innerApiCalls.queryContextLineageSubgraph(
@@ -2644,7 +2644,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createExecution(request, options, callback);
@@ -2731,7 +2731,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getExecution(request, options, callback);
@@ -2832,7 +2832,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'execution.name': request.execution!.name || '',
+        'execution.name': request.execution!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateExecution(request, options, callback);
@@ -2931,7 +2931,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        execution: request.execution || '',
+        execution: request.execution ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addExecutionEvents(request, options, callback);
@@ -3033,7 +3033,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        execution: request.execution || '',
+        execution: request.execution ?? '',
       });
     this.initialize();
     return this.innerApiCalls.queryExecutionInputsAndOutputs(
@@ -3148,7 +3148,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createMetadataSchema(request, options, callback);
@@ -3241,7 +3241,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getMetadataSchema(request, options, callback);
@@ -3374,7 +3374,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        artifact: request.artifact || '',
+        artifact: request.artifact ?? '',
       });
     this.initialize();
     return this.innerApiCalls.queryArtifactLineageSubgraph(
@@ -3495,7 +3495,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createMetadataStore(request, options, callback);
@@ -3638,7 +3638,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteMetadataStore(request, options, callback);
@@ -3782,7 +3782,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteArtifact(request, options, callback);
@@ -3929,7 +3929,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.purgeArtifacts(request, options, callback);
@@ -4076,7 +4076,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteContext(request, options, callback);
@@ -4223,7 +4223,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.purgeContexts(request, options, callback);
@@ -4367,7 +4367,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteExecution(request, options, callback);
@@ -4514,7 +4514,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.purgeExecutions(request, options, callback);
@@ -4657,7 +4657,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listMetadataStores(request, options, callback);
@@ -4705,7 +4705,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4762,7 +4762,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listMetadataStores'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4902,7 +4902,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listArtifacts(request, options, callback);
@@ -4976,7 +4976,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5059,7 +5059,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listArtifacts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5203,7 +5203,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listContexts(request, options, callback);
@@ -5281,7 +5281,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5368,7 +5368,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listContexts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5507,7 +5507,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listExecutions(request, options, callback);
@@ -5580,7 +5580,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5662,7 +5662,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5778,7 +5778,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listMetadataSchemas(request, options, callback);
@@ -5828,7 +5828,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5887,7 +5887,7 @@ export class MetadataServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listMetadataSchemas'];
     const callSettings = defaultCallSettings.merge(options);

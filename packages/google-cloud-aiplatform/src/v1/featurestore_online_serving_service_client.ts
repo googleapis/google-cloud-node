@@ -1501,7 +1501,7 @@ export class FeaturestoreOnlineServingServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        entity_type: request.entityType || '',
+        entity_type: request.entityType ?? '',
       });
     this.initialize();
     return this.innerApiCalls.readFeatureValues(request, options, callback);
@@ -1548,7 +1548,7 @@ export class FeaturestoreOnlineServingServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        entity_type: request.entityType || '',
+        entity_type: request.entityType ?? '',
       });
     this.initialize();
     return this.innerApiCalls.streamingReadFeatureValues(request, options);
