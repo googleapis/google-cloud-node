@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -269,15 +284,11 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
       );
@@ -285,11 +296,14 @@ describe('v1.ReachabilityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getConnectivityTest(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConnectivityTest without error using callback', async () => {
@@ -303,15 +317,11 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
       );
@@ -334,11 +344,14 @@ describe('v1.ReachabilityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConnectivityTest with error', async () => {
@@ -352,26 +365,25 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConnectivityTest = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getConnectivityTest(request), expectedError);
-      assert(
-        (client.innerApiCalls.getConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConnectivityTest with closed client', async () => {
@@ -385,7 +397,10 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConnectivityTest(request), expectedError);
@@ -404,15 +419,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectivityTestRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -421,11 +433,14 @@ describe('v1.ReachabilityServiceClient', () => {
       const [operation] = await client.createConnectivityTest(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConnectivityTest without error using callback', async () => {
@@ -439,15 +454,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectivityTestRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -477,11 +489,14 @@ describe('v1.ReachabilityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConnectivityTest with call error', async () => {
@@ -495,15 +510,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectivityTestRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectivityTest = stubLongRunningCall(
         undefined,
@@ -513,11 +525,14 @@ describe('v1.ReachabilityServiceClient', () => {
         client.createConnectivityTest(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConnectivityTest with LRO error', async () => {
@@ -531,15 +546,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConnectivityTestRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConnectivityTest = stubLongRunningCall(
         undefined,
@@ -548,11 +560,14 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       const [operation] = await client.createConnectivityTest(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateConnectivityTestProgress without error', async () => {
@@ -613,16 +628,13 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
       );
-      request.resource = {};
-      request.resource.name = '';
-      const expectedHeaderRequestParams = 'resource.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.resource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectivityTestRequest',
+        ['resource', 'name']
+      );
+      request.resource.name = defaultValue1;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -631,11 +643,14 @@ describe('v1.ReachabilityServiceClient', () => {
       const [operation] = await client.updateConnectivityTest(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConnectivityTest without error using callback', async () => {
@@ -649,16 +664,13 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
       );
-      request.resource = {};
-      request.resource.name = '';
-      const expectedHeaderRequestParams = 'resource.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.resource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectivityTestRequest',
+        ['resource', 'name']
+      );
+      request.resource.name = defaultValue1;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -688,11 +700,14 @@ describe('v1.ReachabilityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConnectivityTest with call error', async () => {
@@ -706,16 +721,13 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
       );
-      request.resource = {};
-      request.resource.name = '';
-      const expectedHeaderRequestParams = 'resource.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.resource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectivityTestRequest',
+        ['resource', 'name']
+      );
+      request.resource.name = defaultValue1;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectivityTest = stubLongRunningCall(
         undefined,
@@ -725,11 +737,14 @@ describe('v1.ReachabilityServiceClient', () => {
         client.updateConnectivityTest(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConnectivityTest with LRO error', async () => {
@@ -743,16 +758,13 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest()
       );
-      request.resource = {};
-      request.resource.name = '';
-      const expectedHeaderRequestParams = 'resource.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.resource ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConnectivityTestRequest',
+        ['resource', 'name']
+      );
+      request.resource.name = defaultValue1;
+      const expectedHeaderRequestParams = `resource.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConnectivityTest = stubLongRunningCall(
         undefined,
@@ -761,11 +773,14 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       const [operation] = await client.updateConnectivityTest(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateConnectivityTestProgress without error', async () => {
@@ -826,15 +841,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RerunConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -843,11 +855,14 @@ describe('v1.ReachabilityServiceClient', () => {
       const [operation] = await client.rerunConnectivityTest(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.rerunConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes rerunConnectivityTest without error using callback', async () => {
@@ -861,15 +876,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RerunConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -899,11 +911,14 @@ describe('v1.ReachabilityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.rerunConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes rerunConnectivityTest with call error', async () => {
@@ -917,15 +932,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RerunConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rerunConnectivityTest = stubLongRunningCall(
         undefined,
@@ -935,11 +947,14 @@ describe('v1.ReachabilityServiceClient', () => {
         client.rerunConnectivityTest(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.rerunConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes rerunConnectivityTest with LRO error', async () => {
@@ -953,15 +968,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RerunConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rerunConnectivityTest = stubLongRunningCall(
         undefined,
@@ -970,11 +982,14 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       const [operation] = await client.rerunConnectivityTest(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.rerunConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rerunConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRerunConnectivityTestProgress without error', async () => {
@@ -1035,15 +1050,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1052,11 +1064,14 @@ describe('v1.ReachabilityServiceClient', () => {
       const [operation] = await client.deleteConnectivityTest(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConnectivityTest without error using callback', async () => {
@@ -1070,15 +1085,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1108,11 +1120,14 @@ describe('v1.ReachabilityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConnectivityTest with call error', async () => {
@@ -1126,15 +1141,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectivityTest = stubLongRunningCall(
         undefined,
@@ -1144,11 +1156,14 @@ describe('v1.ReachabilityServiceClient', () => {
         client.deleteConnectivityTest(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConnectivityTest with LRO error', async () => {
@@ -1162,15 +1177,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConnectivityTestRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConnectivityTest = stubLongRunningCall(
         undefined,
@@ -1179,11 +1191,14 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       const [operation] = await client.deleteConnectivityTest(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteConnectivityTest as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConnectivityTest as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteConnectivityTestProgress without error', async () => {
@@ -1244,15 +1259,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectivityTestsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
@@ -1268,11 +1280,14 @@ describe('v1.ReachabilityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listConnectivityTests(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConnectivityTests as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConnectivityTests as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnectivityTests as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConnectivityTests without error using callback', async () => {
@@ -1286,15 +1301,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectivityTestsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
@@ -1327,11 +1339,14 @@ describe('v1.ReachabilityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConnectivityTests as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConnectivityTests as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnectivityTests as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConnectivityTests with error', async () => {
@@ -1345,15 +1360,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectivityTestsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConnectivityTests = stubSimpleCall(
         undefined,
@@ -1363,11 +1375,14 @@ describe('v1.ReachabilityServiceClient', () => {
         client.listConnectivityTests(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listConnectivityTests as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConnectivityTests as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConnectivityTests as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConnectivityTestsStream without error', async () => {
@@ -1381,8 +1396,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectivityTestsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
@@ -1425,12 +1444,15 @@ describe('v1.ReachabilityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConnectivityTests, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectivityTests
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1445,8 +1467,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectivityTestsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectivityTests.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1478,12 +1504,15 @@ describe('v1.ReachabilityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConnectivityTests, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectivityTests
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1498,8 +1527,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectivityTestsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networkmanagement.v1.ConnectivityTest()
@@ -1527,12 +1560,15 @@ describe('v1.ReachabilityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectivityTests
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1547,8 +1583,12 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConnectivityTestsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConnectivityTests.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1567,12 +1607,15 @@ describe('v1.ReachabilityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConnectivityTests
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
