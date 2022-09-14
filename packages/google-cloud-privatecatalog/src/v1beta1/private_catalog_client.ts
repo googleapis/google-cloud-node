@@ -468,7 +468,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchCatalogs(request, options, callback);
@@ -515,7 +515,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     const defaultCallSettings = this._defaults['searchCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -571,7 +571,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     const defaultCallSettings = this._defaults['searchCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -686,7 +686,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchProducts(request, options, callback);
@@ -734,7 +734,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     const defaultCallSettings = this._defaults['searchProducts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -791,7 +791,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     const defaultCallSettings = this._defaults['searchProducts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -906,7 +906,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchVersions(request, options, callback);
@@ -954,7 +954,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     const defaultCallSettings = this._defaults['searchVersions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1011,7 +1011,7 @@ export class PrivateCatalogClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     const defaultCallSettings = this._defaults['searchVersions'];
     const callSettings = defaultCallSettings.merge(options);
