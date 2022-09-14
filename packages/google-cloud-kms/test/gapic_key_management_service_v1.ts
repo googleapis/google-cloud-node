@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, IamProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -231,26 +246,23 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
       client.innerApiCalls.getKeyRing = stubSimpleCall(expectedResponse);
       const [response] = await client.getKeyRing(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKeyRing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKeyRing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyRing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKeyRing without error using callback', async () => {
@@ -263,15 +275,9 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
@@ -294,11 +300,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKeyRing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKeyRing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyRing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKeyRing with error', async () => {
@@ -311,26 +320,23 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKeyRing = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getKeyRing(request), expectedError);
-      assert(
-        (client.innerApiCalls.getKeyRing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKeyRing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKeyRing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKeyRing with closed client', async () => {
@@ -343,7 +349,8 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getKeyRing(request), expectedError);
@@ -361,26 +368,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
       client.innerApiCalls.getCryptoKey = stubSimpleCall(expectedResponse);
       const [response] = await client.getCryptoKey(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCryptoKey without error using callback', async () => {
@@ -393,15 +399,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -424,11 +426,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCryptoKey with error', async () => {
@@ -441,26 +446,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCryptoKey = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCryptoKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCryptoKey with closed client', async () => {
@@ -473,7 +477,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCryptoKey(request), expectedError);
@@ -491,15 +498,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -507,11 +510,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCryptoKeyVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCryptoKeyVersion without error using callback', async () => {
@@ -524,15 +530,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -555,11 +557,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCryptoKeyVersion with error', async () => {
@@ -572,26 +577,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCryptoKeyVersion = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCryptoKeyVersion(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCryptoKeyVersion with closed client', async () => {
@@ -604,7 +608,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCryptoKeyVersion(request), expectedError);
@@ -622,26 +629,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.PublicKey()
       );
       client.innerApiCalls.getPublicKey = stubSimpleCall(expectedResponse);
       const [response] = await client.getPublicKey(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPublicKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPublicKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPublicKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPublicKey without error using callback', async () => {
@@ -654,15 +660,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.PublicKey()
       );
@@ -685,11 +687,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPublicKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPublicKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPublicKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPublicKey with error', async () => {
@@ -702,26 +707,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPublicKey = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getPublicKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPublicKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPublicKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPublicKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPublicKey with closed client', async () => {
@@ -734,7 +738,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPublicKey(request), expectedError);
@@ -752,26 +759,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
       client.innerApiCalls.getImportJob = stubSimpleCall(expectedResponse);
       const [response] = await client.getImportJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getImportJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getImportJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getImportJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getImportJob without error using callback', async () => {
@@ -784,15 +790,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
@@ -815,11 +817,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getImportJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getImportJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getImportJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getImportJob with error', async () => {
@@ -832,26 +837,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getImportJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getImportJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.getImportJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getImportJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getImportJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getImportJob with closed client', async () => {
@@ -864,7 +868,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getImportJob(request), expectedError);
@@ -882,26 +889,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
       client.innerApiCalls.createKeyRing = stubSimpleCall(expectedResponse);
       const [response] = await client.createKeyRing(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKeyRing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKeyRing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKeyRing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKeyRing without error using callback', async () => {
@@ -914,15 +920,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.KeyRing()
       );
@@ -945,11 +947,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKeyRing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKeyRing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKeyRing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKeyRing with error', async () => {
@@ -962,26 +967,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKeyRing = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createKeyRing(request), expectedError);
-      assert(
-        (client.innerApiCalls.createKeyRing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKeyRing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKeyRing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKeyRing with closed client', async () => {
@@ -994,7 +998,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createKeyRing(request), expectedError);
@@ -1012,26 +1019,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
       client.innerApiCalls.createCryptoKey = stubSimpleCall(expectedResponse);
       const [response] = await client.createCryptoKey(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCryptoKey without error using callback', async () => {
@@ -1044,15 +1050,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1075,11 +1077,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCryptoKey with error', async () => {
@@ -1092,26 +1097,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCryptoKey = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCryptoKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCryptoKey with closed client', async () => {
@@ -1124,7 +1128,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCryptoKey(request), expectedError);
@@ -1142,15 +1149,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1158,11 +1162,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createCryptoKeyVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCryptoKeyVersion without error using callback', async () => {
@@ -1175,15 +1182,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1206,11 +1210,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCryptoKeyVersion with error', async () => {
@@ -1223,15 +1230,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -1241,11 +1245,14 @@ describe('v1.KeyManagementServiceClient', () => {
         client.createCryptoKeyVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCryptoKeyVersion with closed client', async () => {
@@ -1258,7 +1265,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1279,15 +1290,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1295,11 +1303,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.importCryptoKeyVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importCryptoKeyVersion without error using callback', async () => {
@@ -1312,15 +1323,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1343,11 +1351,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importCryptoKeyVersion with error', async () => {
@@ -1360,15 +1371,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -1378,11 +1386,14 @@ describe('v1.KeyManagementServiceClient', () => {
         client.importCryptoKeyVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.importCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importCryptoKeyVersion with closed client', async () => {
@@ -1395,7 +1406,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ImportCryptoKeyVersionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1416,26 +1431,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
       client.innerApiCalls.createImportJob = stubSimpleCall(expectedResponse);
       const [response] = await client.createImportJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createImportJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createImportJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createImportJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createImportJob without error using callback', async () => {
@@ -1448,15 +1462,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.ImportJob()
       );
@@ -1479,11 +1489,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createImportJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createImportJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createImportJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createImportJob with error', async () => {
@@ -1496,26 +1509,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createImportJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createImportJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.createImportJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createImportJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createImportJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createImportJob with closed client', async () => {
@@ -1528,7 +1540,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createImportJob(request), expectedError);
@@ -1546,27 +1561,27 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
-      request.cryptoKey = {};
-      request.cryptoKey.name = '';
-      const expectedHeaderRequestParams = 'crypto_key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.cryptoKey ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
+        'cryptoKey',
+        'name',
+      ]);
+      request.cryptoKey.name = defaultValue1;
+      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
       client.innerApiCalls.updateCryptoKey = stubSimpleCall(expectedResponse);
       const [response] = await client.updateCryptoKey(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKey without error using callback', async () => {
@@ -1579,16 +1594,13 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
-      request.cryptoKey = {};
-      request.cryptoKey.name = '';
-      const expectedHeaderRequestParams = 'crypto_key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.cryptoKey ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
+        'cryptoKey',
+        'name',
+      ]);
+      request.cryptoKey.name = defaultValue1;
+      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1611,11 +1623,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKey with error', async () => {
@@ -1628,27 +1643,27 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
-      request.cryptoKey = {};
-      request.cryptoKey.name = '';
-      const expectedHeaderRequestParams = 'crypto_key.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.cryptoKey ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
+        'cryptoKey',
+        'name',
+      ]);
+      request.cryptoKey.name = defaultValue1;
+      const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCryptoKey = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCryptoKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCryptoKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKey with closed client', async () => {
@@ -1661,8 +1676,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
-      request.cryptoKey = {};
-      request.cryptoKey.name = '';
+      request.cryptoKey ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
+        'cryptoKey',
+        'name',
+      ]);
+      request.cryptoKey.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCryptoKey(request), expectedError);
@@ -1680,16 +1699,13 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
-      request.cryptoKeyVersion = {};
-      request.cryptoKeyVersion.name = '';
-      const expectedHeaderRequestParams = 'crypto_key_version.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.cryptoKeyVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyVersionRequest',
+        ['cryptoKeyVersion', 'name']
+      );
+      request.cryptoKeyVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1697,11 +1713,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateCryptoKeyVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKeyVersion without error using callback', async () => {
@@ -1714,16 +1733,13 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
-      request.cryptoKeyVersion = {};
-      request.cryptoKeyVersion.name = '';
-      const expectedHeaderRequestParams = 'crypto_key_version.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.cryptoKeyVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyVersionRequest',
+        ['cryptoKeyVersion', 'name']
+      );
+      request.cryptoKeyVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1746,11 +1762,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKeyVersion with error', async () => {
@@ -1763,16 +1782,13 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
-      request.cryptoKeyVersion = {};
-      request.cryptoKeyVersion.name = '';
-      const expectedHeaderRequestParams = 'crypto_key_version.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.cryptoKeyVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyVersionRequest',
+        ['cryptoKeyVersion', 'name']
+      );
+      request.cryptoKeyVersion.name = defaultValue1;
+      const expectedHeaderRequestParams = `crypto_key_version.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -1782,11 +1798,14 @@ describe('v1.KeyManagementServiceClient', () => {
         client.updateCryptoKeyVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKeyVersion with closed client', async () => {
@@ -1799,8 +1818,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest()
       );
-      request.cryptoKeyVersion = {};
-      request.cryptoKeyVersion.name = '';
+      request.cryptoKeyVersion ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyVersionRequest',
+        ['cryptoKeyVersion', 'name']
+      );
+      request.cryptoKeyVersion.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1821,15 +1844,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyPrimaryVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1837,11 +1857,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateCryptoKeyPrimaryVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKeyPrimaryVersion without error using callback', async () => {
@@ -1854,15 +1877,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyPrimaryVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKey()
       );
@@ -1885,11 +1905,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKeyPrimaryVersion with error', async () => {
@@ -1902,15 +1925,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyPrimaryVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCryptoKeyPrimaryVersion = stubSimpleCall(
         undefined,
@@ -1920,11 +1940,14 @@ describe('v1.KeyManagementServiceClient', () => {
         client.updateCryptoKeyPrimaryVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCryptoKeyPrimaryVersion with closed client', async () => {
@@ -1937,7 +1960,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCryptoKeyPrimaryVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1958,15 +1985,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DestroyCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -1974,11 +1998,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.destroyCryptoKeyVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.destroyCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.destroyCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes destroyCryptoKeyVersion without error using callback', async () => {
@@ -1991,15 +2018,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DestroyCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -2022,11 +2046,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.destroyCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.destroyCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes destroyCryptoKeyVersion with error', async () => {
@@ -2039,15 +2066,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DestroyCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.destroyCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -2057,11 +2081,14 @@ describe('v1.KeyManagementServiceClient', () => {
         client.destroyCryptoKeyVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.destroyCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.destroyCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes destroyCryptoKeyVersion with closed client', async () => {
@@ -2074,7 +2101,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DestroyCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2095,15 +2126,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RestoreCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -2111,11 +2139,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.restoreCryptoKeyVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.restoreCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes restoreCryptoKeyVersion without error using callback', async () => {
@@ -2128,15 +2159,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RestoreCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.CryptoKeyVersion()
       );
@@ -2159,11 +2187,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.restoreCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes restoreCryptoKeyVersion with error', async () => {
@@ -2176,15 +2207,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RestoreCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restoreCryptoKeyVersion = stubSimpleCall(
         undefined,
@@ -2194,11 +2222,14 @@ describe('v1.KeyManagementServiceClient', () => {
         client.restoreCryptoKeyVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.restoreCryptoKeyVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restoreCryptoKeyVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes restoreCryptoKeyVersion with closed client', async () => {
@@ -2211,7 +2242,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RestoreCryptoKeyVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2232,26 +2267,23 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptResponse()
       );
       client.innerApiCalls.encrypt = stubSimpleCall(expectedResponse);
       const [response] = await client.encrypt(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.encrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.encrypt as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.encrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes encrypt without error using callback', async () => {
@@ -2264,15 +2296,9 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptResponse()
       );
@@ -2295,11 +2321,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.encrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.encrypt as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.encrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes encrypt with error', async () => {
@@ -2312,23 +2341,20 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.encrypt = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.encrypt(request), expectedError);
-      assert(
-        (client.innerApiCalls.encrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.encrypt as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.encrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes encrypt with closed client', async () => {
@@ -2341,7 +2367,8 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.encrypt(request), expectedError);
@@ -2359,26 +2386,23 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptResponse()
       );
       client.innerApiCalls.decrypt = stubSimpleCall(expectedResponse);
       const [response] = await client.decrypt(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.decrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.decrypt as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.decrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes decrypt without error using callback', async () => {
@@ -2391,15 +2415,9 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptResponse()
       );
@@ -2422,11 +2440,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.decrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.decrypt as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.decrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes decrypt with error', async () => {
@@ -2439,23 +2460,20 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.decrypt = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.decrypt(request), expectedError);
-      assert(
-        (client.innerApiCalls.decrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.decrypt as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.decrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes decrypt with closed client', async () => {
@@ -2468,7 +2486,8 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.decrypt(request), expectedError);
@@ -2486,26 +2505,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignResponse()
       );
       client.innerApiCalls.asymmetricSign = stubSimpleCall(expectedResponse);
       const [response] = await client.asymmetricSign(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asymmetricSign as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asymmetricSign as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asymmetricSign as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asymmetricSign without error using callback', async () => {
@@ -2518,15 +2536,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignResponse()
       );
@@ -2549,11 +2563,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asymmetricSign as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asymmetricSign as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asymmetricSign as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asymmetricSign with error', async () => {
@@ -2566,26 +2583,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asymmetricSign = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.asymmetricSign(request), expectedError);
-      assert(
-        (client.innerApiCalls.asymmetricSign as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asymmetricSign as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asymmetricSign as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asymmetricSign with closed client', async () => {
@@ -2598,7 +2614,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.asymmetricSign(request), expectedError);
@@ -2616,26 +2635,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptResponse()
       );
       client.innerApiCalls.asymmetricDecrypt = stubSimpleCall(expectedResponse);
       const [response] = await client.asymmetricDecrypt(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asymmetricDecrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asymmetricDecrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asymmetricDecrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asymmetricDecrypt without error using callback', async () => {
@@ -2648,15 +2666,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptResponse()
       );
@@ -2679,11 +2693,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asymmetricDecrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asymmetricDecrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asymmetricDecrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asymmetricDecrypt with error', async () => {
@@ -2696,26 +2713,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asymmetricDecrypt = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.asymmetricDecrypt(request), expectedError);
-      assert(
-        (client.innerApiCalls.asymmetricDecrypt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asymmetricDecrypt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asymmetricDecrypt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asymmetricDecrypt with closed client', async () => {
@@ -2728,7 +2744,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.asymmetricDecrypt(request), expectedError);
@@ -2746,26 +2765,23 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignResponse()
       );
       client.innerApiCalls.macSign = stubSimpleCall(expectedResponse);
       const [response] = await client.macSign(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.macSign as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.macSign as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.macSign as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes macSign without error using callback', async () => {
@@ -2778,15 +2794,9 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignResponse()
       );
@@ -2809,11 +2819,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.macSign as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.macSign as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.macSign as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes macSign with error', async () => {
@@ -2826,23 +2839,20 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.macSign = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.macSign(request), expectedError);
-      assert(
-        (client.innerApiCalls.macSign as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.macSign as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.macSign as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes macSign with closed client', async () => {
@@ -2855,7 +2865,8 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.macSign(request), expectedError);
@@ -2873,26 +2884,23 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyResponse()
       );
       client.innerApiCalls.macVerify = stubSimpleCall(expectedResponse);
       const [response] = await client.macVerify(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.macVerify as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.macVerify as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.macVerify as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes macVerify without error using callback', async () => {
@@ -2905,15 +2913,9 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyResponse()
       );
@@ -2936,11 +2938,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.macVerify as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.macVerify as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.macVerify as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes macVerify with error', async () => {
@@ -2953,23 +2958,20 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.macVerify = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.macVerify(request), expectedError);
-      assert(
-        (client.innerApiCalls.macVerify as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.macVerify as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.macVerify as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes macVerify with closed client', async () => {
@@ -2982,7 +2984,8 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.macVerify(request), expectedError);
@@ -3000,15 +3003,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesResponse()
       );
@@ -3016,11 +3015,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.generateRandomBytes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateRandomBytes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateRandomBytes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateRandomBytes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateRandomBytes without error using callback', async () => {
@@ -3033,15 +3035,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesResponse()
       );
@@ -3064,11 +3062,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateRandomBytes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateRandomBytes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateRandomBytes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateRandomBytes with error', async () => {
@@ -3081,26 +3082,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      request.location = '';
-      const expectedHeaderRequestParams = 'location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
+      const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.generateRandomBytes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.generateRandomBytes(request), expectedError);
-      assert(
-        (client.innerApiCalls.generateRandomBytes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.generateRandomBytes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.generateRandomBytes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes generateRandomBytes with closed client', async () => {
@@ -3113,7 +3113,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.generateRandomBytes(request), expectedError);
@@ -3131,15 +3134,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3148,11 +3147,14 @@ describe('v1.KeyManagementServiceClient', () => {
       client.innerApiCalls.listKeyRings = stubSimpleCall(expectedResponse);
       const [response] = await client.listKeyRings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKeyRings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKeyRings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyRings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKeyRings without error using callback', async () => {
@@ -3165,15 +3167,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3198,11 +3196,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKeyRings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKeyRings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyRings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKeyRings with error', async () => {
@@ -3215,26 +3216,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKeyRings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listKeyRings(request), expectedError);
-      assert(
-        (client.innerApiCalls.listKeyRings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKeyRings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKeyRings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKeyRingsStream without error', async () => {
@@ -3247,8 +3247,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3276,11 +3279,12 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listKeyRings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKeyRings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeyRings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3294,8 +3298,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeyRings.createStream = stubPageStreamingCall(
         undefined,
@@ -3320,11 +3327,12 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listKeyRings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKeyRings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeyRings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3338,8 +3346,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
         generateSampleMessage(new protos.google.cloud.kms.v1.KeyRing()),
@@ -3359,11 +3370,12 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKeyRings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeyRings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3377,8 +3389,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKeyRings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3395,11 +3410,12 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKeyRings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKeyRings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3415,15 +3431,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -3432,11 +3444,14 @@ describe('v1.KeyManagementServiceClient', () => {
       client.innerApiCalls.listCryptoKeys = stubSimpleCall(expectedResponse);
       const [response] = await client.listCryptoKeys(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCryptoKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCryptoKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCryptoKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCryptoKeys without error using callback', async () => {
@@ -3449,15 +3464,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -3482,11 +3493,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCryptoKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCryptoKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCryptoKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCryptoKeys with error', async () => {
@@ -3499,26 +3513,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCryptoKeys = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCryptoKeys(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCryptoKeys as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCryptoKeys as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCryptoKeys as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCryptoKeysStream without error', async () => {
@@ -3531,8 +3544,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -3560,11 +3576,12 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCryptoKeys, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCryptoKeys.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3578,8 +3595,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeys.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3602,11 +3622,12 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCryptoKeys, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCryptoKeys.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCryptoKeys.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3620,8 +3641,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
         generateSampleMessage(new protos.google.cloud.kms.v1.CryptoKey()),
@@ -3641,11 +3665,12 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3659,8 +3684,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeys.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3677,11 +3705,12 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCryptoKeys.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3697,15 +3726,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCryptoKeyVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -3721,11 +3747,14 @@ describe('v1.KeyManagementServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCryptoKeyVersions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCryptoKeyVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCryptoKeyVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCryptoKeyVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCryptoKeyVersions without error using callback', async () => {
@@ -3738,15 +3767,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCryptoKeyVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -3777,11 +3803,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCryptoKeyVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCryptoKeyVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCryptoKeyVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCryptoKeyVersions with error', async () => {
@@ -3794,15 +3823,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCryptoKeyVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCryptoKeyVersions = stubSimpleCall(
         undefined,
@@ -3812,11 +3838,14 @@ describe('v1.KeyManagementServiceClient', () => {
         client.listCryptoKeyVersions(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listCryptoKeyVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCryptoKeyVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCryptoKeyVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCryptoKeyVersionsStream without error', async () => {
@@ -3829,8 +3858,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCryptoKeyVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -3870,12 +3903,15 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCryptoKeyVersions, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCryptoKeyVersions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3889,8 +3925,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCryptoKeyVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeyVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3919,12 +3959,15 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCryptoKeyVersions, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCryptoKeyVersions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3938,8 +3981,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCryptoKeyVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.kms.v1.CryptoKeyVersion()
@@ -3966,12 +4013,15 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCryptoKeyVersions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3985,8 +4035,12 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCryptoKeyVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCryptoKeyVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4004,12 +4058,15 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCryptoKeyVersions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4025,15 +4082,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4042,11 +4095,14 @@ describe('v1.KeyManagementServiceClient', () => {
       client.innerApiCalls.listImportJobs = stubSimpleCall(expectedResponse);
       const [response] = await client.listImportJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listImportJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listImportJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listImportJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listImportJobs without error using callback', async () => {
@@ -4059,15 +4115,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4092,11 +4144,14 @@ describe('v1.KeyManagementServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listImportJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listImportJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listImportJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listImportJobs with error', async () => {
@@ -4109,26 +4164,25 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listImportJobs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listImportJobs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listImportJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listImportJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listImportJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listImportJobsStream without error', async () => {
@@ -4141,8 +4195,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4170,11 +4227,12 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listImportJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listImportJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listImportJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4188,8 +4246,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImportJobs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4212,11 +4273,12 @@ describe('v1.KeyManagementServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listImportJobs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listImportJobs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listImportJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4230,8 +4292,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
         generateSampleMessage(new protos.google.cloud.kms.v1.ImportJob()),
@@ -4251,11 +4316,12 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listImportJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4269,8 +4335,11 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listImportJobs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4287,11 +4356,12 @@ describe('v1.KeyManagementServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listImportJobs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listImportJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

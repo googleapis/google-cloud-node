@@ -439,7 +439,7 @@ export class EkmServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEkmConnection(request, options, callback);
@@ -533,7 +533,7 @@ export class EkmServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createEkmConnection(request, options, callback);
@@ -621,7 +621,7 @@ export class EkmServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'ekm_connection.name': request.ekmConnection!.name || '',
+        'ekm_connection.name': request.ekmConnection!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateEkmConnection(request, options, callback);
@@ -733,7 +733,7 @@ export class EkmServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listEkmConnections(request, options, callback);
@@ -790,7 +790,7 @@ export class EkmServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEkmConnections'];
     const callSettings = defaultCallSettings.merge(options);
@@ -856,7 +856,7 @@ export class EkmServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEkmConnections'];
     const callSettings = defaultCallSettings.merge(options);
