@@ -6320,6 +6320,7 @@
                          * @property {google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState|null} [kajEnrollmentState] Workload kajEnrollmentState
                          * @property {boolean|null} [enableSovereignControls] Workload enableSovereignControls
                          * @property {google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse|null} [saaEnrollmentResponse] Workload saaEnrollmentResponse
+                         * @property {Array.<string>|null} [compliantButDisallowedServices] Workload compliantButDisallowedServices
                          */
     
                         /**
@@ -6334,6 +6335,7 @@
                             this.resources = [];
                             this.labels = {};
                             this.resourceSettings = [];
+                            this.compliantButDisallowedServices = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6484,6 +6486,14 @@
                          */
                         Workload.prototype.saaEnrollmentResponse = null;
     
+                        /**
+                         * Workload compliantButDisallowedServices.
+                         * @member {Array.<string>} compliantButDisallowedServices
+                         * @memberof google.cloud.assuredworkloads.v1beta1.Workload
+                         * @instance
+                         */
+                        Workload.prototype.compliantButDisallowedServices = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -6561,6 +6571,9 @@
                                 writer.uint32(/* id 18, wireType 0 =*/144).bool(message.enableSovereignControls);
                             if (message.saaEnrollmentResponse != null && Object.hasOwnProperty.call(message, "saaEnrollmentResponse"))
                                 $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.encode(message.saaEnrollmentResponse, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.compliantButDisallowedServices != null && message.compliantButDisallowedServices.length)
+                                for (var i = 0; i < message.compliantButDisallowedServices.length; ++i)
+                                    writer.uint32(/* id 24, wireType 2 =*/194).string(message.compliantButDisallowedServices[i]);
                             return writer;
                         };
     
@@ -6688,6 +6701,12 @@
                                     }
                                 case 20: {
                                         message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 24: {
+                                        if (!(message.compliantButDisallowedServices && message.compliantButDisallowedServices.length))
+                                            message.compliantButDisallowedServices = [];
+                                        message.compliantButDisallowedServices.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -6850,6 +6869,13 @@
                                 if (error)
                                     return "saaEnrollmentResponse." + error;
                             }
+                            if (message.compliantButDisallowedServices != null && message.hasOwnProperty("compliantButDisallowedServices")) {
+                                if (!Array.isArray(message.compliantButDisallowedServices))
+                                    return "compliantButDisallowedServices: array expected";
+                                for (var i = 0; i < message.compliantButDisallowedServices.length; ++i)
+                                    if (!$util.isString(message.compliantButDisallowedServices[i]))
+                                        return "compliantButDisallowedServices: string[] expected";
+                            }
                             return null;
                         };
     
@@ -7003,6 +7029,13 @@
                                     throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.saaEnrollmentResponse: object expected");
                                 message.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.fromObject(object.saaEnrollmentResponse);
                             }
+                            if (object.compliantButDisallowedServices) {
+                                if (!Array.isArray(object.compliantButDisallowedServices))
+                                    throw TypeError(".google.cloud.assuredworkloads.v1beta1.Workload.compliantButDisallowedServices: array expected");
+                                message.compliantButDisallowedServices = [];
+                                for (var i = 0; i < object.compliantButDisallowedServices.length; ++i)
+                                    message.compliantButDisallowedServices[i] = String(object.compliantButDisallowedServices[i]);
+                            }
                             return message;
                         };
     
@@ -7022,6 +7055,7 @@
                             if (options.arrays || options.defaults) {
                                 object.resources = [];
                                 object.resourceSettings = [];
+                                object.compliantButDisallowedServices = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -7096,6 +7130,11 @@
                                 object.enableSovereignControls = message.enableSovereignControls;
                             if (message.saaEnrollmentResponse != null && message.hasOwnProperty("saaEnrollmentResponse"))
                                 object.saaEnrollmentResponse = $root.google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse.toObject(message.saaEnrollmentResponse, options);
+                            if (message.compliantButDisallowedServices && message.compliantButDisallowedServices.length) {
+                                object.compliantButDisallowedServices = [];
+                                for (var j = 0; j < message.compliantButDisallowedServices.length; ++j)
+                                    object.compliantButDisallowedServices[j] = message.compliantButDisallowedServices[j];
+                            }
                             return object;
                         };
     

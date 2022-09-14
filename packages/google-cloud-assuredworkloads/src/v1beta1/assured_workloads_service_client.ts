@@ -582,7 +582,7 @@ export class AssuredWorkloadsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.restrictAllowedResources(
@@ -693,7 +693,7 @@ export class AssuredWorkloadsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteWorkload(request, options, callback);
@@ -796,8 +796,8 @@ export class AssuredWorkloadsServiceClient {
     return this.innerApiCalls.getWorkload(request, options, callback);
   }
   /**
-   * A request to analyze a hypothetical move of a source project or
-   * project-based workload to a target (destination) folder-based workload.
+   * Analyze if the source Assured Workloads can be moved to the target Assured
+   * Workload
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1014,7 +1014,7 @@ export class AssuredWorkloadsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createWorkload(request, options, callback);

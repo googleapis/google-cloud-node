@@ -235,7 +235,7 @@
             "regionTag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_AnalyzeWorkloadMove_async",
             "title": "AssuredWorkloadsService analyzeWorkloadMove Sample",
             "origin": "API_DEFINITION",
-            "description": " A request to analyze a hypothetical move of a source project or project-based workload to a target (destination) folder-based workload.",
+            "description": " Analyze if the source Assured Workloads can be moved to the target Assured Workload",
             "canonical": true,
             "file": "assured_workloads_service.analyze_workload_move.js",
             "language": "JAVASCRIPT",

@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -280,18 +295,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
       client.innerApiCalls.updateWorkload = stubSimpleCall(expectedResponse);
       const [response] = await client.updateWorkload(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes updateWorkload without error using callback', async () => {
@@ -306,7 +315,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
@@ -329,11 +337,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes updateWorkload with error', async () => {
@@ -348,18 +351,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkload = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateWorkload(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes updateWorkload with closed client', async () => {
@@ -393,15 +390,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse()
       );
@@ -409,11 +403,14 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.restrictAllowedResources(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.restrictAllowedResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes restrictAllowedResources without error using callback', async () => {
@@ -428,15 +425,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse()
       );
@@ -459,11 +453,14 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.restrictAllowedResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes restrictAllowedResources with error', async () => {
@@ -478,15 +475,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.restrictAllowedResources = stubSimpleCall(
         undefined,
@@ -496,11 +490,14 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         client.restrictAllowedResources(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.restrictAllowedResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.restrictAllowedResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes restrictAllowedResources with closed client', async () => {
@@ -515,7 +512,11 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RestrictAllowedResourcesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -538,26 +539,25 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteWorkload = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteWorkload(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkload as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkload as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkload without error using callback', async () => {
@@ -572,15 +572,11 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -603,11 +599,14 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkload as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkload as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkload with error', async () => {
@@ -622,26 +621,25 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkload = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteWorkload(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkload as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkload as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkload with closed client', async () => {
@@ -656,7 +654,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteWorkload(request), expectedError);
@@ -676,18 +677,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
       client.innerApiCalls.getWorkload = stubSimpleCall(expectedResponse);
       const [response] = await client.getWorkload(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes getWorkload without error using callback', async () => {
@@ -702,7 +697,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.Workload()
       );
@@ -725,11 +719,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes getWorkload with error', async () => {
@@ -744,18 +733,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkload = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getWorkload(request), expectedError);
-      assert(
-        (client.innerApiCalls.getWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes getWorkload with closed client', async () => {
@@ -789,7 +772,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse()
       );
@@ -797,11 +779,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeWorkloadMove(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeWorkloadMove as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeWorkloadMove without error using callback', async () => {
@@ -816,7 +793,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse()
       );
@@ -839,11 +815,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeWorkloadMove as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes analyzeWorkloadMove with error', async () => {
@@ -858,18 +829,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeWorkloadMove = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.analyzeWorkloadMove(request), expectedError);
-      assert(
-        (client.innerApiCalls.analyzeWorkloadMove as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeWorkloadMove with closed client', async () => {
@@ -903,15 +868,11 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -920,11 +881,14 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const [operation] = await client.createWorkload(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkload without error using callback', async () => {
@@ -939,15 +903,11 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -977,11 +937,14 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkload with call error', async () => {
@@ -996,26 +959,25 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkload = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createWorkload(request), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkload with LRO error', async () => {
@@ -1030,15 +992,11 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkload = stubLongRunningCall(
         undefined,
@@ -1047,11 +1005,14 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       );
       const [operation] = await client.createWorkload(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkload as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkload as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateWorkloadProgress without error', async () => {
@@ -1115,7 +1076,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.assuredworkloads.v1beta1.Workload()
@@ -1130,11 +1090,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       client.innerApiCalls.listWorkloads = stubSimpleCall(expectedResponse);
       const [response] = await client.listWorkloads(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkloads as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listWorkloads without error using callback', async () => {
@@ -1149,7 +1104,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.assuredworkloads.v1beta1.Workload()
@@ -1182,11 +1136,6 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkloads as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listWorkloads with error', async () => {
@@ -1201,18 +1150,12 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkloads = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listWorkloads(request), expectedError);
-      assert(
-        (client.innerApiCalls.listWorkloads as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listWorkloadsStream without error', async () => {

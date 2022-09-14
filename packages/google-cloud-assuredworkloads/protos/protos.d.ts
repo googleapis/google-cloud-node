@@ -2654,6 +2654,9 @@ export namespace google {
 
                     /** Workload saaEnrollmentResponse */
                     saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse|null);
+
+                    /** Workload compliantButDisallowedServices */
+                    compliantButDisallowedServices?: (string[]|null);
                 }
 
                 /** Represents a Workload. */
@@ -2718,6 +2721,9 @@ export namespace google {
 
                     /** Workload saaEnrollmentResponse. */
                     public saaEnrollmentResponse?: (google.cloud.assuredworkloads.v1beta1.Workload.ISaaEnrollmentResponse|null);
+
+                    /** Workload compliantButDisallowedServices. */
+                    public compliantButDisallowedServices: string[];
 
                     /** Workload complianceRegimeSettings. */
                     public complianceRegimeSettings?: ("il4Settings"|"cjisSettings"|"fedrampHighSettings"|"fedrampModerateSettings");
