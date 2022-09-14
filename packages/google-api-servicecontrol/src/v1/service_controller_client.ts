@@ -413,7 +413,7 @@ export class ServiceControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.check(request, options, callback);
@@ -533,7 +533,7 @@ export class ServiceControllerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.report(request, options, callback);

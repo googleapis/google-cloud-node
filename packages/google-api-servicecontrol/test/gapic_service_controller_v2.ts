@@ -25,6 +25,21 @@ import * as servicecontrollerModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -159,26 +174,24 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckResponse()
       );
       client.innerApiCalls.check = stubSimpleCall(expectedResponse);
       const [response] = await client.check(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.check as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.check as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.check as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes check without error using callback', async () => {
@@ -190,15 +203,11 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckResponse()
       );
@@ -220,11 +229,13 @@ describe('v2.ServiceControllerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.check as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.check as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.check as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes check with error', async () => {
@@ -236,23 +247,21 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.check = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.check(request), expectedError);
-      assert(
-        (client.innerApiCalls.check as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.check as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.check as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes check with closed client', async () => {
@@ -264,7 +273,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      request.serviceName = '';
+      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.check(request), expectedError);
@@ -281,26 +293,25 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportResponse()
       );
       client.innerApiCalls.report = stubSimpleCall(expectedResponse);
       const [response] = await client.report(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.report as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.report as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.report as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes report without error using callback', async () => {
@@ -312,15 +323,11 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportResponse()
       );
@@ -343,11 +350,14 @@ describe('v2.ServiceControllerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.report as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.report as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.report as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes report with error', async () => {
@@ -359,23 +369,22 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.report = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.report(request), expectedError);
-      assert(
-        (client.innerApiCalls.report as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.report as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.report as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes report with closed client', async () => {
@@ -387,7 +396,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      request.serviceName = '';
+      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.report(request), expectedError);
