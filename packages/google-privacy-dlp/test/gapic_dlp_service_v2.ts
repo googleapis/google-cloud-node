@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LocationProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -220,26 +235,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentResponse()
       );
       client.innerApiCalls.inspectContent = stubSimpleCall(expectedResponse);
       const [response] = await client.inspectContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.inspectContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.inspectContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.inspectContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes inspectContent without error using callback', async () => {
@@ -251,15 +265,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentResponse()
       );
@@ -282,11 +292,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.inspectContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.inspectContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.inspectContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes inspectContent with error', async () => {
@@ -298,26 +311,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.inspectContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.inspectContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.inspectContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.inspectContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.inspectContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes inspectContent with closed client', async () => {
@@ -329,7 +341,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.inspectContent(request), expectedError);
@@ -346,26 +361,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageResponse()
       );
       client.innerApiCalls.redactImage = stubSimpleCall(expectedResponse);
       const [response] = await client.redactImage(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.redactImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.redactImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.redactImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes redactImage without error using callback', async () => {
@@ -377,15 +391,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageResponse()
       );
@@ -408,11 +418,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.redactImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.redactImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.redactImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes redactImage with error', async () => {
@@ -424,26 +437,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.redactImage = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.redactImage(request), expectedError);
-      assert(
-        (client.innerApiCalls.redactImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.redactImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.redactImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes redactImage with closed client', async () => {
@@ -455,7 +467,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.redactImage(request), expectedError);
@@ -472,26 +487,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentResponse()
       );
       client.innerApiCalls.deidentifyContent = stubSimpleCall(expectedResponse);
       const [response] = await client.deidentifyContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deidentifyContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deidentifyContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deidentifyContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deidentifyContent without error using callback', async () => {
@@ -503,15 +517,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentResponse()
       );
@@ -534,11 +544,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deidentifyContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deidentifyContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deidentifyContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deidentifyContent with error', async () => {
@@ -550,26 +563,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deidentifyContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deidentifyContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.deidentifyContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deidentifyContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deidentifyContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deidentifyContent with closed client', async () => {
@@ -581,7 +593,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deidentifyContent(request), expectedError);
@@ -598,26 +613,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentResponse()
       );
       client.innerApiCalls.reidentifyContent = stubSimpleCall(expectedResponse);
       const [response] = await client.reidentifyContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reidentifyContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reidentifyContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reidentifyContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reidentifyContent without error using callback', async () => {
@@ -629,15 +643,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentResponse()
       );
@@ -660,11 +670,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reidentifyContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reidentifyContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reidentifyContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reidentifyContent with error', async () => {
@@ -676,26 +689,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reidentifyContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.reidentifyContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.reidentifyContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reidentifyContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reidentifyContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reidentifyContent with closed client', async () => {
@@ -707,7 +719,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.reidentifyContent(request), expectedError);
@@ -724,26 +739,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesResponse()
       );
       client.innerApiCalls.listInfoTypes = stubSimpleCall(expectedResponse);
       const [response] = await client.listInfoTypes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listInfoTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInfoTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInfoTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInfoTypes without error using callback', async () => {
@@ -755,15 +769,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesResponse()
       );
@@ -786,11 +796,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listInfoTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInfoTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInfoTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInfoTypes with error', async () => {
@@ -802,26 +815,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInfoTypes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listInfoTypes(request), expectedError);
-      assert(
-        (client.innerApiCalls.listInfoTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInfoTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInfoTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInfoTypes with closed client', async () => {
@@ -833,7 +845,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listInfoTypes(request), expectedError);
@@ -850,15 +865,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateInspectTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
@@ -866,11 +878,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createInspectTemplate without error using callback', async () => {
@@ -882,15 +897,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateInspectTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
@@ -913,11 +925,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createInspectTemplate with error', async () => {
@@ -929,15 +944,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateInspectTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInspectTemplate = stubSimpleCall(
         undefined,
@@ -947,11 +959,14 @@ describe('v2.DlpServiceClient', () => {
         client.createInspectTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createInspectTemplate with closed client', async () => {
@@ -963,7 +978,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateInspectTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -983,15 +1002,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
@@ -999,11 +1015,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateInspectTemplate without error using callback', async () => {
@@ -1015,15 +1034,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
@@ -1046,11 +1062,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateInspectTemplate with error', async () => {
@@ -1062,15 +1081,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateInspectTemplate = stubSimpleCall(
         undefined,
@@ -1080,11 +1096,14 @@ describe('v2.DlpServiceClient', () => {
         client.updateInspectTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateInspectTemplate with closed client', async () => {
@@ -1096,7 +1115,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1116,15 +1139,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
@@ -1132,11 +1151,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getInspectTemplate without error using callback', async () => {
@@ -1148,15 +1170,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectTemplate()
       );
@@ -1179,11 +1197,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getInspectTemplate with error', async () => {
@@ -1195,26 +1216,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getInspectTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getInspectTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.getInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getInspectTemplate with closed client', async () => {
@@ -1226,7 +1246,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getInspectTemplate(request), expectedError);
@@ -1243,15 +1266,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1259,11 +1279,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteInspectTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteInspectTemplate without error using callback', async () => {
@@ -1275,15 +1298,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1306,11 +1326,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteInspectTemplate with error', async () => {
@@ -1322,15 +1345,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInspectTemplate = stubSimpleCall(
         undefined,
@@ -1340,11 +1360,14 @@ describe('v2.DlpServiceClient', () => {
         client.deleteInspectTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteInspectTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteInspectTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteInspectTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteInspectTemplate with closed client', async () => {
@@ -1356,7 +1379,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInspectTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1376,15 +1403,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeidentifyTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
@@ -1392,11 +1416,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeidentifyTemplate without error using callback', async () => {
@@ -1408,15 +1435,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeidentifyTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
@@ -1439,11 +1463,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeidentifyTemplate with error', async () => {
@@ -1455,15 +1482,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeidentifyTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeidentifyTemplate = stubSimpleCall(
         undefined,
@@ -1473,11 +1497,14 @@ describe('v2.DlpServiceClient', () => {
         client.createDeidentifyTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeidentifyTemplate with closed client', async () => {
@@ -1489,7 +1516,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeidentifyTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1509,15 +1540,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
@@ -1525,11 +1553,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeidentifyTemplate without error using callback', async () => {
@@ -1541,15 +1572,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
@@ -1572,11 +1600,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeidentifyTemplate with error', async () => {
@@ -1588,15 +1619,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeidentifyTemplate = stubSimpleCall(
         undefined,
@@ -1606,11 +1634,14 @@ describe('v2.DlpServiceClient', () => {
         client.updateDeidentifyTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeidentifyTemplate with closed client', async () => {
@@ -1622,7 +1653,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1642,15 +1677,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
@@ -1658,11 +1690,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeidentifyTemplate without error using callback', async () => {
@@ -1674,15 +1709,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyTemplate()
       );
@@ -1705,11 +1737,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeidentifyTemplate with error', async () => {
@@ -1721,15 +1756,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeidentifyTemplate = stubSimpleCall(
         undefined,
@@ -1739,11 +1771,14 @@ describe('v2.DlpServiceClient', () => {
         client.getDeidentifyTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeidentifyTemplate with closed client', async () => {
@@ -1755,7 +1790,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1775,15 +1814,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1791,11 +1827,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDeidentifyTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeidentifyTemplate without error using callback', async () => {
@@ -1807,15 +1846,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1838,11 +1874,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeidentifyTemplate with error', async () => {
@@ -1854,15 +1893,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeidentifyTemplate = stubSimpleCall(
         undefined,
@@ -1872,11 +1908,14 @@ describe('v2.DlpServiceClient', () => {
         client.deleteDeidentifyTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteDeidentifyTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeidentifyTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeidentifyTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeidentifyTemplate with closed client', async () => {
@@ -1888,7 +1927,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeidentifyTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1908,26 +1951,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
       client.innerApiCalls.createJobTrigger = stubSimpleCall(expectedResponse);
       const [response] = await client.createJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createJobTrigger without error using callback', async () => {
@@ -1939,15 +1981,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
@@ -1970,11 +2008,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createJobTrigger with error', async () => {
@@ -1986,26 +2027,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJobTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createJobTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.createJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createJobTrigger with closed client', async () => {
@@ -2017,7 +2057,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createJobTrigger(request), expectedError);
@@ -2034,26 +2077,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
       client.innerApiCalls.updateJobTrigger = stubSimpleCall(expectedResponse);
       const [response] = await client.updateJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateJobTrigger without error using callback', async () => {
@@ -2065,15 +2107,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
@@ -2096,11 +2134,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateJobTrigger with error', async () => {
@@ -2112,26 +2153,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateJobTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateJobTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateJobTrigger with closed client', async () => {
@@ -2143,7 +2183,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateJobTrigger(request), expectedError);
@@ -2160,15 +2203,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'HybridInspectJobTriggerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
@@ -2176,11 +2216,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.hybridInspectJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.hybridInspectJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.hybridInspectJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.hybridInspectJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes hybridInspectJobTrigger without error using callback', async () => {
@@ -2192,15 +2235,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'HybridInspectJobTriggerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
@@ -2223,11 +2263,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.hybridInspectJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.hybridInspectJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.hybridInspectJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes hybridInspectJobTrigger with error', async () => {
@@ -2239,15 +2282,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'HybridInspectJobTriggerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.hybridInspectJobTrigger = stubSimpleCall(
         undefined,
@@ -2257,11 +2297,14 @@ describe('v2.DlpServiceClient', () => {
         client.hybridInspectJobTrigger(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.hybridInspectJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.hybridInspectJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.hybridInspectJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes hybridInspectJobTrigger with closed client', async () => {
@@ -2273,7 +2316,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'HybridInspectJobTriggerRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2293,26 +2340,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
       client.innerApiCalls.getJobTrigger = stubSimpleCall(expectedResponse);
       const [response] = await client.getJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getJobTrigger without error using callback', async () => {
@@ -2324,15 +2370,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.JobTrigger()
       );
@@ -2355,11 +2397,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getJobTrigger with error', async () => {
@@ -2371,26 +2416,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getJobTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getJobTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.getJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getJobTrigger with closed client', async () => {
@@ -2402,7 +2446,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getJobTrigger(request), expectedError);
@@ -2419,26 +2466,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteJobTrigger = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteJobTrigger without error using callback', async () => {
@@ -2450,15 +2496,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2481,11 +2523,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteJobTrigger with error', async () => {
@@ -2497,26 +2542,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteJobTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteJobTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteJobTrigger with closed client', async () => {
@@ -2528,7 +2572,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteJobTrigger(request), expectedError);
@@ -2545,15 +2592,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
@@ -2561,11 +2604,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.activateJobTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.activateJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateJobTrigger without error using callback', async () => {
@@ -2577,15 +2623,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
@@ -2608,11 +2650,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.activateJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateJobTrigger with error', async () => {
@@ -2624,26 +2669,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.activateJobTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.activateJobTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.activateJobTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateJobTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateJobTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateJobTrigger with closed client', async () => {
@@ -2655,7 +2699,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.activateJobTrigger(request), expectedError);
@@ -2672,26 +2719,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
       client.innerApiCalls.createDlpJob = stubSimpleCall(expectedResponse);
       const [response] = await client.createDlpJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDlpJob without error using callback', async () => {
@@ -2703,15 +2749,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
@@ -2734,11 +2776,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDlpJob with error', async () => {
@@ -2750,26 +2795,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDlpJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createDlpJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.createDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDlpJob with closed client', async () => {
@@ -2781,7 +2825,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDlpJob(request), expectedError);
@@ -2798,26 +2845,23 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
       client.innerApiCalls.getDlpJob = stubSimpleCall(expectedResponse);
       const [response] = await client.getDlpJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDlpJob without error using callback', async () => {
@@ -2829,15 +2873,9 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DlpJob()
       );
@@ -2860,11 +2898,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDlpJob with error', async () => {
@@ -2876,23 +2917,20 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDlpJob = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getDlpJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDlpJob with closed client', async () => {
@@ -2904,7 +2942,8 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDlpJob(request), expectedError);
@@ -2921,26 +2960,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteDlpJob = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDlpJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDlpJob without error using callback', async () => {
@@ -2952,15 +2990,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2983,11 +3017,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDlpJob with error', async () => {
@@ -2999,26 +3036,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDlpJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDlpJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDlpJob with closed client', async () => {
@@ -3030,7 +3066,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDlpJob(request), expectedError);
@@ -3047,26 +3086,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.cancelDlpJob = stubSimpleCall(expectedResponse);
       const [response] = await client.cancelDlpJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelDlpJob without error using callback', async () => {
@@ -3078,15 +3116,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3109,11 +3143,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelDlpJob with error', async () => {
@@ -3125,26 +3162,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelDlpJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.cancelDlpJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.cancelDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelDlpJob with closed client', async () => {
@@ -3156,7 +3192,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelDlpJob(request), expectedError);
@@ -3173,15 +3212,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
@@ -3189,11 +3224,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createStoredInfoType(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createStoredInfoType without error using callback', async () => {
@@ -3205,15 +3243,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
@@ -3236,11 +3270,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createStoredInfoType with error', async () => {
@@ -3252,26 +3289,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createStoredInfoType = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createStoredInfoType(request), expectedError);
-      assert(
-        (client.innerApiCalls.createStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createStoredInfoType with closed client', async () => {
@@ -3283,7 +3319,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createStoredInfoType(request), expectedError);
@@ -3300,15 +3339,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
@@ -3316,11 +3351,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateStoredInfoType(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateStoredInfoType without error using callback', async () => {
@@ -3332,15 +3370,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
@@ -3363,11 +3397,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateStoredInfoType with error', async () => {
@@ -3379,26 +3416,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateStoredInfoType = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateStoredInfoType(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateStoredInfoType with closed client', async () => {
@@ -3410,7 +3446,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateStoredInfoType(request), expectedError);
@@ -3427,26 +3466,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
       client.innerApiCalls.getStoredInfoType = stubSimpleCall(expectedResponse);
       const [response] = await client.getStoredInfoType(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStoredInfoType without error using callback', async () => {
@@ -3458,15 +3496,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.StoredInfoType()
       );
@@ -3489,11 +3523,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStoredInfoType with error', async () => {
@@ -3505,26 +3542,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getStoredInfoType = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getStoredInfoType(request), expectedError);
-      assert(
-        (client.innerApiCalls.getStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getStoredInfoType with closed client', async () => {
@@ -3536,7 +3572,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getStoredInfoType(request), expectedError);
@@ -3553,15 +3592,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3569,11 +3604,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteStoredInfoType(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteStoredInfoType without error using callback', async () => {
@@ -3585,15 +3623,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3616,11 +3650,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteStoredInfoType with error', async () => {
@@ -3632,26 +3669,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteStoredInfoType = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteStoredInfoType(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteStoredInfoType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteStoredInfoType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteStoredInfoType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteStoredInfoType with closed client', async () => {
@@ -3663,7 +3699,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteStoredInfoType(request), expectedError);
@@ -3680,15 +3719,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
@@ -3696,11 +3731,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.hybridInspectDlpJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.hybridInspectDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.hybridInspectDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.hybridInspectDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes hybridInspectDlpJob without error using callback', async () => {
@@ -3712,15 +3750,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectResponse()
       );
@@ -3743,11 +3777,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.hybridInspectDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.hybridInspectDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.hybridInspectDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes hybridInspectDlpJob with error', async () => {
@@ -3759,26 +3796,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.hybridInspectDlpJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.hybridInspectDlpJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.hybridInspectDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.hybridInspectDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.hybridInspectDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes hybridInspectDlpJob with closed client', async () => {
@@ -3790,7 +3826,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.hybridInspectDlpJob(request), expectedError);
@@ -3807,26 +3846,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.finishDlpJob = stubSimpleCall(expectedResponse);
       const [response] = await client.finishDlpJob(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.finishDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finishDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finishDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finishDlpJob without error using callback', async () => {
@@ -3838,15 +3876,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3869,11 +3903,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.finishDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finishDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finishDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finishDlpJob with error', async () => {
@@ -3885,26 +3922,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.finishDlpJob = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.finishDlpJob(request), expectedError);
-      assert(
-        (client.innerApiCalls.finishDlpJob as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finishDlpJob as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finishDlpJob as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finishDlpJob with closed client', async () => {
@@ -3916,7 +3952,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.finishDlpJob(request), expectedError);
@@ -3933,15 +3972,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.InspectTemplate()
@@ -3957,11 +3992,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listInspectTemplates(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listInspectTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInspectTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInspectTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInspectTemplates without error using callback', async () => {
@@ -3973,15 +4011,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.InspectTemplate()
@@ -4012,11 +4046,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listInspectTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInspectTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInspectTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInspectTemplates with error', async () => {
@@ -4028,26 +4065,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listInspectTemplates = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listInspectTemplates(request), expectedError);
-      assert(
-        (client.innerApiCalls.listInspectTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listInspectTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listInspectTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listInspectTemplatesStream without error', async () => {
@@ -4059,8 +4095,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.InspectTemplate()
@@ -4097,11 +4136,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listInspectTemplates, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInspectTemplates.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInspectTemplates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4114,8 +4154,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInspectTemplates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4141,11 +4184,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listInspectTemplates, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInspectTemplates.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInspectTemplates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4158,8 +4202,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.InspectTemplate()
@@ -4185,11 +4232,12 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4202,8 +4250,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listInspectTemplates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4220,11 +4271,12 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listInspectTemplates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4239,15 +4291,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeidentifyTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
@@ -4263,11 +4312,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDeidentifyTemplates(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeidentifyTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeidentifyTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeidentifyTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeidentifyTemplates without error using callback', async () => {
@@ -4279,15 +4331,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeidentifyTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
@@ -4318,11 +4367,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeidentifyTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeidentifyTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeidentifyTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeidentifyTemplates with error', async () => {
@@ -4334,15 +4386,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeidentifyTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeidentifyTemplates = stubSimpleCall(
         undefined,
@@ -4352,11 +4401,14 @@ describe('v2.DlpServiceClient', () => {
         client.listDeidentifyTemplates(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listDeidentifyTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeidentifyTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeidentifyTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeidentifyTemplatesStream without error', async () => {
@@ -4368,8 +4420,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeidentifyTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
@@ -4409,12 +4465,15 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeidentifyTemplates, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeidentifyTemplates
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4427,8 +4486,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeidentifyTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeidentifyTemplates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4457,12 +4520,15 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeidentifyTemplates, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeidentifyTemplates
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4475,8 +4541,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeidentifyTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.DeidentifyTemplate()
@@ -4503,12 +4573,15 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeidentifyTemplates
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4521,8 +4594,12 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeidentifyTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeidentifyTemplates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4541,12 +4618,15 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeidentifyTemplates
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4561,15 +4641,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
@@ -4578,11 +4654,14 @@ describe('v2.DlpServiceClient', () => {
       client.innerApiCalls.listJobTriggers = stubSimpleCall(expectedResponse);
       const [response] = await client.listJobTriggers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listJobTriggers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listJobTriggers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listJobTriggers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listJobTriggers without error using callback', async () => {
@@ -4594,15 +4673,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
@@ -4627,11 +4702,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listJobTriggers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listJobTriggers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listJobTriggers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listJobTriggers with error', async () => {
@@ -4643,26 +4721,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobTriggers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listJobTriggers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listJobTriggers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listJobTriggers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listJobTriggers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listJobTriggersStream without error', async () => {
@@ -4674,8 +4751,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
@@ -4706,11 +4786,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listJobTriggers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobTriggers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobTriggers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4723,8 +4804,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobTriggers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4750,11 +4834,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listJobTriggers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobTriggers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobTriggers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4767,8 +4852,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.JobTrigger()),
@@ -4788,11 +4876,12 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobTriggers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobTriggers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4805,8 +4894,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobTriggers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4823,11 +4915,12 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobTriggers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobTriggers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4842,15 +4935,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
@@ -4859,11 +4948,14 @@ describe('v2.DlpServiceClient', () => {
       client.innerApiCalls.listDlpJobs = stubSimpleCall(expectedResponse);
       const [response] = await client.listDlpJobs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDlpJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDlpJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDlpJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDlpJobs without error using callback', async () => {
@@ -4875,15 +4967,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
@@ -4908,11 +4996,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDlpJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDlpJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDlpJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDlpJobs with error', async () => {
@@ -4924,26 +5015,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDlpJobs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDlpJobs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDlpJobs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDlpJobs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDlpJobs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDlpJobsStream without error', async () => {
@@ -4955,8 +5045,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
@@ -4984,11 +5077,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDlpJobs, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDlpJobs.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDlpJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5001,8 +5095,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDlpJobs.createStream = stubPageStreamingCall(
         undefined,
@@ -5027,11 +5124,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDlpJobs, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDlpJobs.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDlpJobs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5044,8 +5142,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
         generateSampleMessage(new protos.google.privacy.dlp.v2.DlpJob()),
@@ -5065,11 +5166,12 @@ describe('v2.DlpServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDlpJobs.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDlpJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5082,8 +5184,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDlpJobs.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5102,11 +5207,12 @@ describe('v2.DlpServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDlpJobs.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDlpJobs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5121,15 +5227,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.StoredInfoType()
@@ -5145,11 +5247,14 @@ describe('v2.DlpServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listStoredInfoTypes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listStoredInfoTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStoredInfoTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStoredInfoTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStoredInfoTypes without error using callback', async () => {
@@ -5161,15 +5266,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.StoredInfoType()
@@ -5200,11 +5301,14 @@ describe('v2.DlpServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listStoredInfoTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStoredInfoTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStoredInfoTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStoredInfoTypes with error', async () => {
@@ -5216,26 +5320,25 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listStoredInfoTypes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listStoredInfoTypes(request), expectedError);
-      assert(
-        (client.innerApiCalls.listStoredInfoTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listStoredInfoTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listStoredInfoTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStoredInfoTypesStream without error', async () => {
@@ -5247,8 +5350,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.StoredInfoType()
@@ -5285,11 +5391,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listStoredInfoTypes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStoredInfoTypes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStoredInfoTypes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5302,8 +5409,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStoredInfoTypes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5329,11 +5439,12 @@ describe('v2.DlpServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listStoredInfoTypes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStoredInfoTypes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStoredInfoTypes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5346,8 +5457,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.privacy.dlp.v2.StoredInfoType()
@@ -5373,11 +5487,12 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5390,8 +5505,11 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listStoredInfoTypes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5408,11 +5526,12 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listStoredInfoTypes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5563,12 +5682,15 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -5599,12 +5721,15 @@ describe('v2.DlpServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
