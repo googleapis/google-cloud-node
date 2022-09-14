@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, IamProtos, LocationProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -220,26 +235,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Repository()
       );
       client.innerApiCalls.getRepository = stubSimpleCall(expectedResponse);
       const [response] = await client.getRepository(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRepository without error using callback', async () => {
@@ -251,15 +265,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Repository()
       );
@@ -282,11 +292,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRepository with error', async () => {
@@ -298,26 +311,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRepository = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getRepository(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRepository with closed client', async () => {
@@ -329,7 +341,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetRepositoryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRepository(request), expectedError);
@@ -346,26 +361,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Repository()
       );
       client.innerApiCalls.createRepository = stubSimpleCall(expectedResponse);
       const [response] = await client.createRepository(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRepository without error using callback', async () => {
@@ -377,15 +391,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Repository()
       );
@@ -408,11 +418,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRepository with error', async () => {
@@ -424,26 +437,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRepository = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createRepository(request), expectedError);
-      assert(
-        (client.innerApiCalls.createRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRepository with closed client', async () => {
@@ -455,7 +467,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateRepositoryRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateRepositoryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createRepository(request), expectedError);
@@ -472,27 +487,27 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
-      request.repository = {};
-      request.repository.name = '';
-      const expectedHeaderRequestParams = 'repository.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.repository ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
+        'repository',
+        'name',
+      ]);
+      request.repository.name = defaultValue1;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Repository()
       );
       client.innerApiCalls.updateRepository = stubSimpleCall(expectedResponse);
       const [response] = await client.updateRepository(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRepository without error using callback', async () => {
@@ -504,16 +519,13 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
-      request.repository = {};
-      request.repository.name = '';
-      const expectedHeaderRequestParams = 'repository.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.repository ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
+        'repository',
+        'name',
+      ]);
+      request.repository.name = defaultValue1;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Repository()
       );
@@ -536,11 +548,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRepository with error', async () => {
@@ -552,27 +567,27 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
-      request.repository = {};
-      request.repository.name = '';
-      const expectedHeaderRequestParams = 'repository.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.repository ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
+        'repository',
+        'name',
+      ]);
+      request.repository.name = defaultValue1;
+      const expectedHeaderRequestParams = `repository.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRepository = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateRepository(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRepository with closed client', async () => {
@@ -584,8 +599,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.UpdateRepositoryRequest()
       );
-      request.repository = {};
-      request.repository.name = '';
+      request.repository ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRepositoryRequest', [
+        'repository',
+        'name',
+      ]);
+      request.repository.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateRepository(request), expectedError);
@@ -602,26 +621,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteRepository = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteRepository(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRepository without error using callback', async () => {
@@ -633,15 +651,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -664,11 +678,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRepository with error', async () => {
@@ -680,26 +697,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRepository = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteRepository(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRepository as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRepository as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRepository as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRepository with closed client', async () => {
@@ -711,7 +727,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteRepositoryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteRepositoryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteRepository(request), expectedError);
@@ -728,15 +747,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesResponse()
       );
@@ -744,11 +759,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.fetchRemoteBranches(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchRemoteBranches as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchRemoteBranches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchRemoteBranches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchRemoteBranches without error using callback', async () => {
@@ -760,15 +778,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesResponse()
       );
@@ -791,11 +805,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchRemoteBranches as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchRemoteBranches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchRemoteBranches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchRemoteBranches with error', async () => {
@@ -807,26 +824,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchRemoteBranches = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchRemoteBranches(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchRemoteBranches as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchRemoteBranches as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchRemoteBranches as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchRemoteBranches with closed client', async () => {
@@ -838,7 +854,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchRemoteBranchesRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('FetchRemoteBranchesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchRemoteBranches(request), expectedError);
@@ -855,26 +874,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Workspace()
       );
       client.innerApiCalls.getWorkspace = stubSimpleCall(expectedResponse);
       const [response] = await client.getWorkspace(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkspace without error using callback', async () => {
@@ -886,15 +904,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Workspace()
       );
@@ -917,11 +931,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkspace with error', async () => {
@@ -933,26 +950,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkspace = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getWorkspace(request), expectedError);
-      assert(
-        (client.innerApiCalls.getWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkspace with closed client', async () => {
@@ -964,7 +980,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkspaceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkspace(request), expectedError);
@@ -981,26 +1000,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Workspace()
       );
       client.innerApiCalls.createWorkspace = stubSimpleCall(expectedResponse);
       const [response] = await client.createWorkspace(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkspace without error using callback', async () => {
@@ -1012,15 +1030,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.Workspace()
       );
@@ -1043,11 +1057,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkspace with error', async () => {
@@ -1059,26 +1076,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkspace = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createWorkspace(request), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkspace with closed client', async () => {
@@ -1090,7 +1106,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkspaceRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateWorkspaceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createWorkspace(request), expectedError);
@@ -1107,26 +1126,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteWorkspace = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteWorkspace(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkspace without error using callback', async () => {
@@ -1138,15 +1156,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1169,11 +1183,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkspace with error', async () => {
@@ -1185,26 +1202,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkspace = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteWorkspace(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteWorkspace as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkspace as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkspace as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkspace with closed client', async () => {
@@ -1216,7 +1232,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkspaceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkspaceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteWorkspace(request), expectedError);
@@ -1233,15 +1252,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesResponse()
       );
@@ -1249,11 +1264,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.installNpmPackages(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.installNpmPackages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.installNpmPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.installNpmPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes installNpmPackages without error using callback', async () => {
@@ -1265,15 +1283,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesResponse()
       );
@@ -1296,11 +1310,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.installNpmPackages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.installNpmPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.installNpmPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes installNpmPackages with error', async () => {
@@ -1312,26 +1329,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.installNpmPackages = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.installNpmPackages(request), expectedError);
-      assert(
-        (client.innerApiCalls.installNpmPackages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.installNpmPackages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.installNpmPackages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes installNpmPackages with closed client', async () => {
@@ -1343,7 +1359,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.InstallNpmPackagesRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('InstallNpmPackagesRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.installNpmPackages(request), expectedError);
@@ -1360,26 +1379,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.pullGitCommits = stubSimpleCall(expectedResponse);
       const [response] = await client.pullGitCommits(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.pullGitCommits as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pullGitCommits as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pullGitCommits as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pullGitCommits without error using callback', async () => {
@@ -1391,15 +1409,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1422,11 +1436,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.pullGitCommits as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pullGitCommits as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pullGitCommits as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pullGitCommits with error', async () => {
@@ -1438,26 +1455,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pullGitCommits = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.pullGitCommits(request), expectedError);
-      assert(
-        (client.innerApiCalls.pullGitCommits as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pullGitCommits as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pullGitCommits as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pullGitCommits with closed client', async () => {
@@ -1469,7 +1485,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PullGitCommitsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('PullGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.pullGitCommits(request), expectedError);
@@ -1486,26 +1505,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.pushGitCommits = stubSimpleCall(expectedResponse);
       const [response] = await client.pushGitCommits(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.pushGitCommits as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pushGitCommits as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pushGitCommits as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pushGitCommits without error using callback', async () => {
@@ -1517,15 +1535,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1548,11 +1562,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.pushGitCommits as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pushGitCommits as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pushGitCommits as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pushGitCommits with error', async () => {
@@ -1564,26 +1581,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.pushGitCommits = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.pushGitCommits(request), expectedError);
-      assert(
-        (client.innerApiCalls.pushGitCommits as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.pushGitCommits as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.pushGitCommits as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes pushGitCommits with closed client', async () => {
@@ -1595,7 +1611,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.PushGitCommitsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('PushGitCommitsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.pushGitCommits(request), expectedError);
@@ -1612,15 +1631,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesResponse()
       );
@@ -1628,11 +1643,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.fetchFileGitStatuses(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchFileGitStatuses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchFileGitStatuses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchFileGitStatuses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchFileGitStatuses without error using callback', async () => {
@@ -1644,15 +1662,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesResponse()
       );
@@ -1675,11 +1689,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchFileGitStatuses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchFileGitStatuses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchFileGitStatuses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchFileGitStatuses with error', async () => {
@@ -1691,26 +1708,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchFileGitStatuses = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchFileGitStatuses(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchFileGitStatuses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchFileGitStatuses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchFileGitStatuses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchFileGitStatuses with closed client', async () => {
@@ -1722,7 +1738,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileGitStatusesRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('FetchFileGitStatusesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchFileGitStatuses(request), expectedError);
@@ -1739,15 +1758,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindResponse()
       );
@@ -1755,11 +1770,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.fetchGitAheadBehind(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchGitAheadBehind as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitAheadBehind as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitAheadBehind as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchGitAheadBehind without error using callback', async () => {
@@ -1771,15 +1789,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindResponse()
       );
@@ -1802,11 +1816,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchGitAheadBehind as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitAheadBehind as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitAheadBehind as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchGitAheadBehind with error', async () => {
@@ -1818,26 +1835,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchGitAheadBehind = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchGitAheadBehind(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchGitAheadBehind as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchGitAheadBehind as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchGitAheadBehind as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchGitAheadBehind with closed client', async () => {
@@ -1849,7 +1865,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchGitAheadBehindRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('FetchGitAheadBehindRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchGitAheadBehind(request), expectedError);
@@ -1866,15 +1885,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CommitWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1882,11 +1898,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.commitWorkspaceChanges(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.commitWorkspaceChanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.commitWorkspaceChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.commitWorkspaceChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes commitWorkspaceChanges without error using callback', async () => {
@@ -1898,15 +1917,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CommitWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1929,11 +1945,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.commitWorkspaceChanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.commitWorkspaceChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.commitWorkspaceChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes commitWorkspaceChanges with error', async () => {
@@ -1945,15 +1964,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CommitWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commitWorkspaceChanges = stubSimpleCall(
         undefined,
@@ -1963,11 +1979,14 @@ describe('v1alpha2.DataformClient', () => {
         client.commitWorkspaceChanges(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.commitWorkspaceChanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.commitWorkspaceChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.commitWorkspaceChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes commitWorkspaceChanges with closed client', async () => {
@@ -1979,7 +1998,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CommitWorkspaceChangesRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CommitWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1999,15 +2022,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2015,11 +2035,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.resetWorkspaceChanges(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetWorkspaceChanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetWorkspaceChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetWorkspaceChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetWorkspaceChanges without error using callback', async () => {
@@ -2031,15 +2054,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2062,11 +2082,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetWorkspaceChanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetWorkspaceChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetWorkspaceChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetWorkspaceChanges with error', async () => {
@@ -2078,15 +2101,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetWorkspaceChanges = stubSimpleCall(
         undefined,
@@ -2096,11 +2116,14 @@ describe('v1alpha2.DataformClient', () => {
         client.resetWorkspaceChanges(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.resetWorkspaceChanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetWorkspaceChanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetWorkspaceChanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetWorkspaceChanges with closed client', async () => {
@@ -2112,7 +2135,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ResetWorkspaceChangesRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ResetWorkspaceChangesRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2132,26 +2159,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffResponse()
       );
       client.innerApiCalls.fetchFileDiff = stubSimpleCall(expectedResponse);
       const [response] = await client.fetchFileDiff(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchFileDiff as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchFileDiff as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchFileDiff as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchFileDiff without error using callback', async () => {
@@ -2163,15 +2189,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffResponse()
       );
@@ -2194,11 +2216,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchFileDiff as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchFileDiff as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchFileDiff as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchFileDiff with error', async () => {
@@ -2210,26 +2235,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchFileDiff = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchFileDiff(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchFileDiff as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchFileDiff as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchFileDiff as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchFileDiff with closed client', async () => {
@@ -2241,7 +2265,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.FetchFileDiffRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('FetchFileDiffRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchFileDiff(request), expectedError);
@@ -2258,26 +2285,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryResponse()
       );
       client.innerApiCalls.makeDirectory = stubSimpleCall(expectedResponse);
       const [response] = await client.makeDirectory(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.makeDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.makeDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.makeDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes makeDirectory without error using callback', async () => {
@@ -2289,15 +2315,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryResponse()
       );
@@ -2320,11 +2342,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.makeDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.makeDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.makeDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes makeDirectory with error', async () => {
@@ -2336,26 +2361,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.makeDirectory = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.makeDirectory(request), expectedError);
-      assert(
-        (client.innerApiCalls.makeDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.makeDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.makeDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes makeDirectory with closed client', async () => {
@@ -2367,7 +2391,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MakeDirectoryRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('MakeDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.makeDirectory(request), expectedError);
@@ -2384,26 +2411,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.removeDirectory = stubSimpleCall(expectedResponse);
       const [response] = await client.removeDirectory(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeDirectory without error using callback', async () => {
@@ -2415,15 +2441,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2446,11 +2468,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeDirectory with error', async () => {
@@ -2462,26 +2487,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeDirectory = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.removeDirectory(request), expectedError);
-      assert(
-        (client.innerApiCalls.removeDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeDirectory with closed client', async () => {
@@ -2493,7 +2517,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveDirectoryRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('RemoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeDirectory(request), expectedError);
@@ -2510,26 +2537,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryResponse()
       );
       client.innerApiCalls.moveDirectory = stubSimpleCall(expectedResponse);
       const [response] = await client.moveDirectory(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.moveDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.moveDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes moveDirectory without error using callback', async () => {
@@ -2541,15 +2567,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryResponse()
       );
@@ -2572,11 +2594,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.moveDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.moveDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes moveDirectory with error', async () => {
@@ -2588,26 +2613,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveDirectory = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.moveDirectory(request), expectedError);
-      assert(
-        (client.innerApiCalls.moveDirectory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.moveDirectory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveDirectory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes moveDirectory with closed client', async () => {
@@ -2619,7 +2643,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveDirectoryRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('MoveDirectoryRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.moveDirectory(request), expectedError);
@@ -2636,26 +2663,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileResponse()
       );
       client.innerApiCalls.readFile = stubSimpleCall(expectedResponse);
       const [response] = await client.readFile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.readFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readFile without error using callback', async () => {
@@ -2667,15 +2693,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileResponse()
       );
@@ -2698,11 +2720,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.readFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readFile with error', async () => {
@@ -2714,23 +2739,22 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readFile = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.readFile(request), expectedError);
-      assert(
-        (client.innerApiCalls.readFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readFile with closed client', async () => {
@@ -2742,7 +2766,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ReadFileRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('ReadFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.readFile(request), expectedError);
@@ -2759,26 +2786,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.removeFile = stubSimpleCall(expectedResponse);
       const [response] = await client.removeFile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeFile without error using callback', async () => {
@@ -2790,15 +2816,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2821,11 +2843,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeFile with error', async () => {
@@ -2837,26 +2862,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeFile = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.removeFile(request), expectedError);
-      assert(
-        (client.innerApiCalls.removeFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeFile with closed client', async () => {
@@ -2868,7 +2892,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.RemoveFileRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('RemoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeFile(request), expectedError);
@@ -2885,26 +2912,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileResponse()
       );
       client.innerApiCalls.moveFile = stubSimpleCall(expectedResponse);
       const [response] = await client.moveFile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.moveFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.moveFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes moveFile without error using callback', async () => {
@@ -2916,15 +2942,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileResponse()
       );
@@ -2947,11 +2969,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.moveFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.moveFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes moveFile with error', async () => {
@@ -2963,23 +2988,22 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.moveFile = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.moveFile(request), expectedError);
-      assert(
-        (client.innerApiCalls.moveFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.moveFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.moveFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes moveFile with closed client', async () => {
@@ -2991,7 +3015,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.MoveFileRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('MoveFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.moveFile(request), expectedError);
@@ -3008,26 +3035,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileResponse()
       );
       client.innerApiCalls.writeFile = stubSimpleCall(expectedResponse);
       const [response] = await client.writeFile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.writeFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.writeFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes writeFile without error using callback', async () => {
@@ -3039,15 +3065,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileResponse()
       );
@@ -3070,11 +3092,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.writeFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.writeFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes writeFile with error', async () => {
@@ -3086,23 +3111,22 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.writeFile = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.writeFile(request), expectedError);
-      assert(
-        (client.innerApiCalls.writeFile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.writeFile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.writeFile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes writeFile with closed client', async () => {
@@ -3114,7 +3138,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WriteFileRequest()
       );
-      request.workspace = '';
+      const defaultValue1 = getTypeDefaultValue('WriteFileRequest', [
+        'workspace',
+      ]);
+      request.workspace = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.writeFile(request), expectedError);
@@ -3131,15 +3158,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CompilationResult()
       );
@@ -3147,11 +3170,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCompilationResult(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCompilationResult as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCompilationResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCompilationResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCompilationResult without error using callback', async () => {
@@ -3163,15 +3189,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CompilationResult()
       );
@@ -3194,11 +3216,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCompilationResult as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCompilationResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCompilationResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCompilationResult with error', async () => {
@@ -3210,26 +3235,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCompilationResult = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCompilationResult(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCompilationResult as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCompilationResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCompilationResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCompilationResult with closed client', async () => {
@@ -3241,7 +3265,10 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetCompilationResultRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCompilationResultRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCompilationResult(request), expectedError);
@@ -3258,15 +3285,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCompilationResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CompilationResult()
       );
@@ -3274,11 +3298,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createCompilationResult(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCompilationResult as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCompilationResult without error using callback', async () => {
@@ -3290,15 +3317,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCompilationResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CompilationResult()
       );
@@ -3321,11 +3345,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCompilationResult as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCompilationResult with error', async () => {
@@ -3337,15 +3364,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCompilationResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCompilationResult = stubSimpleCall(
         undefined,
@@ -3355,11 +3379,14 @@ describe('v1alpha2.DataformClient', () => {
         client.createCompilationResult(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createCompilationResult as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCompilationResult as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCompilationResult as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCompilationResult with closed client', async () => {
@@ -3371,7 +3398,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateCompilationResultRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCompilationResultRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3391,15 +3422,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
       );
@@ -3407,11 +3435,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getWorkflowInvocation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkflowInvocation without error using callback', async () => {
@@ -3423,15 +3454,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
       );
@@ -3454,11 +3482,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkflowInvocation with error', async () => {
@@ -3470,15 +3501,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -3488,11 +3516,14 @@ describe('v1alpha2.DataformClient', () => {
         client.getWorkflowInvocation(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkflowInvocation with closed client', async () => {
@@ -3504,7 +3535,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.GetWorkflowInvocationRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3524,15 +3559,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateWorkflowInvocationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
       );
@@ -3540,11 +3572,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createWorkflowInvocation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkflowInvocation without error using callback', async () => {
@@ -3556,15 +3591,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateWorkflowInvocationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
       );
@@ -3587,11 +3619,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkflowInvocation with error', async () => {
@@ -3603,15 +3638,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateWorkflowInvocationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -3621,11 +3653,14 @@ describe('v1alpha2.DataformClient', () => {
         client.createWorkflowInvocation(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkflowInvocation with closed client', async () => {
@@ -3637,7 +3672,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CreateWorkflowInvocationRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateWorkflowInvocationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3657,15 +3696,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3673,11 +3709,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteWorkflowInvocation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkflowInvocation without error using callback', async () => {
@@ -3689,15 +3728,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3720,11 +3756,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkflowInvocation with error', async () => {
@@ -3736,15 +3775,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -3754,11 +3790,14 @@ describe('v1alpha2.DataformClient', () => {
         client.deleteWorkflowInvocation(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkflowInvocation with closed client', async () => {
@@ -3770,7 +3809,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.DeleteWorkflowInvocationRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3790,15 +3833,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3806,11 +3846,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.cancelWorkflowInvocation(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelWorkflowInvocation without error using callback', async () => {
@@ -3822,15 +3865,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3853,11 +3893,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelWorkflowInvocation with error', async () => {
@@ -3869,15 +3912,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelWorkflowInvocation = stubSimpleCall(
         undefined,
@@ -3887,11 +3927,14 @@ describe('v1alpha2.DataformClient', () => {
         client.cancelWorkflowInvocation(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.cancelWorkflowInvocation as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelWorkflowInvocation as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelWorkflowInvocation as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelWorkflowInvocation with closed client', async () => {
@@ -3903,7 +3946,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.CancelWorkflowInvocationRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelWorkflowInvocationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3923,15 +3970,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Repository()
@@ -3946,11 +3989,14 @@ describe('v1alpha2.DataformClient', () => {
       client.innerApiCalls.listRepositories = stubSimpleCall(expectedResponse);
       const [response] = await client.listRepositories(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRepositories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRepositories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRepositories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRepositories without error using callback', async () => {
@@ -3962,15 +4008,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Repository()
@@ -4001,11 +4043,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRepositories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRepositories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRepositories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRepositories with error', async () => {
@@ -4017,26 +4062,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRepositories = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRepositories(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRepositories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRepositories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRepositories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRepositoriesStream without error', async () => {
@@ -4048,8 +4092,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Repository()
@@ -4087,11 +4134,12 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRepositories, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRepositories.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRepositories.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4104,8 +4152,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4132,11 +4183,12 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRepositories, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRepositories.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRepositories.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4149,8 +4201,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Repository()
@@ -4176,11 +4231,12 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRepositories.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4193,8 +4249,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListRepositoriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRepositoriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRepositories.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4212,11 +4271,12 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRepositories.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRepositories.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4231,15 +4291,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Workspace()
@@ -4254,11 +4310,14 @@ describe('v1alpha2.DataformClient', () => {
       client.innerApiCalls.listWorkspaces = stubSimpleCall(expectedResponse);
       const [response] = await client.listWorkspaces(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkspaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkspaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkspaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkspaces without error using callback', async () => {
@@ -4270,15 +4329,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Workspace()
@@ -4309,11 +4364,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkspaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkspaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkspaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkspaces with error', async () => {
@@ -4325,26 +4383,25 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkspaces = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listWorkspaces(request), expectedError);
-      assert(
-        (client.innerApiCalls.listWorkspaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkspaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkspaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkspacesStream without error', async () => {
@@ -4356,8 +4413,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Workspace()
@@ -4394,11 +4454,12 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkspaces, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkspaces.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkspaces.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4411,8 +4472,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkspaces.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4438,11 +4502,12 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkspaces, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkspaces.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkspaces.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4455,8 +4520,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.Workspace()
@@ -4482,11 +4550,12 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkspaces.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkspaces.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4499,8 +4568,11 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkspacesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkspacesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkspaces.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4518,11 +4590,12 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkspaces.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkspaces.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4537,15 +4610,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryDirectoryContentsRequest',
+        ['workspace']
+      );
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry()
@@ -4561,11 +4631,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.queryDirectoryContents(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryDirectoryContents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryDirectoryContents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryDirectoryContents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryDirectoryContents without error using callback', async () => {
@@ -4577,15 +4650,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryDirectoryContentsRequest',
+        ['workspace']
+      );
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry()
@@ -4618,11 +4688,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryDirectoryContents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryDirectoryContents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryDirectoryContents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryDirectoryContents with error', async () => {
@@ -4634,15 +4707,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryDirectoryContentsRequest',
+        ['workspace']
+      );
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryDirectoryContents = stubSimpleCall(
         undefined,
@@ -4652,11 +4722,14 @@ describe('v1alpha2.DataformClient', () => {
         client.queryDirectoryContents(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.queryDirectoryContents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryDirectoryContents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryDirectoryContents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryDirectoryContentsStream without error', async () => {
@@ -4668,8 +4741,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryDirectoryContentsRequest',
+        ['workspace']
+      );
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry()
@@ -4712,12 +4789,15 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.queryDirectoryContents, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryDirectoryContents
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4730,8 +4810,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryDirectoryContentsRequest',
+        ['workspace']
+      );
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryDirectoryContents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4763,12 +4847,15 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.queryDirectoryContents, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryDirectoryContents
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4781,8 +4868,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryDirectoryContentsRequest',
+        ['workspace']
+      );
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsResponse.DirectoryEntry()
@@ -4810,12 +4901,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryDirectoryContents
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4828,8 +4922,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryDirectoryContentsRequest()
       );
-      request.workspace = '';
-      const expectedHeaderRequestParams = 'workspace=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryDirectoryContentsRequest',
+        ['workspace']
+      );
+      request.workspace = defaultValue1;
+      const expectedHeaderRequestParams = `workspace=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryDirectoryContents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4848,12 +4946,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryDirectoryContents
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4868,15 +4969,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCompilationResultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResult()
@@ -4892,11 +4990,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCompilationResults(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCompilationResults as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCompilationResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCompilationResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCompilationResults without error using callback', async () => {
@@ -4908,15 +5009,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCompilationResultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResult()
@@ -4949,11 +5047,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCompilationResults as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCompilationResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCompilationResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCompilationResults with error', async () => {
@@ -4965,15 +5066,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCompilationResultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCompilationResults = stubSimpleCall(
         undefined,
@@ -4983,11 +5081,14 @@ describe('v1alpha2.DataformClient', () => {
         client.listCompilationResults(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listCompilationResults as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCompilationResults as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCompilationResults as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCompilationResultsStream without error', async () => {
@@ -4999,8 +5100,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCompilationResultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResult()
@@ -5043,12 +5148,15 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCompilationResults, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCompilationResults
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5061,8 +5169,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCompilationResultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompilationResults.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5094,12 +5206,15 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCompilationResults, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCompilationResults
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5112,8 +5227,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCompilationResultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResult()
@@ -5141,12 +5260,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCompilationResults
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5159,8 +5281,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListCompilationResultsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCompilationResultsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCompilationResults.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5179,12 +5305,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCompilationResults
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5199,15 +5328,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryCompilationResultActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResultAction()
@@ -5223,11 +5349,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.queryCompilationResultActions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryCompilationResultActions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryCompilationResultActions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryCompilationResultActions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryCompilationResultActions without error using callback', async () => {
@@ -5239,15 +5368,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryCompilationResultActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResultAction()
@@ -5280,11 +5406,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryCompilationResultActions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryCompilationResultActions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryCompilationResultActions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryCompilationResultActions with error', async () => {
@@ -5296,15 +5425,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryCompilationResultActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryCompilationResultActions = stubSimpleCall(
         undefined,
@@ -5314,11 +5440,14 @@ describe('v1alpha2.DataformClient', () => {
         client.queryCompilationResultActions(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.queryCompilationResultActions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryCompilationResultActions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryCompilationResultActions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryCompilationResultActionsStream without error', async () => {
@@ -5330,8 +5459,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryCompilationResultActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResultAction()
@@ -5377,12 +5510,15 @@ describe('v1alpha2.DataformClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryCompilationResultActions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5395,8 +5531,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryCompilationResultActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryCompilationResultActions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5431,12 +5571,15 @@ describe('v1alpha2.DataformClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryCompilationResultActions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5449,8 +5592,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryCompilationResultActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.CompilationResultAction()
@@ -5478,12 +5625,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryCompilationResultActions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5496,8 +5646,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryCompilationResultActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryCompilationResultActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryCompilationResultActions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5516,12 +5670,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryCompilationResultActions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5536,15 +5693,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListWorkflowInvocationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
@@ -5560,11 +5714,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listWorkflowInvocations(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkflowInvocations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkflowInvocations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkflowInvocations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkflowInvocations without error using callback', async () => {
@@ -5576,15 +5733,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListWorkflowInvocationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
@@ -5617,11 +5771,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkflowInvocations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkflowInvocations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkflowInvocations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkflowInvocations with error', async () => {
@@ -5633,15 +5790,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListWorkflowInvocationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkflowInvocations = stubSimpleCall(
         undefined,
@@ -5651,11 +5805,14 @@ describe('v1alpha2.DataformClient', () => {
         client.listWorkflowInvocations(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listWorkflowInvocations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkflowInvocations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkflowInvocations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkflowInvocationsStream without error', async () => {
@@ -5667,8 +5824,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListWorkflowInvocationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
@@ -5711,12 +5872,15 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkflowInvocations, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listWorkflowInvocations
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5729,8 +5893,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListWorkflowInvocationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowInvocations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5762,12 +5930,15 @@ describe('v1alpha2.DataformClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkflowInvocations, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listWorkflowInvocations
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5780,8 +5951,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListWorkflowInvocationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocation()
@@ -5809,12 +5984,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listWorkflowInvocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5827,8 +6005,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.ListWorkflowInvocationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListWorkflowInvocationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflowInvocations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5847,12 +6029,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listWorkflowInvocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5867,15 +6052,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryWorkflowInvocationActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocationAction()
@@ -5891,11 +6073,14 @@ describe('v1alpha2.DataformClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.queryWorkflowInvocationActions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryWorkflowInvocationActions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryWorkflowInvocationActions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryWorkflowInvocationActions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryWorkflowInvocationActions without error using callback', async () => {
@@ -5907,15 +6092,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryWorkflowInvocationActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocationAction()
@@ -5948,11 +6130,14 @@ describe('v1alpha2.DataformClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryWorkflowInvocationActions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryWorkflowInvocationActions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryWorkflowInvocationActions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryWorkflowInvocationActions with error', async () => {
@@ -5964,15 +6149,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryWorkflowInvocationActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryWorkflowInvocationActions = stubSimpleCall(
         undefined,
@@ -5982,11 +6164,14 @@ describe('v1alpha2.DataformClient', () => {
         client.queryWorkflowInvocationActions(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.queryWorkflowInvocationActions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryWorkflowInvocationActions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryWorkflowInvocationActions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryWorkflowInvocationActionsStream without error', async () => {
@@ -5998,8 +6183,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryWorkflowInvocationActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocationAction()
@@ -6045,12 +6234,15 @@ describe('v1alpha2.DataformClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryWorkflowInvocationActions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6063,8 +6255,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryWorkflowInvocationActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryWorkflowInvocationActions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6099,12 +6295,15 @@ describe('v1alpha2.DataformClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryWorkflowInvocationActions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6117,8 +6316,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryWorkflowInvocationActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dataform.v1alpha2.WorkflowInvocationAction()
@@ -6146,12 +6349,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryWorkflowInvocationActions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6164,8 +6370,12 @@ describe('v1alpha2.DataformClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataform.v1alpha2.QueryWorkflowInvocationActionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        'QueryWorkflowInvocationActionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.queryWorkflowInvocationActions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6184,12 +6394,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.queryWorkflowInvocationActions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6664,12 +6877,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -6700,12 +6916,15 @@ describe('v1alpha2.DataformClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

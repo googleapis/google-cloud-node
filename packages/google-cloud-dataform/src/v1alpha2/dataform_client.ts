@@ -501,7 +501,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getRepository(request, options, callback);
@@ -604,7 +604,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createRepository(request, options, callback);
@@ -704,7 +704,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'repository.name': request.repository!.name || '',
+        'repository.name': request.repository!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateRepository(request, options, callback);
@@ -805,7 +805,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteRepository(request, options, callback);
@@ -902,7 +902,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.fetchRemoteBranches(request, options, callback);
@@ -993,7 +993,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getWorkspace(request, options, callback);
@@ -1090,7 +1090,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createWorkspace(request, options, callback);
@@ -1181,7 +1181,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteWorkspace(request, options, callback);
@@ -1278,7 +1278,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.installNpmPackages(request, options, callback);
@@ -1375,7 +1375,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.pullGitCommits(request, options, callback);
@@ -1469,7 +1469,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.pushGitCommits(request, options, callback);
@@ -1566,7 +1566,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.fetchFileGitStatuses(request, options, callback);
@@ -1667,7 +1667,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.fetchGitAheadBehind(request, options, callback);
@@ -1771,7 +1771,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.commitWorkspaceChanges(
@@ -1877,7 +1877,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resetWorkspaceChanges(request, options, callback);
@@ -1970,7 +1970,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.fetchFileDiff(request, options, callback);
@@ -2064,7 +2064,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.makeDirectory(request, options, callback);
@@ -2158,7 +2158,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeDirectory(request, options, callback);
@@ -2256,7 +2256,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.moveDirectory(request, options, callback);
@@ -2343,7 +2343,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.readFile(request, options, callback);
@@ -2436,7 +2436,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeFile(request, options, callback);
@@ -2525,7 +2525,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.moveFile(request, options, callback);
@@ -2620,7 +2620,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.writeFile(request, options, callback);
@@ -2717,7 +2717,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getCompilationResult(request, options, callback);
@@ -2817,7 +2817,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createCompilationResult(
@@ -2918,7 +2918,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getWorkflowInvocation(request, options, callback);
@@ -3017,7 +3017,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createWorkflowInvocation(
@@ -3118,7 +3118,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteWorkflowInvocation(
@@ -3219,7 +3219,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelWorkflowInvocation(
@@ -3335,7 +3335,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listRepositories(request, options, callback);
@@ -3386,7 +3386,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3446,7 +3446,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRepositories'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3563,7 +3563,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listWorkspaces(request, options, callback);
@@ -3614,7 +3614,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3674,7 +3674,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listWorkspaces'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3788,7 +3788,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     this.initialize();
     return this.innerApiCalls.queryDirectoryContents(
@@ -3840,7 +3840,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3897,7 +3897,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        workspace: request.workspace || '',
+        workspace: request.workspace ?? '',
       });
     const defaultCallSettings = this._defaults['queryDirectoryContents'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4008,7 +4008,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listCompilationResults(
@@ -4057,7 +4057,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4111,7 +4111,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCompilationResults'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4225,7 +4225,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.queryCompilationResultActions(
@@ -4277,7 +4277,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4334,7 +4334,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     const defaultCallSettings = this._defaults['queryCompilationResultActions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4445,7 +4445,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listWorkflowInvocations(
@@ -4494,7 +4494,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4548,7 +4548,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listWorkflowInvocations'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4659,7 +4659,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.queryWorkflowInvocationActions(
@@ -4708,7 +4708,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
@@ -4763,7 +4763,7 @@ export class DataformClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     const defaultCallSettings =
       this._defaults['queryWorkflowInvocationActions'];
