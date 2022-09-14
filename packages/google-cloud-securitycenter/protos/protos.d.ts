@@ -2414,6 +2414,9 @@ export namespace google {
                     /** Finding compliances */
                     compliances?: (google.cloud.securitycenter.v1.ICompliance[]|null);
 
+                    /** Finding parentDisplayName */
+                    parentDisplayName?: (string|null);
+
                     /** Finding description */
                     description?: (string|null);
 
@@ -2519,6 +2522,9 @@ export namespace google {
 
                     /** Finding compliances. */
                     public compliances: google.cloud.securitycenter.v1.ICompliance[];
+
+                    /** Finding parentDisplayName. */
+                    public parentDisplayName: string;
 
                     /** Finding description. */
                     public description: string;

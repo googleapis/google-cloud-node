@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,26 +269,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
       client.innerApiCalls.createSource = stubSimpleCall(expectedResponse);
       const [response] = await client.createSource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSource without error using callback', async () => {
@@ -285,15 +299,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -316,11 +326,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSource with error', async () => {
@@ -332,26 +345,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.createSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSource with closed client', async () => {
@@ -363,7 +375,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSource(request), expectedError);
@@ -380,26 +395,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
       client.innerApiCalls.createFinding = stubSimpleCall(expectedResponse);
       const [response] = await client.createFinding(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createFinding as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFinding without error using callback', async () => {
@@ -411,15 +425,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -442,11 +452,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createFinding as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFinding with error', async () => {
@@ -458,26 +471,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFinding = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createFinding(request), expectedError);
-      assert(
-        (client.innerApiCalls.createFinding as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFinding with closed client', async () => {
@@ -489,7 +501,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createFinding(request), expectedError);
@@ -506,26 +521,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
@@ -537,15 +551,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -568,11 +578,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with error', async () => {
@@ -584,26 +597,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with closed client', async () => {
@@ -615,7 +627,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -632,15 +647,12 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetOrganizationSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -648,11 +660,14 @@ describe('v1beta1.SecurityCenterClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getOrganizationSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getOrganizationSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getOrganizationSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOrganizationSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getOrganizationSettings without error using callback', async () => {
@@ -664,15 +679,12 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetOrganizationSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -695,11 +707,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getOrganizationSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getOrganizationSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOrganizationSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getOrganizationSettings with error', async () => {
@@ -711,15 +726,12 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetOrganizationSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getOrganizationSettings = stubSimpleCall(
         undefined,
@@ -729,11 +741,14 @@ describe('v1beta1.SecurityCenterClient', () => {
         client.getOrganizationSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getOrganizationSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getOrganizationSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getOrganizationSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getOrganizationSettings with closed client', async () => {
@@ -745,7 +760,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetOrganizationSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -765,26 +784,23 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
       client.innerApiCalls.getSource = stubSimpleCall(expectedResponse);
       const [response] = await client.getSource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSource without error using callback', async () => {
@@ -796,15 +812,9 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -827,11 +837,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSource with error', async () => {
@@ -843,23 +856,20 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSource = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.getSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSource with closed client', async () => {
@@ -871,7 +881,8 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSource(request), expectedError);
@@ -888,26 +899,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
       client.innerApiCalls.setFindingState = stubSimpleCall(expectedResponse);
       const [response] = await client.setFindingState(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setFindingState as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setFindingState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setFindingState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setFindingState without error using callback', async () => {
@@ -919,15 +929,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -950,11 +956,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setFindingState as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setFindingState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setFindingState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setFindingState with error', async () => {
@@ -966,26 +975,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setFindingState = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setFindingState(request), expectedError);
-      assert(
-        (client.innerApiCalls.setFindingState as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setFindingState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setFindingState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setFindingState with closed client', async () => {
@@ -997,7 +1005,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setFindingState(request), expectedError);
@@ -1014,26 +1025,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
@@ -1045,15 +1055,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1076,11 +1082,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with error', async () => {
@@ -1092,26 +1101,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with closed client', async () => {
@@ -1123,7 +1131,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1140,15 +1151,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1156,11 +1163,14 @@ describe('v1beta1.SecurityCenterClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
@@ -1172,15 +1182,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1203,11 +1209,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with error', async () => {
@@ -1219,26 +1228,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with closed client', async () => {
@@ -1250,7 +1258,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1267,27 +1278,27 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
-      request.finding = {};
-      request.finding.name = '';
-      const expectedHeaderRequestParams = 'finding.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.finding ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
+        'finding',
+        'name',
+      ]);
+      request.finding.name = defaultValue1;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
       client.innerApiCalls.updateFinding = stubSimpleCall(expectedResponse);
       const [response] = await client.updateFinding(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateFinding as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateFinding without error using callback', async () => {
@@ -1299,16 +1310,13 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
-      request.finding = {};
-      request.finding.name = '';
-      const expectedHeaderRequestParams = 'finding.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.finding ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
+        'finding',
+        'name',
+      ]);
+      request.finding.name = defaultValue1;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Finding()
       );
@@ -1331,11 +1339,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateFinding as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateFinding with error', async () => {
@@ -1347,27 +1358,27 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
-      request.finding = {};
-      request.finding.name = '';
-      const expectedHeaderRequestParams = 'finding.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.finding ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
+        'finding',
+        'name',
+      ]);
+      request.finding.name = defaultValue1;
+      const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFinding = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateFinding(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateFinding as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateFinding as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFinding as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateFinding with closed client', async () => {
@@ -1379,8 +1390,12 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
-      request.finding = {};
-      request.finding.name = '';
+      request.finding ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
+        'finding',
+        'name',
+      ]);
+      request.finding.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateFinding(request), expectedError);
@@ -1397,16 +1412,13 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest()
       );
-      request.organizationSettings = {};
-      request.organizationSettings.name = '';
-      const expectedHeaderRequestParams = 'organization_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.organizationSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateOrganizationSettingsRequest',
+        ['organizationSettings', 'name']
+      );
+      request.organizationSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -1414,11 +1426,14 @@ describe('v1beta1.SecurityCenterClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateOrganizationSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateOrganizationSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateOrganizationSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOrganizationSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateOrganizationSettings without error using callback', async () => {
@@ -1430,16 +1445,13 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest()
       );
-      request.organizationSettings = {};
-      request.organizationSettings.name = '';
-      const expectedHeaderRequestParams = 'organization_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.organizationSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateOrganizationSettingsRequest',
+        ['organizationSettings', 'name']
+      );
+      request.organizationSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.OrganizationSettings()
       );
@@ -1462,11 +1474,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateOrganizationSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateOrganizationSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOrganizationSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateOrganizationSettings with error', async () => {
@@ -1478,16 +1493,13 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest()
       );
-      request.organizationSettings = {};
-      request.organizationSettings.name = '';
-      const expectedHeaderRequestParams = 'organization_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.organizationSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateOrganizationSettingsRequest',
+        ['organizationSettings', 'name']
+      );
+      request.organizationSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `organization_settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateOrganizationSettings = stubSimpleCall(
         undefined,
@@ -1497,11 +1509,14 @@ describe('v1beta1.SecurityCenterClient', () => {
         client.updateOrganizationSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateOrganizationSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateOrganizationSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateOrganizationSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateOrganizationSettings with closed client', async () => {
@@ -1513,8 +1528,12 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest()
       );
-      request.organizationSettings = {};
-      request.organizationSettings.name = '';
+      request.organizationSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateOrganizationSettingsRequest',
+        ['organizationSettings', 'name']
+      );
+      request.organizationSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1534,27 +1553,27 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
       client.innerApiCalls.updateSource = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSource without error using callback', async () => {
@@ -1566,16 +1585,13 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.Source()
       );
@@ -1598,11 +1614,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSource with error', async () => {
@@ -1614,27 +1633,27 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
-      const expectedHeaderRequestParams = 'source.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
+      const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSource with closed client', async () => {
@@ -1646,8 +1665,12 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
-      request.source = {};
-      request.source.name = '';
+      request.source ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
+        'source',
+        'name',
+      ]);
+      request.source.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSource(request), expectedError);
@@ -1664,16 +1687,13 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
-      request.securityMarks = {};
-      request.securityMarks.name = '';
-      const expectedHeaderRequestParams = 'security_marks.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.securityMarks ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
+        'securityMarks',
+        'name',
+      ]);
+      request.securityMarks.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SecurityMarks()
       );
@@ -1681,11 +1701,14 @@ describe('v1beta1.SecurityCenterClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateSecurityMarks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSecurityMarks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSecurityMarks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSecurityMarks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSecurityMarks without error using callback', async () => {
@@ -1697,16 +1720,13 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
-      request.securityMarks = {};
-      request.securityMarks.name = '';
-      const expectedHeaderRequestParams = 'security_marks.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.securityMarks ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
+        'securityMarks',
+        'name',
+      ]);
+      request.securityMarks.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SecurityMarks()
       );
@@ -1729,11 +1749,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSecurityMarks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSecurityMarks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSecurityMarks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSecurityMarks with error', async () => {
@@ -1745,27 +1768,27 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
-      request.securityMarks = {};
-      request.securityMarks.name = '';
-      const expectedHeaderRequestParams = 'security_marks.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.securityMarks ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
+        'securityMarks',
+        'name',
+      ]);
+      request.securityMarks.name = defaultValue1;
+      const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSecurityMarks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateSecurityMarks(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateSecurityMarks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSecurityMarks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSecurityMarks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSecurityMarks with closed client', async () => {
@@ -1777,8 +1800,12 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
-      request.securityMarks = {};
-      request.securityMarks.name = '';
+      request.securityMarks ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
+        'securityMarks',
+        'name',
+      ]);
+      request.securityMarks.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSecurityMarks(request), expectedError);
@@ -1795,15 +1822,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1812,11 +1835,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       const [operation] = await client.runAssetDiscovery(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runAssetDiscovery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runAssetDiscovery without error using callback', async () => {
@@ -1828,15 +1854,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1866,11 +1888,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runAssetDiscovery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runAssetDiscovery with call error', async () => {
@@ -1882,26 +1907,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAssetDiscovery = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.runAssetDiscovery(request), expectedError);
-      assert(
-        (client.innerApiCalls.runAssetDiscovery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runAssetDiscovery with LRO error', async () => {
@@ -1913,15 +1937,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAssetDiscovery = stubLongRunningCall(
         undefined,
@@ -1930,11 +1950,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       const [operation] = await client.runAssetDiscovery(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.runAssetDiscovery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runAssetDiscovery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRunAssetDiscoveryProgress without error', async () => {
@@ -1989,15 +2012,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2012,11 +2031,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       client.innerApiCalls.groupAssets = stubSimpleCall(expectedResponse);
       const [response] = await client.groupAssets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.groupAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.groupAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.groupAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes groupAssets without error using callback', async () => {
@@ -2028,15 +2050,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2069,11 +2087,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.groupAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.groupAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.groupAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes groupAssets with error', async () => {
@@ -2085,26 +2106,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.groupAssets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.groupAssets(request), expectedError);
-      assert(
-        (client.innerApiCalls.groupAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.groupAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.groupAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes groupAssetsStream without error', async () => {
@@ -2116,8 +2136,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2157,11 +2180,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.groupAssets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.groupAssets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2174,8 +2198,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -2206,11 +2233,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.groupAssets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.groupAssets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2223,8 +2251,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2251,11 +2282,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.groupAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2268,8 +2300,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2289,11 +2324,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.groupAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2308,15 +2344,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2331,11 +2363,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       client.innerApiCalls.groupFindings = stubSimpleCall(expectedResponse);
       const [response] = await client.groupFindings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.groupFindings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.groupFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.groupFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes groupFindings without error using callback', async () => {
@@ -2347,15 +2382,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2388,11 +2419,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.groupFindings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.groupFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.groupFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes groupFindings with error', async () => {
@@ -2404,26 +2438,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.groupFindings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.groupFindings(request), expectedError);
-      assert(
-        (client.innerApiCalls.groupFindings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.groupFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.groupFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes groupFindingsStream without error', async () => {
@@ -2435,8 +2468,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2476,11 +2512,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.groupFindings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.groupFindings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupFindings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2493,8 +2530,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupFindings.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2523,11 +2563,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.groupFindings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.groupFindings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupFindings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2540,8 +2581,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.GroupResult()
@@ -2568,11 +2612,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.groupFindings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2585,8 +2630,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.groupFindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2604,11 +2652,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.groupFindings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.groupFindings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2623,15 +2672,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -2646,11 +2691,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
       const [response] = await client.listAssets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAssets without error using callback', async () => {
@@ -2662,15 +2710,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -2703,11 +2747,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAssets with error', async () => {
@@ -2719,26 +2766,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAssets(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAssetsStream without error', async () => {
@@ -2750,8 +2796,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -2791,11 +2840,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAssets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2808,8 +2858,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -2840,11 +2893,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAssets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2857,8 +2911,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.ListAssetsResponse.ListAssetsResult()
@@ -2885,11 +2942,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2902,8 +2960,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2923,11 +2984,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2942,15 +3004,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -2965,11 +3023,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       client.innerApiCalls.listFindings = stubSimpleCall(expectedResponse);
       const [response] = await client.listFindings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFindings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFindings without error using callback', async () => {
@@ -2981,15 +3042,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -3022,11 +3079,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFindings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFindings with error', async () => {
@@ -3038,26 +3098,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFindings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listFindings(request), expectedError);
-      assert(
-        (client.innerApiCalls.listFindings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFindings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFindings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFindingsStream without error', async () => {
@@ -3069,8 +3128,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -3108,11 +3170,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listFindings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFindings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFindings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3125,8 +3188,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.createStream = stubPageStreamingCall(
         undefined,
@@ -3155,11 +3221,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listFindings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFindings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFindings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3172,8 +3239,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Finding()
@@ -3200,11 +3270,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFindings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFindings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3217,8 +3288,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFindings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3236,11 +3310,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFindings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFindings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3255,15 +3330,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3278,11 +3349,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       client.innerApiCalls.listSources = stubSimpleCall(expectedResponse);
       const [response] = await client.listSources(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSources without error using callback', async () => {
@@ -3294,15 +3368,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3333,11 +3403,14 @@ describe('v1beta1.SecurityCenterClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSources with error', async () => {
@@ -3349,26 +3422,25 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSources = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listSources(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSourcesStream without error', async () => {
@@ -3380,8 +3452,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3419,11 +3494,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSources, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3436,8 +3512,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.createStream = stubPageStreamingCall(
         undefined,
@@ -3466,11 +3545,12 @@ describe('v1beta1.SecurityCenterClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSources, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3483,8 +3563,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.securitycenter.v1beta1.Source()
@@ -3511,11 +3594,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3528,8 +3612,11 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSources.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3549,11 +3636,12 @@ describe('v1beta1.SecurityCenterClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSources.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

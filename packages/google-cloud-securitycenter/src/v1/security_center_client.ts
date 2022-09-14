@@ -634,7 +634,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createSource(request, options, callback);
@@ -734,7 +734,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createFinding(request, options, callback);
@@ -840,7 +840,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createMuteConfig(request, options, callback);
@@ -946,7 +946,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createNotificationConfig(
@@ -1050,7 +1050,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteMuteConfig(request, options, callback);
@@ -1148,7 +1148,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteNotificationConfig(
@@ -1252,7 +1252,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getBigQueryExport(request, options, callback);
@@ -1339,7 +1339,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -1433,7 +1433,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getMuteConfig(request, options, callback);
@@ -1531,7 +1531,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getNotificationConfig(request, options, callback);
@@ -1629,7 +1629,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getOrganizationSettings(
@@ -1725,7 +1725,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getSource(request, options, callback);
@@ -1823,7 +1823,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setFindingState(request, options, callback);
@@ -1915,7 +1915,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setMute(request, options, callback);
@@ -2010,7 +2010,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -2099,7 +2099,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
@@ -2200,7 +2200,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'external_system.name': request.externalSystem!.name || '',
+        'external_system.name': request.externalSystem!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateExternalSystem(request, options, callback);
@@ -2305,7 +2305,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'finding.name': request.finding!.name || '',
+        'finding.name': request.finding!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateFinding(request, options, callback);
@@ -2405,7 +2405,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'mute_config.name': request.muteConfig!.name || '',
+        'mute_config.name': request.muteConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateMuteConfig(request, options, callback);
@@ -2508,7 +2508,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'notification_config.name': request.notificationConfig!.name || '',
+        'notification_config.name': request.notificationConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateNotificationConfig(
@@ -2613,7 +2613,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'organization_settings.name': request.organizationSettings!.name || '',
+        'organization_settings.name': request.organizationSettings!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateOrganizationSettings(
@@ -2712,7 +2712,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'source.name': request.source!.name || '',
+        'source.name': request.source!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateSource(request, options, callback);
@@ -2820,7 +2820,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'security_marks.name': request.securityMarks!.name || '',
+        'security_marks.name': request.securityMarks!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateSecurityMarks(request, options, callback);
@@ -2926,7 +2926,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createBigQueryExport(request, options, callback);
@@ -3026,7 +3026,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteBigQueryExport(request, options, callback);
@@ -3126,7 +3126,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'big_query_export.name': request.bigQueryExport!.name || '',
+        'big_query_export.name': request.bigQueryExport!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateBigQueryExport(request, options, callback);
@@ -3258,7 +3258,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.bulkMuteFindings(request, options, callback);
@@ -3402,7 +3402,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.runAssetDiscovery(request, options, callback);
@@ -3656,7 +3656,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.groupAssets(request, options, callback);
@@ -3814,7 +3814,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3981,7 +3981,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['groupAssets'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4214,7 +4214,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.groupFindings(request, options, callback);
@@ -4375,7 +4375,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4545,7 +4545,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['groupFindings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4773,7 +4773,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAssets(request, options, callback);
@@ -4935,7 +4935,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5106,7 +5106,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5342,7 +5342,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listFindings(request, options, callback);
@@ -5509,7 +5509,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5685,7 +5685,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listFindings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5798,7 +5798,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listMuteConfigs(request, options, callback);
@@ -5845,7 +5845,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listMuteConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5901,7 +5901,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listMuteConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6009,7 +6009,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listNotificationConfigs(
@@ -6055,7 +6055,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listNotificationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6106,7 +6106,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listNotificationConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6215,7 +6215,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSources(request, options, callback);
@@ -6258,7 +6258,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6310,7 +6310,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSources'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6426,7 +6426,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listBigQueryExports(request, options, callback);
@@ -6472,7 +6472,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listBigQueryExports'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6527,7 +6527,7 @@ export class SecurityCenterClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listBigQueryExports'];
     const callSettings = defaultCallSettings.merge(options);
