@@ -25,6 +25,21 @@ import * as questionserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -159,26 +174,23 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
       client.innerApiCalls.getQuestion = stubSimpleCall(expectedResponse);
       const [response] = await client.getQuestion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getQuestion without error using callback', async () => {
@@ -190,15 +202,9 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -221,11 +227,14 @@ describe('v1alpha.QuestionServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getQuestion with error', async () => {
@@ -237,26 +246,23 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getQuestion = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getQuestion(request), expectedError);
-      assert(
-        (client.innerApiCalls.getQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getQuestion with closed client', async () => {
@@ -268,7 +274,8 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetQuestionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetQuestionRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getQuestion(request), expectedError);
@@ -285,26 +292,25 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
       client.innerApiCalls.createQuestion = stubSimpleCall(expectedResponse);
       const [response] = await client.createQuestion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createQuestion without error using callback', async () => {
@@ -316,15 +322,11 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -347,11 +349,14 @@ describe('v1alpha.QuestionServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createQuestion with error', async () => {
@@ -363,26 +368,25 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createQuestion = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createQuestion(request), expectedError);
-      assert(
-        (client.innerApiCalls.createQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createQuestion with closed client', async () => {
@@ -394,7 +398,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.CreateQuestionRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateQuestionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createQuestion(request), expectedError);
@@ -411,26 +418,25 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
       client.innerApiCalls.executeQuestion = stubSimpleCall(expectedResponse);
       const [response] = await client.executeQuestion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.executeQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.executeQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes executeQuestion without error using callback', async () => {
@@ -442,15 +448,11 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.Question()
       );
@@ -473,11 +475,14 @@ describe('v1alpha.QuestionServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.executeQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.executeQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes executeQuestion with error', async () => {
@@ -489,26 +494,25 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.executeQuestion = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.executeQuestion(request), expectedError);
-      assert(
-        (client.innerApiCalls.executeQuestion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.executeQuestion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.executeQuestion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes executeQuestion with closed client', async () => {
@@ -520,7 +524,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.ExecuteQuestionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('ExecuteQuestionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.executeQuestion(request), expectedError);
@@ -537,26 +544,25 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
       client.innerApiCalls.getUserFeedback = stubSimpleCall(expectedResponse);
       const [response] = await client.getUserFeedback(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUserFeedback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUserFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUserFeedback without error using callback', async () => {
@@ -568,15 +574,11 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
@@ -599,11 +601,14 @@ describe('v1alpha.QuestionServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUserFeedback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUserFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUserFeedback with error', async () => {
@@ -615,26 +620,25 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUserFeedback = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getUserFeedback(request), expectedError);
-      assert(
-        (client.innerApiCalls.getUserFeedback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUserFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUserFeedback with closed client', async () => {
@@ -646,7 +650,10 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.GetUserFeedbackRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetUserFeedbackRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getUserFeedback(request), expectedError);
@@ -663,16 +670,13 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
-      request.userFeedback = {};
-      request.userFeedback.name = '';
-      const expectedHeaderRequestParams = 'user_feedback.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.userFeedback ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
+        'userFeedback',
+        'name',
+      ]);
+      request.userFeedback.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
@@ -680,11 +684,14 @@ describe('v1alpha.QuestionServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateUserFeedback(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateUserFeedback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUserFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUserFeedback without error using callback', async () => {
@@ -696,16 +703,13 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
-      request.userFeedback = {};
-      request.userFeedback.name = '';
-      const expectedHeaderRequestParams = 'user_feedback.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.userFeedback ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
+        'userFeedback',
+        'name',
+      ]);
+      request.userFeedback.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UserFeedback()
       );
@@ -728,11 +732,14 @@ describe('v1alpha.QuestionServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateUserFeedback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUserFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUserFeedback with error', async () => {
@@ -744,27 +751,27 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
-      request.userFeedback = {};
-      request.userFeedback.name = '';
-      const expectedHeaderRequestParams = 'user_feedback.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.userFeedback ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
+        'userFeedback',
+        'name',
+      ]);
+      request.userFeedback.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_feedback.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateUserFeedback = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateUserFeedback(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateUserFeedback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUserFeedback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserFeedback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUserFeedback with closed client', async () => {
@@ -776,8 +783,12 @@ describe('v1alpha.QuestionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataqna.v1alpha.UpdateUserFeedbackRequest()
       );
-      request.userFeedback = {};
-      request.userFeedback.name = '';
+      request.userFeedback ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserFeedbackRequest', [
+        'userFeedback',
+        'name',
+      ]);
+      request.userFeedback.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateUserFeedback(request), expectedError);
