@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -237,26 +252,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
       );
       client.innerApiCalls.getDataSource = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataSource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataSource without error using callback', async () => {
@@ -270,15 +284,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
       );
@@ -301,11 +311,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataSource with error', async () => {
@@ -319,26 +332,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataSource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDataSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDataSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataSource with closed client', async () => {
@@ -352,7 +364,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataSource(request), expectedError);
@@ -371,15 +386,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
@@ -387,11 +398,14 @@ describe('v1.DataTransferServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createTransferConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTransferConfig without error using callback', async () => {
@@ -405,15 +419,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
@@ -436,11 +446,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTransferConfig with error', async () => {
@@ -454,26 +467,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTransferConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createTransferConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.createTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTransferConfig with closed client', async () => {
@@ -487,7 +499,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTransferConfig(request), expectedError);
@@ -506,16 +521,13 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
-      request.transferConfig = {};
-      request.transferConfig.name = '';
-      const expectedHeaderRequestParams = 'transfer_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.transferConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
+        'transferConfig',
+        'name',
+      ]);
+      request.transferConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `transfer_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
@@ -523,11 +535,14 @@ describe('v1.DataTransferServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateTransferConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTransferConfig without error using callback', async () => {
@@ -541,16 +556,13 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
-      request.transferConfig = {};
-      request.transferConfig.name = '';
-      const expectedHeaderRequestParams = 'transfer_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.transferConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
+        'transferConfig',
+        'name',
+      ]);
+      request.transferConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `transfer_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
@@ -573,11 +585,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTransferConfig with error', async () => {
@@ -591,27 +606,27 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
-      request.transferConfig = {};
-      request.transferConfig.name = '';
-      const expectedHeaderRequestParams = 'transfer_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.transferConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
+        'transferConfig',
+        'name',
+      ]);
+      request.transferConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `transfer_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTransferConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateTransferConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTransferConfig with closed client', async () => {
@@ -625,8 +640,12 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
-      request.transferConfig = {};
-      request.transferConfig.name = '';
+      request.transferConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
+        'transferConfig',
+        'name',
+      ]);
+      request.transferConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTransferConfig(request), expectedError);
@@ -645,15 +664,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -661,11 +676,14 @@ describe('v1.DataTransferServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTransferConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTransferConfig without error using callback', async () => {
@@ -679,15 +697,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -710,11 +724,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTransferConfig with error', async () => {
@@ -728,26 +745,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTransferConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteTransferConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTransferConfig with closed client', async () => {
@@ -761,7 +777,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTransferConfig(request), expectedError);
@@ -780,26 +799,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
       client.innerApiCalls.getTransferConfig = stubSimpleCall(expectedResponse);
       const [response] = await client.getTransferConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTransferConfig without error using callback', async () => {
@@ -813,15 +831,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
@@ -844,11 +858,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTransferConfig with error', async () => {
@@ -862,26 +879,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTransferConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getTransferConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTransferConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTransferConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTransferConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTransferConfig with closed client', async () => {
@@ -895,7 +911,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTransferConfig(request), expectedError);
@@ -915,15 +934,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse()
       );
@@ -932,11 +947,14 @@ describe('v1.DataTransferServiceClient', () => {
       const [response] = await client.scheduleTransferRuns(request);
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.scheduleTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.scheduleTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.scheduleTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes scheduleTransferRuns without error using callback', async () => {
@@ -951,15 +969,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse()
       );
@@ -983,11 +997,14 @@ describe('v1.DataTransferServiceClient', () => {
       const response = await promise;
       assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.scheduleTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.scheduleTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.scheduleTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes scheduleTransferRuns with error', async () => {
@@ -1002,15 +1019,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.scheduleTransferRuns = stubSimpleCall(
         undefined,
@@ -1018,11 +1031,14 @@ describe('v1.DataTransferServiceClient', () => {
       );
       await assert.rejects(client.scheduleTransferRuns(request), expectedError);
       assert(stub.calledOnce);
-      assert(
-        (client.innerApiCalls.scheduleTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.scheduleTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.scheduleTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes scheduleTransferRuns with closed client', async () => {
@@ -1037,7 +1053,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.scheduleTransferRuns(request), expectedError);
@@ -1057,15 +1076,12 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartManualTransferRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse()
       );
@@ -1073,11 +1089,14 @@ describe('v1.DataTransferServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.startManualTransferRuns(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startManualTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startManualTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startManualTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startManualTransferRuns without error using callback', async () => {
@@ -1091,15 +1110,12 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartManualTransferRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse()
       );
@@ -1122,11 +1138,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startManualTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startManualTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startManualTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startManualTransferRuns with error', async () => {
@@ -1140,15 +1159,12 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartManualTransferRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startManualTransferRuns = stubSimpleCall(
         undefined,
@@ -1158,11 +1174,14 @@ describe('v1.DataTransferServiceClient', () => {
         client.startManualTransferRuns(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.startManualTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startManualTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startManualTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startManualTransferRuns with closed client', async () => {
@@ -1176,7 +1195,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'StartManualTransferRunsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1198,26 +1221,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
       );
       client.innerApiCalls.getTransferRun = stubSimpleCall(expectedResponse);
       const [response] = await client.getTransferRun(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTransferRun as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTransferRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTransferRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTransferRun without error using callback', async () => {
@@ -1231,15 +1253,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
       );
@@ -1262,11 +1280,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTransferRun as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTransferRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTransferRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTransferRun with error', async () => {
@@ -1280,26 +1301,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTransferRun = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getTransferRun(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTransferRun as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTransferRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTransferRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTransferRun with closed client', async () => {
@@ -1313,7 +1333,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTransferRun(request), expectedError);
@@ -1332,26 +1355,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteTransferRun = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTransferRun(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTransferRun as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTransferRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTransferRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTransferRun without error using callback', async () => {
@@ -1365,15 +1387,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1396,11 +1414,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTransferRun as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTransferRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTransferRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTransferRun with error', async () => {
@@ -1414,26 +1435,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTransferRun = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteTransferRun(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTransferRun as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTransferRun as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTransferRun as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTransferRun with closed client', async () => {
@@ -1447,7 +1467,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTransferRun(request), expectedError);
@@ -1466,26 +1489,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse()
       );
       client.innerApiCalls.checkValidCreds = stubSimpleCall(expectedResponse);
       const [response] = await client.checkValidCreds(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.checkValidCreds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.checkValidCreds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkValidCreds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkValidCreds without error using callback', async () => {
@@ -1499,15 +1521,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse()
       );
@@ -1530,11 +1548,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.checkValidCreds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.checkValidCreds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkValidCreds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkValidCreds with error', async () => {
@@ -1548,26 +1569,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkValidCreds = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.checkValidCreds(request), expectedError);
-      assert(
-        (client.innerApiCalls.checkValidCreds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.checkValidCreds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkValidCreds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkValidCreds with closed client', async () => {
@@ -1581,7 +1601,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.checkValidCreds(request), expectedError);
@@ -1600,26 +1623,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.enrollDataSources = stubSimpleCall(expectedResponse);
       const [response] = await client.enrollDataSources(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enrollDataSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enrollDataSources without error using callback', async () => {
@@ -1633,15 +1655,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1664,11 +1682,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enrollDataSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enrollDataSources with error', async () => {
@@ -1682,26 +1703,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enrollDataSources = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.enrollDataSources(request), expectedError);
-      assert(
-        (client.innerApiCalls.enrollDataSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enrollDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enrollDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enrollDataSources with closed client', async () => {
@@ -1715,7 +1735,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.enrollDataSources(request), expectedError);
@@ -1734,15 +1757,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
@@ -1757,11 +1776,14 @@ describe('v1.DataTransferServiceClient', () => {
       client.innerApiCalls.listDataSources = stubSimpleCall(expectedResponse);
       const [response] = await client.listDataSources(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataSources without error using callback', async () => {
@@ -1775,15 +1797,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
@@ -1816,11 +1834,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataSources with error', async () => {
@@ -1834,26 +1855,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataSources = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDataSources(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDataSources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataSources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataSources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataSourcesStream without error', async () => {
@@ -1867,8 +1887,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
@@ -1908,11 +1931,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataSources, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataSources.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1927,8 +1951,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataSources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1957,11 +1984,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataSources, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataSources.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataSources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1976,8 +2004,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
@@ -2004,11 +2035,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataSources.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2023,8 +2055,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataSources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2042,11 +2077,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataSources.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataSources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2063,15 +2099,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
@@ -2087,11 +2119,14 @@ describe('v1.DataTransferServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferConfigs without error using callback', async () => {
@@ -2105,15 +2140,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
@@ -2146,11 +2177,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferConfigs with error', async () => {
@@ -2164,26 +2198,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTransferConfigs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listTransferConfigs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTransferConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferConfigsStream without error', async () => {
@@ -2197,8 +2230,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
@@ -2238,11 +2274,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2257,8 +2294,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2287,11 +2327,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2306,8 +2347,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
@@ -2334,11 +2378,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2353,8 +2398,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2372,11 +2420,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2393,15 +2442,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
@@ -2416,11 +2461,14 @@ describe('v1.DataTransferServiceClient', () => {
       client.innerApiCalls.listTransferRuns = stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferRuns(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferRuns without error using callback', async () => {
@@ -2434,15 +2482,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
@@ -2475,11 +2519,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferRuns with error', async () => {
@@ -2493,26 +2540,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTransferRuns = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listTransferRuns(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTransferRuns as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferRuns as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferRuns as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferRunsStream without error', async () => {
@@ -2526,8 +2572,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
@@ -2567,11 +2616,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferRuns, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferRuns.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferRuns.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2586,8 +2636,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferRuns.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2616,11 +2669,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferRuns, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferRuns.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferRuns.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2635,8 +2689,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
@@ -2663,11 +2720,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferRuns.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferRuns.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2682,8 +2740,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferRuns.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2701,11 +2762,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferRuns.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferRuns.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2722,15 +2784,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferMessage()
@@ -2745,11 +2803,14 @@ describe('v1.DataTransferServiceClient', () => {
       client.innerApiCalls.listTransferLogs = stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferLogs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferLogs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferLogs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferLogs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferLogs without error using callback', async () => {
@@ -2763,15 +2824,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferMessage()
@@ -2804,11 +2861,14 @@ describe('v1.DataTransferServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferLogs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferLogs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferLogs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferLogs with error', async () => {
@@ -2822,26 +2882,25 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTransferLogs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listTransferLogs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTransferLogs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferLogs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferLogs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferLogsStream without error', async () => {
@@ -2855,8 +2914,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferMessage()
@@ -2896,11 +2958,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferLogs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferLogs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferLogs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2915,8 +2978,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferLogs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2945,11 +3011,12 @@ describe('v1.DataTransferServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferLogs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferLogs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferLogs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2964,8 +3031,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.datatransfer.v1.TransferMessage()
@@ -2992,11 +3062,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferLogs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferLogs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3011,8 +3082,11 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferLogs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3030,11 +3104,12 @@ describe('v1.DataTransferServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferLogs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferLogs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
