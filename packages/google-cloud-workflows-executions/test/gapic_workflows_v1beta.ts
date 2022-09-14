@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,26 +267,23 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.Workflow()
       );
       client.innerApiCalls.getWorkflow = stubSimpleCall(expectedResponse);
       const [response] = await client.getWorkflow(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkflow without error using callback', async () => {
@@ -283,15 +295,9 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.Workflow()
       );
@@ -314,11 +320,14 @@ describe('v1beta.WorkflowsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkflow with error', async () => {
@@ -330,26 +339,23 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkflow = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getWorkflow(request), expectedError);
-      assert(
-        (client.innerApiCalls.getWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkflow with closed client', async () => {
@@ -361,7 +367,8 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkflow(request), expectedError);
@@ -378,15 +385,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -395,11 +398,14 @@ describe('v1beta.WorkflowsClient', () => {
       const [operation] = await client.createWorkflow(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkflow without error using callback', async () => {
@@ -411,15 +417,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -449,11 +451,14 @@ describe('v1beta.WorkflowsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkflow with call error', async () => {
@@ -465,26 +470,25 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkflow = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createWorkflow(request), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkflow with LRO error', async () => {
@@ -496,15 +500,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkflow = stubLongRunningCall(
         undefined,
@@ -513,11 +513,14 @@ describe('v1beta.WorkflowsClient', () => {
       );
       const [operation] = await client.createWorkflow(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateWorkflowProgress without error', async () => {
@@ -572,15 +575,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -589,11 +588,14 @@ describe('v1beta.WorkflowsClient', () => {
       const [operation] = await client.deleteWorkflow(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkflow without error using callback', async () => {
@@ -605,15 +607,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -643,11 +641,14 @@ describe('v1beta.WorkflowsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkflow with call error', async () => {
@@ -659,26 +660,25 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkflow = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteWorkflow(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkflow with LRO error', async () => {
@@ -690,15 +690,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkflow = stubLongRunningCall(
         undefined,
@@ -707,11 +703,14 @@ describe('v1beta.WorkflowsClient', () => {
       );
       const [operation] = await client.deleteWorkflow(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteWorkflowProgress without error', async () => {
@@ -766,16 +765,13 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
-      request.workflow = {};
-      request.workflow.name = '';
-      const expectedHeaderRequestParams = 'workflow.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workflow ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
+        'workflow',
+        'name',
+      ]);
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -784,11 +780,14 @@ describe('v1beta.WorkflowsClient', () => {
       const [operation] = await client.updateWorkflow(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateWorkflow without error using callback', async () => {
@@ -800,16 +799,13 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
-      request.workflow = {};
-      request.workflow.name = '';
-      const expectedHeaderRequestParams = 'workflow.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workflow ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
+        'workflow',
+        'name',
+      ]);
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -839,11 +835,14 @@ describe('v1beta.WorkflowsClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateWorkflow with call error', async () => {
@@ -855,27 +854,27 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
-      request.workflow = {};
-      request.workflow.name = '';
-      const expectedHeaderRequestParams = 'workflow.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workflow ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
+        'workflow',
+        'name',
+      ]);
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkflow = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateWorkflow(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateWorkflow with LRO error', async () => {
@@ -887,16 +886,13 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
-      request.workflow = {};
-      request.workflow.name = '';
-      const expectedHeaderRequestParams = 'workflow.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workflow ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
+        'workflow',
+        'name',
+      ]);
+      request.workflow.name = defaultValue1;
+      const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkflow = stubLongRunningCall(
         undefined,
@@ -905,11 +901,14 @@ describe('v1beta.WorkflowsClient', () => {
       );
       const [operation] = await client.updateWorkflow(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateWorkflowProgress without error', async () => {
@@ -964,15 +963,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workflows.v1beta.Workflow()
@@ -987,11 +982,14 @@ describe('v1beta.WorkflowsClient', () => {
       client.innerApiCalls.listWorkflows = stubSimpleCall(expectedResponse);
       const [response] = await client.listWorkflows(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkflows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkflows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkflows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkflows without error using callback', async () => {
@@ -1003,15 +1001,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workflows.v1beta.Workflow()
@@ -1042,11 +1036,14 @@ describe('v1beta.WorkflowsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkflows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkflows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkflows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkflows with error', async () => {
@@ -1058,26 +1055,25 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkflows = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listWorkflows(request), expectedError);
-      assert(
-        (client.innerApiCalls.listWorkflows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkflows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkflows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkflowsStream without error', async () => {
@@ -1089,8 +1085,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workflows.v1beta.Workflow()
@@ -1127,11 +1126,12 @@ describe('v1beta.WorkflowsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkflows, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkflows.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkflows.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1144,8 +1144,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflows.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1171,11 +1174,12 @@ describe('v1beta.WorkflowsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkflows, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkflows.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkflows.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1188,8 +1192,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.workflows.v1beta.Workflow()
@@ -1215,11 +1222,12 @@ describe('v1beta.WorkflowsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkflows.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkflows.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1232,8 +1240,11 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkflows.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1250,11 +1261,12 @@ describe('v1beta.WorkflowsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkflows.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkflows.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
