@@ -529,7 +529,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getGameServerCluster(request, options, callback);
@@ -634,7 +634,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.previewCreateGameServerCluster(
@@ -738,7 +738,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.previewDeleteGameServerCluster(
@@ -849,7 +849,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'game_server_cluster.name': request.gameServerCluster!.name || '',
+        'game_server_cluster.name': request.gameServerCluster!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.previewUpdateGameServerCluster(
@@ -962,7 +962,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createGameServerCluster(
@@ -1105,7 +1105,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteGameServerCluster(
@@ -1255,7 +1255,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'game_server_cluster.name': request.gameServerCluster!.name || '',
+        'game_server_cluster.name': request.gameServerCluster!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateGameServerCluster(
@@ -1403,7 +1403,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listGameServerClusters(
@@ -1456,7 +1456,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listGameServerClusters'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1514,7 +1514,7 @@ export class GameServerClustersServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listGameServerClusters'];
     const callSettings = defaultCallSettings.merge(options);

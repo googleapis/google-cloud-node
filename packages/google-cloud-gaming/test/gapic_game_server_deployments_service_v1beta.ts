@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -280,15 +295,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GameServerDeployment()
       );
@@ -296,11 +308,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getGameServerDeployment(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerDeployment without error using callback', async () => {
@@ -315,15 +330,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GameServerDeployment()
       );
@@ -346,11 +358,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerDeployment with error', async () => {
@@ -365,15 +380,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGameServerDeployment = stubSimpleCall(
         undefined,
@@ -383,11 +395,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.getGameServerDeployment(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerDeployment with closed client', async () => {
@@ -402,7 +417,11 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -425,15 +444,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRolloutRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GameServerDeploymentRollout()
       );
@@ -441,11 +457,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getGameServerDeploymentRollout(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerDeploymentRollout without error using callback', async () => {
@@ -460,15 +479,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRolloutRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GameServerDeploymentRollout()
       );
@@ -491,11 +507,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerDeploymentRollout with error', async () => {
@@ -510,15 +529,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRolloutRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGameServerDeploymentRollout = stubSimpleCall(
         undefined,
@@ -528,11 +544,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.getGameServerDeploymentRollout(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerDeploymentRollout with closed client', async () => {
@@ -547,7 +566,11 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGameServerDeploymentRolloutRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -570,16 +593,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
+      const expectedHeaderRequestParams = `rollout.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutResponse()
       );
@@ -589,11 +609,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewGameServerDeploymentRollout without error using callback', async () => {
@@ -608,16 +631,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
+      const expectedHeaderRequestParams = `rollout.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutResponse()
       );
@@ -640,11 +660,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewGameServerDeploymentRollout with error', async () => {
@@ -659,16 +682,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
+      const expectedHeaderRequestParams = `rollout.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.previewGameServerDeploymentRollout = stubSimpleCall(
         undefined,
@@ -678,11 +698,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.previewGameServerDeploymentRollout(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewGameServerDeploymentRollout with closed client', async () => {
@@ -697,8 +720,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -721,15 +748,11 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateResponse()
       );
@@ -737,11 +760,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.fetchDeploymentState(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchDeploymentState as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchDeploymentState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDeploymentState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchDeploymentState without error using callback', async () => {
@@ -756,15 +782,11 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateResponse()
       );
@@ -787,11 +809,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchDeploymentState as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchDeploymentState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDeploymentState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchDeploymentState with error', async () => {
@@ -806,26 +831,25 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchDeploymentState = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchDeploymentState(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchDeploymentState as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchDeploymentState as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchDeploymentState as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchDeploymentState with closed client', async () => {
@@ -840,7 +864,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchDeploymentState(request), expectedError);
@@ -860,15 +887,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerDeploymentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -877,11 +901,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const [operation] = await client.createGameServerDeployment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGameServerDeployment without error using callback', async () => {
@@ -896,15 +923,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerDeploymentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -934,11 +958,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGameServerDeployment with call error', async () => {
@@ -953,15 +980,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerDeploymentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGameServerDeployment = stubLongRunningCall(
         undefined,
@@ -971,11 +995,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.createGameServerDeployment(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGameServerDeployment with LRO error', async () => {
@@ -990,15 +1017,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerDeploymentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGameServerDeployment = stubLongRunningCall(
         undefined,
@@ -1007,11 +1031,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       const [operation] = await client.createGameServerDeployment(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateGameServerDeploymentProgress without error', async () => {
@@ -1076,15 +1103,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1093,11 +1117,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const [operation] = await client.deleteGameServerDeployment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGameServerDeployment without error using callback', async () => {
@@ -1112,15 +1139,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1150,11 +1174,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGameServerDeployment with call error', async () => {
@@ -1169,15 +1196,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGameServerDeployment = stubLongRunningCall(
         undefined,
@@ -1187,11 +1211,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.deleteGameServerDeployment(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGameServerDeployment with LRO error', async () => {
@@ -1206,15 +1233,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerDeploymentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGameServerDeployment = stubLongRunningCall(
         undefined,
@@ -1223,11 +1247,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       const [operation] = await client.deleteGameServerDeployment(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteGameServerDeploymentProgress without error', async () => {
@@ -1292,16 +1319,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest()
       );
-      request.gameServerDeployment = {};
-      request.gameServerDeployment.name = '';
-      const expectedHeaderRequestParams = 'game_server_deployment.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerDeployment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRequest',
+        ['gameServerDeployment', 'name']
+      );
+      request.gameServerDeployment.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_deployment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1310,11 +1334,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const [operation] = await client.updateGameServerDeployment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerDeployment without error using callback', async () => {
@@ -1329,16 +1356,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest()
       );
-      request.gameServerDeployment = {};
-      request.gameServerDeployment.name = '';
-      const expectedHeaderRequestParams = 'game_server_deployment.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerDeployment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRequest',
+        ['gameServerDeployment', 'name']
+      );
+      request.gameServerDeployment.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_deployment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1368,11 +1392,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerDeployment with call error', async () => {
@@ -1387,16 +1414,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest()
       );
-      request.gameServerDeployment = {};
-      request.gameServerDeployment.name = '';
-      const expectedHeaderRequestParams = 'game_server_deployment.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerDeployment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRequest',
+        ['gameServerDeployment', 'name']
+      );
+      request.gameServerDeployment.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_deployment.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGameServerDeployment = stubLongRunningCall(
         undefined,
@@ -1406,11 +1430,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.updateGameServerDeployment(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerDeployment with LRO error', async () => {
@@ -1425,16 +1452,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest()
       );
-      request.gameServerDeployment = {};
-      request.gameServerDeployment.name = '';
-      const expectedHeaderRequestParams = 'game_server_deployment.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerDeployment ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRequest',
+        ['gameServerDeployment', 'name']
+      );
+      request.gameServerDeployment.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_deployment.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGameServerDeployment = stubLongRunningCall(
         undefined,
@@ -1443,11 +1467,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       const [operation] = await client.updateGameServerDeployment(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateGameServerDeployment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeployment as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateGameServerDeploymentProgress without error', async () => {
@@ -1512,16 +1539,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
+      const expectedHeaderRequestParams = `rollout.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1532,11 +1556,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerDeploymentRollout without error using callback', async () => {
@@ -1551,16 +1578,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
+      const expectedHeaderRequestParams = `rollout.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1590,11 +1614,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerDeploymentRollout with call error', async () => {
@@ -1609,16 +1636,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
+      const expectedHeaderRequestParams = `rollout.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGameServerDeploymentRollout =
         stubLongRunningCall(undefined, expectedError);
@@ -1626,11 +1650,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.updateGameServerDeploymentRollout(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerDeploymentRollout with LRO error', async () => {
@@ -1645,16 +1672,13 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest()
       );
-      request.rollout = {};
-      request.rollout.name = '';
-      const expectedHeaderRequestParams = 'rollout.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.rollout ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerDeploymentRolloutRequest',
+        ['rollout', 'name']
+      );
+      request.rollout.name = defaultValue1;
+      const expectedHeaderRequestParams = `rollout.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGameServerDeploymentRollout =
         stubLongRunningCall(undefined, undefined, expectedError);
@@ -1662,11 +1686,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         request
       );
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerDeploymentRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateGameServerDeploymentRolloutProgress without error', async () => {
@@ -1731,15 +1758,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerDeploymentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1beta.GameServerDeployment()
@@ -1755,11 +1779,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listGameServerDeployments(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGameServerDeployments as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGameServerDeployments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGameServerDeployments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGameServerDeployments without error using callback', async () => {
@@ -1774,15 +1801,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerDeploymentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1beta.GameServerDeployment()
@@ -1815,11 +1839,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGameServerDeployments as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGameServerDeployments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGameServerDeployments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGameServerDeployments with error', async () => {
@@ -1834,15 +1861,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerDeploymentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGameServerDeployments = stubSimpleCall(
         undefined,
@@ -1852,11 +1876,14 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         client.listGameServerDeployments(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listGameServerDeployments as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGameServerDeployments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGameServerDeployments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGameServerDeploymentsStream without error', async () => {
@@ -1871,8 +1898,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerDeploymentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1beta.GameServerDeployment()
@@ -1915,12 +1946,15 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerDeployments, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerDeployments
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1936,8 +1970,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerDeploymentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGameServerDeployments.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1969,12 +2007,15 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerDeployments, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerDeployments
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1990,8 +2031,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerDeploymentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1beta.GameServerDeployment()
@@ -2019,12 +2064,15 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerDeployments
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2040,8 +2088,12 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerDeploymentsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGameServerDeployments.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2060,12 +2112,15 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerDeployments
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

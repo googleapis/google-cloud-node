@@ -498,7 +498,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getRealm(request, options, callback);
@@ -599,7 +599,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'realm.name': request.realm!.name || '',
+        'realm.name': request.realm!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.previewRealmUpdate(request, options, callback);
@@ -708,7 +708,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createRealm(request, options, callback);
@@ -847,7 +847,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteRealm(request, options, callback);
@@ -993,7 +993,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'realm.name': request.realm!.name || '',
+        'realm.name': request.realm!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateRealm(request, options, callback);
@@ -1131,7 +1131,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listRealms(request, options, callback);
@@ -1180,7 +1180,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRealms'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1238,7 +1238,7 @@ export class RealmsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRealms'];
     const callSettings = defaultCallSettings.merge(options);

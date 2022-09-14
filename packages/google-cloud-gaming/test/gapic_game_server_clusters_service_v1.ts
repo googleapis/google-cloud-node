@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -265,15 +280,11 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerCluster()
       );
@@ -281,11 +292,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getGameServerCluster(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerCluster without error using callback', async () => {
@@ -298,15 +312,11 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerCluster()
       );
@@ -329,11 +339,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerCluster with error', async () => {
@@ -346,26 +359,25 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGameServerCluster = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getGameServerCluster(request), expectedError);
-      assert(
-        (client.innerApiCalls.getGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGameServerCluster with closed client', async () => {
@@ -378,7 +390,10 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGameServerCluster(request), expectedError);
@@ -396,15 +411,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewCreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse()
       );
@@ -412,11 +424,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.previewCreateGameServerCluster(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewCreateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewCreateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewCreateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewCreateGameServerCluster without error using callback', async () => {
@@ -429,15 +444,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewCreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse()
       );
@@ -460,11 +472,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewCreateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewCreateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewCreateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewCreateGameServerCluster with error', async () => {
@@ -477,15 +492,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewCreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.previewCreateGameServerCluster = stubSimpleCall(
         undefined,
@@ -495,11 +507,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         client.previewCreateGameServerCluster(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.previewCreateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewCreateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewCreateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewCreateGameServerCluster with closed client', async () => {
@@ -512,7 +527,11 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewCreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -533,15 +552,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewDeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse()
       );
@@ -549,11 +565,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.previewDeleteGameServerCluster(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewDeleteGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewDeleteGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewDeleteGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewDeleteGameServerCluster without error using callback', async () => {
@@ -566,15 +585,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewDeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterResponse()
       );
@@ -597,11 +613,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewDeleteGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewDeleteGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewDeleteGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewDeleteGameServerCluster with error', async () => {
@@ -614,15 +633,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewDeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.previewDeleteGameServerCluster = stubSimpleCall(
         undefined,
@@ -632,11 +648,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         client.previewDeleteGameServerCluster(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.previewDeleteGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewDeleteGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewDeleteGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewDeleteGameServerCluster with closed client', async () => {
@@ -649,7 +668,11 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewDeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -670,16 +693,13 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewUpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse()
       );
@@ -687,11 +707,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.previewUpdateGameServerCluster(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewUpdateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewUpdateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewUpdateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewUpdateGameServerCluster without error using callback', async () => {
@@ -704,16 +727,13 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewUpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewUpdateGameServerClusterResponse()
       );
@@ -736,11 +756,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewUpdateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewUpdateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewUpdateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewUpdateGameServerCluster with error', async () => {
@@ -753,16 +776,13 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewUpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_cluster.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.previewUpdateGameServerCluster = stubSimpleCall(
         undefined,
@@ -772,11 +792,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         client.previewUpdateGameServerCluster(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.previewUpdateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewUpdateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewUpdateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewUpdateGameServerCluster with closed client', async () => {
@@ -789,8 +812,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'PreviewUpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -811,15 +838,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -828,11 +852,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       const [operation] = await client.createGameServerCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGameServerCluster without error using callback', async () => {
@@ -845,15 +872,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -883,11 +907,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGameServerCluster with call error', async () => {
@@ -900,15 +927,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGameServerCluster = stubLongRunningCall(
         undefined,
@@ -918,11 +942,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         client.createGameServerCluster(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGameServerCluster with LRO error', async () => {
@@ -935,15 +962,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateGameServerClusterRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGameServerCluster = stubLongRunningCall(
         undefined,
@@ -952,11 +976,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       const [operation] = await client.createGameServerCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateGameServerClusterProgress without error', async () => {
@@ -1015,15 +1042,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1032,11 +1056,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       const [operation] = await client.deleteGameServerCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGameServerCluster without error using callback', async () => {
@@ -1049,15 +1076,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1087,11 +1111,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGameServerCluster with call error', async () => {
@@ -1104,15 +1131,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGameServerCluster = stubLongRunningCall(
         undefined,
@@ -1122,11 +1146,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         client.deleteGameServerCluster(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGameServerCluster with LRO error', async () => {
@@ -1139,15 +1166,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteGameServerClusterRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGameServerCluster = stubLongRunningCall(
         undefined,
@@ -1156,11 +1180,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       const [operation] = await client.deleteGameServerCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteGameServerClusterProgress without error', async () => {
@@ -1219,16 +1246,13 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1237,11 +1261,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       const [operation] = await client.updateGameServerCluster(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerCluster without error using callback', async () => {
@@ -1254,16 +1281,13 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_cluster.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1293,11 +1317,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerCluster with call error', async () => {
@@ -1310,16 +1337,13 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_cluster.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGameServerCluster = stubLongRunningCall(
         undefined,
@@ -1329,11 +1353,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         client.updateGameServerCluster(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGameServerCluster with LRO error', async () => {
@@ -1346,16 +1373,13 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerClusterRequest()
       );
-      request.gameServerCluster = {};
-      request.gameServerCluster.name = '';
-      const expectedHeaderRequestParams = 'game_server_cluster.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.gameServerCluster ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGameServerClusterRequest',
+        ['gameServerCluster', 'name']
+      );
+      request.gameServerCluster.name = defaultValue1;
+      const expectedHeaderRequestParams = `game_server_cluster.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGameServerCluster = stubLongRunningCall(
         undefined,
@@ -1364,11 +1388,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       const [operation] = await client.updateGameServerCluster(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateGameServerCluster as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGameServerCluster as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateGameServerClusterProgress without error', async () => {
@@ -1427,15 +1454,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1.GameServerCluster()
@@ -1451,11 +1475,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listGameServerClusters(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGameServerClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGameServerClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGameServerClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGameServerClusters without error using callback', async () => {
@@ -1468,15 +1495,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1.GameServerCluster()
@@ -1507,11 +1531,14 @@ describe('v1.GameServerClustersServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGameServerClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGameServerClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGameServerClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGameServerClusters with error', async () => {
@@ -1524,15 +1551,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGameServerClusters = stubSimpleCall(
         undefined,
@@ -1542,11 +1566,14 @@ describe('v1.GameServerClustersServiceClient', () => {
         client.listGameServerClusters(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listGameServerClusters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGameServerClusters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGameServerClusters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGameServerClustersStream without error', async () => {
@@ -1559,8 +1586,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1.GameServerCluster()
@@ -1600,12 +1631,15 @@ describe('v1.GameServerClustersServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerClusters, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerClusters
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1619,8 +1653,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGameServerClusters.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1649,12 +1687,15 @@ describe('v1.GameServerClustersServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerClusters, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerClusters
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1668,8 +1709,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.gaming.v1.GameServerCluster()
@@ -1696,12 +1741,15 @@ describe('v1.GameServerClustersServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerClusters
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1715,8 +1763,12 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListGameServerClustersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGameServerClusters.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1735,12 +1787,15 @@ describe('v1.GameServerClustersServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listGameServerClusters
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

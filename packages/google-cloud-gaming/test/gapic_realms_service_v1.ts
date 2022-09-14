@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,26 +269,23 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetRealmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.Realm()
       );
       client.innerApiCalls.getRealm = stubSimpleCall(expectedResponse);
       const [response] = await client.getRealm(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRealm without error using callback', async () => {
@@ -285,15 +297,9 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetRealmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.Realm()
       );
@@ -316,11 +322,14 @@ describe('v1.RealmsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRealm with error', async () => {
@@ -332,23 +341,20 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetRealmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRealm = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getRealm(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRealm with closed client', async () => {
@@ -360,7 +366,8 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetRealmRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRealm(request), expectedError);
@@ -377,16 +384,13 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewRealmUpdateRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
+      const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewRealmUpdateResponse()
       );
@@ -394,11 +398,14 @@ describe('v1.RealmsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.previewRealmUpdate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewRealmUpdate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewRealmUpdate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewRealmUpdate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewRealmUpdate without error using callback', async () => {
@@ -410,16 +417,13 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewRealmUpdateRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
+      const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewRealmUpdateResponse()
       );
@@ -442,11 +446,14 @@ describe('v1.RealmsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.previewRealmUpdate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewRealmUpdate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewRealmUpdate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewRealmUpdate with error', async () => {
@@ -458,27 +465,27 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewRealmUpdateRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
+      const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.previewRealmUpdate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.previewRealmUpdate(request), expectedError);
-      assert(
-        (client.innerApiCalls.previewRealmUpdate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.previewRealmUpdate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.previewRealmUpdate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes previewRealmUpdate with closed client', async () => {
@@ -490,8 +497,12 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewRealmUpdateRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.previewRealmUpdate(request), expectedError);
@@ -508,15 +519,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateRealmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -524,11 +531,14 @@ describe('v1.RealmsServiceClient', () => {
       const [operation] = await client.createRealm(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRealm without error using callback', async () => {
@@ -540,15 +550,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateRealmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -578,11 +584,14 @@ describe('v1.RealmsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRealm with call error', async () => {
@@ -594,26 +603,25 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateRealmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRealm = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createRealm(request), expectedError);
-      assert(
-        (client.innerApiCalls.createRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRealm with LRO error', async () => {
@@ -625,15 +633,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateRealmRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRealm = stubLongRunningCall(
         undefined,
@@ -642,11 +646,14 @@ describe('v1.RealmsServiceClient', () => {
       );
       const [operation] = await client.createRealm(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateRealmProgress without error', async () => {
@@ -698,15 +705,9 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteRealmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -714,11 +715,14 @@ describe('v1.RealmsServiceClient', () => {
       const [operation] = await client.deleteRealm(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRealm without error using callback', async () => {
@@ -730,15 +734,9 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteRealmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -768,11 +766,14 @@ describe('v1.RealmsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRealm with call error', async () => {
@@ -784,26 +785,23 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteRealmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRealm = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteRealm(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRealm with LRO error', async () => {
@@ -815,15 +813,9 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteRealmRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRealm = stubLongRunningCall(
         undefined,
@@ -832,11 +824,14 @@ describe('v1.RealmsServiceClient', () => {
       );
       const [operation] = await client.deleteRealm(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteRealmProgress without error', async () => {
@@ -888,16 +883,13 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateRealmRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
+      const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -905,11 +897,14 @@ describe('v1.RealmsServiceClient', () => {
       const [operation] = await client.updateRealm(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRealm without error using callback', async () => {
@@ -921,16 +916,13 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateRealmRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
+      const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -960,11 +952,14 @@ describe('v1.RealmsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRealm with call error', async () => {
@@ -976,27 +971,27 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateRealmRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
+      const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRealm = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateRealm(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateRealm with LRO error', async () => {
@@ -1008,16 +1003,13 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateRealmRequest()
       );
-      request.realm = {};
-      request.realm.name = '';
-      const expectedHeaderRequestParams = 'realm.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.realm ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
+        'realm',
+        'name',
+      ]);
+      request.realm.name = defaultValue1;
+      const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateRealm = stubLongRunningCall(
         undefined,
@@ -1026,11 +1018,14 @@ describe('v1.RealmsServiceClient', () => {
       );
       const [operation] = await client.updateRealm(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateRealm as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateRealm as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateRealmProgress without error', async () => {
@@ -1082,15 +1077,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListRealmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
@@ -1099,11 +1090,14 @@ describe('v1.RealmsServiceClient', () => {
       client.innerApiCalls.listRealms = stubSimpleCall(expectedResponse);
       const [response] = await client.listRealms(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRealms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRealms as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRealms as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRealms without error using callback', async () => {
@@ -1115,15 +1109,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListRealmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
@@ -1148,11 +1138,14 @@ describe('v1.RealmsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRealms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRealms as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRealms as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRealms with error', async () => {
@@ -1164,26 +1157,25 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListRealmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRealms = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRealms(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRealms as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRealms as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRealms as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRealmsStream without error', async () => {
@@ -1195,8 +1187,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListRealmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
@@ -1224,11 +1219,12 @@ describe('v1.RealmsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRealms, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRealms.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRealms.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1241,8 +1237,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListRealmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRealms.createStream = stubPageStreamingCall(
         undefined,
@@ -1267,11 +1266,12 @@ describe('v1.RealmsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRealms, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRealms.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRealms.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1284,8 +1284,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListRealmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
         generateSampleMessage(new protos.google.cloud.gaming.v1.Realm()),
@@ -1305,11 +1308,12 @@ describe('v1.RealmsServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRealms.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRealms.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1322,8 +1326,11 @@ describe('v1.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListRealmsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRealms.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1342,11 +1349,12 @@ describe('v1.RealmsServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listRealms.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRealms.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
