@@ -360,6 +360,50 @@
             }
         },
         {
+            "regionTag": "storagetransfer_v1_generated_StorageTransferService_DeleteTransferJob_async",
+            "title": "StorageTransferService deleteTransferJob Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes a transfer job. Deleting a transfer job sets its status to [DELETED][google.storagetransfer.v1.TransferJob.Status.DELETED].",
+            "canonical": true,
+            "file": "storage_transfer_service.delete_transfer_job.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "DeleteTransferJob",
+                "fullName": "google.storagetransfer.v1.StorageTransferService.DeleteTransferJob",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "job_name",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project_id",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.protobuf.Empty",
+                "client": {
+                    "shortName": "StorageTransferServiceClient",
+                    "fullName": "google.storagetransfer.v1.StorageTransferServiceClient"
+                },
+                "method": {
+                    "shortName": "DeleteTransferJob",
+                    "fullName": "google.storagetransfer.v1.StorageTransferService.DeleteTransferJob",
+                    "service": {
+                        "shortName": "StorageTransferService",
+                        "fullName": "google.storagetransfer.v1.StorageTransferService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "storagetransfer_v1_generated_StorageTransferService_CreateAgentPool_async",
             "title": "StorageTransferService createAgentPool Sample",
             "origin": "API_DEFINITION",

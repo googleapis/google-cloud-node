@@ -156,6 +156,20 @@ export namespace google {
                 public runTransferJob(request: google.storagetransfer.v1.IRunTransferJobRequest): Promise<google.longrunning.Operation>;
 
                 /**
+                 * Calls DeleteTransferJob.
+                 * @param request DeleteTransferJobRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Empty
+                 */
+                public deleteTransferJob(request: google.storagetransfer.v1.IDeleteTransferJobRequest, callback: google.storagetransfer.v1.StorageTransferService.DeleteTransferJobCallback): void;
+
+                /**
+                 * Calls DeleteTransferJob.
+                 * @param request DeleteTransferJobRequest message or plain object
+                 * @returns Promise
+                 */
+                public deleteTransferJob(request: google.storagetransfer.v1.IDeleteTransferJobRequest): Promise<google.protobuf.Empty>;
+
+                /**
                  * Calls CreateAgentPool.
                  * @param request CreateAgentPoolRequest message or plain object
                  * @param callback Node-style callback called with the error, if any, and AgentPool
@@ -283,6 +297,13 @@ export namespace google {
                  * @param [response] Operation
                  */
                 type RunTransferJobCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                /**
+                 * Callback as used by {@link google.storagetransfer.v1.StorageTransferService|deleteTransferJob}.
+                 * @param error Error, if any
+                 * @param [response] Empty
+                 */
+                type DeleteTransferJobCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
 
                 /**
                  * Callback as used by {@link google.storagetransfer.v1.StorageTransferService|createAgentPool}.
@@ -726,6 +747,109 @@ export namespace google {
 
                 /**
                  * Gets the default type url for GetTransferJobRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a DeleteTransferJobRequest. */
+            interface IDeleteTransferJobRequest {
+
+                /** DeleteTransferJobRequest jobName */
+                jobName?: (string|null);
+
+                /** DeleteTransferJobRequest projectId */
+                projectId?: (string|null);
+            }
+
+            /** Represents a DeleteTransferJobRequest. */
+            class DeleteTransferJobRequest implements IDeleteTransferJobRequest {
+
+                /**
+                 * Constructs a new DeleteTransferJobRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IDeleteTransferJobRequest);
+
+                /** DeleteTransferJobRequest jobName. */
+                public jobName: string;
+
+                /** DeleteTransferJobRequest projectId. */
+                public projectId: string;
+
+                /**
+                 * Creates a new DeleteTransferJobRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns DeleteTransferJobRequest instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IDeleteTransferJobRequest): google.storagetransfer.v1.DeleteTransferJobRequest;
+
+                /**
+                 * Encodes the specified DeleteTransferJobRequest message. Does not implicitly {@link google.storagetransfer.v1.DeleteTransferJobRequest.verify|verify} messages.
+                 * @param message DeleteTransferJobRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IDeleteTransferJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified DeleteTransferJobRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.DeleteTransferJobRequest.verify|verify} messages.
+                 * @param message DeleteTransferJobRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IDeleteTransferJobRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a DeleteTransferJobRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns DeleteTransferJobRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.DeleteTransferJobRequest;
+
+                /**
+                 * Decodes a DeleteTransferJobRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns DeleteTransferJobRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.DeleteTransferJobRequest;
+
+                /**
+                 * Verifies a DeleteTransferJobRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a DeleteTransferJobRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns DeleteTransferJobRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.DeleteTransferJobRequest;
+
+                /**
+                 * Creates a plain object from a DeleteTransferJobRequest message. Also converts values to other types if specified.
+                 * @param message DeleteTransferJobRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.DeleteTransferJobRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this DeleteTransferJobRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for DeleteTransferJobRequest
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -2822,6 +2946,276 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+            /** Properties of an AwsS3CompatibleData. */
+            interface IAwsS3CompatibleData {
+
+                /** AwsS3CompatibleData bucketName */
+                bucketName?: (string|null);
+
+                /** AwsS3CompatibleData path */
+                path?: (string|null);
+
+                /** AwsS3CompatibleData endpoint */
+                endpoint?: (string|null);
+
+                /** AwsS3CompatibleData region */
+                region?: (string|null);
+
+                /** AwsS3CompatibleData s3Metadata */
+                s3Metadata?: (google.storagetransfer.v1.IS3CompatibleMetadata|null);
+            }
+
+            /** Represents an AwsS3CompatibleData. */
+            class AwsS3CompatibleData implements IAwsS3CompatibleData {
+
+                /**
+                 * Constructs a new AwsS3CompatibleData.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IAwsS3CompatibleData);
+
+                /** AwsS3CompatibleData bucketName. */
+                public bucketName: string;
+
+                /** AwsS3CompatibleData path. */
+                public path: string;
+
+                /** AwsS3CompatibleData endpoint. */
+                public endpoint: string;
+
+                /** AwsS3CompatibleData region. */
+                public region: string;
+
+                /** AwsS3CompatibleData s3Metadata. */
+                public s3Metadata?: (google.storagetransfer.v1.IS3CompatibleMetadata|null);
+
+                /** AwsS3CompatibleData dataProvider. */
+                public dataProvider?: "s3Metadata";
+
+                /**
+                 * Creates a new AwsS3CompatibleData instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AwsS3CompatibleData instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IAwsS3CompatibleData): google.storagetransfer.v1.AwsS3CompatibleData;
+
+                /**
+                 * Encodes the specified AwsS3CompatibleData message. Does not implicitly {@link google.storagetransfer.v1.AwsS3CompatibleData.verify|verify} messages.
+                 * @param message AwsS3CompatibleData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IAwsS3CompatibleData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AwsS3CompatibleData message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AwsS3CompatibleData.verify|verify} messages.
+                 * @param message AwsS3CompatibleData message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IAwsS3CompatibleData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AwsS3CompatibleData message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AwsS3CompatibleData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.AwsS3CompatibleData;
+
+                /**
+                 * Decodes an AwsS3CompatibleData message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AwsS3CompatibleData
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.AwsS3CompatibleData;
+
+                /**
+                 * Verifies an AwsS3CompatibleData message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AwsS3CompatibleData message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AwsS3CompatibleData
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.AwsS3CompatibleData;
+
+                /**
+                 * Creates a plain object from an AwsS3CompatibleData message. Also converts values to other types if specified.
+                 * @param message AwsS3CompatibleData
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.AwsS3CompatibleData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AwsS3CompatibleData to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AwsS3CompatibleData
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a S3CompatibleMetadata. */
+            interface IS3CompatibleMetadata {
+
+                /** S3CompatibleMetadata authMethod */
+                authMethod?: (google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod|null);
+
+                /** S3CompatibleMetadata requestModel */
+                requestModel?: (google.storagetransfer.v1.S3CompatibleMetadata.RequestModel|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.RequestModel|null);
+
+                /** S3CompatibleMetadata protocol */
+                protocol?: (google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol|null);
+
+                /** S3CompatibleMetadata listApi */
+                listApi?: (google.storagetransfer.v1.S3CompatibleMetadata.ListApi|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.ListApi|null);
+            }
+
+            /** Represents a S3CompatibleMetadata. */
+            class S3CompatibleMetadata implements IS3CompatibleMetadata {
+
+                /**
+                 * Constructs a new S3CompatibleMetadata.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storagetransfer.v1.IS3CompatibleMetadata);
+
+                /** S3CompatibleMetadata authMethod. */
+                public authMethod: (google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod);
+
+                /** S3CompatibleMetadata requestModel. */
+                public requestModel: (google.storagetransfer.v1.S3CompatibleMetadata.RequestModel|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.RequestModel);
+
+                /** S3CompatibleMetadata protocol. */
+                public protocol: (google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol);
+
+                /** S3CompatibleMetadata listApi. */
+                public listApi: (google.storagetransfer.v1.S3CompatibleMetadata.ListApi|keyof typeof google.storagetransfer.v1.S3CompatibleMetadata.ListApi);
+
+                /**
+                 * Creates a new S3CompatibleMetadata instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns S3CompatibleMetadata instance
+                 */
+                public static create(properties?: google.storagetransfer.v1.IS3CompatibleMetadata): google.storagetransfer.v1.S3CompatibleMetadata;
+
+                /**
+                 * Encodes the specified S3CompatibleMetadata message. Does not implicitly {@link google.storagetransfer.v1.S3CompatibleMetadata.verify|verify} messages.
+                 * @param message S3CompatibleMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storagetransfer.v1.IS3CompatibleMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified S3CompatibleMetadata message, length delimited. Does not implicitly {@link google.storagetransfer.v1.S3CompatibleMetadata.verify|verify} messages.
+                 * @param message S3CompatibleMetadata message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storagetransfer.v1.IS3CompatibleMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a S3CompatibleMetadata message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns S3CompatibleMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storagetransfer.v1.S3CompatibleMetadata;
+
+                /**
+                 * Decodes a S3CompatibleMetadata message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns S3CompatibleMetadata
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storagetransfer.v1.S3CompatibleMetadata;
+
+                /**
+                 * Verifies a S3CompatibleMetadata message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a S3CompatibleMetadata message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns S3CompatibleMetadata
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storagetransfer.v1.S3CompatibleMetadata;
+
+                /**
+                 * Creates a plain object from a S3CompatibleMetadata message. Also converts values to other types if specified.
+                 * @param message S3CompatibleMetadata
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storagetransfer.v1.S3CompatibleMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this S3CompatibleMetadata to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for S3CompatibleMetadata
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace S3CompatibleMetadata {
+
+                /** AuthMethod enum. */
+                enum AuthMethod {
+                    AUTH_METHOD_UNSPECIFIED = 0,
+                    AUTH_METHOD_AWS_SIGNATURE_V4 = 1,
+                    AUTH_METHOD_AWS_SIGNATURE_V2 = 2
+                }
+
+                /** RequestModel enum. */
+                enum RequestModel {
+                    REQUEST_MODEL_UNSPECIFIED = 0,
+                    REQUEST_MODEL_VIRTUAL_HOSTED_STYLE = 1,
+                    REQUEST_MODEL_PATH_STYLE = 2
+                }
+
+                /** NetworkProtocol enum. */
+                enum NetworkProtocol {
+                    NETWORK_PROTOCOL_UNSPECIFIED = 0,
+                    NETWORK_PROTOCOL_HTTPS = 1,
+                    NETWORK_PROTOCOL_HTTP = 2
+                }
+
+                /** ListApi enum. */
+                enum ListApi {
+                    LIST_API_UNSPECIFIED = 0,
+                    LIST_OBJECTS_V2 = 1,
+                    LIST_OBJECTS = 2
+                }
+            }
+
             /** Properties of an AgentPool. */
             interface IAgentPool {
 
@@ -3201,6 +3595,9 @@ export namespace google {
                 /** TransferSpec azureBlobStorageDataSource */
                 azureBlobStorageDataSource?: (google.storagetransfer.v1.IAzureBlobStorageData|null);
 
+                /** TransferSpec awsS3CompatibleDataSource */
+                awsS3CompatibleDataSource?: (google.storagetransfer.v1.IAwsS3CompatibleData|null);
+
                 /** TransferSpec gcsIntermediateDataLocation */
                 gcsIntermediateDataLocation?: (google.storagetransfer.v1.IGcsData|null);
 
@@ -3250,6 +3647,9 @@ export namespace google {
                 /** TransferSpec azureBlobStorageDataSource. */
                 public azureBlobStorageDataSource?: (google.storagetransfer.v1.IAzureBlobStorageData|null);
 
+                /** TransferSpec awsS3CompatibleDataSource. */
+                public awsS3CompatibleDataSource?: (google.storagetransfer.v1.IAwsS3CompatibleData|null);
+
                 /** TransferSpec gcsIntermediateDataLocation. */
                 public gcsIntermediateDataLocation?: (google.storagetransfer.v1.IGcsData|null);
 
@@ -3272,7 +3672,7 @@ export namespace google {
                 public dataSink?: ("gcsDataSink"|"posixDataSink");
 
                 /** TransferSpec dataSource. */
-                public dataSource?: ("gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource");
+                public dataSource?: ("gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|"awsS3CompatibleDataSource");
 
                 /** TransferSpec intermediateDataLocation. */
                 public intermediateDataLocation?: "gcsIntermediateDataLocation";

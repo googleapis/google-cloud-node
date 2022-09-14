@@ -6,6 +6,9 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -17,73 +20,87 @@
           "rpc_timeout_multiplier": 1,
           "max_rpc_timeout_millis": 60000,
           "total_timeout_millis": 600000
+        },
+        "264268458a9e88347dbacbd9398202ff5885a40b": {
+          "initial_retry_delay_millis": 1000,
+          "retry_delay_multiplier": 2,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
         }
       },
       "methods": {
         "GetGoogleServiceAccount": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "CreateTransferJob": {
-          "timeout_millis": 30000,
+          "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateTransferJob": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetTransferJob": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListTransferJobs": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "PauseTransferOperation": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ResumeTransferOperation": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "RunTransferJob": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
+        },
+        "DeleteTransferJob": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "CreateAgentPool": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "UpdateAgentPool": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "GetAgentPool": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "ListAgentPools": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         },
         "DeleteAgentPool": {
-          "timeout_millis": 30000,
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "264268458a9e88347dbacbd9398202ff5885a40b"
         }
       }
     }

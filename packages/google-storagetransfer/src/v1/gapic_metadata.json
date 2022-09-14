@@ -40,6 +40,11 @@
                 "resumeTransferOperation"
               ]
             },
+            "DeleteTransferJob": {
+              "methods": [
+                "deleteTransferJob"
+              ]
+            },
             "CreateAgentPool": {
               "methods": [
                 "createAgentPool"
@@ -112,6 +117,11 @@
             "ResumeTransferOperation": {
               "methods": [
                 "resumeTransferOperation"
+              ]
+            },
+            "DeleteTransferJob": {
+              "methods": [
+                "deleteTransferJob"
               ]
             },
             "CreateAgentPool": {

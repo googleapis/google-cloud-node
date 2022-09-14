@@ -354,6 +354,39 @@
                      */
     
                     /**
+                     * Callback as used by {@link google.storagetransfer.v1.StorageTransferService|deleteTransferJob}.
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @typedef DeleteTransferJobCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.protobuf.Empty} [response] Empty
+                     */
+    
+                    /**
+                     * Calls DeleteTransferJob.
+                     * @function deleteTransferJob
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IDeleteTransferJobRequest} request DeleteTransferJobRequest message or plain object
+                     * @param {google.storagetransfer.v1.StorageTransferService.DeleteTransferJobCallback} callback Node-style callback called with the error, if any, and Empty
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(StorageTransferService.prototype.deleteTransferJob = function deleteTransferJob(request, callback) {
+                        return this.rpcCall(deleteTransferJob, $root.google.storagetransfer.v1.DeleteTransferJobRequest, $root.google.protobuf.Empty, request, callback);
+                    }, "name", { value: "DeleteTransferJob" });
+    
+                    /**
+                     * Calls DeleteTransferJob.
+                     * @function deleteTransferJob
+                     * @memberof google.storagetransfer.v1.StorageTransferService
+                     * @instance
+                     * @param {google.storagetransfer.v1.IDeleteTransferJobRequest} request DeleteTransferJobRequest message or plain object
+                     * @returns {Promise<google.protobuf.Empty>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
                      * Callback as used by {@link google.storagetransfer.v1.StorageTransferService|createAgentPool}.
                      * @memberof google.storagetransfer.v1.StorageTransferService
                      * @typedef CreateAgentPoolCallback
@@ -1440,6 +1473,233 @@
                     };
     
                     return GetTransferJobRequest;
+                })();
+    
+                v1.DeleteTransferJobRequest = (function() {
+    
+                    /**
+                     * Properties of a DeleteTransferJobRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IDeleteTransferJobRequest
+                     * @property {string|null} [jobName] DeleteTransferJobRequest jobName
+                     * @property {string|null} [projectId] DeleteTransferJobRequest projectId
+                     */
+    
+                    /**
+                     * Constructs a new DeleteTransferJobRequest.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a DeleteTransferJobRequest.
+                     * @implements IDeleteTransferJobRequest
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IDeleteTransferJobRequest=} [properties] Properties to set
+                     */
+                    function DeleteTransferJobRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * DeleteTransferJobRequest jobName.
+                     * @member {string} jobName
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @instance
+                     */
+                    DeleteTransferJobRequest.prototype.jobName = "";
+    
+                    /**
+                     * DeleteTransferJobRequest projectId.
+                     * @member {string} projectId
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @instance
+                     */
+                    DeleteTransferJobRequest.prototype.projectId = "";
+    
+                    /**
+                     * Creates a new DeleteTransferJobRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IDeleteTransferJobRequest=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.DeleteTransferJobRequest} DeleteTransferJobRequest instance
+                     */
+                    DeleteTransferJobRequest.create = function create(properties) {
+                        return new DeleteTransferJobRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteTransferJobRequest message. Does not implicitly {@link google.storagetransfer.v1.DeleteTransferJobRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IDeleteTransferJobRequest} message DeleteTransferJobRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteTransferJobRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.jobName != null && Object.hasOwnProperty.call(message, "jobName"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.jobName);
+                        if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.projectId);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified DeleteTransferJobRequest message, length delimited. Does not implicitly {@link google.storagetransfer.v1.DeleteTransferJobRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.IDeleteTransferJobRequest} message DeleteTransferJobRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    DeleteTransferJobRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a DeleteTransferJobRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.DeleteTransferJobRequest} DeleteTransferJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteTransferJobRequest.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.DeleteTransferJobRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.jobName = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.projectId = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a DeleteTransferJobRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.DeleteTransferJobRequest} DeleteTransferJobRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    DeleteTransferJobRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a DeleteTransferJobRequest message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    DeleteTransferJobRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.jobName != null && message.hasOwnProperty("jobName"))
+                            if (!$util.isString(message.jobName))
+                                return "jobName: string expected";
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            if (!$util.isString(message.projectId))
+                                return "projectId: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a DeleteTransferJobRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.DeleteTransferJobRequest} DeleteTransferJobRequest
+                     */
+                    DeleteTransferJobRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.DeleteTransferJobRequest)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.DeleteTransferJobRequest();
+                        if (object.jobName != null)
+                            message.jobName = String(object.jobName);
+                        if (object.projectId != null)
+                            message.projectId = String(object.projectId);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a DeleteTransferJobRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {google.storagetransfer.v1.DeleteTransferJobRequest} message DeleteTransferJobRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    DeleteTransferJobRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.jobName = "";
+                            object.projectId = "";
+                        }
+                        if (message.jobName != null && message.hasOwnProperty("jobName"))
+                            object.jobName = message.jobName;
+                        if (message.projectId != null && message.hasOwnProperty("projectId"))
+                            object.projectId = message.projectId;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this DeleteTransferJobRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    DeleteTransferJobRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for DeleteTransferJobRequest
+                     * @function getTypeUrl
+                     * @memberof google.storagetransfer.v1.DeleteTransferJobRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    DeleteTransferJobRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.storagetransfer.v1.DeleteTransferJobRequest";
+                    };
+    
+                    return DeleteTransferJobRequest;
                 })();
     
                 v1.ListTransferJobsRequest = (function() {
@@ -6211,6 +6471,736 @@
                     return PosixFilesystem;
                 })();
     
+                v1.AwsS3CompatibleData = (function() {
+    
+                    /**
+                     * Properties of an AwsS3CompatibleData.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IAwsS3CompatibleData
+                     * @property {string|null} [bucketName] AwsS3CompatibleData bucketName
+                     * @property {string|null} [path] AwsS3CompatibleData path
+                     * @property {string|null} [endpoint] AwsS3CompatibleData endpoint
+                     * @property {string|null} [region] AwsS3CompatibleData region
+                     * @property {google.storagetransfer.v1.IS3CompatibleMetadata|null} [s3Metadata] AwsS3CompatibleData s3Metadata
+                     */
+    
+                    /**
+                     * Constructs a new AwsS3CompatibleData.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents an AwsS3CompatibleData.
+                     * @implements IAwsS3CompatibleData
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IAwsS3CompatibleData=} [properties] Properties to set
+                     */
+                    function AwsS3CompatibleData(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AwsS3CompatibleData bucketName.
+                     * @member {string} bucketName
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @instance
+                     */
+                    AwsS3CompatibleData.prototype.bucketName = "";
+    
+                    /**
+                     * AwsS3CompatibleData path.
+                     * @member {string} path
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @instance
+                     */
+                    AwsS3CompatibleData.prototype.path = "";
+    
+                    /**
+                     * AwsS3CompatibleData endpoint.
+                     * @member {string} endpoint
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @instance
+                     */
+                    AwsS3CompatibleData.prototype.endpoint = "";
+    
+                    /**
+                     * AwsS3CompatibleData region.
+                     * @member {string} region
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @instance
+                     */
+                    AwsS3CompatibleData.prototype.region = "";
+    
+                    /**
+                     * AwsS3CompatibleData s3Metadata.
+                     * @member {google.storagetransfer.v1.IS3CompatibleMetadata|null|undefined} s3Metadata
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @instance
+                     */
+                    AwsS3CompatibleData.prototype.s3Metadata = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * AwsS3CompatibleData dataProvider.
+                     * @member {"s3Metadata"|undefined} dataProvider
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @instance
+                     */
+                    Object.defineProperty(AwsS3CompatibleData.prototype, "dataProvider", {
+                        get: $util.oneOfGetter($oneOfFields = ["s3Metadata"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new AwsS3CompatibleData instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {google.storagetransfer.v1.IAwsS3CompatibleData=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.AwsS3CompatibleData} AwsS3CompatibleData instance
+                     */
+                    AwsS3CompatibleData.create = function create(properties) {
+                        return new AwsS3CompatibleData(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AwsS3CompatibleData message. Does not implicitly {@link google.storagetransfer.v1.AwsS3CompatibleData.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {google.storagetransfer.v1.IAwsS3CompatibleData} message AwsS3CompatibleData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AwsS3CompatibleData.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.bucketName != null && Object.hasOwnProperty.call(message, "bucketName"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucketName);
+                        if (message.path != null && Object.hasOwnProperty.call(message, "path"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.path);
+                        if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.endpoint);
+                        if (message.s3Metadata != null && Object.hasOwnProperty.call(message, "s3Metadata"))
+                            $root.google.storagetransfer.v1.S3CompatibleMetadata.encode(message.s3Metadata, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.region);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AwsS3CompatibleData message, length delimited. Does not implicitly {@link google.storagetransfer.v1.AwsS3CompatibleData.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {google.storagetransfer.v1.IAwsS3CompatibleData} message AwsS3CompatibleData message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AwsS3CompatibleData.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AwsS3CompatibleData message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.AwsS3CompatibleData} AwsS3CompatibleData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AwsS3CompatibleData.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.AwsS3CompatibleData();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.bucketName = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.path = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.endpoint = reader.string();
+                                    break;
+                                }
+                            case 5: {
+                                    message.region = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.s3Metadata = $root.google.storagetransfer.v1.S3CompatibleMetadata.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AwsS3CompatibleData message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.AwsS3CompatibleData} AwsS3CompatibleData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AwsS3CompatibleData.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AwsS3CompatibleData message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AwsS3CompatibleData.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.bucketName != null && message.hasOwnProperty("bucketName"))
+                            if (!$util.isString(message.bucketName))
+                                return "bucketName: string expected";
+                        if (message.path != null && message.hasOwnProperty("path"))
+                            if (!$util.isString(message.path))
+                                return "path: string expected";
+                        if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                            if (!$util.isString(message.endpoint))
+                                return "endpoint: string expected";
+                        if (message.region != null && message.hasOwnProperty("region"))
+                            if (!$util.isString(message.region))
+                                return "region: string expected";
+                        if (message.s3Metadata != null && message.hasOwnProperty("s3Metadata")) {
+                            properties.dataProvider = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.S3CompatibleMetadata.verify(message.s3Metadata);
+                                if (error)
+                                    return "s3Metadata." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AwsS3CompatibleData message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.AwsS3CompatibleData} AwsS3CompatibleData
+                     */
+                    AwsS3CompatibleData.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.AwsS3CompatibleData)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.AwsS3CompatibleData();
+                        if (object.bucketName != null)
+                            message.bucketName = String(object.bucketName);
+                        if (object.path != null)
+                            message.path = String(object.path);
+                        if (object.endpoint != null)
+                            message.endpoint = String(object.endpoint);
+                        if (object.region != null)
+                            message.region = String(object.region);
+                        if (object.s3Metadata != null) {
+                            if (typeof object.s3Metadata !== "object")
+                                throw TypeError(".google.storagetransfer.v1.AwsS3CompatibleData.s3Metadata: object expected");
+                            message.s3Metadata = $root.google.storagetransfer.v1.S3CompatibleMetadata.fromObject(object.s3Metadata);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AwsS3CompatibleData message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {google.storagetransfer.v1.AwsS3CompatibleData} message AwsS3CompatibleData
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AwsS3CompatibleData.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.bucketName = "";
+                            object.path = "";
+                            object.endpoint = "";
+                            object.region = "";
+                        }
+                        if (message.bucketName != null && message.hasOwnProperty("bucketName"))
+                            object.bucketName = message.bucketName;
+                        if (message.path != null && message.hasOwnProperty("path"))
+                            object.path = message.path;
+                        if (message.endpoint != null && message.hasOwnProperty("endpoint"))
+                            object.endpoint = message.endpoint;
+                        if (message.s3Metadata != null && message.hasOwnProperty("s3Metadata")) {
+                            object.s3Metadata = $root.google.storagetransfer.v1.S3CompatibleMetadata.toObject(message.s3Metadata, options);
+                            if (options.oneofs)
+                                object.dataProvider = "s3Metadata";
+                        }
+                        if (message.region != null && message.hasOwnProperty("region"))
+                            object.region = message.region;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AwsS3CompatibleData to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AwsS3CompatibleData.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AwsS3CompatibleData
+                     * @function getTypeUrl
+                     * @memberof google.storagetransfer.v1.AwsS3CompatibleData
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AwsS3CompatibleData.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.storagetransfer.v1.AwsS3CompatibleData";
+                    };
+    
+                    return AwsS3CompatibleData;
+                })();
+    
+                v1.S3CompatibleMetadata = (function() {
+    
+                    /**
+                     * Properties of a S3CompatibleMetadata.
+                     * @memberof google.storagetransfer.v1
+                     * @interface IS3CompatibleMetadata
+                     * @property {google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod|null} [authMethod] S3CompatibleMetadata authMethod
+                     * @property {google.storagetransfer.v1.S3CompatibleMetadata.RequestModel|null} [requestModel] S3CompatibleMetadata requestModel
+                     * @property {google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol|null} [protocol] S3CompatibleMetadata protocol
+                     * @property {google.storagetransfer.v1.S3CompatibleMetadata.ListApi|null} [listApi] S3CompatibleMetadata listApi
+                     */
+    
+                    /**
+                     * Constructs a new S3CompatibleMetadata.
+                     * @memberof google.storagetransfer.v1
+                     * @classdesc Represents a S3CompatibleMetadata.
+                     * @implements IS3CompatibleMetadata
+                     * @constructor
+                     * @param {google.storagetransfer.v1.IS3CompatibleMetadata=} [properties] Properties to set
+                     */
+                    function S3CompatibleMetadata(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * S3CompatibleMetadata authMethod.
+                     * @member {google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod} authMethod
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @instance
+                     */
+                    S3CompatibleMetadata.prototype.authMethod = 0;
+    
+                    /**
+                     * S3CompatibleMetadata requestModel.
+                     * @member {google.storagetransfer.v1.S3CompatibleMetadata.RequestModel} requestModel
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @instance
+                     */
+                    S3CompatibleMetadata.prototype.requestModel = 0;
+    
+                    /**
+                     * S3CompatibleMetadata protocol.
+                     * @member {google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol} protocol
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @instance
+                     */
+                    S3CompatibleMetadata.prototype.protocol = 0;
+    
+                    /**
+                     * S3CompatibleMetadata listApi.
+                     * @member {google.storagetransfer.v1.S3CompatibleMetadata.ListApi} listApi
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @instance
+                     */
+                    S3CompatibleMetadata.prototype.listApi = 0;
+    
+                    /**
+                     * Creates a new S3CompatibleMetadata instance using the specified properties.
+                     * @function create
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {google.storagetransfer.v1.IS3CompatibleMetadata=} [properties] Properties to set
+                     * @returns {google.storagetransfer.v1.S3CompatibleMetadata} S3CompatibleMetadata instance
+                     */
+                    S3CompatibleMetadata.create = function create(properties) {
+                        return new S3CompatibleMetadata(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified S3CompatibleMetadata message. Does not implicitly {@link google.storagetransfer.v1.S3CompatibleMetadata.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {google.storagetransfer.v1.IS3CompatibleMetadata} message S3CompatibleMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    S3CompatibleMetadata.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.authMethod != null && Object.hasOwnProperty.call(message, "authMethod"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.authMethod);
+                        if (message.requestModel != null && Object.hasOwnProperty.call(message, "requestModel"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.requestModel);
+                        if (message.protocol != null && Object.hasOwnProperty.call(message, "protocol"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).int32(message.protocol);
+                        if (message.listApi != null && Object.hasOwnProperty.call(message, "listApi"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.listApi);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified S3CompatibleMetadata message, length delimited. Does not implicitly {@link google.storagetransfer.v1.S3CompatibleMetadata.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {google.storagetransfer.v1.IS3CompatibleMetadata} message S3CompatibleMetadata message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    S3CompatibleMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a S3CompatibleMetadata message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.storagetransfer.v1.S3CompatibleMetadata} S3CompatibleMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    S3CompatibleMetadata.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.storagetransfer.v1.S3CompatibleMetadata();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.authMethod = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.requestModel = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.protocol = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    message.listApi = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a S3CompatibleMetadata message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.storagetransfer.v1.S3CompatibleMetadata} S3CompatibleMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    S3CompatibleMetadata.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a S3CompatibleMetadata message.
+                     * @function verify
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    S3CompatibleMetadata.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.authMethod != null && message.hasOwnProperty("authMethod"))
+                            switch (message.authMethod) {
+                            default:
+                                return "authMethod: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.requestModel != null && message.hasOwnProperty("requestModel"))
+                            switch (message.requestModel) {
+                            default:
+                                return "requestModel: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.protocol != null && message.hasOwnProperty("protocol"))
+                            switch (message.protocol) {
+                            default:
+                                return "protocol: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.listApi != null && message.hasOwnProperty("listApi"))
+                            switch (message.listApi) {
+                            default:
+                                return "listApi: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a S3CompatibleMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.storagetransfer.v1.S3CompatibleMetadata} S3CompatibleMetadata
+                     */
+                    S3CompatibleMetadata.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.storagetransfer.v1.S3CompatibleMetadata)
+                            return object;
+                        var message = new $root.google.storagetransfer.v1.S3CompatibleMetadata();
+                        switch (object.authMethod) {
+                        case "AUTH_METHOD_UNSPECIFIED":
+                        case 0:
+                            message.authMethod = 0;
+                            break;
+                        case "AUTH_METHOD_AWS_SIGNATURE_V4":
+                        case 1:
+                            message.authMethod = 1;
+                            break;
+                        case "AUTH_METHOD_AWS_SIGNATURE_V2":
+                        case 2:
+                            message.authMethod = 2;
+                            break;
+                        }
+                        switch (object.requestModel) {
+                        case "REQUEST_MODEL_UNSPECIFIED":
+                        case 0:
+                            message.requestModel = 0;
+                            break;
+                        case "REQUEST_MODEL_VIRTUAL_HOSTED_STYLE":
+                        case 1:
+                            message.requestModel = 1;
+                            break;
+                        case "REQUEST_MODEL_PATH_STYLE":
+                        case 2:
+                            message.requestModel = 2;
+                            break;
+                        }
+                        switch (object.protocol) {
+                        case "NETWORK_PROTOCOL_UNSPECIFIED":
+                        case 0:
+                            message.protocol = 0;
+                            break;
+                        case "NETWORK_PROTOCOL_HTTPS":
+                        case 1:
+                            message.protocol = 1;
+                            break;
+                        case "NETWORK_PROTOCOL_HTTP":
+                        case 2:
+                            message.protocol = 2;
+                            break;
+                        }
+                        switch (object.listApi) {
+                        case "LIST_API_UNSPECIFIED":
+                        case 0:
+                            message.listApi = 0;
+                            break;
+                        case "LIST_OBJECTS_V2":
+                        case 1:
+                            message.listApi = 1;
+                            break;
+                        case "LIST_OBJECTS":
+                        case 2:
+                            message.listApi = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a S3CompatibleMetadata message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {google.storagetransfer.v1.S3CompatibleMetadata} message S3CompatibleMetadata
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    S3CompatibleMetadata.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.authMethod = options.enums === String ? "AUTH_METHOD_UNSPECIFIED" : 0;
+                            object.requestModel = options.enums === String ? "REQUEST_MODEL_UNSPECIFIED" : 0;
+                            object.protocol = options.enums === String ? "NETWORK_PROTOCOL_UNSPECIFIED" : 0;
+                            object.listApi = options.enums === String ? "LIST_API_UNSPECIFIED" : 0;
+                        }
+                        if (message.authMethod != null && message.hasOwnProperty("authMethod"))
+                            object.authMethod = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod[message.authMethod] : message.authMethod;
+                        if (message.requestModel != null && message.hasOwnProperty("requestModel"))
+                            object.requestModel = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.RequestModel[message.requestModel] : message.requestModel;
+                        if (message.protocol != null && message.hasOwnProperty("protocol"))
+                            object.protocol = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol[message.protocol] : message.protocol;
+                        if (message.listApi != null && message.hasOwnProperty("listApi"))
+                            object.listApi = options.enums === String ? $root.google.storagetransfer.v1.S3CompatibleMetadata.ListApi[message.listApi] : message.listApi;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this S3CompatibleMetadata to JSON.
+                     * @function toJSON
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    S3CompatibleMetadata.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for S3CompatibleMetadata
+                     * @function getTypeUrl
+                     * @memberof google.storagetransfer.v1.S3CompatibleMetadata
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    S3CompatibleMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.storagetransfer.v1.S3CompatibleMetadata";
+                    };
+    
+                    /**
+                     * AuthMethod enum.
+                     * @name google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod
+                     * @enum {number}
+                     * @property {number} AUTH_METHOD_UNSPECIFIED=0 AUTH_METHOD_UNSPECIFIED value
+                     * @property {number} AUTH_METHOD_AWS_SIGNATURE_V4=1 AUTH_METHOD_AWS_SIGNATURE_V4 value
+                     * @property {number} AUTH_METHOD_AWS_SIGNATURE_V2=2 AUTH_METHOD_AWS_SIGNATURE_V2 value
+                     */
+                    S3CompatibleMetadata.AuthMethod = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "AUTH_METHOD_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "AUTH_METHOD_AWS_SIGNATURE_V4"] = 1;
+                        values[valuesById[2] = "AUTH_METHOD_AWS_SIGNATURE_V2"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * RequestModel enum.
+                     * @name google.storagetransfer.v1.S3CompatibleMetadata.RequestModel
+                     * @enum {number}
+                     * @property {number} REQUEST_MODEL_UNSPECIFIED=0 REQUEST_MODEL_UNSPECIFIED value
+                     * @property {number} REQUEST_MODEL_VIRTUAL_HOSTED_STYLE=1 REQUEST_MODEL_VIRTUAL_HOSTED_STYLE value
+                     * @property {number} REQUEST_MODEL_PATH_STYLE=2 REQUEST_MODEL_PATH_STYLE value
+                     */
+                    S3CompatibleMetadata.RequestModel = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REQUEST_MODEL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REQUEST_MODEL_VIRTUAL_HOSTED_STYLE"] = 1;
+                        values[valuesById[2] = "REQUEST_MODEL_PATH_STYLE"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * NetworkProtocol enum.
+                     * @name google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol
+                     * @enum {number}
+                     * @property {number} NETWORK_PROTOCOL_UNSPECIFIED=0 NETWORK_PROTOCOL_UNSPECIFIED value
+                     * @property {number} NETWORK_PROTOCOL_HTTPS=1 NETWORK_PROTOCOL_HTTPS value
+                     * @property {number} NETWORK_PROTOCOL_HTTP=2 NETWORK_PROTOCOL_HTTP value
+                     */
+                    S3CompatibleMetadata.NetworkProtocol = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NETWORK_PROTOCOL_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "NETWORK_PROTOCOL_HTTPS"] = 1;
+                        values[valuesById[2] = "NETWORK_PROTOCOL_HTTP"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * ListApi enum.
+                     * @name google.storagetransfer.v1.S3CompatibleMetadata.ListApi
+                     * @enum {number}
+                     * @property {number} LIST_API_UNSPECIFIED=0 LIST_API_UNSPECIFIED value
+                     * @property {number} LIST_OBJECTS_V2=1 LIST_OBJECTS_V2 value
+                     * @property {number} LIST_OBJECTS=2 LIST_OBJECTS value
+                     */
+                    S3CompatibleMetadata.ListApi = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LIST_API_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LIST_OBJECTS_V2"] = 1;
+                        values[valuesById[2] = "LIST_OBJECTS"] = 2;
+                        return values;
+                    })();
+    
+                    return S3CompatibleMetadata;
+                })();
+    
                 v1.AgentPool = (function() {
     
                     /**
@@ -7102,6 +8092,7 @@
                      * @property {google.storagetransfer.v1.IHttpData|null} [httpDataSource] TransferSpec httpDataSource
                      * @property {google.storagetransfer.v1.IPosixFilesystem|null} [posixDataSource] TransferSpec posixDataSource
                      * @property {google.storagetransfer.v1.IAzureBlobStorageData|null} [azureBlobStorageDataSource] TransferSpec azureBlobStorageDataSource
+                     * @property {google.storagetransfer.v1.IAwsS3CompatibleData|null} [awsS3CompatibleDataSource] TransferSpec awsS3CompatibleDataSource
                      * @property {google.storagetransfer.v1.IGcsData|null} [gcsIntermediateDataLocation] TransferSpec gcsIntermediateDataLocation
                      * @property {google.storagetransfer.v1.IObjectConditions|null} [objectConditions] TransferSpec objectConditions
                      * @property {google.storagetransfer.v1.ITransferOptions|null} [transferOptions] TransferSpec transferOptions
@@ -7182,6 +8173,14 @@
                     TransferSpec.prototype.azureBlobStorageDataSource = null;
     
                     /**
+                     * TransferSpec awsS3CompatibleDataSource.
+                     * @member {google.storagetransfer.v1.IAwsS3CompatibleData|null|undefined} awsS3CompatibleDataSource
+                     * @memberof google.storagetransfer.v1.TransferSpec
+                     * @instance
+                     */
+                    TransferSpec.prototype.awsS3CompatibleDataSource = null;
+    
+                    /**
                      * TransferSpec gcsIntermediateDataLocation.
                      * @member {google.storagetransfer.v1.IGcsData|null|undefined} gcsIntermediateDataLocation
                      * @memberof google.storagetransfer.v1.TransferSpec
@@ -7245,12 +8244,12 @@
     
                     /**
                      * TransferSpec dataSource.
-                     * @member {"gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|undefined} dataSource
+                     * @member {"gcsDataSource"|"awsS3DataSource"|"httpDataSource"|"posixDataSource"|"azureBlobStorageDataSource"|"awsS3CompatibleDataSource"|undefined} dataSource
                      * @memberof google.storagetransfer.v1.TransferSpec
                      * @instance
                      */
                     Object.defineProperty(TransferSpec.prototype, "dataSource", {
-                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSource", "awsS3DataSource", "httpDataSource", "posixDataSource", "azureBlobStorageDataSource"]),
+                        get: $util.oneOfGetter($oneOfFields = ["gcsDataSource", "awsS3DataSource", "httpDataSource", "posixDataSource", "azureBlobStorageDataSource", "awsS3CompatibleDataSource"]),
                         set: $util.oneOfSetter($oneOfFields)
                     });
     
@@ -7315,6 +8314,8 @@
                             writer.uint32(/* id 17, wireType 2 =*/138).string(message.sourceAgentPoolName);
                         if (message.sinkAgentPoolName != null && Object.hasOwnProperty.call(message, "sinkAgentPoolName"))
                             writer.uint32(/* id 18, wireType 2 =*/146).string(message.sinkAgentPoolName);
+                        if (message.awsS3CompatibleDataSource != null && Object.hasOwnProperty.call(message, "awsS3CompatibleDataSource"))
+                            $root.google.storagetransfer.v1.AwsS3CompatibleData.encode(message.awsS3CompatibleDataSource, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                         return writer;
                     };
     
@@ -7375,6 +8376,10 @@
                                 }
                             case 8: {
                                     message.azureBlobStorageDataSource = $root.google.storagetransfer.v1.AzureBlobStorageData.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 19: {
+                                    message.awsS3CompatibleDataSource = $root.google.storagetransfer.v1.AwsS3CompatibleData.decode(reader, reader.uint32());
                                     break;
                                 }
                             case 16: {
@@ -7503,6 +8508,16 @@
                                     return "azureBlobStorageDataSource." + error;
                             }
                         }
+                        if (message.awsS3CompatibleDataSource != null && message.hasOwnProperty("awsS3CompatibleDataSource")) {
+                            if (properties.dataSource === 1)
+                                return "dataSource: multiple values";
+                            properties.dataSource = 1;
+                            {
+                                var error = $root.google.storagetransfer.v1.AwsS3CompatibleData.verify(message.awsS3CompatibleDataSource);
+                                if (error)
+                                    return "awsS3CompatibleDataSource." + error;
+                            }
+                        }
                         if (message.gcsIntermediateDataLocation != null && message.hasOwnProperty("gcsIntermediateDataLocation")) {
                             properties.intermediateDataLocation = 1;
                             {
@@ -7581,6 +8596,11 @@
                             if (typeof object.azureBlobStorageDataSource !== "object")
                                 throw TypeError(".google.storagetransfer.v1.TransferSpec.azureBlobStorageDataSource: object expected");
                             message.azureBlobStorageDataSource = $root.google.storagetransfer.v1.AzureBlobStorageData.fromObject(object.azureBlobStorageDataSource);
+                        }
+                        if (object.awsS3CompatibleDataSource != null) {
+                            if (typeof object.awsS3CompatibleDataSource !== "object")
+                                throw TypeError(".google.storagetransfer.v1.TransferSpec.awsS3CompatibleDataSource: object expected");
+                            message.awsS3CompatibleDataSource = $root.google.storagetransfer.v1.AwsS3CompatibleData.fromObject(object.awsS3CompatibleDataSource);
                         }
                         if (object.gcsIntermediateDataLocation != null) {
                             if (typeof object.gcsIntermediateDataLocation !== "object")
@@ -7679,6 +8699,11 @@
                             object.sourceAgentPoolName = message.sourceAgentPoolName;
                         if (message.sinkAgentPoolName != null && message.hasOwnProperty("sinkAgentPoolName"))
                             object.sinkAgentPoolName = message.sinkAgentPoolName;
+                        if (message.awsS3CompatibleDataSource != null && message.hasOwnProperty("awsS3CompatibleDataSource")) {
+                            object.awsS3CompatibleDataSource = $root.google.storagetransfer.v1.AwsS3CompatibleData.toObject(message.awsS3CompatibleDataSource, options);
+                            if (options.oneofs)
+                                object.dataSource = "awsS3CompatibleDataSource";
+                        }
                         return object;
                     };
     

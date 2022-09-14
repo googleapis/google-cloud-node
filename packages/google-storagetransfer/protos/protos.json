@@ -151,6 +151,20 @@
                         }
                       ]
                     },
+                    "DeleteTransferJob": {
+                      "requestType": "DeleteTransferJobRequest",
+                      "responseType": "google.protobuf.Empty",
+                      "options": {
+                        "(google.api.http).delete": "/v1/{job_name=transferJobs/**}"
+                      },
+                      "parsedOptions": [
+                        {
+                          "(google.api.http)": {
+                            "delete": "/v1/{job_name=transferJobs/**}"
+                          }
+                        }
+                      ]
+                    },
                     "CreateAgentPool": {
                       "requestType": "CreateAgentPoolRequest",
                       "responseType": "AgentPool",
@@ -299,6 +313,24 @@
                   }
                 },
                 "GetTransferJobRequest": {
+                  "fields": {
+                    "jobName": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "projectId": {
+                      "type": "string",
+                      "id": 2,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    }
+                  }
+                },
+                "DeleteTransferJobRequest": {
                   "fields": {
                     "jobName": {
                       "type": "string",
@@ -646,6 +678,93 @@
                     }
                   }
                 },
+                "AwsS3CompatibleData": {
+                  "oneofs": {
+                    "dataProvider": {
+                      "oneof": [
+                        "s3Metadata"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "bucketName": {
+                      "type": "string",
+                      "id": 1,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "path": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "endpoint": {
+                      "type": "string",
+                      "id": 3,
+                      "options": {
+                        "(google.api.field_behavior)": "REQUIRED"
+                      }
+                    },
+                    "region": {
+                      "type": "string",
+                      "id": 5
+                    },
+                    "s3Metadata": {
+                      "type": "S3CompatibleMetadata",
+                      "id": 4
+                    }
+                  }
+                },
+                "S3CompatibleMetadata": {
+                  "fields": {
+                    "authMethod": {
+                      "type": "AuthMethod",
+                      "id": 1
+                    },
+                    "requestModel": {
+                      "type": "RequestModel",
+                      "id": 2
+                    },
+                    "protocol": {
+                      "type": "NetworkProtocol",
+                      "id": 3
+                    },
+                    "listApi": {
+                      "type": "ListApi",
+                      "id": 4
+                    }
+                  },
+                  "nested": {
+                    "AuthMethod": {
+                      "values": {
+                        "AUTH_METHOD_UNSPECIFIED": 0,
+                        "AUTH_METHOD_AWS_SIGNATURE_V4": 1,
+                        "AUTH_METHOD_AWS_SIGNATURE_V2": 2
+                      }
+                    },
+                    "RequestModel": {
+                      "values": {
+                        "REQUEST_MODEL_UNSPECIFIED": 0,
+                        "REQUEST_MODEL_VIRTUAL_HOSTED_STYLE": 1,
+                        "REQUEST_MODEL_PATH_STYLE": 2
+                      }
+                    },
+                    "NetworkProtocol": {
+                      "values": {
+                        "NETWORK_PROTOCOL_UNSPECIFIED": 0,
+                        "NETWORK_PROTOCOL_HTTPS": 1,
+                        "NETWORK_PROTOCOL_HTTP": 2
+                      }
+                    },
+                    "ListApi": {
+                      "values": {
+                        "LIST_API_UNSPECIFIED": 0,
+                        "LIST_OBJECTS_V2": 1,
+                        "LIST_OBJECTS": 2
+                      }
+                    }
+                  }
+                },
                 "AgentPool": {
                   "options": {
                     "(google.api.resource).type": "storagetransfer.googleapis.com/agentPools",
@@ -742,7 +861,8 @@
                         "awsS3DataSource",
                         "httpDataSource",
                         "posixDataSource",
-                        "azureBlobStorageDataSource"
+                        "azureBlobStorageDataSource",
+                        "awsS3CompatibleDataSource"
                       ]
                     },
                     "intermediateDataLocation": {
@@ -779,6 +899,10 @@
                     "azureBlobStorageDataSource": {
                       "type": "AzureBlobStorageData",
                       "id": 8
+                    },
+                    "awsS3CompatibleDataSource": {
+                      "type": "AwsS3CompatibleData",
+                      "id": 19
                     },
                     "gcsIntermediateDataLocation": {
                       "type": "GcsData",

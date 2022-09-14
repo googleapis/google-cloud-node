@@ -47,7 +47,7 @@ function main(jobName, projectId, transferJob) {
    *  other fields are rejected with the error
    *  INVALID_ARGUMENT google.rpc.Code.INVALID_ARGUMENT. Updating a job status
    *  to DELETED google.storagetransfer.v1.TransferJob.Status.DELETED  requires
-   *  `storagetransfer.jobs.delete` permissions.
+   *  `storagetransfer.jobs.delete` permission.
    */
   // const transferJob = {}
   /**
