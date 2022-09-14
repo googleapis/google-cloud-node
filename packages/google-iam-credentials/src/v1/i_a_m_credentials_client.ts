@@ -423,7 +423,7 @@ export class IAMCredentialsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.generateAccessToken(request, options, callback);
@@ -534,7 +534,7 @@ export class IAMCredentialsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.generateIdToken(request, options, callback);
@@ -633,7 +633,7 @@ export class IAMCredentialsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.signBlob(request, options, callback);
@@ -732,7 +732,7 @@ export class IAMCredentialsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.signJwt(request, options, callback);
