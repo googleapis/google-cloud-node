@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -233,26 +248,23 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.Setting()
       );
       client.innerApiCalls.getSetting = stubSimpleCall(expectedResponse);
       const [response] = await client.getSetting(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSetting as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSetting without error using callback', async () => {
@@ -265,15 +277,9 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.Setting()
       );
@@ -296,11 +302,14 @@ describe('v1.ResourceSettingsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSetting as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSetting with error', async () => {
@@ -313,26 +322,23 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSetting = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getSetting(request), expectedError);
-      assert(
-        (client.innerApiCalls.getSetting as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSetting with closed client', async () => {
@@ -345,7 +351,8 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSetting(request), expectedError);
@@ -363,27 +370,27 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
-      request.setting = {};
-      request.setting.name = '';
-      const expectedHeaderRequestParams = 'setting.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.setting ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
+        'setting',
+        'name',
+      ]);
+      request.setting.name = defaultValue1;
+      const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.Setting()
       );
       client.innerApiCalls.updateSetting = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSetting(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSetting as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSetting without error using callback', async () => {
@@ -396,16 +403,13 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
-      request.setting = {};
-      request.setting.name = '';
-      const expectedHeaderRequestParams = 'setting.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.setting ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
+        'setting',
+        'name',
+      ]);
+      request.setting.name = defaultValue1;
+      const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.Setting()
       );
@@ -428,11 +432,14 @@ describe('v1.ResourceSettingsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSetting as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSetting with error', async () => {
@@ -445,27 +452,27 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
-      request.setting = {};
-      request.setting.name = '';
-      const expectedHeaderRequestParams = 'setting.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.setting ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
+        'setting',
+        'name',
+      ]);
+      request.setting.name = defaultValue1;
+      const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSetting = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateSetting(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateSetting as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSetting as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSetting as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSetting with closed client', async () => {
@@ -478,8 +485,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
-      request.setting = {};
-      request.setting.name = '';
+      request.setting ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
+        'setting',
+        'name',
+      ]);
+      request.setting.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSetting(request), expectedError);
@@ -497,15 +508,11 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcesettings.v1.Setting()
@@ -520,11 +527,14 @@ describe('v1.ResourceSettingsServiceClient', () => {
       client.innerApiCalls.listSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.listSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSettings without error using callback', async () => {
@@ -537,15 +547,11 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcesettings.v1.Setting()
@@ -576,11 +582,14 @@ describe('v1.ResourceSettingsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSettings with error', async () => {
@@ -593,26 +602,25 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSettings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listSettings(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSettingsStream without error', async () => {
@@ -625,8 +633,11 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcesettings.v1.Setting()
@@ -663,11 +674,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSettings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSettings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSettings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -681,8 +693,11 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSettings.createStream = stubPageStreamingCall(
         undefined,
@@ -710,11 +725,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSettings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSettings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSettings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -728,8 +744,11 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.resourcesettings.v1.Setting()
@@ -755,11 +774,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSettings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSettings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -773,8 +793,11 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSettings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -792,11 +815,12 @@ describe('v1.ResourceSettingsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSettings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSettings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
