@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,26 +269,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ManagedService()
       );
       client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
       const [response] = await client.getService(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getService without error using callback', async () => {
@@ -285,15 +299,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ManagedService()
       );
@@ -316,11 +326,14 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getService with error', async () => {
@@ -332,26 +345,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getService = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getService(request), expectedError);
-      assert(
-        (client.innerApiCalls.getService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getService with closed client', async () => {
@@ -363,7 +375,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      request.serviceName = '';
+      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getService(request), expectedError);
@@ -380,27 +395,29 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      request.serviceName = '';
-      request.configId = '';
-      const expectedHeaderRequestParams = 'service_name=&config_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'configId',
+      ]);
+      request.configId = defaultValue2;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
       client.innerApiCalls.getServiceConfig = stubSimpleCall(expectedResponse);
       const [response] = await client.getServiceConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServiceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServiceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServiceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServiceConfig without error using callback', async () => {
@@ -412,16 +429,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      request.serviceName = '';
-      request.configId = '';
-      const expectedHeaderRequestParams = 'service_name=&config_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'configId',
+      ]);
+      request.configId = defaultValue2;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
@@ -441,11 +457,14 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServiceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServiceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServiceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServiceConfig with error', async () => {
@@ -457,27 +476,29 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      request.serviceName = '';
-      request.configId = '';
-      const expectedHeaderRequestParams = 'service_name=&config_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'configId',
+      ]);
+      request.configId = defaultValue2;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServiceConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getServiceConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.getServiceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServiceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServiceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServiceConfig with closed client', async () => {
@@ -489,8 +510,14 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      request.serviceName = '';
-      request.configId = '';
+      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
+        'configId',
+      ]);
+      request.configId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServiceConfig(request), expectedError);
@@ -507,15 +534,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
@@ -523,11 +546,14 @@ describe('v1.ServiceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createServiceConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServiceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServiceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServiceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServiceConfig without error using callback', async () => {
@@ -539,15 +565,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
@@ -567,11 +589,14 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServiceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServiceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServiceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServiceConfig with error', async () => {
@@ -583,26 +608,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createServiceConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.createServiceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServiceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServiceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServiceConfig with closed client', async () => {
@@ -614,7 +638,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      request.serviceName = '';
+      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createServiceConfig(request), expectedError);
@@ -631,27 +658,29 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      request.serviceName = '';
-      request.rolloutId = '';
-      const expectedHeaderRequestParams = 'service_name=&rollout_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'rolloutId',
+      ]);
+      request.rolloutId = defaultValue2;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.Rollout()
       );
       client.innerApiCalls.getServiceRollout = stubSimpleCall(expectedResponse);
       const [response] = await client.getServiceRollout(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServiceRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServiceRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServiceRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServiceRollout without error using callback', async () => {
@@ -663,16 +692,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      request.serviceName = '';
-      request.rolloutId = '';
-      const expectedHeaderRequestParams = 'service_name=&rollout_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'rolloutId',
+      ]);
+      request.rolloutId = defaultValue2;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.Rollout()
       );
@@ -695,11 +723,14 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServiceRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServiceRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServiceRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServiceRollout with error', async () => {
@@ -711,27 +742,29 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      request.serviceName = '';
-      request.rolloutId = '';
-      const expectedHeaderRequestParams = 'service_name=&rollout_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'rolloutId',
+      ]);
+      request.rolloutId = defaultValue2;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServiceRollout = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getServiceRollout(request), expectedError);
-      assert(
-        (client.innerApiCalls.getServiceRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServiceRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServiceRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServiceRollout with closed client', async () => {
@@ -743,8 +776,14 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      request.serviceName = '';
-      request.rolloutId = '';
+      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
+        'rolloutId',
+      ]);
+      request.rolloutId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServiceRollout(request), expectedError);
@@ -761,7 +800,6 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GenerateConfigReportRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GenerateConfigReportResponse()
       );
@@ -769,11 +807,6 @@ describe('v1.ServiceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.generateConfigReport(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateConfigReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes generateConfigReport without error using callback', async () => {
@@ -785,7 +818,6 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GenerateConfigReportRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GenerateConfigReportResponse()
       );
@@ -808,11 +840,6 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.generateConfigReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes generateConfigReport with error', async () => {
@@ -824,18 +851,12 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GenerateConfigReportRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.generateConfigReport = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.generateConfigReport(request), expectedError);
-      assert(
-        (client.innerApiCalls.generateConfigReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes generateConfigReport with closed client', async () => {
@@ -863,7 +884,6 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -872,11 +892,6 @@ describe('v1.ServiceManagerClient', () => {
       const [operation] = await client.createService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes createService without error using callback', async () => {
@@ -888,7 +903,6 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -918,11 +932,6 @@ describe('v1.ServiceManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes createService with call error', async () => {
@@ -934,18 +943,12 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createService = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createService(request), expectedError);
-      assert(
-        (client.innerApiCalls.createService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes createService with LRO error', async () => {
@@ -957,7 +960,6 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createService = stubLongRunningCall(
         undefined,
@@ -966,11 +968,6 @@ describe('v1.ServiceManagerClient', () => {
       );
       const [operation] = await client.createService(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes checkCreateServiceProgress without error', async () => {
@@ -1025,15 +1022,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1042,11 +1035,14 @@ describe('v1.ServiceManagerClient', () => {
       const [operation] = await client.deleteService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteService without error using callback', async () => {
@@ -1058,15 +1054,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1096,11 +1088,14 @@ describe('v1.ServiceManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteService with call error', async () => {
@@ -1112,26 +1107,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteService = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteService(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteService with LRO error', async () => {
@@ -1143,15 +1137,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteService = stubLongRunningCall(
         undefined,
@@ -1160,11 +1150,14 @@ describe('v1.ServiceManagerClient', () => {
       );
       const [operation] = await client.deleteService(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteServiceProgress without error', async () => {
@@ -1219,15 +1212,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1236,11 +1225,14 @@ describe('v1.ServiceManagerClient', () => {
       const [operation] = await client.undeleteService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteService without error using callback', async () => {
@@ -1252,15 +1244,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1290,11 +1278,14 @@ describe('v1.ServiceManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteService with call error', async () => {
@@ -1306,26 +1297,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteService = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.undeleteService(request), expectedError);
-      assert(
-        (client.innerApiCalls.undeleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteService with LRO error', async () => {
@@ -1337,15 +1327,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteService = stubLongRunningCall(
         undefined,
@@ -1354,11 +1340,14 @@ describe('v1.ServiceManagerClient', () => {
       );
       const [operation] = await client.undeleteService(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.undeleteService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUndeleteServiceProgress without error', async () => {
@@ -1413,15 +1402,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1430,11 +1415,14 @@ describe('v1.ServiceManagerClient', () => {
       const [operation] = await client.submitConfigSource(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.submitConfigSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes submitConfigSource without error using callback', async () => {
@@ -1446,15 +1434,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1484,11 +1468,14 @@ describe('v1.ServiceManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.submitConfigSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes submitConfigSource with call error', async () => {
@@ -1500,26 +1487,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitConfigSource = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.submitConfigSource(request), expectedError);
-      assert(
-        (client.innerApiCalls.submitConfigSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes submitConfigSource with LRO error', async () => {
@@ -1531,15 +1517,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.submitConfigSource = stubLongRunningCall(
         undefined,
@@ -1548,11 +1530,14 @@ describe('v1.ServiceManagerClient', () => {
       );
       const [operation] = await client.submitConfigSource(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.submitConfigSource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.submitConfigSource as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkSubmitConfigSourceProgress without error', async () => {
@@ -1607,15 +1592,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1624,11 +1605,14 @@ describe('v1.ServiceManagerClient', () => {
       const [operation] = await client.createServiceRollout(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServiceRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServiceRollout without error using callback', async () => {
@@ -1640,15 +1624,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1678,11 +1658,14 @@ describe('v1.ServiceManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServiceRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServiceRollout with call error', async () => {
@@ -1694,26 +1677,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceRollout = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createServiceRollout(request), expectedError);
-      assert(
-        (client.innerApiCalls.createServiceRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServiceRollout with LRO error', async () => {
@@ -1725,15 +1707,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServiceRollout = stubLongRunningCall(
         undefined,
@@ -1742,11 +1720,14 @@ describe('v1.ServiceManagerClient', () => {
       );
       const [operation] = await client.createServiceRollout(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createServiceRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServiceRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateServiceRolloutProgress without error', async () => {
@@ -1801,7 +1782,6 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServicesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.ManagedService()
@@ -1816,11 +1796,6 @@ describe('v1.ServiceManagerClient', () => {
       client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
       const [response] = await client.listServices(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listServices without error using callback', async () => {
@@ -1832,7 +1807,6 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServicesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.ManagedService()
@@ -1865,11 +1839,6 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listServices with error', async () => {
@@ -1881,18 +1850,12 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServicesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listServices = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listServices(request), expectedError);
-      assert(
-        (client.innerApiCalls.listServices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listServicesStream without error', async () => {
@@ -2058,15 +2021,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2076,11 +2035,14 @@ describe('v1.ServiceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listServiceConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServiceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServiceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServiceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServiceConfigs without error using callback', async () => {
@@ -2092,15 +2054,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2125,11 +2083,14 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServiceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServiceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServiceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServiceConfigs with error', async () => {
@@ -2141,26 +2102,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServiceConfigs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listServiceConfigs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listServiceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServiceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServiceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServiceConfigsStream without error', async () => {
@@ -2172,8 +2132,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2201,11 +2164,12 @@ describe('v1.ServiceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServiceConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2218,8 +2182,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2242,11 +2209,12 @@ describe('v1.ServiceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServiceConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2259,8 +2227,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
@@ -2280,11 +2251,12 @@ describe('v1.ServiceManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2297,8 +2269,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2315,11 +2290,12 @@ describe('v1.ServiceManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2334,15 +2310,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2358,11 +2330,14 @@ describe('v1.ServiceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listServiceRollouts(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServiceRollouts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServiceRollouts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServiceRollouts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServiceRollouts without error using callback', async () => {
@@ -2374,15 +2349,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2413,11 +2384,14 @@ describe('v1.ServiceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServiceRollouts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServiceRollouts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServiceRollouts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServiceRollouts with error', async () => {
@@ -2429,26 +2403,25 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServiceRollouts = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listServiceRollouts(request), expectedError);
-      assert(
-        (client.innerApiCalls.listServiceRollouts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServiceRollouts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServiceRollouts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServiceRolloutsStream without error', async () => {
@@ -2460,8 +2433,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2498,11 +2474,12 @@ describe('v1.ServiceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServiceRollouts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceRollouts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceRollouts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2515,8 +2492,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceRollouts.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2542,11 +2522,12 @@ describe('v1.ServiceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServiceRollouts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceRollouts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceRollouts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2559,8 +2540,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.api.servicemanagement.v1.Rollout()
@@ -2586,11 +2570,12 @@ describe('v1.ServiceManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2603,8 +2588,11 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      request.serviceName = '';
-      const expectedHeaderRequestParams = 'service_name=';
+      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
+        'serviceName',
+      ]);
+      request.serviceName = defaultValue1;
+      const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServiceRollouts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2621,11 +2609,12 @@ describe('v1.ServiceManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

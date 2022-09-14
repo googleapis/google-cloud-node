@@ -549,7 +549,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getService(request, options, callback);
@@ -656,8 +656,8 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
-        config_id: request.configId || '',
+        service_name: request.serviceName ?? '',
+        config_id: request.configId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getServiceConfig(request, options, callback);
@@ -765,7 +765,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createServiceConfig(request, options, callback);
@@ -867,8 +867,8 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
-        rollout_id: request.rolloutId || '',
+        service_name: request.serviceName ?? '',
+        rollout_id: request.rolloutId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getServiceRollout(request, options, callback);
@@ -1238,7 +1238,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteService(request, options, callback);
@@ -1383,7 +1383,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.undeleteService(request, options, callback);
@@ -1542,7 +1542,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.submitConfigSource(request, options, callback);
@@ -1697,7 +1697,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createServiceRollout(request, options, callback);
@@ -2039,7 +2039,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listServiceConfigs(request, options, callback);
@@ -2080,7 +2080,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2130,7 +2130,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     const defaultCallSettings = this._defaults['listServiceConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2247,7 +2247,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listServiceRollouts(request, options, callback);
@@ -2297,7 +2297,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2356,7 +2356,7 @@ export class ServiceManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        service_name: request.serviceName || '',
+        service_name: request.serviceName ?? '',
       });
     const defaultCallSettings = this._defaults['listServiceRollouts'];
     const callSettings = defaultCallSettings.merge(options);
