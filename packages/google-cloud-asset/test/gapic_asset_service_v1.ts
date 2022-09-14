@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,15 +267,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetAssetsHistoryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse()
       );
@@ -268,11 +280,14 @@ describe('v1.AssetServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchGetAssetsHistory(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchGetAssetsHistory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetAssetsHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetAssetsHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetAssetsHistory without error using callback', async () => {
@@ -284,15 +299,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetAssetsHistoryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryResponse()
       );
@@ -315,11 +327,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchGetAssetsHistory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetAssetsHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetAssetsHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetAssetsHistory with error', async () => {
@@ -331,15 +346,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetAssetsHistoryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchGetAssetsHistory = stubSimpleCall(
         undefined,
@@ -349,11 +361,14 @@ describe('v1.AssetServiceClient', () => {
         client.batchGetAssetsHistory(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.batchGetAssetsHistory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetAssetsHistory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetAssetsHistory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetAssetsHistory with closed client', async () => {
@@ -365,7 +380,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetAssetsHistoryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -385,26 +404,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
       client.innerApiCalls.createFeed = stubSimpleCall(expectedResponse);
       const [response] = await client.createFeed(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFeed without error using callback', async () => {
@@ -416,15 +434,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -447,11 +461,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFeed with error', async () => {
@@ -463,26 +480,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFeed = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createFeed(request), expectedError);
-      assert(
-        (client.innerApiCalls.createFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFeed with closed client', async () => {
@@ -494,7 +510,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createFeed(request), expectedError);
@@ -511,26 +530,23 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
       client.innerApiCalls.getFeed = stubSimpleCall(expectedResponse);
       const [response] = await client.getFeed(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getFeed as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getFeed without error using callback', async () => {
@@ -542,15 +558,9 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -573,11 +583,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.getFeed as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getFeed with error', async () => {
@@ -589,23 +602,20 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getFeed = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getFeed(request), expectedError);
-      assert(
-        (client.innerApiCalls.getFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.getFeed as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getFeed with closed client', async () => {
@@ -617,7 +627,8 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getFeed(request), expectedError);
@@ -634,26 +645,23 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsResponse()
       );
       client.innerApiCalls.listFeeds = stubSimpleCall(expectedResponse);
       const [response] = await client.listFeeds(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFeeds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFeeds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFeeds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFeeds without error using callback', async () => {
@@ -665,15 +673,9 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsResponse()
       );
@@ -696,11 +698,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFeeds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFeeds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFeeds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFeeds with error', async () => {
@@ -712,23 +717,20 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFeeds = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listFeeds(request), expectedError);
-      assert(
-        (client.innerApiCalls.listFeeds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFeeds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFeeds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFeeds with closed client', async () => {
@@ -740,7 +742,8 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listFeeds(request), expectedError);
@@ -757,27 +760,27 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
-      request.feed = {};
-      request.feed.name = '';
-      const expectedHeaderRequestParams = 'feed.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.feed ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
+        'feed',
+        'name',
+      ]);
+      request.feed.name = defaultValue1;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
       client.innerApiCalls.updateFeed = stubSimpleCall(expectedResponse);
       const [response] = await client.updateFeed(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateFeed without error using callback', async () => {
@@ -789,16 +792,13 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
-      request.feed = {};
-      request.feed.name = '';
-      const expectedHeaderRequestParams = 'feed.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.feed ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
+        'feed',
+        'name',
+      ]);
+      request.feed.name = defaultValue1;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.Feed()
       );
@@ -821,11 +821,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateFeed with error', async () => {
@@ -837,27 +840,27 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
-      request.feed = {};
-      request.feed.name = '';
-      const expectedHeaderRequestParams = 'feed.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.feed ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
+        'feed',
+        'name',
+      ]);
+      request.feed.name = defaultValue1;
+      const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateFeed = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateFeed(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateFeed with closed client', async () => {
@@ -869,8 +872,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
-      request.feed = {};
-      request.feed.name = '';
+      request.feed ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
+        'feed',
+        'name',
+      ]);
+      request.feed.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateFeed(request), expectedError);
@@ -887,26 +894,23 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteFeed = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteFeed(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteFeed without error using callback', async () => {
@@ -918,15 +922,9 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -949,11 +947,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteFeed with error', async () => {
@@ -965,26 +966,23 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFeed = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteFeed(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteFeed as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFeed as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFeed as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteFeed with closed client', async () => {
@@ -996,7 +994,8 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteFeed(request), expectedError);
@@ -1013,27 +1012,27 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
+        'analysisQuery',
+        'scope',
+      ]);
+      request.analysisQuery.scope = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse()
       );
       client.innerApiCalls.analyzeIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeIamPolicy without error using callback', async () => {
@@ -1045,16 +1044,13 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
+        'analysisQuery',
+        'scope',
+      ]);
+      request.analysisQuery.scope = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyResponse()
       );
@@ -1077,11 +1073,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeIamPolicy with error', async () => {
@@ -1093,27 +1092,27 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
+        'analysisQuery',
+        'scope',
+      ]);
+      request.analysisQuery.scope = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.analyzeIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.analyzeIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeIamPolicy with closed client', async () => {
@@ -1125,8 +1124,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
+        'analysisQuery',
+        'scope',
+      ]);
+      request.analysisQuery.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.analyzeIamPolicy(request), expectedError);
@@ -1143,26 +1146,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveResponse()
       );
       client.innerApiCalls.analyzeMove = stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeMove(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeMove as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeMove as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeMove as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeMove without error using callback', async () => {
@@ -1174,15 +1176,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveResponse()
       );
@@ -1205,11 +1203,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeMove as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeMove as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeMove as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeMove with error', async () => {
@@ -1221,26 +1222,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeMove = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.analyzeMove(request), expectedError);
-      assert(
-        (client.innerApiCalls.analyzeMove as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeMove as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeMove as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeMove with closed client', async () => {
@@ -1252,7 +1252,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.analyzeMove(request), expectedError);
@@ -1269,26 +1272,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsResponse()
       );
       client.innerApiCalls.queryAssets = stubSimpleCall(expectedResponse);
       const [response] = await client.queryAssets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryAssets without error using callback', async () => {
@@ -1300,15 +1302,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsResponse()
       );
@@ -1331,11 +1329,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.queryAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryAssets with error', async () => {
@@ -1347,26 +1348,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.queryAssets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.queryAssets(request), expectedError);
-      assert(
-        (client.innerApiCalls.queryAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.queryAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.queryAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes queryAssets with closed client', async () => {
@@ -1378,7 +1378,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.queryAssets(request), expectedError);
@@ -1395,26 +1398,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
       client.innerApiCalls.createSavedQuery = stubSimpleCall(expectedResponse);
       const [response] = await client.createSavedQuery(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSavedQuery without error using callback', async () => {
@@ -1426,15 +1428,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1457,11 +1455,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSavedQuery with error', async () => {
@@ -1473,26 +1474,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSavedQuery = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createSavedQuery(request), expectedError);
-      assert(
-        (client.innerApiCalls.createSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSavedQuery with closed client', async () => {
@@ -1504,7 +1504,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSavedQuery(request), expectedError);
@@ -1521,26 +1524,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
       client.innerApiCalls.getSavedQuery = stubSimpleCall(expectedResponse);
       const [response] = await client.getSavedQuery(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSavedQuery without error using callback', async () => {
@@ -1552,15 +1554,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1583,11 +1581,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSavedQuery with error', async () => {
@@ -1599,26 +1600,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSavedQuery = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getSavedQuery(request), expectedError);
-      assert(
-        (client.innerApiCalls.getSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSavedQuery with closed client', async () => {
@@ -1630,7 +1630,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSavedQuery(request), expectedError);
@@ -1647,27 +1650,27 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
-      request.savedQuery = {};
-      request.savedQuery.name = '';
-      const expectedHeaderRequestParams = 'saved_query.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.savedQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
+        'savedQuery',
+        'name',
+      ]);
+      request.savedQuery.name = defaultValue1;
+      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
       client.innerApiCalls.updateSavedQuery = stubSimpleCall(expectedResponse);
       const [response] = await client.updateSavedQuery(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSavedQuery without error using callback', async () => {
@@ -1679,16 +1682,13 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
-      request.savedQuery = {};
-      request.savedQuery.name = '';
-      const expectedHeaderRequestParams = 'saved_query.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.savedQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
+        'savedQuery',
+        'name',
+      ]);
+      request.savedQuery.name = defaultValue1;
+      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.SavedQuery()
       );
@@ -1711,11 +1711,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSavedQuery with error', async () => {
@@ -1727,27 +1730,27 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
-      request.savedQuery = {};
-      request.savedQuery.name = '';
-      const expectedHeaderRequestParams = 'saved_query.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.savedQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
+        'savedQuery',
+        'name',
+      ]);
+      request.savedQuery.name = defaultValue1;
+      const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateSavedQuery = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateSavedQuery(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateSavedQuery with closed client', async () => {
@@ -1759,8 +1762,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
-      request.savedQuery = {};
-      request.savedQuery.name = '';
+      request.savedQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
+        'savedQuery',
+        'name',
+      ]);
+      request.savedQuery.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateSavedQuery(request), expectedError);
@@ -1777,26 +1784,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteSavedQuery = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSavedQuery(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSavedQuery without error using callback', async () => {
@@ -1808,15 +1814,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1839,11 +1841,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSavedQuery with error', async () => {
@@ -1855,26 +1860,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSavedQuery = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteSavedQuery(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteSavedQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSavedQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSavedQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSavedQuery with closed client', async () => {
@@ -1886,7 +1890,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteSavedQuery(request), expectedError);
@@ -1903,15 +1910,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetEffectiveIamPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse()
       );
@@ -1919,11 +1923,14 @@ describe('v1.AssetServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchGetEffectiveIamPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetEffectiveIamPolicies without error using callback', async () => {
@@ -1935,15 +1942,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetEffectiveIamPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse()
       );
@@ -1966,11 +1970,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetEffectiveIamPolicies with error', async () => {
@@ -1982,15 +1989,12 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetEffectiveIamPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchGetEffectiveIamPolicies = stubSimpleCall(
         undefined,
@@ -2000,11 +2004,14 @@ describe('v1.AssetServiceClient', () => {
         client.batchGetEffectiveIamPolicies(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetEffectiveIamPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetEffectiveIamPolicies with closed client', async () => {
@@ -2016,7 +2023,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
-      request.scope = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'BatchGetEffectiveIamPoliciesRequest',
+        ['scope']
+      );
+      request.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2036,15 +2047,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2052,11 +2059,14 @@ describe('v1.AssetServiceClient', () => {
       const [operation] = await client.exportAssets(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportAssets without error using callback', async () => {
@@ -2068,15 +2078,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2106,11 +2112,14 @@ describe('v1.AssetServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.exportAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportAssets with call error', async () => {
@@ -2122,26 +2131,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportAssets = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.exportAssets(request), expectedError);
-      assert(
-        (client.innerApiCalls.exportAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes exportAssets with LRO error', async () => {
@@ -2153,15 +2161,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.exportAssets = stubLongRunningCall(
         undefined,
@@ -2170,11 +2174,14 @@ describe('v1.AssetServiceClient', () => {
       );
       const [operation] = await client.exportAssets(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.exportAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.exportAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkExportAssetsProgress without error', async () => {
@@ -2226,16 +2233,13 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'AnalyzeIamPolicyLongrunningRequest',
+        ['analysisQuery', 'scope']
+      );
+      request.analysisQuery.scope = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2244,11 +2248,14 @@ describe('v1.AssetServiceClient', () => {
       const [operation] = await client.analyzeIamPolicyLongrunning(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeIamPolicyLongrunning without error using callback', async () => {
@@ -2260,16 +2267,13 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'AnalyzeIamPolicyLongrunningRequest',
+        ['analysisQuery', 'scope']
+      );
+      request.analysisQuery.scope = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2299,11 +2303,14 @@ describe('v1.AssetServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeIamPolicyLongrunning with call error', async () => {
@@ -2315,16 +2322,13 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'AnalyzeIamPolicyLongrunningRequest',
+        ['analysisQuery', 'scope']
+      );
+      request.analysisQuery.scope = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
         undefined,
@@ -2334,11 +2338,14 @@ describe('v1.AssetServiceClient', () => {
         client.analyzeIamPolicyLongrunning(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes analyzeIamPolicyLongrunning with LRO error', async () => {
@@ -2350,16 +2357,13 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest()
       );
-      request.analysisQuery = {};
-      request.analysisQuery.scope = '';
-      const expectedHeaderRequestParams = 'analysis_query.scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.analysisQuery ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'AnalyzeIamPolicyLongrunningRequest',
+        ['analysisQuery', 'scope']
+      );
+      request.analysisQuery.scope = defaultValue1;
+      const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeIamPolicyLongrunning = stubLongRunningCall(
         undefined,
@@ -2368,11 +2372,14 @@ describe('v1.AssetServiceClient', () => {
       );
       const [operation] = await client.analyzeIamPolicyLongrunning(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.analyzeIamPolicyLongrunning as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkAnalyzeIamPolicyLongrunningProgress without error', async () => {
@@ -2428,15 +2435,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2445,11 +2448,14 @@ describe('v1.AssetServiceClient', () => {
       client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
       const [response] = await client.listAssets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAssets without error using callback', async () => {
@@ -2461,15 +2467,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2494,11 +2496,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAssets with error', async () => {
@@ -2510,26 +2515,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAssets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAssets(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAssets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAssets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAssetsStream without error', async () => {
@@ -2541,8 +2545,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2570,11 +2577,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAssets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2587,8 +2595,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
         undefined,
@@ -2613,11 +2624,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAssets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2630,8 +2642,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
         generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
@@ -2651,11 +2666,12 @@ describe('v1.AssetServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2668,8 +2684,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2688,11 +2707,12 @@ describe('v1.AssetServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2707,15 +2727,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -2731,11 +2747,14 @@ describe('v1.AssetServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.searchAllResources(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchAllResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchAllResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchAllResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchAllResources without error using callback', async () => {
@@ -2747,15 +2766,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -2786,11 +2801,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchAllResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchAllResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchAllResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchAllResources with error', async () => {
@@ -2802,26 +2820,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAllResources = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.searchAllResources(request), expectedError);
-      assert(
-        (client.innerApiCalls.searchAllResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchAllResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchAllResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchAllResourcesStream without error', async () => {
@@ -2833,8 +2850,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -2872,11 +2892,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.searchAllResources, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllResources.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllResources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2889,8 +2910,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllResources.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2917,11 +2941,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.searchAllResources, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllResources.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllResources.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2934,8 +2959,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.ResourceSearchResult()
@@ -2962,11 +2990,12 @@ describe('v1.AssetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllResources.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllResources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2979,8 +3008,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllResources.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2998,11 +3030,12 @@ describe('v1.AssetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllResources.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllResources.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3017,15 +3050,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3041,11 +3070,14 @@ describe('v1.AssetServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.searchAllIamPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchAllIamPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchAllIamPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchAllIamPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchAllIamPolicies without error using callback', async () => {
@@ -3057,15 +3089,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3098,11 +3126,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchAllIamPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchAllIamPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchAllIamPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchAllIamPolicies with error', async () => {
@@ -3114,26 +3145,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchAllIamPolicies = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.searchAllIamPolicies(request), expectedError);
-      assert(
-        (client.innerApiCalls.searchAllIamPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchAllIamPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchAllIamPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchAllIamPoliciesStream without error', async () => {
@@ -3145,8 +3175,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3184,11 +3217,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.searchAllIamPolicies, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllIamPolicies.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllIamPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3201,8 +3235,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllIamPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3229,11 +3266,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.searchAllIamPolicies, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllIamPolicies.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllIamPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3246,8 +3284,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.asset.v1.IamPolicySearchResult()
@@ -3274,11 +3315,12 @@ describe('v1.AssetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3291,8 +3333,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      request.scope = '';
-      const expectedHeaderRequestParams = 'scope=';
+      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
+        'scope',
+      ]);
+      request.scope = defaultValue1;
+      const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchAllIamPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3310,11 +3355,12 @@ describe('v1.AssetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.searchAllIamPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3329,15 +3375,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3346,11 +3388,14 @@ describe('v1.AssetServiceClient', () => {
       client.innerApiCalls.listSavedQueries = stubSimpleCall(expectedResponse);
       const [response] = await client.listSavedQueries(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSavedQueries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSavedQueries without error using callback', async () => {
@@ -3362,15 +3407,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3395,11 +3436,14 @@ describe('v1.AssetServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSavedQueries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSavedQueries with error', async () => {
@@ -3411,26 +3455,25 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSavedQueries = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listSavedQueries(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSavedQueries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSavedQueries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSavedQueriesStream without error', async () => {
@@ -3442,8 +3485,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3474,11 +3520,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSavedQueries, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3491,8 +3538,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3518,11 +3568,12 @@ describe('v1.AssetServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSavedQueries, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3535,8 +3586,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
         generateSampleMessage(new protos.google.cloud.asset.v1.SavedQuery()),
@@ -3556,11 +3610,12 @@ describe('v1.AssetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3573,8 +3628,11 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSavedQueries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3591,11 +3649,12 @@ describe('v1.AssetServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSavedQueries.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSavedQueries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

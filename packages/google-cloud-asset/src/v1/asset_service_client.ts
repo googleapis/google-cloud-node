@@ -574,7 +574,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchGetAssetsHistory(request, options, callback);
@@ -670,7 +670,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createFeed(request, options, callback);
@@ -756,7 +756,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getFeed(request, options, callback);
@@ -841,7 +841,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listFeeds(request, options, callback);
@@ -932,7 +932,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'feed.name': request.feed!.name || '',
+        'feed.name': request.feed!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateFeed(request, options, callback);
@@ -1018,7 +1018,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteFeed(request, options, callback);
@@ -1133,7 +1133,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'analysis_query.scope': request.analysisQuery!.scope || '',
+        'analysis_query.scope': request.analysisQuery!.scope ?? '',
       });
     this.initialize();
     return this.innerApiCalls.analyzeIamPolicy(request, options, callback);
@@ -1232,7 +1232,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.analyzeMove(request, options, callback);
@@ -1382,7 +1382,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.queryAssets(request, options, callback);
@@ -1484,7 +1484,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createSavedQuery(request, options, callback);
@@ -1571,7 +1571,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getSavedQuery(request, options, callback);
@@ -1665,7 +1665,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'saved_query.name': request.savedQuery!.name || '',
+        'saved_query.name': request.savedQuery!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateSavedQuery(request, options, callback);
@@ -1755,7 +1755,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteSavedQuery(request, options, callback);
@@ -1868,7 +1868,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchGetEffectiveIamPolicies(
@@ -2036,7 +2036,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.exportAssets(request, options, callback);
@@ -2203,7 +2203,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'analysis_query.scope': request.analysisQuery!.scope || '',
+        'analysis_query.scope': request.analysisQuery!.scope ?? '',
       });
     this.initialize();
     return this.innerApiCalls.analyzeIamPolicyLongrunning(
@@ -2384,7 +2384,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAssets(request, options, callback);
@@ -2473,7 +2473,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2571,7 +2571,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2815,7 +2815,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchAllResources(request, options, callback);
@@ -2990,7 +2990,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3174,7 +3174,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3371,7 +3371,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchAllIamPolicies(request, options, callback);
@@ -3499,7 +3499,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3636,7 +3636,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3751,7 +3751,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSavedQueries(request, options, callback);
@@ -3806,7 +3806,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3870,7 +3870,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSavedQueries'];
     const callSettings = defaultCallSettings.merge(options);

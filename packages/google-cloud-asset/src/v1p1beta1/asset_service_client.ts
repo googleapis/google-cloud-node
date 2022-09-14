@@ -441,7 +441,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchAllResources(request, options, callback);
@@ -500,7 +500,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
@@ -568,7 +568,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllResources'];
     const callSettings = defaultCallSettings.merge(options);
@@ -693,7 +693,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchAllIamPolicies(request, options, callback);
@@ -747,7 +747,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -810,7 +810,7 @@ export class AssetServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        scope: request.scope || '',
+        scope: request.scope ?? '',
       });
     const defaultCallSettings = this._defaults['searchAllIamPolicies'];
     const callSettings = defaultCallSettings.merge(options);
