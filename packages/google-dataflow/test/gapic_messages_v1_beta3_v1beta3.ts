@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,17 +237,19 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
@@ -241,11 +258,14 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       client.innerApiCalls.listJobMessages = stubSimpleCall(expectedResponse);
       const [response] = await client.listJobMessages(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listJobMessages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listJobMessages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listJobMessages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listJobMessages without error using callback', async () => {
@@ -257,17 +277,19 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
@@ -292,11 +314,14 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listJobMessages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listJobMessages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listJobMessages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listJobMessages with error', async () => {
@@ -308,28 +333,33 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listJobMessages = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listJobMessages(request), expectedError);
-      assert(
-        (client.innerApiCalls.listJobMessages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listJobMessages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listJobMessages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listJobMessagesStream without error', async () => {
@@ -341,10 +371,19 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
+      const defaultValue1 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
@@ -375,11 +414,12 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listJobMessages, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobMessages.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobMessages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -392,10 +432,19 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
+      const defaultValue1 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobMessages.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -421,11 +470,12 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listJobMessages, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobMessages.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobMessages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -438,10 +488,19 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
+      const defaultValue1 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
         generateSampleMessage(new protos.google.dataflow.v1beta3.JobMessage()),
@@ -461,11 +520,12 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobMessages.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobMessages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -478,10 +538,19 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobMessagesRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
+      const defaultValue1 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListJobMessagesRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listJobMessages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -498,11 +567,12 @@ describe('v1beta3.MessagesV1Beta3Client', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listJobMessages.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listJobMessages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

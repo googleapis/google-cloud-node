@@ -409,8 +409,8 @@ export class TemplatesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        location: request.location || '',
+        project_id: request.projectId ?? '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createJobFromTemplate(request, options, callback);
@@ -511,8 +511,8 @@ export class TemplatesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        location: request.location || '',
+        project_id: request.projectId ?? '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.launchTemplate(request, options, callback);
@@ -605,8 +605,8 @@ export class TemplatesServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        location: request.location || '',
+        project_id: request.projectId ?? '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTemplate(request, options, callback);

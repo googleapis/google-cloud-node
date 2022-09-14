@@ -25,6 +25,21 @@ import * as templatesserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -160,16 +175,17 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['location']
+      );
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -177,11 +193,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createJobFromTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createJobFromTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createJobFromTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createJobFromTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createJobFromTemplate without error using callback', async () => {
@@ -193,16 +212,17 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['location']
+      );
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Job()
       );
@@ -225,11 +245,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createJobFromTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createJobFromTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createJobFromTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createJobFromTemplate with error', async () => {
@@ -241,16 +264,17 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['location']
+      );
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createJobFromTemplate = stubSimpleCall(
         undefined,
@@ -260,11 +284,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
         client.createJobFromTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createJobFromTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createJobFromTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createJobFromTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createJobFromTemplate with closed client', async () => {
@@ -276,8 +303,16 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobFromTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'CreateJobFromTemplateRequest',
+        ['location']
+      );
+      request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -297,27 +332,29 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
       client.innerApiCalls.launchTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.launchTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.launchTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.launchTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.launchTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes launchTemplate without error using callback', async () => {
@@ -329,16 +366,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateResponse()
       );
@@ -361,11 +397,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.launchTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.launchTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.launchTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes launchTemplate with error', async () => {
@@ -377,27 +416,29 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.launchTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.launchTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.launchTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.launchTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.launchTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes launchTemplate with closed client', async () => {
@@ -409,8 +450,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.launchTemplate(request), expectedError);
@@ -427,27 +474,29 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
       client.innerApiCalls.getTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.getTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTemplate without error using callback', async () => {
@@ -459,16 +508,15 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateResponse()
       );
@@ -491,11 +539,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTemplate with error', async () => {
@@ -507,27 +558,29 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTemplate with closed client', async () => {
@@ -539,8 +592,14 @@ describe('v1beta3.TemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue('GetTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTemplate(request), expectedError);

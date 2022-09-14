@@ -25,6 +25,21 @@ import * as snapshotsv1beta3Module from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -160,28 +175,33 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&snapshot_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
       client.innerApiCalls.getSnapshot = stubSimpleCall(expectedResponse);
       const [response] = await client.getSnapshot(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSnapshot without error using callback', async () => {
@@ -193,17 +213,19 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&snapshot_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.Snapshot()
       );
@@ -226,11 +248,14 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSnapshot with error', async () => {
@@ -242,28 +267,33 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&snapshot_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSnapshot = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getSnapshot(request), expectedError);
-      assert(
-        (client.innerApiCalls.getSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSnapshot with closed client', async () => {
@@ -275,9 +305,18 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
+      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSnapshot(request), expectedError);
@@ -294,28 +333,33 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&snapshot_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
       client.innerApiCalls.deleteSnapshot = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSnapshot(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSnapshot without error using callback', async () => {
@@ -327,17 +371,19 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&snapshot_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotResponse()
       );
@@ -360,11 +406,14 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSnapshot with error', async () => {
@@ -376,28 +425,33 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&snapshot_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteSnapshot = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteSnapshot(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteSnapshot with closed client', async () => {
@@ -409,9 +463,18 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.snapshotId = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
+        'snapshotId',
+      ]);
+      request.snapshotId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteSnapshot(request), expectedError);
@@ -428,28 +491,33 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
       client.innerApiCalls.listSnapshots = stubSimpleCall(expectedResponse);
       const [response] = await client.listSnapshots(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSnapshots as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSnapshots without error using callback', async () => {
@@ -461,17 +529,19 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsResponse()
       );
@@ -494,11 +564,14 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSnapshots as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSnapshots with error', async () => {
@@ -510,28 +583,33 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
-      const expectedHeaderRequestParams = 'project_id=&location=&job_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSnapshots = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listSnapshots(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSnapshots as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSnapshots as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSnapshots with closed client', async () => {
@@ -543,9 +621,18 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      request.jobId = '';
+      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
+        'jobId',
+      ]);
+      request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listSnapshots(request), expectedError);

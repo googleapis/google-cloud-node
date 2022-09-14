@@ -25,6 +25,21 @@ import * as flextemplatesserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -170,16 +185,15 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateResponse()
       );
@@ -187,11 +201,14 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.launchFlexTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.launchFlexTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.launchFlexTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.launchFlexTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes launchFlexTemplate without error using callback', async () => {
@@ -204,16 +221,15 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateResponse()
       );
@@ -236,11 +252,14 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.launchFlexTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.launchFlexTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.launchFlexTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes launchFlexTemplate with error', async () => {
@@ -253,27 +272,29 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
-      const expectedHeaderRequestParams = 'project_id=&location=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.launchFlexTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.launchFlexTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.launchFlexTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.launchFlexTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.launchFlexTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes launchFlexTemplate with closed client', async () => {
@@ -286,8 +307,14 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      request.projectId = '';
-      request.location = '';
+      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
+        'location',
+      ]);
+      request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.launchFlexTemplate(request), expectedError);
