@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -280,15 +295,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordResponse()
       );
@@ -296,11 +307,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.resetAdminPassword(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetAdminPassword as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetAdminPassword as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetAdminPassword as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetAdminPassword without error using callback', async () => {
@@ -315,15 +329,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordResponse()
       );
@@ -346,11 +356,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetAdminPassword as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetAdminPassword as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetAdminPassword as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetAdminPassword with error', async () => {
@@ -365,26 +378,25 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetAdminPassword = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.resetAdminPassword(request), expectedError);
-      assert(
-        (client.innerApiCalls.resetAdminPassword as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetAdminPassword as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetAdminPassword as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetAdminPassword with closed client', async () => {
@@ -399,7 +411,10 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ResetAdminPasswordRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('ResetAdminPasswordRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resetAdminPassword(request), expectedError);
@@ -419,26 +434,23 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.Domain()
       );
       client.innerApiCalls.getDomain = stubSimpleCall(expectedResponse);
       const [response] = await client.getDomain(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDomain without error using callback', async () => {
@@ -453,15 +465,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.Domain()
       );
@@ -484,11 +490,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDomain with error', async () => {
@@ -503,23 +512,20 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDomain = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getDomain(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDomain with closed client', async () => {
@@ -534,7 +540,8 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.GetDomainRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDomainRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDomain(request), expectedError);
@@ -554,15 +561,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMicrosoftAdDomainRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -571,11 +575,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const [operation] = await client.createMicrosoftAdDomain(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMicrosoftAdDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMicrosoftAdDomain without error using callback', async () => {
@@ -590,15 +597,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMicrosoftAdDomainRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -628,11 +632,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMicrosoftAdDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMicrosoftAdDomain with call error', async () => {
@@ -647,15 +654,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMicrosoftAdDomainRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMicrosoftAdDomain = stubLongRunningCall(
         undefined,
@@ -665,11 +669,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         client.createMicrosoftAdDomain(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createMicrosoftAdDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMicrosoftAdDomain with LRO error', async () => {
@@ -684,15 +691,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.CreateMicrosoftAdDomainRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMicrosoftAdDomainRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMicrosoftAdDomain = stubLongRunningCall(
         undefined,
@@ -701,11 +705,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       const [operation] = await client.createMicrosoftAdDomain(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createMicrosoftAdDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMicrosoftAdDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateMicrosoftAdDomainProgress without error', async () => {
@@ -770,16 +777,13 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
-      request.domain = {};
-      request.domain.name = '';
-      const expectedHeaderRequestParams = 'domain.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.domain ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
+        'domain',
+        'name',
+      ]);
+      request.domain.name = defaultValue1;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -787,11 +791,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const [operation] = await client.updateDomain(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDomain without error using callback', async () => {
@@ -806,16 +813,13 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
-      request.domain = {};
-      request.domain.name = '';
-      const expectedHeaderRequestParams = 'domain.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.domain ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
+        'domain',
+        'name',
+      ]);
+      request.domain.name = defaultValue1;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -845,11 +849,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDomain with call error', async () => {
@@ -864,27 +871,27 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
-      request.domain = {};
-      request.domain.name = '';
-      const expectedHeaderRequestParams = 'domain.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.domain ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
+        'domain',
+        'name',
+      ]);
+      request.domain.name = defaultValue1;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDomain = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDomain(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDomain with LRO error', async () => {
@@ -899,16 +906,13 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.UpdateDomainRequest()
       );
-      request.domain = {};
-      request.domain.name = '';
-      const expectedHeaderRequestParams = 'domain.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.domain ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDomainRequest', [
+        'domain',
+        'name',
+      ]);
+      request.domain.name = defaultValue1;
+      const expectedHeaderRequestParams = `domain.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDomain = stubLongRunningCall(
         undefined,
@@ -917,11 +921,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       const [operation] = await client.updateDomain(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateDomainProgress without error', async () => {
@@ -982,15 +989,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -998,11 +1001,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const [operation] = await client.deleteDomain(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDomain without error using callback', async () => {
@@ -1017,15 +1023,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1055,11 +1057,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDomain with call error', async () => {
@@ -1074,26 +1079,25 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDomain = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDomain(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDomain with LRO error', async () => {
@@ -1108,15 +1112,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DeleteDomainRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDomainRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDomain = stubLongRunningCall(
         undefined,
@@ -1125,11 +1125,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       const [operation] = await client.deleteDomain(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDomain as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDomain as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteDomainProgress without error', async () => {
@@ -1190,15 +1193,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1206,11 +1203,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const [operation] = await client.attachTrust(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.attachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes attachTrust without error using callback', async () => {
@@ -1225,15 +1225,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1263,11 +1257,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.attachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes attachTrust with call error', async () => {
@@ -1282,26 +1279,23 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachTrust = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.attachTrust(request), expectedError);
-      assert(
-        (client.innerApiCalls.attachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes attachTrust with LRO error', async () => {
@@ -1316,15 +1310,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.AttachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AttachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachTrust = stubLongRunningCall(
         undefined,
@@ -1333,11 +1321,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       const [operation] = await client.attachTrust(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.attachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkAttachTrustProgress without error', async () => {
@@ -1398,15 +1389,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1415,11 +1402,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const [operation] = await client.reconfigureTrust(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reconfigureTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reconfigureTrust without error using callback', async () => {
@@ -1434,15 +1424,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1472,11 +1458,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reconfigureTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reconfigureTrust with call error', async () => {
@@ -1491,26 +1480,25 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconfigureTrust = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.reconfigureTrust(request), expectedError);
-      assert(
-        (client.innerApiCalls.reconfigureTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reconfigureTrust with LRO error', async () => {
@@ -1525,15 +1513,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ReconfigureTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReconfigureTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reconfigureTrust = stubLongRunningCall(
         undefined,
@@ -1542,11 +1526,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       const [operation] = await client.reconfigureTrust(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.reconfigureTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reconfigureTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkReconfigureTrustProgress without error', async () => {
@@ -1610,15 +1597,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1626,11 +1607,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const [operation] = await client.detachTrust(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.detachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detachTrust without error using callback', async () => {
@@ -1645,15 +1629,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1683,11 +1661,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.detachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detachTrust with call error', async () => {
@@ -1702,26 +1683,23 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachTrust = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.detachTrust(request), expectedError);
-      assert(
-        (client.innerApiCalls.detachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detachTrust with LRO error', async () => {
@@ -1736,15 +1714,9 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.DetachTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetachTrustRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachTrust = stubLongRunningCall(
         undefined,
@@ -1753,11 +1725,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       const [operation] = await client.detachTrust(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.detachTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDetachTrustProgress without error', async () => {
@@ -1818,15 +1793,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1835,11 +1806,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const [operation] = await client.validateTrust(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.validateTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes validateTrust without error using callback', async () => {
@@ -1854,15 +1828,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1892,11 +1862,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.validateTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes validateTrust with call error', async () => {
@@ -1911,26 +1884,25 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateTrust = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.validateTrust(request), expectedError);
-      assert(
-        (client.innerApiCalls.validateTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes validateTrust with LRO error', async () => {
@@ -1945,15 +1917,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ValidateTrustRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ValidateTrustRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validateTrust = stubLongRunningCall(
         undefined,
@@ -1962,11 +1930,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       );
       const [operation] = await client.validateTrust(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.validateTrust as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validateTrust as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkValidateTrustProgress without error', async () => {
@@ -2030,15 +2001,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2053,11 +2020,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       client.innerApiCalls.listDomains = stubSimpleCall(expectedResponse);
       const [response] = await client.listDomains(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDomains as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDomains as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDomains as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDomains without error using callback', async () => {
@@ -2072,15 +2042,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2113,11 +2079,14 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDomains as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDomains as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDomains as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDomains with error', async () => {
@@ -2132,26 +2101,25 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDomains = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDomains(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDomains as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDomains as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDomains as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDomainsStream without error', async () => {
@@ -2166,8 +2134,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2205,11 +2176,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDomains, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDomains.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDomains.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2225,8 +2197,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDomains.createStream = stubPageStreamingCall(
         undefined,
@@ -2255,11 +2230,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDomains, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDomains.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDomains.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2275,8 +2251,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.managedidentities.v1beta1.Domain()
@@ -2303,11 +2282,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDomains.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDomains.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2323,8 +2303,11 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.managedidentities.v1beta1.ListDomainsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDomainsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDomains.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2344,11 +2327,12 @@ describe('v1beta1.ManagedIdentitiesServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDomains.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDomains.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
