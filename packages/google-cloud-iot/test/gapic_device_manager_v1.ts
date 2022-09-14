@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,15 +237,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -238,11 +249,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createDeviceRegistry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeviceRegistry without error using callback', async () => {
@@ -254,15 +268,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -285,11 +295,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeviceRegistry with error', async () => {
@@ -301,26 +314,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeviceRegistry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createDeviceRegistry(request), expectedError);
-      assert(
-        (client.innerApiCalls.createDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeviceRegistry with closed client', async () => {
@@ -332,7 +344,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDeviceRegistry(request), expectedError);
@@ -349,26 +364,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
       client.innerApiCalls.getDeviceRegistry = stubSimpleCall(expectedResponse);
       const [response] = await client.getDeviceRegistry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeviceRegistry without error using callback', async () => {
@@ -380,15 +394,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -411,11 +421,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeviceRegistry with error', async () => {
@@ -427,26 +440,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeviceRegistry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDeviceRegistry(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeviceRegistry with closed client', async () => {
@@ -458,7 +470,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDeviceRegistry(request), expectedError);
@@ -475,16 +490,13 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
-      request.deviceRegistry = {};
-      request.deviceRegistry.name = '';
-      const expectedHeaderRequestParams = 'device_registry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.deviceRegistry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
+        'deviceRegistry',
+        'name',
+      ]);
+      request.deviceRegistry.name = defaultValue1;
+      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -492,11 +504,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateDeviceRegistry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeviceRegistry without error using callback', async () => {
@@ -508,16 +523,13 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
-      request.deviceRegistry = {};
-      request.deviceRegistry.name = '';
-      const expectedHeaderRequestParams = 'device_registry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.deviceRegistry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
+        'deviceRegistry',
+        'name',
+      ]);
+      request.deviceRegistry.name = defaultValue1;
+      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceRegistry()
       );
@@ -540,11 +552,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeviceRegistry with error', async () => {
@@ -556,27 +571,27 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
-      request.deviceRegistry = {};
-      request.deviceRegistry.name = '';
-      const expectedHeaderRequestParams = 'device_registry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.deviceRegistry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
+        'deviceRegistry',
+        'name',
+      ]);
+      request.deviceRegistry.name = defaultValue1;
+      const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeviceRegistry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDeviceRegistry(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeviceRegistry with closed client', async () => {
@@ -588,8 +603,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
-      request.deviceRegistry = {};
-      request.deviceRegistry.name = '';
+      request.deviceRegistry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
+        'deviceRegistry',
+        'name',
+      ]);
+      request.deviceRegistry.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDeviceRegistry(request), expectedError);
@@ -606,15 +625,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -622,11 +637,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDeviceRegistry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeviceRegistry without error using callback', async () => {
@@ -638,15 +656,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -669,11 +683,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeviceRegistry with error', async () => {
@@ -685,26 +702,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeviceRegistry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDeviceRegistry(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDeviceRegistry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeviceRegistry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeviceRegistry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeviceRegistry with closed client', async () => {
@@ -716,7 +732,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDeviceRegistry(request), expectedError);
@@ -733,26 +752,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
       client.innerApiCalls.createDevice = stubSimpleCall(expectedResponse);
       const [response] = await client.createDevice(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDevice without error using callback', async () => {
@@ -764,15 +782,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -795,11 +809,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDevice with error', async () => {
@@ -811,26 +828,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDevice = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createDevice(request), expectedError);
-      assert(
-        (client.innerApiCalls.createDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDevice with closed client', async () => {
@@ -842,7 +858,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDevice(request), expectedError);
@@ -859,26 +878,23 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
       client.innerApiCalls.getDevice = stubSimpleCall(expectedResponse);
       const [response] = await client.getDevice(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDevice without error using callback', async () => {
@@ -890,15 +906,9 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -921,11 +931,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDevice with error', async () => {
@@ -937,23 +950,20 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDevice = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getDevice(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDevice with closed client', async () => {
@@ -965,7 +975,8 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDevice(request), expectedError);
@@ -982,27 +993,27 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
-      request.device = {};
-      request.device.name = '';
-      const expectedHeaderRequestParams = 'device.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.device ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
+        'device',
+        'name',
+      ]);
+      request.device.name = defaultValue1;
+      const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
       client.innerApiCalls.updateDevice = stubSimpleCall(expectedResponse);
       const [response] = await client.updateDevice(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDevice without error using callback', async () => {
@@ -1014,16 +1025,13 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
-      request.device = {};
-      request.device.name = '';
-      const expectedHeaderRequestParams = 'device.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.device ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
+        'device',
+        'name',
+      ]);
+      request.device.name = defaultValue1;
+      const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.Device()
       );
@@ -1046,11 +1054,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDevice with error', async () => {
@@ -1062,27 +1073,27 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
-      request.device = {};
-      request.device.name = '';
-      const expectedHeaderRequestParams = 'device.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.device ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
+        'device',
+        'name',
+      ]);
+      request.device.name = defaultValue1;
+      const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDevice = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDevice(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDevice with closed client', async () => {
@@ -1094,8 +1105,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
-      request.device = {};
-      request.device.name = '';
+      request.device ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
+        'device',
+        'name',
+      ]);
+      request.device.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDevice(request), expectedError);
@@ -1112,26 +1127,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteDevice = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDevice(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDevice without error using callback', async () => {
@@ -1143,15 +1157,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1174,11 +1184,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDevice with error', async () => {
@@ -1190,26 +1203,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDevice = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDevice(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDevice with closed client', async () => {
@@ -1221,7 +1233,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDevice(request), expectedError);
@@ -1238,15 +1253,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ModifyCloudToDeviceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceConfig()
       );
@@ -1254,11 +1266,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.modifyCloudToDeviceConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes modifyCloudToDeviceConfig without error using callback', async () => {
@@ -1270,15 +1285,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ModifyCloudToDeviceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeviceConfig()
       );
@@ -1301,11 +1313,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes modifyCloudToDeviceConfig with error', async () => {
@@ -1317,15 +1332,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ModifyCloudToDeviceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.modifyCloudToDeviceConfig = stubSimpleCall(
         undefined,
@@ -1335,11 +1347,14 @@ describe('v1.DeviceManagerClient', () => {
         client.modifyCloudToDeviceConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.modifyCloudToDeviceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes modifyCloudToDeviceConfig with closed client', async () => {
@@ -1351,7 +1366,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ModifyCloudToDeviceConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1371,15 +1390,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeviceConfigVersionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse()
       );
@@ -1387,11 +1403,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDeviceConfigVersions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeviceConfigVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceConfigVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceConfigVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceConfigVersions without error using callback', async () => {
@@ -1403,15 +1422,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeviceConfigVersionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsResponse()
       );
@@ -1434,11 +1450,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeviceConfigVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceConfigVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceConfigVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceConfigVersions with error', async () => {
@@ -1450,15 +1469,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeviceConfigVersionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeviceConfigVersions = stubSimpleCall(
         undefined,
@@ -1468,11 +1484,14 @@ describe('v1.DeviceManagerClient', () => {
         client.listDeviceConfigVersions(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listDeviceConfigVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceConfigVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceConfigVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceConfigVersions with closed client', async () => {
@@ -1484,7 +1503,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeviceConfigVersionsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1504,26 +1527,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesResponse()
       );
       client.innerApiCalls.listDeviceStates = stubSimpleCall(expectedResponse);
       const [response] = await client.listDeviceStates(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeviceStates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceStates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceStates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceStates without error using callback', async () => {
@@ -1535,15 +1557,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesResponse()
       );
@@ -1566,11 +1584,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeviceStates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceStates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceStates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceStates with error', async () => {
@@ -1582,26 +1603,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeviceStates = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDeviceStates(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDeviceStates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceStates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceStates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceStates with closed client', async () => {
@@ -1613,7 +1633,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.listDeviceStates(request), expectedError);
@@ -1630,26 +1653,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
@@ -1661,15 +1683,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1692,11 +1710,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with error', async () => {
@@ -1708,26 +1729,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with closed client', async () => {
@@ -1739,7 +1759,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1756,26 +1779,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
@@ -1787,15 +1809,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1818,11 +1836,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with error', async () => {
@@ -1834,26 +1855,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with closed client', async () => {
@@ -1865,7 +1885,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1882,15 +1905,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1898,11 +1917,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
@@ -1914,15 +1936,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1945,11 +1963,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with error', async () => {
@@ -1961,26 +1982,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with closed client', async () => {
@@ -1992,7 +2012,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -2009,15 +2032,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceResponse()
       );
@@ -2025,11 +2044,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.sendCommandToDevice(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.sendCommandToDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.sendCommandToDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sendCommandToDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendCommandToDevice without error using callback', async () => {
@@ -2041,15 +2063,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceResponse()
       );
@@ -2072,11 +2090,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.sendCommandToDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.sendCommandToDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sendCommandToDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendCommandToDevice with error', async () => {
@@ -2088,26 +2109,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.sendCommandToDevice = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.sendCommandToDevice(request), expectedError);
-      assert(
-        (client.innerApiCalls.sendCommandToDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.sendCommandToDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sendCommandToDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendCommandToDevice with closed client', async () => {
@@ -2119,7 +2139,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.sendCommandToDevice(request), expectedError);
@@ -2136,15 +2159,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayResponse()
       );
@@ -2152,11 +2171,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.bindDeviceToGateway(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.bindDeviceToGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.bindDeviceToGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bindDeviceToGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes bindDeviceToGateway without error using callback', async () => {
@@ -2168,15 +2190,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayResponse()
       );
@@ -2199,11 +2217,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.bindDeviceToGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.bindDeviceToGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bindDeviceToGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes bindDeviceToGateway with error', async () => {
@@ -2215,26 +2236,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bindDeviceToGateway = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.bindDeviceToGateway(request), expectedError);
-      assert(
-        (client.innerApiCalls.bindDeviceToGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.bindDeviceToGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bindDeviceToGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes bindDeviceToGateway with closed client', async () => {
@@ -2246,7 +2266,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.bindDeviceToGateway(request), expectedError);
@@ -2263,15 +2286,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UnbindDeviceFromGatewayRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse()
       );
@@ -2279,11 +2299,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.unbindDeviceFromGateway(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.unbindDeviceFromGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.unbindDeviceFromGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unbindDeviceFromGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes unbindDeviceFromGateway without error using callback', async () => {
@@ -2295,15 +2318,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UnbindDeviceFromGatewayRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayResponse()
       );
@@ -2326,11 +2346,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.unbindDeviceFromGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.unbindDeviceFromGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unbindDeviceFromGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes unbindDeviceFromGateway with error', async () => {
@@ -2342,15 +2365,12 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UnbindDeviceFromGatewayRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.unbindDeviceFromGateway = stubSimpleCall(
         undefined,
@@ -2360,11 +2380,14 @@ describe('v1.DeviceManagerClient', () => {
         client.unbindDeviceFromGateway(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.unbindDeviceFromGateway as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.unbindDeviceFromGateway as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unbindDeviceFromGateway as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes unbindDeviceFromGateway with closed client', async () => {
@@ -2376,7 +2399,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UnbindDeviceFromGatewayRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2396,15 +2423,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2414,11 +2437,14 @@ describe('v1.DeviceManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDeviceRegistries(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeviceRegistries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceRegistries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceRegistries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceRegistries without error using callback', async () => {
@@ -2430,15 +2456,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2463,11 +2485,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeviceRegistries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceRegistries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceRegistries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceRegistries with error', async () => {
@@ -2479,26 +2504,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeviceRegistries = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDeviceRegistries(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDeviceRegistries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeviceRegistries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeviceRegistries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeviceRegistriesStream without error', async () => {
@@ -2510,8 +2534,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2542,11 +2569,12 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeviceRegistries, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDeviceRegistries.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDeviceRegistries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2559,8 +2587,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeviceRegistries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2586,11 +2617,12 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeviceRegistries, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDeviceRegistries.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDeviceRegistries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2603,8 +2635,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
         generateSampleMessage(new protos.google.cloud.iot.v1.DeviceRegistry()),
@@ -2624,11 +2659,12 @@ describe('v1.DeviceManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2641,8 +2677,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeviceRegistries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2659,11 +2698,12 @@ describe('v1.DeviceManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDeviceRegistries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2678,15 +2718,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -2695,11 +2731,14 @@ describe('v1.DeviceManagerClient', () => {
       client.innerApiCalls.listDevices = stubSimpleCall(expectedResponse);
       const [response] = await client.listDevices(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDevices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDevices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDevices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDevices without error using callback', async () => {
@@ -2711,15 +2750,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -2744,11 +2779,14 @@ describe('v1.DeviceManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDevices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDevices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDevices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDevices with error', async () => {
@@ -2760,26 +2798,25 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDevices = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDevices(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDevices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDevices as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDevices as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDevicesStream without error', async () => {
@@ -2791,8 +2828,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -2820,11 +2860,12 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDevices, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDevices.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDevices.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2837,8 +2878,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDevices.createStream = stubPageStreamingCall(
         undefined,
@@ -2863,11 +2907,12 @@ describe('v1.DeviceManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDevices, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDevices.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDevices.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2880,8 +2925,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
         generateSampleMessage(new protos.google.cloud.iot.v1.Device()),
@@ -2901,11 +2949,12 @@ describe('v1.DeviceManagerClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDevices.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDevices.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2918,8 +2967,11 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDevices.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2938,11 +2990,12 @@ describe('v1.DeviceManagerClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listDevices.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDevices.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
