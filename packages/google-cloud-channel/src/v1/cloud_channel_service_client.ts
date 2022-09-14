@@ -733,7 +733,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getCustomer(request, options, callback);
@@ -848,7 +848,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.checkCloudIdentityAccountsExist(
@@ -952,7 +952,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createCustomer(request, options, callback);
@@ -1051,7 +1051,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'customer.name': request.customer!.name || '',
+        'customer.name': request.customer!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateCustomer(request, options, callback);
@@ -1144,7 +1144,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteCustomer(request, options, callback);
@@ -1268,7 +1268,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.importCustomer(request, options, callback);
@@ -1364,7 +1364,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEntitlement(request, options, callback);
@@ -1471,7 +1471,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getChannelPartnerLink(request, options, callback);
@@ -1595,7 +1595,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createChannelPartnerLink(
@@ -1725,7 +1725,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateChannelPartnerLink(
@@ -1841,7 +1841,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getCustomerRepricingConfig(
@@ -1982,7 +1982,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createCustomerRepricingConfig(
@@ -2112,7 +2112,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         'customer_repricing_config.name':
-          request.customerRepricingConfig!.name || '',
+          request.customerRepricingConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateCustomerRepricingConfig(
@@ -2227,7 +2227,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteCustomerRepricingConfig(
@@ -2343,7 +2343,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getChannelPartnerRepricingConfig(
@@ -2484,7 +2484,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createChannelPartnerRepricingConfig(
@@ -2614,7 +2614,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         'channel_partner_repricing_config.name':
-          request.channelPartnerRepricingConfig!.name || '',
+          request.channelPartnerRepricingConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateChannelPartnerRepricingConfig(
@@ -2727,7 +2727,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteChannelPartnerRepricingConfig(
@@ -2825,7 +2825,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        entitlement: request.entitlement || '',
+        entitlement: request.entitlement ?? '',
       });
     this.initialize();
     return this.innerApiCalls.lookupOffer(request, options, callback);
@@ -2934,7 +2934,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        account: request.account || '',
+        account: request.account ?? '',
       });
     this.initialize();
     return this.innerApiCalls.registerSubscriber(request, options, callback);
@@ -3047,7 +3047,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        account: request.account || '',
+        account: request.account ?? '',
       });
     this.initialize();
     return this.innerApiCalls.unregisterSubscriber(request, options, callback);
@@ -3178,7 +3178,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        customer: request.customer || '',
+        customer: request.customer ?? '',
       });
     this.initialize();
     return this.innerApiCalls.provisionCloudIdentity(
@@ -3371,7 +3371,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createEntitlement(request, options, callback);
@@ -3552,7 +3552,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.changeParameters(request, options, callback);
@@ -3728,7 +3728,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.changeRenewalSettings(request, options, callback);
@@ -3908,7 +3908,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.changeOffer(request, options, callback);
@@ -4083,7 +4083,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.startPaidService(request, options, callback);
@@ -4255,7 +4255,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.suspendEntitlement(request, options, callback);
@@ -4432,7 +4432,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelEntitlement(request, options, callback);
@@ -4610,7 +4610,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.activateEntitlement(request, options, callback);
@@ -4797,7 +4797,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.transferEntitlements(request, options, callback);
@@ -4979,7 +4979,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.transferEntitlementsToGoogle(
@@ -5129,7 +5129,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listCustomers(request, options, callback);
@@ -5177,7 +5177,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5234,7 +5234,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5353,7 +5353,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listEntitlements(request, options, callback);
@@ -5398,7 +5398,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5452,7 +5452,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEntitlements'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5598,7 +5598,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTransferableSkus(request, options, callback);
@@ -5661,7 +5661,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTransferableSkus'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5733,7 +5733,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTransferableSkus'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5870,7 +5870,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTransferableOffers(
@@ -5928,7 +5928,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTransferableOffers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5991,7 +5991,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTransferableOffers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6114,7 +6114,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listChannelPartnerLinks(
@@ -6165,7 +6165,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6221,7 +6221,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listChannelPartnerLinks'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6361,7 +6361,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listCustomerRepricingConfigs(
@@ -6419,7 +6419,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6482,7 +6482,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCustomerRepricingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -6624,7 +6624,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listChannelPartnerRepricingConfigs(
@@ -6685,7 +6685,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listChannelPartnerRepricingConfigs'];
@@ -6752,7 +6752,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings =
       this._defaults['listChannelPartnerRepricingConfigs'];
@@ -7061,7 +7061,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSkus(request, options, callback);
@@ -7111,7 +7111,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7170,7 +7170,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSkus'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7283,7 +7283,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listOffers(request, options, callback);
@@ -7334,7 +7334,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listOffers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7394,7 +7394,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listOffers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7517,7 +7517,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        customer: request.customer || '',
+        customer: request.customer ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listPurchasableSkus(request, options, callback);
@@ -7566,7 +7566,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        customer: request.customer || '',
+        customer: request.customer ?? '',
       });
     const defaultCallSettings = this._defaults['listPurchasableSkus'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7624,7 +7624,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        customer: request.customer || '',
+        customer: request.customer ?? '',
       });
     const defaultCallSettings = this._defaults['listPurchasableSkus'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7747,7 +7747,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        customer: request.customer || '',
+        customer: request.customer ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listPurchasableOffers(request, options, callback);
@@ -7796,7 +7796,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        customer: request.customer || '',
+        customer: request.customer ?? '',
       });
     const defaultCallSettings = this._defaults['listPurchasableOffers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7854,7 +7854,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        customer: request.customer || '',
+        customer: request.customer ?? '',
       });
     const defaultCallSettings = this._defaults['listPurchasableOffers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -7981,7 +7981,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        account: request.account || '',
+        account: request.account ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSubscribers(request, options, callback);
@@ -8026,7 +8026,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        account: request.account || '',
+        account: request.account ?? '',
       });
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -8080,7 +8080,7 @@ export class CloudChannelServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        account: request.account || '',
+        account: request.account ?? '',
       });
     const defaultCallSettings = this._defaults['listSubscribers'];
     const callSettings = defaultCallSettings.merge(options);

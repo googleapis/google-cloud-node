@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -269,26 +284,23 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
       client.innerApiCalls.getCustomer = stubSimpleCall(expectedResponse);
       const [response] = await client.getCustomer(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomer without error using callback', async () => {
@@ -302,15 +314,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
@@ -333,11 +339,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomer with error', async () => {
@@ -351,26 +360,23 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomer = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCustomer(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomer with closed client', async () => {
@@ -384,7 +390,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCustomerRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomer(request), expectedError);
@@ -403,15 +410,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CheckCloudIdentityAccountsExistRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse()
       );
@@ -419,11 +423,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.checkCloudIdentityAccountsExist(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCloudIdentityAccountsExist without error using callback', async () => {
@@ -437,15 +444,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CheckCloudIdentityAccountsExistRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse()
       );
@@ -468,11 +472,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCloudIdentityAccountsExist with error', async () => {
@@ -486,15 +493,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CheckCloudIdentityAccountsExistRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.checkCloudIdentityAccountsExist = stubSimpleCall(
         undefined,
@@ -504,11 +508,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.checkCloudIdentityAccountsExist(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.checkCloudIdentityAccountsExist as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCloudIdentityAccountsExist with closed client', async () => {
@@ -522,7 +529,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CheckCloudIdentityAccountsExistRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -544,26 +555,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
       client.innerApiCalls.createCustomer = stubSimpleCall(expectedResponse);
       const [response] = await client.createCustomer(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomer without error using callback', async () => {
@@ -577,15 +587,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
@@ -608,11 +614,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomer with error', async () => {
@@ -626,26 +635,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomer = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCustomer(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomer with closed client', async () => {
@@ -659,7 +667,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCustomer(request), expectedError);
@@ -678,27 +689,27 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
-      request.customer = {};
-      request.customer.name = '';
-      const expectedHeaderRequestParams = 'customer.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
+        'customer',
+        'name',
+      ]);
+      request.customer.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
       client.innerApiCalls.updateCustomer = stubSimpleCall(expectedResponse);
       const [response] = await client.updateCustomer(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomer without error using callback', async () => {
@@ -712,16 +723,13 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
-      request.customer = {};
-      request.customer.name = '';
-      const expectedHeaderRequestParams = 'customer.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
+        'customer',
+        'name',
+      ]);
+      request.customer.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
@@ -744,11 +752,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomer with error', async () => {
@@ -762,27 +773,27 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
-      request.customer = {};
-      request.customer.name = '';
-      const expectedHeaderRequestParams = 'customer.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
+        'customer',
+        'name',
+      ]);
+      request.customer.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomer = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCustomer(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomer with closed client', async () => {
@@ -796,8 +807,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRequest()
       );
-      request.customer = {};
-      request.customer.name = '';
+      request.customer ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomerRequest', [
+        'customer',
+        'name',
+      ]);
+      request.customer.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCustomer(request), expectedError);
@@ -816,26 +831,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteCustomer = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteCustomer(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomer without error using callback', async () => {
@@ -849,15 +863,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -880,11 +890,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomer with error', async () => {
@@ -898,26 +911,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomer = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteCustomer(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomer with closed client', async () => {
@@ -931,7 +943,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteCustomer(request), expectedError);
@@ -950,26 +965,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
       client.innerApiCalls.importCustomer = stubSimpleCall(expectedResponse);
       const [response] = await client.importCustomer(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importCustomer without error using callback', async () => {
@@ -983,15 +997,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
@@ -1014,11 +1024,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importCustomer with error', async () => {
@@ -1032,26 +1045,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importCustomer = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.importCustomer(request), expectedError);
-      assert(
-        (client.innerApiCalls.importCustomer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importCustomer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importCustomer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importCustomer with closed client', async () => {
@@ -1065,7 +1077,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ImportCustomerRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('ImportCustomerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.importCustomer(request), expectedError);
@@ -1084,26 +1099,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Entitlement()
       );
       client.innerApiCalls.getEntitlement = stubSimpleCall(expectedResponse);
       const [response] = await client.getEntitlement(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntitlement without error using callback', async () => {
@@ -1117,15 +1131,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Entitlement()
       );
@@ -1148,11 +1158,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntitlement with error', async () => {
@@ -1166,26 +1179,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntitlement = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getEntitlement(request), expectedError);
-      assert(
-        (client.innerApiCalls.getEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntitlement with closed client', async () => {
@@ -1199,7 +1211,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetEntitlementRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntitlement(request), expectedError);
@@ -1218,15 +1233,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
@@ -1234,11 +1246,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getChannelPartnerLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getChannelPartnerLink without error using callback', async () => {
@@ -1252,15 +1267,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
@@ -1283,11 +1295,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getChannelPartnerLink with error', async () => {
@@ -1301,15 +1316,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChannelPartnerLink = stubSimpleCall(
         undefined,
@@ -1319,11 +1331,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.getChannelPartnerLink(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getChannelPartnerLink with closed client', async () => {
@@ -1337,7 +1352,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1359,15 +1378,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
@@ -1375,11 +1391,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createChannelPartnerLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createChannelPartnerLink without error using callback', async () => {
@@ -1393,15 +1412,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
@@ -1424,11 +1440,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createChannelPartnerLink with error', async () => {
@@ -1442,15 +1461,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannelPartnerLink = stubSimpleCall(
         undefined,
@@ -1460,11 +1476,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.createChannelPartnerLink(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createChannelPartnerLink with closed client', async () => {
@@ -1478,7 +1497,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerLinkRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1500,15 +1523,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
@@ -1516,11 +1536,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateChannelPartnerLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateChannelPartnerLink without error using callback', async () => {
@@ -1534,15 +1557,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
@@ -1565,11 +1585,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateChannelPartnerLink with error', async () => {
@@ -1583,15 +1606,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateChannelPartnerLink = stubSimpleCall(
         undefined,
@@ -1601,11 +1621,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.updateChannelPartnerLink(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateChannelPartnerLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateChannelPartnerLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelPartnerLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateChannelPartnerLink with closed client', async () => {
@@ -1619,7 +1642,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1641,15 +1668,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CustomerRepricingConfig()
       );
@@ -1657,11 +1681,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCustomerRepricingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomerRepricingConfig without error using callback', async () => {
@@ -1675,15 +1702,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CustomerRepricingConfig()
       );
@@ -1706,11 +1730,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomerRepricingConfig with error', async () => {
@@ -1724,15 +1751,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomerRepricingConfig = stubSimpleCall(
         undefined,
@@ -1742,11 +1766,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.getCustomerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomerRepricingConfig with closed client', async () => {
@@ -1760,7 +1787,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetCustomerRepricingConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1782,15 +1813,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CustomerRepricingConfig()
       );
@@ -1798,11 +1826,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createCustomerRepricingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomerRepricingConfig without error using callback', async () => {
@@ -1816,15 +1847,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CustomerRepricingConfig()
       );
@@ -1847,11 +1875,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomerRepricingConfig with error', async () => {
@@ -1865,15 +1896,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomerRepricingConfig = stubSimpleCall(
         undefined,
@@ -1883,11 +1911,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.createCustomerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomerRepricingConfig with closed client', async () => {
@@ -1901,7 +1932,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateCustomerRepricingConfigRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1923,16 +1958,13 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
       );
-      request.customerRepricingConfig = {};
-      request.customerRepricingConfig.name = '';
-      const expectedHeaderRequestParams = 'customer_repricing_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomerRepricingConfigRequest',
+        ['customerRepricingConfig', 'name']
+      );
+      request.customerRepricingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer_repricing_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CustomerRepricingConfig()
       );
@@ -1940,11 +1972,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateCustomerRepricingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomerRepricingConfig without error using callback', async () => {
@@ -1958,16 +1993,13 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
       );
-      request.customerRepricingConfig = {};
-      request.customerRepricingConfig.name = '';
-      const expectedHeaderRequestParams = 'customer_repricing_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomerRepricingConfigRequest',
+        ['customerRepricingConfig', 'name']
+      );
+      request.customerRepricingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer_repricing_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CustomerRepricingConfig()
       );
@@ -1990,11 +2022,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomerRepricingConfig with error', async () => {
@@ -2008,16 +2043,13 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
       );
-      request.customerRepricingConfig = {};
-      request.customerRepricingConfig.name = '';
-      const expectedHeaderRequestParams = 'customer_repricing_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomerRepricingConfigRequest',
+        ['customerRepricingConfig', 'name']
+      );
+      request.customerRepricingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `customer_repricing_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomerRepricingConfig = stubSimpleCall(
         undefined,
@@ -2027,11 +2059,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.updateCustomerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomerRepricingConfig with closed client', async () => {
@@ -2045,8 +2080,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateCustomerRepricingConfigRequest()
       );
-      request.customerRepricingConfig = {};
-      request.customerRepricingConfig.name = '';
+      request.customerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomerRepricingConfigRequest',
+        ['customerRepricingConfig', 'name']
+      );
+      request.customerRepricingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2068,15 +2107,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2084,11 +2120,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteCustomerRepricingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomerRepricingConfig without error using callback', async () => {
@@ -2102,15 +2141,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2133,11 +2169,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomerRepricingConfig with error', async () => {
@@ -2151,15 +2190,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomerRepricingConfig = stubSimpleCall(
         undefined,
@@ -2169,11 +2205,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.deleteCustomerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomerRepricingConfig with closed client', async () => {
@@ -2187,7 +2226,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteCustomerRepricingConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCustomerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2209,15 +2252,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
       );
@@ -2225,11 +2265,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getChannelPartnerRepricingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getChannelPartnerRepricingConfig without error using callback', async () => {
@@ -2243,15 +2286,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
       );
@@ -2274,11 +2314,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getChannelPartnerRepricingConfig with error', async () => {
@@ -2292,15 +2335,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getChannelPartnerRepricingConfig = stubSimpleCall(
         undefined,
@@ -2310,11 +2350,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.getChannelPartnerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getChannelPartnerRepricingConfig with closed client', async () => {
@@ -2328,7 +2371,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.GetChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2350,15 +2397,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
       );
@@ -2368,11 +2412,14 @@ describe('v1.CloudChannelServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createChannelPartnerRepricingConfig without error using callback', async () => {
@@ -2386,15 +2433,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
       );
@@ -2417,11 +2461,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createChannelPartnerRepricingConfig with error', async () => {
@@ -2435,15 +2482,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createChannelPartnerRepricingConfig = stubSimpleCall(
         undefined,
@@ -2453,11 +2497,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.createChannelPartnerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createChannelPartnerRepricingConfig with closed client', async () => {
@@ -2471,7 +2518,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateChannelPartnerRepricingConfigRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateChannelPartnerRepricingConfigRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2493,17 +2544,13 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
       );
-      request.channelPartnerRepricingConfig = {};
-      request.channelPartnerRepricingConfig.name = '';
-      const expectedHeaderRequestParams =
-        'channel_partner_repricing_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.channelPartnerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerRepricingConfigRequest',
+        ['channelPartnerRepricingConfig', 'name']
+      );
+      request.channelPartnerRepricingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `channel_partner_repricing_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
       );
@@ -2513,11 +2560,14 @@ describe('v1.CloudChannelServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateChannelPartnerRepricingConfig without error using callback', async () => {
@@ -2531,17 +2581,13 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
       );
-      request.channelPartnerRepricingConfig = {};
-      request.channelPartnerRepricingConfig.name = '';
-      const expectedHeaderRequestParams =
-        'channel_partner_repricing_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.channelPartnerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerRepricingConfigRequest',
+        ['channelPartnerRepricingConfig', 'name']
+      );
+      request.channelPartnerRepricingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `channel_partner_repricing_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
       );
@@ -2564,11 +2610,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateChannelPartnerRepricingConfig with error', async () => {
@@ -2582,17 +2631,13 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
       );
-      request.channelPartnerRepricingConfig = {};
-      request.channelPartnerRepricingConfig.name = '';
-      const expectedHeaderRequestParams =
-        'channel_partner_repricing_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.channelPartnerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerRepricingConfigRequest',
+        ['channelPartnerRepricingConfig', 'name']
+      );
+      request.channelPartnerRepricingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `channel_partner_repricing_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateChannelPartnerRepricingConfig = stubSimpleCall(
         undefined,
@@ -2602,11 +2647,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.updateChannelPartnerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateChannelPartnerRepricingConfig with closed client', async () => {
@@ -2620,8 +2668,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UpdateChannelPartnerRepricingConfigRequest()
       );
-      request.channelPartnerRepricingConfig = {};
-      request.channelPartnerRepricingConfig.name = '';
+      request.channelPartnerRepricingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateChannelPartnerRepricingConfigRequest',
+        ['channelPartnerRepricingConfig', 'name']
+      );
+      request.channelPartnerRepricingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2643,15 +2695,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2661,11 +2710,14 @@ describe('v1.CloudChannelServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteChannelPartnerRepricingConfig without error using callback', async () => {
@@ -2679,15 +2731,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2710,11 +2759,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteChannelPartnerRepricingConfig with error', async () => {
@@ -2728,15 +2780,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteChannelPartnerRepricingConfig = stubSimpleCall(
         undefined,
@@ -2746,11 +2795,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.deleteChannelPartnerRepricingConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteChannelPartnerRepricingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteChannelPartnerRepricingConfig with closed client', async () => {
@@ -2764,7 +2816,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.DeleteChannelPartnerRepricingConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteChannelPartnerRepricingConfigRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2786,26 +2842,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      request.entitlement = '';
-      const expectedHeaderRequestParams = 'entitlement=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
+        'entitlement',
+      ]);
+      request.entitlement = defaultValue1;
+      const expectedHeaderRequestParams = `entitlement=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Offer()
       );
       client.innerApiCalls.lookupOffer = stubSimpleCall(expectedResponse);
       const [response] = await client.lookupOffer(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupOffer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.lookupOffer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookupOffer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookupOffer without error using callback', async () => {
@@ -2819,15 +2874,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      request.entitlement = '';
-      const expectedHeaderRequestParams = 'entitlement=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
+        'entitlement',
+      ]);
+      request.entitlement = defaultValue1;
+      const expectedHeaderRequestParams = `entitlement=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Offer()
       );
@@ -2850,11 +2901,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupOffer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.lookupOffer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookupOffer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookupOffer with error', async () => {
@@ -2868,26 +2922,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      request.entitlement = '';
-      const expectedHeaderRequestParams = 'entitlement=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
+        'entitlement',
+      ]);
+      request.entitlement = defaultValue1;
+      const expectedHeaderRequestParams = `entitlement=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupOffer = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.lookupOffer(request), expectedError);
-      assert(
-        (client.innerApiCalls.lookupOffer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.lookupOffer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookupOffer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookupOffer with closed client', async () => {
@@ -2901,7 +2954,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.LookupOfferRequest()
       );
-      request.entitlement = '';
+      const defaultValue1 = getTypeDefaultValue('LookupOfferRequest', [
+        'entitlement',
+      ]);
+      request.entitlement = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookupOffer(request), expectedError);
@@ -2920,15 +2976,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberResponse()
       );
@@ -2936,11 +2988,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.registerSubscriber(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.registerSubscriber as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.registerSubscriber as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.registerSubscriber as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes registerSubscriber without error using callback', async () => {
@@ -2954,15 +3009,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberResponse()
       );
@@ -2985,11 +3036,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.registerSubscriber as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.registerSubscriber as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.registerSubscriber as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes registerSubscriber with error', async () => {
@@ -3003,26 +3057,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.registerSubscriber = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.registerSubscriber(request), expectedError);
-      assert(
-        (client.innerApiCalls.registerSubscriber as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.registerSubscriber as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.registerSubscriber as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes registerSubscriber with closed client', async () => {
@@ -3036,7 +3089,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberRequest()
       );
-      request.account = '';
+      const defaultValue1 = getTypeDefaultValue('RegisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.registerSubscriber(request), expectedError);
@@ -3055,15 +3111,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberResponse()
       );
@@ -3071,11 +3123,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.unregisterSubscriber(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.unregisterSubscriber as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.unregisterSubscriber as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unregisterSubscriber as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes unregisterSubscriber without error using callback', async () => {
@@ -3089,15 +3144,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberResponse()
       );
@@ -3120,11 +3171,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.unregisterSubscriber as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.unregisterSubscriber as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unregisterSubscriber as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes unregisterSubscriber with error', async () => {
@@ -3138,26 +3192,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.unregisterSubscriber = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.unregisterSubscriber(request), expectedError);
-      assert(
-        (client.innerApiCalls.unregisterSubscriber as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.unregisterSubscriber as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.unregisterSubscriber as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes unregisterSubscriber with closed client', async () => {
@@ -3171,7 +3224,10 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberRequest()
       );
-      request.account = '';
+      const defaultValue1 = getTypeDefaultValue('UnregisterSubscriberRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.unregisterSubscriber(request), expectedError);
@@ -3190,15 +3246,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ProvisionCloudIdentityRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3207,11 +3260,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.provisionCloudIdentity(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.provisionCloudIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes provisionCloudIdentity without error using callback', async () => {
@@ -3225,15 +3281,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ProvisionCloudIdentityRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3263,11 +3316,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.provisionCloudIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes provisionCloudIdentity with call error', async () => {
@@ -3281,15 +3337,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ProvisionCloudIdentityRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.provisionCloudIdentity = stubLongRunningCall(
         undefined,
@@ -3299,11 +3352,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.provisionCloudIdentity(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.provisionCloudIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes provisionCloudIdentity with LRO error', async () => {
@@ -3317,15 +3373,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ProvisionCloudIdentityRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ProvisionCloudIdentityRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.provisionCloudIdentity = stubLongRunningCall(
         undefined,
@@ -3334,11 +3387,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.provisionCloudIdentity(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.provisionCloudIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.provisionCloudIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkProvisionCloudIdentityProgress without error', async () => {
@@ -3399,15 +3455,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3416,11 +3468,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.createEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntitlement without error using callback', async () => {
@@ -3434,15 +3489,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3472,11 +3523,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntitlement with call error', async () => {
@@ -3490,26 +3544,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntitlement = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createEntitlement(request), expectedError);
-      assert(
-        (client.innerApiCalls.createEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntitlement with LRO error', async () => {
@@ -3523,15 +3576,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CreateEntitlementRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntitlementRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntitlement = stubLongRunningCall(
         undefined,
@@ -3540,11 +3589,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.createEntitlement(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateEntitlementProgress without error', async () => {
@@ -3605,15 +3657,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3622,11 +3670,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.changeParameters(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.changeParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeParameters without error using callback', async () => {
@@ -3640,15 +3691,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3678,11 +3725,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.changeParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeParameters with call error', async () => {
@@ -3696,26 +3746,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.changeParameters = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.changeParameters(request), expectedError);
-      assert(
-        (client.innerApiCalls.changeParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeParameters with LRO error', async () => {
@@ -3729,15 +3778,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeParametersRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeParametersRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.changeParameters = stubLongRunningCall(
         undefined,
@@ -3746,11 +3791,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.changeParameters(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.changeParameters as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeParameters as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkChangeParametersProgress without error', async () => {
@@ -3811,15 +3859,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ChangeRenewalSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3828,11 +3873,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.changeRenewalSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.changeRenewalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeRenewalSettings without error using callback', async () => {
@@ -3846,15 +3894,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ChangeRenewalSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3884,11 +3929,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.changeRenewalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeRenewalSettings with call error', async () => {
@@ -3902,15 +3950,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ChangeRenewalSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.changeRenewalSettings = stubLongRunningCall(
         undefined,
@@ -3920,11 +3965,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.changeRenewalSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.changeRenewalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeRenewalSettings with LRO error', async () => {
@@ -3938,15 +3986,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeRenewalSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ChangeRenewalSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.changeRenewalSettings = stubLongRunningCall(
         undefined,
@@ -3955,11 +4000,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.changeRenewalSettings(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.changeRenewalSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeRenewalSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkChangeRenewalSettingsProgress without error', async () => {
@@ -4020,15 +4068,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4036,11 +4078,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.changeOffer(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.changeOffer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeOffer without error using callback', async () => {
@@ -4054,15 +4099,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4092,11 +4131,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.changeOffer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeOffer with call error', async () => {
@@ -4110,26 +4152,23 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.changeOffer = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.changeOffer(request), expectedError);
-      assert(
-        (client.innerApiCalls.changeOffer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes changeOffer with LRO error', async () => {
@@ -4143,15 +4182,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChangeOfferRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ChangeOfferRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.changeOffer = stubLongRunningCall(
         undefined,
@@ -4160,11 +4193,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.changeOffer(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.changeOffer as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.changeOffer as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkChangeOfferProgress without error', async () => {
@@ -4222,15 +4258,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4239,11 +4271,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.startPaidService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startPaidService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startPaidService without error using callback', async () => {
@@ -4257,15 +4292,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4295,11 +4326,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startPaidService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startPaidService with call error', async () => {
@@ -4313,26 +4347,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startPaidService = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.startPaidService(request), expectedError);
-      assert(
-        (client.innerApiCalls.startPaidService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startPaidService with LRO error', async () => {
@@ -4346,15 +4379,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.StartPaidServiceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartPaidServiceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startPaidService = stubLongRunningCall(
         undefined,
@@ -4363,11 +4392,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.startPaidService(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.startPaidService as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startPaidService as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkStartPaidServiceProgress without error', async () => {
@@ -4428,15 +4460,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4445,11 +4473,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.suspendEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.suspendEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes suspendEntitlement without error using callback', async () => {
@@ -4463,15 +4494,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4501,11 +4528,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.suspendEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes suspendEntitlement with call error', async () => {
@@ -4519,26 +4549,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.suspendEntitlement = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.suspendEntitlement(request), expectedError);
-      assert(
-        (client.innerApiCalls.suspendEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes suspendEntitlement with LRO error', async () => {
@@ -4552,15 +4581,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.SuspendEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SuspendEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.suspendEntitlement = stubLongRunningCall(
         undefined,
@@ -4569,11 +4594,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.suspendEntitlement(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.suspendEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspendEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkSuspendEntitlementProgress without error', async () => {
@@ -4634,15 +4662,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4651,11 +4675,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.cancelEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelEntitlement without error using callback', async () => {
@@ -4669,15 +4696,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4707,11 +4730,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelEntitlement with call error', async () => {
@@ -4725,26 +4751,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelEntitlement = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.cancelEntitlement(request), expectedError);
-      assert(
-        (client.innerApiCalls.cancelEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelEntitlement with LRO error', async () => {
@@ -4758,15 +4783,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.CancelEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelEntitlement = stubLongRunningCall(
         undefined,
@@ -4775,11 +4796,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.cancelEntitlement(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.cancelEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCancelEntitlementProgress without error', async () => {
@@ -4840,15 +4864,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4857,11 +4877,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.activateEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.activateEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateEntitlement without error using callback', async () => {
@@ -4875,15 +4898,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4913,11 +4932,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.activateEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateEntitlement with call error', async () => {
@@ -4931,26 +4953,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.activateEntitlement = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.activateEntitlement(request), expectedError);
-      assert(
-        (client.innerApiCalls.activateEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateEntitlement with LRO error', async () => {
@@ -4964,15 +4985,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ActivateEntitlementRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ActivateEntitlementRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.activateEntitlement = stubLongRunningCall(
         undefined,
@@ -4981,11 +4998,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.activateEntitlement(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.activateEntitlement as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateEntitlement as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkActivateEntitlementProgress without error', async () => {
@@ -5046,15 +5066,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5063,11 +5079,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.transferEntitlements(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.transferEntitlements as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferEntitlements without error using callback', async () => {
@@ -5081,15 +5100,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5119,11 +5134,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.transferEntitlements as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferEntitlements with call error', async () => {
@@ -5137,26 +5155,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferEntitlements = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.transferEntitlements(request), expectedError);
-      assert(
-        (client.innerApiCalls.transferEntitlements as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferEntitlements with LRO error', async () => {
@@ -5170,15 +5187,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TransferEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferEntitlements = stubLongRunningCall(
         undefined,
@@ -5187,11 +5200,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.transferEntitlements(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.transferEntitlements as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkTransferEntitlementsProgress without error', async () => {
@@ -5252,15 +5268,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TransferEntitlementsToGoogleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5269,11 +5282,14 @@ describe('v1.CloudChannelServiceClient', () => {
       const [operation] = await client.transferEntitlementsToGoogle(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.transferEntitlementsToGoogle as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferEntitlementsToGoogle without error using callback', async () => {
@@ -5287,15 +5303,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TransferEntitlementsToGoogleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -5325,11 +5338,14 @@ describe('v1.CloudChannelServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.transferEntitlementsToGoogle as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferEntitlementsToGoogle with call error', async () => {
@@ -5343,15 +5359,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TransferEntitlementsToGoogleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferEntitlementsToGoogle = stubLongRunningCall(
         undefined,
@@ -5361,11 +5374,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.transferEntitlementsToGoogle(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.transferEntitlementsToGoogle as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes transferEntitlementsToGoogle with LRO error', async () => {
@@ -5379,15 +5395,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.TransferEntitlementsToGoogleRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TransferEntitlementsToGoogleRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.transferEntitlementsToGoogle = stubLongRunningCall(
         undefined,
@@ -5396,11 +5409,14 @@ describe('v1.CloudChannelServiceClient', () => {
       );
       const [operation] = await client.transferEntitlementsToGoogle(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.transferEntitlementsToGoogle as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.transferEntitlementsToGoogle as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkTransferEntitlementsToGoogleProgress without error', async () => {
@@ -5462,15 +5478,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
@@ -5479,11 +5491,14 @@ describe('v1.CloudChannelServiceClient', () => {
       client.innerApiCalls.listCustomers = stubSimpleCall(expectedResponse);
       const [response] = await client.listCustomers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomers without error using callback', async () => {
@@ -5497,15 +5512,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
@@ -5530,11 +5541,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomers with error', async () => {
@@ -5548,26 +5562,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCustomers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCustomers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomersStream without error', async () => {
@@ -5581,8 +5594,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
@@ -5613,11 +5629,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5632,8 +5649,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5659,11 +5679,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5678,8 +5699,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
@@ -5699,11 +5723,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5718,8 +5743,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5736,11 +5764,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5757,15 +5786,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
@@ -5774,11 +5799,14 @@ describe('v1.CloudChannelServiceClient', () => {
       client.innerApiCalls.listEntitlements = stubSimpleCall(expectedResponse);
       const [response] = await client.listEntitlements(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listEntitlements as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntitlements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntitlements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntitlements without error using callback', async () => {
@@ -5792,15 +5820,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
@@ -5825,11 +5849,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listEntitlements as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntitlements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntitlements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntitlements with error', async () => {
@@ -5843,26 +5870,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntitlements = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listEntitlements(request), expectedError);
-      assert(
-        (client.innerApiCalls.listEntitlements as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntitlements as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntitlements as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntitlementsStream without error', async () => {
@@ -5876,8 +5902,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
@@ -5908,11 +5937,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listEntitlements, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntitlements.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntitlements.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5927,8 +5957,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntitlements.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5954,11 +5987,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listEntitlements, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntitlements.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntitlements.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5973,8 +6007,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
@@ -5994,11 +6031,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6013,8 +6051,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListEntitlementsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntitlementsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntitlements.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6031,11 +6072,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntitlements.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6052,15 +6094,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableSku()
@@ -6076,11 +6114,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferableSkus(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferableSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferableSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferableSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferableSkus without error using callback', async () => {
@@ -6094,15 +6135,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableSku()
@@ -6133,11 +6170,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferableSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferableSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferableSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferableSkus with error', async () => {
@@ -6151,26 +6191,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTransferableSkus = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listTransferableSkus(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTransferableSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferableSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferableSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferableSkusStream without error', async () => {
@@ -6184,8 +6223,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableSku()
@@ -6222,11 +6264,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferableSkus, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferableSkus.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferableSkus.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6241,8 +6284,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferableSkus.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6268,11 +6314,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferableSkus, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferableSkus.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferableSkus.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6287,8 +6334,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableSku()
@@ -6314,11 +6364,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6333,8 +6384,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTransferableSkusRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferableSkus.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6351,11 +6405,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6372,15 +6427,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTransferableOffersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableOffer()
@@ -6396,11 +6448,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferableOffers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferableOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferableOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferableOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferableOffers without error using callback', async () => {
@@ -6414,15 +6469,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTransferableOffersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableOffer()
@@ -6453,11 +6505,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTransferableOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferableOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferableOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferableOffers with error', async () => {
@@ -6471,15 +6526,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTransferableOffersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTransferableOffers = stubSimpleCall(
         undefined,
@@ -6489,11 +6541,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.listTransferableOffers(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listTransferableOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTransferableOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTransferableOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTransferableOffersStream without error', async () => {
@@ -6507,8 +6562,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTransferableOffersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableOffer()
@@ -6549,12 +6608,15 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferableOffers, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTransferableOffers
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6569,8 +6631,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTransferableOffersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferableOffers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6600,12 +6666,15 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferableOffers, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTransferableOffers
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6620,8 +6689,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTransferableOffersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.TransferableOffer()
@@ -6648,12 +6721,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTransferableOffers
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6668,8 +6744,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListTransferableOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListTransferableOffersRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTransferableOffers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6688,12 +6768,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listTransferableOffers
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6710,15 +6793,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
@@ -6734,11 +6814,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listChannelPartnerLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listChannelPartnerLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listChannelPartnerLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelPartnerLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listChannelPartnerLinks without error using callback', async () => {
@@ -6752,15 +6835,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
@@ -6791,11 +6871,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listChannelPartnerLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listChannelPartnerLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelPartnerLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listChannelPartnerLinks with error', async () => {
@@ -6809,15 +6892,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChannelPartnerLinks = stubSimpleCall(
         undefined,
@@ -6827,11 +6907,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.listChannelPartnerLinks(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listChannelPartnerLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listChannelPartnerLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelPartnerLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listChannelPartnerLinksStream without error', async () => {
@@ -6845,8 +6928,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
@@ -6887,12 +6974,15 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listChannelPartnerLinks, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerLinks
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6907,8 +6997,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelPartnerLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6938,12 +7032,15 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listChannelPartnerLinks, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerLinks
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6958,8 +7055,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
@@ -6987,12 +7088,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerLinks
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7007,8 +7111,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelPartnerLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7027,12 +7135,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerLinks
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -7049,15 +7160,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCustomerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.CustomerRepricingConfig()
@@ -7073,11 +7181,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCustomerRepricingConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomerRepricingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomerRepricingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomerRepricingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomerRepricingConfigs without error using callback', async () => {
@@ -7091,15 +7202,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCustomerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.CustomerRepricingConfig()
@@ -7132,11 +7240,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomerRepricingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomerRepricingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomerRepricingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomerRepricingConfigs with error', async () => {
@@ -7150,15 +7261,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCustomerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomerRepricingConfigs = stubSimpleCall(
         undefined,
@@ -7168,11 +7276,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.listCustomerRepricingConfigs(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listCustomerRepricingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomerRepricingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomerRepricingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomerRepricingConfigsStream without error', async () => {
@@ -7186,8 +7297,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCustomerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.CustomerRepricingConfig()
@@ -7233,12 +7348,15 @@ describe('v1.CloudChannelServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCustomerRepricingConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7253,8 +7371,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCustomerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomerRepricingConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7289,12 +7411,15 @@ describe('v1.CloudChannelServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCustomerRepricingConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7309,8 +7434,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCustomerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.CustomerRepricingConfig()
@@ -7338,12 +7467,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCustomerRepricingConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7358,8 +7490,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListCustomerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCustomerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomerRepricingConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7378,12 +7514,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCustomerRepricingConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -7400,15 +7539,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
@@ -7426,11 +7562,14 @@ describe('v1.CloudChannelServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listChannelPartnerRepricingConfigs without error using callback', async () => {
@@ -7444,15 +7583,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
@@ -7485,11 +7621,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listChannelPartnerRepricingConfigs with error', async () => {
@@ -7503,15 +7642,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listChannelPartnerRepricingConfigs = stubSimpleCall(
         undefined,
@@ -7521,11 +7657,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.listChannelPartnerRepricingConfigs(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listChannelPartnerRepricingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listChannelPartnerRepricingConfigsStream without error', async () => {
@@ -7539,8 +7678,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
@@ -7586,12 +7729,15 @@ describe('v1.CloudChannelServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerRepricingConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7606,8 +7752,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelPartnerRepricingConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -7642,12 +7792,15 @@ describe('v1.CloudChannelServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerRepricingConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7662,8 +7815,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.ChannelPartnerRepricingConfig()
@@ -7691,12 +7848,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerRepricingConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -7711,8 +7871,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListChannelPartnerRepricingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListChannelPartnerRepricingConfigsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listChannelPartnerRepricingConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -7731,12 +7895,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listChannelPartnerRepricingConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -7753,7 +7920,6 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListProductsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
@@ -7762,11 +7928,6 @@ describe('v1.CloudChannelServiceClient', () => {
       client.innerApiCalls.listProducts = stubSimpleCall(expectedResponse);
       const [response] = await client.listProducts(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listProducts without error using callback', async () => {
@@ -7780,7 +7941,6 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListProductsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
@@ -7805,11 +7965,6 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listProducts with error', async () => {
@@ -7823,18 +7978,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListProductsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listProducts = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listProducts(request), expectedError);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listProductsStream without error', async () => {
@@ -7994,15 +8143,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
@@ -8011,11 +8154,14 @@ describe('v1.CloudChannelServiceClient', () => {
       client.innerApiCalls.listSkus = stubSimpleCall(expectedResponse);
       const [response] = await client.listSkus(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSkus without error using callback', async () => {
@@ -8029,15 +8175,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
@@ -8062,11 +8202,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSkus with error', async () => {
@@ -8080,23 +8223,20 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSkus = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listSkus(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSkusStream without error', async () => {
@@ -8110,8 +8250,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
@@ -8139,10 +8280,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSkus, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSkus.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSkus.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8157,8 +8300,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSkus.createStream = stubPageStreamingCall(
         undefined,
@@ -8183,10 +8327,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSkus, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSkus.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSkus.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8201,8 +8347,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
@@ -8221,10 +8368,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSkus.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSkus.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8239,8 +8388,9 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSkusRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8258,10 +8408,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listSkus.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSkus.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -8278,15 +8430,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
@@ -8295,11 +8443,14 @@ describe('v1.CloudChannelServiceClient', () => {
       client.innerApiCalls.listOffers = stubSimpleCall(expectedResponse);
       const [response] = await client.listOffers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listOffers without error using callback', async () => {
@@ -8313,15 +8464,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
@@ -8346,11 +8493,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listOffers with error', async () => {
@@ -8364,26 +8514,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOffers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listOffers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listOffersStream without error', async () => {
@@ -8397,8 +8546,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
@@ -8426,11 +8578,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listOffers, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listOffers.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOffers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8445,8 +8598,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOffers.createStream = stubPageStreamingCall(
         undefined,
@@ -8471,11 +8627,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listOffers, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listOffers.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOffers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8490,8 +8647,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
@@ -8511,11 +8671,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listOffers.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOffers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8530,8 +8691,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListOffersRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListOffersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOffers.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -8550,11 +8714,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listOffers.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOffers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -8571,15 +8736,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
+        'customer',
+      ]);
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableSku()
@@ -8595,11 +8756,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listPurchasableSkus(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPurchasableSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPurchasableSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPurchasableSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPurchasableSkus without error using callback', async () => {
@@ -8613,15 +8777,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
+        'customer',
+      ]);
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableSku()
@@ -8652,11 +8812,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPurchasableSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPurchasableSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPurchasableSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPurchasableSkus with error', async () => {
@@ -8670,26 +8833,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
+        'customer',
+      ]);
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPurchasableSkus = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listPurchasableSkus(request), expectedError);
-      assert(
-        (client.innerApiCalls.listPurchasableSkus as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPurchasableSkus as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPurchasableSkus as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPurchasableSkusStream without error', async () => {
@@ -8703,8 +8865,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
+        'customer',
+      ]);
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableSku()
@@ -8741,11 +8906,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPurchasableSkus, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPurchasableSkus.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPurchasableSkus.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8760,8 +8926,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
+        'customer',
+      ]);
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPurchasableSkus.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -8787,11 +8956,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPurchasableSkus, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPurchasableSkus.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPurchasableSkus.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8806,8 +8976,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
+        'customer',
+      ]);
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableSku()
@@ -8833,11 +9006,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -8852,8 +9026,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableSkusRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue('ListPurchasableSkusRequest', [
+        'customer',
+      ]);
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPurchasableSkus.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -8870,11 +9047,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -8891,15 +9069,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPurchasableOffersRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableOffer()
@@ -8915,11 +9090,14 @@ describe('v1.CloudChannelServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listPurchasableOffers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPurchasableOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPurchasableOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPurchasableOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPurchasableOffers without error using callback', async () => {
@@ -8933,15 +9111,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPurchasableOffersRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableOffer()
@@ -8972,11 +9147,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPurchasableOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPurchasableOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPurchasableOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPurchasableOffers with error', async () => {
@@ -8990,15 +9168,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPurchasableOffersRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPurchasableOffers = stubSimpleCall(
         undefined,
@@ -9008,11 +9183,14 @@ describe('v1.CloudChannelServiceClient', () => {
         client.listPurchasableOffers(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listPurchasableOffers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPurchasableOffers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPurchasableOffers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPurchasableOffersStream without error', async () => {
@@ -9026,8 +9204,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPurchasableOffersRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableOffer()
@@ -9067,12 +9249,15 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPurchasableOffers, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPurchasableOffers
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9087,8 +9272,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPurchasableOffersRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPurchasableOffers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9117,12 +9306,15 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPurchasableOffers, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPurchasableOffers
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9137,8 +9329,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPurchasableOffersRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.channel.v1.PurchasableOffer()
@@ -9165,12 +9361,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPurchasableOffers
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9185,8 +9384,12 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListPurchasableOffersRequest()
       );
-      request.customer = '';
-      const expectedHeaderRequestParams = 'customer=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPurchasableOffersRequest',
+        ['customer']
+      );
+      request.customer = defaultValue1;
+      const expectedHeaderRequestParams = `customer=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPurchasableOffers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9205,12 +9408,15 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPurchasableOffers
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -9227,24 +9433,23 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.listSubscribers = stubSimpleCall(expectedResponse);
       const [response] = await client.listSubscribers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSubscribers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSubscribers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubscribers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSubscribers without error using callback', async () => {
@@ -9258,15 +9463,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.innerApiCalls.listSubscribers =
         stubSimpleCallWithCallback(expectedResponse);
@@ -9284,11 +9485,14 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listSubscribers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSubscribers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubscribers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSubscribers with error', async () => {
@@ -9302,26 +9506,25 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listSubscribers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listSubscribers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listSubscribers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listSubscribers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listSubscribers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listSubscribersStream without error', async () => {
@@ -9335,8 +9538,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.listSubscribers.createStream =
         stubPageStreamingCall(expectedResponse);
@@ -9360,11 +9566,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSubscribers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSubscribers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSubscribers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9379,8 +9586,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubscribers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9403,11 +9613,12 @@ describe('v1.CloudChannelServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listSubscribers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSubscribers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSubscribers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9422,8 +9633,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [new String(), new String(), new String()];
       client.descriptors.page.listSubscribers.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
@@ -9439,11 +9653,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSubscribers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9458,8 +9673,11 @@ describe('v1.CloudChannelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.channel.v1.ListSubscribersRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue('ListSubscribersRequest', [
+        'account',
+      ]);
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listSubscribers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9476,11 +9694,12 @@ describe('v1.CloudChannelServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listSubscribers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listSubscribers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
