@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -265,26 +280,23 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.Runtime()
       );
       client.innerApiCalls.getRuntime = stubSimpleCall(expectedResponse);
       const [response] = await client.getRuntime(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRuntime without error using callback', async () => {
@@ -297,15 +309,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.Runtime()
       );
@@ -328,11 +334,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRuntime with error', async () => {
@@ -345,26 +354,23 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRuntime = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getRuntime(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRuntime with closed client', async () => {
@@ -377,7 +383,8 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRuntime(request), expectedError);
@@ -395,15 +402,12 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RefreshRuntimeTokenInternalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse()
       );
@@ -411,11 +415,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.refreshRuntimeTokenInternal(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes refreshRuntimeTokenInternal without error using callback', async () => {
@@ -428,15 +435,12 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RefreshRuntimeTokenInternalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse()
       );
@@ -459,11 +463,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes refreshRuntimeTokenInternal with error', async () => {
@@ -476,15 +483,12 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RefreshRuntimeTokenInternalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.refreshRuntimeTokenInternal = stubSimpleCall(
         undefined,
@@ -494,11 +498,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
         client.refreshRuntimeTokenInternal(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.refreshRuntimeTokenInternal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes refreshRuntimeTokenInternal with closed client', async () => {
@@ -511,7 +518,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RefreshRuntimeTokenInternalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -532,15 +543,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -549,11 +556,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const [operation] = await client.createRuntime(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRuntime without error using callback', async () => {
@@ -566,15 +576,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -604,11 +610,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRuntime with call error', async () => {
@@ -621,26 +630,25 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRuntime = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createRuntime(request), expectedError);
-      assert(
-        (client.innerApiCalls.createRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRuntime with LRO error', async () => {
@@ -653,15 +661,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRuntime = stubLongRunningCall(
         undefined,
@@ -670,11 +674,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       );
       const [operation] = await client.createRuntime(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateRuntimeProgress without error', async () => {
@@ -732,15 +739,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -749,11 +752,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const [operation] = await client.deleteRuntime(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRuntime without error using callback', async () => {
@@ -766,15 +772,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -804,11 +806,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRuntime with call error', async () => {
@@ -821,26 +826,25 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRuntime = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteRuntime(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteRuntime with LRO error', async () => {
@@ -853,15 +857,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteRuntime = stubLongRunningCall(
         undefined,
@@ -870,11 +870,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       );
       const [operation] = await client.deleteRuntime(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteRuntimeProgress without error', async () => {
@@ -932,15 +935,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -948,11 +947,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const [operation] = await client.startRuntime(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startRuntime without error using callback', async () => {
@@ -965,15 +967,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1003,11 +1001,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startRuntime with call error', async () => {
@@ -1020,26 +1021,25 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startRuntime = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.startRuntime(request), expectedError);
-      assert(
-        (client.innerApiCalls.startRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startRuntime with LRO error', async () => {
@@ -1052,15 +1052,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startRuntime = stubLongRunningCall(
         undefined,
@@ -1069,11 +1065,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       );
       const [operation] = await client.startRuntime(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.startRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkStartRuntimeProgress without error', async () => {
@@ -1128,15 +1127,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1144,11 +1137,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const [operation] = await client.stopRuntime(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.stopRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopRuntime without error using callback', async () => {
@@ -1161,15 +1157,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1199,11 +1189,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.stopRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopRuntime with call error', async () => {
@@ -1216,26 +1209,23 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopRuntime = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.stopRuntime(request), expectedError);
-      assert(
-        (client.innerApiCalls.stopRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stopRuntime with LRO error', async () => {
@@ -1248,15 +1238,9 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stopRuntime = stubLongRunningCall(
         undefined,
@@ -1265,11 +1249,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       );
       const [operation] = await client.stopRuntime(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.stopRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stopRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkStopRuntimeProgress without error', async () => {
@@ -1324,15 +1311,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1341,11 +1324,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const [operation] = await client.switchRuntime(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.switchRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes switchRuntime without error using callback', async () => {
@@ -1358,15 +1344,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1396,11 +1378,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.switchRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes switchRuntime with call error', async () => {
@@ -1413,26 +1398,25 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.switchRuntime = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.switchRuntime(request), expectedError);
-      assert(
-        (client.innerApiCalls.switchRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes switchRuntime with LRO error', async () => {
@@ -1445,15 +1429,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.switchRuntime = stubLongRunningCall(
         undefined,
@@ -1462,11 +1442,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       );
       const [operation] = await client.switchRuntime(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.switchRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkSwitchRuntimeProgress without error', async () => {
@@ -1524,15 +1507,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1540,11 +1519,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const [operation] = await client.resetRuntime(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetRuntime without error using callback', async () => {
@@ -1557,15 +1539,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1595,11 +1573,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resetRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetRuntime with call error', async () => {
@@ -1612,26 +1593,25 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetRuntime = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.resetRuntime(request), expectedError);
-      assert(
-        (client.innerApiCalls.resetRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resetRuntime with LRO error', async () => {
@@ -1644,15 +1624,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resetRuntime = stubLongRunningCall(
         undefined,
@@ -1661,11 +1637,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       );
       const [operation] = await client.resetRuntime(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.resetRuntime as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resetRuntime as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkResetRuntimeProgress without error', async () => {
@@ -1720,15 +1699,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1737,11 +1712,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const [operation] = await client.reportRuntimeEvent(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reportRuntimeEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reportRuntimeEvent without error using callback', async () => {
@@ -1754,15 +1732,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1792,11 +1766,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reportRuntimeEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reportRuntimeEvent with call error', async () => {
@@ -1809,26 +1786,25 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reportRuntimeEvent = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.reportRuntimeEvent(request), expectedError);
-      assert(
-        (client.innerApiCalls.reportRuntimeEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reportRuntimeEvent with LRO error', async () => {
@@ -1841,15 +1817,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reportRuntimeEvent = stubLongRunningCall(
         undefined,
@@ -1858,11 +1830,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       );
       const [operation] = await client.reportRuntimeEvent(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.reportRuntimeEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reportRuntimeEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkReportRuntimeEventProgress without error', async () => {
@@ -1920,15 +1895,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
@@ -1937,11 +1908,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       client.innerApiCalls.listRuntimes = stubSimpleCall(expectedResponse);
       const [response] = await client.listRuntimes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRuntimes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRuntimes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRuntimes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRuntimes without error using callback', async () => {
@@ -1954,15 +1928,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
@@ -1987,11 +1957,14 @@ describe('v1.ManagedNotebookServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRuntimes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRuntimes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRuntimes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRuntimes with error', async () => {
@@ -2004,26 +1977,25 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRuntimes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRuntimes(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRuntimes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRuntimes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRuntimes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRuntimesStream without error', async () => {
@@ -2036,8 +2008,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
@@ -2068,11 +2043,12 @@ describe('v1.ManagedNotebookServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRuntimes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRuntimes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRuntimes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2086,8 +2062,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimes.createStream = stubPageStreamingCall(
         undefined,
@@ -2115,11 +2094,12 @@ describe('v1.ManagedNotebookServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRuntimes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRuntimes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRuntimes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2133,8 +2113,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
         generateSampleMessage(new protos.google.cloud.notebooks.v1.Runtime()),
@@ -2154,11 +2137,12 @@ describe('v1.ManagedNotebookServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRuntimes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRuntimes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2172,8 +2156,11 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRuntimes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2190,11 +2177,12 @@ describe('v1.ManagedNotebookServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRuntimes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRuntimes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

@@ -595,7 +595,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getRuntime(request, options, callback);
@@ -697,7 +697,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.refreshRuntimeTokenInternal(
@@ -812,7 +812,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createRuntime(request, options, callback);
@@ -953,7 +953,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteRuntime(request, options, callback);
@@ -1098,7 +1098,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.startRuntime(request, options, callback);
@@ -1243,7 +1243,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.stopRuntime(request, options, callback);
@@ -1388,7 +1388,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.switchRuntime(request, options, callback);
@@ -1529,7 +1529,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resetRuntime(request, options, callback);
@@ -1673,7 +1673,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.reportRuntimeEvent(request, options, callback);
@@ -1802,7 +1802,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listRuntimes(request, options, callback);
@@ -1842,7 +1842,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRuntimes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1891,7 +1891,7 @@ export class ManagedNotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listRuntimes'];
     const callSettings = defaultCallSettings.merge(options);

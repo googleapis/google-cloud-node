@@ -805,7 +805,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getInstance(request, options, callback);
@@ -905,7 +905,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateInstanceMetadataItems(
@@ -1010,7 +1010,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        notebook_instance: request.notebookInstance || '',
+        notebook_instance: request.notebookInstance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.isInstanceUpgradeable(request, options, callback);
@@ -1102,7 +1102,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getInstanceHealth(request, options, callback);
@@ -1194,7 +1194,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEnvironment(request, options, callback);
@@ -1280,7 +1280,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getSchedule(request, options, callback);
@@ -1366,7 +1366,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getExecution(request, options, callback);
@@ -1475,7 +1475,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createInstance(request, options, callback);
@@ -1622,7 +1622,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.registerInstance(request, options, callback);
@@ -1768,7 +1768,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setInstanceAccelerator(
@@ -1914,7 +1914,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setInstanceMachineType(
@@ -2059,7 +2059,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateInstanceConfig(request, options, callback);
@@ -2200,7 +2200,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateShieldedInstanceConfig(
@@ -2346,7 +2346,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setInstanceLabels(request, options, callback);
@@ -2485,7 +2485,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteInstance(request, options, callback);
@@ -2624,7 +2624,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.startInstance(request, options, callback);
@@ -2763,7 +2763,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.stopInstance(request, options, callback);
@@ -2902,7 +2902,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resetInstance(request, options, callback);
@@ -3050,7 +3050,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.reportInstanceInfo(request, options, callback);
@@ -3192,7 +3192,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.upgradeInstance(request, options, callback);
@@ -3334,7 +3334,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.rollbackInstance(request, options, callback);
@@ -3480,7 +3480,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.upgradeInstanceInternal(
@@ -3629,7 +3629,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createEnvironment(request, options, callback);
@@ -3768,7 +3768,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteEnvironment(request, options, callback);
@@ -3907,7 +3907,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteSchedule(request, options, callback);
@@ -4050,7 +4050,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createSchedule(request, options, callback);
@@ -4189,7 +4189,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.triggerSchedule(request, options, callback);
@@ -4328,7 +4328,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteExecution(request, options, callback);
@@ -4471,7 +4471,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createExecution(request, options, callback);
@@ -4606,7 +4606,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listInstances(request, options, callback);
@@ -4646,7 +4646,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4695,7 +4695,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4800,7 +4800,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listEnvironments(request, options, callback);
@@ -4839,7 +4839,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4887,7 +4887,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
@@ -4997,7 +4997,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSchedules(request, options, callback);
@@ -5041,7 +5041,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5094,7 +5094,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSchedules'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5206,7 +5206,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listExecutions(request, options, callback);
@@ -5252,7 +5252,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5307,7 +5307,7 @@ export class NotebookServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listExecutions'];
     const callSettings = defaultCallSettings.merge(options);
