@@ -421,7 +421,7 @@ export class PublisherClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        channel_connection: request.channelConnection || '',
+        channel_connection: request.channelConnection ?? '',
       });
     this.initialize();
     return this.innerApiCalls.publishChannelConnectionEvents(
@@ -525,7 +525,7 @@ export class PublisherClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        channel: request.channel || '',
+        channel: request.channel ?? '',
       });
     this.initialize();
     return this.innerApiCalls.publishEvents(request, options, callback);

@@ -25,6 +25,21 @@ import * as publisherModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -157,15 +172,12 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
-      request.channelConnection = '';
-      const expectedHeaderRequestParams = 'channel_connection=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PublishChannelConnectionEventsRequest',
+        ['channelConnection']
+      );
+      request.channelConnection = defaultValue1;
+      const expectedHeaderRequestParams = `channel_connection=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse()
       );
@@ -173,11 +185,14 @@ describe('v1.PublisherClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.publishChannelConnectionEvents(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.publishChannelConnectionEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.publishChannelConnectionEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.publishChannelConnectionEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes publishChannelConnectionEvents without error using callback', async () => {
@@ -189,15 +204,12 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
-      request.channelConnection = '';
-      const expectedHeaderRequestParams = 'channel_connection=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PublishChannelConnectionEventsRequest',
+        ['channelConnection']
+      );
+      request.channelConnection = defaultValue1;
+      const expectedHeaderRequestParams = `channel_connection=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse()
       );
@@ -220,11 +232,14 @@ describe('v1.PublisherClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.publishChannelConnectionEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.publishChannelConnectionEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.publishChannelConnectionEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes publishChannelConnectionEvents with error', async () => {
@@ -236,15 +251,12 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
-      request.channelConnection = '';
-      const expectedHeaderRequestParams = 'channel_connection=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PublishChannelConnectionEventsRequest',
+        ['channelConnection']
+      );
+      request.channelConnection = defaultValue1;
+      const expectedHeaderRequestParams = `channel_connection=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.publishChannelConnectionEvents = stubSimpleCall(
         undefined,
@@ -254,11 +266,14 @@ describe('v1.PublisherClient', () => {
         client.publishChannelConnectionEvents(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.publishChannelConnectionEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.publishChannelConnectionEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.publishChannelConnectionEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes publishChannelConnectionEvents with closed client', async () => {
@@ -270,7 +285,11 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
-      request.channelConnection = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'PublishChannelConnectionEventsRequest',
+        ['channelConnection']
+      );
+      request.channelConnection = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -290,26 +309,25 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      request.channel = '';
-      const expectedHeaderRequestParams = 'channel=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
+        'channel',
+      ]);
+      request.channel = defaultValue1;
+      const expectedHeaderRequestParams = `channel=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsResponse()
       );
       client.innerApiCalls.publishEvents = stubSimpleCall(expectedResponse);
       const [response] = await client.publishEvents(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.publishEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.publishEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.publishEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes publishEvents without error using callback', async () => {
@@ -321,15 +339,11 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      request.channel = '';
-      const expectedHeaderRequestParams = 'channel=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
+        'channel',
+      ]);
+      request.channel = defaultValue1;
+      const expectedHeaderRequestParams = `channel=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsResponse()
       );
@@ -352,11 +366,14 @@ describe('v1.PublisherClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.publishEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.publishEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.publishEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes publishEvents with error', async () => {
@@ -368,26 +385,25 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      request.channel = '';
-      const expectedHeaderRequestParams = 'channel=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
+        'channel',
+      ]);
+      request.channel = defaultValue1;
+      const expectedHeaderRequestParams = `channel=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.publishEvents = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.publishEvents(request), expectedError);
-      assert(
-        (client.innerApiCalls.publishEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.publishEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.publishEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes publishEvents with closed client', async () => {
@@ -399,7 +415,10 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      request.channel = '';
+      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
+        'channel',
+      ]);
+      request.channel = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.publishEvents(request), expectedError);
