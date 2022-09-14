@@ -426,7 +426,7 @@ export class ValidationHelperV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        attestor: request.attestor || '',
+        attestor: request.attestor ?? '',
       });
     this.initialize();
     return this.innerApiCalls.validateAttestationOccurrence(

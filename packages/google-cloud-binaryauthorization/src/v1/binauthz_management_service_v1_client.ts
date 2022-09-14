@@ -441,7 +441,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getPolicy(request, options, callback);
@@ -544,7 +544,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'policy.name': request.policy!.name || '',
+        'policy.name': request.policy!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updatePolicy(request, options, callback);
@@ -650,7 +650,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAttestor(request, options, callback);
@@ -749,7 +749,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAttestor(request, options, callback);
@@ -849,7 +849,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'attestor.name': request.attestor!.name || '',
+        'attestor.name': request.attestor!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAttestor(request, options, callback);
@@ -948,7 +948,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAttestor(request, options, callback);
@@ -1052,7 +1052,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAttestors(request, options, callback);
@@ -1094,7 +1094,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1145,7 +1145,7 @@ export class BinauthzManagementServiceV1Client {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAttestors'];
     const callSettings = defaultCallSettings.merge(options);

@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,26 +269,23 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
       client.innerApiCalls.getPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPolicy without error using callback', async () => {
@@ -288,15 +300,9 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
@@ -319,11 +325,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPolicy with error', async () => {
@@ -338,23 +347,20 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPolicy with closed client', async () => {
@@ -369,7 +375,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -389,27 +396,27 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
       client.innerApiCalls.updatePolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.updatePolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePolicy without error using callback', async () => {
@@ -424,16 +431,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Policy()
       );
@@ -456,11 +460,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePolicy with error', async () => {
@@ -475,27 +482,27 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updatePolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.updatePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePolicy with closed client', async () => {
@@ -510,8 +517,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePolicy(request), expectedError);
@@ -531,26 +542,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
       client.innerApiCalls.createAttestor = stubSimpleCall(expectedResponse);
       const [response] = await client.createAttestor(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAttestor without error using callback', async () => {
@@ -565,15 +575,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
@@ -596,11 +602,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAttestor with error', async () => {
@@ -615,26 +624,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAttestor = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAttestor(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAttestor with closed client', async () => {
@@ -649,7 +657,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createAttestor(request), expectedError);
@@ -669,26 +680,23 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
       client.innerApiCalls.getAttestor = stubSimpleCall(expectedResponse);
       const [response] = await client.getAttestor(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAttestor without error using callback', async () => {
@@ -703,15 +711,9 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
@@ -734,11 +736,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAttestor with error', async () => {
@@ -753,26 +758,23 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttestor = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAttestor(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAttestor with closed client', async () => {
@@ -787,7 +789,8 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAttestor(request), expectedError);
@@ -807,27 +810,27 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
-      request.attestor = {};
-      request.attestor.name = '';
-      const expectedHeaderRequestParams = 'attestor.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.attestor ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
+        'attestor',
+        'name',
+      ]);
+      request.attestor.name = defaultValue1;
+      const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
       client.innerApiCalls.updateAttestor = stubSimpleCall(expectedResponse);
       const [response] = await client.updateAttestor(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAttestor without error using callback', async () => {
@@ -842,16 +845,13 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
-      request.attestor = {};
-      request.attestor.name = '';
-      const expectedHeaderRequestParams = 'attestor.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.attestor ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
+        'attestor',
+        'name',
+      ]);
+      request.attestor.name = defaultValue1;
+      const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
       );
@@ -874,11 +874,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAttestor with error', async () => {
@@ -893,27 +896,27 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
-      request.attestor = {};
-      request.attestor.name = '';
-      const expectedHeaderRequestParams = 'attestor.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.attestor ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
+        'attestor',
+        'name',
+      ]);
+      request.attestor.name = defaultValue1;
+      const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAttestor = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAttestor(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAttestor with closed client', async () => {
@@ -928,8 +931,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
-      request.attestor = {};
-      request.attestor.name = '';
+      request.attestor ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
+        'attestor',
+        'name',
+      ]);
+      request.attestor.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAttestor(request), expectedError);
@@ -949,26 +956,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteAttestor = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAttestor(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAttestor without error using callback', async () => {
@@ -983,15 +989,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1014,11 +1016,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAttestor with error', async () => {
@@ -1033,26 +1038,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAttestor = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAttestor(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAttestor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAttestor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAttestor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAttestor with closed client', async () => {
@@ -1067,7 +1071,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAttestor(request), expectedError);
@@ -1087,15 +1094,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
@@ -1110,11 +1113,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       client.innerApiCalls.listAttestors = stubSimpleCall(expectedResponse);
       const [response] = await client.listAttestors(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAttestors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAttestors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAttestors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAttestors without error using callback', async () => {
@@ -1129,15 +1135,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
@@ -1170,11 +1172,14 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAttestors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAttestors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAttestors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAttestors with error', async () => {
@@ -1189,26 +1194,25 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAttestors = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAttestors(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAttestors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAttestors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAttestors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAttestorsStream without error', async () => {
@@ -1223,8 +1227,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
@@ -1264,11 +1271,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAttestors, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAttestors.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAttestors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1284,8 +1292,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttestors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1314,11 +1325,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAttestors, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAttestors.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAttestors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1334,8 +1346,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.binaryauthorization.v1beta1.Attestor()
@@ -1362,11 +1377,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAttestors.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1382,8 +1398,11 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAttestors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1401,11 +1420,12 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAttestors.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAttestors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
