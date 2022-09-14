@@ -25,6 +25,21 @@ import * as languageserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -159,18 +174,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSentimentRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSentimentResponse()
       );
       client.innerApiCalls.analyzeSentiment = stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeSentiment(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeSentiment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeSentiment without error using callback', async () => {
@@ -182,7 +191,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSentimentRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSentimentResponse()
       );
@@ -205,11 +213,6 @@ describe('v1.LanguageServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeSentiment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes analyzeSentiment with error', async () => {
@@ -221,18 +224,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSentimentRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeSentiment = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.analyzeSentiment(request), expectedError);
-      assert(
-        (client.innerApiCalls.analyzeSentiment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeSentiment with closed client', async () => {
@@ -260,18 +257,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitiesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitiesResponse()
       );
       client.innerApiCalls.analyzeEntities = stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeEntities(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeEntities as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeEntities without error using callback', async () => {
@@ -283,7 +274,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitiesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitiesResponse()
       );
@@ -306,11 +296,6 @@ describe('v1.LanguageServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeEntities as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes analyzeEntities with error', async () => {
@@ -322,18 +307,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitiesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeEntities = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.analyzeEntities(request), expectedError);
-      assert(
-        (client.innerApiCalls.analyzeEntities as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeEntities with closed client', async () => {
@@ -361,7 +340,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitySentimentRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitySentimentResponse()
       );
@@ -369,11 +347,6 @@ describe('v1.LanguageServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeEntitySentiment(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeEntitySentiment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeEntitySentiment without error using callback', async () => {
@@ -385,7 +358,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitySentimentRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitySentimentResponse()
       );
@@ -408,11 +380,6 @@ describe('v1.LanguageServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeEntitySentiment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes analyzeEntitySentiment with error', async () => {
@@ -424,7 +391,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeEntitySentimentRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeEntitySentiment = stubSimpleCall(
         undefined,
@@ -433,11 +399,6 @@ describe('v1.LanguageServiceClient', () => {
       await assert.rejects(
         client.analyzeEntitySentiment(request),
         expectedError
-      );
-      assert(
-        (client.innerApiCalls.analyzeEntitySentiment as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
       );
     });
 
@@ -469,18 +430,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSyntaxRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSyntaxResponse()
       );
       client.innerApiCalls.analyzeSyntax = stubSimpleCall(expectedResponse);
       const [response] = await client.analyzeSyntax(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeSyntax as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeSyntax without error using callback', async () => {
@@ -492,7 +447,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSyntaxRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSyntaxResponse()
       );
@@ -515,11 +469,6 @@ describe('v1.LanguageServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.analyzeSyntax as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes analyzeSyntax with error', async () => {
@@ -531,18 +480,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnalyzeSyntaxRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.analyzeSyntax = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.analyzeSyntax(request), expectedError);
-      assert(
-        (client.innerApiCalls.analyzeSyntax as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes analyzeSyntax with closed client', async () => {
@@ -570,18 +513,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.ClassifyTextRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.ClassifyTextResponse()
       );
       client.innerApiCalls.classifyText = stubSimpleCall(expectedResponse);
       const [response] = await client.classifyText(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.classifyText as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes classifyText without error using callback', async () => {
@@ -593,7 +530,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.ClassifyTextRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.ClassifyTextResponse()
       );
@@ -616,11 +552,6 @@ describe('v1.LanguageServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.classifyText as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes classifyText with error', async () => {
@@ -632,18 +563,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.ClassifyTextRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.classifyText = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.classifyText(request), expectedError);
-      assert(
-        (client.innerApiCalls.classifyText as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes classifyText with closed client', async () => {
@@ -671,18 +596,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnnotateTextRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnnotateTextResponse()
       );
       client.innerApiCalls.annotateText = stubSimpleCall(expectedResponse);
       const [response] = await client.annotateText(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateText as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes annotateText without error using callback', async () => {
@@ -694,7 +613,6 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnnotateTextRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.language.v1.AnnotateTextResponse()
       );
@@ -717,11 +635,6 @@ describe('v1.LanguageServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateText as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes annotateText with error', async () => {
@@ -733,18 +646,12 @@ describe('v1.LanguageServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.language.v1.AnnotateTextRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateText = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.annotateText(request), expectedError);
-      assert(
-        (client.innerApiCalls.annotateText as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes annotateText with closed client', async () => {
