@@ -33,6 +33,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -260,15 +275,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
       );
@@ -276,11 +288,14 @@ describe('v1.NetworkSecurityClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getAuthorizationPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAuthorizationPolicy without error using callback', async () => {
@@ -292,15 +307,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
       );
@@ -323,11 +335,14 @@ describe('v1.NetworkSecurityClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAuthorizationPolicy with error', async () => {
@@ -339,15 +354,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAuthorizationPolicy = stubSimpleCall(
         undefined,
@@ -357,11 +369,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.getAuthorizationPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAuthorizationPolicy with closed client', async () => {
@@ -373,7 +388,11 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetAuthorizationPolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -393,15 +412,11 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
       );
@@ -409,11 +424,14 @@ describe('v1.NetworkSecurityClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getServerTlsPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServerTlsPolicy without error using callback', async () => {
@@ -425,15 +443,11 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
       );
@@ -456,11 +470,14 @@ describe('v1.NetworkSecurityClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServerTlsPolicy with error', async () => {
@@ -472,26 +489,25 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServerTlsPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getServerTlsPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServerTlsPolicy with closed client', async () => {
@@ -503,7 +519,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetServerTlsPolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetServerTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServerTlsPolicy(request), expectedError);
@@ -520,15 +539,11 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
       );
@@ -536,11 +551,14 @@ describe('v1.NetworkSecurityClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getClientTlsPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getClientTlsPolicy without error using callback', async () => {
@@ -552,15 +570,11 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
       );
@@ -583,11 +597,14 @@ describe('v1.NetworkSecurityClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getClientTlsPolicy with error', async () => {
@@ -599,26 +616,25 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getClientTlsPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getClientTlsPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getClientTlsPolicy with closed client', async () => {
@@ -630,7 +646,10 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.GetClientTlsPolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetClientTlsPolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getClientTlsPolicy(request), expectedError);
@@ -647,15 +666,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAuthorizationPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -664,11 +680,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.createAuthorizationPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAuthorizationPolicy without error using callback', async () => {
@@ -680,15 +699,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAuthorizationPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -718,11 +734,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAuthorizationPolicy with call error', async () => {
@@ -734,15 +753,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAuthorizationPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -752,11 +768,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.createAuthorizationPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAuthorizationPolicy with LRO error', async () => {
@@ -768,15 +787,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateAuthorizationPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateAuthorizationPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -785,11 +801,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.createAuthorizationPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateAuthorizationPolicyProgress without error', async () => {
@@ -845,16 +864,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
-      request.authorizationPolicy = {};
-      request.authorizationPolicy.name = '';
-      const expectedHeaderRequestParams = 'authorization_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.authorizationPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAuthorizationPolicyRequest',
+        ['authorizationPolicy', 'name']
+      );
+      request.authorizationPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -863,11 +879,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.updateAuthorizationPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAuthorizationPolicy without error using callback', async () => {
@@ -879,16 +898,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
-      request.authorizationPolicy = {};
-      request.authorizationPolicy.name = '';
-      const expectedHeaderRequestParams = 'authorization_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.authorizationPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAuthorizationPolicyRequest',
+        ['authorizationPolicy', 'name']
+      );
+      request.authorizationPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -918,11 +934,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAuthorizationPolicy with call error', async () => {
@@ -934,16 +953,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
-      request.authorizationPolicy = {};
-      request.authorizationPolicy.name = '';
-      const expectedHeaderRequestParams = 'authorization_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.authorizationPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAuthorizationPolicyRequest',
+        ['authorizationPolicy', 'name']
+      );
+      request.authorizationPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -953,11 +969,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.updateAuthorizationPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAuthorizationPolicy with LRO error', async () => {
@@ -969,16 +988,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateAuthorizationPolicyRequest()
       );
-      request.authorizationPolicy = {};
-      request.authorizationPolicy.name = '';
-      const expectedHeaderRequestParams = 'authorization_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.authorizationPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAuthorizationPolicyRequest',
+        ['authorizationPolicy', 'name']
+      );
+      request.authorizationPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `authorization_policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -987,11 +1003,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.updateAuthorizationPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateAuthorizationPolicyProgress without error', async () => {
@@ -1047,15 +1066,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1064,11 +1080,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.deleteAuthorizationPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAuthorizationPolicy without error using callback', async () => {
@@ -1080,15 +1099,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1118,11 +1134,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAuthorizationPolicy with call error', async () => {
@@ -1134,15 +1153,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -1152,11 +1168,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.deleteAuthorizationPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAuthorizationPolicy with LRO error', async () => {
@@ -1168,15 +1187,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteAuthorizationPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAuthorizationPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAuthorizationPolicy = stubLongRunningCall(
         undefined,
@@ -1185,11 +1201,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.deleteAuthorizationPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAuthorizationPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAuthorizationPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteAuthorizationPolicyProgress without error', async () => {
@@ -1245,15 +1264,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateServerTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1262,11 +1278,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.createServerTlsPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServerTlsPolicy without error using callback', async () => {
@@ -1278,15 +1297,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateServerTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1316,11 +1332,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServerTlsPolicy with call error', async () => {
@@ -1332,15 +1351,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateServerTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1350,11 +1366,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.createServerTlsPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServerTlsPolicy with LRO error', async () => {
@@ -1366,15 +1385,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateServerTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateServerTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1383,11 +1399,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.createServerTlsPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateServerTlsPolicyProgress without error', async () => {
@@ -1442,16 +1461,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
-      request.serverTlsPolicy = {};
-      request.serverTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'server_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.serverTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateServerTlsPolicyRequest',
+        ['serverTlsPolicy', 'name']
+      );
+      request.serverTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1460,11 +1476,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.updateServerTlsPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateServerTlsPolicy without error using callback', async () => {
@@ -1476,16 +1495,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
-      request.serverTlsPolicy = {};
-      request.serverTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'server_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.serverTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateServerTlsPolicyRequest',
+        ['serverTlsPolicy', 'name']
+      );
+      request.serverTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1515,11 +1531,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateServerTlsPolicy with call error', async () => {
@@ -1531,16 +1550,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
-      request.serverTlsPolicy = {};
-      request.serverTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'server_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.serverTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateServerTlsPolicyRequest',
+        ['serverTlsPolicy', 'name']
+      );
+      request.serverTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1550,11 +1566,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.updateServerTlsPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateServerTlsPolicy with LRO error', async () => {
@@ -1566,16 +1585,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateServerTlsPolicyRequest()
       );
-      request.serverTlsPolicy = {};
-      request.serverTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'server_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.serverTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateServerTlsPolicyRequest',
+        ['serverTlsPolicy', 'name']
+      );
+      request.serverTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `server_tls_policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1584,11 +1600,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.updateServerTlsPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateServerTlsPolicyProgress without error', async () => {
@@ -1643,15 +1662,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteServerTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1660,11 +1676,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.deleteServerTlsPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteServerTlsPolicy without error using callback', async () => {
@@ -1676,15 +1695,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteServerTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1714,11 +1730,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteServerTlsPolicy with call error', async () => {
@@ -1730,15 +1749,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteServerTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1748,11 +1764,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.deleteServerTlsPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteServerTlsPolicy with LRO error', async () => {
@@ -1764,15 +1783,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteServerTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteServerTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServerTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1781,11 +1797,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.deleteServerTlsPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteServerTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteServerTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteServerTlsPolicyProgress without error', async () => {
@@ -1840,15 +1859,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateClientTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1857,11 +1873,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.createClientTlsPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createClientTlsPolicy without error using callback', async () => {
@@ -1873,15 +1892,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateClientTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1911,11 +1927,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createClientTlsPolicy with call error', async () => {
@@ -1927,15 +1946,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateClientTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1945,11 +1961,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.createClientTlsPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createClientTlsPolicy with LRO error', async () => {
@@ -1961,15 +1980,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.CreateClientTlsPolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateClientTlsPolicyRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -1978,11 +1994,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.createClientTlsPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateClientTlsPolicyProgress without error', async () => {
@@ -2037,16 +2056,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
-      request.clientTlsPolicy = {};
-      request.clientTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'client_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.clientTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateClientTlsPolicyRequest',
+        ['clientTlsPolicy', 'name']
+      );
+      request.clientTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2055,11 +2071,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.updateClientTlsPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateClientTlsPolicy without error using callback', async () => {
@@ -2071,16 +2090,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
-      request.clientTlsPolicy = {};
-      request.clientTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'client_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.clientTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateClientTlsPolicyRequest',
+        ['clientTlsPolicy', 'name']
+      );
+      request.clientTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2110,11 +2126,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateClientTlsPolicy with call error', async () => {
@@ -2126,16 +2145,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
-      request.clientTlsPolicy = {};
-      request.clientTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'client_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.clientTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateClientTlsPolicyRequest',
+        ['clientTlsPolicy', 'name']
+      );
+      request.clientTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2145,11 +2161,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.updateClientTlsPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateClientTlsPolicy with LRO error', async () => {
@@ -2161,16 +2180,13 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.UpdateClientTlsPolicyRequest()
       );
-      request.clientTlsPolicy = {};
-      request.clientTlsPolicy.name = '';
-      const expectedHeaderRequestParams = 'client_tls_policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.clientTlsPolicy ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateClientTlsPolicyRequest',
+        ['clientTlsPolicy', 'name']
+      );
+      request.clientTlsPolicy.name = defaultValue1;
+      const expectedHeaderRequestParams = `client_tls_policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2179,11 +2195,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.updateClientTlsPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateClientTlsPolicyProgress without error', async () => {
@@ -2238,15 +2257,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteClientTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2255,11 +2271,14 @@ describe('v1.NetworkSecurityClient', () => {
       const [operation] = await client.deleteClientTlsPolicy(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteClientTlsPolicy without error using callback', async () => {
@@ -2271,15 +2290,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteClientTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2309,11 +2325,14 @@ describe('v1.NetworkSecurityClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteClientTlsPolicy with call error', async () => {
@@ -2325,15 +2344,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteClientTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2343,11 +2359,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.deleteClientTlsPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteClientTlsPolicy with LRO error', async () => {
@@ -2359,15 +2378,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.DeleteClientTlsPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteClientTlsPolicyRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteClientTlsPolicy = stubLongRunningCall(
         undefined,
@@ -2376,11 +2392,14 @@ describe('v1.NetworkSecurityClient', () => {
       );
       const [operation] = await client.deleteClientTlsPolicy(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteClientTlsPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteClientTlsPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteClientTlsPolicyProgress without error', async () => {
@@ -2435,15 +2454,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAuthorizationPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2459,11 +2475,14 @@ describe('v1.NetworkSecurityClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listAuthorizationPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAuthorizationPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthorizationPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAuthorizationPolicies without error using callback', async () => {
@@ -2475,15 +2494,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAuthorizationPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2516,11 +2532,14 @@ describe('v1.NetworkSecurityClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAuthorizationPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthorizationPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAuthorizationPolicies with error', async () => {
@@ -2532,15 +2551,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAuthorizationPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAuthorizationPolicies = stubSimpleCall(
         undefined,
@@ -2550,11 +2566,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.listAuthorizationPolicies(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listAuthorizationPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAuthorizationPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAuthorizationPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAuthorizationPoliciesStream without error', async () => {
@@ -2566,8 +2585,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAuthorizationPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2610,12 +2633,15 @@ describe('v1.NetworkSecurityClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAuthorizationPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAuthorizationPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2628,8 +2654,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAuthorizationPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizationPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2661,12 +2691,15 @@ describe('v1.NetworkSecurityClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAuthorizationPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAuthorizationPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2679,8 +2712,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAuthorizationPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.AuthorizationPolicy()
@@ -2708,12 +2745,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAuthorizationPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2726,8 +2766,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListAuthorizationPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListAuthorizationPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAuthorizationPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2746,12 +2790,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listAuthorizationPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2766,15 +2813,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListServerTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -2790,11 +2834,14 @@ describe('v1.NetworkSecurityClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listServerTlsPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServerTlsPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServerTlsPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServerTlsPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServerTlsPolicies without error using callback', async () => {
@@ -2806,15 +2853,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListServerTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -2847,11 +2891,14 @@ describe('v1.NetworkSecurityClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServerTlsPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServerTlsPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServerTlsPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServerTlsPolicies with error', async () => {
@@ -2863,15 +2910,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListServerTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServerTlsPolicies = stubSimpleCall(
         undefined,
@@ -2881,11 +2925,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.listServerTlsPolicies(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listServerTlsPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServerTlsPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServerTlsPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServerTlsPoliciesStream without error', async () => {
@@ -2897,8 +2944,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListServerTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -2941,12 +2992,15 @@ describe('v1.NetworkSecurityClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServerTlsPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listServerTlsPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2959,8 +3013,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListServerTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServerTlsPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2992,12 +3050,15 @@ describe('v1.NetworkSecurityClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServerTlsPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listServerTlsPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3010,8 +3071,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListServerTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ServerTlsPolicy()
@@ -3039,12 +3104,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listServerTlsPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3057,8 +3125,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListServerTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListServerTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServerTlsPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3077,12 +3149,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listServerTlsPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3097,15 +3172,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListClientTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3121,11 +3193,14 @@ describe('v1.NetworkSecurityClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listClientTlsPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listClientTlsPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listClientTlsPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClientTlsPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listClientTlsPolicies without error using callback', async () => {
@@ -3137,15 +3212,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListClientTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3178,11 +3250,14 @@ describe('v1.NetworkSecurityClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listClientTlsPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listClientTlsPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClientTlsPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listClientTlsPolicies with error', async () => {
@@ -3194,15 +3269,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListClientTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listClientTlsPolicies = stubSimpleCall(
         undefined,
@@ -3212,11 +3284,14 @@ describe('v1.NetworkSecurityClient', () => {
         client.listClientTlsPolicies(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listClientTlsPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listClientTlsPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listClientTlsPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listClientTlsPoliciesStream without error', async () => {
@@ -3228,8 +3303,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListClientTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3272,12 +3351,15 @@ describe('v1.NetworkSecurityClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listClientTlsPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listClientTlsPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3290,8 +3372,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListClientTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClientTlsPolicies.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3323,12 +3409,15 @@ describe('v1.NetworkSecurityClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listClientTlsPolicies, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listClientTlsPolicies
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3341,8 +3430,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListClientTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.networksecurity.v1.ClientTlsPolicy()
@@ -3370,12 +3463,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listClientTlsPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3388,8 +3484,12 @@ describe('v1.NetworkSecurityClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networksecurity.v1.ListClientTlsPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListClientTlsPoliciesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listClientTlsPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3408,12 +3508,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listClientTlsPolicies
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3888,12 +3991,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -3924,12 +4030,15 @@ describe('v1.NetworkSecurityClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

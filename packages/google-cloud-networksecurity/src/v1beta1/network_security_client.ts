@@ -679,7 +679,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAuthorizationPolicy(
@@ -781,7 +781,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getServerTlsPolicy(request, options, callback);
@@ -879,7 +879,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getClientTlsPolicy(request, options, callback);
@@ -991,7 +991,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAuthorizationPolicy(
@@ -1139,7 +1139,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'authorization_policy.name': request.authorizationPolicy!.name || '',
+        'authorization_policy.name': request.authorizationPolicy!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAuthorizationPolicy(
@@ -1282,7 +1282,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAuthorizationPolicy(
@@ -1432,7 +1432,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createServerTlsPolicy(request, options, callback);
@@ -1577,7 +1577,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'server_tls_policy.name': request.serverTlsPolicy!.name || '',
+        'server_tls_policy.name': request.serverTlsPolicy!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateServerTlsPolicy(request, options, callback);
@@ -1716,7 +1716,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteServerTlsPolicy(request, options, callback);
@@ -1862,7 +1862,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createClientTlsPolicy(request, options, callback);
@@ -2007,7 +2007,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'client_tls_policy.name': request.clientTlsPolicy!.name || '',
+        'client_tls_policy.name': request.clientTlsPolicy!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateClientTlsPolicy(request, options, callback);
@@ -2146,7 +2146,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteClientTlsPolicy(request, options, callback);
@@ -2284,7 +2284,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAuthorizationPolicies(
@@ -2331,7 +2331,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2383,7 +2383,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAuthorizationPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2491,7 +2491,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listServerTlsPolicies(request, options, callback);
@@ -2533,7 +2533,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listServerTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2584,7 +2584,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listServerTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2692,7 +2692,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listClientTlsPolicies(request, options, callback);
@@ -2734,7 +2734,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listClientTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2785,7 +2785,7 @@ export class NetworkSecurityClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listClientTlsPolicies'];
     const callSettings = defaultCallSettings.merge(options);
