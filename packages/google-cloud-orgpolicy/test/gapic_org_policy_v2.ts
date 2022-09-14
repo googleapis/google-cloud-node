@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -220,26 +235,23 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
       client.innerApiCalls.getPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPolicy without error using callback', async () => {
@@ -251,15 +263,9 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -282,11 +288,14 @@ describe('v2.OrgPolicyClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPolicy with error', async () => {
@@ -298,23 +307,20 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPolicy = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPolicy with closed client', async () => {
@@ -326,7 +332,8 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetPolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPolicy(request), expectedError);
@@ -343,15 +350,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -359,11 +362,14 @@ describe('v2.OrgPolicyClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getEffectivePolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEffectivePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectivePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectivePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectivePolicy without error using callback', async () => {
@@ -375,15 +381,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -406,11 +408,14 @@ describe('v2.OrgPolicyClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEffectivePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectivePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectivePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectivePolicy with error', async () => {
@@ -422,26 +427,25 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectivePolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getEffectivePolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getEffectivePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectivePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectivePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectivePolicy with closed client', async () => {
@@ -453,7 +457,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.GetEffectivePolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetEffectivePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEffectivePolicy(request), expectedError);
@@ -470,26 +477,25 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
       client.innerApiCalls.createPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.createPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPolicy without error using callback', async () => {
@@ -501,15 +507,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -532,11 +534,14 @@ describe('v2.OrgPolicyClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPolicy with error', async () => {
@@ -548,26 +553,25 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.createPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPolicy with closed client', async () => {
@@ -579,7 +583,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.CreatePolicyRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreatePolicyRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPolicy(request), expectedError);
@@ -596,27 +603,27 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
       client.innerApiCalls.updatePolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.updatePolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePolicy without error using callback', async () => {
@@ -628,16 +635,13 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.Policy()
       );
@@ -660,11 +664,14 @@ describe('v2.OrgPolicyClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePolicy with error', async () => {
@@ -676,27 +683,27 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
-      const expectedHeaderRequestParams = 'policy.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
+      const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updatePolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.updatePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePolicy with closed client', async () => {
@@ -708,8 +715,12 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.UpdatePolicyRequest()
       );
-      request.policy = {};
-      request.policy.name = '';
+      request.policy ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
+        'policy',
+        'name',
+      ]);
+      request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePolicy(request), expectedError);
@@ -726,26 +737,25 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deletePolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.deletePolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePolicy without error using callback', async () => {
@@ -757,15 +767,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -788,11 +794,14 @@ describe('v2.OrgPolicyClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePolicy with error', async () => {
@@ -804,26 +813,25 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deletePolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.deletePolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePolicy with closed client', async () => {
@@ -835,7 +843,10 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.DeletePolicyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeletePolicyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePolicy(request), expectedError);
@@ -852,15 +863,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -875,11 +882,14 @@ describe('v2.OrgPolicyClient', () => {
       client.innerApiCalls.listConstraints = stubSimpleCall(expectedResponse);
       const [response] = await client.listConstraints(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConstraints as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConstraints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConstraints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConstraints without error using callback', async () => {
@@ -891,15 +901,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -930,11 +936,14 @@ describe('v2.OrgPolicyClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConstraints as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConstraints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConstraints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConstraints with error', async () => {
@@ -946,26 +955,25 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConstraints = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listConstraints(request), expectedError);
-      assert(
-        (client.innerApiCalls.listConstraints as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConstraints as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConstraints as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConstraintsStream without error', async () => {
@@ -977,8 +985,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -1015,11 +1026,12 @@ describe('v2.OrgPolicyClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConstraints, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConstraints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConstraints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1032,8 +1044,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConstraints.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1059,11 +1074,12 @@ describe('v2.OrgPolicyClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConstraints, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConstraints.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConstraints.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1076,8 +1092,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.orgpolicy.v2.Constraint()
@@ -1103,11 +1122,12 @@ describe('v2.OrgPolicyClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConstraints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConstraints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1120,8 +1140,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListConstraintsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConstraintsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConstraints.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1138,11 +1161,12 @@ describe('v2.OrgPolicyClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConstraints.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConstraints.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1157,15 +1181,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -1174,11 +1194,14 @@ describe('v2.OrgPolicyClient', () => {
       client.innerApiCalls.listPolicies = stubSimpleCall(expectedResponse);
       const [response] = await client.listPolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPolicies without error using callback', async () => {
@@ -1190,15 +1213,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -1223,11 +1242,14 @@ describe('v2.OrgPolicyClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPolicies with error', async () => {
@@ -1239,26 +1261,25 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPolicies = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listPolicies(request), expectedError);
-      assert(
-        (client.innerApiCalls.listPolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPoliciesStream without error', async () => {
@@ -1270,8 +1291,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -1302,11 +1326,12 @@ describe('v2.OrgPolicyClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPolicies, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPolicies.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1319,8 +1344,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicies.createStream = stubPageStreamingCall(
         undefined,
@@ -1348,11 +1376,12 @@ describe('v2.OrgPolicyClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPolicies, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPolicies.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPolicies.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1365,8 +1394,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
         generateSampleMessage(new protos.google.cloud.orgpolicy.v2.Policy()),
@@ -1386,11 +1418,12 @@ describe('v2.OrgPolicyClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPolicies.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1403,8 +1436,11 @@ describe('v2.OrgPolicyClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orgpolicy.v2.ListPoliciesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPoliciesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPolicies.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1421,11 +1457,12 @@ describe('v2.OrgPolicyClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPolicies.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPolicies.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
