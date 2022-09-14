@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -223,15 +238,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMigrationWorkflowRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -239,11 +251,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createMigrationWorkflow(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMigrationWorkflow without error using callback', async () => {
@@ -255,15 +270,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMigrationWorkflowRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -286,11 +298,14 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMigrationWorkflow with error', async () => {
@@ -302,15 +317,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMigrationWorkflowRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMigrationWorkflow = stubSimpleCall(
         undefined,
@@ -320,11 +332,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         client.createMigrationWorkflow(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMigrationWorkflow with closed client', async () => {
@@ -336,7 +351,11 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.CreateMigrationWorkflowRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMigrationWorkflowRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -356,15 +375,11 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -372,11 +387,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getMigrationWorkflow(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigrationWorkflow without error using callback', async () => {
@@ -388,15 +406,11 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
       );
@@ -419,11 +433,14 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigrationWorkflow with error', async () => {
@@ -435,26 +452,25 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMigrationWorkflow = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getMigrationWorkflow(request), expectedError);
-      assert(
-        (client.innerApiCalls.getMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigrationWorkflow with closed client', async () => {
@@ -466,7 +482,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationWorkflowRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetMigrationWorkflowRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMigrationWorkflow(request), expectedError);
@@ -483,15 +502,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -499,11 +515,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteMigrationWorkflow(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMigrationWorkflow without error using callback', async () => {
@@ -515,15 +534,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -546,11 +562,14 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMigrationWorkflow with error', async () => {
@@ -562,15 +581,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMigrationWorkflow = stubSimpleCall(
         undefined,
@@ -580,11 +596,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         client.deleteMigrationWorkflow(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMigrationWorkflow with closed client', async () => {
@@ -596,7 +615,11 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.DeleteMigrationWorkflowRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -616,15 +639,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -632,11 +652,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.startMigrationWorkflow(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startMigrationWorkflow without error using callback', async () => {
@@ -648,15 +671,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -679,11 +699,14 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startMigrationWorkflow with error', async () => {
@@ -695,15 +718,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startMigrationWorkflow = stubSimpleCall(
         undefined,
@@ -713,11 +733,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         client.startMigrationWorkflow(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.startMigrationWorkflow as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startMigrationWorkflow as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startMigrationWorkflow as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startMigrationWorkflow with closed client', async () => {
@@ -729,7 +752,11 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.StartMigrationWorkflowRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'StartMigrationWorkflowRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -749,15 +776,11 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
       );
@@ -765,11 +788,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getMigrationSubtask(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMigrationSubtask as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigrationSubtask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigrationSubtask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigrationSubtask without error using callback', async () => {
@@ -781,15 +807,11 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
       );
@@ -812,11 +834,14 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMigrationSubtask as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigrationSubtask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigrationSubtask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigrationSubtask with error', async () => {
@@ -828,26 +853,25 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMigrationSubtask = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getMigrationSubtask(request), expectedError);
-      assert(
-        (client.innerApiCalls.getMigrationSubtask as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMigrationSubtask as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMigrationSubtask as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMigrationSubtask with closed client', async () => {
@@ -859,7 +883,10 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.GetMigrationSubtaskRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetMigrationSubtaskRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getMigrationSubtask(request), expectedError);
@@ -876,15 +903,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationWorkflowsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -900,11 +924,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listMigrationWorkflows(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMigrationWorkflows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigrationWorkflows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigrationWorkflows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigrationWorkflows without error using callback', async () => {
@@ -916,15 +943,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationWorkflowsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -957,11 +981,14 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMigrationWorkflows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigrationWorkflows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigrationWorkflows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigrationWorkflows with error', async () => {
@@ -973,15 +1000,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationWorkflowsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMigrationWorkflows = stubSimpleCall(
         undefined,
@@ -991,11 +1015,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         client.listMigrationWorkflows(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listMigrationWorkflows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigrationWorkflows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigrationWorkflows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigrationWorkflowsStream without error', async () => {
@@ -1007,8 +1034,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationWorkflowsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -1051,12 +1082,15 @@ describe('v2alpha.MigrationServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listMigrationWorkflows, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationWorkflows
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1069,8 +1103,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationWorkflowsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationWorkflows.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1102,12 +1140,15 @@ describe('v2alpha.MigrationServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listMigrationWorkflows, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationWorkflows
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1120,8 +1161,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationWorkflowsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationWorkflow()
@@ -1149,12 +1194,15 @@ describe('v2alpha.MigrationServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationWorkflows
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1167,8 +1215,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationWorkflowsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationWorkflowsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationWorkflows.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1187,12 +1239,15 @@ describe('v2alpha.MigrationServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationWorkflows
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1207,15 +1262,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationSubtasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1231,11 +1283,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listMigrationSubtasks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMigrationSubtasks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigrationSubtasks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigrationSubtasks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigrationSubtasks without error using callback', async () => {
@@ -1247,15 +1302,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationSubtasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1288,11 +1340,14 @@ describe('v2alpha.MigrationServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMigrationSubtasks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigrationSubtasks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigrationSubtasks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigrationSubtasks with error', async () => {
@@ -1304,15 +1359,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationSubtasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMigrationSubtasks = stubSimpleCall(
         undefined,
@@ -1322,11 +1374,14 @@ describe('v2alpha.MigrationServiceClient', () => {
         client.listMigrationSubtasks(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listMigrationSubtasks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMigrationSubtasks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMigrationSubtasks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMigrationSubtasksStream without error', async () => {
@@ -1338,8 +1393,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationSubtasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1382,12 +1441,15 @@ describe('v2alpha.MigrationServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listMigrationSubtasks, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationSubtasks
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1400,8 +1462,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationSubtasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationSubtasks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1433,12 +1499,15 @@ describe('v2alpha.MigrationServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listMigrationSubtasks, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationSubtasks
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1451,8 +1520,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationSubtasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.migration.v2alpha.MigrationSubtask()
@@ -1480,12 +1553,15 @@ describe('v2alpha.MigrationServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationSubtasks
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1498,8 +1574,12 @@ describe('v2alpha.MigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.migration.v2alpha.ListMigrationSubtasksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMigrationSubtasksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMigrationSubtasks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1518,12 +1598,15 @@ describe('v2alpha.MigrationServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMigrationSubtasks
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
