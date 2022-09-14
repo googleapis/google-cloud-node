@@ -549,8 +549,8 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        index_id: request.indexId || '',
+        project_id: request.projectId ?? '',
+        index_id: request.indexId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIndex(request, options, callback);
@@ -684,7 +684,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.exportEntities(request, options, callback);
@@ -847,7 +847,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.importEntities(request, options, callback);
@@ -1001,7 +1001,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createIndex(request, options, callback);
@@ -1150,8 +1150,8 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
-        index_id: request.indexId || '',
+        project_id: request.projectId ?? '',
+        index_id: request.indexId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteIndex(request, options, callback);
@@ -1282,7 +1282,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listIndexes(request, options, callback);
@@ -1322,7 +1322,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1371,7 +1371,7 @@ export class DatastoreAdminClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     const defaultCallSettings = this._defaults['listIndexes'];
     const callSettings = defaultCallSettings.merge(options);

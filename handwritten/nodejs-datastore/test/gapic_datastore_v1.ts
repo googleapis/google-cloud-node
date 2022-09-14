@@ -25,6 +25,21 @@ import * as datastoreModule from '../src';
 
 import {protobuf, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -180,26 +195,23 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.LookupResponse()
       );
       client.innerApiCalls.lookup = stubSimpleCall(expectedResponse);
       const [response] = await client.lookup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.lookup as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookup without error using callback', async () => {
@@ -211,15 +223,9 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.LookupResponse()
       );
@@ -242,11 +248,14 @@ describe('v1.DatastoreClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.lookup as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookup with error', async () => {
@@ -258,23 +267,20 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.lookup = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.lookup(request), expectedError);
-      assert(
-        (client.innerApiCalls.lookup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.lookup as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.lookup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes lookup with closed client', async () => {
@@ -286,7 +292,8 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.LookupRequest()
       );
-      request.projectId = '';
+      const defaultValue1 = getTypeDefaultValue('LookupRequest', ['projectId']);
+      request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.lookup(request), expectedError);
@@ -303,26 +310,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryResponse()
       );
       client.innerApiCalls.runQuery = stubSimpleCall(expectedResponse);
       const [response] = await client.runQuery(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runQuery without error using callback', async () => {
@@ -334,15 +340,11 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryResponse()
       );
@@ -365,11 +367,14 @@ describe('v1.DatastoreClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runQuery with error', async () => {
@@ -381,23 +386,22 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runQuery = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.runQuery(request), expectedError);
-      assert(
-        (client.innerApiCalls.runQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runQuery with closed client', async () => {
@@ -409,7 +413,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RunQueryRequest()
       );
-      request.projectId = '';
+      const defaultValue1 = getTypeDefaultValue('RunQueryRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runQuery(request), expectedError);
@@ -426,26 +433,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionResponse()
       );
       client.innerApiCalls.beginTransaction = stubSimpleCall(expectedResponse);
       const [response] = await client.beginTransaction(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.beginTransaction as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.beginTransaction as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.beginTransaction as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes beginTransaction without error using callback', async () => {
@@ -457,15 +463,11 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionResponse()
       );
@@ -488,11 +490,14 @@ describe('v1.DatastoreClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.beginTransaction as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.beginTransaction as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.beginTransaction as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes beginTransaction with error', async () => {
@@ -504,26 +509,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.beginTransaction = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.beginTransaction(request), expectedError);
-      assert(
-        (client.innerApiCalls.beginTransaction as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.beginTransaction as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.beginTransaction as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes beginTransaction with closed client', async () => {
@@ -535,7 +539,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.BeginTransactionRequest()
       );
-      request.projectId = '';
+      const defaultValue1 = getTypeDefaultValue('BeginTransactionRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.beginTransaction(request), expectedError);
@@ -552,26 +559,23 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.CommitResponse()
       );
       client.innerApiCalls.commit = stubSimpleCall(expectedResponse);
       const [response] = await client.commit(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.commit as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.commit as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.commit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes commit without error using callback', async () => {
@@ -583,15 +587,9 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.CommitResponse()
       );
@@ -614,11 +612,14 @@ describe('v1.DatastoreClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.commit as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.commit as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.commit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes commit with error', async () => {
@@ -630,23 +631,20 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.commit = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.commit(request), expectedError);
-      assert(
-        (client.innerApiCalls.commit as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.commit as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.commit as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes commit with closed client', async () => {
@@ -658,7 +656,8 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.CommitRequest()
       );
-      request.projectId = '';
+      const defaultValue1 = getTypeDefaultValue('CommitRequest', ['projectId']);
+      request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.commit(request), expectedError);
@@ -675,26 +674,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RollbackResponse()
       );
       client.innerApiCalls.rollback = stubSimpleCall(expectedResponse);
       const [response] = await client.rollback(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.rollback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.rollback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes rollback without error using callback', async () => {
@@ -706,15 +704,11 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.RollbackResponse()
       );
@@ -737,11 +731,14 @@ describe('v1.DatastoreClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.rollback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.rollback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes rollback with error', async () => {
@@ -753,23 +750,22 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.rollback = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.rollback(request), expectedError);
-      assert(
-        (client.innerApiCalls.rollback as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.rollback as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.rollback as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes rollback with closed client', async () => {
@@ -781,7 +777,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.RollbackRequest()
       );
-      request.projectId = '';
+      const defaultValue1 = getTypeDefaultValue('RollbackRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.rollback(request), expectedError);
@@ -798,26 +797,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsResponse()
       );
       client.innerApiCalls.allocateIds = stubSimpleCall(expectedResponse);
       const [response] = await client.allocateIds(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.allocateIds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.allocateIds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.allocateIds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes allocateIds without error using callback', async () => {
@@ -829,15 +827,11 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsResponse()
       );
@@ -860,11 +854,14 @@ describe('v1.DatastoreClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.allocateIds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.allocateIds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.allocateIds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes allocateIds with error', async () => {
@@ -876,26 +873,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.allocateIds = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.allocateIds(request), expectedError);
-      assert(
-        (client.innerApiCalls.allocateIds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.allocateIds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.allocateIds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes allocateIds with closed client', async () => {
@@ -907,7 +903,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.AllocateIdsRequest()
       );
-      request.projectId = '';
+      const defaultValue1 = getTypeDefaultValue('AllocateIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.allocateIds(request), expectedError);
@@ -924,26 +923,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsResponse()
       );
       client.innerApiCalls.reserveIds = stubSimpleCall(expectedResponse);
       const [response] = await client.reserveIds(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reserveIds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reserveIds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reserveIds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reserveIds without error using callback', async () => {
@@ -955,15 +953,11 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsResponse()
       );
@@ -986,11 +980,14 @@ describe('v1.DatastoreClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reserveIds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reserveIds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reserveIds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reserveIds with error', async () => {
@@ -1002,26 +999,25 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      request.projectId = '';
-      const expectedHeaderRequestParams = 'project_id=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reserveIds = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.reserveIds(request), expectedError);
-      assert(
-        (client.innerApiCalls.reserveIds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reserveIds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reserveIds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reserveIds with closed client', async () => {
@@ -1033,7 +1029,10 @@ describe('v1.DatastoreClient', () => {
       const request = generateSampleMessage(
         new protos.google.datastore.v1.ReserveIdsRequest()
       );
-      request.projectId = '';
+      const defaultValue1 = getTypeDefaultValue('ReserveIdsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.reserveIds(request), expectedError);
