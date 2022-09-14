@@ -5,13 +5,13 @@
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/artifact-registry/latest",
   "codeowner_team": "@googleapis/aap-dpes",
   "language": "nodejs",
-  "issue_tracker": "https://github.com/googleapis/nodejs-artifact-registry/issues",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
   "product_documentation": "https://cloud.google.com/artifact-registry/",
   "name": "artifactregistry",
   "distribution_name": "@google-cloud/artifact-registry",
   "name_pretty": "Artifact Registry",
   "api_id": "artifactregistry.googleapis.com",
-  "repo": "googleapis/nodejs-artifact-registry",
+  "repo": "googleapis/google-cloud-node",
   "api_shortname": "artifactregistry",
   "library_type": "GAPIC_AUTO"
 }
