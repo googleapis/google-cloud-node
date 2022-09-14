@@ -441,7 +441,7 @@ export class DatastoreClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.lookup(request, options, callback);
@@ -540,7 +540,7 @@ export class DatastoreClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.runQuery(request, options, callback);
@@ -632,7 +632,7 @@ export class DatastoreClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.beginTransaction(request, options, callback);
@@ -741,7 +741,7 @@ export class DatastoreClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.commit(request, options, callback);
@@ -832,7 +832,7 @@ export class DatastoreClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.rollback(request, options, callback);
@@ -924,7 +924,7 @@ export class DatastoreClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.allocateIds(request, options, callback);
@@ -1016,7 +1016,7 @@ export class DatastoreClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project_id: request.projectId || '',
+        project_id: request.projectId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.reserveIds(request, options, callback);
