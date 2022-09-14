@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,26 +237,25 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetKnowledgeBaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
       client.innerApiCalls.getKnowledgeBase = stubSimpleCall(expectedResponse);
       const [response] = await client.getKnowledgeBase(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKnowledgeBase without error using callback', async () => {
@@ -253,15 +267,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetKnowledgeBaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -284,11 +294,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKnowledgeBase with error', async () => {
@@ -300,26 +313,25 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetKnowledgeBaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getKnowledgeBase = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getKnowledgeBase(request), expectedError);
-      assert(
-        (client.innerApiCalls.getKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getKnowledgeBase with closed client', async () => {
@@ -331,7 +343,10 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetKnowledgeBaseRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getKnowledgeBase(request), expectedError);
@@ -348,15 +363,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateKnowledgeBaseRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateKnowledgeBaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -364,11 +375,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createKnowledgeBase(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKnowledgeBase without error using callback', async () => {
@@ -380,15 +394,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateKnowledgeBaseRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateKnowledgeBaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -411,11 +421,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKnowledgeBase with error', async () => {
@@ -427,26 +440,25 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateKnowledgeBaseRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateKnowledgeBaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createKnowledgeBase = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createKnowledgeBase(request), expectedError);
-      assert(
-        (client.innerApiCalls.createKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createKnowledgeBase with closed client', async () => {
@@ -458,7 +470,10 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateKnowledgeBaseRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateKnowledgeBaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createKnowledgeBase(request), expectedError);
@@ -475,15 +490,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteKnowledgeBaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -491,11 +502,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteKnowledgeBase(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteKnowledgeBase without error using callback', async () => {
@@ -507,15 +521,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteKnowledgeBaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -538,11 +548,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteKnowledgeBase with error', async () => {
@@ -554,26 +567,25 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteKnowledgeBaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteKnowledgeBase = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteKnowledgeBase(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteKnowledgeBase with closed client', async () => {
@@ -585,7 +597,10 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteKnowledgeBaseRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteKnowledgeBaseRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteKnowledgeBase(request), expectedError);
@@ -602,16 +617,13 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.UpdateKnowledgeBaseRequest()
       );
-      request.knowledgeBase = {};
-      request.knowledgeBase.name = '';
-      const expectedHeaderRequestParams = 'knowledge_base.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.knowledgeBase ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateKnowledgeBaseRequest', [
+        'knowledgeBase',
+        'name',
+      ]);
+      request.knowledgeBase.name = defaultValue1;
+      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -619,11 +631,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateKnowledgeBase(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateKnowledgeBase without error using callback', async () => {
@@ -635,16 +650,13 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.UpdateKnowledgeBaseRequest()
       );
-      request.knowledgeBase = {};
-      request.knowledgeBase.name = '';
-      const expectedHeaderRequestParams = 'knowledge_base.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.knowledgeBase ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateKnowledgeBaseRequest', [
+        'knowledgeBase',
+        'name',
+      ]);
+      request.knowledgeBase.name = defaultValue1;
+      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
       );
@@ -667,11 +679,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateKnowledgeBase with error', async () => {
@@ -683,27 +698,27 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.UpdateKnowledgeBaseRequest()
       );
-      request.knowledgeBase = {};
-      request.knowledgeBase.name = '';
-      const expectedHeaderRequestParams = 'knowledge_base.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.knowledgeBase ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateKnowledgeBaseRequest', [
+        'knowledgeBase',
+        'name',
+      ]);
+      request.knowledgeBase.name = defaultValue1;
+      const expectedHeaderRequestParams = `knowledge_base.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateKnowledgeBase = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateKnowledgeBase(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateKnowledgeBase as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateKnowledgeBase as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateKnowledgeBase as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateKnowledgeBase with closed client', async () => {
@@ -715,8 +730,12 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.UpdateKnowledgeBaseRequest()
       );
-      request.knowledgeBase = {};
-      request.knowledgeBase.name = '';
+      request.knowledgeBase ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateKnowledgeBaseRequest', [
+        'knowledgeBase',
+        'name',
+      ]);
+      request.knowledgeBase.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateKnowledgeBase(request), expectedError);
@@ -733,15 +752,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListKnowledgeBasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -757,11 +772,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listKnowledgeBases(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKnowledgeBases as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKnowledgeBases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKnowledgeBases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKnowledgeBases without error using callback', async () => {
@@ -773,15 +791,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListKnowledgeBasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -814,11 +828,14 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listKnowledgeBases as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKnowledgeBases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKnowledgeBases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKnowledgeBases with error', async () => {
@@ -830,26 +847,25 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListKnowledgeBasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listKnowledgeBases = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listKnowledgeBases(request), expectedError);
-      assert(
-        (client.innerApiCalls.listKnowledgeBases as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listKnowledgeBases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listKnowledgeBases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listKnowledgeBasesStream without error', async () => {
@@ -861,8 +877,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKnowledgeBasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -900,11 +919,12 @@ describe('v2beta1.KnowledgeBasesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listKnowledgeBases, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKnowledgeBases.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKnowledgeBases.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -917,8 +937,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKnowledgeBasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKnowledgeBases.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -945,11 +968,12 @@ describe('v2beta1.KnowledgeBasesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listKnowledgeBases, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKnowledgeBases.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKnowledgeBases.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -962,8 +986,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKnowledgeBasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2beta1.KnowledgeBase()
@@ -990,11 +1017,12 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1007,8 +1035,11 @@ describe('v2beta1.KnowledgeBasesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListKnowledgeBasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListKnowledgeBasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listKnowledgeBases.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1026,11 +1057,12 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listKnowledgeBases.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1181,12 +1213,15 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -1217,12 +1252,15 @@ describe('v2beta1.KnowledgeBasesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

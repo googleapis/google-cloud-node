@@ -631,7 +631,7 @@ export class SessionEntityTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getSessionEntityType(request, options, callback);
@@ -742,7 +742,7 @@ export class SessionEntityTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createSessionEntityType(
@@ -849,7 +849,7 @@ export class SessionEntityTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'session_entity_type.name': request.sessionEntityType!.name || '',
+        'session_entity_type.name': request.sessionEntityType!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateSessionEntityType(
@@ -960,7 +960,7 @@ export class SessionEntityTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteSessionEntityType(
@@ -1073,7 +1073,7 @@ export class SessionEntityTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSessionEntityTypes(
@@ -1121,7 +1121,7 @@ export class SessionEntityTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSessionEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1174,7 +1174,7 @@ export class SessionEntityTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSessionEntityTypes'];
     const callSettings = defaultCallSettings.merge(options);

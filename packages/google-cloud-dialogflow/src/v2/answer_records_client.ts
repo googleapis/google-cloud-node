@@ -611,7 +611,7 @@ export class AnswerRecordsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'answer_record.name': request.answerRecord!.name || '',
+        'answer_record.name': request.answerRecord!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAnswerRecord(request, options, callback);
@@ -725,7 +725,7 @@ export class AnswerRecordsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAnswerRecords(request, options, callback);
@@ -777,7 +777,7 @@ export class AnswerRecordsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAnswerRecords'];
     const callSettings = defaultCallSettings.merge(options);
@@ -838,7 +838,7 @@ export class AnswerRecordsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAnswerRecords'];
     const callSettings = defaultCallSettings.merge(options);

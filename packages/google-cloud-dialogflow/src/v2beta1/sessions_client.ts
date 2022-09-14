@@ -674,7 +674,7 @@ export class SessionsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        session: request.session || '',
+        session: request.session ?? '',
       });
     this.initialize();
     return this.innerApiCalls.detectIntent(request, options, callback);

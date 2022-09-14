@@ -578,7 +578,7 @@ export class FulfillmentsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getFulfillment(request, options, callback);
@@ -678,7 +678,7 @@ export class FulfillmentsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'fulfillment.name': request.fulfillment!.name || '',
+        'fulfillment.name': request.fulfillment!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateFulfillment(request, options, callback);

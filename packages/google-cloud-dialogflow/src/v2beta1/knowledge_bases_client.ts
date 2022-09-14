@@ -607,7 +607,7 @@ export class KnowledgeBasesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getKnowledgeBase(request, options, callback);
@@ -710,7 +710,7 @@ export class KnowledgeBasesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createKnowledgeBase(request, options, callback);
@@ -815,7 +815,7 @@ export class KnowledgeBasesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteKnowledgeBase(request, options, callback);
@@ -919,7 +919,7 @@ export class KnowledgeBasesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'knowledge_base.name': request.knowledgeBase!.name || '',
+        'knowledge_base.name': request.knowledgeBase!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateKnowledgeBase(request, options, callback);
@@ -1050,7 +1050,7 @@ export class KnowledgeBasesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listKnowledgeBases(request, options, callback);
@@ -1117,7 +1117,7 @@ export class KnowledgeBasesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listKnowledgeBases'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1193,7 +1193,7 @@ export class KnowledgeBasesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listKnowledgeBases'];
     const callSettings = defaultCallSettings.merge(options);

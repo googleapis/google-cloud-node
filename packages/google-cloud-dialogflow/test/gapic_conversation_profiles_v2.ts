@@ -32,6 +32,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -268,15 +283,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ConversationProfile()
       );
@@ -284,11 +296,14 @@ describe('v2.ConversationProfilesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getConversationProfile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversationProfile without error using callback', async () => {
@@ -301,15 +316,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ConversationProfile()
       );
@@ -332,11 +344,14 @@ describe('v2.ConversationProfilesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversationProfile with error', async () => {
@@ -349,15 +364,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversationProfile = stubSimpleCall(
         undefined,
@@ -367,11 +379,14 @@ describe('v2.ConversationProfilesClient', () => {
         client.getConversationProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversationProfile with closed client', async () => {
@@ -384,7 +399,11 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -405,15 +424,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversationProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ConversationProfile()
       );
@@ -421,11 +437,14 @@ describe('v2.ConversationProfilesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createConversationProfile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversationProfile without error using callback', async () => {
@@ -438,15 +457,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversationProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ConversationProfile()
       );
@@ -469,11 +485,14 @@ describe('v2.ConversationProfilesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversationProfile with error', async () => {
@@ -486,15 +505,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversationProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversationProfile = stubSimpleCall(
         undefined,
@@ -504,11 +520,14 @@ describe('v2.ConversationProfilesClient', () => {
         client.createConversationProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversationProfile with closed client', async () => {
@@ -521,7 +540,11 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversationProfileRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -542,16 +565,13 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.UpdateConversationProfileRequest()
       );
-      request.conversationProfile = {};
-      request.conversationProfile.name = '';
-      const expectedHeaderRequestParams = 'conversation_profile.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.conversationProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConversationProfileRequest',
+        ['conversationProfile', 'name']
+      );
+      request.conversationProfile.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ConversationProfile()
       );
@@ -559,11 +579,14 @@ describe('v2.ConversationProfilesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateConversationProfile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConversationProfile without error using callback', async () => {
@@ -576,16 +599,13 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.UpdateConversationProfileRequest()
       );
-      request.conversationProfile = {};
-      request.conversationProfile.name = '';
-      const expectedHeaderRequestParams = 'conversation_profile.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.conversationProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConversationProfileRequest',
+        ['conversationProfile', 'name']
+      );
+      request.conversationProfile.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ConversationProfile()
       );
@@ -608,11 +628,14 @@ describe('v2.ConversationProfilesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConversationProfile with error', async () => {
@@ -625,16 +648,13 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.UpdateConversationProfileRequest()
       );
-      request.conversationProfile = {};
-      request.conversationProfile.name = '';
-      const expectedHeaderRequestParams = 'conversation_profile.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.conversationProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConversationProfileRequest',
+        ['conversationProfile', 'name']
+      );
+      request.conversationProfile.name = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateConversationProfile = stubSimpleCall(
         undefined,
@@ -644,11 +664,14 @@ describe('v2.ConversationProfilesClient', () => {
         client.updateConversationProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateConversationProfile with closed client', async () => {
@@ -661,8 +684,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.UpdateConversationProfileRequest()
       );
-      request.conversationProfile = {};
-      request.conversationProfile.name = '';
+      request.conversationProfile ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateConversationProfileRequest',
+        ['conversationProfile', 'name']
+      );
+      request.conversationProfile.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -683,15 +710,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -699,11 +723,14 @@ describe('v2.ConversationProfilesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteConversationProfile(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversationProfile without error using callback', async () => {
@@ -716,15 +743,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -747,11 +771,14 @@ describe('v2.ConversationProfilesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversationProfile with error', async () => {
@@ -764,15 +791,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversationProfile = stubSimpleCall(
         undefined,
@@ -782,11 +806,14 @@ describe('v2.ConversationProfilesClient', () => {
         client.deleteConversationProfile(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteConversationProfile as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversationProfile as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversationProfile as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversationProfile with closed client', async () => {
@@ -799,7 +826,11 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversationProfileRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -820,15 +851,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -837,11 +865,14 @@ describe('v2.ConversationProfilesClient', () => {
       const [operation] = await client.setSuggestionFeatureConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setSuggestionFeatureConfig without error using callback', async () => {
@@ -854,15 +885,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -892,11 +920,14 @@ describe('v2.ConversationProfilesClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setSuggestionFeatureConfig with call error', async () => {
@@ -909,15 +940,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setSuggestionFeatureConfig = stubLongRunningCall(
         undefined,
@@ -927,11 +955,14 @@ describe('v2.ConversationProfilesClient', () => {
         client.setSuggestionFeatureConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setSuggestionFeatureConfig with LRO error', async () => {
@@ -944,15 +975,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setSuggestionFeatureConfig = stubLongRunningCall(
         undefined,
@@ -961,11 +989,14 @@ describe('v2.ConversationProfilesClient', () => {
       );
       const [operation] = await client.setSuggestionFeatureConfig(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.setSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkSetSuggestionFeatureConfigProgress without error', async () => {
@@ -1024,15 +1055,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ClearSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1041,11 +1069,14 @@ describe('v2.ConversationProfilesClient', () => {
       const [operation] = await client.clearSuggestionFeatureConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes clearSuggestionFeatureConfig without error using callback', async () => {
@@ -1058,15 +1089,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ClearSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1096,11 +1124,14 @@ describe('v2.ConversationProfilesClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes clearSuggestionFeatureConfig with call error', async () => {
@@ -1113,15 +1144,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ClearSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.clearSuggestionFeatureConfig = stubLongRunningCall(
         undefined,
@@ -1131,11 +1159,14 @@ describe('v2.ConversationProfilesClient', () => {
         client.clearSuggestionFeatureConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes clearSuggestionFeatureConfig with LRO error', async () => {
@@ -1148,15 +1179,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
-      request.conversationProfile = '';
-      const expectedHeaderRequestParams = 'conversation_profile=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ClearSuggestionFeatureConfigRequest',
+        ['conversationProfile']
+      );
+      request.conversationProfile = defaultValue1;
+      const expectedHeaderRequestParams = `conversation_profile=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.clearSuggestionFeatureConfig = stubLongRunningCall(
         undefined,
@@ -1165,11 +1193,14 @@ describe('v2.ConversationProfilesClient', () => {
       );
       const [operation] = await client.clearSuggestionFeatureConfig(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.clearSuggestionFeatureConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkClearSuggestionFeatureConfigProgress without error', async () => {
@@ -1228,15 +1259,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConversationProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.ConversationProfile()
@@ -1252,11 +1280,14 @@ describe('v2.ConversationProfilesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listConversationProfiles(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConversationProfiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversationProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversationProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversationProfiles without error using callback', async () => {
@@ -1269,15 +1300,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConversationProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.ConversationProfile()
@@ -1310,11 +1338,14 @@ describe('v2.ConversationProfilesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConversationProfiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversationProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversationProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversationProfiles with error', async () => {
@@ -1327,15 +1358,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConversationProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversationProfiles = stubSimpleCall(
         undefined,
@@ -1345,11 +1373,14 @@ describe('v2.ConversationProfilesClient', () => {
         client.listConversationProfiles(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listConversationProfiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversationProfiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversationProfiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversationProfilesStream without error', async () => {
@@ -1362,8 +1393,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConversationProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.ConversationProfile()
@@ -1404,12 +1439,15 @@ describe('v2.ConversationProfilesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConversationProfiles, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConversationProfiles
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1423,8 +1461,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConversationProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversationProfiles.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1454,12 +1496,15 @@ describe('v2.ConversationProfilesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConversationProfiles, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConversationProfiles
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1473,8 +1518,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConversationProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.dialogflow.v2.ConversationProfile()
@@ -1502,12 +1551,15 @@ describe('v2.ConversationProfilesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConversationProfiles
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1521,8 +1573,12 @@ describe('v2.ConversationProfilesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListConversationProfilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversationProfiles.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1541,12 +1597,15 @@ describe('v2.ConversationProfilesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listConversationProfiles
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1701,12 +1760,15 @@ describe('v2.ConversationProfilesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -1738,12 +1800,15 @@ describe('v2.ConversationProfilesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

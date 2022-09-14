@@ -660,7 +660,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getConversationProfile(
@@ -768,7 +768,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createConversationProfile(
@@ -875,7 +875,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'conversation_profile.name': request.conversationProfile!.name || '',
+        'conversation_profile.name': request.conversationProfile!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateConversationProfile(
@@ -978,7 +978,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteConversationProfile(
@@ -1108,7 +1108,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        conversation_profile: request.conversationProfile || '',
+        conversation_profile: request.conversationProfile ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setSuggestionFeatureConfig(
@@ -1265,7 +1265,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        conversation_profile: request.conversationProfile || '',
+        conversation_profile: request.conversationProfile ?? '',
       });
     this.initialize();
     return this.innerApiCalls.clearSuggestionFeatureConfig(
@@ -1404,7 +1404,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listConversationProfiles(
@@ -1448,7 +1448,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listConversationProfiles'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1497,7 +1497,7 @@ export class ConversationProfilesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listConversationProfiles'];
     const callSettings = defaultCallSettings.merge(options);
