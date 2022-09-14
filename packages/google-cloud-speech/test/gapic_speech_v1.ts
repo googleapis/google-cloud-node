@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -205,18 +220,12 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.RecognizeRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.RecognizeResponse()
       );
       client.innerApiCalls.recognize = stubSimpleCall(expectedResponse);
       const [response] = await client.recognize(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.recognize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes recognize without error using callback', async () => {
@@ -228,7 +237,6 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.RecognizeRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.RecognizeResponse()
       );
@@ -251,11 +259,6 @@ describe('v1.SpeechClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.recognize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes recognize with error', async () => {
@@ -267,15 +270,9 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.RecognizeRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.recognize = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.recognize(request), expectedError);
-      assert(
-        (client.innerApiCalls.recognize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes recognize with closed client', async () => {
@@ -303,7 +300,6 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.LongRunningRecognizeRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -312,11 +308,6 @@ describe('v1.SpeechClient', () => {
       const [operation] = await client.longRunningRecognize(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.longRunningRecognize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes longRunningRecognize without error using callback', async () => {
@@ -328,7 +319,6 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.LongRunningRecognizeRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -358,11 +348,6 @@ describe('v1.SpeechClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.longRunningRecognize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes longRunningRecognize with call error', async () => {
@@ -374,18 +359,12 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.LongRunningRecognizeRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.longRunningRecognize = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.longRunningRecognize(request), expectedError);
-      assert(
-        (client.innerApiCalls.longRunningRecognize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes longRunningRecognize with LRO error', async () => {
@@ -397,7 +376,6 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.LongRunningRecognizeRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.longRunningRecognize = stubLongRunningCall(
         undefined,
@@ -406,11 +384,6 @@ describe('v1.SpeechClient', () => {
       );
       const [operation] = await client.longRunningRecognize(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.longRunningRecognize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes checkLongRunningRecognizeProgress without error', async () => {
@@ -465,6 +438,7 @@ describe('v1.SpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.StreamingRecognizeRequest()
       );
+
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.StreamingRecognizeResponse()
       );

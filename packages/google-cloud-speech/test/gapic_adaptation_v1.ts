@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -220,26 +235,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
       client.innerApiCalls.createPhraseSet = stubSimpleCall(expectedResponse);
       const [response] = await client.createPhraseSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPhraseSet without error using callback', async () => {
@@ -251,15 +265,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -282,11 +292,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPhraseSet with error', async () => {
@@ -298,26 +311,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createPhraseSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createPhraseSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.createPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createPhraseSet with closed client', async () => {
@@ -329,7 +341,10 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreatePhraseSetRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createPhraseSet(request), expectedError);
@@ -346,26 +361,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
       client.innerApiCalls.getPhraseSet = stubSimpleCall(expectedResponse);
       const [response] = await client.getPhraseSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPhraseSet without error using callback', async () => {
@@ -377,15 +391,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -408,11 +418,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPhraseSet with error', async () => {
@@ -424,26 +437,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getPhraseSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getPhraseSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.getPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getPhraseSet with closed client', async () => {
@@ -455,7 +467,10 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetPhraseSetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getPhraseSet(request), expectedError);
@@ -472,27 +487,27 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
-      request.phraseSet = {};
-      request.phraseSet.name = '';
-      const expectedHeaderRequestParams = 'phrase_set.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.phraseSet ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
+        'phraseSet',
+        'name',
+      ]);
+      request.phraseSet.name = defaultValue1;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
       client.innerApiCalls.updatePhraseSet = stubSimpleCall(expectedResponse);
       const [response] = await client.updatePhraseSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePhraseSet without error using callback', async () => {
@@ -504,16 +519,13 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
-      request.phraseSet = {};
-      request.phraseSet.name = '';
-      const expectedHeaderRequestParams = 'phrase_set.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.phraseSet ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
+        'phraseSet',
+        'name',
+      ]);
+      request.phraseSet.name = defaultValue1;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.PhraseSet()
       );
@@ -536,11 +548,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePhraseSet with error', async () => {
@@ -552,27 +567,27 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
-      request.phraseSet = {};
-      request.phraseSet.name = '';
-      const expectedHeaderRequestParams = 'phrase_set.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.phraseSet ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
+        'phraseSet',
+        'name',
+      ]);
+      request.phraseSet.name = defaultValue1;
+      const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePhraseSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updatePhraseSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.updatePhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePhraseSet with closed client', async () => {
@@ -584,8 +599,12 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdatePhraseSetRequest()
       );
-      request.phraseSet = {};
-      request.phraseSet.name = '';
+      request.phraseSet ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
+        'phraseSet',
+        'name',
+      ]);
+      request.phraseSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePhraseSet(request), expectedError);
@@ -602,26 +621,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deletePhraseSet = stubSimpleCall(expectedResponse);
       const [response] = await client.deletePhraseSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePhraseSet without error using callback', async () => {
@@ -633,15 +651,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -664,11 +678,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePhraseSet with error', async () => {
@@ -680,26 +697,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePhraseSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deletePhraseSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.deletePhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePhraseSet with closed client', async () => {
@@ -711,7 +727,10 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeletePhraseSetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deletePhraseSet(request), expectedError);
@@ -728,26 +747,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
       client.innerApiCalls.createCustomClass = stubSimpleCall(expectedResponse);
       const [response] = await client.createCustomClass(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomClass without error using callback', async () => {
@@ -759,15 +777,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -790,11 +804,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomClass with error', async () => {
@@ -806,26 +823,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomClass = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCustomClass(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomClass with closed client', async () => {
@@ -837,7 +853,10 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.CreateCustomClassRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCustomClass(request), expectedError);
@@ -854,26 +873,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
       client.innerApiCalls.getCustomClass = stubSimpleCall(expectedResponse);
       const [response] = await client.getCustomClass(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomClass without error using callback', async () => {
@@ -885,15 +903,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -916,11 +930,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomClass with error', async () => {
@@ -932,26 +949,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomClass = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCustomClass(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomClass with closed client', async () => {
@@ -963,7 +979,10 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.GetCustomClassRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomClass(request), expectedError);
@@ -980,27 +999,27 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
-      request.customClass = {};
-      request.customClass.name = '';
-      const expectedHeaderRequestParams = 'custom_class.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customClass ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
+        'customClass',
+        'name',
+      ]);
+      request.customClass.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
       client.innerApiCalls.updateCustomClass = stubSimpleCall(expectedResponse);
       const [response] = await client.updateCustomClass(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomClass without error using callback', async () => {
@@ -1012,16 +1031,13 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
-      request.customClass = {};
-      request.customClass.name = '';
-      const expectedHeaderRequestParams = 'custom_class.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customClass ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
+        'customClass',
+        'name',
+      ]);
+      request.customClass.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1.CustomClass()
       );
@@ -1044,11 +1060,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomClass with error', async () => {
@@ -1060,27 +1079,27 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
-      request.customClass = {};
-      request.customClass.name = '';
-      const expectedHeaderRequestParams = 'custom_class.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customClass ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
+        'customClass',
+        'name',
+      ]);
+      request.customClass.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomClass = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCustomClass(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomClass with closed client', async () => {
@@ -1092,8 +1111,12 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.UpdateCustomClassRequest()
       );
-      request.customClass = {};
-      request.customClass.name = '';
+      request.customClass ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
+        'customClass',
+        'name',
+      ]);
+      request.customClass.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCustomClass(request), expectedError);
@@ -1110,26 +1133,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteCustomClass = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteCustomClass(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomClass without error using callback', async () => {
@@ -1141,15 +1163,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1172,11 +1190,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomClass with error', async () => {
@@ -1188,26 +1209,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCustomClass = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteCustomClass(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCustomClass as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCustomClass as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCustomClass as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCustomClass with closed client', async () => {
@@ -1219,7 +1239,10 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.DeleteCustomClassRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteCustomClass(request), expectedError);
@@ -1236,15 +1259,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1253,11 +1272,14 @@ describe('v1.AdaptationClient', () => {
       client.innerApiCalls.listPhraseSet = stubSimpleCall(expectedResponse);
       const [response] = await client.listPhraseSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPhraseSet without error using callback', async () => {
@@ -1269,15 +1291,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1302,11 +1320,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPhraseSet with error', async () => {
@@ -1318,26 +1339,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPhraseSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listPhraseSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.listPhraseSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPhraseSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPhraseSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPhraseSetStream without error', async () => {
@@ -1349,8 +1369,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1381,11 +1404,12 @@ describe('v1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPhraseSet, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseSet.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseSet.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1398,8 +1422,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseSet.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1425,11 +1452,12 @@ describe('v1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPhraseSet, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseSet.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseSet.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1442,8 +1470,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
         generateSampleMessage(new protos.google.cloud.speech.v1.PhraseSet()),
@@ -1463,11 +1494,12 @@ describe('v1.AdaptationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseSet.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseSet.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1480,8 +1512,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListPhraseSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPhraseSet.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1498,11 +1533,12 @@ describe('v1.AdaptationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPhraseSet.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPhraseSet.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1517,15 +1553,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1534,11 +1566,14 @@ describe('v1.AdaptationClient', () => {
       client.innerApiCalls.listCustomClasses = stubSimpleCall(expectedResponse);
       const [response] = await client.listCustomClasses(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomClasses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomClasses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomClasses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomClasses without error using callback', async () => {
@@ -1550,15 +1585,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1583,11 +1614,14 @@ describe('v1.AdaptationClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomClasses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomClasses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomClasses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomClasses with error', async () => {
@@ -1599,26 +1633,25 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomClasses = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCustomClasses(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCustomClasses as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomClasses as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomClasses as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomClassesStream without error', async () => {
@@ -1630,8 +1663,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1662,11 +1698,12 @@ describe('v1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomClasses, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomClasses.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomClasses.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1679,8 +1716,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomClasses.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1706,11 +1746,12 @@ describe('v1.AdaptationClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomClasses, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomClasses.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomClasses.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1723,8 +1764,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
         generateSampleMessage(new protos.google.cloud.speech.v1.CustomClass()),
@@ -1744,11 +1788,12 @@ describe('v1.AdaptationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomClasses.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1761,8 +1806,11 @@ describe('v1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1.ListCustomClassesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomClasses.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1779,11 +1827,12 @@ describe('v1.AdaptationClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomClasses.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomClasses.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
