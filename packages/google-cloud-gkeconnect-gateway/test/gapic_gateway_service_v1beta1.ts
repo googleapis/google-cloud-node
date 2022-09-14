@@ -25,6 +25,21 @@ import * as gatewayserviceModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -157,18 +172,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
       client.innerApiCalls.getResource = stubSimpleCall(expectedResponse);
       const [response] = await client.getResource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes getResource without error using callback', async () => {
@@ -178,7 +187,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -198,11 +206,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes getResource with error', async () => {
@@ -212,18 +215,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.getResource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getResource(request), expectedError);
-      assert(
-        (client.innerApiCalls.getResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes getResource with closed client', async () => {
@@ -247,18 +244,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
       client.innerApiCalls.postResource = stubSimpleCall(expectedResponse);
       const [response] = await client.postResource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.postResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes postResource without error using callback', async () => {
@@ -268,7 +259,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -288,11 +278,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.postResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes postResource with error', async () => {
@@ -302,18 +287,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.postResource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.postResource(request), expectedError);
-      assert(
-        (client.innerApiCalls.postResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes postResource with closed client', async () => {
@@ -337,18 +316,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
       client.innerApiCalls.deleteResource = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteResource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes deleteResource without error using callback', async () => {
@@ -358,7 +331,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -378,11 +350,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes deleteResource with error', async () => {
@@ -392,18 +359,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteResource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteResource(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes deleteResource with closed client', async () => {
@@ -427,18 +388,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
       client.innerApiCalls.putResource = stubSimpleCall(expectedResponse);
       const [response] = await client.putResource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.putResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes putResource without error using callback', async () => {
@@ -448,7 +403,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -468,11 +422,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.putResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes putResource with error', async () => {
@@ -482,18 +431,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.putResource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.putResource(request), expectedError);
-      assert(
-        (client.innerApiCalls.putResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes putResource with closed client', async () => {
@@ -517,18 +460,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
       client.innerApiCalls.patchResource = stubSimpleCall(expectedResponse);
       const [response] = await client.patchResource(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patchResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes patchResource without error using callback', async () => {
@@ -538,7 +475,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.api.HttpBody()
       );
@@ -558,11 +494,6 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patchResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes patchResource with error', async () => {
@@ -572,18 +503,12 @@ describe('v1beta1.GatewayServiceClient', () => {
       });
       client.initialize();
       const request = generateSampleMessage(new protos.google.api.HttpBody());
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.patchResource = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.patchResource(request), expectedError);
-      assert(
-        (client.innerApiCalls.patchResource as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes patchResource with closed client', async () => {
