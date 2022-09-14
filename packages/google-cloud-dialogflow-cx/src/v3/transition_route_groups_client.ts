@@ -563,7 +563,7 @@ export class TransitionRouteGroupsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTransitionRouteGroup(
@@ -684,7 +684,7 @@ export class TransitionRouteGroupsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTransitionRouteGroup(
@@ -803,7 +803,7 @@ export class TransitionRouteGroupsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'transition_route_group.name': request.transitionRouteGroup!.name || '',
+        'transition_route_group.name': request.transitionRouteGroup!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTransitionRouteGroup(
@@ -918,7 +918,7 @@ export class TransitionRouteGroupsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTransitionRouteGroup(
@@ -1038,7 +1038,7 @@ export class TransitionRouteGroupsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTransitionRouteGroups(
@@ -1097,7 +1097,7 @@ export class TransitionRouteGroupsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1161,7 +1161,7 @@ export class TransitionRouteGroupsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTransitionRouteGroups'];
     const callSettings = defaultCallSettings.merge(options);

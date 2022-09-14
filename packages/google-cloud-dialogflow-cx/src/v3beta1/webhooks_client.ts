@@ -551,7 +551,7 @@ export class WebhooksClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getWebhook(request, options, callback);
@@ -651,7 +651,7 @@ export class WebhooksClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createWebhook(request, options, callback);
@@ -751,7 +751,7 @@ export class WebhooksClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'webhook.name': request.webhook!.name || '',
+        'webhook.name': request.webhook!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateWebhook(request, options, callback);
@@ -860,7 +860,7 @@ export class WebhooksClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteWebhook(request, options, callback);
@@ -961,7 +961,7 @@ export class WebhooksClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listWebhooks(request, options, callback);
@@ -1001,7 +1001,7 @@ export class WebhooksClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1050,7 +1050,7 @@ export class WebhooksClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listWebhooks'];
     const callSettings = defaultCallSettings.merge(options);

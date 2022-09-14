@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -196,26 +211,25 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentRequest()
       );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse()
       );
       client.innerApiCalls.detectIntent = stubSimpleCall(expectedResponse);
       const [response] = await client.detectIntent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.detectIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detectIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detectIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detectIntent without error using callback', async () => {
@@ -227,15 +241,11 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentRequest()
       );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentResponse()
       );
@@ -258,11 +268,14 @@ describe('v3.SessionsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.detectIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detectIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detectIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detectIntent with error', async () => {
@@ -274,26 +287,25 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentRequest()
       );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detectIntent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.detectIntent(request), expectedError);
-      assert(
-        (client.innerApiCalls.detectIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detectIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detectIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detectIntent with closed client', async () => {
@@ -305,7 +317,10 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.DetectIntentRequest()
       );
-      request.session = '';
+      const defaultValue1 = getTypeDefaultValue('DetectIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.detectIntent(request), expectedError);
@@ -322,26 +337,25 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentRequest()
       );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentResponse()
       );
       client.innerApiCalls.matchIntent = stubSimpleCall(expectedResponse);
       const [response] = await client.matchIntent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.matchIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.matchIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.matchIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes matchIntent without error using callback', async () => {
@@ -353,15 +367,11 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentRequest()
       );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentResponse()
       );
@@ -384,11 +394,14 @@ describe('v3.SessionsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.matchIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.matchIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.matchIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes matchIntent with error', async () => {
@@ -400,26 +413,25 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentRequest()
       );
-      request.session = '';
-      const expectedHeaderRequestParams = 'session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
+      const expectedHeaderRequestParams = `session=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.matchIntent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.matchIntent(request), expectedError);
-      assert(
-        (client.innerApiCalls.matchIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.matchIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.matchIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes matchIntent with closed client', async () => {
@@ -431,7 +443,10 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.MatchIntentRequest()
       );
-      request.session = '';
+      const defaultValue1 = getTypeDefaultValue('MatchIntentRequest', [
+        'session',
+      ]);
+      request.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.matchIntent(request), expectedError);
@@ -448,27 +463,27 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentRequest()
       );
-      request.matchIntentRequest = {};
-      request.matchIntentRequest.session = '';
-      const expectedHeaderRequestParams = 'match_intent_request.session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.matchIntentRequest ??= {};
+      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
+        'matchIntentRequest',
+        'session',
+      ]);
+      request.matchIntentRequest.session = defaultValue1;
+      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentResponse()
       );
       client.innerApiCalls.fulfillIntent = stubSimpleCall(expectedResponse);
       const [response] = await client.fulfillIntent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fulfillIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fulfillIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fulfillIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fulfillIntent without error using callback', async () => {
@@ -480,16 +495,13 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentRequest()
       );
-      request.matchIntentRequest = {};
-      request.matchIntentRequest.session = '';
-      const expectedHeaderRequestParams = 'match_intent_request.session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.matchIntentRequest ??= {};
+      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
+        'matchIntentRequest',
+        'session',
+      ]);
+      request.matchIntentRequest.session = defaultValue1;
+      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentResponse()
       );
@@ -512,11 +524,14 @@ describe('v3.SessionsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fulfillIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fulfillIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fulfillIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fulfillIntent with error', async () => {
@@ -528,27 +543,27 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentRequest()
       );
-      request.matchIntentRequest = {};
-      request.matchIntentRequest.session = '';
-      const expectedHeaderRequestParams = 'match_intent_request.session=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.matchIntentRequest ??= {};
+      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
+        'matchIntentRequest',
+        'session',
+      ]);
+      request.matchIntentRequest.session = defaultValue1;
+      const expectedHeaderRequestParams = `match_intent_request.session=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fulfillIntent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fulfillIntent(request), expectedError);
-      assert(
-        (client.innerApiCalls.fulfillIntent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fulfillIntent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fulfillIntent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fulfillIntent with closed client', async () => {
@@ -560,8 +575,12 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.FulfillIntentRequest()
       );
-      request.matchIntentRequest = {};
-      request.matchIntentRequest.session = '';
+      request.matchIntentRequest ??= {};
+      const defaultValue1 = getTypeDefaultValue('FulfillIntentRequest', [
+        'matchIntentRequest',
+        'session',
+      ]);
+      request.matchIntentRequest.session = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fulfillIntent(request), expectedError);
@@ -578,6 +597,7 @@ describe('v3.SessionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StreamingDetectIntentRequest()
       );
+
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.StreamingDetectIntentResponse()
       );
@@ -803,12 +823,15 @@ describe('v3.SessionsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -839,12 +862,15 @@ describe('v3.SessionsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

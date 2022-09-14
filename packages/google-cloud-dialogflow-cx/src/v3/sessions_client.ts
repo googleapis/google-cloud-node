@@ -578,7 +578,7 @@ export class SessionsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        session: request.session || '',
+        session: request.session ?? '',
       });
     this.initialize();
     return this.innerApiCalls.detectIntent(request, options, callback);
@@ -685,7 +685,7 @@ export class SessionsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        session: request.session || '',
+        session: request.session ?? '',
       });
     this.initialize();
     return this.innerApiCalls.matchIntent(request, options, callback);
@@ -784,7 +784,7 @@ export class SessionsClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         'match_intent_request.session':
-          request.matchIntentRequest!.session || '',
+          request.matchIntentRequest!.session ?? '',
       });
     this.initialize();
     return this.innerApiCalls.fulfillIntent(request, options, callback);
