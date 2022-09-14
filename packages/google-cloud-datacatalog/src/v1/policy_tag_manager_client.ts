@@ -461,7 +461,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTaxonomy(request, options, callback);
@@ -556,7 +556,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTaxonomy(request, options, callback);
@@ -655,7 +655,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'taxonomy.name': request.taxonomy!.name || '',
+        'taxonomy.name': request.taxonomy!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTaxonomy(request, options, callback);
@@ -740,7 +740,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTaxonomy(request, options, callback);
@@ -833,7 +833,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createPolicyTag(request, options, callback);
@@ -931,7 +931,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deletePolicyTag(request, options, callback);
@@ -1031,7 +1031,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'policy_tag.name': request.policyTag!.name || '',
+        'policy_tag.name': request.policyTag!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updatePolicyTag(request, options, callback);
@@ -1122,7 +1122,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getPolicyTag(request, options, callback);
@@ -1209,7 +1209,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -1304,7 +1304,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -1394,7 +1394,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
@@ -1498,7 +1498,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTaxonomies(request, options, callback);
@@ -1540,7 +1540,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1591,7 +1591,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTaxonomies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1700,7 +1700,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listPolicyTags(request, options, callback);
@@ -1743,7 +1743,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPolicyTags'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1795,7 +1795,7 @@ export class PolicyTagManagerClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPolicyTags'];
     const callSettings = defaultCallSettings.merge(options);

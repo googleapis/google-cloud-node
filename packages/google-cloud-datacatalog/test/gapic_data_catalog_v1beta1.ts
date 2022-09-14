@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,26 +237,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
       client.innerApiCalls.createEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.createEntryGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntryGroup without error using callback', async () => {
@@ -253,15 +267,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
@@ -284,11 +294,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntryGroup with error', async () => {
@@ -300,26 +313,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntryGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createEntryGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.createEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntryGroup with closed client', async () => {
@@ -331,7 +343,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryGroupRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntryGroup(request), expectedError);
@@ -348,27 +363,27 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
-      request.entryGroup = {};
-      request.entryGroup.name = '';
-      const expectedHeaderRequestParams = 'entry_group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.entryGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
+        'entryGroup',
+        'name',
+      ]);
+      request.entryGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
       client.innerApiCalls.updateEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.updateEntryGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateEntryGroup without error using callback', async () => {
@@ -380,16 +395,13 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
-      request.entryGroup = {};
-      request.entryGroup.name = '';
-      const expectedHeaderRequestParams = 'entry_group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.entryGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
+        'entryGroup',
+        'name',
+      ]);
+      request.entryGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
@@ -412,11 +424,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateEntryGroup with error', async () => {
@@ -428,27 +443,27 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
-      request.entryGroup = {};
-      request.entryGroup.name = '';
-      const expectedHeaderRequestParams = 'entry_group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.entryGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
+        'entryGroup',
+        'name',
+      ]);
+      request.entryGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntryGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateEntryGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateEntryGroup with closed client', async () => {
@@ -460,8 +475,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryGroupRequest()
       );
-      request.entryGroup = {};
-      request.entryGroup.name = '';
+      request.entryGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
+        'entryGroup',
+        'name',
+      ]);
+      request.entryGroup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntryGroup(request), expectedError);
@@ -478,26 +497,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
       client.innerApiCalls.getEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.getEntryGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntryGroup without error using callback', async () => {
@@ -509,15 +527,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
       );
@@ -540,11 +554,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntryGroup with error', async () => {
@@ -556,26 +573,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntryGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getEntryGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.getEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntryGroup with closed client', async () => {
@@ -587,7 +603,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryGroupRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntryGroup(request), expectedError);
@@ -604,26 +623,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteEntryGroup = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteEntryGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteEntryGroup without error using callback', async () => {
@@ -635,15 +653,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -666,11 +680,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteEntryGroup with error', async () => {
@@ -682,26 +699,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEntryGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteEntryGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteEntryGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteEntryGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEntryGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteEntryGroup with closed client', async () => {
@@ -713,7 +729,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryGroupRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntryGroup(request), expectedError);
@@ -730,26 +749,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.createEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.createEntry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntry without error using callback', async () => {
@@ -761,15 +779,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
@@ -792,11 +806,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntry with error', async () => {
@@ -808,26 +825,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createEntry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createEntry(request), expectedError);
-      assert(
-        (client.innerApiCalls.createEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createEntry with closed client', async () => {
@@ -839,7 +855,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateEntryRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createEntry(request), expectedError);
@@ -856,27 +875,27 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
-      request.entry = {};
-      request.entry.name = '';
-      const expectedHeaderRequestParams = 'entry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.entry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
+        'entry',
+        'name',
+      ]);
+      request.entry.name = defaultValue1;
+      const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.updateEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.updateEntry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateEntry without error using callback', async () => {
@@ -888,16 +907,13 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
-      request.entry = {};
-      request.entry.name = '';
-      const expectedHeaderRequestParams = 'entry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.entry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
+        'entry',
+        'name',
+      ]);
+      request.entry.name = defaultValue1;
+      const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
@@ -920,11 +936,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateEntry with error', async () => {
@@ -936,27 +955,27 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
-      request.entry = {};
-      request.entry.name = '';
-      const expectedHeaderRequestParams = 'entry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.entry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
+        'entry',
+        'name',
+      ]);
+      request.entry.name = defaultValue1;
+      const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateEntry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateEntry(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateEntry with closed client', async () => {
@@ -968,8 +987,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateEntryRequest()
       );
-      request.entry = {};
-      request.entry.name = '';
+      request.entry ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
+        'entry',
+        'name',
+      ]);
+      request.entry.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateEntry(request), expectedError);
@@ -986,26 +1009,23 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteEntry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteEntry without error using callback', async () => {
@@ -1017,15 +1037,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1048,11 +1062,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteEntry with error', async () => {
@@ -1064,26 +1081,23 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteEntry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteEntry(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteEntry with closed client', async () => {
@@ -1095,7 +1109,8 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteEntryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteEntry(request), expectedError);
@@ -1112,26 +1127,23 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.getEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.getEntry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntry without error using callback', async () => {
@@ -1143,15 +1155,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
@@ -1174,11 +1180,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntry with error', async () => {
@@ -1190,23 +1199,20 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEntry = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getEntry(request), expectedError);
-      assert(
-        (client.innerApiCalls.getEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEntry with closed client', async () => {
@@ -1218,7 +1224,8 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetEntryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getEntry(request), expectedError);
@@ -1235,18 +1242,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
       client.innerApiCalls.lookupEntry = stubSimpleCall(expectedResponse);
       const [response] = await client.lookupEntry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes lookupEntry without error using callback', async () => {
@@ -1258,7 +1259,6 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Entry()
       );
@@ -1281,11 +1281,6 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.lookupEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes lookupEntry with error', async () => {
@@ -1297,18 +1292,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.LookupEntryRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.lookupEntry = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.lookupEntry(request), expectedError);
-      assert(
-        (client.innerApiCalls.lookupEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes lookupEntry with closed client', async () => {
@@ -1336,26 +1325,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.createTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.createTagTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTagTemplate without error using callback', async () => {
@@ -1367,15 +1355,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
@@ -1398,11 +1382,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTagTemplate with error', async () => {
@@ -1414,26 +1401,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createTagTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.createTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTagTemplate with closed client', async () => {
@@ -1445,7 +1431,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTagTemplate(request), expectedError);
@@ -1462,26 +1451,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.getTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.getTagTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTagTemplate without error using callback', async () => {
@@ -1493,15 +1481,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
@@ -1524,11 +1508,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTagTemplate with error', async () => {
@@ -1540,26 +1527,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTagTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getTagTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTagTemplate with closed client', async () => {
@@ -1571,7 +1557,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.GetTagTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTagTemplate(request), expectedError);
@@ -1588,27 +1577,27 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
-      request.tagTemplate = {};
-      request.tagTemplate.name = '';
-      const expectedHeaderRequestParams = 'tag_template.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tagTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
+        'tagTemplate',
+        'name',
+      ]);
+      request.tagTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
       client.innerApiCalls.updateTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.updateTagTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTagTemplate without error using callback', async () => {
@@ -1620,16 +1609,13 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
-      request.tagTemplate = {};
-      request.tagTemplate.name = '';
-      const expectedHeaderRequestParams = 'tag_template.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tagTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
+        'tagTemplate',
+        'name',
+      ]);
+      request.tagTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplate()
       );
@@ -1652,11 +1638,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTagTemplate with error', async () => {
@@ -1668,27 +1657,27 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
-      request.tagTemplate = {};
-      request.tagTemplate.name = '';
-      const expectedHeaderRequestParams = 'tag_template.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tagTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
+        'tagTemplate',
+        'name',
+      ]);
+      request.tagTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTagTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateTagTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTagTemplate with closed client', async () => {
@@ -1700,8 +1689,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateRequest()
       );
-      request.tagTemplate = {};
-      request.tagTemplate.name = '';
+      request.tagTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
+        'tagTemplate',
+        'name',
+      ]);
+      request.tagTemplate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTagTemplate(request), expectedError);
@@ -1718,26 +1711,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteTagTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTagTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTagTemplate without error using callback', async () => {
@@ -1749,15 +1741,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1780,11 +1768,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTagTemplate with error', async () => {
@@ -1796,26 +1787,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTagTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteTagTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTagTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTagTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTagTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTagTemplate with closed client', async () => {
@@ -1827,7 +1817,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTagTemplate(request), expectedError);
@@ -1844,15 +1837,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTagTemplateFieldRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
@@ -1860,11 +1850,14 @@ describe('v1beta1.DataCatalogClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createTagTemplateField(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTagTemplateField without error using callback', async () => {
@@ -1876,15 +1869,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTagTemplateFieldRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
@@ -1907,11 +1897,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTagTemplateField with error', async () => {
@@ -1923,15 +1916,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTagTemplateFieldRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTagTemplateField = stubSimpleCall(
         undefined,
@@ -1941,11 +1931,14 @@ describe('v1beta1.DataCatalogClient', () => {
         client.createTagTemplateField(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTagTemplateField with closed client', async () => {
@@ -1957,7 +1950,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagTemplateFieldRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTagTemplateFieldRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1977,15 +1974,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
@@ -1993,11 +1987,14 @@ describe('v1beta1.DataCatalogClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateTagTemplateField(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTagTemplateField without error using callback', async () => {
@@ -2009,15 +2006,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
@@ -2040,11 +2034,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTagTemplateField with error', async () => {
@@ -2056,15 +2053,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTagTemplateField = stubSimpleCall(
         undefined,
@@ -2074,11 +2068,14 @@ describe('v1beta1.DataCatalogClient', () => {
         client.updateTagTemplateField(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTagTemplateField with closed client', async () => {
@@ -2090,7 +2087,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagTemplateFieldRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2110,15 +2111,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RenameTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
@@ -2126,11 +2124,14 @@ describe('v1beta1.DataCatalogClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.renameTagTemplateField(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.renameTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.renameTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes renameTagTemplateField without error using callback', async () => {
@@ -2142,15 +2143,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RenameTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.TagTemplateField()
       );
@@ -2173,11 +2171,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.renameTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.renameTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes renameTagTemplateField with error', async () => {
@@ -2189,15 +2190,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RenameTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.renameTagTemplateField = stubSimpleCall(
         undefined,
@@ -2207,11 +2205,14 @@ describe('v1beta1.DataCatalogClient', () => {
         client.renameTagTemplateField(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.renameTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.renameTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.renameTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes renameTagTemplateField with closed client', async () => {
@@ -2223,7 +2224,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.RenameTagTemplateFieldRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RenameTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2243,15 +2248,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2259,11 +2261,14 @@ describe('v1beta1.DataCatalogClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTagTemplateField(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTagTemplateField without error using callback', async () => {
@@ -2275,15 +2280,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2306,11 +2308,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTagTemplateField with error', async () => {
@@ -2322,15 +2327,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTagTemplateField = stubSimpleCall(
         undefined,
@@ -2340,11 +2342,14 @@ describe('v1beta1.DataCatalogClient', () => {
         client.deleteTagTemplateField(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteTagTemplateField as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTagTemplateField as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTagTemplateField as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTagTemplateField with closed client', async () => {
@@ -2356,7 +2361,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagTemplateFieldRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTagTemplateFieldRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2376,26 +2385,23 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
       client.innerApiCalls.createTag = stubSimpleCall(expectedResponse);
       const [response] = await client.createTag(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTag without error using callback', async () => {
@@ -2407,15 +2413,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
@@ -2438,11 +2438,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTag with error', async () => {
@@ -2454,23 +2457,20 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.createTag(request), expectedError);
-      assert(
-        (client.innerApiCalls.createTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTag with closed client', async () => {
@@ -2482,7 +2482,8 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.CreateTagRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createTag(request), expectedError);
@@ -2499,27 +2500,27 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
-      request.tag = {};
-      request.tag.name = '';
-      const expectedHeaderRequestParams = 'tag.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tag ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
+        'tag',
+        'name',
+      ]);
+      request.tag.name = defaultValue1;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
       client.innerApiCalls.updateTag = stubSimpleCall(expectedResponse);
       const [response] = await client.updateTag(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTag without error using callback', async () => {
@@ -2531,16 +2532,13 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
-      request.tag = {};
-      request.tag.name = '';
-      const expectedHeaderRequestParams = 'tag.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tag ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
+        'tag',
+        'name',
+      ]);
+      request.tag.name = defaultValue1;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.Tag()
       );
@@ -2563,11 +2561,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTag with error', async () => {
@@ -2579,24 +2580,24 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
-      request.tag = {};
-      request.tag.name = '';
-      const expectedHeaderRequestParams = 'tag.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tag ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
+        'tag',
+        'name',
+      ]);
+      request.tag.name = defaultValue1;
+      const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.updateTag(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTag with closed client', async () => {
@@ -2608,8 +2609,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.UpdateTagRequest()
       );
-      request.tag = {};
-      request.tag.name = '';
+      request.tag ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
+        'tag',
+        'name',
+      ]);
+      request.tag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateTag(request), expectedError);
@@ -2626,26 +2631,23 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteTag = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTag(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTag without error using callback', async () => {
@@ -2657,15 +2659,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2688,11 +2684,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTag with error', async () => {
@@ -2704,23 +2703,20 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTag = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.deleteTag(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTag with closed client', async () => {
@@ -2732,7 +2728,8 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.DeleteTagRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteTag(request), expectedError);
@@ -2749,26 +2746,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
@@ -2780,15 +2776,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2811,11 +2803,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with error', async () => {
@@ -2827,26 +2822,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with closed client', async () => {
@@ -2858,7 +2852,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -2875,26 +2872,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
@@ -2906,15 +2902,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -2937,11 +2929,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with error', async () => {
@@ -2953,26 +2948,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with closed client', async () => {
@@ -2984,7 +2978,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -3001,15 +2998,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3017,11 +3010,14 @@ describe('v1beta1.DataCatalogClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
@@ -3033,15 +3029,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -3064,11 +3056,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with error', async () => {
@@ -3080,26 +3075,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with closed client', async () => {
@@ -3111,7 +3105,10 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -3128,7 +3125,6 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
@@ -3143,11 +3139,6 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.searchCatalog = stubSimpleCall(expectedResponse);
       const [response] = await client.searchCatalog(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchCatalog as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes searchCatalog without error using callback', async () => {
@@ -3159,7 +3150,6 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.SearchCatalogResult()
@@ -3192,11 +3182,6 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchCatalog as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes searchCatalog with error', async () => {
@@ -3208,18 +3193,12 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.SearchCatalogRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchCatalog = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.searchCatalog(request), expectedError);
-      assert(
-        (client.innerApiCalls.searchCatalog as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes searchCatalogStream without error', async () => {
@@ -3387,15 +3366,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
@@ -3410,11 +3385,14 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.listEntryGroups = stubSimpleCall(expectedResponse);
       const [response] = await client.listEntryGroups(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listEntryGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntryGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntryGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntryGroups without error using callback', async () => {
@@ -3426,15 +3404,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
@@ -3467,11 +3441,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listEntryGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntryGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntryGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntryGroups with error', async () => {
@@ -3483,26 +3460,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntryGroups = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listEntryGroups(request), expectedError);
-      assert(
-        (client.innerApiCalls.listEntryGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntryGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntryGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntryGroupsStream without error', async () => {
@@ -3514,8 +3490,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
@@ -3553,11 +3532,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listEntryGroups, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntryGroups.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntryGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3570,8 +3550,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntryGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3598,11 +3581,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listEntryGroups, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntryGroups.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntryGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3615,8 +3599,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.EntryGroup()
@@ -3643,11 +3630,12 @@ describe('v1beta1.DataCatalogClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntryGroups.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntryGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3660,8 +3648,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntryGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntryGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3679,11 +3670,12 @@ describe('v1beta1.DataCatalogClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listEntryGroups.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntryGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3698,15 +3690,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Entry()
@@ -3721,11 +3709,14 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.listEntries = stubSimpleCall(expectedResponse);
       const [response] = await client.listEntries(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listEntries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntries without error using callback', async () => {
@@ -3737,15 +3728,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Entry()
@@ -3776,11 +3763,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listEntries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntries with error', async () => {
@@ -3792,26 +3782,25 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listEntries = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listEntries(request), expectedError);
-      assert(
-        (client.innerApiCalls.listEntries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listEntries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listEntries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listEntriesStream without error', async () => {
@@ -3823,8 +3812,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Entry()
@@ -3861,11 +3853,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listEntries, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listEntries.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3878,8 +3871,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntries.createStream = stubPageStreamingCall(
         undefined,
@@ -3907,11 +3903,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listEntries, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listEntries.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntries.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3924,8 +3921,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Entry()
@@ -3951,11 +3951,12 @@ describe('v1beta1.DataCatalogClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listEntries.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3968,8 +3969,11 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listEntries.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3988,11 +3992,12 @@ describe('v1beta1.DataCatalogClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listEntries.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listEntries.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4007,15 +4012,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Tag()
@@ -4030,11 +4029,14 @@ describe('v1beta1.DataCatalogClient', () => {
       client.innerApiCalls.listTags = stubSimpleCall(expectedResponse);
       const [response] = await client.listTags(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTags as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTags as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTags as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTags without error using callback', async () => {
@@ -4046,15 +4048,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Tag()
@@ -4085,11 +4081,14 @@ describe('v1beta1.DataCatalogClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTags as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTags as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTags as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTags with error', async () => {
@@ -4101,23 +4100,20 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTags = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.listTags(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTags as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTags as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTags as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTagsStream without error', async () => {
@@ -4129,8 +4125,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Tag()
@@ -4167,10 +4164,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTags, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTags.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTags.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4183,8 +4182,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTags.createStream = stubPageStreamingCall(
         undefined,
@@ -4212,10 +4212,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTags, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTags.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTags.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4228,8 +4230,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.datacatalog.v1beta1.Tag()
@@ -4254,10 +4257,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTags.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTags.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4270,8 +4275,9 @@ describe('v1beta1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ListTagsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTags.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -4289,10 +4295,12 @@ describe('v1beta1.DataCatalogClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTags.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTags.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
