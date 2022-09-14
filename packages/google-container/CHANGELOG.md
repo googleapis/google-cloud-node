@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [4.1.3](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.2...v4.1.3) (2022-09-13)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency uuid to v9 ([#564](https://github.com/googleapis/nodejs-cloud-container/issues/564)) ([513d05b](https://github.com/googleapis/nodejs-cloud-container/commit/513d05b38918d0dfd239d4684ee2235a799e6ca5))
+
 ## [4.1.2](https://github.com/googleapis/nodejs-cloud-container/compare/v4.1.1...v4.1.2) (2022-09-08)
 
 
