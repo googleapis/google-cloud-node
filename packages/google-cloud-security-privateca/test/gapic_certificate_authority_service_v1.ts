@@ -33,6 +33,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -286,26 +301,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
       client.innerApiCalls.createCertificate = stubSimpleCall(expectedResponse);
       const [response] = await client.createCertificate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificate without error using callback', async () => {
@@ -320,15 +334,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
@@ -351,11 +361,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificate with error', async () => {
@@ -370,26 +383,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificate with closed client', async () => {
@@ -404,7 +416,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCertificate(request), expectedError);
@@ -424,26 +439,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
       client.innerApiCalls.getCertificate = stubSimpleCall(expectedResponse);
       const [response] = await client.getCertificate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificate without error using callback', async () => {
@@ -458,15 +472,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
@@ -489,11 +499,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificate with error', async () => {
@@ -508,26 +521,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificate with closed client', async () => {
@@ -542,7 +554,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCertificate(request), expectedError);
@@ -562,26 +577,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
       client.innerApiCalls.revokeCertificate = stubSimpleCall(expectedResponse);
       const [response] = await client.revokeCertificate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.revokeCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.revokeCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.revokeCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes revokeCertificate without error using callback', async () => {
@@ -596,15 +610,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
@@ -627,11 +637,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.revokeCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.revokeCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.revokeCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes revokeCertificate with error', async () => {
@@ -646,26 +659,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.revokeCertificate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.revokeCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.revokeCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.revokeCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.revokeCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes revokeCertificate with closed client', async () => {
@@ -680,7 +692,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.RevokeCertificateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('RevokeCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.revokeCertificate(request), expectedError);
@@ -700,27 +715,27 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
       client.innerApiCalls.updateCertificate = stubSimpleCall(expectedResponse);
       const [response] = await client.updateCertificate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificate without error using callback', async () => {
@@ -735,16 +750,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.Certificate()
       );
@@ -767,11 +779,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificate with error', async () => {
@@ -786,27 +801,27 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificate with closed client', async () => {
@@ -821,8 +836,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCertificate(request), expectedError);
@@ -842,15 +861,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'FetchCertificateAuthorityCsrRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse()
       );
@@ -858,11 +874,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.fetchCertificateAuthorityCsr(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchCertificateAuthorityCsr without error using callback', async () => {
@@ -877,15 +896,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'FetchCertificateAuthorityCsrRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrResponse()
       );
@@ -908,11 +924,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchCertificateAuthorityCsr with error', async () => {
@@ -927,15 +946,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'FetchCertificateAuthorityCsrRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchCertificateAuthorityCsr = stubSimpleCall(
         undefined,
@@ -945,11 +961,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.fetchCertificateAuthorityCsr(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCertificateAuthorityCsr as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchCertificateAuthorityCsr with closed client', async () => {
@@ -964,7 +983,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCertificateAuthorityCsrRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'FetchCertificateAuthorityCsrRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -987,15 +1010,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CertificateAuthority()
       );
@@ -1003,11 +1023,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCertificateAuthority(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateAuthority without error using callback', async () => {
@@ -1022,15 +1045,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CertificateAuthority()
       );
@@ -1053,11 +1073,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateAuthority with error', async () => {
@@ -1072,15 +1095,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateAuthority = stubSimpleCall(
         undefined,
@@ -1090,11 +1110,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.getCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateAuthority with closed client', async () => {
@@ -1109,7 +1132,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateAuthorityRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1132,26 +1159,23 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CaPool()
       );
       client.innerApiCalls.getCaPool = stubSimpleCall(expectedResponse);
       const [response] = await client.getCaPool(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCaPool without error using callback', async () => {
@@ -1166,15 +1190,9 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CaPool()
       );
@@ -1197,11 +1215,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCaPool with error', async () => {
@@ -1216,23 +1237,20 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCaPool = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getCaPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCaPool with closed client', async () => {
@@ -1247,7 +1265,8 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCaPoolRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCaPoolRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCaPool(request), expectedError);
@@ -1267,26 +1286,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      request.caPool = '';
-      const expectedHeaderRequestParams = 'ca_pool=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
+        'caPool',
+      ]);
+      request.caPool = defaultValue1;
+      const expectedHeaderRequestParams = `ca_pool=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsResponse()
       );
       client.innerApiCalls.fetchCaCerts = stubSimpleCall(expectedResponse);
       const [response] = await client.fetchCaCerts(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchCaCerts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchCaCerts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCaCerts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchCaCerts without error using callback', async () => {
@@ -1301,15 +1319,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      request.caPool = '';
-      const expectedHeaderRequestParams = 'ca_pool=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
+        'caPool',
+      ]);
+      request.caPool = defaultValue1;
+      const expectedHeaderRequestParams = `ca_pool=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsResponse()
       );
@@ -1332,11 +1346,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchCaCerts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchCaCerts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCaCerts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchCaCerts with error', async () => {
@@ -1351,26 +1368,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      request.caPool = '';
-      const expectedHeaderRequestParams = 'ca_pool=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
+        'caPool',
+      ]);
+      request.caPool = defaultValue1;
+      const expectedHeaderRequestParams = `ca_pool=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchCaCerts = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchCaCerts(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchCaCerts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchCaCerts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchCaCerts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchCaCerts with closed client', async () => {
@@ -1385,7 +1401,10 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.FetchCaCertsRequest()
       );
-      request.caPool = '';
+      const defaultValue1 = getTypeDefaultValue('FetchCaCertsRequest', [
+        'caPool',
+      ]);
+      request.caPool = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchCaCerts(request), expectedError);
@@ -1405,15 +1424,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateRevocationListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CertificateRevocationList()
       );
@@ -1421,11 +1437,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCertificateRevocationList(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateRevocationList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateRevocationList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateRevocationList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateRevocationList without error using callback', async () => {
@@ -1440,15 +1459,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateRevocationListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CertificateRevocationList()
       );
@@ -1471,11 +1487,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateRevocationList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateRevocationList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateRevocationList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateRevocationList with error', async () => {
@@ -1490,15 +1509,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateRevocationListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateRevocationList = stubSimpleCall(
         undefined,
@@ -1508,11 +1524,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.getCertificateRevocationList(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getCertificateRevocationList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateRevocationList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateRevocationList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateRevocationList with closed client', async () => {
@@ -1527,7 +1546,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateRevocationListRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateRevocationListRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1550,15 +1573,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CertificateTemplate()
       );
@@ -1566,11 +1586,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCertificateTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateTemplate without error using callback', async () => {
@@ -1585,15 +1608,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CertificateTemplate()
       );
@@ -1616,11 +1636,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateTemplate with error', async () => {
@@ -1635,15 +1658,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateTemplate = stubSimpleCall(
         undefined,
@@ -1653,11 +1673,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.getCertificateTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateTemplate with closed client', async () => {
@@ -1672,7 +1695,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.GetCertificateTemplateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1695,15 +1722,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ActivateCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1712,11 +1736,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.activateCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.activateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateCertificateAuthority without error using callback', async () => {
@@ -1731,15 +1758,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ActivateCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1769,11 +1793,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.activateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateCertificateAuthority with call error', async () => {
@@ -1788,15 +1815,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ActivateCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.activateCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -1806,11 +1830,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.activateCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.activateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes activateCertificateAuthority with LRO error', async () => {
@@ -1825,15 +1852,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ActivateCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ActivateCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.activateCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -1842,11 +1866,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.activateCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.activateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.activateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkActivateCertificateAuthorityProgress without error', async () => {
@@ -1911,15 +1938,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateAuthorityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1928,11 +1952,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.createCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateAuthority without error using callback', async () => {
@@ -1947,15 +1974,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateAuthorityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1985,11 +2009,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateAuthority with call error', async () => {
@@ -2004,15 +2031,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateAuthorityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2022,11 +2046,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.createCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateAuthority with LRO error', async () => {
@@ -2041,15 +2068,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateAuthorityRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateAuthorityRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2058,11 +2082,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.createCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCertificateAuthorityProgress without error', async () => {
@@ -2127,15 +2154,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DisableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2144,11 +2168,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.disableCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.disableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableCertificateAuthority without error using callback', async () => {
@@ -2163,15 +2190,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DisableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2201,11 +2225,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.disableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableCertificateAuthority with call error', async () => {
@@ -2220,15 +2247,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DisableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2238,11 +2262,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.disableCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.disableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableCertificateAuthority with LRO error', async () => {
@@ -2257,15 +2284,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DisableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DisableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2274,11 +2298,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.disableCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.disableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDisableCertificateAuthorityProgress without error', async () => {
@@ -2343,15 +2370,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'EnableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2360,11 +2384,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.enableCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableCertificateAuthority without error using callback', async () => {
@@ -2379,15 +2406,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'EnableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2417,11 +2441,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableCertificateAuthority with call error', async () => {
@@ -2436,15 +2463,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'EnableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2454,11 +2478,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.enableCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.enableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableCertificateAuthority with LRO error', async () => {
@@ -2473,15 +2500,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.EnableCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'EnableCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2490,11 +2514,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.enableCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.enableCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkEnableCertificateAuthorityProgress without error', async () => {
@@ -2559,15 +2586,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UndeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2576,11 +2600,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.undeleteCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteCertificateAuthority without error using callback', async () => {
@@ -2595,15 +2622,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UndeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2633,11 +2657,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteCertificateAuthority with call error', async () => {
@@ -2652,15 +2679,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UndeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2670,11 +2694,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.undeleteCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.undeleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeleteCertificateAuthority with LRO error', async () => {
@@ -2689,15 +2716,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UndeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UndeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeleteCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2706,11 +2730,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.undeleteCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.undeleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUndeleteCertificateAuthorityProgress without error', async () => {
@@ -2775,15 +2802,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2792,11 +2816,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.deleteCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateAuthority without error using callback', async () => {
@@ -2811,15 +2838,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2849,11 +2873,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateAuthority with call error', async () => {
@@ -2868,15 +2895,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2886,11 +2910,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.deleteCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateAuthority with LRO error', async () => {
@@ -2905,15 +2932,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateAuthorityRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateAuthorityRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -2922,11 +2946,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.deleteCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteCertificateAuthorityProgress without error', async () => {
@@ -2991,16 +3018,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest()
       );
-      request.certificateAuthority = {};
-      request.certificateAuthority.name = '';
-      const expectedHeaderRequestParams = 'certificate_authority.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateAuthority ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateAuthorityRequest',
+        ['certificateAuthority', 'name']
+      );
+      request.certificateAuthority.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_authority.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3009,11 +3033,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.updateCertificateAuthority(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateAuthority without error using callback', async () => {
@@ -3028,16 +3055,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest()
       );
-      request.certificateAuthority = {};
-      request.certificateAuthority.name = '';
-      const expectedHeaderRequestParams = 'certificate_authority.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateAuthority ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateAuthorityRequest',
+        ['certificateAuthority', 'name']
+      );
+      request.certificateAuthority.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_authority.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3067,11 +3091,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateAuthority with call error', async () => {
@@ -3086,16 +3113,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest()
       );
-      request.certificateAuthority = {};
-      request.certificateAuthority.name = '';
-      const expectedHeaderRequestParams = 'certificate_authority.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateAuthority ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateAuthorityRequest',
+        ['certificateAuthority', 'name']
+      );
+      request.certificateAuthority.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_authority.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -3105,11 +3129,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.updateCertificateAuthority(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateAuthority with LRO error', async () => {
@@ -3124,16 +3151,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest()
       );
-      request.certificateAuthority = {};
-      request.certificateAuthority.name = '';
-      const expectedHeaderRequestParams = 'certificate_authority.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateAuthority ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateAuthorityRequest',
+        ['certificateAuthority', 'name']
+      );
+      request.certificateAuthority.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_authority.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateAuthority = stubLongRunningCall(
         undefined,
@@ -3142,11 +3166,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.updateCertificateAuthority(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificateAuthority as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateAuthority as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateCertificateAuthorityProgress without error', async () => {
@@ -3211,15 +3238,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3227,11 +3250,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.createCaPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCaPool without error using callback', async () => {
@@ -3246,15 +3272,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3284,11 +3306,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCaPool with call error', async () => {
@@ -3303,26 +3328,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCaPool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCaPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCaPool with LRO error', async () => {
@@ -3337,15 +3361,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCaPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCaPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCaPool = stubLongRunningCall(
         undefined,
@@ -3354,11 +3374,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.createCaPool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCaPoolProgress without error', async () => {
@@ -3419,16 +3442,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
-      request.caPool = {};
-      request.caPool.name = '';
-      const expectedHeaderRequestParams = 'ca_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.caPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
+        'caPool',
+        'name',
+      ]);
+      request.caPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3436,11 +3456,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.updateCaPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCaPool without error using callback', async () => {
@@ -3455,16 +3478,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
-      request.caPool = {};
-      request.caPool.name = '';
-      const expectedHeaderRequestParams = 'ca_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.caPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
+        'caPool',
+        'name',
+      ]);
+      request.caPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3494,11 +3514,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCaPool with call error', async () => {
@@ -3513,27 +3536,27 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
-      request.caPool = {};
-      request.caPool.name = '';
-      const expectedHeaderRequestParams = 'ca_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.caPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
+        'caPool',
+        'name',
+      ]);
+      request.caPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCaPool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCaPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCaPool with LRO error', async () => {
@@ -3548,16 +3571,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCaPoolRequest()
       );
-      request.caPool = {};
-      request.caPool.name = '';
-      const expectedHeaderRequestParams = 'ca_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.caPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCaPoolRequest', [
+        'caPool',
+        'name',
+      ]);
+      request.caPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `ca_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCaPool = stubLongRunningCall(
         undefined,
@@ -3566,11 +3586,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.updateCaPool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateCaPoolProgress without error', async () => {
@@ -3631,15 +3654,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3647,11 +3666,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.deleteCaPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCaPool without error using callback', async () => {
@@ -3666,15 +3688,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3704,11 +3722,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCaPool with call error', async () => {
@@ -3723,26 +3744,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCaPool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteCaPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCaPool with LRO error', async () => {
@@ -3757,15 +3777,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCaPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCaPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCaPool = stubLongRunningCall(
         undefined,
@@ -3774,11 +3790,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.deleteCaPool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCaPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCaPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteCaPoolProgress without error', async () => {
@@ -3839,16 +3858,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest()
       );
-      request.certificateRevocationList = {};
-      request.certificateRevocationList.name = '';
-      const expectedHeaderRequestParams = 'certificate_revocation_list.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateRevocationList ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateRevocationListRequest',
+        ['certificateRevocationList', 'name']
+      );
+      request.certificateRevocationList.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_revocation_list.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3857,11 +3873,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.updateCertificateRevocationList(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateRevocationList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateRevocationList without error using callback', async () => {
@@ -3876,16 +3895,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest()
       );
-      request.certificateRevocationList = {};
-      request.certificateRevocationList.name = '';
-      const expectedHeaderRequestParams = 'certificate_revocation_list.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateRevocationList ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateRevocationListRequest',
+        ['certificateRevocationList', 'name']
+      );
+      request.certificateRevocationList.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_revocation_list.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3915,11 +3931,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateRevocationList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateRevocationList with call error', async () => {
@@ -3934,16 +3953,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest()
       );
-      request.certificateRevocationList = {};
-      request.certificateRevocationList.name = '';
-      const expectedHeaderRequestParams = 'certificate_revocation_list.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateRevocationList ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateRevocationListRequest',
+        ['certificateRevocationList', 'name']
+      );
+      request.certificateRevocationList.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_revocation_list.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateRevocationList =
         stubLongRunningCall(undefined, expectedError);
@@ -3951,11 +3967,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.updateCertificateRevocationList(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCertificateRevocationList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateRevocationList with LRO error', async () => {
@@ -3970,26 +3989,26 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateRevocationListRequest()
       );
-      request.certificateRevocationList = {};
-      request.certificateRevocationList.name = '';
-      const expectedHeaderRequestParams = 'certificate_revocation_list.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateRevocationList ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateRevocationListRequest',
+        ['certificateRevocationList', 'name']
+      );
+      request.certificateRevocationList.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_revocation_list.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateRevocationList =
         stubLongRunningCall(undefined, undefined, expectedError);
       const [operation] = await client.updateCertificateRevocationList(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificateRevocationList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateRevocationList as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateCertificateRevocationListProgress without error', async () => {
@@ -4054,15 +4073,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4071,11 +4087,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.createCertificateTemplate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateTemplate without error using callback', async () => {
@@ -4090,15 +4109,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4128,11 +4144,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateTemplate with call error', async () => {
@@ -4147,15 +4166,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateTemplate = stubLongRunningCall(
         undefined,
@@ -4165,11 +4181,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.createCertificateTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateTemplate with LRO error', async () => {
@@ -4184,15 +4203,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.CreateCertificateTemplateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateTemplateRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateTemplate = stubLongRunningCall(
         undefined,
@@ -4201,11 +4217,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.createCertificateTemplate(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCertificateTemplateProgress without error', async () => {
@@ -4270,15 +4289,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4287,11 +4303,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.deleteCertificateTemplate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateTemplate without error using callback', async () => {
@@ -4306,15 +4325,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4344,11 +4360,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateTemplate with call error', async () => {
@@ -4363,15 +4382,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateTemplate = stubLongRunningCall(
         undefined,
@@ -4381,11 +4397,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.deleteCertificateTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateTemplate with LRO error', async () => {
@@ -4400,15 +4419,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.DeleteCertificateTemplateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateTemplateRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateTemplate = stubLongRunningCall(
         undefined,
@@ -4417,11 +4433,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.deleteCertificateTemplate(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteCertificateTemplateProgress without error', async () => {
@@ -4486,16 +4505,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest()
       );
-      request.certificateTemplate = {};
-      request.certificateTemplate.name = '';
-      const expectedHeaderRequestParams = 'certificate_template.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateTemplateRequest',
+        ['certificateTemplate', 'name']
+      );
+      request.certificateTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_template.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4504,11 +4520,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const [operation] = await client.updateCertificateTemplate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateTemplate without error using callback', async () => {
@@ -4523,16 +4542,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest()
       );
-      request.certificateTemplate = {};
-      request.certificateTemplate.name = '';
-      const expectedHeaderRequestParams = 'certificate_template.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateTemplateRequest',
+        ['certificateTemplate', 'name']
+      );
+      request.certificateTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_template.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -4562,11 +4578,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateTemplate with call error', async () => {
@@ -4581,16 +4600,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest()
       );
-      request.certificateTemplate = {};
-      request.certificateTemplate.name = '';
-      const expectedHeaderRequestParams = 'certificate_template.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateTemplateRequest',
+        ['certificateTemplate', 'name']
+      );
+      request.certificateTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_template.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateTemplate = stubLongRunningCall(
         undefined,
@@ -4600,11 +4616,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.updateCertificateTemplate(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateTemplate with LRO error', async () => {
@@ -4619,16 +4638,13 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.UpdateCertificateTemplateRequest()
       );
-      request.certificateTemplate = {};
-      request.certificateTemplate.name = '';
-      const expectedHeaderRequestParams = 'certificate_template.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateTemplate ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateTemplateRequest',
+        ['certificateTemplate', 'name']
+      );
+      request.certificateTemplate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_template.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateTemplate = stubLongRunningCall(
         undefined,
@@ -4637,11 +4653,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       );
       const [operation] = await client.updateCertificateTemplate(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificateTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateCertificateTemplateProgress without error', async () => {
@@ -4706,15 +4725,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.Certificate()
@@ -4729,11 +4744,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       client.innerApiCalls.listCertificates = stubSimpleCall(expectedResponse);
       const [response] = await client.listCertificates(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificates without error using callback', async () => {
@@ -4748,15 +4766,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.Certificate()
@@ -4789,11 +4803,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificates with error', async () => {
@@ -4808,26 +4825,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificates = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCertificates(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCertificates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificatesStream without error', async () => {
@@ -4842,8 +4858,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.Certificate()
@@ -4881,11 +4900,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificates, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4901,8 +4921,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4929,11 +4952,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificates, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4949,8 +4973,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.Certificate()
@@ -4977,11 +5004,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4997,8 +5025,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5016,11 +5047,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5038,15 +5070,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateAuthoritiesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateAuthority()
@@ -5062,11 +5091,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCertificateAuthorities(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateAuthorities as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateAuthorities as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateAuthorities as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateAuthorities without error using callback', async () => {
@@ -5081,15 +5113,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateAuthoritiesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateAuthority()
@@ -5122,11 +5151,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateAuthorities as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateAuthorities as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateAuthorities as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateAuthorities with error', async () => {
@@ -5141,15 +5173,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateAuthoritiesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateAuthorities = stubSimpleCall(
         undefined,
@@ -5159,11 +5188,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.listCertificateAuthorities(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listCertificateAuthorities as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateAuthorities as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateAuthorities as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateAuthoritiesStream without error', async () => {
@@ -5178,8 +5210,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateAuthoritiesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateAuthority()
@@ -5222,12 +5258,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateAuthorities, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateAuthorities
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5243,8 +5282,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateAuthoritiesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateAuthorities.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5276,12 +5319,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateAuthorities, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateAuthorities
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5297,8 +5343,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateAuthoritiesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateAuthority()
@@ -5326,12 +5376,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateAuthorities
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5347,8 +5400,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateAuthoritiesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateAuthoritiesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateAuthorities.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5367,12 +5424,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateAuthorities
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5390,15 +5450,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CaPool()
@@ -5413,11 +5469,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       client.innerApiCalls.listCaPools = stubSimpleCall(expectedResponse);
       const [response] = await client.listCaPools(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCaPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCaPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCaPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCaPools without error using callback', async () => {
@@ -5432,15 +5491,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CaPool()
@@ -5471,11 +5526,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCaPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCaPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCaPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCaPools with error', async () => {
@@ -5490,26 +5548,25 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCaPools = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCaPools(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCaPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCaPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCaPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCaPoolsStream without error', async () => {
@@ -5524,8 +5581,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CaPool()
@@ -5563,11 +5623,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCaPools, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listCaPools.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCaPools.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5583,8 +5644,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCaPools.createStream = stubPageStreamingCall(
         undefined,
@@ -5613,11 +5677,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCaPools, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listCaPools.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCaPools.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5633,8 +5698,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CaPool()
@@ -5660,11 +5728,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listCaPools.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCaPools.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5680,8 +5749,11 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCaPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCaPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCaPools.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -5701,11 +5773,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listCaPools.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCaPools.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5723,15 +5796,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateRevocationListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateRevocationList()
@@ -5747,11 +5817,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCertificateRevocationLists(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateRevocationLists as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateRevocationLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateRevocationLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateRevocationLists without error using callback', async () => {
@@ -5766,15 +5839,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateRevocationListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateRevocationList()
@@ -5807,11 +5877,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateRevocationLists as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateRevocationLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateRevocationLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateRevocationLists with error', async () => {
@@ -5826,15 +5899,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateRevocationListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateRevocationLists = stubSimpleCall(
         undefined,
@@ -5844,11 +5914,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.listCertificateRevocationLists(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listCertificateRevocationLists as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateRevocationLists as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateRevocationLists as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateRevocationListsStream without error', async () => {
@@ -5863,8 +5936,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateRevocationListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateRevocationList()
@@ -5910,12 +5987,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateRevocationLists
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5931,8 +6011,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateRevocationListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateRevocationLists.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -5967,12 +6051,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateRevocationLists
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5988,8 +6075,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateRevocationListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateRevocationList()
@@ -6017,12 +6108,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateRevocationLists
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6038,8 +6132,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateRevocationListsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateRevocationListsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateRevocationLists.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6058,12 +6156,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateRevocationLists
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6081,15 +6182,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateTemplate()
@@ -6105,11 +6203,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCertificateTemplates(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateTemplates without error using callback', async () => {
@@ -6124,15 +6225,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateTemplate()
@@ -6165,11 +6263,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateTemplates with error', async () => {
@@ -6184,15 +6285,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateTemplates = stubSimpleCall(
         undefined,
@@ -6202,11 +6300,14 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         client.listCertificateTemplates(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listCertificateTemplates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateTemplates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateTemplates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateTemplatesStream without error', async () => {
@@ -6221,8 +6322,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateTemplate()
@@ -6265,12 +6370,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateTemplates, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateTemplates
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6286,8 +6394,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateTemplates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6319,12 +6431,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateTemplates, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateTemplates
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6340,8 +6455,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.security.privateca.v1.CertificateTemplate()
@@ -6369,12 +6488,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateTemplates
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6390,8 +6512,12 @@ describe('v1.CertificateAuthorityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.security.privateca.v1.ListCertificateTemplatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateTemplatesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateTemplates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6410,12 +6536,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateTemplates
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6929,12 +7058,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -6968,12 +7100,15 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
