@@ -457,7 +457,7 @@ export class AlphaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        property: request.property || '',
+        property: request.property ?? '',
       });
     this.initialize();
     return this.innerApiCalls.runFunnelReport(request, options, callback);

@@ -473,7 +473,7 @@ export class BetaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        property: request.property || '',
+        property: request.property ?? '',
       });
     this.initialize();
     return this.innerApiCalls.runReport(request, options, callback);
@@ -613,7 +613,7 @@ export class BetaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        property: request.property || '',
+        property: request.property ?? '',
       });
     this.initialize();
     return this.innerApiCalls.runPivotReport(request, options, callback);
@@ -716,7 +716,7 @@ export class BetaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        property: request.property || '',
+        property: request.property ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchRunReports(request, options, callback);
@@ -825,7 +825,7 @@ export class BetaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        property: request.property || '',
+        property: request.property ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchRunPivotReports(request, options, callback);
@@ -935,7 +935,7 @@ export class BetaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getMetadata(request, options, callback);
@@ -1068,7 +1068,7 @@ export class BetaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        property: request.property || '',
+        property: request.property ?? '',
       });
     this.initialize();
     return this.innerApiCalls.runRealtimeReport(request, options, callback);
@@ -1199,7 +1199,7 @@ export class BetaAnalyticsDataClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        property: request.property || '',
+        property: request.property ?? '',
       });
     this.initialize();
     return this.innerApiCalls.checkCompatibility(request, options, callback);
