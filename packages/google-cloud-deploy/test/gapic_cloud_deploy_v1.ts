@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,15 +267,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeliveryPipeline()
       );
@@ -268,11 +279,14 @@ describe('v1.CloudDeployClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDeliveryPipeline(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeliveryPipeline without error using callback', async () => {
@@ -284,15 +298,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeliveryPipeline()
       );
@@ -315,11 +325,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeliveryPipeline with error', async () => {
@@ -331,26 +344,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDeliveryPipeline = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDeliveryPipeline(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDeliveryPipeline with closed client', async () => {
@@ -362,7 +374,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDeliveryPipeline(request), expectedError);
@@ -379,26 +394,23 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Target()
       );
       client.innerApiCalls.getTarget = stubSimpleCall(expectedResponse);
       const [response] = await client.getTarget(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTarget without error using callback', async () => {
@@ -410,15 +422,9 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Target()
       );
@@ -441,11 +447,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTarget with error', async () => {
@@ -457,23 +466,20 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTarget = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getTarget(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTarget with closed client', async () => {
@@ -485,7 +491,8 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTarget(request), expectedError);
@@ -502,26 +509,23 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Release()
       );
       client.innerApiCalls.getRelease = stubSimpleCall(expectedResponse);
       const [response] = await client.getRelease(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRelease as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRelease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRelease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRelease without error using callback', async () => {
@@ -533,15 +537,9 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Release()
       );
@@ -564,11 +562,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRelease as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRelease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRelease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRelease with error', async () => {
@@ -580,26 +581,23 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRelease = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getRelease(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRelease as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRelease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRelease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRelease with closed client', async () => {
@@ -611,7 +609,8 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRelease(request), expectedError);
@@ -628,26 +627,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutResponse()
       );
       client.innerApiCalls.approveRollout = stubSimpleCall(expectedResponse);
       const [response] = await client.approveRollout(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.approveRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveRollout without error using callback', async () => {
@@ -659,15 +657,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutResponse()
       );
@@ -690,11 +684,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.approveRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveRollout with error', async () => {
@@ -706,26 +703,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveRollout = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.approveRollout(request), expectedError);
-      assert(
-        (client.innerApiCalls.approveRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveRollout with closed client', async () => {
@@ -737,7 +733,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.approveRollout(request), expectedError);
@@ -754,26 +753,23 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Rollout()
       );
       client.innerApiCalls.getRollout = stubSimpleCall(expectedResponse);
       const [response] = await client.getRollout(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRollout without error using callback', async () => {
@@ -785,15 +781,9 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Rollout()
       );
@@ -816,11 +806,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRollout with error', async () => {
@@ -832,26 +825,23 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getRollout = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getRollout(request), expectedError);
-      assert(
-        (client.innerApiCalls.getRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getRollout with closed client', async () => {
@@ -863,7 +853,8 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getRollout(request), expectedError);
@@ -880,26 +871,23 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Config()
       );
       client.innerApiCalls.getConfig = stubSimpleCall(expectedResponse);
       const [response] = await client.getConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConfig without error using callback', async () => {
@@ -911,15 +899,9 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.deploy.v1.Config()
       );
@@ -942,11 +924,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConfig with error', async () => {
@@ -958,23 +943,20 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConfig = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.getConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConfig with closed client', async () => {
@@ -986,7 +968,8 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConfig(request), expectedError);
@@ -1003,15 +986,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeliveryPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1020,11 +1000,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.createDeliveryPipeline(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeliveryPipeline without error using callback', async () => {
@@ -1036,15 +1019,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeliveryPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1074,11 +1054,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeliveryPipeline with call error', async () => {
@@ -1090,15 +1073,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeliveryPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -1108,11 +1088,14 @@ describe('v1.CloudDeployClient', () => {
         client.createDeliveryPipeline(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDeliveryPipeline with LRO error', async () => {
@@ -1124,15 +1107,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDeliveryPipelineRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -1141,11 +1121,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.createDeliveryPipeline(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateDeliveryPipelineProgress without error', async () => {
@@ -1200,16 +1183,13 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
-      request.deliveryPipeline = {};
-      request.deliveryPipeline.name = '';
-      const expectedHeaderRequestParams = 'delivery_pipeline.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.deliveryPipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeliveryPipelineRequest',
+        ['deliveryPipeline', 'name']
+      );
+      request.deliveryPipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1218,11 +1198,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.updateDeliveryPipeline(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeliveryPipeline without error using callback', async () => {
@@ -1234,16 +1217,13 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
-      request.deliveryPipeline = {};
-      request.deliveryPipeline.name = '';
-      const expectedHeaderRequestParams = 'delivery_pipeline.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.deliveryPipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeliveryPipelineRequest',
+        ['deliveryPipeline', 'name']
+      );
+      request.deliveryPipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1273,11 +1253,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeliveryPipeline with call error', async () => {
@@ -1289,16 +1272,13 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
-      request.deliveryPipeline = {};
-      request.deliveryPipeline.name = '';
-      const expectedHeaderRequestParams = 'delivery_pipeline.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.deliveryPipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeliveryPipelineRequest',
+        ['deliveryPipeline', 'name']
+      );
+      request.deliveryPipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -1308,11 +1288,14 @@ describe('v1.CloudDeployClient', () => {
         client.updateDeliveryPipeline(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDeliveryPipeline with LRO error', async () => {
@@ -1324,16 +1307,13 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest()
       );
-      request.deliveryPipeline = {};
-      request.deliveryPipeline.name = '';
-      const expectedHeaderRequestParams = 'delivery_pipeline.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.deliveryPipeline ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDeliveryPipelineRequest',
+        ['deliveryPipeline', 'name']
+      );
+      request.deliveryPipeline.name = defaultValue1;
+      const expectedHeaderRequestParams = `delivery_pipeline.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -1342,11 +1322,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.updateDeliveryPipeline(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateDeliveryPipelineProgress without error', async () => {
@@ -1401,15 +1384,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeliveryPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1418,11 +1398,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.deleteDeliveryPipeline(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeliveryPipeline without error using callback', async () => {
@@ -1434,15 +1417,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeliveryPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1472,11 +1452,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeliveryPipeline with call error', async () => {
@@ -1488,15 +1471,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeliveryPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -1506,11 +1486,14 @@ describe('v1.CloudDeployClient', () => {
         client.deleteDeliveryPipeline(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDeliveryPipeline with LRO error', async () => {
@@ -1522,15 +1505,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDeliveryPipelineRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDeliveryPipeline = stubLongRunningCall(
         undefined,
@@ -1539,11 +1519,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.deleteDeliveryPipeline(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDeliveryPipeline as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDeliveryPipeline as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteDeliveryPipelineProgress without error', async () => {
@@ -1598,15 +1581,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1614,11 +1593,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.createTarget(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTarget without error using callback', async () => {
@@ -1630,15 +1612,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1668,11 +1646,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTarget with call error', async () => {
@@ -1684,26 +1665,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTarget = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createTarget(request), expectedError);
-      assert(
-        (client.innerApiCalls.createTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTarget with LRO error', async () => {
@@ -1715,15 +1695,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTarget = stubLongRunningCall(
         undefined,
@@ -1732,11 +1708,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.createTarget(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateTargetProgress without error', async () => {
@@ -1788,16 +1767,13 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
-      request.target = {};
-      request.target.name = '';
-      const expectedHeaderRequestParams = 'target.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.target ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
+        'target',
+        'name',
+      ]);
+      request.target.name = defaultValue1;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1805,11 +1781,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.updateTarget(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTarget without error using callback', async () => {
@@ -1821,16 +1800,13 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
-      request.target = {};
-      request.target.name = '';
-      const expectedHeaderRequestParams = 'target.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.target ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
+        'target',
+        'name',
+      ]);
+      request.target.name = defaultValue1;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1860,11 +1836,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTarget with call error', async () => {
@@ -1876,27 +1855,27 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
-      request.target = {};
-      request.target.name = '';
-      const expectedHeaderRequestParams = 'target.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.target ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
+        'target',
+        'name',
+      ]);
+      request.target.name = defaultValue1;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTarget = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateTarget(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTarget with LRO error', async () => {
@@ -1908,16 +1887,13 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
-      request.target = {};
-      request.target.name = '';
-      const expectedHeaderRequestParams = 'target.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.target ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
+        'target',
+        'name',
+      ]);
+      request.target.name = defaultValue1;
+      const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTarget = stubLongRunningCall(
         undefined,
@@ -1926,11 +1902,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.updateTarget(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateTargetProgress without error', async () => {
@@ -1982,15 +1961,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1998,11 +1973,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.deleteTarget(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTarget without error using callback', async () => {
@@ -2014,15 +1992,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2052,11 +2026,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTarget with call error', async () => {
@@ -2068,26 +2045,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTarget = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteTarget(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTarget with LRO error', async () => {
@@ -2099,15 +2075,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTarget = stubLongRunningCall(
         undefined,
@@ -2116,11 +2088,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.deleteTarget(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteTarget as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTarget as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteTargetProgress without error', async () => {
@@ -2172,15 +2147,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2189,11 +2160,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.createRelease(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRelease as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRelease without error using callback', async () => {
@@ -2205,15 +2179,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2243,11 +2213,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRelease as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRelease with call error', async () => {
@@ -2259,26 +2232,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRelease = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createRelease(request), expectedError);
-      assert(
-        (client.innerApiCalls.createRelease as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRelease with LRO error', async () => {
@@ -2290,15 +2262,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRelease = stubLongRunningCall(
         undefined,
@@ -2307,11 +2275,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.createRelease(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createRelease as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRelease as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateReleaseProgress without error', async () => {
@@ -2366,15 +2337,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2383,11 +2350,14 @@ describe('v1.CloudDeployClient', () => {
       const [operation] = await client.createRollout(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRollout without error using callback', async () => {
@@ -2399,15 +2369,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2437,11 +2403,14 @@ describe('v1.CloudDeployClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRollout with call error', async () => {
@@ -2453,26 +2422,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRollout = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createRollout(request), expectedError);
-      assert(
-        (client.innerApiCalls.createRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createRollout with LRO error', async () => {
@@ -2484,15 +2452,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createRollout = stubLongRunningCall(
         undefined,
@@ -2501,11 +2465,14 @@ describe('v1.CloudDeployClient', () => {
       );
       const [operation] = await client.createRollout(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createRollout as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createRollout as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateRolloutProgress without error', async () => {
@@ -2560,15 +2527,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeliveryPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -2584,11 +2548,14 @@ describe('v1.CloudDeployClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDeliveryPipelines(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeliveryPipelines as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeliveryPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeliveryPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeliveryPipelines without error using callback', async () => {
@@ -2600,15 +2567,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeliveryPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -2639,11 +2603,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDeliveryPipelines as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeliveryPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeliveryPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeliveryPipelines with error', async () => {
@@ -2655,15 +2622,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeliveryPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDeliveryPipelines = stubSimpleCall(
         undefined,
@@ -2673,11 +2637,14 @@ describe('v1.CloudDeployClient', () => {
         client.listDeliveryPipelines(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listDeliveryPipelines as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDeliveryPipelines as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDeliveryPipelines as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDeliveryPipelinesStream without error', async () => {
@@ -2689,8 +2656,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeliveryPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -2730,12 +2701,15 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeliveryPipelines, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeliveryPipelines
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2748,8 +2722,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeliveryPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeliveryPipelines.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2778,12 +2756,15 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDeliveryPipelines, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeliveryPipelines
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2796,8 +2777,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeliveryPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.deploy.v1.DeliveryPipeline()
@@ -2824,12 +2809,15 @@ describe('v1.CloudDeployClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeliveryPipelines
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2842,8 +2830,12 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDeliveryPipelinesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDeliveryPipelines.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2861,12 +2853,15 @@ describe('v1.CloudDeployClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDeliveryPipelines
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2881,15 +2876,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -2898,11 +2889,14 @@ describe('v1.CloudDeployClient', () => {
       client.innerApiCalls.listTargets = stubSimpleCall(expectedResponse);
       const [response] = await client.listTargets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTargets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTargets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTargets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTargets without error using callback', async () => {
@@ -2914,15 +2908,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -2947,11 +2937,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTargets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTargets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTargets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTargets with error', async () => {
@@ -2963,26 +2956,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTargets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listTargets(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTargets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTargets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTargets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTargetsStream without error', async () => {
@@ -2994,8 +2986,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -3023,11 +3018,12 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTargets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTargets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3040,8 +3036,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargets.createStream = stubPageStreamingCall(
         undefined,
@@ -3066,11 +3065,12 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTargets, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTargets.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3083,8 +3083,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Target()),
@@ -3104,11 +3107,12 @@ describe('v1.CloudDeployClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTargets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3121,8 +3125,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTargets.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3141,11 +3148,12 @@ describe('v1.CloudDeployClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listTargets.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTargets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3160,15 +3168,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -3177,11 +3181,14 @@ describe('v1.CloudDeployClient', () => {
       client.innerApiCalls.listReleases = stubSimpleCall(expectedResponse);
       const [response] = await client.listReleases(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listReleases as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReleases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReleases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReleases without error using callback', async () => {
@@ -3193,15 +3200,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -3226,11 +3229,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listReleases as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReleases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReleases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReleases with error', async () => {
@@ -3242,26 +3248,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReleases = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listReleases(request), expectedError);
-      assert(
-        (client.innerApiCalls.listReleases as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReleases as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReleases as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReleasesStream without error', async () => {
@@ -3273,8 +3278,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -3302,11 +3310,12 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listReleases, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReleases.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReleases.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3319,8 +3328,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReleases.createStream = stubPageStreamingCall(
         undefined,
@@ -3345,11 +3357,12 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listReleases, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReleases.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReleases.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3362,8 +3375,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Release()),
@@ -3383,11 +3399,12 @@ describe('v1.CloudDeployClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReleases.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReleases.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3400,8 +3417,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReleases.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3418,11 +3438,12 @@ describe('v1.CloudDeployClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReleases.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReleases.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3437,15 +3458,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -3454,11 +3471,14 @@ describe('v1.CloudDeployClient', () => {
       client.innerApiCalls.listRollouts = stubSimpleCall(expectedResponse);
       const [response] = await client.listRollouts(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRollouts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRollouts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRollouts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRollouts without error using callback', async () => {
@@ -3470,15 +3490,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -3503,11 +3519,14 @@ describe('v1.CloudDeployClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listRollouts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRollouts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRollouts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRollouts with error', async () => {
@@ -3519,26 +3538,25 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listRollouts = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listRollouts(request), expectedError);
-      assert(
-        (client.innerApiCalls.listRollouts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listRollouts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listRollouts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listRolloutsStream without error', async () => {
@@ -3550,8 +3568,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -3579,11 +3600,12 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRollouts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRollouts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRollouts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3596,8 +3618,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRollouts.createStream = stubPageStreamingCall(
         undefined,
@@ -3622,11 +3647,12 @@ describe('v1.CloudDeployClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listRollouts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRollouts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRollouts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3639,8 +3665,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
         generateSampleMessage(new protos.google.cloud.deploy.v1.Rollout()),
@@ -3660,11 +3689,12 @@ describe('v1.CloudDeployClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRollouts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3677,8 +3707,11 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listRollouts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3695,11 +3728,12 @@ describe('v1.CloudDeployClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listRollouts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listRollouts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
