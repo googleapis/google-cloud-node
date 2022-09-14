@@ -33,6 +33,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -269,26 +284,25 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
       );
       client.innerApiCalls.getAppConnection = stubSimpleCall(expectedResponse);
       const [response] = await client.getAppConnection(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAppConnection without error using callback', async () => {
@@ -301,15 +315,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
       );
@@ -332,11 +342,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAppConnection with error', async () => {
@@ -349,26 +362,25 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAppConnection = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAppConnection(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAppConnection with closed client', async () => {
@@ -381,7 +393,10 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.GetAppConnectionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAppConnection(request), expectedError);
@@ -399,15 +414,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -416,11 +427,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       const [operation] = await client.createAppConnection(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAppConnection without error using callback', async () => {
@@ -433,15 +447,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -471,11 +481,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAppConnection with call error', async () => {
@@ -488,26 +501,25 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAppConnection = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAppConnection(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAppConnection with LRO error', async () => {
@@ -520,15 +532,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.CreateAppConnectionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAppConnectionRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAppConnection = stubLongRunningCall(
         undefined,
@@ -537,11 +545,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
       const [operation] = await client.createAppConnection(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateAppConnectionProgress without error', async () => {
@@ -599,16 +610,13 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.appConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
+        'appConnection',
+        'name',
+      ]);
+      request.appConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -617,11 +625,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       const [operation] = await client.updateAppConnection(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAppConnection without error using callback', async () => {
@@ -634,16 +645,13 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.appConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
+        'appConnection',
+        'name',
+      ]);
+      request.appConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -673,11 +681,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAppConnection with call error', async () => {
@@ -690,27 +701,27 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.appConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
+        'appConnection',
+        'name',
+      ]);
+      request.appConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAppConnection = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAppConnection(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAppConnection with LRO error', async () => {
@@ -723,16 +734,13 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.UpdateAppConnectionRequest()
       );
-      request.appConnection = {};
-      request.appConnection.name = '';
-      const expectedHeaderRequestParams = 'app_connection.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.appConnection ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAppConnectionRequest', [
+        'appConnection',
+        'name',
+      ]);
+      request.appConnection.name = defaultValue1;
+      const expectedHeaderRequestParams = `app_connection.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAppConnection = stubLongRunningCall(
         undefined,
@@ -741,11 +749,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
       const [operation] = await client.updateAppConnection(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateAppConnectionProgress without error', async () => {
@@ -803,15 +814,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -820,11 +827,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       const [operation] = await client.deleteAppConnection(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAppConnection without error using callback', async () => {
@@ -837,15 +847,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -875,11 +881,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAppConnection with call error', async () => {
@@ -892,26 +901,25 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAppConnection = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAppConnection(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAppConnection with LRO error', async () => {
@@ -924,15 +932,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.DeleteAppConnectionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAppConnectionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAppConnection = stubLongRunningCall(
         undefined,
@@ -941,11 +945,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       );
       const [operation] = await client.deleteAppConnection(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAppConnection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAppConnection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteAppConnectionProgress without error', async () => {
@@ -1003,15 +1010,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1027,11 +1030,14 @@ describe('v1.AppConnectionsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listAppConnections(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAppConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAppConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAppConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAppConnections without error using callback', async () => {
@@ -1044,15 +1050,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1085,11 +1087,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAppConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAppConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAppConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAppConnections with error', async () => {
@@ -1102,26 +1107,25 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAppConnections = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAppConnections(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAppConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAppConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAppConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAppConnectionsStream without error', async () => {
@@ -1134,8 +1138,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1175,11 +1182,12 @@ describe('v1.AppConnectionsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAppConnections, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAppConnections.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1193,8 +1201,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAppConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1223,11 +1234,12 @@ describe('v1.AppConnectionsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAppConnections, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAppConnections.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1241,8 +1253,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.AppConnection()
@@ -1269,11 +1284,12 @@ describe('v1.AppConnectionsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAppConnections.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1287,8 +1303,11 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ListAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAppConnectionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAppConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1306,11 +1325,12 @@ describe('v1.AppConnectionsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAppConnections.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAppConnections.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1326,15 +1346,12 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResolveAppConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1350,11 +1367,14 @@ describe('v1.AppConnectionsServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.resolveAppConnections(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resolveAppConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resolveAppConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveAppConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resolveAppConnections without error using callback', async () => {
@@ -1367,15 +1387,12 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResolveAppConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1408,11 +1425,14 @@ describe('v1.AppConnectionsServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resolveAppConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resolveAppConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveAppConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resolveAppConnections with error', async () => {
@@ -1425,15 +1445,12 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ResolveAppConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resolveAppConnections = stubSimpleCall(
         undefined,
@@ -1443,11 +1460,14 @@ describe('v1.AppConnectionsServiceClient', () => {
         client.resolveAppConnections(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.resolveAppConnections as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.resolveAppConnections as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resolveAppConnections as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resolveAppConnectionsStream without error', async () => {
@@ -1460,8 +1480,12 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ResolveAppConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1504,12 +1528,15 @@ describe('v1.AppConnectionsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.resolveAppConnections, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.resolveAppConnections
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1523,8 +1550,12 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ResolveAppConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.resolveAppConnections.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1556,12 +1587,15 @@ describe('v1.AppConnectionsServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.resolveAppConnections, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.resolveAppConnections
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1575,8 +1609,12 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ResolveAppConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails()
@@ -1604,12 +1642,15 @@ describe('v1.AppConnectionsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.resolveAppConnections
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1623,8 +1664,12 @@ describe('v1.AppConnectionsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ResolveAppConnectionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.resolveAppConnections.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1643,12 +1688,15 @@ describe('v1.AppConnectionsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.resolveAppConnections
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2136,12 +2184,15 @@ describe('v1.AppConnectionsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -2173,12 +2224,15 @@ describe('v1.AppConnectionsServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

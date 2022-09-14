@@ -475,7 +475,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getPolicy(request, options, callback);
@@ -596,7 +596,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createPolicy(request, options, callback);
@@ -749,7 +749,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'policy.name': request.policy!.name || '',
+        'policy.name': request.policy!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updatePolicy(request, options, callback);
@@ -903,7 +903,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deletePolicy(request, options, callback);
@@ -1045,7 +1045,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listPolicies(request, options, callback);
@@ -1096,7 +1096,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1156,7 +1156,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1282,7 +1282,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        attachment_point: request.attachmentPoint || '',
+        attachment_point: request.attachmentPoint ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listApplicablePolicies(
@@ -1343,7 +1343,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        attachment_point: request.attachmentPoint || '',
+        attachment_point: request.attachmentPoint ?? '',
       });
     const defaultCallSettings = this._defaults['listApplicablePolicies'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1409,7 +1409,7 @@ export class PoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        attachment_point: request.attachmentPoint || '',
+        attachment_point: request.attachmentPoint ?? '',
       });
     const defaultCallSettings = this._defaults['listApplicablePolicies'];
     const callSettings = defaultCallSettings.merge(options);

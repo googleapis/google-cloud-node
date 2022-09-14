@@ -598,7 +598,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAzureClient(request, options, callback);
@@ -695,7 +695,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAzureCluster(request, options, callback);
@@ -799,7 +799,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        azure_cluster: request.azureCluster || '',
+        azure_cluster: request.azureCluster ?? '',
       });
     this.initialize();
     return this.innerApiCalls.generateAzureAccessToken(
@@ -900,7 +900,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAzureNodePool(request, options, callback);
@@ -1004,7 +1004,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAzureServerConfig(request, options, callback);
@@ -1136,7 +1136,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAzureClient(request, options, callback);
@@ -1295,7 +1295,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAzureClient(request, options, callback);
@@ -1456,7 +1456,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAzureCluster(request, options, callback);
@@ -1609,7 +1609,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'azure_cluster.name': request.azureCluster!.name || '',
+        'azure_cluster.name': request.azureCluster!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAzureCluster(request, options, callback);
@@ -1775,7 +1775,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAzureCluster(request, options, callback);
@@ -1936,7 +1936,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAzureNodePool(request, options, callback);
@@ -2086,7 +2086,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'azure_node_pool.name': request.azureNodePool!.name || '',
+        'azure_node_pool.name': request.azureNodePool!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAzureNodePool(request, options, callback);
@@ -2250,7 +2250,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAzureNodePool(request, options, callback);
@@ -2397,7 +2397,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAzureClients(request, options, callback);
@@ -2448,7 +2448,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2508,7 +2508,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAzureClients'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2626,7 +2626,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAzureClusters(request, options, callback);
@@ -2677,7 +2677,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2737,7 +2737,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAzureClusters'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2855,7 +2855,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAzureNodePools(request, options, callback);
@@ -2907,7 +2907,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2968,7 +2968,7 @@ export class AzureClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAzureNodePools'];
     const callSettings = defaultCallSettings.merge(options);
