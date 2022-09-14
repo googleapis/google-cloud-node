@@ -25,6 +25,21 @@ import * as texttospeechModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -157,18 +172,12 @@ describe('v1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesResponse()
       );
       client.innerApiCalls.listVoices = stubSimpleCall(expectedResponse);
       const [response] = await client.listVoices(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listVoices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listVoices without error using callback', async () => {
@@ -180,7 +189,6 @@ describe('v1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesResponse()
       );
@@ -203,11 +211,6 @@ describe('v1.TextToSpeechClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listVoices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listVoices with error', async () => {
@@ -219,18 +222,12 @@ describe('v1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.ListVoicesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listVoices = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listVoices(request), expectedError);
-      assert(
-        (client.innerApiCalls.listVoices as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listVoices with closed client', async () => {
@@ -258,18 +255,12 @@ describe('v1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechResponse()
       );
       client.innerApiCalls.synthesizeSpeech = stubSimpleCall(expectedResponse);
       const [response] = await client.synthesizeSpeech(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.synthesizeSpeech as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes synthesizeSpeech without error using callback', async () => {
@@ -281,7 +272,6 @@ describe('v1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechResponse()
       );
@@ -304,11 +294,6 @@ describe('v1.TextToSpeechClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.synthesizeSpeech as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes synthesizeSpeech with error', async () => {
@@ -320,18 +305,12 @@ describe('v1.TextToSpeechClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.texttospeech.v1.SynthesizeSpeechRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.synthesizeSpeech = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.synthesizeSpeech(request), expectedError);
-      assert(
-        (client.innerApiCalls.synthesizeSpeech as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes synthesizeSpeech with closed client', async () => {
