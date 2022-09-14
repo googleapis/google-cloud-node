@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -248,26 +263,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
@@ -282,15 +296,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -313,11 +323,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with error', async () => {
@@ -332,26 +345,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with closed client', async () => {
@@ -366,7 +378,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -386,26 +401,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
@@ -420,15 +434,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -451,11 +461,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with error', async () => {
@@ -470,26 +483,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with closed client', async () => {
@@ -504,7 +516,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -524,15 +539,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -540,11 +551,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
@@ -559,15 +573,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -590,11 +600,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with error', async () => {
@@ -609,26 +622,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with closed client', async () => {
@@ -643,7 +655,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -663,26 +678,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
       client.innerApiCalls.getIapSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.getIapSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIapSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIapSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIapSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIapSettings without error using callback', async () => {
@@ -697,15 +711,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
@@ -728,11 +738,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIapSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIapSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIapSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIapSettings with error', async () => {
@@ -747,26 +760,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIapSettings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIapSettings(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIapSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIapSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIapSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIapSettings with closed client', async () => {
@@ -781,7 +793,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIapSettings(request), expectedError);
@@ -801,27 +816,27 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
-      request.iapSettings = {};
-      request.iapSettings.name = '';
-      const expectedHeaderRequestParams = 'iap_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.iapSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
+        'iapSettings',
+        'name',
+      ]);
+      request.iapSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
       client.innerApiCalls.updateIapSettings = stubSimpleCall(expectedResponse);
       const [response] = await client.updateIapSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIapSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIapSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIapSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIapSettings without error using callback', async () => {
@@ -836,16 +851,13 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
-      request.iapSettings = {};
-      request.iapSettings.name = '';
-      const expectedHeaderRequestParams = 'iap_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.iapSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
+        'iapSettings',
+        'name',
+      ]);
+      request.iapSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.IapSettings()
       );
@@ -868,11 +880,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateIapSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIapSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIapSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIapSettings with error', async () => {
@@ -887,27 +902,27 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
-      request.iapSettings = {};
-      request.iapSettings.name = '';
-      const expectedHeaderRequestParams = 'iap_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.iapSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
+        'iapSettings',
+        'name',
+      ]);
+      request.iapSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateIapSettings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateIapSettings(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateIapSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateIapSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateIapSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateIapSettings with closed client', async () => {
@@ -922,8 +937,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
-      request.iapSettings = {};
-      request.iapSettings.name = '';
+      request.iapSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
+        'iapSettings',
+        'name',
+      ]);
+      request.iapSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateIapSettings(request), expectedError);
@@ -943,15 +962,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTunnelDestGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -959,11 +975,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createTunnelDestGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTunnelDestGroup without error using callback', async () => {
@@ -978,15 +997,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTunnelDestGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1009,11 +1025,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTunnelDestGroup with error', async () => {
@@ -1028,15 +1047,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTunnelDestGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createTunnelDestGroup = stubSimpleCall(
         undefined,
@@ -1046,11 +1062,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         client.createTunnelDestGroup(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createTunnelDestGroup with closed client', async () => {
@@ -1065,7 +1084,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateTunnelDestGroupRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1088,15 +1111,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1104,11 +1123,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getTunnelDestGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTunnelDestGroup without error using callback', async () => {
@@ -1123,15 +1145,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1154,11 +1172,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTunnelDestGroup with error', async () => {
@@ -1173,26 +1194,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getTunnelDestGroup = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getTunnelDestGroup(request), expectedError);
-      assert(
-        (client.innerApiCalls.getTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getTunnelDestGroup with closed client', async () => {
@@ -1207,7 +1227,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getTunnelDestGroup(request), expectedError);
@@ -1227,15 +1250,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTunnelDestGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1243,11 +1263,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTunnelDestGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTunnelDestGroup without error using callback', async () => {
@@ -1262,15 +1285,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTunnelDestGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1293,11 +1313,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTunnelDestGroup with error', async () => {
@@ -1312,15 +1335,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTunnelDestGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteTunnelDestGroup = stubSimpleCall(
         undefined,
@@ -1330,11 +1350,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         client.deleteTunnelDestGroup(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteTunnelDestGroup with closed client', async () => {
@@ -1349,7 +1372,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteTunnelDestGroupRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1372,16 +1399,13 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
       );
-      request.tunnelDestGroup = {};
-      request.tunnelDestGroup.name = '';
-      const expectedHeaderRequestParams = 'tunnel_dest_group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tunnelDestGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTunnelDestGroupRequest',
+        ['tunnelDestGroup', 'name']
+      );
+      request.tunnelDestGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1389,11 +1413,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateTunnelDestGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTunnelDestGroup without error using callback', async () => {
@@ -1408,16 +1435,13 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
       );
-      request.tunnelDestGroup = {};
-      request.tunnelDestGroup.name = '';
-      const expectedHeaderRequestParams = 'tunnel_dest_group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tunnelDestGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTunnelDestGroupRequest',
+        ['tunnelDestGroup', 'name']
+      );
+      request.tunnelDestGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.iap.v1.TunnelDestGroup()
       );
@@ -1440,11 +1464,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTunnelDestGroup with error', async () => {
@@ -1459,16 +1486,13 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
       );
-      request.tunnelDestGroup = {};
-      request.tunnelDestGroup.name = '';
-      const expectedHeaderRequestParams = 'tunnel_dest_group.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.tunnelDestGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTunnelDestGroupRequest',
+        ['tunnelDestGroup', 'name']
+      );
+      request.tunnelDestGroup.name = defaultValue1;
+      const expectedHeaderRequestParams = `tunnel_dest_group.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateTunnelDestGroup = stubSimpleCall(
         undefined,
@@ -1478,11 +1502,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         client.updateTunnelDestGroup(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateTunnelDestGroup as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateTunnelDestGroup as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateTunnelDestGroup as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateTunnelDestGroup with closed client', async () => {
@@ -1497,8 +1524,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.UpdateTunnelDestGroupRequest()
       );
-      request.tunnelDestGroup = {};
-      request.tunnelDestGroup.name = '';
+      request.tunnelDestGroup ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateTunnelDestGroupRequest',
+        ['tunnelDestGroup', 'name']
+      );
+      request.tunnelDestGroup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1521,15 +1552,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1539,11 +1566,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listTunnelDestGroups(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTunnelDestGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTunnelDestGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTunnelDestGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTunnelDestGroups without error using callback', async () => {
@@ -1558,15 +1588,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1591,11 +1617,14 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listTunnelDestGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTunnelDestGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTunnelDestGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTunnelDestGroups with error', async () => {
@@ -1610,26 +1639,25 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listTunnelDestGroups = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listTunnelDestGroups(request), expectedError);
-      assert(
-        (client.innerApiCalls.listTunnelDestGroups as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listTunnelDestGroups as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listTunnelDestGroups as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listTunnelDestGroupsStream without error', async () => {
@@ -1644,8 +1672,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1676,11 +1707,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTunnelDestGroups, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTunnelDestGroups.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTunnelDestGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1696,8 +1728,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTunnelDestGroups.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1723,11 +1758,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listTunnelDestGroups, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTunnelDestGroups.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTunnelDestGroups.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1743,8 +1779,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
         generateSampleMessage(new protos.google.cloud.iap.v1.TunnelDestGroup()),
@@ -1764,11 +1803,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1784,8 +1824,11 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listTunnelDestGroups.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1802,11 +1845,12 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listTunnelDestGroups.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

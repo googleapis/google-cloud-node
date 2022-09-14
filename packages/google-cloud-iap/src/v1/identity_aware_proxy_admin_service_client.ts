@@ -435,7 +435,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -525,7 +525,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -617,7 +617,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
@@ -702,7 +702,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIapSettings(request, options, callback);
@@ -794,7 +794,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'iap_settings.name': request.iapSettings!.name || '',
+        'iap_settings.name': request.iapSettings!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateIapSettings(request, options, callback);
@@ -895,7 +895,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTunnelDestGroup(request, options, callback);
@@ -982,7 +982,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTunnelDestGroup(request, options, callback);
@@ -1075,7 +1075,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTunnelDestGroup(request, options, callback);
@@ -1170,7 +1170,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'tunnel_dest_group.name': request.tunnelDestGroup!.name || '',
+        'tunnel_dest_group.name': request.tunnelDestGroup!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTunnelDestGroup(request, options, callback);
@@ -1282,7 +1282,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTunnelDestGroups(request, options, callback);
@@ -1331,7 +1331,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1389,7 +1389,7 @@ export class IdentityAwareProxyAdminServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTunnelDestGroups'];
     const callSettings = defaultCallSettings.merge(options);
