@@ -29,10 +29,9 @@ function main(updateMask, listing) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Field mask is used to specify the fields to be overwritten in the
-   *  Listing resource by the update.
-   *  The fields specified in the update_mask are relative to the resource, not
-   *  the full request.
+   *  Required. Field mask specifies the fields to update in the listing resource. The
+   *  fields specified in the `updateMask` are relative to the resource and are
+   *  not a full request.
    */
   // const updateMask = {}
   /**

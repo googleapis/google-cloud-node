@@ -8,43 +8,6 @@
               "nested": {
                 "dataexchange": {
                   "nested": {
-                    "common": {
-                      "options": {
-                        "csharp_namespace": "Google.Cloud.BigQuery.DataExchange.Common",
-                        "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/dataexchange/common;common",
-                        "java_multiple_files": true,
-                        "java_outer_classname": "CommonProto",
-                        "java_package": "com.google.cloud.bigquery.dataexchange.common",
-                        "php_namespace": "Google\\Cloud\\BigQuery\\DataExchange\\Common",
-                        "ruby_package": "Google::Cloud::Bigquery::DataExchange::Common"
-                      },
-                      "nested": {
-                        "Category": {
-                          "values": {
-                            "CATEGORY_UNSPECIFIED": 0,
-                            "CATEGORY_OTHERS": 1,
-                            "CATEGORY_ADVERTISING_AND_MARKETING": 2,
-                            "CATEGORY_COMMERCE": 3,
-                            "CATEGORY_CLIMATE_AND_ENVIRONMENT": 4,
-                            "CATEGORY_DEMOGRAPHICS": 5,
-                            "CATEGORY_ECONOMICS": 6,
-                            "CATEGORY_EDUCATION": 7,
-                            "CATEGORY_ENERGY": 8,
-                            "CATEGORY_FINANCIAL": 9,
-                            "CATEGORY_GAMING": 10,
-                            "CATEGORY_GEOSPATIAL": 11,
-                            "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE": 12,
-                            "CATEGORY_MEDIA": 13,
-                            "CATEGORY_PUBLIC_SECTOR": 14,
-                            "CATEGORY_RETAIL": 15,
-                            "CATEGORY_SPORTS": 16,
-                            "CATEGORY_SCIENCE_AND_RESEARCH": 17,
-                            "CATEGORY_TRANSPORTATION_AND_LOGISTICS": 18,
-                            "CATEGORY_TRAVEL_AND_TOURISM": 19
-                          }
-                        }
-                      }
-                    },
                     "v1beta1": {
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.DataExchange.V1Beta1",
@@ -522,6 +485,13 @@
                             }
                           },
                           "fields": {
+                            "bigqueryDataset": {
+                              "type": "BigQueryDatasetSource",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
                             "name": {
                               "type": "string",
                               "id": 1,
@@ -557,13 +527,6 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
-                            "bigqueryDataset": {
-                              "type": "BigQueryDatasetSource",
-                              "id": 6,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
                             "state": {
                               "type": "State",
                               "id": 7,
@@ -587,7 +550,7 @@
                             },
                             "categories": {
                               "rule": "repeated",
-                              "type": "google.cloud.bigquery.dataexchange.common.Category",
+                              "type": "Category",
                               "id": 10,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
@@ -624,6 +587,30 @@
                               "values": {
                                 "STATE_UNSPECIFIED": 0,
                                 "ACTIVE": 1
+                              }
+                            },
+                            "Category": {
+                              "values": {
+                                "CATEGORY_UNSPECIFIED": 0,
+                                "CATEGORY_OTHERS": 1,
+                                "CATEGORY_ADVERTISING_AND_MARKETING": 2,
+                                "CATEGORY_COMMERCE": 3,
+                                "CATEGORY_CLIMATE_AND_ENVIRONMENT": 4,
+                                "CATEGORY_DEMOGRAPHICS": 5,
+                                "CATEGORY_ECONOMICS": 6,
+                                "CATEGORY_EDUCATION": 7,
+                                "CATEGORY_ENERGY": 8,
+                                "CATEGORY_FINANCIAL": 9,
+                                "CATEGORY_GAMING": 10,
+                                "CATEGORY_GEOSPATIAL": 11,
+                                "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE": 12,
+                                "CATEGORY_MEDIA": 13,
+                                "CATEGORY_PUBLIC_SECTOR": 14,
+                                "CATEGORY_RETAIL": 15,
+                                "CATEGORY_SPORTS": 16,
+                                "CATEGORY_SCIENCE_AND_RESEARCH": 17,
+                                "CATEGORY_TRANSPORTATION_AND_LOGISTICS": 18,
+                                "CATEGORY_TRAVEL_AND_TOURISM": 19
                               }
                             }
                           }
@@ -871,6 +858,10 @@
                             }
                           },
                           "fields": {
+                            "destinationDataset": {
+                              "type": "DestinationDataset",
+                              "id": 3
+                            },
                             "name": {
                               "type": "string",
                               "id": 1,
@@ -878,10 +869,6 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "analyticshub.googleapis.com/Listing"
                               }
-                            },
-                            "destinationDataset": {
-                              "type": "DestinationDataset",
-                              "id": 3
                             }
                           }
                         },

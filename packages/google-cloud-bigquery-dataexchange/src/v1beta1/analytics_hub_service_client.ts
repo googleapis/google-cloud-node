@@ -17,16 +17,17 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -36,15 +37,15 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './analytics_hub_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
- *  The AnalyticsHubService API facilitates data sharing within and across
- *  organizations. It allows data providers to publish Listings --- a
- *  discoverable and searchable SKU representing a dataset. Data consumers can
- *  subscribe to Listings. Upon subscription, AnalyticsHub provisions a "Linked
- *  Datasets" surfacing the data in the consumer's project.
+ *  The `AnalyticsHubService` API facilitates data sharing within and across
+ *  organizations. It allows data providers to publish listings that reference
+ *  shared datasets. With Analytics Hub, users can discover and search for
+ *  listings that they have access to. Subscribers can view and subscribe to
+ *  listings. When you subscribe to a listing, Analytics Hub creates a linked
+ *  dataset in your project.
  * @class
  * @memberof v1beta1
  */
@@ -65,6 +66,7 @@ export class AnalyticsHubServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   analyticsHubServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -100,8 +102,18 @@ export class AnalyticsHubServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new AnalyticsHubServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof AnalyticsHubServiceClient;
     const servicePath =
@@ -121,8 +133,13 @@ export class AnalyticsHubServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -143,6 +160,10 @@ export class AnalyticsHubServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -212,7 +233,7 @@ export class AnalyticsHubServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -351,12 +372,12 @@ export class AnalyticsHubServiceClient {
   // -- Service calls --
   // -------------------
   /**
-   * Gets details of a single DataExchange.
+   * Gets the details of a data exchange.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the DataExchange.
+   *   Required. The resource name of the data exchange.
    *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -442,28 +463,28 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getDataExchange(request, options, callback);
   }
   /**
-   * Creates a new DataExchange in a given project and location.
+   * Creates a new data exchange.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource path of the DataExchange.
+   *   Required. The parent resource path of the data exchange.
    *   e.g. `projects/myproject/locations/US`.
    * @param {string} request.dataExchangeId
-   *   Required. The ID of the DataExchange to create.
+   *   Required. The ID of the data exchange.
    *   Must contain only Unicode letters, numbers (0-9), underscores (_).
    *   Should not use characters that require URL-escaping, or characters
    *   outside of ASCII, spaces.
    *   Max length: 100 bytes.
    * @param {google.cloud.bigquery.dataexchange.v1beta1.DataExchange} request.dataExchange
-   *   Required. The DataExchange to create.
+   *   Required. The data exchange to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -548,24 +569,23 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createDataExchange(request, options, callback);
   }
   /**
-   * Updates the parameters of a single DataExchange.
+   * Updates an existing data exchange.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   DataExchange resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request.
+   *   Required. Field mask specifies the fields to update in the data exchange
+   *   resource. The fields specified in the
+   *   `updateMask` are relative to the resource and are not a full request.
    * @param {google.cloud.bigquery.dataexchange.v1beta1.DataExchange} request.dataExchange
-   *   Required. The DataExchange to update.
+   *   Required. The data exchange to update.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -650,20 +670,20 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'data_exchange.name': request.dataExchange!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'data_exchange.name': request.dataExchange!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateDataExchange(request, options, callback);
   }
   /**
-   * Deletes a single DataExchange.
+   * Deletes an existing data exchange.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the DataExchange to delete.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
+   *   Required. The full name of the data exchange resource that you want to delete.
+   *   For example, `projects/myproject/locations/US/dataExchanges/123`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -748,14 +768,14 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteDataExchange(request, options, callback);
   }
   /**
-   * Gets details of a single Listing.
+   * Gets the details of a listing.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -846,14 +866,14 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getListing(request, options, callback);
   }
   /**
-   * Creates a new Listing in a given project and location.
+   * Creates a new listing.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -861,7 +881,7 @@ export class AnalyticsHubServiceClient {
    *   Required. The parent resource path of the listing.
    *   e.g. `projects/myproject/locations/US/dataExchanges/123`.
    * @param {string} request.listingId
-   *   Required. The ID of the Listing to create.
+   *   Required. The ID of the listing to create.
    *   Must contain only Unicode letters, numbers (0-9), underscores (_).
    *   Should not use characters that require URL-escaping, or characters
    *   outside of ASCII, spaces.
@@ -952,22 +972,21 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createListing(request, options, callback);
   }
   /**
-   * Updates the parameters of a single Listing.
+   * Updates an existing listing.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. Field mask is used to specify the fields to be overwritten in the
-   *   Listing resource by the update.
-   *   The fields specified in the update_mask are relative to the resource, not
-   *   the full request.
+   *   Required. Field mask specifies the fields to update in the listing resource. The
+   *   fields specified in the `updateMask` are relative to the resource and are
+   *   not a full request.
    * @param {google.cloud.bigquery.dataexchange.v1beta1.Listing} request.listing
    *   Required. The listing to update.
    * @param {object} [options]
@@ -1054,15 +1073,14 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'listing.name': request.listing!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'listing.name': request.listing!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateListing(request, options, callback);
   }
   /**
-   * Deletes a single Listing, as long as there are no subscriptions
-   * associated with the source of this Listing.
+   * Deletes a listing.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1153,26 +1171,27 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteListing(request, options, callback);
   }
   /**
-   * Subscribes to a single Listing.
+   * Subscribes to a listing.
    *
-   * Data Exchange currently supports one type of Listing: a BigQuery dataset.
-   * Upon subscription to a Listing for a BigQuery dataset, Data Exchange
+   * Currently, with Analytics Hub, you can create listings that
+   * reference only BigQuery datasets.
+   * Upon subscription to a listing for a BigQuery dataset, Analytics Hub
    * creates a linked dataset in the subscriber's project.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. Resource name of the listing to subscribe to.
-   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
    * @param {google.cloud.bigquery.dataexchange.v1beta1.DestinationDataset} request.destinationDataset
    *   BigQuery destination dataset to create for the subscriber.
+   * @param {string} request.name
+   *   Required. Resource name of the listing that you want to subscribe to.
+   *   e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1257,14 +1276,14 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.subscribeListing(request, options, callback);
   }
   /**
-   * Gets the IAM policy for a dataExchange or a listing.
+   * Gets the IAM policy.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1344,14 +1363,14 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        resource: request.resource || '',
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   /**
-   * Sets the IAM policy for a dataExchange or a listing.
+   * Sets the IAM policy.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1439,15 +1458,14 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        resource: request.resource || '',
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   /**
-   * Returns the permissions that a caller has on a specified dataExchange or
-   * listing.
+   * Returns the permissions that a caller has.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1529,20 +1547,20 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        resource: request.resource || '',
+      this._gaxModule.routingHeader.fromParams({
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
 
   /**
-   * Lists DataExchanges in a given project and location.
+   * Lists all data exchanges in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource path of the DataExchanges.
+   *   Required. The parent resource path of the data exchanges.
    *   e.g. `projects/myproject/locations/US`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
@@ -1631,8 +1649,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listDataExchanges(request, options, callback);
@@ -1643,7 +1661,7 @@ export class AnalyticsHubServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource path of the DataExchanges.
+   *   Required. The parent resource path of the data exchanges.
    *   e.g. `projects/myproject/locations/US`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
@@ -1672,8 +1690,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1692,7 +1710,7 @@ export class AnalyticsHubServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource path of the DataExchanges.
+   *   Required. The parent resource path of the data exchanges.
    *   e.g. `projects/myproject/locations/US`.
    * @param {number} request.pageSize
    *   The maximum number of results to return in a single response page. Leverage
@@ -1722,8 +1740,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1735,7 +1753,8 @@ export class AnalyticsHubServiceClient {
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>;
   }
   /**
-   * Lists DataExchanges from projects in a given organization and location.
+   * Lists all data exchanges from projects in a given organization and
+   * location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1829,8 +1848,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        organization: request.organization || '',
+      this._gaxModule.routingHeader.fromParams({
+        organization: request.organization ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listOrgDataExchanges(request, options, callback);
@@ -1870,8 +1889,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        organization: request.organization || '',
+      this._gaxModule.routingHeader.fromParams({
+        organization: request.organization ?? '',
       });
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1920,8 +1939,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        organization: request.organization || '',
+      this._gaxModule.routingHeader.fromParams({
+        organization: request.organization ?? '',
       });
     const defaultCallSettings = this._defaults['listOrgDataExchanges'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1933,7 +1952,7 @@ export class AnalyticsHubServiceClient {
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IDataExchange>;
   }
   /**
-   * Lists Listings in a given project and location.
+   * Lists all listings in a given project and location.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2027,8 +2046,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listListings(request, options, callback);
@@ -2068,8 +2087,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2118,8 +2137,8 @@ export class AnalyticsHubServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listListings'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2130,6 +2149,86 @@ export class AnalyticsHubServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.dataexchange.v1beta1.IListing>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2301,6 +2400,7 @@ export class AnalyticsHubServiceClient {
       return this.analyticsHubServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();

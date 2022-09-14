@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource path of the DataExchanges.
+   *  Required. The parent resource path of the data exchanges.
    *  e.g. `projects/myproject/locations/US`.
    */
   // const parent = 'abc123'

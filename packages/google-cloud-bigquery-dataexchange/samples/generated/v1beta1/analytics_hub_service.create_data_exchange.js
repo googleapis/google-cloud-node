@@ -29,12 +29,12 @@ function main(parent, dataExchangeId, dataExchange) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource path of the DataExchange.
+   *  Required. The parent resource path of the data exchange.
    *  e.g. `projects/myproject/locations/US`.
    */
   // const parent = 'abc123'
   /**
-   *  Required. The ID of the DataExchange to create.
+   *  Required. The ID of the data exchange.
    *  Must contain only Unicode letters, numbers (0-9), underscores (_).
    *  Should not use characters that require URL-escaping, or characters
    *  outside of ASCII, spaces.
@@ -42,7 +42,7 @@ function main(parent, dataExchangeId, dataExchange) {
    */
   // const dataExchangeId = 'abc123'
   /**
-   *  Required. The DataExchange to create.
+   *  Required. The data exchange to create.
    */
   // const dataExchange = {}
 

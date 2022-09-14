@@ -26,34 +26,6 @@ export namespace google {
             /** Namespace dataexchange. */
             namespace dataexchange {
 
-                /** Namespace common. */
-                namespace common {
-
-                    /** Category enum. */
-                    enum Category {
-                        CATEGORY_UNSPECIFIED = 0,
-                        CATEGORY_OTHERS = 1,
-                        CATEGORY_ADVERTISING_AND_MARKETING = 2,
-                        CATEGORY_COMMERCE = 3,
-                        CATEGORY_CLIMATE_AND_ENVIRONMENT = 4,
-                        CATEGORY_DEMOGRAPHICS = 5,
-                        CATEGORY_ECONOMICS = 6,
-                        CATEGORY_EDUCATION = 7,
-                        CATEGORY_ENERGY = 8,
-                        CATEGORY_FINANCIAL = 9,
-                        CATEGORY_GAMING = 10,
-                        CATEGORY_GEOSPATIAL = 11,
-                        CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE = 12,
-                        CATEGORY_MEDIA = 13,
-                        CATEGORY_PUBLIC_SECTOR = 14,
-                        CATEGORY_RETAIL = 15,
-                        CATEGORY_SPORTS = 16,
-                        CATEGORY_SCIENCE_AND_RESEARCH = 17,
-                        CATEGORY_TRANSPORTATION_AND_LOGISTICS = 18,
-                        CATEGORY_TRAVEL_AND_TOURISM = 19
-                    }
-                }
-
                 /** Namespace v1beta1. */
                 namespace v1beta1 {
 
@@ -962,6 +934,9 @@ export namespace google {
                     /** Properties of a Listing. */
                     interface IListing {
 
+                        /** Listing bigqueryDataset */
+                        bigqueryDataset?: (google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null);
+
                         /** Listing name */
                         name?: (string|null);
 
@@ -977,9 +952,6 @@ export namespace google {
                         /** Listing documentation */
                         documentation?: (string|null);
 
-                        /** Listing bigqueryDataset */
-                        bigqueryDataset?: (google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null);
-
                         /** Listing state */
                         state?: (google.cloud.bigquery.dataexchange.v1beta1.Listing.State|keyof typeof google.cloud.bigquery.dataexchange.v1beta1.Listing.State|null);
 
@@ -990,7 +962,7 @@ export namespace google {
                         dataProvider?: (google.cloud.bigquery.dataexchange.v1beta1.IDataProvider|null);
 
                         /** Listing categories */
-                        categories?: (google.cloud.bigquery.dataexchange.common.Category[]|null);
+                        categories?: (google.cloud.bigquery.dataexchange.v1beta1.Listing.Category[]|null);
 
                         /** Listing publisher */
                         publisher?: (google.cloud.bigquery.dataexchange.v1beta1.IPublisher|null);
@@ -1008,6 +980,9 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.bigquery.dataexchange.v1beta1.IListing);
 
+                        /** Listing bigqueryDataset. */
+                        public bigqueryDataset?: (google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null);
+
                         /** Listing name. */
                         public name: string;
 
@@ -1023,9 +998,6 @@ export namespace google {
                         /** Listing documentation. */
                         public documentation: string;
 
-                        /** Listing bigqueryDataset. */
-                        public bigqueryDataset?: (google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null);
-
                         /** Listing state. */
                         public state: (google.cloud.bigquery.dataexchange.v1beta1.Listing.State|keyof typeof google.cloud.bigquery.dataexchange.v1beta1.Listing.State);
 
@@ -1036,7 +1008,7 @@ export namespace google {
                         public dataProvider?: (google.cloud.bigquery.dataexchange.v1beta1.IDataProvider|null);
 
                         /** Listing categories. */
-                        public categories: google.cloud.bigquery.dataexchange.common.Category[];
+                        public categories: google.cloud.bigquery.dataexchange.v1beta1.Listing.Category[];
 
                         /** Listing publisher. */
                         public publisher?: (google.cloud.bigquery.dataexchange.v1beta1.IPublisher|null);
@@ -1228,6 +1200,30 @@ export namespace google {
                         enum State {
                             STATE_UNSPECIFIED = 0,
                             ACTIVE = 1
+                        }
+
+                        /** Category enum. */
+                        enum Category {
+                            CATEGORY_UNSPECIFIED = 0,
+                            CATEGORY_OTHERS = 1,
+                            CATEGORY_ADVERTISING_AND_MARKETING = 2,
+                            CATEGORY_COMMERCE = 3,
+                            CATEGORY_CLIMATE_AND_ENVIRONMENT = 4,
+                            CATEGORY_DEMOGRAPHICS = 5,
+                            CATEGORY_ECONOMICS = 6,
+                            CATEGORY_EDUCATION = 7,
+                            CATEGORY_ENERGY = 8,
+                            CATEGORY_FINANCIAL = 9,
+                            CATEGORY_GAMING = 10,
+                            CATEGORY_GEOSPATIAL = 11,
+                            CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE = 12,
+                            CATEGORY_MEDIA = 13,
+                            CATEGORY_PUBLIC_SECTOR = 14,
+                            CATEGORY_RETAIL = 15,
+                            CATEGORY_SPORTS = 16,
+                            CATEGORY_SCIENCE_AND_RESEARCH = 17,
+                            CATEGORY_TRANSPORTATION_AND_LOGISTICS = 18,
+                            CATEGORY_TRAVEL_AND_TOURISM = 19
                         }
                     }
 
@@ -2682,11 +2678,11 @@ export namespace google {
                     /** Properties of a SubscribeListingRequest. */
                     interface ISubscribeListingRequest {
 
-                        /** SubscribeListingRequest name */
-                        name?: (string|null);
-
                         /** SubscribeListingRequest destinationDataset */
                         destinationDataset?: (google.cloud.bigquery.dataexchange.v1beta1.IDestinationDataset|null);
+
+                        /** SubscribeListingRequest name */
+                        name?: (string|null);
                     }
 
                     /** Represents a SubscribeListingRequest. */
@@ -2698,11 +2694,11 @@ export namespace google {
                          */
                         constructor(properties?: google.cloud.bigquery.dataexchange.v1beta1.ISubscribeListingRequest);
 
-                        /** SubscribeListingRequest name. */
-                        public name: string;
-
                         /** SubscribeListingRequest destinationDataset. */
                         public destinationDataset?: (google.cloud.bigquery.dataexchange.v1beta1.IDestinationDataset|null);
+
+                        /** SubscribeListingRequest name. */
+                        public name: string;
 
                         /** SubscribeListingRequest destination. */
                         public destination?: "destinationDataset";

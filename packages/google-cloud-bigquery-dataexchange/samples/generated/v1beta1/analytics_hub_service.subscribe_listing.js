@@ -29,14 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Resource name of the listing to subscribe to.
-   *  e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
-   */
-  // const name = 'abc123'
-  /**
    *  BigQuery destination dataset to create for the subscriber.
    */
   // const destinationDataset = {}
+  /**
+   *  Required. Resource name of the listing that you want to subscribe to.
+   *  e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+   */
+  // const name = 'abc123'
 
   // Imports the Dataexchange library
   const {AnalyticsHubServiceClient} = require('@google-cloud/bigquery-data-exchange').v1beta1;

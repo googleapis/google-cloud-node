@@ -25,7 +25,22 @@ import * as analyticshubserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
+
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -231,26 +246,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
       client.innerApiCalls.getDataExchange = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataExchange(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataExchange without error using callback', async () => {
@@ -263,15 +277,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -294,11 +304,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataExchange with error', async () => {
@@ -311,26 +324,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataExchange = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDataExchange(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataExchange with closed client', async () => {
@@ -343,7 +355,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetDataExchangeRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataExchange(request), expectedError);
@@ -361,15 +376,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -377,11 +388,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createDataExchange(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataExchange without error using callback', async () => {
@@ -394,15 +408,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -425,11 +435,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataExchange with error', async () => {
@@ -442,26 +455,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataExchange = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createDataExchange(request), expectedError);
-      assert(
-        (client.innerApiCalls.createDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataExchange with closed client', async () => {
@@ -474,7 +486,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateDataExchangeRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateDataExchangeRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDataExchange(request), expectedError);
@@ -492,16 +507,13 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
-      request.dataExchange = {};
-      request.dataExchange.name = '';
-      const expectedHeaderRequestParams = 'data_exchange.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataExchange ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
+        'dataExchange',
+        'name',
+      ]);
+      request.dataExchange.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -509,11 +521,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateDataExchange(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataExchange without error using callback', async () => {
@@ -526,16 +541,13 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
-      request.dataExchange = {};
-      request.dataExchange.name = '';
-      const expectedHeaderRequestParams = 'data_exchange.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataExchange ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
+        'dataExchange',
+        'name',
+      ]);
+      request.dataExchange.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
       );
@@ -558,11 +570,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataExchange with error', async () => {
@@ -575,27 +590,27 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
-      request.dataExchange = {};
-      request.dataExchange.name = '';
-      const expectedHeaderRequestParams = 'data_exchange.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataExchange ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
+        'dataExchange',
+        'name',
+      ]);
+      request.dataExchange.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_exchange.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataExchange = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDataExchange(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataExchange with closed client', async () => {
@@ -608,8 +623,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateDataExchangeRequest()
       );
-      request.dataExchange = {};
-      request.dataExchange.name = '';
+      request.dataExchange ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataExchangeRequest', [
+        'dataExchange',
+        'name',
+      ]);
+      request.dataExchange.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDataExchange(request), expectedError);
@@ -627,15 +646,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -643,11 +658,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDataExchange(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataExchange without error using callback', async () => {
@@ -660,15 +678,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -691,11 +705,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataExchange with error', async () => {
@@ -708,26 +725,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataExchange = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDataExchange(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDataExchange as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataExchange as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataExchange as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataExchange with closed client', async () => {
@@ -740,7 +756,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteDataExchangeRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteDataExchangeRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDataExchange(request), expectedError);
@@ -758,26 +777,23 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
       client.innerApiCalls.getListing = stubSimpleCall(expectedResponse);
       const [response] = await client.getListing(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getListing without error using callback', async () => {
@@ -790,15 +806,9 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -821,11 +831,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getListing with error', async () => {
@@ -838,26 +851,23 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getListing = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getListing(request), expectedError);
-      assert(
-        (client.innerApiCalls.getListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getListing with closed client', async () => {
@@ -870,7 +880,8 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.GetListingRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetListingRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getListing(request), expectedError);
@@ -888,26 +899,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
       client.innerApiCalls.createListing = stubSimpleCall(expectedResponse);
       const [response] = await client.createListing(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createListing without error using callback', async () => {
@@ -920,15 +930,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -951,11 +957,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createListing with error', async () => {
@@ -968,26 +977,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createListing = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createListing(request), expectedError);
-      assert(
-        (client.innerApiCalls.createListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createListing with closed client', async () => {
@@ -1000,7 +1008,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.CreateListingRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateListingRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createListing(request), expectedError);
@@ -1018,27 +1029,27 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
-      request.listing = {};
-      request.listing.name = '';
-      const expectedHeaderRequestParams = 'listing.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.listing ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
+        'listing',
+        'name',
+      ]);
+      request.listing.name = defaultValue1;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
       client.innerApiCalls.updateListing = stubSimpleCall(expectedResponse);
       const [response] = await client.updateListing(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateListing without error using callback', async () => {
@@ -1051,16 +1062,13 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
-      request.listing = {};
-      request.listing.name = '';
-      const expectedHeaderRequestParams = 'listing.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.listing ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
+        'listing',
+        'name',
+      ]);
+      request.listing.name = defaultValue1;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
       );
@@ -1083,11 +1091,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateListing with error', async () => {
@@ -1100,27 +1111,27 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
-      request.listing = {};
-      request.listing.name = '';
-      const expectedHeaderRequestParams = 'listing.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.listing ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
+        'listing',
+        'name',
+      ]);
+      request.listing.name = defaultValue1;
+      const expectedHeaderRequestParams = `listing.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateListing = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateListing(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateListing with closed client', async () => {
@@ -1133,8 +1144,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.UpdateListingRequest()
       );
-      request.listing = {};
-      request.listing.name = '';
+      request.listing ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateListingRequest', [
+        'listing',
+        'name',
+      ]);
+      request.listing.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateListing(request), expectedError);
@@ -1152,26 +1167,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteListing = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteListing(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteListing without error using callback', async () => {
@@ -1184,15 +1198,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1215,11 +1225,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteListing with error', async () => {
@@ -1232,26 +1245,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteListing = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteListing(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteListing with closed client', async () => {
@@ -1264,7 +1276,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.DeleteListingRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteListing(request), expectedError);
@@ -1282,26 +1297,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingResponse()
       );
       client.innerApiCalls.subscribeListing = stubSimpleCall(expectedResponse);
       const [response] = await client.subscribeListing(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.subscribeListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.subscribeListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.subscribeListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes subscribeListing without error using callback', async () => {
@@ -1314,15 +1328,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingResponse()
       );
@@ -1345,11 +1355,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.subscribeListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.subscribeListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.subscribeListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes subscribeListing with error', async () => {
@@ -1362,26 +1375,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.subscribeListing = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.subscribeListing(request), expectedError);
-      assert(
-        (client.innerApiCalls.subscribeListing as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.subscribeListing as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.subscribeListing as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes subscribeListing with closed client', async () => {
@@ -1394,7 +1406,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('SubscribeListingRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.subscribeListing(request), expectedError);
@@ -1412,26 +1427,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
@@ -1444,15 +1458,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1475,11 +1485,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with error', async () => {
@@ -1492,26 +1505,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with closed client', async () => {
@@ -1524,7 +1536,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1542,26 +1557,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
@@ -1574,15 +1588,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
@@ -1605,11 +1615,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with error', async () => {
@@ -1622,26 +1635,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with closed client', async () => {
@@ -1654,7 +1666,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1672,15 +1687,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1688,11 +1699,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
@@ -1705,15 +1719,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
@@ -1736,11 +1746,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with error', async () => {
@@ -1753,26 +1766,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
-      const expectedHeaderRequestParams = 'resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with closed client', async () => {
@@ -1785,7 +1797,10 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1803,15 +1818,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -1826,11 +1837,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       client.innerApiCalls.listDataExchanges = stubSimpleCall(expectedResponse);
       const [response] = await client.listDataExchanges(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataExchanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataExchanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataExchanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataExchanges without error using callback', async () => {
@@ -1843,15 +1857,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -1884,11 +1894,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataExchanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataExchanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataExchanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataExchanges with error', async () => {
@@ -1901,26 +1914,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataExchanges = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDataExchanges(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDataExchanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataExchanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataExchanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataExchangesStream without error', async () => {
@@ -1933,8 +1945,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -1974,11 +1989,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataExchanges, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataExchanges.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataExchanges.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1992,8 +2008,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataExchanges.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2022,11 +2041,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataExchanges, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataExchanges.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataExchanges.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2040,8 +2060,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2068,11 +2091,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataExchanges.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataExchanges.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2086,8 +2110,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataExchangesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataExchanges.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2105,11 +2132,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataExchanges.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataExchanges.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2125,15 +2153,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
-      request.organization = '';
-      const expectedHeaderRequestParams = 'organization=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
+        'organization',
+      ]);
+      request.organization = defaultValue1;
+      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2149,11 +2173,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listOrgDataExchanges(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listOrgDataExchanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listOrgDataExchanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOrgDataExchanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listOrgDataExchanges without error using callback', async () => {
@@ -2166,15 +2193,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
-      request.organization = '';
-      const expectedHeaderRequestParams = 'organization=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
+        'organization',
+      ]);
+      request.organization = defaultValue1;
+      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2207,11 +2230,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listOrgDataExchanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listOrgDataExchanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOrgDataExchanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listOrgDataExchanges with error', async () => {
@@ -2224,26 +2250,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
-      request.organization = '';
-      const expectedHeaderRequestParams = 'organization=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
+        'organization',
+      ]);
+      request.organization = defaultValue1;
+      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listOrgDataExchanges = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listOrgDataExchanges(request), expectedError);
-      assert(
-        (client.innerApiCalls.listOrgDataExchanges as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listOrgDataExchanges as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listOrgDataExchanges as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listOrgDataExchangesStream without error', async () => {
@@ -2256,8 +2281,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
-      request.organization = '';
-      const expectedHeaderRequestParams = 'organization=';
+      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
+        'organization',
+      ]);
+      request.organization = defaultValue1;
+      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2297,11 +2325,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listOrgDataExchanges, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listOrgDataExchanges.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOrgDataExchanges.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2315,8 +2344,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
-      request.organization = '';
-      const expectedHeaderRequestParams = 'organization=';
+      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
+        'organization',
+      ]);
+      request.organization = defaultValue1;
+      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrgDataExchanges.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2345,11 +2377,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listOrgDataExchanges, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listOrgDataExchanges.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOrgDataExchanges.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2363,8 +2396,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
-      request.organization = '';
-      const expectedHeaderRequestParams = 'organization=';
+      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
+        'organization',
+      ]);
+      request.organization = defaultValue1;
+      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.DataExchange()
@@ -2391,11 +2427,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2409,8 +2446,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest()
       );
-      request.organization = '';
-      const expectedHeaderRequestParams = 'organization=';
+      const defaultValue1 = getTypeDefaultValue('ListOrgDataExchangesRequest', [
+        'organization',
+      ]);
+      request.organization = defaultValue1;
+      const expectedHeaderRequestParams = `organization=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listOrgDataExchanges.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2428,11 +2468,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listOrgDataExchanges.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2448,15 +2489,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2471,11 +2508,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       client.innerApiCalls.listListings = stubSimpleCall(expectedResponse);
       const [response] = await client.listListings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listListings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listListings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listListings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listListings without error using callback', async () => {
@@ -2488,15 +2528,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2529,11 +2565,14 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listListings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listListings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listListings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listListings with error', async () => {
@@ -2546,26 +2585,25 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listListings = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listListings(request), expectedError);
-      assert(
-        (client.innerApiCalls.listListings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listListings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listListings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listListingsStream without error', async () => {
@@ -2578,8 +2616,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2619,11 +2660,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listListings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listListings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listListings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2637,8 +2679,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listListings.createStream = stubPageStreamingCall(
         undefined,
@@ -2669,11 +2714,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listListings, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listListings.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listListings.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2687,8 +2733,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.bigquery.dataexchange.v1beta1.Listing()
@@ -2715,11 +2764,12 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listListings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listListings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2733,8 +2783,11 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.dataexchange.v1beta1.ListListingsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListListingsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listListings.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2752,11 +2805,215 @@ describe('v1beta1.AnalyticsHubServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
+        (client.descriptors.page.listListings.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client =
+        new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client =
+        new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client =
+        new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client =
+        new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
         (
-          client.descriptors.page.listListings.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client =
+        new analyticshubserviceModule.v1beta1.AnalyticsHubServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

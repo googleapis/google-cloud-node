@@ -1,4 +1,3 @@
 [
-  "../../protos/google/cloud/bigquery/dataexchange/common/common.proto",
   "../../protos/google/cloud/bigquery/dataexchange/v1beta1/dataexchange.proto"
 ]

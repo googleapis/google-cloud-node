@@ -66,68 +66,6 @@
                      */
                     var dataexchange = {};
     
-                    dataexchange.common = (function() {
-    
-                        /**
-                         * Namespace common.
-                         * @memberof google.cloud.bigquery.dataexchange
-                         * @namespace
-                         */
-                        var common = {};
-    
-                        /**
-                         * Category enum.
-                         * @name google.cloud.bigquery.dataexchange.common.Category
-                         * @enum {number}
-                         * @property {number} CATEGORY_UNSPECIFIED=0 CATEGORY_UNSPECIFIED value
-                         * @property {number} CATEGORY_OTHERS=1 CATEGORY_OTHERS value
-                         * @property {number} CATEGORY_ADVERTISING_AND_MARKETING=2 CATEGORY_ADVERTISING_AND_MARKETING value
-                         * @property {number} CATEGORY_COMMERCE=3 CATEGORY_COMMERCE value
-                         * @property {number} CATEGORY_CLIMATE_AND_ENVIRONMENT=4 CATEGORY_CLIMATE_AND_ENVIRONMENT value
-                         * @property {number} CATEGORY_DEMOGRAPHICS=5 CATEGORY_DEMOGRAPHICS value
-                         * @property {number} CATEGORY_ECONOMICS=6 CATEGORY_ECONOMICS value
-                         * @property {number} CATEGORY_EDUCATION=7 CATEGORY_EDUCATION value
-                         * @property {number} CATEGORY_ENERGY=8 CATEGORY_ENERGY value
-                         * @property {number} CATEGORY_FINANCIAL=9 CATEGORY_FINANCIAL value
-                         * @property {number} CATEGORY_GAMING=10 CATEGORY_GAMING value
-                         * @property {number} CATEGORY_GEOSPATIAL=11 CATEGORY_GEOSPATIAL value
-                         * @property {number} CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE=12 CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE value
-                         * @property {number} CATEGORY_MEDIA=13 CATEGORY_MEDIA value
-                         * @property {number} CATEGORY_PUBLIC_SECTOR=14 CATEGORY_PUBLIC_SECTOR value
-                         * @property {number} CATEGORY_RETAIL=15 CATEGORY_RETAIL value
-                         * @property {number} CATEGORY_SPORTS=16 CATEGORY_SPORTS value
-                         * @property {number} CATEGORY_SCIENCE_AND_RESEARCH=17 CATEGORY_SCIENCE_AND_RESEARCH value
-                         * @property {number} CATEGORY_TRANSPORTATION_AND_LOGISTICS=18 CATEGORY_TRANSPORTATION_AND_LOGISTICS value
-                         * @property {number} CATEGORY_TRAVEL_AND_TOURISM=19 CATEGORY_TRAVEL_AND_TOURISM value
-                         */
-                        common.Category = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "CATEGORY_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "CATEGORY_OTHERS"] = 1;
-                            values[valuesById[2] = "CATEGORY_ADVERTISING_AND_MARKETING"] = 2;
-                            values[valuesById[3] = "CATEGORY_COMMERCE"] = 3;
-                            values[valuesById[4] = "CATEGORY_CLIMATE_AND_ENVIRONMENT"] = 4;
-                            values[valuesById[5] = "CATEGORY_DEMOGRAPHICS"] = 5;
-                            values[valuesById[6] = "CATEGORY_ECONOMICS"] = 6;
-                            values[valuesById[7] = "CATEGORY_EDUCATION"] = 7;
-                            values[valuesById[8] = "CATEGORY_ENERGY"] = 8;
-                            values[valuesById[9] = "CATEGORY_FINANCIAL"] = 9;
-                            values[valuesById[10] = "CATEGORY_GAMING"] = 10;
-                            values[valuesById[11] = "CATEGORY_GEOSPATIAL"] = 11;
-                            values[valuesById[12] = "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE"] = 12;
-                            values[valuesById[13] = "CATEGORY_MEDIA"] = 13;
-                            values[valuesById[14] = "CATEGORY_PUBLIC_SECTOR"] = 14;
-                            values[valuesById[15] = "CATEGORY_RETAIL"] = 15;
-                            values[valuesById[16] = "CATEGORY_SPORTS"] = 16;
-                            values[valuesById[17] = "CATEGORY_SCIENCE_AND_RESEARCH"] = 17;
-                            values[valuesById[18] = "CATEGORY_TRANSPORTATION_AND_LOGISTICS"] = 18;
-                            values[valuesById[19] = "CATEGORY_TRAVEL_AND_TOURISM"] = 19;
-                            return values;
-                        })();
-    
-                        return common;
-                    })();
-    
                     dataexchange.v1beta1 = (function() {
     
                         /**
@@ -2052,16 +1990,16 @@
                              * Properties of a Listing.
                              * @memberof google.cloud.bigquery.dataexchange.v1beta1
                              * @interface IListing
+                             * @property {google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null} [bigqueryDataset] Listing bigqueryDataset
                              * @property {string|null} [name] Listing name
                              * @property {string|null} [displayName] Listing displayName
                              * @property {string|null} [description] Listing description
                              * @property {string|null} [primaryContact] Listing primaryContact
                              * @property {string|null} [documentation] Listing documentation
-                             * @property {google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null} [bigqueryDataset] Listing bigqueryDataset
                              * @property {google.cloud.bigquery.dataexchange.v1beta1.Listing.State|null} [state] Listing state
                              * @property {Uint8Array|null} [icon] Listing icon
                              * @property {google.cloud.bigquery.dataexchange.v1beta1.IDataProvider|null} [dataProvider] Listing dataProvider
-                             * @property {Array.<google.cloud.bigquery.dataexchange.common.Category>|null} [categories] Listing categories
+                             * @property {Array.<google.cloud.bigquery.dataexchange.v1beta1.Listing.Category>|null} [categories] Listing categories
                              * @property {google.cloud.bigquery.dataexchange.v1beta1.IPublisher|null} [publisher] Listing publisher
                              * @property {string|null} [requestAccess] Listing requestAccess
                              */
@@ -2081,6 +2019,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * Listing bigqueryDataset.
+                             * @member {google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null|undefined} bigqueryDataset
+                             * @memberof google.cloud.bigquery.dataexchange.v1beta1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.bigqueryDataset = null;
     
                             /**
                              * Listing name.
@@ -2123,14 +2069,6 @@
                             Listing.prototype.documentation = "";
     
                             /**
-                             * Listing bigqueryDataset.
-                             * @member {google.cloud.bigquery.dataexchange.v1beta1.Listing.IBigQueryDatasetSource|null|undefined} bigqueryDataset
-                             * @memberof google.cloud.bigquery.dataexchange.v1beta1.Listing
-                             * @instance
-                             */
-                            Listing.prototype.bigqueryDataset = null;
-    
-                            /**
                              * Listing state.
                              * @member {google.cloud.bigquery.dataexchange.v1beta1.Listing.State} state
                              * @memberof google.cloud.bigquery.dataexchange.v1beta1.Listing
@@ -2156,7 +2094,7 @@
     
                             /**
                              * Listing categories.
-                             * @member {Array.<google.cloud.bigquery.dataexchange.common.Category>} categories
+                             * @member {Array.<google.cloud.bigquery.dataexchange.v1beta1.Listing.Category>} categories
                              * @memberof google.cloud.bigquery.dataexchange.v1beta1.Listing
                              * @instance
                              */
@@ -2278,6 +2216,10 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
+                                    case 6: {
+                                            message.bigqueryDataset = $root.google.cloud.bigquery.dataexchange.v1beta1.Listing.BigQueryDatasetSource.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     case 1: {
                                             message.name = reader.string();
                                             break;
@@ -2296,10 +2238,6 @@
                                         }
                                     case 5: {
                                             message.documentation = reader.string();
-                                            break;
-                                        }
-                                    case 6: {
-                                            message.bigqueryDataset = $root.google.cloud.bigquery.dataexchange.v1beta1.Listing.BigQueryDatasetSource.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 7: {
@@ -2369,6 +2307,14 @@
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
                                 var properties = {};
+                                if (message.bigqueryDataset != null && message.hasOwnProperty("bigqueryDataset")) {
+                                    properties.source = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.dataexchange.v1beta1.Listing.BigQueryDatasetSource.verify(message.bigqueryDataset);
+                                        if (error)
+                                            return "bigqueryDataset." + error;
+                                    }
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
@@ -2384,14 +2330,6 @@
                                 if (message.documentation != null && message.hasOwnProperty("documentation"))
                                     if (!$util.isString(message.documentation))
                                         return "documentation: string expected";
-                                if (message.bigqueryDataset != null && message.hasOwnProperty("bigqueryDataset")) {
-                                    properties.source = 1;
-                                    {
-                                        var error = $root.google.cloud.bigquery.dataexchange.v1beta1.Listing.BigQueryDatasetSource.verify(message.bigqueryDataset);
-                                        if (error)
-                                            return "bigqueryDataset." + error;
-                                    }
-                                }
                                 if (message.state != null && message.hasOwnProperty("state"))
                                     switch (message.state) {
                                     default:
@@ -2461,6 +2399,11 @@
                                 if (object instanceof $root.google.cloud.bigquery.dataexchange.v1beta1.Listing)
                                     return object;
                                 var message = new $root.google.cloud.bigquery.dataexchange.v1beta1.Listing();
+                                if (object.bigqueryDataset != null) {
+                                    if (typeof object.bigqueryDataset !== "object")
+                                        throw TypeError(".google.cloud.bigquery.dataexchange.v1beta1.Listing.bigqueryDataset: object expected");
+                                    message.bigqueryDataset = $root.google.cloud.bigquery.dataexchange.v1beta1.Listing.BigQueryDatasetSource.fromObject(object.bigqueryDataset);
+                                }
                                 if (object.name != null)
                                     message.name = String(object.name);
                                 if (object.displayName != null)
@@ -2471,11 +2414,6 @@
                                     message.primaryContact = String(object.primaryContact);
                                 if (object.documentation != null)
                                     message.documentation = String(object.documentation);
-                                if (object.bigqueryDataset != null) {
-                                    if (typeof object.bigqueryDataset !== "object")
-                                        throw TypeError(".google.cloud.bigquery.dataexchange.v1beta1.Listing.bigqueryDataset: object expected");
-                                    message.bigqueryDataset = $root.google.cloud.bigquery.dataexchange.v1beta1.Listing.BigQueryDatasetSource.fromObject(object.bigqueryDataset);
-                                }
                                 switch (object.state) {
                                 case "STATE_UNSPECIFIED":
                                 case 0:
@@ -2652,7 +2590,7 @@
                                 if (message.categories && message.categories.length) {
                                     object.categories = [];
                                     for (var j = 0; j < message.categories.length; ++j)
-                                        object.categories[j] = options.enums === String ? $root.google.cloud.bigquery.dataexchange.common.Category[message.categories[j]] : message.categories[j];
+                                        object.categories[j] = options.enums === String ? $root.google.cloud.bigquery.dataexchange.v1beta1.Listing.Category[message.categories[j]] : message.categories[j];
                                 }
                                 if (message.publisher != null && message.hasOwnProperty("publisher"))
                                     object.publisher = $root.google.cloud.bigquery.dataexchange.v1beta1.Publisher.toObject(message.publisher, options);
@@ -2901,6 +2839,56 @@
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "ACTIVE"] = 1;
+                                return values;
+                            })();
+    
+                            /**
+                             * Category enum.
+                             * @name google.cloud.bigquery.dataexchange.v1beta1.Listing.Category
+                             * @enum {number}
+                             * @property {number} CATEGORY_UNSPECIFIED=0 CATEGORY_UNSPECIFIED value
+                             * @property {number} CATEGORY_OTHERS=1 CATEGORY_OTHERS value
+                             * @property {number} CATEGORY_ADVERTISING_AND_MARKETING=2 CATEGORY_ADVERTISING_AND_MARKETING value
+                             * @property {number} CATEGORY_COMMERCE=3 CATEGORY_COMMERCE value
+                             * @property {number} CATEGORY_CLIMATE_AND_ENVIRONMENT=4 CATEGORY_CLIMATE_AND_ENVIRONMENT value
+                             * @property {number} CATEGORY_DEMOGRAPHICS=5 CATEGORY_DEMOGRAPHICS value
+                             * @property {number} CATEGORY_ECONOMICS=6 CATEGORY_ECONOMICS value
+                             * @property {number} CATEGORY_EDUCATION=7 CATEGORY_EDUCATION value
+                             * @property {number} CATEGORY_ENERGY=8 CATEGORY_ENERGY value
+                             * @property {number} CATEGORY_FINANCIAL=9 CATEGORY_FINANCIAL value
+                             * @property {number} CATEGORY_GAMING=10 CATEGORY_GAMING value
+                             * @property {number} CATEGORY_GEOSPATIAL=11 CATEGORY_GEOSPATIAL value
+                             * @property {number} CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE=12 CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE value
+                             * @property {number} CATEGORY_MEDIA=13 CATEGORY_MEDIA value
+                             * @property {number} CATEGORY_PUBLIC_SECTOR=14 CATEGORY_PUBLIC_SECTOR value
+                             * @property {number} CATEGORY_RETAIL=15 CATEGORY_RETAIL value
+                             * @property {number} CATEGORY_SPORTS=16 CATEGORY_SPORTS value
+                             * @property {number} CATEGORY_SCIENCE_AND_RESEARCH=17 CATEGORY_SCIENCE_AND_RESEARCH value
+                             * @property {number} CATEGORY_TRANSPORTATION_AND_LOGISTICS=18 CATEGORY_TRANSPORTATION_AND_LOGISTICS value
+                             * @property {number} CATEGORY_TRAVEL_AND_TOURISM=19 CATEGORY_TRAVEL_AND_TOURISM value
+                             */
+                            Listing.Category = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CATEGORY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "CATEGORY_OTHERS"] = 1;
+                                values[valuesById[2] = "CATEGORY_ADVERTISING_AND_MARKETING"] = 2;
+                                values[valuesById[3] = "CATEGORY_COMMERCE"] = 3;
+                                values[valuesById[4] = "CATEGORY_CLIMATE_AND_ENVIRONMENT"] = 4;
+                                values[valuesById[5] = "CATEGORY_DEMOGRAPHICS"] = 5;
+                                values[valuesById[6] = "CATEGORY_ECONOMICS"] = 6;
+                                values[valuesById[7] = "CATEGORY_EDUCATION"] = 7;
+                                values[valuesById[8] = "CATEGORY_ENERGY"] = 8;
+                                values[valuesById[9] = "CATEGORY_FINANCIAL"] = 9;
+                                values[valuesById[10] = "CATEGORY_GAMING"] = 10;
+                                values[valuesById[11] = "CATEGORY_GEOSPATIAL"] = 11;
+                                values[valuesById[12] = "CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE"] = 12;
+                                values[valuesById[13] = "CATEGORY_MEDIA"] = 13;
+                                values[valuesById[14] = "CATEGORY_PUBLIC_SECTOR"] = 14;
+                                values[valuesById[15] = "CATEGORY_RETAIL"] = 15;
+                                values[valuesById[16] = "CATEGORY_SPORTS"] = 16;
+                                values[valuesById[17] = "CATEGORY_SCIENCE_AND_RESEARCH"] = 17;
+                                values[valuesById[18] = "CATEGORY_TRANSPORTATION_AND_LOGISTICS"] = 18;
+                                values[valuesById[19] = "CATEGORY_TRAVEL_AND_TOURISM"] = 19;
                                 return values;
                             })();
     
@@ -6203,8 +6191,8 @@
                              * Properties of a SubscribeListingRequest.
                              * @memberof google.cloud.bigquery.dataexchange.v1beta1
                              * @interface ISubscribeListingRequest
-                             * @property {string|null} [name] SubscribeListingRequest name
                              * @property {google.cloud.bigquery.dataexchange.v1beta1.IDestinationDataset|null} [destinationDataset] SubscribeListingRequest destinationDataset
+                             * @property {string|null} [name] SubscribeListingRequest name
                              */
     
                             /**
@@ -6223,20 +6211,20 @@
                             }
     
                             /**
-                             * SubscribeListingRequest name.
-                             * @member {string} name
-                             * @memberof google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest
-                             * @instance
-                             */
-                            SubscribeListingRequest.prototype.name = "";
-    
-                            /**
                              * SubscribeListingRequest destinationDataset.
                              * @member {google.cloud.bigquery.dataexchange.v1beta1.IDestinationDataset|null|undefined} destinationDataset
                              * @memberof google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest
                              * @instance
                              */
                             SubscribeListingRequest.prototype.destinationDataset = null;
+    
+                            /**
+                             * SubscribeListingRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest
+                             * @instance
+                             */
+                            SubscribeListingRequest.prototype.name = "";
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -6314,12 +6302,12 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
-                                    case 1: {
-                                            message.name = reader.string();
-                                            break;
-                                        }
                                     case 3: {
                                             message.destinationDataset = $root.google.cloud.bigquery.dataexchange.v1beta1.DestinationDataset.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 1: {
+                                            message.name = reader.string();
                                             break;
                                         }
                                     default:
@@ -6358,9 +6346,6 @@
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
                                 var properties = {};
-                                if (message.name != null && message.hasOwnProperty("name"))
-                                    if (!$util.isString(message.name))
-                                        return "name: string expected";
                                 if (message.destinationDataset != null && message.hasOwnProperty("destinationDataset")) {
                                     properties.destination = 1;
                                     {
@@ -6369,6 +6354,9 @@
                                             return "destinationDataset." + error;
                                     }
                                 }
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
                                 return null;
                             };
     
@@ -6384,13 +6372,13 @@
                                 if (object instanceof $root.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest)
                                     return object;
                                 var message = new $root.google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest();
-                                if (object.name != null)
-                                    message.name = String(object.name);
                                 if (object.destinationDataset != null) {
                                     if (typeof object.destinationDataset !== "object")
                                         throw TypeError(".google.cloud.bigquery.dataexchange.v1beta1.SubscribeListingRequest.destinationDataset: object expected");
                                     message.destinationDataset = $root.google.cloud.bigquery.dataexchange.v1beta1.DestinationDataset.fromObject(object.destinationDataset);
                                 }
+                                if (object.name != null)
+                                    message.name = String(object.name);
                                 return message;
                             };
     
