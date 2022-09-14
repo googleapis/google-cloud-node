@@ -25,6 +25,21 @@ import * as iamcheckerModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -157,7 +172,6 @@ describe('v1.IamCheckerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse()
       );
@@ -165,11 +179,6 @@ describe('v1.IamCheckerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.troubleshootIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.troubleshootIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes troubleshootIamPolicy without error using callback', async () => {
@@ -181,7 +190,6 @@ describe('v1.IamCheckerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyResponse()
       );
@@ -204,11 +212,6 @@ describe('v1.IamCheckerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.troubleshootIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes troubleshootIamPolicy with error', async () => {
@@ -220,7 +223,6 @@ describe('v1.IamCheckerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.policytroubleshooter.v1.TroubleshootIamPolicyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.troubleshootIamPolicy = stubSimpleCall(
         undefined,
@@ -229,11 +231,6 @@ describe('v1.IamCheckerClient', () => {
       await assert.rejects(
         client.troubleshootIamPolicy(request),
         expectedError
-      );
-      assert(
-        (client.innerApiCalls.troubleshootIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
       );
     });
 
