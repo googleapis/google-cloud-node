@@ -225,6 +225,8 @@ describe('Compute', () => {
 
     after(async function () {
       this.timeout(10 * 60 * 1000);
+      this.retries(3);
+      await delay(this.test);
       if (dirty) {
         await client.delete({
           project,
