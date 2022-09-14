@@ -618,7 +618,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getInstance(request, options, callback);
@@ -709,7 +709,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getVolume(request, options, callback);
@@ -807,7 +807,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        location: request.location || '',
+        location: request.location ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listNetworkUsage(request, options, callback);
@@ -898,7 +898,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getNetwork(request, options, callback);
@@ -989,7 +989,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getLun(request, options, callback);
@@ -1080,7 +1080,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getNfsShare(request, options, callback);
@@ -1193,7 +1193,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'instance.name': request.instance!.name || '',
+        'instance.name': request.instance!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateInstance(request, options, callback);
@@ -1332,7 +1332,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resetInstance(request, options, callback);
@@ -1470,7 +1470,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.startInstance(request, options, callback);
@@ -1608,7 +1608,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.stopInstance(request, options, callback);
@@ -1748,7 +1748,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        instance: request.instance || '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.detachLun(request, options, callback);
@@ -1897,7 +1897,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'volume.name': request.volume!.name || '',
+        'volume.name': request.volume!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateVolume(request, options, callback);
@@ -2037,7 +2037,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        volume: request.volume || '',
+        volume: request.volume ?? '',
       });
     this.initialize();
     return this.innerApiCalls.resizeVolume(request, options, callback);
@@ -2182,7 +2182,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'network.name': request.network!.name || '',
+        'network.name': request.network!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateNetwork(request, options, callback);
@@ -2327,7 +2327,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'nfs_share.name': request.nfsShare!.name || '',
+        'nfs_share.name': request.nfsShare!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateNfsShare(request, options, callback);
@@ -2463,7 +2463,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listInstances(request, options, callback);
@@ -2504,7 +2504,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2554,7 +2554,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listInstances'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2661,7 +2661,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listVolumes(request, options, callback);
@@ -2702,7 +2702,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2752,7 +2752,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listVolumes'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2859,7 +2859,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listNetworks(request, options, callback);
@@ -2900,7 +2900,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2950,7 +2950,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listNetworks'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3055,7 +3055,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listLuns(request, options, callback);
@@ -3094,7 +3094,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3142,7 +3142,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listLuns'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3249,7 +3249,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listNfsShares(request, options, callback);
@@ -3290,7 +3290,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3340,7 +3340,7 @@ export class BareMetalSolutionClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listNfsShares'];
     const callSettings = defaultCallSettings.merge(options);
