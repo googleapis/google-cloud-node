@@ -614,7 +614,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAppConnector(request, options, callback);
@@ -744,7 +744,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAppConnector(request, options, callback);
@@ -906,7 +906,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'app_connector.name': request.appConnector!.name || '',
+        'app_connector.name': request.appConnector!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAppConnector(request, options, callback);
@@ -1062,7 +1062,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAppConnector(request, options, callback);
@@ -1220,7 +1220,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        app_connector: request.appConnector || '',
+        app_connector: request.appConnector ?? '',
       });
     this.initialize();
     return this.innerApiCalls.reportStatus(request, options, callback);
@@ -1367,7 +1367,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAppConnectors(request, options, callback);
@@ -1419,7 +1419,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAppConnectors'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1480,7 +1480,7 @@ export class AppConnectorsServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAppConnectors'];
     const callSettings = defaultCallSettings.merge(options);
