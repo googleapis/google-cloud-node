@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -233,26 +248,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAccountRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Account()
       );
       client.innerApiCalls.getAccount = stubSimpleCall(expectedResponse);
       const [response] = await client.getAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccount without error using callback', async () => {
@@ -265,15 +277,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAccountRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Account()
       );
@@ -296,11 +302,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccount with error', async () => {
@@ -313,26 +322,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAccountRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAccount = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAccount(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAccount with closed client', async () => {
@@ -345,7 +351,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAccountRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAccount(request), expectedError);
@@ -363,26 +370,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteAccountRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteAccount = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccount without error using callback', async () => {
@@ -395,15 +401,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteAccountRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -426,11 +428,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccount with error', async () => {
@@ -443,26 +448,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteAccountRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccount = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAccount(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccount with closed client', async () => {
@@ -475,7 +479,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteAccountRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAccount(request), expectedError);
@@ -493,27 +500,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAccountRequest()
       );
-      request.account = {};
-      request.account.name = '';
-      const expectedHeaderRequestParams = 'account.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.account ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
+        'account',
+        'name',
+      ]);
+      request.account.name = defaultValue1;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Account()
       );
       client.innerApiCalls.updateAccount = stubSimpleCall(expectedResponse);
       const [response] = await client.updateAccount(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccount without error using callback', async () => {
@@ -526,16 +533,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAccountRequest()
       );
-      request.account = {};
-      request.account.name = '';
-      const expectedHeaderRequestParams = 'account.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.account ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
+        'account',
+        'name',
+      ]);
+      request.account.name = defaultValue1;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Account()
       );
@@ -558,11 +562,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccount with error', async () => {
@@ -575,27 +582,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAccountRequest()
       );
-      request.account = {};
-      request.account.name = '';
-      const expectedHeaderRequestParams = 'account.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.account ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
+        'account',
+        'name',
+      ]);
+      request.account.name = defaultValue1;
+      const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccount = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAccount(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccount with closed client', async () => {
@@ -608,8 +615,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAccountRequest()
       );
-      request.account = {};
-      request.account.name = '';
+      request.account ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
+        'account',
+        'name',
+      ]);
+      request.account.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAccount(request), expectedError);
@@ -627,7 +638,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketResponse()
       );
@@ -635,11 +645,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.provisionAccountTicket(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.provisionAccountTicket as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes provisionAccountTicket without error using callback', async () => {
@@ -652,7 +657,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketResponse()
       );
@@ -675,11 +679,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.provisionAccountTicket as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes provisionAccountTicket with error', async () => {
@@ -692,7 +691,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ProvisionAccountTicketRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.provisionAccountTicket = stubSimpleCall(
         undefined,
@@ -701,11 +699,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       await assert.rejects(
         client.provisionAccountTicket(request),
         expectedError
-      );
-      assert(
-        (client.innerApiCalls.provisionAccountTicket as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
       );
     });
 
@@ -739,26 +732,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetPropertyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
       client.innerApiCalls.getProperty = stubSimpleCall(expectedResponse);
       const [response] = await client.getProperty(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProperty without error using callback', async () => {
@@ -771,15 +761,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetPropertyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
@@ -802,11 +786,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProperty with error', async () => {
@@ -819,26 +806,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetPropertyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProperty = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getProperty(request), expectedError);
-      assert(
-        (client.innerApiCalls.getProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProperty with closed client', async () => {
@@ -851,7 +835,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetPropertyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProperty(request), expectedError);
@@ -869,18 +854,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreatePropertyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
       client.innerApiCalls.createProperty = stubSimpleCall(expectedResponse);
       const [response] = await client.createProperty(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes createProperty without error using callback', async () => {
@@ -893,7 +872,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreatePropertyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
@@ -916,11 +894,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes createProperty with error', async () => {
@@ -933,18 +906,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreatePropertyRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.createProperty = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createProperty(request), expectedError);
-      assert(
-        (client.innerApiCalls.createProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes createProperty with closed client', async () => {
@@ -974,26 +941,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeletePropertyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
       client.innerApiCalls.deleteProperty = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteProperty(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProperty without error using callback', async () => {
@@ -1006,15 +972,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeletePropertyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
@@ -1037,11 +999,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProperty with error', async () => {
@@ -1054,26 +1019,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeletePropertyRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProperty = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteProperty(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProperty with closed client', async () => {
@@ -1086,7 +1050,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeletePropertyRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProperty(request), expectedError);
@@ -1104,27 +1071,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdatePropertyRequest()
       );
-      request.property = {};
-      request.property.name = '';
-      const expectedHeaderRequestParams = 'property.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.property ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
+        'property',
+        'name',
+      ]);
+      request.property.name = defaultValue1;
+      const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
       client.innerApiCalls.updateProperty = stubSimpleCall(expectedResponse);
       const [response] = await client.updateProperty(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProperty without error using callback', async () => {
@@ -1137,16 +1104,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdatePropertyRequest()
       );
-      request.property = {};
-      request.property.name = '';
-      const expectedHeaderRequestParams = 'property.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.property ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
+        'property',
+        'name',
+      ]);
+      request.property.name = defaultValue1;
+      const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Property()
       );
@@ -1169,11 +1133,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProperty with error', async () => {
@@ -1186,27 +1153,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdatePropertyRequest()
       );
-      request.property = {};
-      request.property.name = '';
-      const expectedHeaderRequestParams = 'property.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.property ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
+        'property',
+        'name',
+      ]);
+      request.property.name = defaultValue1;
+      const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProperty = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateProperty(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateProperty as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProperty as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProperty as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProperty with closed client', async () => {
@@ -1219,8 +1186,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdatePropertyRequest()
       );
-      request.property = {};
-      request.property.name = '';
+      request.property ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
+        'property',
+        'name',
+      ]);
+      request.property.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProperty(request), expectedError);
@@ -1238,26 +1209,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetUserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUserLinkRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UserLink()
       );
       client.innerApiCalls.getUserLink = stubSimpleCall(expectedResponse);
       const [response] = await client.getUserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUserLink without error using callback', async () => {
@@ -1270,15 +1238,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetUserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUserLinkRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UserLink()
       );
@@ -1301,11 +1263,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUserLink with error', async () => {
@@ -1318,26 +1283,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetUserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetUserLinkRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getUserLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getUserLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.getUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getUserLink with closed client', async () => {
@@ -1350,7 +1312,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetUserLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetUserLinkRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getUserLink(request), expectedError);
@@ -1368,26 +1331,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchGetUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchGetUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchGetUserLinksResponse()
       );
       client.innerApiCalls.batchGetUserLinks = stubSimpleCall(expectedResponse);
       const [response] = await client.batchGetUserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchGetUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetUserLinks without error using callback', async () => {
@@ -1400,15 +1362,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchGetUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchGetUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchGetUserLinksResponse()
       );
@@ -1431,11 +1389,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchGetUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetUserLinks with error', async () => {
@@ -1448,26 +1409,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchGetUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchGetUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchGetUserLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.batchGetUserLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchGetUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchGetUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchGetUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchGetUserLinks with closed client', async () => {
@@ -1480,7 +1440,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchGetUserLinksRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('BatchGetUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchGetUserLinks(request), expectedError);
@@ -1498,26 +1461,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateUserLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateUserLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UserLink()
       );
       client.innerApiCalls.createUserLink = stubSimpleCall(expectedResponse);
       const [response] = await client.createUserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUserLink without error using callback', async () => {
@@ -1530,15 +1492,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateUserLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateUserLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UserLink()
       );
@@ -1561,11 +1519,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUserLink with error', async () => {
@@ -1578,26 +1539,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateUserLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateUserLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createUserLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createUserLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.createUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createUserLink with closed client', async () => {
@@ -1610,7 +1570,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateUserLinkRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateUserLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createUserLink(request), expectedError);
@@ -1628,15 +1591,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchCreateUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchCreateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchCreateUserLinksResponse()
       );
@@ -1644,11 +1603,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchCreateUserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchCreateUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchCreateUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchCreateUserLinks without error using callback', async () => {
@@ -1661,15 +1623,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchCreateUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchCreateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchCreateUserLinksResponse()
       );
@@ -1692,11 +1650,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchCreateUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchCreateUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchCreateUserLinks with error', async () => {
@@ -1709,26 +1670,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchCreateUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchCreateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCreateUserLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.batchCreateUserLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchCreateUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchCreateUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCreateUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchCreateUserLinks with closed client', async () => {
@@ -1741,7 +1701,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchCreateUserLinksRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('BatchCreateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchCreateUserLinks(request), expectedError);
@@ -1759,27 +1722,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateUserLinkRequest()
       );
-      request.userLink = {};
-      request.userLink.name = '';
-      const expectedHeaderRequestParams = 'user_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.userLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserLinkRequest', [
+        'userLink',
+        'name',
+      ]);
+      request.userLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UserLink()
       );
       client.innerApiCalls.updateUserLink = stubSimpleCall(expectedResponse);
       const [response] = await client.updateUserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUserLink without error using callback', async () => {
@@ -1792,16 +1755,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateUserLinkRequest()
       );
-      request.userLink = {};
-      request.userLink.name = '';
-      const expectedHeaderRequestParams = 'user_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.userLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserLinkRequest', [
+        'userLink',
+        'name',
+      ]);
+      request.userLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UserLink()
       );
@@ -1824,11 +1784,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUserLink with error', async () => {
@@ -1841,27 +1804,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateUserLinkRequest()
       );
-      request.userLink = {};
-      request.userLink.name = '';
-      const expectedHeaderRequestParams = 'user_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.userLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserLinkRequest', [
+        'userLink',
+        'name',
+      ]);
+      request.userLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `user_link.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateUserLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateUserLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateUserLink with closed client', async () => {
@@ -1874,8 +1837,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateUserLinkRequest()
       );
-      request.userLink = {};
-      request.userLink.name = '';
+      request.userLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateUserLinkRequest', [
+        'userLink',
+        'name',
+      ]);
+      request.userLink.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateUserLink(request), expectedError);
@@ -1893,15 +1860,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchUpdateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksResponse()
       );
@@ -1909,11 +1872,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchUpdateUserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchUpdateUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchUpdateUserLinks without error using callback', async () => {
@@ -1926,15 +1892,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchUpdateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksResponse()
       );
@@ -1957,11 +1919,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchUpdateUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchUpdateUserLinks with error', async () => {
@@ -1974,26 +1939,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchUpdateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchUpdateUserLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.batchUpdateUserLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchUpdateUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchUpdateUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchUpdateUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchUpdateUserLinks with closed client', async () => {
@@ -2006,7 +1970,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchUpdateUserLinksRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('BatchUpdateUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchUpdateUserLinks(request), expectedError);
@@ -2024,26 +1991,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteUserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteUserLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteUserLink = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteUserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUserLink without error using callback', async () => {
@@ -2056,15 +2022,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteUserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteUserLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2087,11 +2049,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUserLink with error', async () => {
@@ -2104,26 +2069,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteUserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteUserLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteUserLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteUserLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteUserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteUserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteUserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteUserLink with closed client', async () => {
@@ -2136,7 +2100,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteUserLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteUserLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteUserLink(request), expectedError);
@@ -2154,15 +2121,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchDeleteUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchDeleteUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2170,11 +2133,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchDeleteUserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchDeleteUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchDeleteUserLinks without error using callback', async () => {
@@ -2187,15 +2153,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchDeleteUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchDeleteUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2218,11 +2180,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchDeleteUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchDeleteUserLinks with error', async () => {
@@ -2235,26 +2200,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchDeleteUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BatchDeleteUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchDeleteUserLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.batchDeleteUserLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchDeleteUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchDeleteUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchDeleteUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchDeleteUserLinks with closed client', async () => {
@@ -2267,7 +2231,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.BatchDeleteUserLinksRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('BatchDeleteUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchDeleteUserLinks(request), expectedError);
@@ -2285,15 +2252,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateFirebaseLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.FirebaseLink()
       );
@@ -2301,11 +2264,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createFirebaseLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFirebaseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFirebaseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFirebaseLink without error using callback', async () => {
@@ -2318,15 +2284,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateFirebaseLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.FirebaseLink()
       );
@@ -2349,11 +2311,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFirebaseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFirebaseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFirebaseLink with error', async () => {
@@ -2366,26 +2331,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateFirebaseLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createFirebaseLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createFirebaseLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.createFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createFirebaseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createFirebaseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createFirebaseLink with closed client', async () => {
@@ -2398,7 +2362,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateFirebaseLinkRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createFirebaseLink(request), expectedError);
@@ -2416,15 +2383,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2432,11 +2395,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteFirebaseLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFirebaseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFirebaseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteFirebaseLink without error using callback', async () => {
@@ -2449,15 +2415,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2480,11 +2442,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFirebaseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFirebaseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteFirebaseLink with error', async () => {
@@ -2497,26 +2462,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteFirebaseLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteFirebaseLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteFirebaseLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteFirebaseLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteFirebaseLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteFirebaseLink with closed client', async () => {
@@ -2529,7 +2493,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteFirebaseLink(request), expectedError);
@@ -2547,26 +2514,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGlobalSiteTagRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGlobalSiteTagRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GlobalSiteTag()
       );
       client.innerApiCalls.getGlobalSiteTag = stubSimpleCall(expectedResponse);
       const [response] = await client.getGlobalSiteTag(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGlobalSiteTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGlobalSiteTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGlobalSiteTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGlobalSiteTag without error using callback', async () => {
@@ -2579,15 +2545,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGlobalSiteTagRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGlobalSiteTagRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GlobalSiteTag()
       );
@@ -2610,11 +2572,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGlobalSiteTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGlobalSiteTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGlobalSiteTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGlobalSiteTag with error', async () => {
@@ -2627,26 +2592,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGlobalSiteTagRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetGlobalSiteTagRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGlobalSiteTag = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getGlobalSiteTag(request), expectedError);
-      assert(
-        (client.innerApiCalls.getGlobalSiteTag as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGlobalSiteTag as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGlobalSiteTag as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGlobalSiteTag with closed client', async () => {
@@ -2659,7 +2623,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGlobalSiteTagRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetGlobalSiteTagRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGlobalSiteTag(request), expectedError);
@@ -2677,15 +2644,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateGoogleAdsLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
       );
@@ -2693,11 +2656,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createGoogleAdsLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGoogleAdsLink without error using callback', async () => {
@@ -2710,15 +2676,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateGoogleAdsLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
       );
@@ -2741,11 +2703,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGoogleAdsLink with error', async () => {
@@ -2758,26 +2723,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateGoogleAdsLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createGoogleAdsLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createGoogleAdsLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.createGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createGoogleAdsLink with closed client', async () => {
@@ -2790,7 +2754,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateGoogleAdsLinkRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createGoogleAdsLink(request), expectedError);
@@ -2808,16 +2775,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleAdsLinkRequest()
       );
-      request.googleAdsLink = {};
-      request.googleAdsLink.name = '';
-      const expectedHeaderRequestParams = 'google_ads_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.googleAdsLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
+        'googleAdsLink',
+        'name',
+      ]);
+      request.googleAdsLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
       );
@@ -2825,11 +2789,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateGoogleAdsLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGoogleAdsLink without error using callback', async () => {
@@ -2842,16 +2809,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleAdsLinkRequest()
       );
-      request.googleAdsLink = {};
-      request.googleAdsLink.name = '';
-      const expectedHeaderRequestParams = 'google_ads_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.googleAdsLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
+        'googleAdsLink',
+        'name',
+      ]);
+      request.googleAdsLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
       );
@@ -2874,11 +2838,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGoogleAdsLink with error', async () => {
@@ -2891,27 +2858,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleAdsLinkRequest()
       );
-      request.googleAdsLink = {};
-      request.googleAdsLink.name = '';
-      const expectedHeaderRequestParams = 'google_ads_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.googleAdsLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
+        'googleAdsLink',
+        'name',
+      ]);
+      request.googleAdsLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGoogleAdsLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateGoogleAdsLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGoogleAdsLink with closed client', async () => {
@@ -2924,8 +2891,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleAdsLinkRequest()
       );
-      request.googleAdsLink = {};
-      request.googleAdsLink.name = '';
+      request.googleAdsLink ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
+        'googleAdsLink',
+        'name',
+      ]);
+      request.googleAdsLink.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateGoogleAdsLink(request), expectedError);
@@ -2943,15 +2914,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteGoogleAdsLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -2959,11 +2926,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteGoogleAdsLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGoogleAdsLink without error using callback', async () => {
@@ -2976,15 +2946,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteGoogleAdsLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3007,11 +2973,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGoogleAdsLink with error', async () => {
@@ -3024,26 +2993,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteGoogleAdsLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteGoogleAdsLink = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteGoogleAdsLink(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteGoogleAdsLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteGoogleAdsLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteGoogleAdsLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteGoogleAdsLink with closed client', async () => {
@@ -3056,7 +3024,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteGoogleAdsLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteGoogleAdsLink(request), expectedError);
@@ -3074,15 +3045,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataSharingSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataSharingSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataSharingSettings()
       );
@@ -3090,11 +3058,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDataSharingSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataSharingSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataSharingSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataSharingSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataSharingSettings without error using callback', async () => {
@@ -3107,15 +3078,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataSharingSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataSharingSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataSharingSettings()
       );
@@ -3138,11 +3106,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataSharingSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataSharingSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataSharingSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataSharingSettings with error', async () => {
@@ -3155,15 +3126,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataSharingSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataSharingSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataSharingSettings = stubSimpleCall(
         undefined,
@@ -3173,11 +3141,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.getDataSharingSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getDataSharingSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataSharingSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataSharingSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataSharingSettings with closed client', async () => {
@@ -3190,7 +3161,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataSharingSettingsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataSharingSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3211,15 +3186,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
       );
@@ -3227,11 +3199,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getMeasurementProtocolSecret(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMeasurementProtocolSecret without error using callback', async () => {
@@ -3244,15 +3219,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
       );
@@ -3275,11 +3247,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMeasurementProtocolSecret with error', async () => {
@@ -3292,15 +3267,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -3310,11 +3282,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.getMeasurementProtocolSecret(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getMeasurementProtocolSecret with closed client', async () => {
@@ -3327,7 +3302,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3348,15 +3327,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMeasurementProtocolSecretRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
       );
@@ -3364,11 +3340,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createMeasurementProtocolSecret(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMeasurementProtocolSecret without error using callback', async () => {
@@ -3381,15 +3360,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMeasurementProtocolSecretRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
       );
@@ -3412,11 +3388,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMeasurementProtocolSecret with error', async () => {
@@ -3429,15 +3408,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMeasurementProtocolSecretRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -3447,11 +3423,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.createMeasurementProtocolSecret(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createMeasurementProtocolSecret with closed client', async () => {
@@ -3464,7 +3443,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateMeasurementProtocolSecretRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3485,15 +3468,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3501,11 +3481,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteMeasurementProtocolSecret(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMeasurementProtocolSecret without error using callback', async () => {
@@ -3518,15 +3501,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -3549,11 +3529,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMeasurementProtocolSecret with error', async () => {
@@ -3566,15 +3549,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -3584,11 +3564,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.deleteMeasurementProtocolSecret(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteMeasurementProtocolSecret with closed client', async () => {
@@ -3601,7 +3584,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteMeasurementProtocolSecretRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3622,16 +3609,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest()
       );
-      request.measurementProtocolSecret = {};
-      request.measurementProtocolSecret.name = '';
-      const expectedHeaderRequestParams = 'measurement_protocol_secret.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.measurementProtocolSecret ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateMeasurementProtocolSecretRequest',
+        ['measurementProtocolSecret', 'name']
+      );
+      request.measurementProtocolSecret.name = defaultValue1;
+      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
       );
@@ -3639,11 +3623,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateMeasurementProtocolSecret(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateMeasurementProtocolSecret without error using callback', async () => {
@@ -3656,16 +3643,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest()
       );
-      request.measurementProtocolSecret = {};
-      request.measurementProtocolSecret.name = '';
-      const expectedHeaderRequestParams = 'measurement_protocol_secret.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.measurementProtocolSecret ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateMeasurementProtocolSecretRequest',
+        ['measurementProtocolSecret', 'name']
+      );
+      request.measurementProtocolSecret.name = defaultValue1;
+      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
       );
@@ -3688,11 +3672,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateMeasurementProtocolSecret with error', async () => {
@@ -3705,16 +3692,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest()
       );
-      request.measurementProtocolSecret = {};
-      request.measurementProtocolSecret.name = '';
-      const expectedHeaderRequestParams = 'measurement_protocol_secret.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.measurementProtocolSecret ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateMeasurementProtocolSecretRequest',
+        ['measurementProtocolSecret', 'name']
+      );
+      request.measurementProtocolSecret.name = defaultValue1;
+      const expectedHeaderRequestParams = `measurement_protocol_secret.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateMeasurementProtocolSecret = stubSimpleCall(
         undefined,
@@ -3724,11 +3708,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.updateMeasurementProtocolSecret(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateMeasurementProtocolSecret as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateMeasurementProtocolSecret with closed client', async () => {
@@ -3741,8 +3728,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest()
       );
-      request.measurementProtocolSecret = {};
-      request.measurementProtocolSecret.name = '';
+      request.measurementProtocolSecret ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateMeasurementProtocolSecretRequest',
+        ['measurementProtocolSecret', 'name']
+      );
+      request.measurementProtocolSecret.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3763,15 +3754,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest()
       );
-      request.property = '';
-      const expectedHeaderRequestParams = 'property=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AcknowledgeUserDataCollectionRequest',
+        ['property']
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse()
       );
@@ -3779,11 +3767,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.acknowledgeUserDataCollection(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.acknowledgeUserDataCollection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.acknowledgeUserDataCollection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.acknowledgeUserDataCollection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes acknowledgeUserDataCollection without error using callback', async () => {
@@ -3796,15 +3787,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest()
       );
-      request.property = '';
-      const expectedHeaderRequestParams = 'property=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AcknowledgeUserDataCollectionRequest',
+        ['property']
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse()
       );
@@ -3827,11 +3815,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.acknowledgeUserDataCollection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.acknowledgeUserDataCollection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.acknowledgeUserDataCollection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes acknowledgeUserDataCollection with error', async () => {
@@ -3844,15 +3835,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest()
       );
-      request.property = '';
-      const expectedHeaderRequestParams = 'property=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AcknowledgeUserDataCollectionRequest',
+        ['property']
+      );
+      request.property = defaultValue1;
+      const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.acknowledgeUserDataCollection = stubSimpleCall(
         undefined,
@@ -3862,11 +3850,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.acknowledgeUserDataCollection(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.acknowledgeUserDataCollection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.acknowledgeUserDataCollection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.acknowledgeUserDataCollection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes acknowledgeUserDataCollection with closed client', async () => {
@@ -3879,7 +3870,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest()
       );
-      request.property = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'AcknowledgeUserDataCollectionRequest',
+        ['property']
+      );
+      request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -3900,15 +3895,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGoogleSignalsSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleSignalsSettings()
       );
@@ -3916,11 +3908,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getGoogleSignalsSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGoogleSignalsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGoogleSignalsSettings without error using callback', async () => {
@@ -3933,15 +3928,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGoogleSignalsSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleSignalsSettings()
       );
@@ -3964,11 +3956,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGoogleSignalsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGoogleSignalsSettings with error', async () => {
@@ -3981,15 +3976,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGoogleSignalsSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGoogleSignalsSettings = stubSimpleCall(
         undefined,
@@ -3999,11 +3991,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.getGoogleSignalsSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getGoogleSignalsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGoogleSignalsSettings with closed client', async () => {
@@ -4016,7 +4011,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGoogleSignalsSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4037,16 +4036,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest()
       );
-      request.googleSignalsSettings = {};
-      request.googleSignalsSettings.name = '';
-      const expectedHeaderRequestParams = 'google_signals_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.googleSignalsSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGoogleSignalsSettingsRequest',
+        ['googleSignalsSettings', 'name']
+      );
+      request.googleSignalsSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_signals_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleSignalsSettings()
       );
@@ -4054,11 +4050,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateGoogleSignalsSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGoogleSignalsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGoogleSignalsSettings without error using callback', async () => {
@@ -4071,16 +4070,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest()
       );
-      request.googleSignalsSettings = {};
-      request.googleSignalsSettings.name = '';
-      const expectedHeaderRequestParams = 'google_signals_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.googleSignalsSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGoogleSignalsSettingsRequest',
+        ['googleSignalsSettings', 'name']
+      );
+      request.googleSignalsSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_signals_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GoogleSignalsSettings()
       );
@@ -4103,11 +4099,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateGoogleSignalsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGoogleSignalsSettings with error', async () => {
@@ -4120,16 +4119,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest()
       );
-      request.googleSignalsSettings = {};
-      request.googleSignalsSettings.name = '';
-      const expectedHeaderRequestParams = 'google_signals_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.googleSignalsSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGoogleSignalsSettingsRequest',
+        ['googleSignalsSettings', 'name']
+      );
+      request.googleSignalsSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `google_signals_settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateGoogleSignalsSettings = stubSimpleCall(
         undefined,
@@ -4139,11 +4135,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.updateGoogleSignalsSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateGoogleSignalsSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateGoogleSignalsSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateGoogleSignalsSettings with closed client', async () => {
@@ -4156,8 +4155,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest()
       );
-      request.googleSignalsSettings = {};
-      request.googleSignalsSettings.name = '';
+      request.googleSignalsSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateGoogleSignalsSettingsRequest',
+        ['googleSignalsSettings', 'name']
+      );
+      request.googleSignalsSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4178,15 +4181,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateConversionEventRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversionEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ConversionEvent()
       );
@@ -4194,11 +4194,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createConversionEvent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversionEvent without error using callback', async () => {
@@ -4211,15 +4214,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateConversionEventRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversionEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ConversionEvent()
       );
@@ -4242,11 +4242,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversionEvent with error', async () => {
@@ -4259,15 +4262,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateConversionEventRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversionEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createConversionEvent = stubSimpleCall(
         undefined,
@@ -4277,11 +4277,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.createConversionEvent(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createConversionEvent with closed client', async () => {
@@ -4294,7 +4297,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateConversionEventRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateConversionEventRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4315,15 +4322,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetConversionEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ConversionEvent()
       );
@@ -4331,11 +4334,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getConversionEvent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversionEvent without error using callback', async () => {
@@ -4348,15 +4354,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetConversionEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ConversionEvent()
       );
@@ -4379,11 +4381,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversionEvent with error', async () => {
@@ -4396,26 +4401,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetConversionEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getConversionEvent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getConversionEvent(request), expectedError);
-      assert(
-        (client.innerApiCalls.getConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getConversionEvent with closed client', async () => {
@@ -4428,7 +4432,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetConversionEventRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getConversionEvent(request), expectedError);
@@ -4446,15 +4453,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteConversionEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversionEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4462,11 +4466,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteConversionEvent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversionEvent without error using callback', async () => {
@@ -4479,15 +4486,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteConversionEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversionEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4510,11 +4514,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversionEvent with error', async () => {
@@ -4527,15 +4534,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteConversionEventRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversionEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteConversionEvent = stubSimpleCall(
         undefined,
@@ -4545,11 +4549,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.deleteConversionEvent(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteConversionEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteConversionEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteConversionEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteConversionEvent with closed client', async () => {
@@ -4562,7 +4569,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteConversionEventRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteConversionEventRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4583,15 +4594,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
       );
@@ -4599,11 +4607,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDisplayVideo360AdvertiserLink(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDisplayVideo360AdvertiserLink without error using callback', async () => {
@@ -4616,15 +4627,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
       );
@@ -4647,11 +4655,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDisplayVideo360AdvertiserLink with error', async () => {
@@ -4664,15 +4675,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDisplayVideo360AdvertiserLink = stubSimpleCall(
         undefined,
@@ -4682,11 +4690,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.getDisplayVideo360AdvertiserLink(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDisplayVideo360AdvertiserLink with closed client', async () => {
@@ -4699,7 +4710,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4720,15 +4735,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
       );
@@ -4738,11 +4750,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDisplayVideo360AdvertiserLink without error using callback', async () => {
@@ -4755,15 +4770,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
       );
@@ -4786,11 +4798,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDisplayVideo360AdvertiserLink with error', async () => {
@@ -4803,15 +4818,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDisplayVideo360AdvertiserLink = stubSimpleCall(
         undefined,
@@ -4821,11 +4833,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.createDisplayVideo360AdvertiserLink(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDisplayVideo360AdvertiserLink with closed client', async () => {
@@ -4838,7 +4853,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4859,15 +4878,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4877,11 +4893,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDisplayVideo360AdvertiserLink without error using callback', async () => {
@@ -4894,15 +4913,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -4925,11 +4941,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDisplayVideo360AdvertiserLink with error', async () => {
@@ -4942,15 +4961,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDisplayVideo360AdvertiserLink = stubSimpleCall(
         undefined,
@@ -4960,11 +4976,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.deleteDisplayVideo360AdvertiserLink(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDisplayVideo360AdvertiserLink with closed client', async () => {
@@ -4977,7 +4996,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4998,17 +5021,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.displayVideo_360AdvertiserLink = {};
-      request.displayVideo_360AdvertiserLink.name = '';
-      const expectedHeaderRequestParams =
-        'display_video_360_advertiser_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.displayVideo_360AdvertiserLink ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayVideo360AdvertiserLinkRequest',
+        ['displayVideo_360AdvertiserLink', 'name']
+      );
+      request.displayVideo_360AdvertiserLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `display_video_360_advertiser_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
       );
@@ -5018,11 +5037,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDisplayVideo360AdvertiserLink without error using callback', async () => {
@@ -5035,17 +5057,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.displayVideo_360AdvertiserLink = {};
-      request.displayVideo_360AdvertiserLink.name = '';
-      const expectedHeaderRequestParams =
-        'display_video_360_advertiser_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.displayVideo_360AdvertiserLink ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayVideo360AdvertiserLinkRequest',
+        ['displayVideo_360AdvertiserLink', 'name']
+      );
+      request.displayVideo_360AdvertiserLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `display_video_360_advertiser_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
       );
@@ -5068,11 +5086,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDisplayVideo360AdvertiserLink with error', async () => {
@@ -5085,17 +5106,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.displayVideo_360AdvertiserLink = {};
-      request.displayVideo_360AdvertiserLink.name = '';
-      const expectedHeaderRequestParams =
-        'display_video_360_advertiser_link.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.displayVideo_360AdvertiserLink ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayVideo360AdvertiserLinkRequest',
+        ['displayVideo_360AdvertiserLink', 'name']
+      );
+      request.displayVideo_360AdvertiserLink.name = defaultValue1;
+      const expectedHeaderRequestParams = `display_video_360_advertiser_link.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDisplayVideo360AdvertiserLink = stubSimpleCall(
         undefined,
@@ -5105,11 +5122,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.updateDisplayVideo360AdvertiserLink(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDisplayVideo360AdvertiserLink as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDisplayVideo360AdvertiserLink with closed client', async () => {
@@ -5122,8 +5142,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDisplayVideo360AdvertiserLinkRequest()
       );
-      request.displayVideo_360AdvertiserLink = {};
-      request.displayVideo_360AdvertiserLink.name = '';
+      request.displayVideo_360AdvertiserLink ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayVideo360AdvertiserLinkRequest',
+        ['displayVideo_360AdvertiserLink', 'name']
+      );
+      request.displayVideo_360AdvertiserLink.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5144,15 +5168,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
       );
@@ -5162,14 +5183,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .getDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
@@ -5182,15 +5205,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
       );
@@ -5213,14 +5233,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .getDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDisplayVideo360AdvertiserLinkProposal with error', async () => {
@@ -5233,15 +5255,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDisplayVideo360AdvertiserLinkProposal =
         stubSimpleCall(undefined, expectedError);
@@ -5249,14 +5268,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.getDisplayVideo360AdvertiserLinkProposal(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .getDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .getDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDisplayVideo360AdvertiserLinkProposal with closed client', async () => {
@@ -5269,7 +5290,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5290,15 +5315,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkProposalRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
       );
@@ -5307,14 +5329,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const [response] =
         await client.createDisplayVideo360AdvertiserLinkProposal(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .createDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
@@ -5327,15 +5351,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkProposalRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
       );
@@ -5358,14 +5379,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .createDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDisplayVideo360AdvertiserLinkProposal with error', async () => {
@@ -5378,15 +5401,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkProposalRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDisplayVideo360AdvertiserLinkProposal =
         stubSimpleCall(undefined, expectedError);
@@ -5394,14 +5414,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.createDisplayVideo360AdvertiserLinkProposal(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .createDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .createDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDisplayVideo360AdvertiserLinkProposal with closed client', async () => {
@@ -5414,7 +5436,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDisplayVideo360AdvertiserLinkProposalRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5435,15 +5461,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5452,14 +5475,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const [response] =
         await client.deleteDisplayVideo360AdvertiserLinkProposal(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
@@ -5472,15 +5497,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -5503,14 +5525,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDisplayVideo360AdvertiserLinkProposal with error', async () => {
@@ -5523,15 +5547,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDisplayVideo360AdvertiserLinkProposal =
         stubSimpleCall(undefined, expectedError);
@@ -5539,14 +5560,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.deleteDisplayVideo360AdvertiserLinkProposal(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .deleteDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDisplayVideo360AdvertiserLinkProposal with closed client', async () => {
@@ -5559,7 +5582,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5580,15 +5607,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse()
       );
@@ -5597,14 +5621,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const [response] =
         await client.approveDisplayVideo360AdvertiserLinkProposal(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
@@ -5617,15 +5643,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalResponse()
       );
@@ -5648,14 +5671,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveDisplayVideo360AdvertiserLinkProposal with error', async () => {
@@ -5668,15 +5693,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveDisplayVideo360AdvertiserLinkProposal =
         stubSimpleCall(undefined, expectedError);
@@ -5684,14 +5706,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.approveDisplayVideo360AdvertiserLinkProposal(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .approveDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveDisplayVideo360AdvertiserLinkProposal with closed client', async () => {
@@ -5704,7 +5728,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ApproveDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ApproveDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5725,15 +5753,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
       );
@@ -5742,14 +5767,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const [response] =
         await client.cancelDisplayVideo360AdvertiserLinkProposal(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelDisplayVideo360AdvertiserLinkProposal without error using callback', async () => {
@@ -5762,15 +5789,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
       );
@@ -5793,14 +5817,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelDisplayVideo360AdvertiserLinkProposal with error', async () => {
@@ -5813,15 +5839,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelDisplayVideo360AdvertiserLinkProposal =
         stubSimpleCall(undefined, expectedError);
@@ -5829,14 +5852,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.cancelDisplayVideo360AdvertiserLinkProposal(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .cancelDisplayVideo360AdvertiserLinkProposal as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelDisplayVideo360AdvertiserLinkProposal with closed client', async () => {
@@ -5849,7 +5874,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CancelDisplayVideo360AdvertiserLinkProposalRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CancelDisplayVideo360AdvertiserLinkProposalRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5870,15 +5899,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomDimensionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomDimensionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomDimension()
       );
@@ -5886,11 +5912,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createCustomDimension(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomDimension without error using callback', async () => {
@@ -5903,15 +5932,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomDimensionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomDimensionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomDimension()
       );
@@ -5934,11 +5960,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomDimension with error', async () => {
@@ -5951,15 +5980,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomDimensionRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomDimensionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomDimension = stubSimpleCall(
         undefined,
@@ -5969,11 +5995,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.createCustomDimension(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomDimension with closed client', async () => {
@@ -5986,7 +6015,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomDimensionRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCustomDimensionRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -6007,16 +6040,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest()
       );
-      request.customDimension = {};
-      request.customDimension.name = '';
-      const expectedHeaderRequestParams = 'custom_dimension.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customDimension ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomDimensionRequest',
+        ['customDimension', 'name']
+      );
+      request.customDimension.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomDimension()
       );
@@ -6024,11 +6054,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateCustomDimension(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomDimension without error using callback', async () => {
@@ -6041,16 +6074,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest()
       );
-      request.customDimension = {};
-      request.customDimension.name = '';
-      const expectedHeaderRequestParams = 'custom_dimension.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customDimension ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomDimensionRequest',
+        ['customDimension', 'name']
+      );
+      request.customDimension.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomDimension()
       );
@@ -6073,11 +6103,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomDimension with error', async () => {
@@ -6090,16 +6123,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest()
       );
-      request.customDimension = {};
-      request.customDimension.name = '';
-      const expectedHeaderRequestParams = 'custom_dimension.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customDimension ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomDimensionRequest',
+        ['customDimension', 'name']
+      );
+      request.customDimension.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_dimension.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomDimension = stubSimpleCall(
         undefined,
@@ -6109,11 +6139,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.updateCustomDimension(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomDimension with closed client', async () => {
@@ -6126,8 +6159,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest()
       );
-      request.customDimension = {};
-      request.customDimension.name = '';
+      request.customDimension ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCustomDimensionRequest',
+        ['customDimension', 'name']
+      );
+      request.customDimension.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -6148,15 +6185,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ArchiveCustomDimensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6164,11 +6198,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.archiveCustomDimension(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.archiveCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveCustomDimension without error using callback', async () => {
@@ -6181,15 +6218,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ArchiveCustomDimensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6212,11 +6246,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.archiveCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveCustomDimension with error', async () => {
@@ -6229,15 +6266,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ArchiveCustomDimensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.archiveCustomDimension = stubSimpleCall(
         undefined,
@@ -6247,11 +6281,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.archiveCustomDimension(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.archiveCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveCustomDimension with closed client', async () => {
@@ -6264,7 +6301,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ArchiveCustomDimensionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -6285,15 +6326,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomDimensionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomDimension()
       );
@@ -6301,11 +6338,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCustomDimension(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomDimension without error using callback', async () => {
@@ -6318,15 +6358,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomDimensionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomDimension()
       );
@@ -6349,11 +6385,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomDimension with error', async () => {
@@ -6366,26 +6405,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomDimensionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomDimension = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCustomDimension(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCustomDimension as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomDimension as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomDimension as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomDimension with closed client', async () => {
@@ -6398,7 +6436,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomDimensionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomDimension(request), expectedError);
@@ -6416,15 +6457,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomMetricRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomMetric()
       );
@@ -6432,11 +6469,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createCustomMetric(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomMetric without error using callback', async () => {
@@ -6449,15 +6489,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomMetricRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomMetric()
       );
@@ -6480,11 +6516,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomMetric with error', async () => {
@@ -6497,26 +6536,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomMetricRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCustomMetric = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCustomMetric(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCustomMetric with closed client', async () => {
@@ -6529,7 +6567,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateCustomMetricRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createCustomMetric(request), expectedError);
@@ -6547,16 +6588,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomMetricRequest()
       );
-      request.customMetric = {};
-      request.customMetric.name = '';
-      const expectedHeaderRequestParams = 'custom_metric.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customMetric ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
+        'customMetric',
+        'name',
+      ]);
+      request.customMetric.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomMetric()
       );
@@ -6564,11 +6602,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateCustomMetric(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomMetric without error using callback', async () => {
@@ -6581,16 +6622,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomMetricRequest()
       );
-      request.customMetric = {};
-      request.customMetric.name = '';
-      const expectedHeaderRequestParams = 'custom_metric.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customMetric ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
+        'customMetric',
+        'name',
+      ]);
+      request.customMetric.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomMetric()
       );
@@ -6613,11 +6651,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomMetric with error', async () => {
@@ -6630,27 +6671,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomMetricRequest()
       );
-      request.customMetric = {};
-      request.customMetric.name = '';
-      const expectedHeaderRequestParams = 'custom_metric.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.customMetric ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
+        'customMetric',
+        'name',
+      ]);
+      request.customMetric.name = defaultValue1;
+      const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCustomMetric = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCustomMetric(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCustomMetric with closed client', async () => {
@@ -6663,8 +6704,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateCustomMetricRequest()
       );
-      request.customMetric = {};
-      request.customMetric.name = '';
+      request.customMetric ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
+        'customMetric',
+        'name',
+      ]);
+      request.customMetric.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateCustomMetric(request), expectedError);
@@ -6682,15 +6727,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6698,11 +6739,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.archiveCustomMetric(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.archiveCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveCustomMetric without error using callback', async () => {
@@ -6715,15 +6759,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -6746,11 +6786,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.archiveCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveCustomMetric with error', async () => {
@@ -6763,26 +6806,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.archiveCustomMetric = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.archiveCustomMetric(request), expectedError);
-      assert(
-        (client.innerApiCalls.archiveCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveCustomMetric with closed client', async () => {
@@ -6795,7 +6837,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.archiveCustomMetric(request), expectedError);
@@ -6813,26 +6858,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomMetric()
       );
       client.innerApiCalls.getCustomMetric = stubSimpleCall(expectedResponse);
       const [response] = await client.getCustomMetric(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomMetric without error using callback', async () => {
@@ -6845,15 +6889,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CustomMetric()
       );
@@ -6876,11 +6916,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomMetric with error', async () => {
@@ -6893,26 +6936,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomMetricRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCustomMetric = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCustomMetric(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCustomMetric as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCustomMetric as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCustomMetric as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCustomMetric with closed client', async () => {
@@ -6925,7 +6967,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetCustomMetricRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCustomMetric(request), expectedError);
@@ -6943,15 +6988,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataRetentionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
       );
@@ -6959,11 +7001,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDataRetentionSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataRetentionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataRetentionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataRetentionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataRetentionSettings without error using callback', async () => {
@@ -6976,15 +7021,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataRetentionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
       );
@@ -7007,11 +7049,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataRetentionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataRetentionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataRetentionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataRetentionSettings with error', async () => {
@@ -7024,15 +7069,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataRetentionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataRetentionSettings = stubSimpleCall(
         undefined,
@@ -7042,11 +7084,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.getDataRetentionSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getDataRetentionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataRetentionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataRetentionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataRetentionSettings with closed client', async () => {
@@ -7059,7 +7104,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetDataRetentionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -7080,16 +7129,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest()
       );
-      request.dataRetentionSettings = {};
-      request.dataRetentionSettings.name = '';
-      const expectedHeaderRequestParams = 'data_retention_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataRetentionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDataRetentionSettingsRequest',
+        ['dataRetentionSettings', 'name']
+      );
+      request.dataRetentionSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
       );
@@ -7097,11 +7143,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateDataRetentionSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataRetentionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataRetentionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataRetentionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataRetentionSettings without error using callback', async () => {
@@ -7114,16 +7163,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest()
       );
-      request.dataRetentionSettings = {};
-      request.dataRetentionSettings.name = '';
-      const expectedHeaderRequestParams = 'data_retention_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataRetentionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDataRetentionSettingsRequest',
+        ['dataRetentionSettings', 'name']
+      );
+      request.dataRetentionSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataRetentionSettings()
       );
@@ -7146,11 +7192,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataRetentionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataRetentionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataRetentionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataRetentionSettings with error', async () => {
@@ -7163,16 +7212,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest()
       );
-      request.dataRetentionSettings = {};
-      request.dataRetentionSettings.name = '';
-      const expectedHeaderRequestParams = 'data_retention_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataRetentionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDataRetentionSettingsRequest',
+        ['dataRetentionSettings', 'name']
+      );
+      request.dataRetentionSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_retention_settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataRetentionSettings = stubSimpleCall(
         undefined,
@@ -7182,11 +7228,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.updateDataRetentionSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateDataRetentionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataRetentionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataRetentionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataRetentionSettings with closed client', async () => {
@@ -7199,8 +7248,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest()
       );
-      request.dataRetentionSettings = {};
-      request.dataRetentionSettings.name = '';
+      request.dataRetentionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDataRetentionSettingsRequest',
+        ['dataRetentionSettings', 'name']
+      );
+      request.dataRetentionSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -7221,26 +7274,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDataStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataStream()
       );
       client.innerApiCalls.createDataStream = stubSimpleCall(expectedResponse);
       const [response] = await client.createDataStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataStream without error using callback', async () => {
@@ -7253,15 +7305,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDataStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataStream()
       );
@@ -7284,11 +7332,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataStream with error', async () => {
@@ -7301,26 +7352,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDataStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDataStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createDataStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.createDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDataStream with closed client', async () => {
@@ -7333,7 +7383,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateDataStreamRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createDataStream(request), expectedError);
@@ -7351,26 +7404,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDataStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteDataStream = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteDataStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataStream without error using callback', async () => {
@@ -7383,15 +7435,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDataStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -7414,11 +7462,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataStream with error', async () => {
@@ -7431,26 +7482,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDataStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDataStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteDataStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDataStream with closed client', async () => {
@@ -7463,7 +7513,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DeleteDataStreamRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteDataStream(request), expectedError);
@@ -7481,27 +7534,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataStreamRequest()
       );
-      request.dataStream = {};
-      request.dataStream.name = '';
-      const expectedHeaderRequestParams = 'data_stream.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataStream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
+        'dataStream',
+        'name',
+      ]);
+      request.dataStream.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataStream()
       );
       client.innerApiCalls.updateDataStream = stubSimpleCall(expectedResponse);
       const [response] = await client.updateDataStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataStream without error using callback', async () => {
@@ -7514,16 +7567,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataStreamRequest()
       );
-      request.dataStream = {};
-      request.dataStream.name = '';
-      const expectedHeaderRequestParams = 'data_stream.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataStream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
+        'dataStream',
+        'name',
+      ]);
+      request.dataStream.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataStream()
       );
@@ -7546,11 +7596,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataStream with error', async () => {
@@ -7563,27 +7616,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataStreamRequest()
       );
-      request.dataStream = {};
-      request.dataStream.name = '';
-      const expectedHeaderRequestParams = 'data_stream.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dataStream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
+        'dataStream',
+        'name',
+      ]);
+      request.dataStream.name = defaultValue1;
+      const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDataStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDataStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDataStream with closed client', async () => {
@@ -7596,8 +7649,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateDataStreamRequest()
       );
-      request.dataStream = {};
-      request.dataStream.name = '';
+      request.dataStream ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
+        'dataStream',
+        'name',
+      ]);
+      request.dataStream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDataStream(request), expectedError);
@@ -7615,26 +7672,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataStream()
       );
       client.innerApiCalls.getDataStream = stubSimpleCall(expectedResponse);
       const [response] = await client.getDataStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataStream without error using callback', async () => {
@@ -7647,15 +7703,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.DataStream()
       );
@@ -7678,11 +7730,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataStream with error', async () => {
@@ -7695,26 +7750,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDataStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDataStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDataStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDataStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDataStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDataStream with closed client', async () => {
@@ -7727,7 +7781,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetDataStreamRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDataStream(request), expectedError);
@@ -7745,26 +7802,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAudienceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAudienceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Audience()
       );
       client.innerApiCalls.getAudience = stubSimpleCall(expectedResponse);
       const [response] = await client.getAudience(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAudience without error using callback', async () => {
@@ -7777,15 +7831,9 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAudienceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAudienceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Audience()
       );
@@ -7808,11 +7856,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAudience with error', async () => {
@@ -7825,26 +7876,23 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAudienceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetAudienceRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAudience = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getAudience(request), expectedError);
-      assert(
-        (client.innerApiCalls.getAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAudience with closed client', async () => {
@@ -7857,7 +7905,8 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAudienceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetAudienceRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getAudience(request), expectedError);
@@ -7875,26 +7924,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateAudienceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAudienceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Audience()
       );
       client.innerApiCalls.createAudience = stubSimpleCall(expectedResponse);
       const [response] = await client.createAudience(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAudience without error using callback', async () => {
@@ -7907,15 +7955,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateAudienceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAudienceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Audience()
       );
@@ -7938,11 +7982,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAudience with error', async () => {
@@ -7955,26 +8002,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateAudienceRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateAudienceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createAudience = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createAudience(request), expectedError);
-      assert(
-        (client.innerApiCalls.createAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createAudience with closed client', async () => {
@@ -7987,7 +8033,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.CreateAudienceRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateAudienceRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createAudience(request), expectedError);
@@ -8005,27 +8054,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAudienceRequest()
       );
-      request.audience = {};
-      request.audience.name = '';
-      const expectedHeaderRequestParams = 'audience.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.audience ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAudienceRequest', [
+        'audience',
+        'name',
+      ]);
+      request.audience.name = defaultValue1;
+      const expectedHeaderRequestParams = `audience.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Audience()
       );
       client.innerApiCalls.updateAudience = stubSimpleCall(expectedResponse);
       const [response] = await client.updateAudience(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAudience without error using callback', async () => {
@@ -8038,16 +8087,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAudienceRequest()
       );
-      request.audience = {};
-      request.audience.name = '';
-      const expectedHeaderRequestParams = 'audience.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.audience ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAudienceRequest', [
+        'audience',
+        'name',
+      ]);
+      request.audience.name = defaultValue1;
+      const expectedHeaderRequestParams = `audience.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.Audience()
       );
@@ -8070,11 +8116,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAudience with error', async () => {
@@ -8087,27 +8136,27 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAudienceRequest()
       );
-      request.audience = {};
-      request.audience.name = '';
-      const expectedHeaderRequestParams = 'audience.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.audience ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAudienceRequest', [
+        'audience',
+        'name',
+      ]);
+      request.audience.name = defaultValue1;
+      const expectedHeaderRequestParams = `audience.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAudience = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAudience(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAudience with closed client', async () => {
@@ -8120,8 +8169,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAudienceRequest()
       );
-      request.audience = {};
-      request.audience.name = '';
+      request.audience ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateAudienceRequest', [
+        'audience',
+        'name',
+      ]);
+      request.audience.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAudience(request), expectedError);
@@ -8139,26 +8192,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveAudienceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ArchiveAudienceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.archiveAudience = stubSimpleCall(expectedResponse);
       const [response] = await client.archiveAudience(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.archiveAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveAudience without error using callback', async () => {
@@ -8171,15 +8223,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveAudienceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ArchiveAudienceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -8202,11 +8250,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.archiveAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveAudience with error', async () => {
@@ -8219,26 +8270,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveAudienceRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ArchiveAudienceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.archiveAudience = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.archiveAudience(request), expectedError);
-      assert(
-        (client.innerApiCalls.archiveAudience as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.archiveAudience as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.archiveAudience as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes archiveAudience with closed client', async () => {
@@ -8251,7 +8301,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ArchiveAudienceRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('ArchiveAudienceRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.archiveAudience(request), expectedError);
@@ -8269,15 +8322,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAttributionSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAttributionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AttributionSettings()
       );
@@ -8285,11 +8335,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getAttributionSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAttributionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAttributionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAttributionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAttributionSettings without error using callback', async () => {
@@ -8302,15 +8355,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAttributionSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAttributionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AttributionSettings()
       );
@@ -8333,11 +8383,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getAttributionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAttributionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAttributionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAttributionSettings with error', async () => {
@@ -8350,15 +8403,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAttributionSettingsRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAttributionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getAttributionSettings = stubSimpleCall(
         undefined,
@@ -8368,11 +8418,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.getAttributionSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getAttributionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getAttributionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getAttributionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getAttributionSettings with closed client', async () => {
@@ -8385,7 +8438,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.GetAttributionSettingsRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetAttributionSettingsRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -8406,16 +8463,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest()
       );
-      request.attributionSettings = {};
-      request.attributionSettings.name = '';
-      const expectedHeaderRequestParams = 'attribution_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.attributionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAttributionSettingsRequest',
+        ['attributionSettings', 'name']
+      );
+      request.attributionSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `attribution_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AttributionSettings()
       );
@@ -8423,11 +8477,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateAttributionSettings(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAttributionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAttributionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAttributionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAttributionSettings without error using callback', async () => {
@@ -8440,16 +8497,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest()
       );
-      request.attributionSettings = {};
-      request.attributionSettings.name = '';
-      const expectedHeaderRequestParams = 'attribution_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.attributionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAttributionSettingsRequest',
+        ['attributionSettings', 'name']
+      );
+      request.attributionSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `attribution_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AttributionSettings()
       );
@@ -8472,11 +8526,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAttributionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAttributionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAttributionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAttributionSettings with error', async () => {
@@ -8489,16 +8546,13 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest()
       );
-      request.attributionSettings = {};
-      request.attributionSettings.name = '';
-      const expectedHeaderRequestParams = 'attribution_settings.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.attributionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAttributionSettingsRequest',
+        ['attributionSettings', 'name']
+      );
+      request.attributionSettings.name = defaultValue1;
+      const expectedHeaderRequestParams = `attribution_settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAttributionSettings = stubSimpleCall(
         undefined,
@@ -8508,11 +8562,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.updateAttributionSettings(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateAttributionSettings as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAttributionSettings as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAttributionSettings as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAttributionSettings with closed client', async () => {
@@ -8525,8 +8582,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest()
       );
-      request.attributionSettings = {};
-      request.attributionSettings.name = '';
+      request.attributionSettings ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAttributionSettingsRequest',
+        ['attributionSettings', 'name']
+      );
+      request.attributionSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -8547,26 +8608,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.RunAccessReportRequest()
       );
-      request.entity = '';
-      const expectedHeaderRequestParams = 'entity=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunAccessReportRequest', [
+        'entity',
+      ]);
+      request.entity = defaultValue1;
+      const expectedHeaderRequestParams = `entity=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.RunAccessReportResponse()
       );
       client.innerApiCalls.runAccessReport = stubSimpleCall(expectedResponse);
       const [response] = await client.runAccessReport(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runAccessReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runAccessReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runAccessReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runAccessReport without error using callback', async () => {
@@ -8579,15 +8639,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.RunAccessReportRequest()
       );
-      request.entity = '';
-      const expectedHeaderRequestParams = 'entity=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunAccessReportRequest', [
+        'entity',
+      ]);
+      request.entity = defaultValue1;
+      const expectedHeaderRequestParams = `entity=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.RunAccessReportResponse()
       );
@@ -8610,11 +8666,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runAccessReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runAccessReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runAccessReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runAccessReport with error', async () => {
@@ -8627,26 +8686,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.RunAccessReportRequest()
       );
-      request.entity = '';
-      const expectedHeaderRequestParams = 'entity=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunAccessReportRequest', [
+        'entity',
+      ]);
+      request.entity = defaultValue1;
+      const expectedHeaderRequestParams = `entity=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runAccessReport = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.runAccessReport(request), expectedError);
-      assert(
-        (client.innerApiCalls.runAccessReport as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runAccessReport as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runAccessReport as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runAccessReport with closed client', async () => {
@@ -8659,7 +8717,10 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.RunAccessReportRequest()
       );
-      request.entity = '';
+      const defaultValue1 = getTypeDefaultValue('RunAccessReportRequest', [
+        'entity',
+      ]);
+      request.entity = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.runAccessReport(request), expectedError);
@@ -8677,7 +8738,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Account()
@@ -8692,11 +8752,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listAccounts = stubSimpleCall(expectedResponse);
       const [response] = await client.listAccounts(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAccounts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listAccounts without error using callback', async () => {
@@ -8709,7 +8764,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Account()
@@ -8740,11 +8794,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAccounts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listAccounts with error', async () => {
@@ -8757,18 +8806,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccounts = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAccounts(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAccounts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listAccountsStream without error', async () => {
@@ -8935,7 +8978,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AccountSummary()
@@ -8951,11 +8993,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listAccountSummaries(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAccountSummaries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listAccountSummaries without error using callback', async () => {
@@ -8968,7 +9005,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AccountSummary()
@@ -9001,11 +9037,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAccountSummaries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listAccountSummaries with error', async () => {
@@ -9018,18 +9049,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAccountSummariesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listAccountSummaries = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAccountSummaries(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAccountSummaries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listAccountSummariesStream without error', async () => {
@@ -9198,7 +9223,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListPropertiesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Property()
@@ -9213,11 +9237,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listProperties = stubSimpleCall(expectedResponse);
       const [response] = await client.listProperties(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProperties as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listProperties without error using callback', async () => {
@@ -9230,7 +9249,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListPropertiesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Property()
@@ -9261,11 +9279,6 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProperties as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes listProperties with error', async () => {
@@ -9278,18 +9291,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListPropertiesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.listProperties = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listProperties(request), expectedError);
-      assert(
-        (client.innerApiCalls.listProperties as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listPropertiesStream without error', async () => {
@@ -9454,15 +9461,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.UserLink()
@@ -9477,11 +9480,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listUserLinks = stubSimpleCall(expectedResponse);
       const [response] = await client.listUserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUserLinks without error using callback', async () => {
@@ -9494,15 +9500,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.UserLink()
@@ -9533,11 +9535,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUserLinks with error', async () => {
@@ -9550,26 +9555,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listUserLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listUserLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.listUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listUserLinksStream without error', async () => {
@@ -9582,8 +9586,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.UserLink()
@@ -9620,11 +9627,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listUserLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listUserLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listUserLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9638,8 +9646,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUserLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9665,11 +9676,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listUserLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listUserLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listUserLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9683,8 +9695,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.UserLink()
@@ -9710,11 +9725,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listUserLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listUserLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9728,8 +9744,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listUserLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -9746,11 +9765,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listUserLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listUserLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -9766,15 +9786,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AuditUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AuditUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AuditUserLink()
@@ -9789,11 +9805,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.auditUserLinks = stubSimpleCall(expectedResponse);
       const [response] = await client.auditUserLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.auditUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.auditUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.auditUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes auditUserLinks without error using callback', async () => {
@@ -9806,15 +9825,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AuditUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AuditUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AuditUserLink()
@@ -9847,11 +9862,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.auditUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.auditUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.auditUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes auditUserLinks with error', async () => {
@@ -9864,26 +9882,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AuditUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AuditUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.auditUserLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.auditUserLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.auditUserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.auditUserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.auditUserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes auditUserLinksStream without error', async () => {
@@ -9896,8 +9913,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AuditUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('AuditUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AuditUserLink()
@@ -9935,11 +9955,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.auditUserLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.auditUserLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.auditUserLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9953,8 +9974,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AuditUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('AuditUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.auditUserLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -9981,11 +10005,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.auditUserLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.auditUserLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.auditUserLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -9999,8 +10024,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AuditUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('AuditUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.AuditUserLink()
@@ -10027,11 +10055,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.auditUserLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.auditUserLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10045,8 +10074,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.AuditUserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('AuditUserLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.auditUserLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10064,11 +10096,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.auditUserLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.auditUserLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -10084,15 +10117,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.FirebaseLink()
@@ -10107,11 +10136,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listFirebaseLinks = stubSimpleCall(expectedResponse);
       const [response] = await client.listFirebaseLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFirebaseLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFirebaseLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFirebaseLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFirebaseLinks without error using callback', async () => {
@@ -10124,15 +10156,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.FirebaseLink()
@@ -10165,11 +10193,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listFirebaseLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFirebaseLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFirebaseLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFirebaseLinks with error', async () => {
@@ -10182,26 +10213,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listFirebaseLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listFirebaseLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.listFirebaseLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listFirebaseLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listFirebaseLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listFirebaseLinksStream without error', async () => {
@@ -10214,8 +10244,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.FirebaseLink()
@@ -10253,11 +10286,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listFirebaseLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFirebaseLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10271,8 +10305,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFirebaseLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10299,11 +10336,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listFirebaseLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFirebaseLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFirebaseLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10317,8 +10355,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.FirebaseLink()
@@ -10345,11 +10386,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10363,8 +10405,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListFirebaseLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listFirebaseLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10382,11 +10427,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listFirebaseLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -10402,15 +10448,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
@@ -10426,11 +10468,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listGoogleAdsLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGoogleAdsLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGoogleAdsLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoogleAdsLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGoogleAdsLinks without error using callback', async () => {
@@ -10443,15 +10488,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
@@ -10484,11 +10525,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listGoogleAdsLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGoogleAdsLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoogleAdsLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGoogleAdsLinks with error', async () => {
@@ -10501,26 +10545,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listGoogleAdsLinks = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listGoogleAdsLinks(request), expectedError);
-      assert(
-        (client.innerApiCalls.listGoogleAdsLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listGoogleAdsLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listGoogleAdsLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listGoogleAdsLinksStream without error', async () => {
@@ -10533,8 +10576,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
@@ -10572,11 +10618,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGoogleAdsLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10590,8 +10637,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGoogleAdsLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10618,11 +10668,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listGoogleAdsLinks, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGoogleAdsLinks.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10636,8 +10687,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.GoogleAdsLink()
@@ -10664,11 +10718,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10682,8 +10737,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListGoogleAdsLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listGoogleAdsLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -10701,11 +10759,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listGoogleAdsLinks.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -10721,15 +10780,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMeasurementProtocolSecretsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
@@ -10745,11 +10801,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listMeasurementProtocolSecrets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMeasurementProtocolSecrets without error using callback', async () => {
@@ -10762,15 +10821,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMeasurementProtocolSecretsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
@@ -10803,11 +10859,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMeasurementProtocolSecrets with error', async () => {
@@ -10820,15 +10879,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMeasurementProtocolSecretsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listMeasurementProtocolSecrets = stubSimpleCall(
         undefined,
@@ -10838,11 +10894,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.listMeasurementProtocolSecrets(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listMeasurementProtocolSecrets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listMeasurementProtocolSecretsStream without error', async () => {
@@ -10855,8 +10914,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMeasurementProtocolSecretsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
@@ -10902,12 +10965,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMeasurementProtocolSecrets
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10921,8 +10987,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMeasurementProtocolSecretsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMeasurementProtocolSecrets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -10957,12 +11027,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMeasurementProtocolSecrets
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -10976,8 +11049,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMeasurementProtocolSecretsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.MeasurementProtocolSecret()
@@ -11005,12 +11082,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMeasurementProtocolSecrets
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11024,8 +11104,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListMeasurementProtocolSecretsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listMeasurementProtocolSecrets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11044,12 +11128,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listMeasurementProtocolSecrets
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -11065,15 +11152,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SearchChangeHistoryEventsRequest',
+        ['account']
+      );
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
@@ -11089,11 +11173,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.searchChangeHistoryEvents(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchChangeHistoryEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchChangeHistoryEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchChangeHistoryEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchChangeHistoryEvents without error using callback', async () => {
@@ -11106,15 +11193,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SearchChangeHistoryEventsRequest',
+        ['account']
+      );
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
@@ -11147,11 +11231,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchChangeHistoryEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchChangeHistoryEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchChangeHistoryEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchChangeHistoryEvents with error', async () => {
@@ -11164,15 +11251,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SearchChangeHistoryEventsRequest',
+        ['account']
+      );
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.searchChangeHistoryEvents = stubSimpleCall(
         undefined,
@@ -11182,11 +11266,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.searchChangeHistoryEvents(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.searchChangeHistoryEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.searchChangeHistoryEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.searchChangeHistoryEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes searchChangeHistoryEventsStream without error', async () => {
@@ -11199,8 +11286,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue(
+        'SearchChangeHistoryEventsRequest',
+        ['account']
+      );
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
@@ -11243,12 +11334,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.searchChangeHistoryEvents, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.searchChangeHistoryEvents
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11262,8 +11356,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue(
+        'SearchChangeHistoryEventsRequest',
+        ['account']
+      );
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchChangeHistoryEvents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11295,12 +11393,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.searchChangeHistoryEvents, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.searchChangeHistoryEvents
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11314,8 +11415,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue(
+        'SearchChangeHistoryEventsRequest',
+        ['account']
+      );
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ChangeHistoryEvent()
@@ -11343,12 +11448,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.searchChangeHistoryEvents
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11362,8 +11470,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest()
       );
-      request.account = '';
-      const expectedHeaderRequestParams = 'account=';
+      const defaultValue1 = getTypeDefaultValue(
+        'SearchChangeHistoryEventsRequest',
+        ['account']
+      );
+      request.account = defaultValue1;
+      const expectedHeaderRequestParams = `account=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.searchChangeHistoryEvents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11382,12 +11494,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.searchChangeHistoryEvents
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -11403,15 +11518,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListConversionEventsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ConversionEvent()
@@ -11427,11 +11538,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listConversionEvents(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConversionEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversionEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversionEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversionEvents without error using callback', async () => {
@@ -11444,15 +11558,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListConversionEventsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ConversionEvent()
@@ -11485,11 +11595,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listConversionEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversionEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversionEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversionEvents with error', async () => {
@@ -11502,26 +11615,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListConversionEventsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listConversionEvents = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listConversionEvents(request), expectedError);
-      assert(
-        (client.innerApiCalls.listConversionEvents as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listConversionEvents as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listConversionEvents as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listConversionEventsStream without error', async () => {
@@ -11534,8 +11646,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListConversionEventsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ConversionEvent()
@@ -11573,11 +11688,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConversionEvents, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversionEvents.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversionEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11591,8 +11707,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListConversionEventsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionEvents.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11619,11 +11738,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listConversionEvents, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversionEvents.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversionEvents.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11637,8 +11757,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListConversionEventsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.ConversionEvent()
@@ -11665,11 +11788,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversionEvents.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversionEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11683,8 +11807,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListConversionEventsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listConversionEvents.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -11702,11 +11829,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listConversionEvents.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listConversionEvents.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -11722,15 +11850,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
@@ -11748,11 +11873,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         request
       );
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDisplayVideo360AdvertiserLinks without error using callback', async () => {
@@ -11765,15 +11893,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
@@ -11806,11 +11931,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDisplayVideo360AdvertiserLinks with error', async () => {
@@ -11823,15 +11951,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDisplayVideo360AdvertiserLinks = stubSimpleCall(
         undefined,
@@ -11841,11 +11966,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.listDisplayVideo360AdvertiserLinks(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDisplayVideo360AdvertiserLinks as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDisplayVideo360AdvertiserLinksStream without error', async () => {
@@ -11858,8 +11986,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
@@ -11905,12 +12037,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinks
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11924,8 +12059,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDisplayVideo360AdvertiserLinks.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -11960,12 +12099,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinks
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -11979,8 +12121,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink()
@@ -12008,12 +12154,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinks
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12027,8 +12176,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinksRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinksRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDisplayVideo360AdvertiserLinks.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12047,12 +12200,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinks
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -12068,15 +12224,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinkProposalsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
@@ -12093,14 +12246,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const [response] =
         await client.listDisplayVideo360AdvertiserLinkProposals(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .listDisplayVideo360AdvertiserLinkProposals as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDisplayVideo360AdvertiserLinkProposals without error using callback', async () => {
@@ -12113,15 +12268,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinkProposalsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
@@ -12154,14 +12306,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (
-          client.innerApiCalls
-            .listDisplayVideo360AdvertiserLinkProposals as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDisplayVideo360AdvertiserLinkProposals with error', async () => {
@@ -12174,15 +12328,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinkProposalsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDisplayVideo360AdvertiserLinkProposals =
         stubSimpleCall(undefined, expectedError);
@@ -12190,14 +12341,16 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         client.listDisplayVideo360AdvertiserLinkProposals(request),
         expectedError
       );
-      assert(
-        (
-          client.innerApiCalls
-            .listDisplayVideo360AdvertiserLinkProposals as SinonStub
-        )
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls
+          .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls
+          .listDisplayVideo360AdvertiserLinkProposals as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDisplayVideo360AdvertiserLinkProposalsStream without error', async () => {
@@ -12210,8 +12363,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinkProposalsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
@@ -12258,12 +12415,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12277,8 +12437,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinkProposalsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12314,12 +12478,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
             request
           )
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12333,8 +12500,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinkProposalsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLinkProposal()
@@ -12363,12 +12534,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12382,8 +12556,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDisplayVideo360AdvertiserLinkProposalsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDisplayVideo360AdvertiserLinkProposalsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12403,12 +12581,15 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDisplayVideo360AdvertiserLinkProposals
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -12424,15 +12605,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomDimensionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomDimension()
@@ -12448,11 +12625,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCustomDimensions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomDimensions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomDimensions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomDimensions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomDimensions without error using callback', async () => {
@@ -12465,15 +12645,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomDimensionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomDimension()
@@ -12506,11 +12682,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomDimensions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomDimensions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomDimensions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomDimensions with error', async () => {
@@ -12523,26 +12702,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomDimensionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomDimensions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCustomDimensions(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCustomDimensions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomDimensions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomDimensions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomDimensionsStream without error', async () => {
@@ -12555,8 +12733,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomDimensionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomDimension()
@@ -12594,11 +12775,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomDimensions, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomDimensions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomDimensions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12612,8 +12794,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomDimensionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomDimensions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12640,11 +12825,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomDimensions, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomDimensions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomDimensions.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12658,8 +12844,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomDimensionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomDimension()
@@ -12686,11 +12875,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12704,8 +12894,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomDimensionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomDimensions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -12723,11 +12916,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomDimensions.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -12743,15 +12937,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomMetric()
@@ -12766,11 +12956,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listCustomMetrics = stubSimpleCall(expectedResponse);
       const [response] = await client.listCustomMetrics(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomMetrics as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomMetrics without error using callback', async () => {
@@ -12783,15 +12976,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomMetric()
@@ -12824,11 +13013,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCustomMetrics as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomMetrics with error', async () => {
@@ -12841,26 +13033,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCustomMetrics = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCustomMetrics(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCustomMetrics as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCustomMetrics as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCustomMetrics as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCustomMetricsStream without error', async () => {
@@ -12873,8 +13064,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomMetric()
@@ -12912,11 +13106,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomMetrics, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomMetrics.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomMetrics.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12930,8 +13125,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomMetrics.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -12958,11 +13156,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCustomMetrics, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomMetrics.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomMetrics.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -12976,8 +13175,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.CustomMetric()
@@ -13004,11 +13206,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -13022,8 +13225,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListCustomMetricsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCustomMetrics.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13041,11 +13247,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCustomMetrics.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -13061,15 +13268,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDataStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DataStream()
@@ -13084,11 +13287,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listDataStreams = stubSimpleCall(expectedResponse);
       const [response] = await client.listDataStreams(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataStreams without error using callback', async () => {
@@ -13101,15 +13307,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDataStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DataStream()
@@ -13140,11 +13342,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDataStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataStreams with error', async () => {
@@ -13157,26 +13362,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDataStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDataStreams = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listDataStreams(request), expectedError);
-      assert(
-        (client.innerApiCalls.listDataStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDataStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDataStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDataStreamsStream without error', async () => {
@@ -13189,8 +13393,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDataStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DataStream()
@@ -13228,11 +13435,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataStreams, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataStreams.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataStreams.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -13246,8 +13454,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDataStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataStreams.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13274,11 +13485,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDataStreams, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataStreams.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataStreams.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -13292,8 +13504,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDataStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.DataStream()
@@ -13319,11 +13534,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataStreams.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataStreams.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -13337,8 +13553,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListDataStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDataStreams.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13356,11 +13575,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listDataStreams.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listDataStreams.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -13376,15 +13596,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAudiencesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAudiencesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Audience()
@@ -13399,11 +13615,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       client.innerApiCalls.listAudiences = stubSimpleCall(expectedResponse);
       const [response] = await client.listAudiences(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAudiences as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAudiences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAudiences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAudiences without error using callback', async () => {
@@ -13416,15 +13635,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAudiencesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAudiencesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Audience()
@@ -13455,11 +13670,14 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAudiences as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAudiences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAudiences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAudiences with error', async () => {
@@ -13472,26 +13690,25 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAudiencesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListAudiencesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listAudiences = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listAudiences(request), expectedError);
-      assert(
-        (client.innerApiCalls.listAudiences as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listAudiences as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listAudiences as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listAudiencesStream without error', async () => {
@@ -13504,8 +13721,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAudiencesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAudiencesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Audience()
@@ -13542,11 +13762,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAudiences, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAudiences.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAudiences.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -13560,8 +13781,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAudiencesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAudiencesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAudiences.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -13587,11 +13811,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listAudiences, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAudiences.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAudiences.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -13605,8 +13830,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAudiencesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAudiencesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.analytics.admin.v1alpha.Audience()
@@ -13632,11 +13860,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAudiences.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAudiences.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -13650,8 +13879,11 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1alpha.ListAudiencesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListAudiencesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listAudiences.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -13668,11 +13900,12 @@ describe('v1alpha.AnalyticsAdminServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listAudiences.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listAudiences.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
