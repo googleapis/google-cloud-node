@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -252,28 +267,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
       client.innerApiCalls.getBuild = stubSimpleCall(expectedResponse);
       const [response] = await client.getBuild(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBuild without error using callback', async () => {
@@ -285,17 +301,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -318,11 +332,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBuild with error', async () => {
@@ -334,25 +351,26 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuild = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.getBuild(request), expectedError);
-      assert(
-        (client.innerApiCalls.getBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBuild with closed client', async () => {
@@ -364,9 +382,14 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBuild(request), expectedError);
@@ -383,28 +406,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
       client.innerApiCalls.cancelBuild = stubSimpleCall(expectedResponse);
       const [response] = await client.cancelBuild(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelBuild without error using callback', async () => {
@@ -416,17 +440,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.Build()
       );
@@ -449,11 +471,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.cancelBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelBuild with error', async () => {
@@ -465,28 +490,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.cancelBuild = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.cancelBuild(request), expectedError);
-      assert(
-        (client.innerApiCalls.cancelBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.cancelBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.cancelBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes cancelBuild with closed client', async () => {
@@ -498,9 +524,14 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.cancelBuild(request), expectedError);
@@ -517,16 +548,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -534,11 +564,14 @@ describe('v1.CloudBuildClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createBuildTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBuildTrigger without error using callback', async () => {
@@ -550,16 +583,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -582,11 +614,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBuildTrigger with error', async () => {
@@ -598,27 +633,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuildTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createBuildTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.createBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBuildTrigger with closed client', async () => {
@@ -630,8 +667,14 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createBuildTrigger(request), expectedError);
@@ -648,28 +691,33 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
       client.innerApiCalls.getBuildTrigger = stubSimpleCall(expectedResponse);
       const [response] = await client.getBuildTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBuildTrigger without error using callback', async () => {
@@ -681,17 +729,19 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -714,11 +764,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBuildTrigger with error', async () => {
@@ -730,28 +783,33 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getBuildTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getBuildTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.getBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getBuildTrigger with closed client', async () => {
@@ -763,9 +821,18 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getBuildTrigger(request), expectedError);
@@ -782,17 +849,19 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -800,11 +869,14 @@ describe('v1.CloudBuildClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteBuildTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteBuildTrigger without error using callback', async () => {
@@ -816,17 +888,19 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -849,11 +923,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteBuildTrigger with error', async () => {
@@ -865,28 +942,33 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteBuildTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteBuildTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteBuildTrigger with closed client', async () => {
@@ -898,9 +980,18 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteBuildTrigger(request), expectedError);
@@ -917,19 +1008,21 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.trigger = {};
-      request.trigger.resourceName = '';
-      const expectedHeaderRequestParams =
-        'project_id=&trigger_id=&trigger.resource_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      request.trigger ??= {};
+      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'trigger',
+        'resourceName',
+      ]);
+      request.trigger.resourceName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -937,11 +1030,14 @@ describe('v1.CloudBuildClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateBuildTrigger(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateBuildTrigger without error using callback', async () => {
@@ -953,19 +1049,21 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.trigger = {};
-      request.trigger.resourceName = '';
-      const expectedHeaderRequestParams =
-        'project_id=&trigger_id=&trigger.resource_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      request.trigger ??= {};
+      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'trigger',
+        'resourceName',
+      ]);
+      request.trigger.resourceName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.BuildTrigger()
       );
@@ -988,11 +1086,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateBuildTrigger with error', async () => {
@@ -1004,30 +1105,35 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.trigger = {};
-      request.trigger.resourceName = '';
-      const expectedHeaderRequestParams =
-        'project_id=&trigger_id=&trigger.resource_name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      request.trigger ??= {};
+      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'trigger',
+        'resourceName',
+      ]);
+      request.trigger.resourceName = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateBuildTrigger = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateBuildTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateBuildTrigger with closed client', async () => {
@@ -1039,10 +1145,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.trigger = {};
-      request.trigger.resourceName = '';
+      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      request.trigger ??= {};
+      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
+        'trigger',
+        'resourceName',
+      ]);
+      request.trigger.resourceName = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateBuildTrigger(request), expectedError);
@@ -1059,17 +1175,22 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
-      request.projectId = '';
-      request.trigger = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['trigger']
+      );
+      request.trigger = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['name']
+      );
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
       );
@@ -1077,11 +1198,14 @@ describe('v1.CloudBuildClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.receiveTriggerWebhook(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.receiveTriggerWebhook as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.receiveTriggerWebhook as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes receiveTriggerWebhook without error using callback', async () => {
@@ -1093,17 +1217,22 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
-      request.projectId = '';
-      request.trigger = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['trigger']
+      );
+      request.trigger = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['name']
+      );
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse()
       );
@@ -1126,11 +1255,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.receiveTriggerWebhook as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.receiveTriggerWebhook as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes receiveTriggerWebhook with error', async () => {
@@ -1142,17 +1274,22 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
-      request.projectId = '';
-      request.trigger = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['trigger']
+      );
+      request.trigger = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['name']
+      );
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.receiveTriggerWebhook = stubSimpleCall(
         undefined,
@@ -1162,11 +1299,14 @@ describe('v1.CloudBuildClient', () => {
         client.receiveTriggerWebhook(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.receiveTriggerWebhook as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.receiveTriggerWebhook as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.receiveTriggerWebhook as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes receiveTriggerWebhook with closed client', async () => {
@@ -1178,9 +1318,21 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
-      request.projectId = '';
-      request.trigger = '';
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['projectId']
+      );
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['trigger']
+      );
+      request.trigger = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ReceiveTriggerWebhookRequest',
+        ['name']
+      );
+      request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1200,26 +1352,25 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
       client.innerApiCalls.getWorkerPool = stubSimpleCall(expectedResponse);
       const [response] = await client.getWorkerPool(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkerPool without error using callback', async () => {
@@ -1231,15 +1382,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
@@ -1262,11 +1409,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkerPool with error', async () => {
@@ -1278,26 +1428,25 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkerPool = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getWorkerPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.getWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWorkerPool with closed client', async () => {
@@ -1309,7 +1458,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWorkerPool(request), expectedError);
@@ -1326,16 +1478,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1343,11 +1494,14 @@ describe('v1.CloudBuildClient', () => {
       const [operation] = await client.createBuild(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBuild without error using callback', async () => {
@@ -1359,16 +1513,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1398,11 +1551,14 @@ describe('v1.CloudBuildClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBuild with call error', async () => {
@@ -1414,27 +1570,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuild = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createBuild(request), expectedError);
-      assert(
-        (client.innerApiCalls.createBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createBuild with LRO error', async () => {
@@ -1446,16 +1604,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createBuild = stubLongRunningCall(
         undefined,
@@ -1464,11 +1621,14 @@ describe('v1.CloudBuildClient', () => {
       );
       const [operation] = await client.createBuild(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateBuildProgress without error', async () => {
@@ -1520,17 +1680,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1538,11 +1696,14 @@ describe('v1.CloudBuildClient', () => {
       const [operation] = await client.retryBuild(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retryBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retryBuild without error using callback', async () => {
@@ -1554,17 +1715,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1594,11 +1753,14 @@ describe('v1.CloudBuildClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.retryBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retryBuild with call error', async () => {
@@ -1610,28 +1772,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retryBuild = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.retryBuild(request), expectedError);
-      assert(
-        (client.innerApiCalls.retryBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes retryBuild with LRO error', async () => {
@@ -1643,17 +1806,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      request.projectId = '';
-      request.id = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      request.id = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.retryBuild = stubLongRunningCall(
         undefined,
@@ -1662,11 +1823,14 @@ describe('v1.CloudBuildClient', () => {
       );
       const [operation] = await client.retryBuild(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.retryBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.retryBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRetryBuildProgress without error', async () => {
@@ -1718,15 +1882,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1734,11 +1894,14 @@ describe('v1.CloudBuildClient', () => {
       const [operation] = await client.approveBuild(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.approveBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveBuild without error using callback', async () => {
@@ -1750,15 +1913,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1788,11 +1947,14 @@ describe('v1.CloudBuildClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.approveBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveBuild with call error', async () => {
@@ -1804,26 +1966,25 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveBuild = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.approveBuild(request), expectedError);
-      assert(
-        (client.innerApiCalls.approveBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes approveBuild with LRO error', async () => {
@@ -1835,15 +1996,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.approveBuild = stubLongRunningCall(
         undefined,
@@ -1852,11 +2009,14 @@ describe('v1.CloudBuildClient', () => {
       );
       const [operation] = await client.approveBuild(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.approveBuild as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.approveBuild as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkApproveBuildProgress without error', async () => {
@@ -1908,17 +2068,19 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1927,11 +2089,14 @@ describe('v1.CloudBuildClient', () => {
       const [operation] = await client.runBuildTrigger(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runBuildTrigger without error using callback', async () => {
@@ -1943,17 +2108,19 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1983,11 +2150,14 @@ describe('v1.CloudBuildClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.runBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runBuildTrigger with call error', async () => {
@@ -1999,28 +2169,33 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.runBuildTrigger(request), expectedError);
-      assert(
-        (client.innerApiCalls.runBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes runBuildTrigger with LRO error', async () => {
@@ -2032,17 +2207,19 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      request.projectId = '';
-      request.triggerId = '';
-      request.name = '';
-      const expectedHeaderRequestParams = 'project_id=&trigger_id=&name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'triggerId',
+      ]);
+      request.triggerId = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
+        'name',
+      ]);
+      request.name = defaultValue3;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.runBuildTrigger = stubLongRunningCall(
         undefined,
@@ -2051,11 +2228,14 @@ describe('v1.CloudBuildClient', () => {
       );
       const [operation] = await client.runBuildTrigger(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.runBuildTrigger as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.runBuildTrigger as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRunBuildTriggerProgress without error', async () => {
@@ -2110,15 +2290,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2127,11 +2303,14 @@ describe('v1.CloudBuildClient', () => {
       const [operation] = await client.createWorkerPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkerPool without error using callback', async () => {
@@ -2143,15 +2322,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2181,11 +2356,14 @@ describe('v1.CloudBuildClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkerPool with call error', async () => {
@@ -2197,26 +2375,25 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkerPool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createWorkerPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWorkerPool with LRO error', async () => {
@@ -2228,15 +2405,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWorkerPool = stubLongRunningCall(
         undefined,
@@ -2245,11 +2418,14 @@ describe('v1.CloudBuildClient', () => {
       );
       const [operation] = await client.createWorkerPool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateWorkerPoolProgress without error', async () => {
@@ -2304,15 +2480,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2321,11 +2493,14 @@ describe('v1.CloudBuildClient', () => {
       const [operation] = await client.deleteWorkerPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkerPool without error using callback', async () => {
@@ -2337,15 +2512,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2375,11 +2546,14 @@ describe('v1.CloudBuildClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkerPool with call error', async () => {
@@ -2391,26 +2565,25 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteWorkerPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteWorkerPool with LRO error', async () => {
@@ -2422,15 +2595,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
         undefined,
@@ -2439,11 +2608,14 @@ describe('v1.CloudBuildClient', () => {
       );
       const [operation] = await client.deleteWorkerPool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteWorkerPoolProgress without error', async () => {
@@ -2498,16 +2670,13 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool = {};
-      request.workerPool.name = '';
-      const expectedHeaderRequestParams = 'worker_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workerPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
+        'workerPool',
+        'name',
+      ]);
+      request.workerPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2516,11 +2685,14 @@ describe('v1.CloudBuildClient', () => {
       const [operation] = await client.updateWorkerPool(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateWorkerPool without error using callback', async () => {
@@ -2532,16 +2704,13 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool = {};
-      request.workerPool.name = '';
-      const expectedHeaderRequestParams = 'worker_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workerPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
+        'workerPool',
+        'name',
+      ]);
+      request.workerPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2571,11 +2740,14 @@ describe('v1.CloudBuildClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateWorkerPool with call error', async () => {
@@ -2587,27 +2759,27 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool = {};
-      request.workerPool.name = '';
-      const expectedHeaderRequestParams = 'worker_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workerPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
+        'workerPool',
+        'name',
+      ]);
+      request.workerPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateWorkerPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateWorkerPool with LRO error', async () => {
@@ -2619,16 +2791,13 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
-      request.workerPool = {};
-      request.workerPool.name = '';
-      const expectedHeaderRequestParams = 'worker_pool.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.workerPool ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
+        'workerPool',
+        'name',
+      ]);
+      request.workerPool.name = defaultValue1;
+      const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
         undefined,
@@ -2637,11 +2806,14 @@ describe('v1.CloudBuildClient', () => {
       );
       const [operation] = await client.updateWorkerPool(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateWorkerPool as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateWorkerPoolProgress without error', async () => {
@@ -2696,16 +2868,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -2714,11 +2885,14 @@ describe('v1.CloudBuildClient', () => {
       client.innerApiCalls.listBuilds = stubSimpleCall(expectedResponse);
       const [response] = await client.listBuilds(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listBuilds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBuilds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBuilds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBuilds without error using callback', async () => {
@@ -2730,16 +2904,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -2764,11 +2937,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listBuilds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBuilds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBuilds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBuilds with error', async () => {
@@ -2780,27 +2956,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuilds = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listBuilds(request), expectedError);
-      assert(
-        (client.innerApiCalls.listBuilds as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBuilds as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBuilds as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBuildsStream without error', async () => {
@@ -2812,9 +2990,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -2845,11 +3029,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuilds, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBuilds.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuilds.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2862,9 +3047,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuilds.createStream = stubPageStreamingCall(
         undefined,
@@ -2892,11 +3083,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuilds, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBuilds.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuilds.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2909,9 +3101,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
         generateSampleMessage(new protos.google.devtools.cloudbuild.v1.Build()),
@@ -2931,11 +3129,12 @@ describe('v1.CloudBuildClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBuilds.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2948,9 +3147,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuilds.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2969,11 +3174,12 @@ describe('v1.CloudBuildClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listBuilds.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuilds.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2988,16 +3194,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3012,11 +3217,14 @@ describe('v1.CloudBuildClient', () => {
       client.innerApiCalls.listBuildTriggers = stubSimpleCall(expectedResponse);
       const [response] = await client.listBuildTriggers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listBuildTriggers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBuildTriggers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBuildTriggers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBuildTriggers without error using callback', async () => {
@@ -3028,16 +3236,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3068,11 +3275,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listBuildTriggers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBuildTriggers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBuildTriggers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBuildTriggers with error', async () => {
@@ -3084,27 +3294,29 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listBuildTriggers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listBuildTriggers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listBuildTriggers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listBuildTriggers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listBuildTriggers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listBuildTriggersStream without error', async () => {
@@ -3116,9 +3328,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3156,11 +3374,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuildTriggers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listBuildTriggers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3173,9 +3392,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuildTriggers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3202,11 +3427,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listBuildTriggers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listBuildTriggers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuildTriggers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3219,9 +3445,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.BuildTrigger()
@@ -3248,11 +3480,12 @@ describe('v1.CloudBuildClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3265,9 +3498,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      request.projectId = '';
-      request.parent = '';
-      const expectedHeaderRequestParams = 'project_id=&parent=';
+      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'projectId',
+      ]);
+      request.projectId = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue2;
+      const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listBuildTriggers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3285,11 +3524,12 @@ describe('v1.CloudBuildClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listBuildTriggers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3304,15 +3544,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -3327,11 +3563,14 @@ describe('v1.CloudBuildClient', () => {
       client.innerApiCalls.listWorkerPools = stubSimpleCall(expectedResponse);
       const [response] = await client.listWorkerPools(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkerPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkerPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkerPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkerPools without error using callback', async () => {
@@ -3343,15 +3582,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -3382,11 +3617,14 @@ describe('v1.CloudBuildClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkerPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkerPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkerPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkerPools with error', async () => {
@@ -3398,26 +3636,25 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listWorkerPools = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listWorkerPools(request), expectedError);
-      assert(
-        (client.innerApiCalls.listWorkerPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listWorkerPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listWorkerPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listWorkerPoolsStream without error', async () => {
@@ -3429,8 +3666,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -3467,11 +3707,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkerPools, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkerPools.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3484,8 +3725,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkerPools.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3511,11 +3755,12 @@ describe('v1.CloudBuildClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listWorkerPools, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkerPools.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3528,8 +3773,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.devtools.cloudbuild.v1.WorkerPool()
@@ -3555,11 +3803,12 @@ describe('v1.CloudBuildClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3572,8 +3821,11 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listWorkerPools.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3591,11 +3843,12 @@ describe('v1.CloudBuildClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listWorkerPools.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
