@@ -32,6 +32,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -259,26 +274,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.Certificate()
       );
       client.innerApiCalls.getCertificate = stubSimpleCall(expectedResponse);
       const [response] = await client.getCertificate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificate without error using callback', async () => {
@@ -290,15 +304,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.Certificate()
       );
@@ -321,11 +331,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificate with error', async () => {
@@ -337,26 +350,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificate with closed client', async () => {
@@ -368,7 +380,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCertificate(request), expectedError);
@@ -385,26 +400,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMap()
       );
       client.innerApiCalls.getCertificateMap = stubSimpleCall(expectedResponse);
       const [response] = await client.getCertificateMap(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateMap without error using callback', async () => {
@@ -416,15 +430,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMap()
       );
@@ -447,11 +457,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateMap with error', async () => {
@@ -463,26 +476,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateMap = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getCertificateMap(request), expectedError);
-      assert(
-        (client.innerApiCalls.getCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateMap with closed client', async () => {
@@ -494,7 +506,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getCertificateMap(request), expectedError);
@@ -511,15 +526,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
       );
@@ -527,11 +539,14 @@ describe('v1.CertificateManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getCertificateMapEntry(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateMapEntry without error using callback', async () => {
@@ -543,15 +558,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
       );
@@ -574,11 +586,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateMapEntry with error', async () => {
@@ -590,15 +605,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getCertificateMapEntry = stubSimpleCall(
         undefined,
@@ -608,11 +620,14 @@ describe('v1.CertificateManagerClient', () => {
         client.getCertificateMapEntry(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getCertificateMapEntry with closed client', async () => {
@@ -624,7 +639,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -644,15 +663,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
       );
@@ -660,11 +675,14 @@ describe('v1.CertificateManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getDnsAuthorization(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDnsAuthorization without error using callback', async () => {
@@ -676,15 +694,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
       );
@@ -707,11 +721,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDnsAuthorization with error', async () => {
@@ -723,26 +740,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getDnsAuthorization = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getDnsAuthorization(request), expectedError);
-      assert(
-        (client.innerApiCalls.getDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getDnsAuthorization with closed client', async () => {
@@ -754,7 +770,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getDnsAuthorization(request), expectedError);
@@ -771,15 +790,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -788,11 +803,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.createCertificate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificate without error using callback', async () => {
@@ -804,15 +822,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -842,11 +856,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificate with call error', async () => {
@@ -858,26 +875,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificate = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificate with LRO error', async () => {
@@ -889,15 +905,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificate = stubLongRunningCall(
         undefined,
@@ -906,11 +918,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.createCertificate(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCertificateProgress without error', async () => {
@@ -965,16 +980,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -983,11 +995,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.updateCertificate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificate without error using callback', async () => {
@@ -999,16 +1014,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1038,11 +1050,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificate with call error', async () => {
@@ -1054,27 +1069,27 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificate = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificate with LRO error', async () => {
@@ -1086,16 +1101,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
-      request.certificate = {};
-      request.certificate.name = '';
-      const expectedHeaderRequestParams = 'certificate.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificate ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
+        'certificate',
+        'name',
+      ]);
+      request.certificate.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificate = stubLongRunningCall(
         undefined,
@@ -1104,11 +1116,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.updateCertificate(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateCertificateProgress without error', async () => {
@@ -1163,15 +1178,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1180,11 +1191,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.deleteCertificate(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificate without error using callback', async () => {
@@ -1196,15 +1210,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1234,11 +1244,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificate with call error', async () => {
@@ -1250,26 +1263,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificate = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteCertificate(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificate with LRO error', async () => {
@@ -1281,15 +1293,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificate = stubLongRunningCall(
         undefined,
@@ -1298,11 +1306,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.deleteCertificate(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCertificate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteCertificateProgress without error', async () => {
@@ -1357,15 +1368,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1374,11 +1381,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.createCertificateMap(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateMap without error using callback', async () => {
@@ -1390,15 +1400,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1428,11 +1434,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateMap with call error', async () => {
@@ -1444,26 +1453,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMap = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createCertificateMap(request), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateMap with LRO error', async () => {
@@ -1475,15 +1483,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMap = stubLongRunningCall(
         undefined,
@@ -1492,11 +1496,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.createCertificateMap(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCertificateMapProgress without error', async () => {
@@ -1551,16 +1558,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
-      request.certificateMap = {};
-      request.certificateMap.name = '';
-      const expectedHeaderRequestParams = 'certificate_map.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMap ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
+        'certificateMap',
+        'name',
+      ]);
+      request.certificateMap.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1569,11 +1573,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.updateCertificateMap(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateMap without error using callback', async () => {
@@ -1585,16 +1592,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
-      request.certificateMap = {};
-      request.certificateMap.name = '';
-      const expectedHeaderRequestParams = 'certificate_map.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMap ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
+        'certificateMap',
+        'name',
+      ]);
+      request.certificateMap.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1624,11 +1628,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateMap with call error', async () => {
@@ -1640,27 +1647,27 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
-      request.certificateMap = {};
-      request.certificateMap.name = '';
-      const expectedHeaderRequestParams = 'certificate_map.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMap ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
+        'certificateMap',
+        'name',
+      ]);
+      request.certificateMap.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMap = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateCertificateMap(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateMap with LRO error', async () => {
@@ -1672,16 +1679,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
-      request.certificateMap = {};
-      request.certificateMap.name = '';
-      const expectedHeaderRequestParams = 'certificate_map.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMap ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
+        'certificateMap',
+        'name',
+      ]);
+      request.certificateMap.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMap = stubLongRunningCall(
         undefined,
@@ -1690,11 +1694,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.updateCertificateMap(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateCertificateMapProgress without error', async () => {
@@ -1749,15 +1756,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1766,11 +1769,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.deleteCertificateMap(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateMap without error using callback', async () => {
@@ -1782,15 +1788,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1820,11 +1822,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateMap with call error', async () => {
@@ -1836,26 +1841,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMap = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteCertificateMap(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateMap with LRO error', async () => {
@@ -1867,15 +1871,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMap = stubLongRunningCall(
         undefined,
@@ -1884,11 +1884,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.deleteCertificateMap(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCertificateMap as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMap as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteCertificateMapProgress without error', async () => {
@@ -1943,15 +1946,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateMapEntryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1960,11 +1960,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.createCertificateMapEntry(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateMapEntry without error using callback', async () => {
@@ -1976,15 +1979,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateMapEntryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2014,11 +2014,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateMapEntry with call error', async () => {
@@ -2030,15 +2033,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateMapEntryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2048,11 +2048,14 @@ describe('v1.CertificateManagerClient', () => {
         client.createCertificateMapEntry(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createCertificateMapEntry with LRO error', async () => {
@@ -2064,15 +2067,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateCertificateMapEntryRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2081,11 +2081,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.createCertificateMapEntry(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateCertificateMapEntryProgress without error', async () => {
@@ -2141,16 +2144,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest()
       );
-      request.certificateMapEntry = {};
-      request.certificateMapEntry.name = '';
-      const expectedHeaderRequestParams = 'certificate_map_entry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMapEntry ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateMapEntryRequest',
+        ['certificateMapEntry', 'name']
+      );
+      request.certificateMapEntry.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2159,11 +2159,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.updateCertificateMapEntry(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateMapEntry without error using callback', async () => {
@@ -2175,16 +2178,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest()
       );
-      request.certificateMapEntry = {};
-      request.certificateMapEntry.name = '';
-      const expectedHeaderRequestParams = 'certificate_map_entry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMapEntry ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateMapEntryRequest',
+        ['certificateMapEntry', 'name']
+      );
+      request.certificateMapEntry.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2214,11 +2214,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateMapEntry with call error', async () => {
@@ -2230,16 +2233,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest()
       );
-      request.certificateMapEntry = {};
-      request.certificateMapEntry.name = '';
-      const expectedHeaderRequestParams = 'certificate_map_entry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMapEntry ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateMapEntryRequest',
+        ['certificateMapEntry', 'name']
+      );
+      request.certificateMapEntry.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2249,11 +2249,14 @@ describe('v1.CertificateManagerClient', () => {
         client.updateCertificateMapEntry(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateCertificateMapEntry with LRO error', async () => {
@@ -2265,16 +2268,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest()
       );
-      request.certificateMapEntry = {};
-      request.certificateMapEntry.name = '';
-      const expectedHeaderRequestParams = 'certificate_map_entry.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.certificateMapEntry ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateCertificateMapEntryRequest',
+        ['certificateMapEntry', 'name']
+      );
+      request.certificateMapEntry.name = defaultValue1;
+      const expectedHeaderRequestParams = `certificate_map_entry.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2283,11 +2283,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.updateCertificateMapEntry(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateCertificateMapEntryProgress without error', async () => {
@@ -2343,15 +2346,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2360,11 +2360,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.deleteCertificateMapEntry(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateMapEntry without error using callback', async () => {
@@ -2376,15 +2379,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2414,11 +2414,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateMapEntry with call error', async () => {
@@ -2430,15 +2433,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2448,11 +2448,14 @@ describe('v1.CertificateManagerClient', () => {
         client.deleteCertificateMapEntry(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteCertificateMapEntry with LRO error', async () => {
@@ -2464,15 +2467,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteCertificateMapEntryRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteCertificateMapEntry = stubLongRunningCall(
         undefined,
@@ -2481,11 +2481,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.deleteCertificateMapEntry(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteCertificateMapEntry as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteCertificateMapEntry as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteCertificateMapEntryProgress without error', async () => {
@@ -2541,15 +2544,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDnsAuthorizationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2558,11 +2558,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.createDnsAuthorization(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDnsAuthorization without error using callback', async () => {
@@ -2574,15 +2577,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDnsAuthorizationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2612,11 +2612,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDnsAuthorization with call error', async () => {
@@ -2628,15 +2631,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDnsAuthorizationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -2646,11 +2646,14 @@ describe('v1.CertificateManagerClient', () => {
         client.createDnsAuthorization(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.createDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createDnsAuthorization with LRO error', async () => {
@@ -2662,15 +2665,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'CreateDnsAuthorizationRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -2679,11 +2679,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.createDnsAuthorization(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.createDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkCreateDnsAuthorizationProgress without error', async () => {
@@ -2738,16 +2741,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest()
       );
-      request.dnsAuthorization = {};
-      request.dnsAuthorization.name = '';
-      const expectedHeaderRequestParams = 'dns_authorization.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dnsAuthorization ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDnsAuthorizationRequest',
+        ['dnsAuthorization', 'name']
+      );
+      request.dnsAuthorization.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2756,11 +2756,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.updateDnsAuthorization(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDnsAuthorization without error using callback', async () => {
@@ -2772,16 +2775,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest()
       );
-      request.dnsAuthorization = {};
-      request.dnsAuthorization.name = '';
-      const expectedHeaderRequestParams = 'dns_authorization.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dnsAuthorization ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDnsAuthorizationRequest',
+        ['dnsAuthorization', 'name']
+      );
+      request.dnsAuthorization.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2811,11 +2811,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDnsAuthorization with call error', async () => {
@@ -2827,16 +2830,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest()
       );
-      request.dnsAuthorization = {};
-      request.dnsAuthorization.name = '';
-      const expectedHeaderRequestParams = 'dns_authorization.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dnsAuthorization ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDnsAuthorizationRequest',
+        ['dnsAuthorization', 'name']
+      );
+      request.dnsAuthorization.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -2846,11 +2846,14 @@ describe('v1.CertificateManagerClient', () => {
         client.updateDnsAuthorization(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDnsAuthorization with LRO error', async () => {
@@ -2862,16 +2865,13 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest()
       );
-      request.dnsAuthorization = {};
-      request.dnsAuthorization.name = '';
-      const expectedHeaderRequestParams = 'dns_authorization.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.dnsAuthorization ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDnsAuthorizationRequest',
+        ['dnsAuthorization', 'name']
+      );
+      request.dnsAuthorization.name = defaultValue1;
+      const expectedHeaderRequestParams = `dns_authorization.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -2880,11 +2880,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.updateDnsAuthorization(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.updateDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUpdateDnsAuthorizationProgress without error', async () => {
@@ -2939,15 +2942,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDnsAuthorizationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2956,11 +2956,14 @@ describe('v1.CertificateManagerClient', () => {
       const [operation] = await client.deleteDnsAuthorization(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDnsAuthorization without error using callback', async () => {
@@ -2972,15 +2975,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDnsAuthorizationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -3010,11 +3010,14 @@ describe('v1.CertificateManagerClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDnsAuthorization with call error', async () => {
@@ -3026,15 +3029,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDnsAuthorizationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3044,11 +3044,14 @@ describe('v1.CertificateManagerClient', () => {
         client.deleteDnsAuthorization(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteDnsAuthorization with LRO error', async () => {
@@ -3060,15 +3063,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteDnsAuthorizationRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteDnsAuthorization = stubLongRunningCall(
         undefined,
@@ -3077,11 +3077,14 @@ describe('v1.CertificateManagerClient', () => {
       );
       const [operation] = await client.deleteDnsAuthorization(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteDnsAuthorization as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteDnsAuthorization as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteDnsAuthorizationProgress without error', async () => {
@@ -3136,15 +3139,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -3159,11 +3158,14 @@ describe('v1.CertificateManagerClient', () => {
       client.innerApiCalls.listCertificates = stubSimpleCall(expectedResponse);
       const [response] = await client.listCertificates(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificates without error using callback', async () => {
@@ -3175,15 +3177,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -3216,11 +3214,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificates with error', async () => {
@@ -3232,26 +3233,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificates = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCertificates(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCertificates as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificates as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificatesStream without error', async () => {
@@ -3263,8 +3263,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -3302,11 +3305,12 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificates, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3319,8 +3323,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificates.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3347,11 +3354,12 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificates, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3364,8 +3372,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.Certificate()
@@ -3392,11 +3403,12 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3409,8 +3421,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificates.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3428,11 +3443,12 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificates.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificates.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3447,15 +3463,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -3471,11 +3483,14 @@ describe('v1.CertificateManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCertificateMaps(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateMaps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateMaps as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateMaps as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateMaps without error using callback', async () => {
@@ -3487,15 +3502,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -3528,11 +3539,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateMaps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateMaps as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateMaps as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateMaps with error', async () => {
@@ -3544,26 +3558,25 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateMaps = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listCertificateMaps(request), expectedError);
-      assert(
-        (client.innerApiCalls.listCertificateMaps as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateMaps as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateMaps as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateMapsStream without error', async () => {
@@ -3575,8 +3588,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -3616,11 +3632,12 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateMaps, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificateMaps.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificateMaps.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3633,8 +3650,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMaps.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3663,11 +3683,12 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateMaps, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificateMaps.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificateMaps.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3680,8 +3701,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMap()
@@ -3708,11 +3732,12 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3725,8 +3750,11 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMaps.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3744,11 +3772,12 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listCertificateMaps.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3763,15 +3792,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateMapEntriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -3787,11 +3813,14 @@ describe('v1.CertificateManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listCertificateMapEntries(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateMapEntries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateMapEntries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateMapEntries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateMapEntries without error using callback', async () => {
@@ -3803,15 +3832,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateMapEntriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -3844,11 +3870,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listCertificateMapEntries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateMapEntries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateMapEntries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateMapEntries with error', async () => {
@@ -3860,15 +3889,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateMapEntriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listCertificateMapEntries = stubSimpleCall(
         undefined,
@@ -3878,11 +3904,14 @@ describe('v1.CertificateManagerClient', () => {
         client.listCertificateMapEntries(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listCertificateMapEntries as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listCertificateMapEntries as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listCertificateMapEntries as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listCertificateMapEntriesStream without error', async () => {
@@ -3894,8 +3923,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateMapEntriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -3938,12 +3971,15 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateMapEntries, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateMapEntries
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3956,8 +3992,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateMapEntriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMapEntries.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3989,12 +4029,15 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listCertificateMapEntries, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateMapEntries
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4007,8 +4050,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateMapEntriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.CertificateMapEntry()
@@ -4036,12 +4083,15 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateMapEntries
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4054,8 +4104,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListCertificateMapEntriesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listCertificateMapEntries.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4074,12 +4128,15 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listCertificateMapEntries
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4094,15 +4151,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDnsAuthorizationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -4118,11 +4172,14 @@ describe('v1.CertificateManagerClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listDnsAuthorizations(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDnsAuthorizations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDnsAuthorizations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDnsAuthorizations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDnsAuthorizations without error using callback', async () => {
@@ -4134,15 +4191,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDnsAuthorizationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -4175,11 +4229,14 @@ describe('v1.CertificateManagerClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listDnsAuthorizations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDnsAuthorizations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDnsAuthorizations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDnsAuthorizations with error', async () => {
@@ -4191,15 +4248,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDnsAuthorizationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listDnsAuthorizations = stubSimpleCall(
         undefined,
@@ -4209,11 +4263,14 @@ describe('v1.CertificateManagerClient', () => {
         client.listDnsAuthorizations(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listDnsAuthorizations as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listDnsAuthorizations as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listDnsAuthorizations as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listDnsAuthorizationsStream without error', async () => {
@@ -4225,8 +4282,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDnsAuthorizationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -4269,12 +4330,15 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDnsAuthorizations, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDnsAuthorizations
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4287,8 +4351,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDnsAuthorizationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDnsAuthorizations.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -4320,12 +4388,15 @@ describe('v1.CertificateManagerClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listDnsAuthorizations, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDnsAuthorizations
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4338,8 +4409,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDnsAuthorizationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.certificatemanager.v1.DnsAuthorization()
@@ -4367,12 +4442,15 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDnsAuthorizations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -4385,8 +4463,12 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListDnsAuthorizationsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listDnsAuthorizations.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -4405,12 +4487,15 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listDnsAuthorizations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -4561,12 +4646,15 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -4597,12 +4685,15 @@ describe('v1.CertificateManagerClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
