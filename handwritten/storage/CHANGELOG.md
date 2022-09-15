@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.5.0](https://github.com/googleapis/nodejs-storage/compare/v6.4.2...v6.5.0) (2022-09-15)
+
+
+### Features
+
+* Add multiple lifecycle rules ([#2062](https://github.com/googleapis/nodejs-storage/issues/2062)) ([fbe2deb](https://github.com/googleapis/nodejs-storage/commit/fbe2deb72bd98db54a03cf228a360a871ba1915b))
+
 ## [6.4.2](https://github.com/googleapis/nodejs-storage/compare/v6.4.1...v6.4.2) (2022-09-01)
 
 
