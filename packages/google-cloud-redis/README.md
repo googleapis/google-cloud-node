@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Redis: Node.js Client](https://github.com/googleapis/nodejs-redis)
+# [Cloud Redis: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/redis.svg)](https://www.npmjs.org/package/@google-cloud/redis)
@@ -14,11 +14,11 @@ Google Cloud Memorystore for Redis API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-redis/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
 
 * [Cloud Redis Node.js Client API Reference][client-docs]
 * [Cloud Redis Documentation][product-docs]
-* [github.com/googleapis/nodejs-redis](https://github.com/googleapis/nodejs-redis)
+* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -79,11 +79,34 @@ async function main(projectId, location) {
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-redis/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-redis/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-redis&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Cloud_redis.create_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.create_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.create_instance.js,samples/README.md) |
+| Cloud_redis.delete_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.delete_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.delete_instance.js,samples/README.md) |
+| Cloud_redis.export_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.export_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.export_instance.js,samples/README.md) |
+| Cloud_redis.failover_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.failover_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.failover_instance.js,samples/README.md) |
+| Cloud_redis.get_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.get_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.get_instance.js,samples/README.md) |
+| Cloud_redis.get_instance_auth_string | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.get_instance_auth_string.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.get_instance_auth_string.js,samples/README.md) |
+| Cloud_redis.import_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.import_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.import_instance.js,samples/README.md) |
+| Cloud_redis.list_instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.list_instances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.list_instances.js,samples/README.md) |
+| Cloud_redis.reschedule_maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.reschedule_maintenance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.reschedule_maintenance.js,samples/README.md) |
+| Cloud_redis.update_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.update_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.update_instance.js,samples/README.md) |
+| Cloud_redis.upgrade_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1/cloud_redis.upgrade_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1/cloud_redis.upgrade_instance.js,samples/README.md) |
+| Cloud_redis.create_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.create_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.create_instance.js,samples/README.md) |
+| Cloud_redis.delete_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.delete_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.delete_instance.js,samples/README.md) |
+| Cloud_redis.export_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.export_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.export_instance.js,samples/README.md) |
+| Cloud_redis.failover_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.failover_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.failover_instance.js,samples/README.md) |
+| Cloud_redis.get_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.get_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.get_instance.js,samples/README.md) |
+| Cloud_redis.get_instance_auth_string | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.get_instance_auth_string.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.get_instance_auth_string.js,samples/README.md) |
+| Cloud_redis.import_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.import_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.import_instance.js,samples/README.md) |
+| Cloud_redis.list_instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.list_instances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.list_instances.js,samples/README.md) |
+| Cloud_redis.reschedule_maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.reschedule_maintenance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.reschedule_maintenance.js,samples/README.md) |
+| Cloud_redis.update_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.update_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.update_instance.js,samples/README.md) |
+| Cloud_redis.upgrade_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.upgrade_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/generated/v1beta1/cloud_redis.upgrade_instance.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/quickstart.js,samples/README.md) |
+| Redis | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-redis/samples/system-test/redis.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-redis/samples/system-test/redis.js,samples/README.md) |
 
 
 
@@ -133,7 +156,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-redis/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -145,7 +168,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-redis/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/redis/latest
 [product-docs]: https://cloud.google.com/memorystore/docs/redis/

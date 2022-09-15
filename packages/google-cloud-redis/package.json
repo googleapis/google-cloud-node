@@ -28,8 +28,8 @@
   ],
   "scripts": {
     "test": "c8 mocha build/test",
-    "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "system-test": "c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
     "fix": "gts fix",

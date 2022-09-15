@@ -8,7 +8,7 @@
   "name_pretty": "Cloud Redis",
   "default_version": "v1",
   "release_level": "stable",
-  "repo": "googleapis/nodejs-redis",
+  "repo": "googleapis/google-cloud-node",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/redis/latest",
   "requires_billing": true,
   "api_shortname": "redis",
