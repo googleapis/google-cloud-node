@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [3.1.3](https://github.com/googleapis/nodejs-redis/compare/v3.1.2...v3.1.3) (2022-09-14)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#588](https://github.com/googleapis/nodejs-redis/issues/588)) ([9f7b15d](https://github.com/googleapis/nodejs-redis/commit/9f7b15dd3f937a4cd69247c3f27903778bd54e6c))
+
 ## [3.1.2](https://github.com/googleapis/nodejs-redis/compare/v3.1.1...v3.1.2) (2022-09-01)
 
 
