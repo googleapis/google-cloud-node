@@ -103,11 +103,13 @@ describe('file', () => {
 
   it('should upload a file using a stream', async () => {
     const output = execSync(
-      `node streamFileUpload.js ${bucketName} ${fileName}`
+      `node streamFileUpload.js ${bucketName} ${fileName} ${fileContents}`
     );
     assert.match(output, new RegExp(`${fileName} uploaded to ${bucketName}`));
     const [exists] = await bucket.file(fileName).exists();
     assert.strictEqual(exists, true);
+    const response = await bucket.file(fileName).download();
+    assert.strictEqual(response[0].toString(), fileContents);
   });
 
   it('should upload a file with a kms key', async () => {

@@ -20,7 +20,11 @@
  * at https://cloud.google.com/storage/docs.
  */
 
-function main(bucketName = 'my-bucket', destFileName = 'file.txt') {
+function main(
+  bucketName = 'my-bucket',
+  destFileName = 'file.txt',
+  contents = 'this is the file content'
+) {
   // [START storage_stream_file_upload]
   /**
    * TODO(developer): Uncomment the following lines before running the sample
@@ -30,6 +34,9 @@ function main(bucketName = 'my-bucket', destFileName = 'file.txt') {
 
   // The new ID for your GCS file
   // const destFileName = 'your-new-file-name';
+
+  // The content to be uploaded in the GCS file
+  // const contents = 'your file content';
 
   // Imports the Google Cloud client library
   const {Storage} = require('@google-cloud/storage');
@@ -48,7 +55,7 @@ function main(bucketName = 'my-bucket', destFileName = 'file.txt') {
 
   // Create a pass through stream from a string
   const passthroughStream = new stream.PassThrough();
-  passthroughStream.write('input text');
+  passthroughStream.write(contents);
   passthroughStream.end();
 
   async function streamFileUpload() {
