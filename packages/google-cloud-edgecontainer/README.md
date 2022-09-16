@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,59 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/edgecontainer
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The parent location, which owns this collection of VPN connections.
+ */
+// const parent = 'abc123'
+/**
+ *  The maximum number of resources to list.
+ */
+// const pageSize = 1234
+/**
+ *  A page token received from previous list request.
+ */
+// const pageToken = 'abc123'
+/**
+ *  Only resources matching this filter will be listed.
+ */
+// const filter = 'abc123'
+/**
+ *  Specifies the order in which resources will be listed.
+ */
+// const orderBy = 'abc123'
+
+// Imports the Edgecontainer library
+const {EdgeContainerClient} = require('@google-cloud/edgecontainer').v1;
+
+// Instantiates a client
+const edgecontainerClient = new EdgeContainerClient();
+
+async function callListVpnConnections() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await edgecontainerClient.listVpnConnectionsAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListVpnConnections();
+
+```
 
 
 
@@ -79,6 +132,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Edge_container.list_vpn_connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.list_vpn_connections.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.list_vpn_connections.js,samples/README.md) |
 | Edge_container.update_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.update_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.update_cluster.js,samples/README.md) |
 | Edge_container.update_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.update_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/generated/v1/edge_container.update_node_pool.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-edgecontainer/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-edgecontainer/samples/test/quickstart.js,samples/README.md) |
 
 
