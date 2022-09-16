@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -29,7 +27,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the KeyRing google.cloud.kms.v1.KeyRing 
+   *  Required. The resource name of the KeyRing google.cloud.kms.v1.KeyRing
    *  to list, in the format `projects/* /locations/* /keyRings/*`.
    */
   // const parent = 'abc123'
@@ -38,7 +36,7 @@ function main(parent) {
    *  CryptoKeys google.cloud.kms.v1.CryptoKey  to include in the response.
    *  Further CryptoKeys google.cloud.kms.v1.CryptoKey  can subsequently be
    *  obtained by including the
-   *  ListCryptoKeysResponse.next_page_token google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token 
+   *  ListCryptoKeysResponse.next_page_token google.cloud.kms.v1.ListCryptoKeysResponse.next_page_token
    *  in a subsequent request.  If unspecified, the server will pick an
    *  appropriate default.
    */
@@ -82,7 +80,7 @@ function main(parent) {
     // Run request
     const iterable = await kmsClient.listCryptoKeysAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
