@@ -1,0 +1,16 @@
+{
+  "name": "kms",
+  "name_pretty": "Cloud Key Management Service",
+  "product_documentation": "cloud.google.com/kms/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "beta",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-cloud/kms",
+  "api_id": "google.cloud.kms.v1",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO"
+}
+
