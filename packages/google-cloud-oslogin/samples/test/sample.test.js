@@ -21,10 +21,10 @@ const {execSync} = require('child_process');
 const exec = cmd => execSync(cmd, {encoding: 'utf8'});
 
 describe('sample tests', () => {
-  // This test current fails because it requires setup in the google-cloud-node
-  // project, running VMs, and a fair amount of infrastructure.
-  it.skip('should run the quickstart', () => {
-    const output = exec('node quickstart');
-    assert.include(output, 'Login Profile:');
+  it('should run the quickstart', () => {
+    const output = exec(
+      'node quickstart users/kokoro-system-test@long-door-651.iam.gserviceaccount.com'
+    );
+    assert(output !== null);
   });
 });
