@@ -11,10 +11,13 @@
                     "v1beta1": {
                       "options": {
                         "cc_enable_arenas": true,
+                        "csharp_namespace": "Google.Cloud.Security.PublicCA.V1Beta1",
                         "go_package": "google.golang.org/genproto/googleapis/cloud/security/publicca/v1beta1;publicca",
                         "java_multiple_files": true,
                         "java_outer_classname": "ServiceProto",
-                        "java_package": "com.google.cloud.security.publicca.v1beta1"
+                        "java_package": "com.google.cloud.security.publicca.v1beta1",
+                        "php_namespace": "Google\\Cloud\\Security\\PublicCA\\V1beta1",
+                        "ruby_package": "Google::Cloud::Security::PublicCA::V1beta1"
                       },
                       "nested": {
                         "ExternalAccountKey": {
