@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-docs-samples-os-login",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "*.js"
+  ],
+  "repository": "googleapis/nodejs-os-login",
+  "private": true,
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "@google-cloud/os-login": "^4.0.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0"
+  }
+}
