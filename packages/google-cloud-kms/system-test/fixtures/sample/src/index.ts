@@ -16,18 +16,25 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-const config = {
-  "enable-source-maps": true,
-  "throw-deprecation": true,
-  "timeout": 10000
+import {EkmServiceClient, KeyManagementServiceClient} from '@google-cloud/kms';
+
+// check that the client class type name can be used
+function doStuffWithEkmServiceClient(client: EkmServiceClient) {
+  client.close();
 }
-if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
-  delete config['throw-deprecation'];
+function doStuffWithKeyManagementServiceClient(
+  client: KeyManagementServiceClient
+) {
+  client.close();
 }
-if (process.env.MOCHA_REPORTER) {
-  config.reporter = process.env.MOCHA_REPORTER;
+
+function main() {
+  // check that the client instance can be created
+  const ekmServiceClient = new EkmServiceClient();
+  doStuffWithEkmServiceClient(ekmServiceClient);
+  // check that the client instance can be created
+  const keyManagementServiceClient = new KeyManagementServiceClient();
+  doStuffWithKeyManagementServiceClient(keyManagementServiceClient);
 }
-if (process.env.MOCHA_REPORTER_OUTPUT) {
-  config['reporter-option'] = `output=${process.env.MOCHA_REPORTER_OUTPUT}`;
-}
-module.exports = config
+
+main();
