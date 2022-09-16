@@ -3978,6 +3978,9 @@ export namespace google {
 
                     /** Node symptoms */
                     symptoms?: (google.cloud.tpu.v2alpha1.ISymptom[]|null);
+
+                    /** Node shieldedInstanceConfig */
+                    shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
                 }
 
                 /** Represents a Node. */
@@ -4048,6 +4051,9 @@ export namespace google {
 
                     /** Node symptoms. */
                     public symptoms: google.cloud.tpu.v2alpha1.ISymptom[];
+
+                    /** Node shieldedInstanceConfig. */
+                    public shieldedInstanceConfig?: (google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null);
 
                     /**
                      * Creates a new Node instance using the specified properties.
@@ -6597,6 +6603,103 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetGuestAttributesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ShieldedInstanceConfig. */
+                interface IShieldedInstanceConfig {
+
+                    /** ShieldedInstanceConfig enableSecureBoot */
+                    enableSecureBoot?: (boolean|null);
+                }
+
+                /** Represents a ShieldedInstanceConfig. */
+                class ShieldedInstanceConfig implements IShieldedInstanceConfig {
+
+                    /**
+                     * Constructs a new ShieldedInstanceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.tpu.v2alpha1.IShieldedInstanceConfig);
+
+                    /** ShieldedInstanceConfig enableSecureBoot. */
+                    public enableSecureBoot: boolean;
+
+                    /**
+                     * Creates a new ShieldedInstanceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ShieldedInstanceConfig instance
+                     */
+                    public static create(properties?: google.cloud.tpu.v2alpha1.IShieldedInstanceConfig): google.cloud.tpu.v2alpha1.ShieldedInstanceConfig;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.tpu.v2alpha1.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.verify|verify} messages.
+                     * @param message ShieldedInstanceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.tpu.v2alpha1.IShieldedInstanceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.tpu.v2alpha1.ShieldedInstanceConfig;
+
+                    /**
+                     * Decodes a ShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ShieldedInstanceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.tpu.v2alpha1.ShieldedInstanceConfig;
+
+                    /**
+                     * Verifies a ShieldedInstanceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ShieldedInstanceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.tpu.v2alpha1.ShieldedInstanceConfig;
+
+                    /**
+                     * Creates a plain object from a ShieldedInstanceConfig message. Also converts values to other types if specified.
+                     * @param message ShieldedInstanceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.tpu.v2alpha1.ShieldedInstanceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ShieldedInstanceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ShieldedInstanceConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

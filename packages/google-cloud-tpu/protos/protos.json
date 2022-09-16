@@ -1303,6 +1303,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "shieldedInstanceConfig": {
+                          "type": "ShieldedInstanceConfig",
+                          "id": 45
                         }
                       },
                       "nested": {
@@ -1730,6 +1734,14 @@
                         "guestAttributes": {
                           "rule": "repeated",
                           "type": "GuestAttributes",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ShieldedInstanceConfig": {
+                      "fields": {
+                        "enableSecureBoot": {
+                          "type": "bool",
                           "id": 1
                         }
                       }

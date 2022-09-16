@@ -9039,6 +9039,7 @@
                          * @property {Array.<google.cloud.tpu.v2alpha1.IAttachedDisk>|null} [dataDisks] Node dataDisks
                          * @property {google.cloud.tpu.v2alpha1.Node.ApiVersion|null} [apiVersion] Node apiVersion
                          * @property {Array.<google.cloud.tpu.v2alpha1.ISymptom>|null} [symptoms] Node symptoms
+                         * @property {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] Node shieldedInstanceConfig
                          */
     
                         /**
@@ -9223,6 +9224,14 @@
                         Node.prototype.symptoms = $util.emptyArray;
     
                         /**
+                         * Node shieldedInstanceConfig.
+                         * @member {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig|null|undefined} shieldedInstanceConfig
+                         * @memberof google.cloud.tpu.v2alpha1.Node
+                         * @instance
+                         */
+                        Node.prototype.shieldedInstanceConfig = null;
+    
+                        /**
                          * Creates a new Node instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.tpu.v2alpha1.Node
@@ -9292,6 +9301,8 @@
                             if (message.dataDisks != null && message.dataDisks.length)
                                 for (var i = 0; i < message.dataDisks.length; ++i)
                                     $root.google.cloud.tpu.v2alpha1.AttachedDisk.encode(message.dataDisks[i], writer.uint32(/* id 41, wireType 2 =*/330).fork()).ldelim();
+                            if (message.shieldedInstanceConfig != null && Object.hasOwnProperty.call(message, "shieldedInstanceConfig"))
+                                $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 45, wireType 2 =*/362).fork()).ldelim();
                             return writer;
                         };
     
@@ -9450,6 +9461,10 @@
                                         if (!(message.symptoms && message.symptoms.length))
                                             message.symptoms = [];
                                         message.symptoms.push($root.google.cloud.tpu.v2alpha1.Symptom.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 45: {
+                                        message.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -9619,6 +9634,11 @@
                                     if (error)
                                         return "symptoms." + error;
                                 }
+                            }
+                            if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig")) {
+                                var error = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.verify(message.shieldedInstanceConfig);
+                                if (error)
+                                    return "shieldedInstanceConfig." + error;
                             }
                             return null;
                         };
@@ -9829,6 +9849,11 @@
                                     message.symptoms[i] = $root.google.cloud.tpu.v2alpha1.Symptom.fromObject(object.symptoms[i]);
                                 }
                             }
+                            if (object.shieldedInstanceConfig != null) {
+                                if (typeof object.shieldedInstanceConfig !== "object")
+                                    throw TypeError(".google.cloud.tpu.v2alpha1.Node.shieldedInstanceConfig: object expected");
+                                message.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.fromObject(object.shieldedInstanceConfig);
+                            }
                             return message;
                         };
     
@@ -9874,6 +9899,7 @@
                                 object.networkConfig = null;
                                 object.serviceAccount = null;
                                 object.apiVersion = options.enums === String ? "API_VERSION_UNSPECIFIED" : 0;
+                                object.shieldedInstanceConfig = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -9937,6 +9963,8 @@
                                 for (var j = 0; j < message.dataDisks.length; ++j)
                                     object.dataDisks[j] = $root.google.cloud.tpu.v2alpha1.AttachedDisk.toObject(message.dataDisks[j], options);
                             }
+                            if (message.shieldedInstanceConfig != null && message.hasOwnProperty("shieldedInstanceConfig"))
+                                object.shieldedInstanceConfig = $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                             return object;
                         };
     
@@ -15712,6 +15740,209 @@
                         };
     
                         return GetGuestAttributesResponse;
+                    })();
+    
+                    v2alpha1.ShieldedInstanceConfig = (function() {
+    
+                        /**
+                         * Properties of a ShieldedInstanceConfig.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @interface IShieldedInstanceConfig
+                         * @property {boolean|null} [enableSecureBoot] ShieldedInstanceConfig enableSecureBoot
+                         */
+    
+                        /**
+                         * Constructs a new ShieldedInstanceConfig.
+                         * @memberof google.cloud.tpu.v2alpha1
+                         * @classdesc Represents a ShieldedInstanceConfig.
+                         * @implements IShieldedInstanceConfig
+                         * @constructor
+                         * @param {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig=} [properties] Properties to set
+                         */
+                        function ShieldedInstanceConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ShieldedInstanceConfig enableSecureBoot.
+                         * @member {boolean} enableSecureBoot
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @instance
+                         */
+                        ShieldedInstanceConfig.prototype.enableSecureBoot = false;
+    
+                        /**
+                         * Creates a new ShieldedInstanceConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig=} [properties] Properties to set
+                         * @returns {google.cloud.tpu.v2alpha1.ShieldedInstanceConfig} ShieldedInstanceConfig instance
+                         */
+                        ShieldedInstanceConfig.create = function create(properties) {
+                            return new ShieldedInstanceConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ShieldedInstanceConfig message. Does not implicitly {@link google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig} message ShieldedInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShieldedInstanceConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.enableSecureBoot != null && Object.hasOwnProperty.call(message, "enableSecureBoot"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enableSecureBoot);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ShieldedInstanceConfig message, length delimited. Does not implicitly {@link google.cloud.tpu.v2alpha1.ShieldedInstanceConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.IShieldedInstanceConfig} message ShieldedInstanceConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ShieldedInstanceConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ShieldedInstanceConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.tpu.v2alpha1.ShieldedInstanceConfig} ShieldedInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShieldedInstanceConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.enableSecureBoot = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ShieldedInstanceConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.tpu.v2alpha1.ShieldedInstanceConfig} ShieldedInstanceConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ShieldedInstanceConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ShieldedInstanceConfig message.
+                         * @function verify
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ShieldedInstanceConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
+                                if (typeof message.enableSecureBoot !== "boolean")
+                                    return "enableSecureBoot: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ShieldedInstanceConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.tpu.v2alpha1.ShieldedInstanceConfig} ShieldedInstanceConfig
+                         */
+                        ShieldedInstanceConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig)
+                                return object;
+                            var message = new $root.google.cloud.tpu.v2alpha1.ShieldedInstanceConfig();
+                            if (object.enableSecureBoot != null)
+                                message.enableSecureBoot = Boolean(object.enableSecureBoot);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ShieldedInstanceConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {google.cloud.tpu.v2alpha1.ShieldedInstanceConfig} message ShieldedInstanceConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ShieldedInstanceConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.enableSecureBoot = false;
+                            if (message.enableSecureBoot != null && message.hasOwnProperty("enableSecureBoot"))
+                                object.enableSecureBoot = message.enableSecureBoot;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ShieldedInstanceConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ShieldedInstanceConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ShieldedInstanceConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.tpu.v2alpha1.ShieldedInstanceConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ShieldedInstanceConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.tpu.v2alpha1.ShieldedInstanceConfig";
+                        };
+    
+                        return ShieldedInstanceConfig;
                     })();
     
                     return v2alpha1;
