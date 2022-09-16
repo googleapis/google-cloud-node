@@ -23373,6 +23373,34 @@
                             }
                           ]
                         },
+                        "DeleteFeatureValues": {
+                          "requestType": "DeleteFeatureValuesRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:deleteFeatureValues",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "entity_type",
+                            "(google.longrunning.operation_info).response_type": "DeleteFeatureValuesResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteFeatureValuesOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{entity_type=projects/*/locations/*/featurestores/*/entityTypes/*}:deleteFeatureValues",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "entity_type"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeleteFeatureValuesResponse",
+                                "metadata_type": "DeleteFeatureValuesOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "SearchFeatures": {
                           "requestType": "SearchFeaturesRequest",
                           "responseType": "SearchFeaturesResponse",
@@ -24160,6 +24188,14 @@
                         }
                       }
                     },
+                    "DeleteFeatureValuesOperationMetadata": {
+                      "fields": {
+                        "genericMetadata": {
+                          "type": "GenericOperationMetadata",
+                          "id": 1
+                        }
+                      }
+                    },
                     "CreateEntityTypeOperationMetadata": {
                       "fields": {
                         "genericMetadata": {
@@ -24181,6 +24217,64 @@
                         "genericMetadata": {
                           "type": "GenericOperationMetadata",
                           "id": 1
+                        }
+                      }
+                    },
+                    "DeleteFeatureValuesRequest": {
+                      "oneofs": {
+                        "DeleteOption": {
+                          "oneof": [
+                            "selectEntity"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "selectEntity": {
+                          "type": "SelectEntity",
+                          "id": 2
+                        },
+                        "entityType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/EntityType"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "SelectEntity": {
+                          "fields": {
+                            "entityIdSelector": {
+                              "type": "EntityIdSelector",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "DeleteFeatureValuesResponse": {
+                      "fields": {}
+                    },
+                    "EntityIdSelector": {
+                      "oneofs": {
+                        "EntityIdsSource": {
+                          "oneof": [
+                            "csvSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "csvSource": {
+                          "type": "CsvSource",
+                          "id": 3
+                        },
+                        "entityIdField": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },

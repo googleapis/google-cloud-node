@@ -429,6 +429,11 @@
                 "exportFeatureValues"
               ]
             },
+            "DeleteFeatureValues": {
+              "methods": [
+                "deleteFeatureValues"
+              ]
+            },
             "ListFeaturestores": {
               "methods": [
                 "listFeaturestores",
@@ -540,6 +545,11 @@
             "ExportFeatureValues": {
               "methods": [
                 "exportFeatureValues"
+              ]
+            },
+            "DeleteFeatureValues": {
+              "methods": [
+                "deleteFeatureValues"
               ]
             },
             "ListFeaturestores": {
