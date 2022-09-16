@@ -18,8 +18,8 @@ const assert = require('assert');
 const path = require('path');
 const cp = require('child_process');
 const {describe, it, before} = require('mocha');
-const {Client} = require('@google-cloud/edgecontainer').v1;
-const edgecontainerClient = new Client();
+const {EdgeContainerClient} = require('@google-cloud/edgecontainer').v1;
+const edgecontainerClient = new EdgeContainerClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
