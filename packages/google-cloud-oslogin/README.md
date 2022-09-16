@@ -57,18 +57,40 @@ npm install @google-cloud/os-login
 ### Using the client library
 
 ```javascript
-const {OsLoginServiceClient} = require('@google-cloud/os-login');
-const client = new OsLoginServiceClient();
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The unique ID for the user in format `users/{user}`.
+ */
+// const name = 'abc123'
+/**
+ *  The project ID of the Google Cloud Platform project.
+ */
+// const projectId = 'abc123'
+/**
+ *  A system ID for filtering the results of the request.
+ */
+// const systemId = 'abc123'
 
-async function quickstart() {
-  const [loginProfile] = await client.getLoginProfile({
-    name: 'users/beckwith@google.com',
-  });
-  console.log('Login Profile:');
-  console.log(loginProfile);
+// Imports the Oslogin library
+const {OsLoginServiceClient} = require('@google-cloud/os-login').v1;
+
+// Instantiates a client
+const osloginClient = new OsLoginServiceClient();
+
+async function callGetLoginProfile() {
+  // Construct request
+  const request = {
+    name,
+  };
+
+  // Run request
+  const response = await osloginClient.getLoginProfile(request);
+  console.log(response[0]);
 }
 
-quickstart();
+callGetLoginProfile();
 
 ```
 
