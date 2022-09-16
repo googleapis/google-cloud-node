@@ -12,7 +12,8 @@
     "packages/google-cloud-security-publicca": {},
     "packages/google-devtools-artifactregistry": {},
     "packages/google-iam": {},
-    "packages/typeless-sample-bot": {}
+    "packages/typeless-sample-bot": {},
+    "packages/google-cloud-edgecontainer": {}
   },
   "release-type": "node"
 }
