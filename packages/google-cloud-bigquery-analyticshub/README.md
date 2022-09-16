@@ -31,7 +31,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
+  * [Using the client library](#using-the-client-library)
 * [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
@@ -53,6 +53,54 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 npm install @google-cloud/analyticshub
 ```
 
+
+### Using the client library
+
+```javascript
+/**
+ * This snippet has been automatically generated and should be regarded as a code template only.
+ * It will require modifications to work.
+ * It may require correct/in-range values for request initialization.
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+/**
+ *  Required. The parent resource path of the listing.
+ *  e.g. `projects/myproject/locations/US/dataExchanges/123`.
+ */
+// const parent = 'abc123'
+/**
+ *  The maximum number of results to return in a single response page. Leverage
+ *  the page tokens to iterate through the entire collection.
+ */
+// const pageSize = 1234
+/**
+ *  Page token, returned by a previous call, to request the next page of
+ *  results.
+ */
+// const pageToken = 'abc123'
+
+// Imports the Analyticshub library
+const {AnalyticsHubServiceClient} = require('@google-cloud/analyticshub').v1;
+
+// Instantiates a client
+const analyticshubClient = new AnalyticsHubServiceClient();
+
+async function callListListings() {
+  // Construct request
+  const request = {
+    parent,
+  };
+
+  // Run request
+  const iterable = await analyticshubClient.listListingsAsync(request);
+  for await (const response of iterable) {
+      console.log(response);
+  }
+}
+
+callListListings();
+
+```
 
 
 
@@ -77,6 +125,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/
 | Analytics_hub_service.test_iam_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.test_iam_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.test_iam_permissions.js,samples/README.md) |
 | Analytics_hub_service.update_data_exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_data_exchange.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_data_exchange.js,samples/README.md) |
 | Analytics_hub_service.update_listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_listing.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_listing.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/quickstart.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/test/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/test/quickstart.js,samples/README.md) |
 
 
