@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [4.0.2](https://github.com/googleapis/nodejs-os-login/compare/v4.0.1...v4.0.2) (2022-09-16)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#548](https://github.com/googleapis/nodejs-os-login/issues/548)) ([ae426fe](https://github.com/googleapis/nodejs-os-login/commit/ae426fe0178d310d06ed488d4506ab8c916a3f62))
+* Better support for fallback mode ([#543](https://github.com/googleapis/nodejs-os-login/issues/543)) ([d149110](https://github.com/googleapis/nodejs-os-login/commit/d149110ac085100b47f680ab10c2505885f88f2d))
+* Change import long to require ([#544](https://github.com/googleapis/nodejs-os-login/issues/544)) ([5bf317b](https://github.com/googleapis/nodejs-os-login/commit/5bf317b8f2488f6860e941b14ccd38469e61059b))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-os-login/issues/1553)) ([#547](https://github.com/googleapis/nodejs-os-login/issues/547)) ([a71f7b4](https://github.com/googleapis/nodejs-os-login/commit/a71f7b48575b5ad66334c4338d7c5c0acf658cdd))
+* Preserve default values in x-goog-request-params header ([#551](https://github.com/googleapis/nodejs-os-login/issues/551)) ([1f50d1d](https://github.com/googleapis/nodejs-os-login/commit/1f50d1d0a868547d0069991826bfe429443d0f24))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-os-login/issues/1546)) ([#546](https://github.com/googleapis/nodejs-os-login/issues/546)) ([9a273e0](https://github.com/googleapis/nodejs-os-login/commit/9a273e07c65036f5a017b28bf25e29bb217862f4))
+* use google-gax v3.3.0 ([a71f7b4](https://github.com/googleapis/nodejs-os-login/commit/a71f7b48575b5ad66334c4338d7c5c0acf658cdd))
+
 ## [4.0.1](https://github.com/googleapis/nodejs-os-login/compare/v4.0.0...v4.0.1) (2022-06-30)
 
 
