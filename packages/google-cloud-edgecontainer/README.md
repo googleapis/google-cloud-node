@@ -99,7 +99,7 @@ async function callListVpnConnections() {
   // Run request
   const iterable = await edgecontainerClient.listVpnConnectionsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
