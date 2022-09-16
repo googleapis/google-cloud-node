@@ -94,7 +94,7 @@ async function callListListings() {
   // Run request
   const iterable = await analyticshubClient.listListingsAsync(request);
   for await (const response of iterable) {
-      console.log(response);
+    console.log(response);
   }
 }
 
