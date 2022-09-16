@@ -16,7 +16,19 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+import {AnalyticsHubServiceClient} from '@google-cloud/analyticshub';
 
-module.exports = {
-  ...require('gts/.prettierrc.json')
+// check that the client class type name can be used
+function doStuffWithAnalyticsHubServiceClient(
+  client: AnalyticsHubServiceClient
+) {
+  client.close();
 }
+
+function main() {
+  // check that the client instance can be created
+  const analyticsHubServiceClient = new AnalyticsHubServiceClient();
+  doStuffWithAnalyticsHubServiceClient(analyticsHubServiceClient);
+}
+
+main();
