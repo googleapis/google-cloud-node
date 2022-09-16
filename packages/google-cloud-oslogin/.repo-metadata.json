@@ -6,7 +6,7 @@
   "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Google Cloud OS Login",
-  "repo": "googleapis/nodejs-os-login",
+  "repo": "googleapis/google-cloud-node",
   "product_documentation": "https://cloud.google.com/compute/docs/oslogin/",
   "requires_billing": true,
   "name": "oslogin",

@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud OS Login: Node.js Client](https://github.com/googleapis/nodejs-os-login)
+# [Google Cloud OS Login: Node.js Client](https://github.com/googleapis/google-cloud-node)
 
 [![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/os-login.svg)](https://www.npmjs.org/package/@google-cloud/os-login)
@@ -14,11 +14,11 @@ Google Cloud OS Login API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-os-login/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/google-cloud-node/blob/main/CHANGELOG.md).
 
 * [Google Cloud OS Login Node.js Client API Reference][client-docs]
 * [Google Cloud OS Login Documentation][product-docs]
-* [github.com/googleapis/nodejs-os-login](https://github.com/googleapis/nodejs-os-login)
+* [github.com/googleapis/google-cloud-node](https://github.com/googleapis/google-cloud-node)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -98,11 +98,24 @@ callGetLoginProfile();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-os-login/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-os-login/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-os-login&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Os_login_service.delete_posix_account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.delete_posix_account.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1/os_login_service.delete_posix_account.js,samples/README.md) |
+| Os_login_service.delete_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.delete_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1/os_login_service.delete_ssh_public_key.js,samples/README.md) |
+| Os_login_service.get_login_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.get_login_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1/os_login_service.get_login_profile.js,samples/README.md) |
+| Os_login_service.get_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.get_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1/os_login_service.get_ssh_public_key.js,samples/README.md) |
+| Os_login_service.import_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.import_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1/os_login_service.import_ssh_public_key.js,samples/README.md) |
+| Os_login_service.update_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1/os_login_service.update_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1/os_login_service.update_ssh_public_key.js,samples/README.md) |
+| Os_login_service.delete_posix_account | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.delete_posix_account.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.delete_posix_account.js,samples/README.md) |
+| Os_login_service.delete_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.delete_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.delete_ssh_public_key.js,samples/README.md) |
+| Os_login_service.get_login_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.get_login_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.get_login_profile.js,samples/README.md) |
+| Os_login_service.get_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.get_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.get_ssh_public_key.js,samples/README.md) |
+| Os_login_service.import_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.import_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.import_ssh_public_key.js,samples/README.md) |
+| Os_login_service.update_ssh_public_key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.update_ssh_public_key.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/generated/v1beta/os_login_service.update_ssh_public_key.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/quickstart.js,samples/README.md) |
+| Sample.test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-oslogin/samples/test/sample.test.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-oslogin/samples/test/sample.test.js,samples/README.md) |
 
 
 
@@ -152,7 +165,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-os-login/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -164,7 +177,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-os-login/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/os-login/latest
 [product-docs]: https://cloud.google.com/compute/docs/oslogin/

@@ -8,6 +8,7 @@
   "packages/google-cloud-beyondcorp-clientconnectorservices": "0.2.0",
   "packages/google-cloud-beyondcorp-clientgateways": "0.2.0",
   "packages/google-cloud-gkemulticloud": "0.1.1",
+  "packages/google-cloud-oslogin": "4.0.1",
   "packages/google-cloud-redis": "3.1.3",
   "packages/google-cloud-security-publicca": "0.1.0",
   "packages/google-devtools-artifactregistry": "2.0.0",

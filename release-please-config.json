@@ -8,6 +8,7 @@
     "packages/google-cloud-beyondcorp-clientconnectorservices": {},
     "packages/google-cloud-beyondcorp-clientgateways": {},
     "packages/google-cloud-gkemulticloud": {},
+    "packages/google-cloud-oslogin": {},
     "packages/google-cloud-redis": {},
     "packages/google-cloud-security-publicca": {},
     "packages/google-devtools-artifactregistry": {},
