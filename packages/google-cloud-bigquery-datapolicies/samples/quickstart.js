@@ -16,8 +16,6 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-
-
 'use strict';
 
 function main(parent) {
@@ -46,7 +44,8 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Datapolicies library
-  const {DataPolicyServiceClient} = require('@google-cloud/bigquery-datapolicies').v1beta1;
+  const {DataPolicyServiceClient} =
+    require('@google-cloud/bigquery-datapolicies').v1beta1;
 
   // Instantiates a client
   const datapoliciesClient = new DataPolicyServiceClient();
@@ -60,7 +59,7 @@ function main(parent) {
     // Run request
     const iterable = await datapoliciesClient.listDataPoliciesAsync(request);
     for await (const response of iterable) {
-        console.log(response);
+      console.log(response);
     }
   }
 
