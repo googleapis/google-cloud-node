@@ -1,5 +1,47 @@
 # Changelog
 
+## [2.1.0](https://github.com/googleapis/nodejs-retail/compare/v2.0.0...v2.1.0) (2022-09-20)
+
+
+### Features
+
+* add local inventories info to the Product resource ([166a195](https://github.com/googleapis/nodejs-retail/commit/166a195d3d8b2d858418a6058ee72c5dd9036463))
+* allow adding labels in search requests ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow adding labels in search requests ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow disabling spell check in search requests ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow disabling spell check in search requests ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow enabling recommendation filtering on custom attributes ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow enabling recommendation filtering on custom attributes ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow returning min/max values on search numeric facets ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow returning min/max values on search numeric facets ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow skiping default branch protection when doing product full import ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow to return min/max values on search numeric facets ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow to use serving configs as an alias of placements ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow using serving configs as an alias of placements ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* allow using serving configs as an alias of placements ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* Model Services, BatchRemoveCatalogAttributes, ExactSearchableOption ([be33b58](https://github.com/googleapis/nodejs-retail/commit/be33b5817ce85ca245fc08a9598c7c1b48cb84fc))
+* new model service to manage recommendation models ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* release AttributesConfig APIs to v2 version ([166a195](https://github.com/googleapis/nodejs-retail/commit/166a195d3d8b2d858418a6058ee72c5dd9036463))
+* release CompletionConfig APIs to v2 version ([166a195](https://github.com/googleapis/nodejs-retail/commit/166a195d3d8b2d858418a6058ee72c5dd9036463))
+* release Control and ServingConfig serivces to v2 version ([166a195](https://github.com/googleapis/nodejs-retail/commit/166a195d3d8b2d858418a6058ee72c5dd9036463))
+* return output BigQuery table on product / event export response ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* return output BigQuery table on product / event export response ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* support case insensitive match on search facets ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* support case insensitive match on search facets ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* support case insensitive match on search facets ([b20cb74](https://github.com/googleapis/nodejs-retail/commit/b20cb7417e6e8daf3745d75224b2ea87a21680a1))
+* Support regapic LRO ([c074f6c](https://github.com/googleapis/nodejs-retail/commit/c074f6c8125d16e375c6c0bc8bae6b2e84ed56f9))
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#206](https://github.com/googleapis/nodejs-retail/issues/206)) ([166a195](https://github.com/googleapis/nodejs-retail/commit/166a195d3d8b2d858418a6058ee72c5dd9036463))
+* Better support for fallback mode ([#204](https://github.com/googleapis/nodejs-retail/issues/204)) ([4256e26](https://github.com/googleapis/nodejs-retail/commit/4256e2690e9d66a9083a13962b8f9f706e4db710))
+* Change import long to require ([#205](https://github.com/googleapis/nodejs-retail/issues/205)) ([9acff3d](https://github.com/googleapis/nodejs-retail/commit/9acff3daf2571f5a087f85882ed50b23be52d4e8))
+* **deps:** Update dependency @google-cloud/storage to v6 ([#185](https://github.com/googleapis/nodejs-retail/issues/185)) ([d0e7c2f](https://github.com/googleapis/nodejs-retail/commit/d0e7c2fdd9306c8b162a4b1bd676937f60bcd1cb))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-retail/issues/1553)) ([#208](https://github.com/googleapis/nodejs-retail/issues/208)) ([a079b82](https://github.com/googleapis/nodejs-retail/commit/a079b82805b9550d9a7772ec620d70e5d28bc5a2))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-retail/issues/1546)) ([#207](https://github.com/googleapis/nodejs-retail/issues/207)) ([b742392](https://github.com/googleapis/nodejs-retail/commit/b7423929a30f635880eff37f479f95498cbfcde5))
+* use google-gax v3.3.0 ([a079b82](https://github.com/googleapis/nodejs-retail/commit/a079b82805b9550d9a7772ec620d70e5d28bc5a2))
+
 ## [2.0.0](https://github.com/googleapis/nodejs-retail/compare/v1.8.1...v2.0.0) (2022-06-20)
 
 
