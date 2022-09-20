@@ -14,7 +14,7 @@
 
 'use strict';
 
-function main(projectId, region, job_name) {
+function main(projectId, region, jobName) {
   // [START batch_create_script_job]
   /**
    * TODO(developer): Uncomment and replace these variables before running the sample.
@@ -25,11 +25,11 @@ function main(projectId, region, job_name) {
    * https://cloud.google.com/batch/docs/get-started#locations
    */
   // const region = 'us-central-1';
-  /** 
+  /**
    * The name of the job that will be created.
    * It needs to be unique for each project and region pair.
    */
-  // const job_name = 'YOUR_JOB_NAME';
+  // const jobName = 'YOUR_JOB_NAME';
 
   // Imports the Batch library
   const batchLib = require('@google-cloud/batch');
@@ -42,7 +42,8 @@ function main(projectId, region, job_name) {
   const task = new batch.TaskSpec();
   const runnable = new batch.Runnable();
   runnable.script = new batch.Runnable.Script();
-  runnable.script.text = "echo Hello world! This is task ${BATCH_TASK_INDEX}. This job has a total of ${BATCH_TASK_COUNT} tasks."
+  runnable.script.text =
+    'echo Hello world! This is task ${BATCH_TASK_INDEX}. This job has a total of ${BATCH_TASK_COUNT} tasks.';
   // You can also run a script from a file. Just remember, that needs to be a script that's
   // already on the VM that will be running the job. Using runnable.script.text and runnable.script.path is mutually
   // exclusive.
@@ -51,12 +52,12 @@ function main(projectId, region, job_name) {
 
   // We can specify what resources are requested by each task.
   const resources = new batch.ComputeResource();
-  resources.cpuMilli = 2000;  // in milliseconds per cpu-second. This means the task requires 2 whole CPUs.
+  resources.cpuMilli = 2000; // in milliseconds per cpu-second. This means the task requires 2 whole CPUs.
   resources.memoryMib = 16;
   task.computeResource = resources;
 
   task.maxRetryCount = 2;
-  task.maxRunDuration = "3600s";
+  task.maxRunDuration = '3600s';
 
   // Tasks are grouped inside a job using TaskGroups.
   const group = new batch.TaskGroup();
@@ -68,21 +69,22 @@ function main(projectId, region, job_name) {
   // Read more about machine types here: https://cloud.google.com/compute/docs/machine-types
   const allocationPolicy = new batch.AllocationPolicy();
   const policy = new batch.AllocationPolicy.InstancePolicy();
-  policy.machineType = "e2-standard-4";
+  policy.machineType = 'e2-standard-4';
   const instances = new batch.AllocationPolicy.InstancePolicyOrTemplate();
   instances.policy = policy;
   allocationPolicy.instances = [instances];
 
   const job = new batch.Job();
+  job.name = jobName;
   job.taskGroups = [group];
   job.allocationPolicy = allocationPolicy;
-  job.labels = {"env": "testing", "type": "script"};
+  job.labels = {env: 'testing', type: 'script'};
   // We use Cloud Logging as it's an out option available out of the box
   job.logs_policy = new batch.LogsPolicy();
   job.logs_policy.destination = batch.LogsPolicy.Destination.CLOUD_LOGGING;
 
   // The job's parent is the project and region in which the job will run
-  parent = "projects/" + projectId + "/locations/" + region;
+  const parent = 'projects/' + projectId + '/locations/' + region;
 
   async function callCreateJob() {
     // Construct request
