@@ -25,6 +25,21 @@ import * as webriskservicev1beta1Module from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -170,7 +185,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
       );
@@ -178,11 +192,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.computeThreatListDiff(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.computeThreatListDiff as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes computeThreatListDiff without error using callback', async () => {
@@ -195,7 +204,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffResponse()
       );
@@ -218,11 +226,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.computeThreatListDiff as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes computeThreatListDiff with error', async () => {
@@ -235,7 +238,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.ComputeThreatListDiffRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.computeThreatListDiff = stubSimpleCall(
         undefined,
@@ -244,11 +246,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       await assert.rejects(
         client.computeThreatListDiff(request),
         expectedError
-      );
-      assert(
-        (client.innerApiCalls.computeThreatListDiff as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
       );
     });
 
@@ -282,18 +279,12 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
       );
       client.innerApiCalls.searchUris = stubSimpleCall(expectedResponse);
       const [response] = await client.searchUris(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchUris as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes searchUris without error using callback', async () => {
@@ -306,7 +297,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisResponse()
       );
@@ -329,11 +319,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchUris as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes searchUris with error', async () => {
@@ -346,18 +331,12 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchUrisRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchUris = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.searchUris(request), expectedError);
-      assert(
-        (client.innerApiCalls.searchUris as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes searchUris with closed client', async () => {
@@ -387,18 +366,12 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
       );
       client.innerApiCalls.searchHashes = stubSimpleCall(expectedResponse);
       const [response] = await client.searchHashes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchHashes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes searchHashes without error using callback', async () => {
@@ -411,7 +384,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesResponse()
       );
@@ -434,11 +406,6 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.searchHashes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes searchHashes with error', async () => {
@@ -451,18 +418,12 @@ describe('v1beta1.WebRiskServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1beta1.SearchHashesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.searchHashes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.searchHashes(request), expectedError);
-      assert(
-        (client.innerApiCalls.searchHashes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes searchHashes with closed client', async () => {

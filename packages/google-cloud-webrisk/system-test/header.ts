@@ -15,20 +15,19 @@
 import * as protoTypes from '../protos/protos';
 import {assert} from 'chai';
 import {describe, it} from 'mocha';
+import {WebRiskServiceClient} from '../src/index';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const http2spy = require('http2spy');
-const {WebRiskServiceV1Beta1Client} = http2spy.require(
-  require.resolve('../src/v1beta1')
-);
+const gax = http2spy.require('google-gax');
 describe('header', () => {
   it('populates x-goog-api-client header', async () => {
-    const client = new WebRiskServiceV1Beta1Client();
+    const client = new WebRiskServiceClient({}, gax);
     const request = {
       uri: 'http://testsafebrowsing.appspot.com/s/malware.html',
       threatTypes: ['MALWARE'],
     };
     await client.searchUris(
-      request as unknown as protoTypes.google.cloud.webrisk.v1beta1.SearchUrisRequest
+      request as unknown as protoTypes.google.cloud.webrisk.v1.SearchUrisRequest
     );
     assert.ok(
       /^gax\/[\w.-]+ gapic\/[\w.-]+ gl-node\/[0-9]+\.[\w.-]+ grpc\/[\w.-]+$/.test(
