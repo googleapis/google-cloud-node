@@ -1035,6 +1035,9 @@ export namespace google {
 
                 /** NodeConfig confidentialNodes */
                 confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
+
+                /** NodeConfig loggingConfig */
+                loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
             }
 
             /** Represents a NodeConfig. */
@@ -1126,6 +1129,9 @@ export namespace google {
 
                 /** NodeConfig confidentialNodes. */
                 public confidentialNodes?: (google.container.v1.IConfidentialNodes|null);
+
+                /** NodeConfig loggingConfig. */
+                public loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
                 /**
                  * Creates a new NodeConfig instance using the specified properties.
@@ -5336,6 +5342,9 @@ export namespace google {
 
                 /** NodeConfigDefaults gcfsConfig */
                 gcfsConfig?: (google.container.v1.IGcfsConfig|null);
+
+                /** NodeConfigDefaults loggingConfig */
+                loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
             }
 
             /** Represents a NodeConfigDefaults. */
@@ -5349,6 +5358,9 @@ export namespace google {
 
                 /** NodeConfigDefaults gcfsConfig. */
                 public gcfsConfig?: (google.container.v1.IGcfsConfig|null);
+
+                /** NodeConfigDefaults loggingConfig. */
+                public loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
                 /**
                  * Creates a new NodeConfigDefaults instance using the specified properties.
@@ -5532,6 +5544,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolAutoConfigNetworkTags */
                 desiredNodePoolAutoConfigNetworkTags?: (google.container.v1.INetworkTags|null);
+
+                /** ClusterUpdate desiredNodePoolLoggingConfig */
+                desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -5644,6 +5659,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNodePoolAutoConfigNetworkTags. */
                 public desiredNodePoolAutoConfigNetworkTags?: (google.container.v1.INetworkTags|null);
+
+                /** ClusterUpdate desiredNodePoolLoggingConfig. */
+                public desiredNodePoolLoggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.
@@ -6583,6 +6601,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest gvnic */
                 gvnic?: (google.container.v1.IVirtualNIC|null);
+
+                /** UpdateNodePoolRequest loggingConfig */
+                loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
             }
 
             /** Represents an UpdateNodePoolRequest. */
@@ -6650,6 +6671,9 @@ export namespace google {
 
                 /** UpdateNodePoolRequest gvnic. */
                 public gvnic?: (google.container.v1.IVirtualNIC|null);
+
+                /** UpdateNodePoolRequest loggingConfig. */
+                public loggingConfig?: (google.container.v1.INodePoolLoggingConfig|null);
 
                 /**
                  * Creates a new UpdateNodePoolRequest instance using the specified properties.
@@ -17249,6 +17273,210 @@ export namespace google {
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a NodePoolLoggingConfig. */
+            interface INodePoolLoggingConfig {
+
+                /** NodePoolLoggingConfig variantConfig */
+                variantConfig?: (google.container.v1.ILoggingVariantConfig|null);
+            }
+
+            /** Represents a NodePoolLoggingConfig. */
+            class NodePoolLoggingConfig implements INodePoolLoggingConfig {
+
+                /**
+                 * Constructs a new NodePoolLoggingConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.INodePoolLoggingConfig);
+
+                /** NodePoolLoggingConfig variantConfig. */
+                public variantConfig?: (google.container.v1.ILoggingVariantConfig|null);
+
+                /**
+                 * Creates a new NodePoolLoggingConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns NodePoolLoggingConfig instance
+                 */
+                public static create(properties?: google.container.v1.INodePoolLoggingConfig): google.container.v1.NodePoolLoggingConfig;
+
+                /**
+                 * Encodes the specified NodePoolLoggingConfig message. Does not implicitly {@link google.container.v1.NodePoolLoggingConfig.verify|verify} messages.
+                 * @param message NodePoolLoggingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.INodePoolLoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified NodePoolLoggingConfig message, length delimited. Does not implicitly {@link google.container.v1.NodePoolLoggingConfig.verify|verify} messages.
+                 * @param message NodePoolLoggingConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.INodePoolLoggingConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a NodePoolLoggingConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns NodePoolLoggingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.NodePoolLoggingConfig;
+
+                /**
+                 * Decodes a NodePoolLoggingConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns NodePoolLoggingConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.NodePoolLoggingConfig;
+
+                /**
+                 * Verifies a NodePoolLoggingConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a NodePoolLoggingConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns NodePoolLoggingConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.NodePoolLoggingConfig;
+
+                /**
+                 * Creates a plain object from a NodePoolLoggingConfig message. Also converts values to other types if specified.
+                 * @param message NodePoolLoggingConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.NodePoolLoggingConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this NodePoolLoggingConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for NodePoolLoggingConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a LoggingVariantConfig. */
+            interface ILoggingVariantConfig {
+
+                /** LoggingVariantConfig variant */
+                variant?: (google.container.v1.LoggingVariantConfig.Variant|keyof typeof google.container.v1.LoggingVariantConfig.Variant|null);
+            }
+
+            /** Represents a LoggingVariantConfig. */
+            class LoggingVariantConfig implements ILoggingVariantConfig {
+
+                /**
+                 * Constructs a new LoggingVariantConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.container.v1.ILoggingVariantConfig);
+
+                /** LoggingVariantConfig variant. */
+                public variant: (google.container.v1.LoggingVariantConfig.Variant|keyof typeof google.container.v1.LoggingVariantConfig.Variant);
+
+                /**
+                 * Creates a new LoggingVariantConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns LoggingVariantConfig instance
+                 */
+                public static create(properties?: google.container.v1.ILoggingVariantConfig): google.container.v1.LoggingVariantConfig;
+
+                /**
+                 * Encodes the specified LoggingVariantConfig message. Does not implicitly {@link google.container.v1.LoggingVariantConfig.verify|verify} messages.
+                 * @param message LoggingVariantConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.container.v1.ILoggingVariantConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified LoggingVariantConfig message, length delimited. Does not implicitly {@link google.container.v1.LoggingVariantConfig.verify|verify} messages.
+                 * @param message LoggingVariantConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.container.v1.ILoggingVariantConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a LoggingVariantConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns LoggingVariantConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.container.v1.LoggingVariantConfig;
+
+                /**
+                 * Decodes a LoggingVariantConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns LoggingVariantConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.container.v1.LoggingVariantConfig;
+
+                /**
+                 * Verifies a LoggingVariantConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a LoggingVariantConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns LoggingVariantConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.container.v1.LoggingVariantConfig;
+
+                /**
+                 * Creates a plain object from a LoggingVariantConfig message. Also converts values to other types if specified.
+                 * @param message LoggingVariantConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.container.v1.LoggingVariantConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this LoggingVariantConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for LoggingVariantConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace LoggingVariantConfig {
+
+                /** Variant enum. */
+                enum Variant {
+                    VARIANT_UNSPECIFIED = 0,
+                    DEFAULT = 1,
+                    MAX_THROUGHPUT = 2
+                }
             }
 
             /** Properties of a MonitoringComponentConfig. */

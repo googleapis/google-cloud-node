@@ -230,7 +230,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 131,
+                    "end": 135,
                     "type": "FULL"
                 }
             ],
@@ -314,6 +314,10 @@
                     {
                         "name": "gvnic",
                         "type": ".google.container.v1.VirtualNIC"
+                    },
+                    {
+                        "name": "logging_config",
+                        "type": ".google.container.v1.NodePoolLoggingConfig"
                     }
                 ],
                 "resultType": ".google.container.v1.Operation",

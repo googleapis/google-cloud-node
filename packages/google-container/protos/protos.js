@@ -1744,6 +1744,7 @@
                      * @property {google.container.v1.IVirtualNIC|null} [gvnic] NodeConfig gvnic
                      * @property {boolean|null} [spot] NodeConfig spot
                      * @property {google.container.v1.IConfidentialNodes|null} [confidentialNodes] NodeConfig confidentialNodes
+                     * @property {google.container.v1.INodePoolLoggingConfig|null} [loggingConfig] NodeConfig loggingConfig
                      */
     
                     /**
@@ -1984,6 +1985,14 @@
                     NodeConfig.prototype.confidentialNodes = null;
     
                     /**
+                     * NodeConfig loggingConfig.
+                     * @member {google.container.v1.INodePoolLoggingConfig|null|undefined} loggingConfig
+                     * @memberof google.container.v1.NodeConfig
+                     * @instance
+                     */
+                    NodeConfig.prototype.loggingConfig = null;
+    
+                    /**
                      * Creates a new NodeConfig instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.NodeConfig
@@ -2067,6 +2076,8 @@
                             writer.uint32(/* id 32, wireType 0 =*/256).bool(message.spot);
                         if (message.confidentialNodes != null && Object.hasOwnProperty.call(message, "confidentialNodes"))
                             $root.google.container.v1.ConfidentialNodes.encode(message.confidentialNodes, writer.uint32(/* id 35, wireType 2 =*/282).fork()).ldelim();
+                        if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                            $root.google.container.v1.NodePoolLoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 38, wireType 2 =*/306).fork()).ldelim();
                         return writer;
                     };
     
@@ -2255,6 +2266,10 @@
                                     message.confidentialNodes = $root.google.container.v1.ConfidentialNodes.decode(reader, reader.uint32());
                                     break;
                                 }
+                            case 38: {
+                                    message.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
                             default:
                                 reader.skipType(tag & 7);
                                 break;
@@ -2421,6 +2436,11 @@
                             if (error)
                                 return "confidentialNodes." + error;
                         }
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                            var error = $root.google.container.v1.NodePoolLoggingConfig.verify(message.loggingConfig);
+                            if (error)
+                                return "loggingConfig." + error;
+                        }
                         return null;
                     };
     
@@ -2556,6 +2576,11 @@
                                 throw TypeError(".google.container.v1.NodeConfig.confidentialNodes: object expected");
                             message.confidentialNodes = $root.google.container.v1.ConfidentialNodes.fromObject(object.confidentialNodes);
                         }
+                        if (object.loggingConfig != null) {
+                            if (typeof object.loggingConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfig.loggingConfig: object expected");
+                            message.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.fromObject(object.loggingConfig);
+                        }
                         return message;
                     };
     
@@ -2604,6 +2629,7 @@
                             object.gvnic = null;
                             object.spot = false;
                             object.confidentialNodes = null;
+                            object.loggingConfig = null;
                         }
                         if (message.machineType != null && message.hasOwnProperty("machineType"))
                             object.machineType = message.machineType;
@@ -2678,6 +2704,8 @@
                             object.spot = message.spot;
                         if (message.confidentialNodes != null && message.hasOwnProperty("confidentialNodes"))
                             object.confidentialNodes = $root.google.container.v1.ConfidentialNodes.toObject(message.confidentialNodes, options);
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                            object.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.toObject(message.loggingConfig, options);
                         return object;
                     };
     
@@ -13068,6 +13096,7 @@
                      * @memberof google.container.v1
                      * @interface INodeConfigDefaults
                      * @property {google.container.v1.IGcfsConfig|null} [gcfsConfig] NodeConfigDefaults gcfsConfig
+                     * @property {google.container.v1.INodePoolLoggingConfig|null} [loggingConfig] NodeConfigDefaults loggingConfig
                      */
     
                     /**
@@ -13092,6 +13121,14 @@
                      * @instance
                      */
                     NodeConfigDefaults.prototype.gcfsConfig = null;
+    
+                    /**
+                     * NodeConfigDefaults loggingConfig.
+                     * @member {google.container.v1.INodePoolLoggingConfig|null|undefined} loggingConfig
+                     * @memberof google.container.v1.NodeConfigDefaults
+                     * @instance
+                     */
+                    NodeConfigDefaults.prototype.loggingConfig = null;
     
                     /**
                      * Creates a new NodeConfigDefaults instance using the specified properties.
@@ -13119,6 +13156,8 @@
                             writer = $Writer.create();
                         if (message.gcfsConfig != null && Object.hasOwnProperty.call(message, "gcfsConfig"))
                             $root.google.container.v1.GcfsConfig.encode(message.gcfsConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                            $root.google.container.v1.NodePoolLoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                         return writer;
                     };
     
@@ -13155,6 +13194,10 @@
                             switch (tag >>> 3) {
                             case 1: {
                                     message.gcfsConfig = $root.google.container.v1.GcfsConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -13197,6 +13240,11 @@
                             if (error)
                                 return "gcfsConfig." + error;
                         }
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                            var error = $root.google.container.v1.NodePoolLoggingConfig.verify(message.loggingConfig);
+                            if (error)
+                                return "loggingConfig." + error;
+                        }
                         return null;
                     };
     
@@ -13217,6 +13265,11 @@
                                 throw TypeError(".google.container.v1.NodeConfigDefaults.gcfsConfig: object expected");
                             message.gcfsConfig = $root.google.container.v1.GcfsConfig.fromObject(object.gcfsConfig);
                         }
+                        if (object.loggingConfig != null) {
+                            if (typeof object.loggingConfig !== "object")
+                                throw TypeError(".google.container.v1.NodeConfigDefaults.loggingConfig: object expected");
+                            message.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.fromObject(object.loggingConfig);
+                        }
                         return message;
                     };
     
@@ -13233,10 +13286,14 @@
                         if (!options)
                             options = {};
                         var object = {};
-                        if (options.defaults)
+                        if (options.defaults) {
                             object.gcfsConfig = null;
+                            object.loggingConfig = null;
+                        }
                         if (message.gcfsConfig != null && message.hasOwnProperty("gcfsConfig"))
                             object.gcfsConfig = $root.google.container.v1.GcfsConfig.toObject(message.gcfsConfig, options);
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                            object.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.toObject(message.loggingConfig, options);
                         return object;
                     };
     
@@ -13309,6 +13366,7 @@
                      * @property {string|null} [desiredMasterVersion] ClusterUpdate desiredMasterVersion
                      * @property {google.container.v1.IGcfsConfig|null} [desiredGcfsConfig] ClusterUpdate desiredGcfsConfig
                      * @property {google.container.v1.INetworkTags|null} [desiredNodePoolAutoConfigNetworkTags] ClusterUpdate desiredNodePoolAutoConfigNetworkTags
+                     * @property {google.container.v1.INodePoolLoggingConfig|null} [desiredNodePoolLoggingConfig] ClusterUpdate desiredNodePoolLoggingConfig
                      */
     
                     /**
@@ -13600,6 +13658,14 @@
                     ClusterUpdate.prototype.desiredNodePoolAutoConfigNetworkTags = null;
     
                     /**
+                     * ClusterUpdate desiredNodePoolLoggingConfig.
+                     * @member {google.container.v1.INodePoolLoggingConfig|null|undefined} desiredNodePoolLoggingConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredNodePoolLoggingConfig = null;
+    
+                    /**
                      * Creates a new ClusterUpdate instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.ClusterUpdate
@@ -13692,6 +13758,8 @@
                             $root.google.container.v1.GcfsConfig.encode(message.desiredGcfsConfig, writer.uint32(/* id 109, wireType 2 =*/874).fork()).ldelim();
                         if (message.desiredNodePoolAutoConfigNetworkTags != null && Object.hasOwnProperty.call(message, "desiredNodePoolAutoConfigNetworkTags"))
                             $root.google.container.v1.NetworkTags.encode(message.desiredNodePoolAutoConfigNetworkTags, writer.uint32(/* id 110, wireType 2 =*/882).fork()).ldelim();
+                        if (message.desiredNodePoolLoggingConfig != null && Object.hasOwnProperty.call(message, "desiredNodePoolLoggingConfig"))
+                            $root.google.container.v1.NodePoolLoggingConfig.encode(message.desiredNodePoolLoggingConfig, writer.uint32(/* id 116, wireType 2 =*/930).fork()).ldelim();
                         return writer;
                     };
     
@@ -13862,6 +13930,10 @@
                                 }
                             case 110: {
                                     message.desiredNodePoolAutoConfigNetworkTags = $root.google.container.v1.NetworkTags.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 116: {
+                                    message.desiredNodePoolLoggingConfig = $root.google.container.v1.NodePoolLoggingConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -14068,6 +14140,11 @@
                             if (error)
                                 return "desiredNodePoolAutoConfigNetworkTags." + error;
                         }
+                        if (message.desiredNodePoolLoggingConfig != null && message.hasOwnProperty("desiredNodePoolLoggingConfig")) {
+                            var error = $root.google.container.v1.NodePoolLoggingConfig.verify(message.desiredNodePoolLoggingConfig);
+                            if (error)
+                                return "desiredNodePoolLoggingConfig." + error;
+                        }
                         return null;
                     };
     
@@ -14259,6 +14336,11 @@
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredNodePoolAutoConfigNetworkTags: object expected");
                             message.desiredNodePoolAutoConfigNetworkTags = $root.google.container.v1.NetworkTags.fromObject(object.desiredNodePoolAutoConfigNetworkTags);
                         }
+                        if (object.desiredNodePoolLoggingConfig != null) {
+                            if (typeof object.desiredNodePoolLoggingConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredNodePoolLoggingConfig: object expected");
+                            message.desiredNodePoolLoggingConfig = $root.google.container.v1.NodePoolLoggingConfig.fromObject(object.desiredNodePoolLoggingConfig);
+                        }
                         return message;
                     };
     
@@ -14311,6 +14393,7 @@
                             object.desiredMasterVersion = "";
                             object.desiredGcfsConfig = null;
                             object.desiredNodePoolAutoConfigNetworkTags = null;
+                            object.desiredNodePoolLoggingConfig = null;
                         }
                         if (message.desiredNodeVersion != null && message.hasOwnProperty("desiredNodeVersion"))
                             object.desiredNodeVersion = message.desiredNodeVersion;
@@ -14383,6 +14466,8 @@
                             object.desiredGcfsConfig = $root.google.container.v1.GcfsConfig.toObject(message.desiredGcfsConfig, options);
                         if (message.desiredNodePoolAutoConfigNetworkTags != null && message.hasOwnProperty("desiredNodePoolAutoConfigNetworkTags"))
                             object.desiredNodePoolAutoConfigNetworkTags = $root.google.container.v1.NetworkTags.toObject(message.desiredNodePoolAutoConfigNetworkTags, options);
+                        if (message.desiredNodePoolLoggingConfig != null && message.hasOwnProperty("desiredNodePoolLoggingConfig"))
+                            object.desiredNodePoolLoggingConfig = $root.google.container.v1.NodePoolLoggingConfig.toObject(message.desiredNodePoolLoggingConfig, options);
                         return object;
                     };
     
@@ -16710,6 +16795,7 @@
                      * @property {google.container.v1.IGcfsConfig|null} [gcfsConfig] UpdateNodePoolRequest gcfsConfig
                      * @property {google.container.v1.IConfidentialNodes|null} [confidentialNodes] UpdateNodePoolRequest confidentialNodes
                      * @property {google.container.v1.IVirtualNIC|null} [gvnic] UpdateNodePoolRequest gvnic
+                     * @property {google.container.v1.INodePoolLoggingConfig|null} [loggingConfig] UpdateNodePoolRequest loggingConfig
                      */
     
                     /**
@@ -16881,6 +16967,14 @@
                     UpdateNodePoolRequest.prototype.gvnic = null;
     
                     /**
+                     * UpdateNodePoolRequest loggingConfig.
+                     * @member {google.container.v1.INodePoolLoggingConfig|null|undefined} loggingConfig
+                     * @memberof google.container.v1.UpdateNodePoolRequest
+                     * @instance
+                     */
+                    UpdateNodePoolRequest.prototype.loggingConfig = null;
+    
+                    /**
                      * Creates a new UpdateNodePoolRequest instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.UpdateNodePoolRequest
@@ -16943,6 +17037,8 @@
                             $root.google.container.v1.ConfidentialNodes.encode(message.confidentialNodes, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
                         if (message.gvnic != null && Object.hasOwnProperty.call(message, "gvnic"))
                             $root.google.container.v1.VirtualNIC.encode(message.gvnic, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
+                        if (message.loggingConfig != null && Object.hasOwnProperty.call(message, "loggingConfig"))
+                            $root.google.container.v1.NodePoolLoggingConfig.encode(message.loggingConfig, writer.uint32(/* id 32, wireType 2 =*/258).fork()).ldelim();
                         return writer;
                     };
     
@@ -17053,6 +17149,10 @@
                                 }
                             case 29: {
                                     message.gvnic = $root.google.container.v1.VirtualNIC.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 32: {
+                                    message.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -17173,6 +17273,11 @@
                             if (error)
                                 return "gvnic." + error;
                         }
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig")) {
+                            var error = $root.google.container.v1.NodePoolLoggingConfig.verify(message.loggingConfig);
+                            if (error)
+                                return "loggingConfig." + error;
+                        }
                         return null;
                     };
     
@@ -17264,6 +17369,11 @@
                                 throw TypeError(".google.container.v1.UpdateNodePoolRequest.gvnic: object expected");
                             message.gvnic = $root.google.container.v1.VirtualNIC.fromObject(object.gvnic);
                         }
+                        if (object.loggingConfig != null) {
+                            if (typeof object.loggingConfig !== "object")
+                                throw TypeError(".google.container.v1.UpdateNodePoolRequest.loggingConfig: object expected");
+                            message.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.fromObject(object.loggingConfig);
+                        }
                         return message;
                     };
     
@@ -17301,6 +17411,7 @@
                             object.gcfsConfig = null;
                             object.confidentialNodes = null;
                             object.gvnic = null;
+                            object.loggingConfig = null;
                         }
                         if (message.projectId != null && message.hasOwnProperty("projectId"))
                             object.projectId = message.projectId;
@@ -17343,6 +17454,8 @@
                             object.confidentialNodes = $root.google.container.v1.ConfidentialNodes.toObject(message.confidentialNodes, options);
                         if (message.gvnic != null && message.hasOwnProperty("gvnic"))
                             object.gvnic = $root.google.container.v1.VirtualNIC.toObject(message.gvnic, options);
+                        if (message.loggingConfig != null && message.hasOwnProperty("loggingConfig"))
+                            object.loggingConfig = $root.google.container.v1.NodePoolLoggingConfig.toObject(message.loggingConfig, options);
                         return object;
                     };
     
@@ -43411,6 +43524,451 @@
                     };
     
                     return MonitoringConfig;
+                })();
+    
+                v1.NodePoolLoggingConfig = (function() {
+    
+                    /**
+                     * Properties of a NodePoolLoggingConfig.
+                     * @memberof google.container.v1
+                     * @interface INodePoolLoggingConfig
+                     * @property {google.container.v1.ILoggingVariantConfig|null} [variantConfig] NodePoolLoggingConfig variantConfig
+                     */
+    
+                    /**
+                     * Constructs a new NodePoolLoggingConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a NodePoolLoggingConfig.
+                     * @implements INodePoolLoggingConfig
+                     * @constructor
+                     * @param {google.container.v1.INodePoolLoggingConfig=} [properties] Properties to set
+                     */
+                    function NodePoolLoggingConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * NodePoolLoggingConfig variantConfig.
+                     * @member {google.container.v1.ILoggingVariantConfig|null|undefined} variantConfig
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @instance
+                     */
+                    NodePoolLoggingConfig.prototype.variantConfig = null;
+    
+                    /**
+                     * Creates a new NodePoolLoggingConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {google.container.v1.INodePoolLoggingConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.NodePoolLoggingConfig} NodePoolLoggingConfig instance
+                     */
+                    NodePoolLoggingConfig.create = function create(properties) {
+                        return new NodePoolLoggingConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified NodePoolLoggingConfig message. Does not implicitly {@link google.container.v1.NodePoolLoggingConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {google.container.v1.INodePoolLoggingConfig} message NodePoolLoggingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodePoolLoggingConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.variantConfig != null && Object.hasOwnProperty.call(message, "variantConfig"))
+                            $root.google.container.v1.LoggingVariantConfig.encode(message.variantConfig, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified NodePoolLoggingConfig message, length delimited. Does not implicitly {@link google.container.v1.NodePoolLoggingConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {google.container.v1.INodePoolLoggingConfig} message NodePoolLoggingConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    NodePoolLoggingConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a NodePoolLoggingConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.NodePoolLoggingConfig} NodePoolLoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodePoolLoggingConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.NodePoolLoggingConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.variantConfig = $root.google.container.v1.LoggingVariantConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a NodePoolLoggingConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.NodePoolLoggingConfig} NodePoolLoggingConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    NodePoolLoggingConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a NodePoolLoggingConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    NodePoolLoggingConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.variantConfig != null && message.hasOwnProperty("variantConfig")) {
+                            var error = $root.google.container.v1.LoggingVariantConfig.verify(message.variantConfig);
+                            if (error)
+                                return "variantConfig." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a NodePoolLoggingConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.NodePoolLoggingConfig} NodePoolLoggingConfig
+                     */
+                    NodePoolLoggingConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.NodePoolLoggingConfig)
+                            return object;
+                        var message = new $root.google.container.v1.NodePoolLoggingConfig();
+                        if (object.variantConfig != null) {
+                            if (typeof object.variantConfig !== "object")
+                                throw TypeError(".google.container.v1.NodePoolLoggingConfig.variantConfig: object expected");
+                            message.variantConfig = $root.google.container.v1.LoggingVariantConfig.fromObject(object.variantConfig);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a NodePoolLoggingConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {google.container.v1.NodePoolLoggingConfig} message NodePoolLoggingConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    NodePoolLoggingConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.variantConfig = null;
+                        if (message.variantConfig != null && message.hasOwnProperty("variantConfig"))
+                            object.variantConfig = $root.google.container.v1.LoggingVariantConfig.toObject(message.variantConfig, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this NodePoolLoggingConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    NodePoolLoggingConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for NodePoolLoggingConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.NodePoolLoggingConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    NodePoolLoggingConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.NodePoolLoggingConfig";
+                    };
+    
+                    return NodePoolLoggingConfig;
+                })();
+    
+                v1.LoggingVariantConfig = (function() {
+    
+                    /**
+                     * Properties of a LoggingVariantConfig.
+                     * @memberof google.container.v1
+                     * @interface ILoggingVariantConfig
+                     * @property {google.container.v1.LoggingVariantConfig.Variant|null} [variant] LoggingVariantConfig variant
+                     */
+    
+                    /**
+                     * Constructs a new LoggingVariantConfig.
+                     * @memberof google.container.v1
+                     * @classdesc Represents a LoggingVariantConfig.
+                     * @implements ILoggingVariantConfig
+                     * @constructor
+                     * @param {google.container.v1.ILoggingVariantConfig=} [properties] Properties to set
+                     */
+                    function LoggingVariantConfig(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * LoggingVariantConfig variant.
+                     * @member {google.container.v1.LoggingVariantConfig.Variant} variant
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @instance
+                     */
+                    LoggingVariantConfig.prototype.variant = 0;
+    
+                    /**
+                     * Creates a new LoggingVariantConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingVariantConfig=} [properties] Properties to set
+                     * @returns {google.container.v1.LoggingVariantConfig} LoggingVariantConfig instance
+                     */
+                    LoggingVariantConfig.create = function create(properties) {
+                        return new LoggingVariantConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingVariantConfig message. Does not implicitly {@link google.container.v1.LoggingVariantConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingVariantConfig} message LoggingVariantConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingVariantConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.variant != null && Object.hasOwnProperty.call(message, "variant"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.variant);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified LoggingVariantConfig message, length delimited. Does not implicitly {@link google.container.v1.LoggingVariantConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {google.container.v1.ILoggingVariantConfig} message LoggingVariantConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    LoggingVariantConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a LoggingVariantConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.container.v1.LoggingVariantConfig} LoggingVariantConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingVariantConfig.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.container.v1.LoggingVariantConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.variant = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a LoggingVariantConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.container.v1.LoggingVariantConfig} LoggingVariantConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    LoggingVariantConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a LoggingVariantConfig message.
+                     * @function verify
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    LoggingVariantConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.variant != null && message.hasOwnProperty("variant"))
+                            switch (message.variant) {
+                            default:
+                                return "variant: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a LoggingVariantConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.container.v1.LoggingVariantConfig} LoggingVariantConfig
+                     */
+                    LoggingVariantConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.container.v1.LoggingVariantConfig)
+                            return object;
+                        var message = new $root.google.container.v1.LoggingVariantConfig();
+                        switch (object.variant) {
+                        case "VARIANT_UNSPECIFIED":
+                        case 0:
+                            message.variant = 0;
+                            break;
+                        case "DEFAULT":
+                        case 1:
+                            message.variant = 1;
+                            break;
+                        case "MAX_THROUGHPUT":
+                        case 2:
+                            message.variant = 2;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a LoggingVariantConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {google.container.v1.LoggingVariantConfig} message LoggingVariantConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    LoggingVariantConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.variant = options.enums === String ? "VARIANT_UNSPECIFIED" : 0;
+                        if (message.variant != null && message.hasOwnProperty("variant"))
+                            object.variant = options.enums === String ? $root.google.container.v1.LoggingVariantConfig.Variant[message.variant] : message.variant;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this LoggingVariantConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    LoggingVariantConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for LoggingVariantConfig
+                     * @function getTypeUrl
+                     * @memberof google.container.v1.LoggingVariantConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    LoggingVariantConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.container.v1.LoggingVariantConfig";
+                    };
+    
+                    /**
+                     * Variant enum.
+                     * @name google.container.v1.LoggingVariantConfig.Variant
+                     * @enum {number}
+                     * @property {number} VARIANT_UNSPECIFIED=0 VARIANT_UNSPECIFIED value
+                     * @property {number} DEFAULT=1 DEFAULT value
+                     * @property {number} MAX_THROUGHPUT=2 MAX_THROUGHPUT value
+                     */
+                    LoggingVariantConfig.Variant = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "VARIANT_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "DEFAULT"] = 1;
+                        values[valuesById[2] = "MAX_THROUGHPUT"] = 2;
+                        return values;
+                    })();
+    
+                    return LoggingVariantConfig;
                 })();
     
                 v1.MonitoringComponentConfig = (function() {

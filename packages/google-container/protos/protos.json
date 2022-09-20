@@ -1006,6 +1006,10 @@
                     "confidentialNodes": {
                       "type": "ConfidentialNodes",
                       "id": 35
+                    },
+                    "loggingConfig": {
+                      "type": "NodePoolLoggingConfig",
+                      "id": 38
                     }
                   }
                 },
@@ -1891,6 +1895,10 @@
                     "gcfsConfig": {
                       "type": "GcfsConfig",
                       "id": 1
+                    },
+                    "loggingConfig": {
+                      "type": "NodePoolLoggingConfig",
+                      "id": 3
                     }
                   }
                 },
@@ -2032,6 +2040,10 @@
                     "desiredNodePoolAutoConfigNetworkTags": {
                       "type": "NetworkTags",
                       "id": 110
+                    },
+                    "desiredNodePoolLoggingConfig": {
+                      "type": "NodePoolLoggingConfig",
+                      "id": 116
                     }
                   }
                 },
@@ -2395,6 +2407,10 @@
                     "gvnic": {
                       "type": "VirtualNIC",
                       "id": 29
+                    },
+                    "loggingConfig": {
+                      "type": "NodePoolLoggingConfig",
+                      "id": 32
                     }
                   }
                 },
@@ -4648,6 +4664,31 @@
                     "managedPrometheusConfig": {
                       "type": "ManagedPrometheusConfig",
                       "id": 2
+                    }
+                  }
+                },
+                "NodePoolLoggingConfig": {
+                  "fields": {
+                    "variantConfig": {
+                      "type": "LoggingVariantConfig",
+                      "id": 1
+                    }
+                  }
+                },
+                "LoggingVariantConfig": {
+                  "fields": {
+                    "variant": {
+                      "type": "Variant",
+                      "id": 1
+                    }
+                  },
+                  "nested": {
+                    "Variant": {
+                      "values": {
+                        "VARIANT_UNSPECIFIED": 0,
+                        "DEFAULT": 1,
+                        "MAX_THROUGHPUT": 2
+                      }
                     }
                   }
                 },

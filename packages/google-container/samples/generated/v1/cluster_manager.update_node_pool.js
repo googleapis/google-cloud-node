@@ -109,6 +109,10 @@ function main(nodeVersion, imageType) {
    *  Enable or disable gvnic on the node pool.
    */
   // const gvnic = {}
+  /**
+   *  Logging configuration.
+   */
+  // const loggingConfig = {}
 
   // Imports the Container library
   const {ClusterManagerClient} = require('@google-cloud/container').v1;

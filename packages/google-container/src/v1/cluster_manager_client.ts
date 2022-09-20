@@ -828,6 +828,8 @@ export class ClusterManagerClient {
    *   All the nodes in the node pool will be Confidential VM once enabled.
    * @param {google.container.v1.VirtualNIC} request.gvnic
    *   Enable or disable gvnic on the node pool.
+   * @param {google.container.v1.NodePoolLoggingConfig} request.loggingConfig
+   *   Logging configuration.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
