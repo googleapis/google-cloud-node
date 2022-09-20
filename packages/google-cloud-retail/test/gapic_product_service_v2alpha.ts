@@ -32,6 +32,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -259,26 +274,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Product()
       );
       client.innerApiCalls.createProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.createProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProduct without error using callback', async () => {
@@ -290,15 +304,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Product()
       );
@@ -321,11 +331,14 @@ describe('v2alpha.ProductServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProduct with error', async () => {
@@ -337,26 +350,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.createProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProduct with closed client', async () => {
@@ -368,7 +380,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateProductRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateProductRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProduct(request), expectedError);
@@ -385,26 +400,23 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Product()
       );
       client.innerApiCalls.getProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.getProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProduct without error using callback', async () => {
@@ -416,15 +428,9 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Product()
       );
@@ -447,11 +453,14 @@ describe('v2alpha.ProductServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProduct with error', async () => {
@@ -463,26 +472,23 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.getProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProduct with closed client', async () => {
@@ -494,7 +500,8 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetProductRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetProductRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProduct(request), expectedError);
@@ -511,27 +518,27 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
+        'product',
+        'name',
+      ]);
+      request.product.name = defaultValue1;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Product()
       );
       client.innerApiCalls.updateProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.updateProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProduct without error using callback', async () => {
@@ -543,16 +550,13 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
+        'product',
+        'name',
+      ]);
+      request.product.name = defaultValue1;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Product()
       );
@@ -575,11 +579,14 @@ describe('v2alpha.ProductServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProduct with error', async () => {
@@ -591,27 +598,27 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
+        'product',
+        'name',
+      ]);
+      request.product.name = defaultValue1;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProduct with closed client', async () => {
@@ -623,8 +630,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateProductRequest', [
+        'product',
+        'name',
+      ]);
+      request.product.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProduct(request), expectedError);
@@ -641,26 +652,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProduct without error using callback', async () => {
@@ -672,15 +682,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -703,11 +709,14 @@ describe('v2alpha.ProductServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProduct with error', async () => {
@@ -719,26 +728,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProduct with closed client', async () => {
@@ -750,7 +758,10 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteProductRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteProductRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProduct(request), expectedError);
@@ -767,15 +778,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -784,11 +791,14 @@ describe('v2alpha.ProductServiceClient', () => {
       const [operation] = await client.purgeProducts(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes purgeProducts without error using callback', async () => {
@@ -800,15 +810,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -838,11 +844,14 @@ describe('v2alpha.ProductServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes purgeProducts with call error', async () => {
@@ -854,26 +863,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeProducts = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.purgeProducts(request), expectedError);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes purgeProducts with LRO error', async () => {
@@ -885,15 +893,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PurgeProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeProducts = stubLongRunningCall(
         undefined,
@@ -902,11 +906,14 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       const [operation] = await client.purgeProducts(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkPurgeProductsProgress without error', async () => {
@@ -961,15 +968,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -978,11 +981,14 @@ describe('v2alpha.ProductServiceClient', () => {
       const [operation] = await client.importProducts(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importProducts without error using callback', async () => {
@@ -994,15 +1000,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1032,11 +1034,14 @@ describe('v2alpha.ProductServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importProducts with call error', async () => {
@@ -1048,26 +1053,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProducts = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.importProducts(request), expectedError);
-      assert(
-        (client.innerApiCalls.importProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importProducts with LRO error', async () => {
@@ -1079,15 +1083,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ImportProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ImportProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProducts = stubLongRunningCall(
         undefined,
@@ -1096,11 +1096,14 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       const [operation] = await client.importProducts(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.importProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkImportProductsProgress without error', async () => {
@@ -1155,16 +1158,13 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
-      request.inventory = {};
-      request.inventory.name = '';
-      const expectedHeaderRequestParams = 'inventory.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.inventory ??= {};
+      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
+        'inventory',
+        'name',
+      ]);
+      request.inventory.name = defaultValue1;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1172,11 +1172,14 @@ describe('v2alpha.ProductServiceClient', () => {
       const [operation] = await client.setInventory(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setInventory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setInventory without error using callback', async () => {
@@ -1188,16 +1191,13 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
-      request.inventory = {};
-      request.inventory.name = '';
-      const expectedHeaderRequestParams = 'inventory.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.inventory ??= {};
+      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
+        'inventory',
+        'name',
+      ]);
+      request.inventory.name = defaultValue1;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1227,11 +1227,14 @@ describe('v2alpha.ProductServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setInventory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setInventory with call error', async () => {
@@ -1243,27 +1246,27 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
-      request.inventory = {};
-      request.inventory.name = '';
-      const expectedHeaderRequestParams = 'inventory.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.inventory ??= {};
+      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
+        'inventory',
+        'name',
+      ]);
+      request.inventory.name = defaultValue1;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setInventory = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setInventory(request), expectedError);
-      assert(
-        (client.innerApiCalls.setInventory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setInventory with LRO error', async () => {
@@ -1275,16 +1278,13 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.SetInventoryRequest()
       );
-      request.inventory = {};
-      request.inventory.name = '';
-      const expectedHeaderRequestParams = 'inventory.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.inventory ??= {};
+      const defaultValue1 = getTypeDefaultValue('SetInventoryRequest', [
+        'inventory',
+        'name',
+      ]);
+      request.inventory.name = defaultValue1;
+      const expectedHeaderRequestParams = `inventory.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setInventory = stubLongRunningCall(
         undefined,
@@ -1293,11 +1293,14 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       const [operation] = await client.setInventory(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.setInventory as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setInventory as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkSetInventoryProgress without error', async () => {
@@ -1349,15 +1352,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1366,11 +1365,14 @@ describe('v2alpha.ProductServiceClient', () => {
       const [operation] = await client.addFulfillmentPlaces(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addFulfillmentPlaces without error using callback', async () => {
@@ -1382,15 +1384,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1420,11 +1418,14 @@ describe('v2alpha.ProductServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addFulfillmentPlaces with call error', async () => {
@@ -1436,26 +1437,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addFulfillmentPlaces = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addFulfillmentPlaces(request), expectedError);
-      assert(
-        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addFulfillmentPlaces with LRO error', async () => {
@@ -1467,15 +1467,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddFulfillmentPlacesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addFulfillmentPlaces = stubLongRunningCall(
         undefined,
@@ -1484,11 +1480,14 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       const [operation] = await client.addFulfillmentPlaces(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkAddFulfillmentPlacesProgress without error', async () => {
@@ -1543,15 +1542,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveFulfillmentPlacesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1560,11 +1556,14 @@ describe('v2alpha.ProductServiceClient', () => {
       const [operation] = await client.removeFulfillmentPlaces(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeFulfillmentPlaces without error using callback', async () => {
@@ -1576,15 +1575,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveFulfillmentPlacesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1614,11 +1610,14 @@ describe('v2alpha.ProductServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeFulfillmentPlaces with call error', async () => {
@@ -1630,15 +1629,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveFulfillmentPlacesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeFulfillmentPlaces = stubLongRunningCall(
         undefined,
@@ -1648,11 +1644,14 @@ describe('v2alpha.ProductServiceClient', () => {
         client.removeFulfillmentPlaces(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeFulfillmentPlaces with LRO error', async () => {
@@ -1664,15 +1663,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveFulfillmentPlacesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeFulfillmentPlaces = stubLongRunningCall(
         undefined,
@@ -1681,11 +1677,14 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       const [operation] = await client.removeFulfillmentPlaces(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeFulfillmentPlaces as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRemoveFulfillmentPlacesProgress without error', async () => {
@@ -1741,15 +1740,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1758,11 +1753,14 @@ describe('v2alpha.ProductServiceClient', () => {
       const [operation] = await client.addLocalInventories(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addLocalInventories without error using callback', async () => {
@@ -1774,15 +1772,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1812,11 +1806,14 @@ describe('v2alpha.ProductServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addLocalInventories with call error', async () => {
@@ -1828,26 +1825,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addLocalInventories = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addLocalInventories(request), expectedError);
-      assert(
-        (client.innerApiCalls.addLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addLocalInventories with LRO error', async () => {
@@ -1859,15 +1855,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.AddLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddLocalInventoriesRequest', [
+        'product',
+      ]);
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addLocalInventories = stubLongRunningCall(
         undefined,
@@ -1876,11 +1868,14 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       const [operation] = await client.addLocalInventories(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.addLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkAddLocalInventoriesProgress without error', async () => {
@@ -1935,15 +1930,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveLocalInventoriesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1952,11 +1944,14 @@ describe('v2alpha.ProductServiceClient', () => {
       const [operation] = await client.removeLocalInventories(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeLocalInventories without error using callback', async () => {
@@ -1968,15 +1963,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveLocalInventoriesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2006,11 +1998,14 @@ describe('v2alpha.ProductServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeLocalInventories with call error', async () => {
@@ -2022,15 +2017,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveLocalInventoriesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeLocalInventories = stubLongRunningCall(
         undefined,
@@ -2040,11 +2032,14 @@ describe('v2alpha.ProductServiceClient', () => {
         client.removeLocalInventories(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.removeLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeLocalInventories with LRO error', async () => {
@@ -2056,15 +2051,12 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.RemoveLocalInventoriesRequest()
       );
-      request.product = '';
-      const expectedHeaderRequestParams = 'product=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveLocalInventoriesRequest',
+        ['product']
+      );
+      request.product = defaultValue1;
+      const expectedHeaderRequestParams = `product=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeLocalInventories = stubLongRunningCall(
         undefined,
@@ -2073,11 +2065,14 @@ describe('v2alpha.ProductServiceClient', () => {
       );
       const [operation] = await client.removeLocalInventories(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.removeLocalInventories as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeLocalInventories as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkRemoveLocalInventoriesProgress without error', async () => {
@@ -2132,15 +2127,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
@@ -2149,11 +2140,14 @@ describe('v2alpha.ProductServiceClient', () => {
       client.innerApiCalls.listProducts = stubSimpleCall(expectedResponse);
       const [response] = await client.listProducts(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProducts without error using callback', async () => {
@@ -2165,15 +2159,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
@@ -2198,11 +2188,14 @@ describe('v2alpha.ProductServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProducts with error', async () => {
@@ -2214,26 +2207,25 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProducts = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listProducts(request), expectedError);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductsStream without error', async () => {
@@ -2245,8 +2237,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
@@ -2277,11 +2272,12 @@ describe('v2alpha.ProductServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProducts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2294,8 +2290,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.createStream = stubPageStreamingCall(
         undefined,
@@ -2323,11 +2322,12 @@ describe('v2alpha.ProductServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProducts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2340,8 +2340,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Product()),
@@ -2361,11 +2364,12 @@ describe('v2alpha.ProductServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2378,8 +2382,11 @@ describe('v2alpha.ProductServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListProductsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2396,11 +2403,12 @@ describe('v2alpha.ProductServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2551,12 +2559,15 @@ describe('v2alpha.ProductServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -2587,12 +2598,15 @@ describe('v2alpha.ProductServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

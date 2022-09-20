@@ -196,6 +196,9 @@ export class ControlServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
       ),
@@ -489,7 +492,7 @@ export class ControlServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createControl(request, options, callback);
@@ -584,7 +587,7 @@ export class ControlServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteControl(request, options, callback);
@@ -594,7 +597,7 @@ export class ControlServiceClient {
    *
    * {@link google.cloud.retail.v2beta.Control|Control} cannot be set to a different
    * oneof field, if so an INVALID_ARGUMENT is returned. If the
-   * {@link google.cloud.retail.v2beta.Control|Control} to delete does not exist, a
+   * {@link google.cloud.retail.v2beta.Control|Control} to update does not exist, a
    * NOT_FOUND error is returned.
    *
    * @param {Object} request
@@ -688,7 +691,7 @@ export class ControlServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'control.name': request.control!.name || '',
+        'control.name': request.control!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateControl(request, options, callback);
@@ -699,7 +702,7 @@ export class ControlServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Control to delete. Format:
+   *   Required. The resource name of the Control to get. Format:
    *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/controls/{control_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -774,14 +777,15 @@ export class ControlServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getControl(request, options, callback);
   }
 
   /**
-   * Lists all Controls linked to this catalog.
+   * Lists all Controls by their parent
+   * {@link google.cloud.retail.v2beta.Catalog|Catalog}.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -883,7 +887,7 @@ export class ControlServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listControls(request, options, callback);
@@ -931,7 +935,7 @@ export class ControlServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
@@ -988,7 +992,7 @@ export class ControlServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listControls'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1484,6 +1488,68 @@ export class ControlServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

@@ -43,7 +43,7 @@ const version = require('../../../package.json').version;
  *  Auto-completion service for retail.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Please enable Retail Search on Cloud Console before using this feature.
+ *  Enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2beta
  */
@@ -197,6 +197,9 @@ export class CompletionServiceClient {
       ),
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
@@ -395,7 +398,7 @@ export class CompletionServiceClient {
    * Completes the specified prefix with keyword suggestions.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -541,7 +544,7 @@ export class CompletionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        catalog: request.catalog || '',
+        catalog: request.catalog ?? '',
       });
     this.initialize();
     return this.innerApiCalls.completeQuery(request, options, callback);
@@ -556,7 +559,7 @@ export class CompletionServiceClient {
    * are indexed successfully and ready for serving. The process takes hours.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -568,8 +571,8 @@ export class CompletionServiceClient {
    *   Required. The desired input location of the data.
    * @param {string} request.notificationPubsubTopic
    *   Pub/Sub topic for receiving notification. If this field is set,
-   *   when the import is finished, a notification will be sent to
-   *   specified Pub/Sub topic. The message data will be JSON string of a
+   *   when the import is finished, a notification is sent to
+   *   specified Pub/Sub topic. The message data is JSON string of a
    *   {@link google.longrunning.Operation|Operation}.
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
    * @param {object} [options]
@@ -663,7 +666,7 @@ export class CompletionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.importCompletionData(request, options, callback);
@@ -1188,6 +1191,68 @@ export class CompletionServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

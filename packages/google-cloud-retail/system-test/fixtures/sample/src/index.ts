@@ -20,6 +20,7 @@ import {
   CatalogServiceClient,
   CompletionServiceClient,
   ControlServiceClient,
+  ModelServiceClient,
   PredictionServiceClient,
   ProductServiceClient,
   SearchServiceClient,
@@ -35,6 +36,9 @@ function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
   client.close();
 }
 function doStuffWithControlServiceClient(client: ControlServiceClient) {
+  client.close();
+}
+function doStuffWithModelServiceClient(client: ModelServiceClient) {
   client.close();
 }
 function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
@@ -65,6 +69,9 @@ function main() {
   // check that the client instance can be created
   const controlServiceClient = new ControlServiceClient();
   doStuffWithControlServiceClient(controlServiceClient);
+  // check that the client instance can be created
+  const modelServiceClient = new ModelServiceClient();
+  doStuffWithModelServiceClient(modelServiceClient);
   // check that the client instance can be created
   const predictionServiceClient = new PredictionServiceClient();
   doStuffWithPredictionServiceClient(predictionServiceClient);

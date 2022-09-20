@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -233,15 +248,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateServingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -249,11 +260,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createServingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServingConfig without error using callback', async () => {
@@ -266,15 +280,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateServingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -297,11 +307,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServingConfig with error', async () => {
@@ -314,26 +327,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateServingConfigRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createServingConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createServingConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.createServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createServingConfig with closed client', async () => {
@@ -346,7 +358,10 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.CreateServingConfigRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateServingConfigRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createServingConfig(request), expectedError);
@@ -364,15 +379,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteServingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -380,11 +391,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteServingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteServingConfig without error using callback', async () => {
@@ -397,15 +411,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteServingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -428,11 +438,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteServingConfig with error', async () => {
@@ -445,26 +458,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteServingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteServingConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteServingConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteServingConfig with closed client', async () => {
@@ -477,7 +489,10 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.DeleteServingConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteServingConfig(request), expectedError);
@@ -495,16 +510,13 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateServingConfigRequest()
       );
-      request.servingConfig = {};
-      request.servingConfig.name = '';
-      const expectedHeaderRequestParams = 'serving_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.servingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
+        'servingConfig',
+        'name',
+      ]);
+      request.servingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -512,11 +524,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateServingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateServingConfig without error using callback', async () => {
@@ -529,16 +544,13 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateServingConfigRequest()
       );
-      request.servingConfig = {};
-      request.servingConfig.name = '';
-      const expectedHeaderRequestParams = 'serving_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.servingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
+        'servingConfig',
+        'name',
+      ]);
+      request.servingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -561,11 +573,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateServingConfig with error', async () => {
@@ -578,27 +593,27 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateServingConfigRequest()
       );
-      request.servingConfig = {};
-      request.servingConfig.name = '';
-      const expectedHeaderRequestParams = 'serving_config.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.servingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
+        'servingConfig',
+        'name',
+      ]);
+      request.servingConfig.name = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateServingConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateServingConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateServingConfig with closed client', async () => {
@@ -611,8 +626,12 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.UpdateServingConfigRequest()
       );
-      request.servingConfig = {};
-      request.servingConfig.name = '';
+      request.servingConfig ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateServingConfigRequest', [
+        'servingConfig',
+        'name',
+      ]);
+      request.servingConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateServingConfig(request), expectedError);
@@ -630,26 +649,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetServingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
       client.innerApiCalls.getServingConfig = stubSimpleCall(expectedResponse);
       const [response] = await client.getServingConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServingConfig without error using callback', async () => {
@@ -662,15 +680,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetServingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -693,11 +707,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServingConfig with error', async () => {
@@ -710,26 +727,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetServingConfigRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getServingConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getServingConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.getServingConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getServingConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getServingConfig with closed client', async () => {
@@ -742,7 +758,10 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.GetServingConfigRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetServingConfigRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getServingConfig(request), expectedError);
@@ -760,26 +779,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AddControlRequest()
       );
-      request.servingConfig = '';
-      const expectedHeaderRequestParams = 'serving_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
       client.innerApiCalls.addControl = stubSimpleCall(expectedResponse);
       const [response] = await client.addControl(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addControl without error using callback', async () => {
@@ -792,15 +810,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AddControlRequest()
       );
-      request.servingConfig = '';
-      const expectedHeaderRequestParams = 'serving_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -823,11 +837,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addControl with error', async () => {
@@ -840,26 +857,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AddControlRequest()
       );
-      request.servingConfig = '';
-      const expectedHeaderRequestParams = 'serving_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addControl = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addControl(request), expectedError);
-      assert(
-        (client.innerApiCalls.addControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addControl with closed client', async () => {
@@ -872,7 +888,10 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.AddControlRequest()
       );
-      request.servingConfig = '';
+      const defaultValue1 = getTypeDefaultValue('AddControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addControl(request), expectedError);
@@ -890,26 +909,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.RemoveControlRequest()
       );
-      request.servingConfig = '';
-      const expectedHeaderRequestParams = 'serving_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
       client.innerApiCalls.removeControl = stubSimpleCall(expectedResponse);
       const [response] = await client.removeControl(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeControl without error using callback', async () => {
@@ -922,15 +940,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.RemoveControlRequest()
       );
-      request.servingConfig = '';
-      const expectedHeaderRequestParams = 'serving_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ServingConfig()
       );
@@ -953,11 +967,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeControl with error', async () => {
@@ -970,26 +987,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.RemoveControlRequest()
       );
-      request.servingConfig = '';
-      const expectedHeaderRequestParams = 'serving_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
+      const expectedHeaderRequestParams = `serving_config=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeControl = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.removeControl(request), expectedError);
-      assert(
-        (client.innerApiCalls.removeControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeControl with closed client', async () => {
@@ -1002,7 +1018,10 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.RemoveControlRequest()
       );
-      request.servingConfig = '';
+      const defaultValue1 = getTypeDefaultValue('RemoveControlRequest', [
+        'servingConfig',
+      ]);
+      request.servingConfig = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removeControl(request), expectedError);
@@ -1020,15 +1039,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListServingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1044,11 +1059,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listServingConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServingConfigs without error using callback', async () => {
@@ -1061,15 +1079,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListServingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1100,11 +1114,14 @@ describe('v2beta.ServingConfigServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listServingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServingConfigs with error', async () => {
@@ -1117,26 +1134,25 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListServingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listServingConfigs = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listServingConfigs(request), expectedError);
-      assert(
-        (client.innerApiCalls.listServingConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listServingConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listServingConfigsStream without error', async () => {
@@ -1149,8 +1165,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListServingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1187,11 +1206,12 @@ describe('v2beta.ServingConfigServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServingConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServingConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1205,8 +1225,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListServingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServingConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1232,11 +1255,12 @@ describe('v2beta.ServingConfigServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listServingConfigs, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServingConfigs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServingConfigs.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1250,8 +1274,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListServingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.retail.v2beta.ServingConfig()
@@ -1277,11 +1304,12 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServingConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServingConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1295,8 +1323,11 @@ describe('v2beta.ServingConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2beta.ListServingConfigsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListServingConfigsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listServingConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1314,11 +1345,12 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listServingConfigs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listServingConfigs.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1473,12 +1505,15 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -1510,12 +1545,15 @@ describe('v2beta.ServingConfigServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2109,6 +2147,83 @@ describe('v2beta.ServingConfigServiceClient', () => {
         assert.strictEqual(result, 'controlValue');
         assert(
           (client.pathTemplates.controlPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('model', () => {
+      const fakePath = '/rendered/path/model';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        model: 'modelValue',
+      };
+      const client =
+        new servingconfigserviceModule.v2beta.ServingConfigServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.modelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.modelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('modelPath', () => {
+        const result = client.modelPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'modelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.modelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelName', () => {
+        const result = client.matchProjectFromModelName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelName', () => {
+        const result = client.matchLocationFromModelName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromModelName', () => {
+        const result = client.matchCatalogFromModelName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelFromModelName', () => {
+        const result = client.matchModelFromModelName(fakePath);
+        assert.strictEqual(result, 'modelValue');
+        assert(
+          (client.pathTemplates.modelPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

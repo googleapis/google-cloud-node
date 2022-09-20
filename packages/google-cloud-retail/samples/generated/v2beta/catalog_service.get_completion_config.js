@@ -30,7 +30,7 @@ function main(name) {
    */
   /**
    *  Required. Full CompletionConfig resource name. Format:
-   *  projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig
+   *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/completionConfig`
    */
   // const name = 'abc123'
 

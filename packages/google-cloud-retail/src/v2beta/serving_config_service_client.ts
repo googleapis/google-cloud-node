@@ -196,6 +196,9 @@ export class ServingConfigServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
       ),
@@ -492,7 +495,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createServingConfig(request, options, callback);
@@ -506,7 +509,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to delete. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -586,7 +589,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteServingConfig(request, options, callback);
@@ -685,7 +688,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'serving_config.name': request.servingConfig!.name || '',
+        'serving_config.name': request.servingConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateServingConfig(request, options, callback);
@@ -699,7 +702,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the ServingConfig to get. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -779,7 +782,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getServingConfig(request, options, callback);
@@ -797,7 +800,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.servingConfig
    *   Required. The source ServingConfig resource name . Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {string} request.controlId
    *   Required. The id of the control to apply. Assumed to be in the same catalog
    *   as the serving config - if id is not found a NOT_FOUND error is returned.
@@ -874,7 +877,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        serving_config: request.servingConfig || '',
+        serving_config: request.servingConfig ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addControl(request, options, callback);
@@ -889,7 +892,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.servingConfig
    *   Required. The source ServingConfig resource name . Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/servingConfigs/{serving_config_id}`
    * @param {string} request.controlId
    *   Required. The id of the control to apply. Assumed to be in the same catalog
    *   as the serving config.
@@ -972,7 +975,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        serving_config: request.servingConfig || '',
+        serving_config: request.servingConfig ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeControl(request, options, callback);
@@ -985,7 +988,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -1075,7 +1078,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listServingConfigs(request, options, callback);
@@ -1087,7 +1090,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -1117,7 +1120,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1137,7 +1140,7 @@ export class ServingConfigServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The catalog resource name. Format:
-   *   projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}
+   *   `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}`
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of results to return. If unspecified, defaults
    *   to 100. If a value greater than 100 is provided, at most 100 results are
@@ -1168,7 +1171,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1664,6 +1667,68 @@ export class ServingConfigServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

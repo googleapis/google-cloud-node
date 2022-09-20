@@ -195,6 +195,9 @@ export class UserEventServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
       ),
@@ -502,7 +505,7 @@ export class UserEventServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.writeUserEvent(request, options, callback);
@@ -610,7 +613,7 @@ export class UserEventServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.collectUserEvent(request, options, callback);
@@ -748,7 +751,7 @@ export class UserEventServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.purgeUserEvents(request, options, callback);
@@ -793,9 +796,9 @@ export class UserEventServiceClient {
    * synchronous. Events that already exist are skipped.
    * Use this method for backfilling historical user events.
    *
-   * Operation.response is of type ImportResponse. Note that it is
+   * `Operation.response` is of type `ImportResponse`. Note that it is
    * possible for a subset of the items to be successfully inserted.
-   * Operation.metadata is of type ImportMetadata.
+   * `Operation.metadata` is of type `ImportMetadata`.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -897,7 +900,7 @@ export class UserEventServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.importUserEvents(request, options, callback);
@@ -938,14 +941,14 @@ export class UserEventServiceClient {
     >;
   }
   /**
-   * Starts a user event rejoin operation with latest product catalog. Events
-   * will not be annotated with detailed product information if product is
-   * missing from the catalog at the time the user event is ingested, and these
-   * events are stored as unjoined events with a limited usage on training and
-   * serving. This method can be used to start a join operation on specified
-   * events with latest version of product catalog. It can also be used to
-   * correct events joined with the wrong product catalog. A rejoin operation
-   * can take hours or days to complete.
+   * Starts a user-event rejoin operation with latest product catalog. Events
+   * are not annotated with detailed product information for products that are
+   * missing from the catalog when the user event is ingested. These
+   * events are stored as unjoined events with limited usage on training and
+   * serving. You can use this method to start a join operation on specified
+   * events with the latest version of product catalog. You can also use this
+   * method to correct events joined with the wrong product catalog. A rejoin
+   * operation can take hours or days to complete.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -955,8 +958,8 @@ export class UserEventServiceClient {
    * @param {google.cloud.retail.v2beta.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
    *   The type of the user event rejoin to define the scope and range of the user
    *   events to be rejoined with the latest product catalog. Defaults to
-   *   USER_EVENT_REJOIN_SCOPE_UNSPECIFIED if this field is not set, or set to an
-   *   invalid integer value.
+   *   `USER_EVENT_REJOIN_SCOPE_UNSPECIFIED` if this field is not set, or set to
+   *   an invalid integer value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1048,7 +1051,7 @@ export class UserEventServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.rejoinUserEvents(request, options, callback);
@@ -1573,6 +1576,68 @@ export class UserEventServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

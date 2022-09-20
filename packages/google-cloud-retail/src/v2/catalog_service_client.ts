@@ -496,7 +496,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'catalog.name': request.catalog!.name || '',
+        'catalog.name': request.catalog!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateCatalog(request, options, callback);
@@ -634,7 +634,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        catalog: request.catalog || '',
+        catalog: request.catalog ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setDefaultBranch(request, options, callback);
@@ -722,7 +722,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        catalog: request.catalog || '',
+        catalog: request.catalog ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getDefaultBranch(request, options, callback);
@@ -814,7 +814,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getCompletionConfig(request, options, callback);
@@ -924,7 +924,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'completion_config.name': request.completionConfig!.name || '',
+        'completion_config.name': request.completionConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateCompletionConfig(
@@ -1020,7 +1020,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAttributesConfig(request, options, callback);
@@ -1127,7 +1127,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'attributes_config.name': request.attributesConfig!.name || '',
+        'attributes_config.name': request.attributesConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAttributesConfig(
@@ -1231,7 +1231,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        attributes_config: request.attributesConfig || '',
+        attributes_config: request.attributesConfig ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addCatalogAttribute(request, options, callback);
@@ -1331,7 +1331,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        attributes_config: request.attributesConfig || '',
+        attributes_config: request.attributesConfig ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeCatalogAttribute(
@@ -1445,7 +1445,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        attributes_config: request.attributesConfig || '',
+        attributes_config: request.attributesConfig ?? '',
       });
     this.initialize();
     return this.innerApiCalls.replaceCatalogAttribute(
@@ -1561,7 +1561,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listCatalogs(request, options, callback);
@@ -1617,7 +1617,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCatalogs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1682,7 +1682,7 @@ export class CatalogServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listCatalogs'];
     const callSettings = defaultCallSettings.merge(options);

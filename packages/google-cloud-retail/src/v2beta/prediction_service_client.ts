@@ -194,6 +194,9 @@ export class PredictionServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
       ),
@@ -408,12 +411,12 @@ export class PredictionServiceClient {
    *   a random unique ID and leave
    *   {@link google.cloud.retail.v2beta.UserInfo.user_id|UserInfo.user_id} unset.
    * @param {number} request.pageSize
-   *   Maximum number of results to return per page. Set this property
-   *   to the number of prediction results needed. If zero, the service will
-   *   choose a reasonable default. The maximum allowed value is 100. Values
-   *   above 100 will be coerced to 100.
+   *   Maximum number of results to return. Set this property to the number of
+   *   prediction results needed. If zero, the service will choose a reasonable
+   *   default. The maximum allowed value is 100. Values above 100 will be coerced
+   *   to 100.
    * @param {string} request.pageToken
-   *   This field is not used for now; leave it unset.
+   *   This field is not used; leave it unset.
    * @param {string} request.filter
    *   Filter for restricting prediction results with a length limit of 5,000
    *   characters. Accepts values for tags and the `filterOutOfStockItems` flag.
@@ -574,7 +577,7 @@ export class PredictionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        placement: request.placement || '',
+        placement: request.placement ?? '',
       });
     this.initialize();
     return this.innerApiCalls.predict(request, options, callback);
@@ -1065,6 +1068,68 @@ export class PredictionServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

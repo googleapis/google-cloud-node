@@ -224,7 +224,7 @@ function main(placement, visitorId) {
    *  the same as
    *  UserEvent.page_categories google.cloud.retail.v2beta.UserEvent.page_categories;
    *  To represent full path of category, use '>' sign to separate different
-   *  hierarchies. If '>' is part of the category name, please replace it with
+   *  hierarchies. If '>' is part of the category name, replace it with
    *  other character(s).
    *  Category pages include special pages such as sales or promotions. For
    *  instance, a special sale page may have the category hierarchy:
@@ -238,6 +238,14 @@ function main(placement, visitorId) {
   // const searchMode = {}
   /**
    *  The specification for personalization.
+   *  Notice that if both
+   *  ServingConfig.personalization_spec google.cloud.retail.v2beta.ServingConfig.personalization_spec 
+   *  and
+   *  SearchRequest.personalization_spec google.cloud.retail.v2beta.SearchRequest.personalization_spec 
+   *  are set.
+   *  SearchRequest.personalization_spec google.cloud.retail.v2beta.SearchRequest.personalization_spec 
+   *  will override
+   *  ServingConfig.personalization_spec google.cloud.retail.v2beta.ServingConfig.personalization_spec.
    */
   // const personalizationSpec = {}
   /**

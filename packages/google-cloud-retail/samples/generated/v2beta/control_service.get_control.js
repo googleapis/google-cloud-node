@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the Control to delete. Format:
+   *  Required. The resource name of the Control to get. Format:
    *  `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/controls/{control_id}`
    */
   // const name = 'abc123'

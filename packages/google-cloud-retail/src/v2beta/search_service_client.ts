@@ -44,7 +44,7 @@ const version = require('../../../package.json').version;
  *  Service for search.
  *
  *  This feature is only available for users who have Retail Search enabled.
- *  Please enable Retail Search on Cloud Console before using this feature.
+ *  Enable Retail Search on Cloud Console before using this feature.
  * @class
  * @memberof v2beta
  */
@@ -201,6 +201,9 @@ export class SearchServiceClient {
       ),
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
+      ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
       ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
@@ -396,7 +399,7 @@ export class SearchServiceClient {
    * Performs a search.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -590,7 +593,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2beta.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, please replace it with
+   *   hierarchies. If '>' is part of the category name, replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -601,6 +604,15 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set.
+   *   {@link google.cloud.retail.v2beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   will override
+   *   {@link google.cloud.retail.v2beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {number[]} request.labels
    *   The labels applied to a resource must meet the following requirements:
    *
@@ -696,7 +708,7 @@ export class SearchServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        placement: request.placement || '',
+        placement: request.placement ?? '',
       });
     this.initialize();
     return this.innerApiCalls.search(request, options, callback);
@@ -896,7 +908,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2beta.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, please replace it with
+   *   hierarchies. If '>' is part of the category name, replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -907,6 +919,15 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set.
+   *   {@link google.cloud.retail.v2beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   will override
+   *   {@link google.cloud.retail.v2beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {number[]} request.labels
    *   The labels applied to a resource must meet the following requirements:
    *
@@ -950,7 +971,7 @@ export class SearchServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        placement: request.placement || '',
+        placement: request.placement ?? '',
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1158,7 +1179,7 @@ export class SearchServiceClient {
    *   {@link google.cloud.retail.v2beta.UserEvent.page_categories|UserEvent.page_categories};
    *
    *   To represent full path of category, use '>' sign to separate different
-   *   hierarchies. If '>' is part of the category name, please replace it with
+   *   hierarchies. If '>' is part of the category name, replace it with
    *   other character(s).
    *
    *   Category pages include special pages such as sales or promotions. For
@@ -1169,6 +1190,15 @@ export class SearchServiceClient {
    *   request triggers both product search and faceted search.
    * @param {google.cloud.retail.v2beta.SearchRequest.PersonalizationSpec} request.personalizationSpec
    *   The specification for personalization.
+   *
+   *   Notice that if both
+   *   {@link google.cloud.retail.v2beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}
+   *   and
+   *   {@link google.cloud.retail.v2beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   are set.
+   *   {@link google.cloud.retail.v2beta.SearchRequest.personalization_spec|SearchRequest.personalization_spec}
+   *   will override
+   *   {@link google.cloud.retail.v2beta.ServingConfig.personalization_spec|ServingConfig.personalization_spec}.
    * @param {number[]} request.labels
    *   The labels applied to a resource must meet the following requirements:
    *
@@ -1213,7 +1243,7 @@ export class SearchServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        placement: request.placement || '',
+        placement: request.placement ?? '',
       });
     const defaultCallSettings = this._defaults['search'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1776,6 +1806,68 @@ export class SearchServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

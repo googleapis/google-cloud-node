@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, operationsProtos, LocationProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -222,26 +237,25 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Control()
       );
       client.innerApiCalls.createControl = stubSimpleCall(expectedResponse);
       const [response] = await client.createControl(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createControl without error using callback', async () => {
@@ -253,15 +267,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Control()
       );
@@ -284,11 +294,14 @@ describe('v2alpha.ControlServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createControl with error', async () => {
@@ -300,26 +313,25 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createControl = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createControl(request), expectedError);
-      assert(
-        (client.innerApiCalls.createControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createControl with closed client', async () => {
@@ -331,7 +343,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.CreateControlRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue('CreateControlRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createControl(request), expectedError);
@@ -348,26 +363,25 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteControl = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteControl(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteControl without error using callback', async () => {
@@ -379,15 +393,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -410,11 +420,14 @@ describe('v2alpha.ControlServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteControl with error', async () => {
@@ -426,26 +439,25 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteControl = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteControl(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteControl with closed client', async () => {
@@ -457,7 +469,10 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.DeleteControlRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteControlRequest', [
+        'name',
+      ]);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteControl(request), expectedError);
@@ -474,27 +489,27 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
-      request.control = {};
-      request.control.name = '';
-      const expectedHeaderRequestParams = 'control.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
+        'control',
+        'name',
+      ]);
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Control()
       );
       client.innerApiCalls.updateControl = stubSimpleCall(expectedResponse);
       const [response] = await client.updateControl(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateControl without error using callback', async () => {
@@ -506,16 +521,13 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
-      request.control = {};
-      request.control.name = '';
-      const expectedHeaderRequestParams = 'control.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
+        'control',
+        'name',
+      ]);
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Control()
       );
@@ -538,11 +550,14 @@ describe('v2alpha.ControlServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateControl with error', async () => {
@@ -554,27 +569,27 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
-      request.control = {};
-      request.control.name = '';
-      const expectedHeaderRequestParams = 'control.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
+        'control',
+        'name',
+      ]);
+      request.control.name = defaultValue1;
+      const expectedHeaderRequestParams = `control.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateControl = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateControl(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateControl with closed client', async () => {
@@ -586,8 +601,12 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.UpdateControlRequest()
       );
-      request.control = {};
-      request.control.name = '';
+      request.control ??= {};
+      const defaultValue1 = getTypeDefaultValue('UpdateControlRequest', [
+        'control',
+        'name',
+      ]);
+      request.control.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateControl(request), expectedError);
@@ -604,26 +623,23 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Control()
       );
       client.innerApiCalls.getControl = stubSimpleCall(expectedResponse);
       const [response] = await client.getControl(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getControl without error using callback', async () => {
@@ -635,15 +651,9 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.Control()
       );
@@ -666,11 +676,14 @@ describe('v2alpha.ControlServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getControl with error', async () => {
@@ -682,26 +695,23 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getControl = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getControl(request), expectedError);
-      assert(
-        (client.innerApiCalls.getControl as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getControl as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getControl with closed client', async () => {
@@ -713,7 +723,8 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.GetControlRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue('GetControlRequest', ['name']);
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getControl(request), expectedError);
@@ -730,15 +741,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
@@ -747,11 +754,14 @@ describe('v2alpha.ControlServiceClient', () => {
       client.innerApiCalls.listControls = stubSimpleCall(expectedResponse);
       const [response] = await client.listControls(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listControls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listControls without error using callback', async () => {
@@ -763,15 +773,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
@@ -796,11 +802,14 @@ describe('v2alpha.ControlServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listControls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listControls with error', async () => {
@@ -812,26 +821,25 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listControls = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listControls(request), expectedError);
-      assert(
-        (client.innerApiCalls.listControls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listControls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listControlsStream without error', async () => {
@@ -843,8 +851,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
@@ -875,11 +886,12 @@ describe('v2alpha.ControlServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listControls, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listControls.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listControls.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -892,8 +904,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listControls.createStream = stubPageStreamingCall(
         undefined,
@@ -921,11 +936,12 @@ describe('v2alpha.ControlServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listControls, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listControls.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listControls.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -938,8 +954,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
         generateSampleMessage(new protos.google.cloud.retail.v2alpha.Control()),
@@ -959,11 +978,12 @@ describe('v2alpha.ControlServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listControls.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listControls.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -976,8 +996,11 @@ describe('v2alpha.ControlServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.retail.v2alpha.ListControlsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue('ListControlsRequest', [
+        'parent',
+      ]);
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listControls.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -994,11 +1017,12 @@ describe('v2alpha.ControlServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listControls.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listControls.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1149,12 +1173,15 @@ describe('v2alpha.ControlServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -1185,12 +1212,15 @@ describe('v2alpha.ControlServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

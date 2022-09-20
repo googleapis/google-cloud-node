@@ -26,6 +26,8 @@ const CompletionServiceClient = v2beta.CompletionServiceClient;
 type CompletionServiceClient = v2beta.CompletionServiceClient;
 const ControlServiceClient = v2beta.ControlServiceClient;
 type ControlServiceClient = v2beta.ControlServiceClient;
+const ModelServiceClient = v2beta.ModelServiceClient;
+type ModelServiceClient = v2beta.ModelServiceClient;
 const PredictionServiceClient = v2beta.PredictionServiceClient;
 type PredictionServiceClient = v2beta.PredictionServiceClient;
 const ProductServiceClient = v2beta.ProductServiceClient;
@@ -44,6 +46,7 @@ export {
   CatalogServiceClient,
   CompletionServiceClient,
   ControlServiceClient,
+  ModelServiceClient,
   PredictionServiceClient,
   ProductServiceClient,
   SearchServiceClient,
@@ -57,6 +60,7 @@ export default {
   CatalogServiceClient,
   CompletionServiceClient,
   ControlServiceClient,
+  ModelServiceClient,
   PredictionServiceClient,
   ProductServiceClient,
   SearchServiceClient,

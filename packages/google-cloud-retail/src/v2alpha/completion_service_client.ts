@@ -544,7 +544,7 @@ export class CompletionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        catalog: request.catalog || '',
+        catalog: request.catalog ?? '',
       });
     this.initialize();
     return this.innerApiCalls.completeQuery(request, options, callback);
@@ -666,7 +666,7 @@ export class CompletionServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.importCompletionData(request, options, callback);

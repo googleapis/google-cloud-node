@@ -492,7 +492,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createServingConfig(request, options, callback);
@@ -586,7 +586,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteServingConfig(request, options, callback);
@@ -685,7 +685,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'serving_config.name': request.servingConfig!.name || '',
+        'serving_config.name': request.servingConfig!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateServingConfig(request, options, callback);
@@ -773,7 +773,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getServingConfig(request, options, callback);
@@ -866,7 +866,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        serving_config: request.servingConfig || '',
+        serving_config: request.servingConfig ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addControl(request, options, callback);
@@ -958,7 +958,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        serving_config: request.servingConfig || '',
+        serving_config: request.servingConfig ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeControl(request, options, callback);
@@ -1061,7 +1061,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listServingConfigs(request, options, callback);
@@ -1103,7 +1103,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1154,7 +1154,7 @@ export class ServingConfigServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listServingConfigs'];
     const callSettings = defaultCallSettings.merge(options);

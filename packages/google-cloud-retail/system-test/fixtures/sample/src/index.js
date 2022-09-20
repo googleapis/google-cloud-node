@@ -23,6 +23,7 @@ function main() {
   const catalogServiceClient = new retail.CatalogServiceClient();
   const completionServiceClient = new retail.CompletionServiceClient();
   const controlServiceClient = new retail.ControlServiceClient();
+  const modelServiceClient = new retail.ModelServiceClient();
   const predictionServiceClient = new retail.PredictionServiceClient();
   const productServiceClient = new retail.ProductServiceClient();
   const searchServiceClient = new retail.SearchServiceClient();

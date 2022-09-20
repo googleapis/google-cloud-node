@@ -201,6 +201,9 @@ export class ProductServiceClient {
       controlPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/controls/{control}'
       ),
+      modelPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/models/{model}'
+      ),
       productPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}/products/{product}'
       ),
@@ -585,7 +588,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createProduct(request, options, callback);
@@ -679,7 +682,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getProduct(request, options, callback);
@@ -796,7 +799,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'product.name': request.product!.name || '',
+        'product.name': request.product!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateProduct(request, options, callback);
@@ -908,7 +911,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteProduct(request, options, callback);
@@ -938,29 +941,24 @@ export class ProductServiceClient {
    * @param {google.cloud.retail.v2beta.ImportErrorsConfig} request.errorsConfig
    *   The desired location of errors incurred during the Import.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Indicates which fields in the provided imported 'products' to update. If
-   *   not set, will by default update all fields.
+   *   Indicates which fields in the provided imported `products` to update. If
+   *   not set, all fields are updated.
    * @param {google.cloud.retail.v2beta.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
    *   The mode of reconciliation between existing products and the products to be
    *   imported. Defaults to
    *   {@link google.cloud.retail.v2beta.ImportProductsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
    * @param {string} request.notificationPubsubTopic
    *   Full Pub/Sub topic name for receiving notification. If this field is set,
-   *   when the import is finished, a notification will be sent to
-   *   specified Pub/Sub topic. The message data will be JSON string of a
+   *   when the import is finished, a notification is sent to
+   *   specified Pub/Sub topic. The message data is JSON string of a
    *   {@link google.longrunning.Operation|Operation}.
    *
    *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
    *   to be within the same project as
    *   {@link google.cloud.retail.v2beta.ImportProductsRequest.parent|ImportProductsRequest.parent}.
-   *   Make sure that both
-   *   `cloud-retail-customer-data-access@system.gserviceaccount.com` and
-   *   `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
-   *   have the `pubsub.topics.publish` IAM permission on the topic.
-   *
-   *   Only supported when
-   *   {@link google.cloud.retail.v2beta.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
-   *   is set to `FULL`.
+   *   Make sure that `service-<project
+   *   number>@gcp-sa-retail.iam.gserviceaccount.com` has the
+   *   `pubsub.topics.publish` IAM permission on the topic.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1052,7 +1050,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.importProducts(request, options, callback);
@@ -1099,9 +1097,9 @@ export class ProductServiceClient {
    *
    * This process is asynchronous and does not require the
    * {@link google.cloud.retail.v2beta.Product|Product} to exist before updating
-   * fulfillment information. If the request is valid, the update will be
-   * enqueued and processed downstream. As a consequence, when a response is
-   * returned, updates are not immediately manifested in the
+   * fulfillment information. If the request is valid, the update is enqueued
+   * and processed downstream. As a consequence, when a response is returned,
+   * updates are not immediately manifested in the
    * {@link google.cloud.retail.v2beta.Product|Product} queried by
    * {@link google.cloud.retail.v2beta.ProductService.GetProduct|ProductService.GetProduct}
    * or
@@ -1111,10 +1109,10 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|ProductService.CreateProduct}
    * and
    * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct},
-   * the specified inventory field value(s) will overwrite any existing value(s)
+   * the specified inventory field value(s) overwrite any existing value(s)
    * while ignoring the last update time for this field. Furthermore, the last
-   * update time for the specified inventory fields will be overwritten to the
-   * time of the
+   * update times for the specified inventory fields are overwritten by the
+   * times of the
    * {@link google.cloud.retail.v2beta.ProductService.CreateProduct|ProductService.CreateProduct}
    * or
    * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct}
@@ -1122,11 +1120,11 @@ export class ProductServiceClient {
    *
    * If no inventory fields are set in
    * {@link google.cloud.retail.v2beta.CreateProductRequest.product|CreateProductRequest.product},
-   * then any pre-existing inventory information for this product will be used.
+   * then any pre-existing inventory information for this product is used.
    *
    * If no inventory fields are set in
    * {@link google.cloud.retail.v2beta.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask},
-   * then any existing inventory information will be preserved.
+   * then any existing inventory information is preserved.
    *
    * Pre-existing inventory information can only be updated with
    * {@link google.cloud.retail.v2beta.ProductService.SetInventory|ProductService.SetInventory},
@@ -1134,8 +1132,17 @@ export class ProductServiceClient {
    * and
    * {@link google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|ProductService.RemoveFulfillmentPlaces}.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s is obsolete after
+   * one day, and the {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API returns `NOT_FOUND` afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates are not marked as {@link google.longrunning.Operation.done|done} until
+   * they are obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1308,7 +1315,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'inventory.name': request.inventory!.name || '',
+        'inventory.name': request.inventory!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setInventory(request, options, callback);
@@ -1362,8 +1369,17 @@ export class ProductServiceClient {
    * or
    * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1514,7 +1530,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        product: request.product || '',
+        product: request.product ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addFulfillmentPlaces(request, options, callback);
@@ -1568,8 +1584,17 @@ export class ProductServiceClient {
    * or
    * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ProductService.ListProducts}.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1715,7 +1740,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        product: request.product || '',
+        product: request.product ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeFulfillmentPlaces(
@@ -1780,8 +1805,17 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1915,7 +1949,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        product: request.product || '',
+        product: request.product ?? '',
       });
     this.initialize();
     return this.innerApiCalls.addLocalInventories(request, options, callback);
@@ -1974,8 +2008,17 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.UpdateProduct|ProductService.UpdateProduct}
    * has no effect on local inventories.
    *
+   * The returned {@link google.longrunning.Operation|Operation}s will be obsolete
+   * after 1 day, and {@link google.longrunning.Operations.GetOperation|GetOperation}
+   * API will return NOT_FOUND afterwards.
+   *
+   * If conflicting updates are issued, the
+   * {@link google.longrunning.Operation|Operation}s associated with the stale
+   * updates will not be marked as {@link google.longrunning.Operation.done|done}
+   * until being obsolete.
+   *
    * This feature is only available for users who have Retail Search enabled.
-   * Please enable Retail Search on Cloud Console before using this feature.
+   * Enable Retail Search on Cloud Console before using this feature.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2092,7 +2135,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        product: request.product || '',
+        product: request.product ?? '',
       });
     this.initialize();
     return this.innerApiCalls.removeLocalInventories(
@@ -2298,7 +2341,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listProducts(request, options, callback);
@@ -2405,7 +2448,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2521,7 +2564,7 @@ export class ProductServiceClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listProducts'];
     const callSettings = defaultCallSettings.merge(options);
@@ -3084,6 +3127,68 @@ export class ProductServiceClient {
    */
   matchControlFromControlName(controlName: string) {
     return this.pathTemplates.controlPathTemplate.match(controlName).control;
+  }
+
+  /**
+   * Return a fully-qualified model resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} model
+   * @returns {string} Resource name string.
+   */
+  modelPath(project: string, location: string, catalog: string, model: string) {
+    return this.pathTemplates.modelPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      model: model,
+    });
+  }
+
+  /**
+   * Parse the project from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).project;
+  }
+
+  /**
+   * Parse the location from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).location;
+  }
+
+  /**
+   * Parse the catalog from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).catalog;
+  }
+
+  /**
+   * Parse the model from Model resource.
+   *
+   * @param {string} modelName
+   *   A fully-qualified path representing Model resource.
+   * @returns {string} A string representing the model.
+   */
+  matchModelFromModelName(modelName: string) {
+    return this.pathTemplates.modelPathTemplate.match(modelName).model;
   }
 
   /**

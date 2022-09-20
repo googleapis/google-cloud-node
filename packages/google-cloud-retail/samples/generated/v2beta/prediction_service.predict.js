@@ -61,14 +61,14 @@ function main(placement, userEvent) {
    */
   // const userEvent = {}
   /**
-   *  Maximum number of results to return per page. Set this property
-   *  to the number of prediction results needed. If zero, the service will
-   *  choose a reasonable default. The maximum allowed value is 100. Values
-   *  above 100 will be coerced to 100.
+   *  Maximum number of results to return. Set this property to the number of
+   *  prediction results needed. If zero, the service will choose a reasonable
+   *  default. The maximum allowed value is 100. Values above 100 will be coerced
+   *  to 100.
    */
   // const pageSize = 1234
   /**
-   *  This field is not used for now; leave it unset.
+   *  This field is not used; leave it unset.
    */
   // const pageToken = 'abc123'
   /**
