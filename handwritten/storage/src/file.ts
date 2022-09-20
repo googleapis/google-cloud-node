@@ -1387,9 +1387,10 @@ class File extends ServiceObject<File> {
 
     const throughStream = new PassThroughShim();
 
-    let isServedCompressed = true;
+    let isCompressed = true;
     let crc32c = true;
     let md5 = false;
+    let safeToValidate = true;
 
     if (typeof options.validation === 'string') {
       const value = options.validation.toLowerCase().trim();
@@ -1489,7 +1490,16 @@ class File extends ServiceObject<File> {
         rawResponseStream.on('error', onComplete);
 
         const headers = rawResponseStream.toJSON().headers;
-        isServedCompressed = headers['content-encoding'] === 'gzip';
+        isCompressed = headers['content-encoding'] === 'gzip';
+
+        // The object is safe to validate if:
+        // 1. It was stored gzip and returned to us gzip OR
+        // 2. It was never stored as gzip
+        safeToValidate =
+          (headers['x-goog-stored-content-encoding'] === 'gzip' &&
+            isCompressed) ||
+          headers['x-goog-stored-content-encoding'] === 'identity';
+
         const transformStreams: Transform[] = [];
 
         if (shouldRunValidation) {
@@ -1515,7 +1525,7 @@ class File extends ServiceObject<File> {
           transformStreams.push(validateStream);
         }
 
-        if (isServedCompressed && options.decompress) {
+        if (isCompressed && options.decompress) {
           transformStreams.push(zlib.createGunzip());
         }
 
@@ -1558,30 +1568,13 @@ class File extends ServiceObject<File> {
           return;
         }
 
-        // TODO(https://github.com/googleapis/nodejs-storage/issues/709):
-        // Remove once the backend issue is fixed.
-        // If object is stored compressed (having
-        // metadata.contentEncoding === 'gzip') and was served decompressed,
-        // then skip checksum validation because the remote checksum is computed
-        // against the compressed version of the object.
-        if (!isServedCompressed) {
-          try {
-            await this.getMetadata({userProject: options.userProject});
-          } catch (e) {
-            throughStream.destroy(e as Error);
-            return;
-          }
-          if (this.metadata.contentEncoding === 'gzip') {
-            return;
-          }
-        }
-
         // If we're doing validation, assume the worst-- a data integrity
         // mismatch. If not, these tests won't be performed, and we can assume
         // the best.
-        let failed = crc32c || md5;
-
-        if (validateStream) {
+        // We must check if the server decompressed the data on serve because hash
+        // validation is not possible in this case.
+        let failed = (crc32c || md5) && safeToValidate;
+        if (validateStream && safeToValidate) {
           if (crc32c && hashes.crc32c) {
             failed = !validateStream.test('crc32c', hashes.crc32c);
           }
