@@ -567,7 +567,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAwsCluster(request, options, callback);
@@ -671,7 +671,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        aws_cluster: request.awsCluster || '',
+        aws_cluster: request.awsCluster ?? '',
       });
     this.initialize();
     return this.innerApiCalls.generateAwsAccessToken(
@@ -772,7 +772,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAwsNodePool(request, options, callback);
@@ -876,7 +876,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAwsServerConfig(request, options, callback);
@@ -1003,7 +1003,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAwsCluster(request, options, callback);
@@ -1168,7 +1168,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'aws_cluster.name': request.awsCluster!.name || '',
+        'aws_cluster.name': request.awsCluster!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAwsCluster(request, options, callback);
@@ -1334,7 +1334,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAwsCluster(request, options, callback);
@@ -1496,7 +1496,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAwsNodePool(request, options, callback);
@@ -1656,7 +1656,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'aws_node_pool.name': request.awsNodePool!.name || '',
+        'aws_node_pool.name': request.awsNodePool!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAwsNodePool(request, options, callback);
@@ -1820,7 +1820,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        name: request.name || '',
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAwsNodePool(request, options, callback);
@@ -1967,7 +1967,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAwsClusters(request, options, callback);
@@ -2018,7 +2018,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2078,7 +2078,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAwsClusters'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2196,7 +2196,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAwsNodePools(request, options, callback);
@@ -2248,7 +2248,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2309,7 +2309,7 @@ export class AwsClustersClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        parent: request.parent || '',
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAwsNodePools'];
     const callSettings = defaultCallSettings.merge(options);

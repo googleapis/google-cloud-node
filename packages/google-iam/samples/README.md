@@ -12,6 +12,13 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Policies.create_policy](#policies.create_policy)
+  * [Policies.delete_policy](#policies.delete_policy)
+  * [Policies.get_policy](#policies.get_policy)
+  * [Policies.list_applicable_policies](#policies.list_applicable_policies)
+  * [Policies.list_policies](#policies.list_policies)
+  * [Policies.update_policy](#policies.update_policy)
+  * [Quickstart](#quickstart)
   * [Quickstart](#quickstart)
 
 ## Before you begin
@@ -29,16 +36,135 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Quickstart
+### Policies.create_policy
 
-View the [source code](https://github.com/googleapis/google-cloud-node/blob/main//workspace/google-cloud-node/packages/google-iam/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.create_policy.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=/workspace/google-cloud-node/packages/google-iam/samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.create_policy.js,samples/README.md)
 
 __Usage:__
 
 
-`node /workspace/google-cloud-node/packages/google-iam/samples/quickstart.js`
+`node packages/google-iam/samples/generated/v2/policies.create_policy.js`
+
+
+-----
+
+
+
+
+### Policies.delete_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.delete_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.delete_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-iam/samples/generated/v2/policies.delete_policy.js`
+
+
+-----
+
+
+
+
+### Policies.get_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.get_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.get_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-iam/samples/generated/v2/policies.get_policy.js`
+
+
+-----
+
+
+
+
+### Policies.list_applicable_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.list_applicable_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.list_applicable_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-iam/samples/generated/v2/policies.list_applicable_policies.js`
+
+
+-----
+
+
+
+
+### Policies.list_policies
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.list_policies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.list_policies.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-iam/samples/generated/v2/policies.list_policies.js`
+
+
+-----
+
+
+
+
+### Policies.update_policy
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/generated/v2/policies.update_policy.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/generated/v2/policies.update_policy.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-iam/samples/generated/v2/policies.update_policy.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-iam/samples/quickstart.js`
+
+
+-----
+
+
+
+
+### Quickstart
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-iam/samples/test/quickstart.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-iam/samples/test/quickstart.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-iam/samples/test/quickstart.js`
 
 
 
