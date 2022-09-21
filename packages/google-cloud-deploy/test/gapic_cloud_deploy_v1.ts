@@ -267,9 +267,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetDeliveryPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -298,9 +299,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetDeliveryPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -344,9 +346,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetDeliveryPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -374,9 +377,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetDeliveryPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeliveryPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetDeliveryPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -394,7 +398,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -422,7 +429,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -466,7 +476,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -491,7 +504,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -509,7 +525,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetReleaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -537,7 +556,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetReleaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -581,7 +603,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetReleaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -609,7 +634,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReleaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetReleaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -627,9 +655,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ApproveRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -657,9 +686,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ApproveRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -703,9 +733,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ApproveRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -733,9 +764,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ApproveRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveRolloutRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ApproveRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -753,7 +785,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -781,7 +816,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -825,7 +863,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -853,7 +894,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRolloutRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetRolloutRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -871,7 +915,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -899,7 +946,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -943,7 +993,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -968,7 +1021,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.GetConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConfigRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.GetConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -987,7 +1043,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.CreateDeliveryPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1020,7 +1076,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.CreateDeliveryPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1074,7 +1130,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.CreateDeliveryPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1108,7 +1164,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.CreateDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.CreateDeliveryPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1185,7 +1241,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.deliveryPipeline ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest',
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
@@ -1219,7 +1275,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.deliveryPipeline ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest',
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
@@ -1274,7 +1330,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.deliveryPipeline ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest',
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
@@ -1309,7 +1365,7 @@ describe('v1.CloudDeployClient', () => {
       );
       request.deliveryPipeline ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.UpdateDeliveryPipelineRequest',
         ['deliveryPipeline', 'name']
       );
       request.deliveryPipeline.name = defaultValue1;
@@ -1385,7 +1441,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1418,7 +1474,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1472,7 +1528,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1506,7 +1562,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeliveryPipelineRequest',
+        '.google.cloud.deploy.v1.DeleteDeliveryPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1581,9 +1637,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateTargetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1612,9 +1669,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateTargetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1665,9 +1723,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateTargetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1695,9 +1754,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateTargetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1768,10 +1828,10 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
       request.target ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
-        'target',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateTargetRequest',
+        ['target', 'name']
+      );
       request.target.name = defaultValue1;
       const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1801,10 +1861,10 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
       request.target ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
-        'target',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateTargetRequest',
+        ['target', 'name']
+      );
       request.target.name = defaultValue1;
       const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1856,10 +1916,10 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
       request.target ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
-        'target',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateTargetRequest',
+        ['target', 'name']
+      );
       request.target.name = defaultValue1;
       const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1888,10 +1948,10 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.UpdateTargetRequest()
       );
       request.target ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetRequest', [
-        'target',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.UpdateTargetRequest',
+        ['target', 'name']
+      );
       request.target.name = defaultValue1;
       const expectedHeaderRequestParams = `target.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1961,9 +2021,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1992,9 +2053,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2045,9 +2107,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2075,9 +2138,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.DeleteTargetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.DeleteTargetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2147,9 +2211,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateReleaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2179,9 +2244,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateReleaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2232,9 +2298,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateReleaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2262,9 +2329,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateReleaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReleaseRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateReleaseRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2337,9 +2405,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateRolloutRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2369,9 +2438,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateRolloutRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2422,9 +2492,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateRolloutRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2452,9 +2523,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.CreateRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRolloutRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.CreateRolloutRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2528,7 +2600,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeliveryPipelinesRequest',
+        '.google.cloud.deploy.v1.ListDeliveryPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2568,7 +2640,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeliveryPipelinesRequest',
+        '.google.cloud.deploy.v1.ListDeliveryPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2623,7 +2695,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeliveryPipelinesRequest',
+        '.google.cloud.deploy.v1.ListDeliveryPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2657,7 +2729,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeliveryPipelinesRequest',
+        '.google.cloud.deploy.v1.ListDeliveryPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2723,7 +2795,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeliveryPipelinesRequest',
+        '.google.cloud.deploy.v1.ListDeliveryPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2778,7 +2850,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeliveryPipelinesRequest',
+        '.google.cloud.deploy.v1.ListDeliveryPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2831,7 +2903,7 @@ describe('v1.CloudDeployClient', () => {
         new protos.google.cloud.deploy.v1.ListDeliveryPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeliveryPipelinesRequest',
+        '.google.cloud.deploy.v1.ListDeliveryPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2876,9 +2948,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListTargetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2908,9 +2981,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListTargetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2956,9 +3030,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListTargetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2986,9 +3061,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListTargetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3036,9 +3112,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListTargetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3083,9 +3160,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListTargetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3125,9 +3203,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListTargetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListTargetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3168,9 +3247,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListReleasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3200,9 +3280,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListReleasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3248,9 +3329,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListReleasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3278,9 +3360,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListReleasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3328,9 +3411,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListReleasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3375,9 +3459,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListReleasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3417,9 +3502,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListReleasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReleasesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListReleasesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3458,9 +3544,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListRolloutsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3490,9 +3577,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListRolloutsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3538,9 +3626,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListRolloutsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3568,9 +3657,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListRolloutsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3618,9 +3708,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListRolloutsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3665,9 +3756,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListRolloutsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3707,9 +3799,10 @@ describe('v1.CloudDeployClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.deploy.v1.ListRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRolloutsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.deploy.v1.ListRolloutsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
