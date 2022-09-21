@@ -16,10 +16,8 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-export {ApplicationServiceClient} from './application_service_client';
 export {CompanyServiceClient} from './company_service_client';
 export {CompletionClient} from './completion_client';
 export {EventServiceClient} from './event_service_client';
 export {JobServiceClient} from './job_service_client';
-export {ProfileServiceClient} from './profile_service_client';
 export {TenantServiceClient} from './tenant_service_client';

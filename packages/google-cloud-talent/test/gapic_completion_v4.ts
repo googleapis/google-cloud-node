@@ -25,6 +25,21 @@ import * as completionModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -50,99 +65,101 @@ function stubSimpleCallWithCallback<ResponseType>(
 }
 
 describe('v4.CompletionClient', () => {
-  it('has servicePath', () => {
-    const servicePath = completionModule.v4.CompletionClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint = completionModule.v4.CompletionClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = completionModule.v4.CompletionClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new completionModule.v4.CompletionClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new completionModule.v4.CompletionClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath = completionModule.v4.CompletionClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new completionModule.v4.CompletionClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint = completionModule.v4.CompletionClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.completionStub, undefined);
-    await client.initialize();
-    assert(client.completionStub);
-  });
 
-  it('has close method for the initialized client', done => {
-    const client = new completionModule.v4.CompletionClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = completionModule.v4.CompletionClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.initialize();
-    assert(client.completionStub);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client = new completionModule.v4.CompletionClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client = new completionModule.v4.CompletionClient();
+      assert(client);
     });
-    assert.strictEqual(client.completionStub, undefined);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new completionModule.v4.CompletionClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('should create a client with gRPC fallback', () => {
+      const client = new completionModule.v4.CompletionClient({
+        fallback: true,
+      });
+      assert(client);
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new completionModule.v4.CompletionClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new completionModule.v4.CompletionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.completionStub, undefined);
+      await client.initialize();
+      assert(client.completionStub);
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    it('has close method for the initialized client', done => {
+      const client = new completionModule.v4.CompletionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      assert(client.completionStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new completionModule.v4.CompletionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.completionStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new completionModule.v4.CompletionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new completionModule.v4.CompletionClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('completeQuery', () => {
@@ -155,26 +172,25 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      request.tenant = '';
-      const expectedHeaderRequestParams = 'tenant=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
+        'tenant',
+      ]);
+      request.tenant = defaultValue1;
+      const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryResponse()
       );
       client.innerApiCalls.completeQuery = stubSimpleCall(expectedResponse);
       const [response] = await client.completeQuery(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.completeQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.completeQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.completeQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes completeQuery without error using callback', async () => {
@@ -186,15 +202,11 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      request.tenant = '';
-      const expectedHeaderRequestParams = 'tenant=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
+        'tenant',
+      ]);
+      request.tenant = defaultValue1;
+      const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryResponse()
       );
@@ -217,11 +229,14 @@ describe('v4.CompletionClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.completeQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.completeQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.completeQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes completeQuery with error', async () => {
@@ -233,26 +248,25 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      request.tenant = '';
-      const expectedHeaderRequestParams = 'tenant=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
+        'tenant',
+      ]);
+      request.tenant = defaultValue1;
+      const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.completeQuery = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.completeQuery(request), expectedError);
-      assert(
-        (client.innerApiCalls.completeQuery as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.completeQuery as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.completeQuery as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes completeQuery with closed client', async () => {
@@ -264,7 +278,10 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      request.tenant = '';
+      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
+        'tenant',
+      ]);
+      request.tenant = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.completeQuery(request), expectedError);

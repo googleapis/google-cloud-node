@@ -17,19 +17,18 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
+  GrpcClientOptions,
   LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -38,7 +37,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './job_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -72,7 +70,7 @@ export class JobServiceClient {
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
-   * in [this document](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#creating-the-client-instance).
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
    * The common options are:
    * @param {object} [options.credentials] - Credentials object.
    * @param {string} [options.credentials.client_email]
@@ -95,13 +93,22 @@ export class JobServiceClient {
    *     API remote host.
    * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
    *     Follows the structure of {@link gapicConfig}.
-   * @param {boolean} [options.fallback] - Use HTTP fallback mode.
-   *     In fallback mode, a special browser-compatible transport implementation is used
-   *     instead of gRPC transport. In browser context (if the `window` object is defined)
-   *     the fallback mode is enabled automatically; set `options.fallback` to `false`
-   *     if you need to override this behavior.
+   * @param {boolean | "rest"} [options.fallback] - Use HTTP fallback mode.
+   *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new JobServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof JobServiceClient;
     const servicePath =
@@ -121,8 +128,13 @@ export class JobServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -166,12 +178,6 @@ export class JobServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      applicationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/tenants/{tenant}/profiles/{profile}/applications/{application}'
-      ),
-      profilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/tenants/{tenant}/profiles/{profile}'
-      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -204,16 +210,24 @@ export class JobServiceClient {
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
-
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+    };
+    if (opts.fallback === 'rest') {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [
+        {
+          selector: 'google.longrunning.Operations.GetOperation',
+          get: '/v4beta1/{name=projects/*/operations/*}',
+        },
+      ];
+    }
     this.operationsClient = this._gaxModule
-      .lro({
-        auth: this.auth,
-        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
-      })
+      .lro(lroOptions)
       .operationsClient(opts);
     const batchCreateJobsResponse = protoFilesRoot.lookup(
       '.google.cloud.talent.v4beta1.JobOperationResult'
@@ -255,7 +269,7 @@ export class JobServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -324,7 +338,8 @@ export class JobServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -477,8 +492,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createJob(request, options, callback);
@@ -568,8 +583,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getJob(request, options, callback);
@@ -664,8 +679,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'job.name': request.job!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'job.name': request.job!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateJob(request, options, callback);
@@ -759,8 +774,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteJob(request, options, callback);
@@ -866,8 +881,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchDeleteJobs(request, options, callback);
@@ -904,15 +919,7 @@ export class JobServiceClient {
    *
    *   Defaults to false.
    * @param {boolean} request.requirePreciseResultSize
-   *   Controls if the search job request requires the return of a precise
-   *   count of the first 300 results. Setting this to `true` ensures
-   *   consistency in the number of results per page. Best practice is to set this
-   *   value to true if a client allows users to jump directly to a
-   *   non-sequential search results page.
-   *
-   *   Enabling this flag may adversely impact performance.
-   *
-   *   Defaults to false.
+   *   This field is deprecated.
    * @param {number[]} request.histogramQueries
    *   An expression specifies a histogram request against matching jobs.
    *
@@ -924,6 +931,8 @@ export class JobServiceClient {
    *   for each distinct attribute value.
    *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
    *   matching entities within each bucket.
+   *
+   *   A maximum of 200 histogram buckets are supported.
    *
    *   Data types:
    *
@@ -951,6 +960,9 @@ export class JobServiceClient {
    *     "FULL_TIME", "PART_TIME".
    *   * company_size: histogram by {@link google.cloud.talent.v4beta1.CompanySize|CompanySize}, for example, "SMALL",
    *   "MEDIUM", "BIG".
+   *   * publish_time_in_day: histogram by the {@link google.cloud.talent.v4beta1.Job.posting_publish_time|Job.posting_publish_time}
+   *     in days.
+   *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_month: histogram by the {@link google.cloud.talent.v4beta1.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
@@ -1004,7 +1016,7 @@ export class JobServiceClient {
    *   bucket(100000, MAX)])`
    *   * `count(string_custom_attribute["some-string-custom-attribute"])`
    *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
    * @param {google.cloud.talent.v4beta1.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
    *   Defaults to {@link google.cloud.talent.v4beta1.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1092,6 +1104,14 @@ export class JobServiceClient {
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
+   *   This field is deprecated. Please use
+   *   {@link google.cloud.talent.v4beta1.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} going forward.
+   *
+   *   To migrate, disable_keyword_match set to false maps to
+   *   {@link google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+   *   true maps to {@link google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+   *   {@link google.cloud.talent.v4beta1.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+   *
    *   Controls whether to disable exact keyword match on {@link google.cloud.talent.v4beta1.Job.title|Job.title},
    *   {@link google.cloud.talent.v4beta1.Job.description|Job.description}, {@link google.cloud.talent.v4beta1.Job.company_display_name|Job.company_display_name}, {@link google.cloud.talent.v4beta1.Job.addresses|Job.addresses},
    *   {@link google.cloud.talent.v4beta1.Job.qualifications|Job.qualifications}. When disable keyword match is turned off, a
@@ -1111,6 +1131,11 @@ export class JobServiceClient {
    *   requests.
    *
    *   Defaults to false.
+   * @param {google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
+   *   Controls what keyword match options to use.
+   *
+   *   Defaults to {@link google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+   *   is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1183,8 +1208,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchJobs(request, options, callback);
@@ -1226,15 +1251,7 @@ export class JobServiceClient {
    *
    *   Defaults to false.
    * @param {boolean} request.requirePreciseResultSize
-   *   Controls if the search job request requires the return of a precise
-   *   count of the first 300 results. Setting this to `true` ensures
-   *   consistency in the number of results per page. Best practice is to set this
-   *   value to true if a client allows users to jump directly to a
-   *   non-sequential search results page.
-   *
-   *   Enabling this flag may adversely impact performance.
-   *
-   *   Defaults to false.
+   *   This field is deprecated.
    * @param {number[]} request.histogramQueries
    *   An expression specifies a histogram request against matching jobs.
    *
@@ -1246,6 +1263,8 @@ export class JobServiceClient {
    *   for each distinct attribute value.
    *   * `count(numeric_histogram_facet, list of buckets)`: Count the number of
    *   matching entities within each bucket.
+   *
+   *   A maximum of 200 histogram buckets are supported.
    *
    *   Data types:
    *
@@ -1273,6 +1292,9 @@ export class JobServiceClient {
    *     "FULL_TIME", "PART_TIME".
    *   * company_size: histogram by {@link google.cloud.talent.v4beta1.CompanySize|CompanySize}, for example, "SMALL",
    *   "MEDIUM", "BIG".
+   *   * publish_time_in_day: histogram by the {@link google.cloud.talent.v4beta1.Job.posting_publish_time|Job.posting_publish_time}
+   *     in days.
+   *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_month: histogram by the {@link google.cloud.talent.v4beta1.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
@@ -1326,7 +1348,7 @@ export class JobServiceClient {
    *   bucket(100000, MAX)])`
    *   * `count(string_custom_attribute["some-string-custom-attribute"])`
    *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
    * @param {google.cloud.talent.v4beta1.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
    *   Defaults to {@link google.cloud.talent.v4beta1.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1414,6 +1436,14 @@ export class JobServiceClient {
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
+   *   This field is deprecated. Please use
+   *   {@link google.cloud.talent.v4beta1.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} going forward.
+   *
+   *   To migrate, disable_keyword_match set to false maps to
+   *   {@link google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+   *   true maps to {@link google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+   *   {@link google.cloud.talent.v4beta1.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+   *
    *   Controls whether to disable exact keyword match on {@link google.cloud.talent.v4beta1.Job.title|Job.title},
    *   {@link google.cloud.talent.v4beta1.Job.description|Job.description}, {@link google.cloud.talent.v4beta1.Job.company_display_name|Job.company_display_name}, {@link google.cloud.talent.v4beta1.Job.addresses|Job.addresses},
    *   {@link google.cloud.talent.v4beta1.Job.qualifications|Job.qualifications}. When disable keyword match is turned off, a
@@ -1433,6 +1463,11 @@ export class JobServiceClient {
    *   requests.
    *
    *   Defaults to false.
+   * @param {google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
+   *   Controls what keyword match options to use.
+   *
+   *   Defaults to {@link google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+   *   is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1505,8 +1540,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.searchJobsForAlert(request, options, callback);
@@ -1615,8 +1650,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchCreateJobs(request, options, callback);
@@ -1641,14 +1676,15 @@ export class JobServiceClient {
       protos.google.cloud.talent.v4beta1.BatchOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.batchCreateJobs,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.talent.v4beta1.JobOperationResult,
@@ -1773,8 +1809,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchUpdateJobs(request, options, callback);
@@ -1799,14 +1835,15 @@ export class JobServiceClient {
       protos.google.cloud.talent.v4beta1.BatchOperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.batchUpdateJobs,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.talent.v4beta1.JobOperationResult,
@@ -1831,10 +1868,13 @@ export class JobServiceClient {
    *
    *   The fields eligible for filtering are:
    *
-   *   * `companyName` (Required)
+   *   * `companyName`
    *   * `requisitionId`
    *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
+   *
+   *   At least one of `companyName` and `requisitionId` must present or an
+   *   INVALID_ARGUMENT error is thrown.
    *
    *   Sample Query:
    *
@@ -1843,6 +1883,8 @@ export class JobServiceClient {
    *   requisitionId = "req-1"
    *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
+   *   * requisitionId = "req-1"
+   *   * requisitionId = "req-1" AND status = "EXPIRED"
    * @param {string} request.pageToken
    *   The starting point of a query result.
    * @param {number} request.pageSize
@@ -1931,8 +1973,8 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listJobs(request, options, callback);
@@ -1955,10 +1997,13 @@ export class JobServiceClient {
    *
    *   The fields eligible for filtering are:
    *
-   *   * `companyName` (Required)
+   *   * `companyName`
    *   * `requisitionId`
    *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
+   *
+   *   At least one of `companyName` and `requisitionId` must present or an
+   *   INVALID_ARGUMENT error is thrown.
    *
    *   Sample Query:
    *
@@ -1967,6 +2012,8 @@ export class JobServiceClient {
    *   requisitionId = "req-1"
    *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
+   *   * requisitionId = "req-1"
+   *   * requisitionId = "req-1" AND status = "EXPIRED"
    * @param {string} request.pageToken
    *   The starting point of a query result.
    * @param {number} request.pageSize
@@ -2001,14 +2048,14 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
-      this.innerApiCalls.listJobs as gax.GaxCall,
+      this.innerApiCalls.listJobs as GaxCall,
       request,
       callSettings
     );
@@ -2033,10 +2080,13 @@ export class JobServiceClient {
    *
    *   The fields eligible for filtering are:
    *
-   *   * `companyName` (Required)
+   *   * `companyName`
    *   * `requisitionId`
    *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
+   *
+   *   At least one of `companyName` and `requisitionId` must present or an
+   *   INVALID_ARGUMENT error is thrown.
    *
    *   Sample Query:
    *
@@ -2045,6 +2095,8 @@ export class JobServiceClient {
    *   requisitionId = "req-1"
    *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
+   *   * requisitionId = "req-1"
+   *   * requisitionId = "req-1" AND status = "EXPIRED"
    * @param {string} request.pageToken
    *   The starting point of a query result.
    * @param {number} request.pageSize
@@ -2080,141 +2132,198 @@ export class JobServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.talent.v4beta1.IJob>;
   }
+  /**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * [google.longrunning.Operation]{@link
+   * external:"google.longrunning.Operation"}. The promise has a method named
+   * "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to @link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.ListOperationsResponse> {
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+  cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.CancelOperationRequest,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See [gax.CallOptions]{@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+    return this.operationsClient.deleteOperation(request, options, callback);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified application resource name string.
-   *
-   * @param {string} project
-   * @param {string} tenant
-   * @param {string} profile
-   * @param {string} application
-   * @returns {string} Resource name string.
-   */
-  applicationPath(
-    project: string,
-    tenant: string,
-    profile: string,
-    application: string
-  ) {
-    return this.pathTemplates.applicationPathTemplate.render({
-      project: project,
-      tenant: tenant,
-      profile: profile,
-      application: application,
-    });
-  }
-
-  /**
-   * Parse the project from Application resource.
-   *
-   * @param {string} applicationName
-   *   A fully-qualified path representing Application resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName)
-      .project;
-  }
-
-  /**
-   * Parse the tenant from Application resource.
-   *
-   * @param {string} applicationName
-   *   A fully-qualified path representing Application resource.
-   * @returns {string} A string representing the tenant.
-   */
-  matchTenantFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName)
-      .tenant;
-  }
-
-  /**
-   * Parse the profile from Application resource.
-   *
-   * @param {string} applicationName
-   *   A fully-qualified path representing Application resource.
-   * @returns {string} A string representing the profile.
-   */
-  matchProfileFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName)
-      .profile;
-  }
-
-  /**
-   * Parse the application from Application resource.
-   *
-   * @param {string} applicationName
-   *   A fully-qualified path representing Application resource.
-   * @returns {string} A string representing the application.
-   */
-  matchApplicationFromApplicationName(applicationName: string) {
-    return this.pathTemplates.applicationPathTemplate.match(applicationName)
-      .application;
-  }
-
-  /**
-   * Return a fully-qualified profile resource name string.
-   *
-   * @param {string} project
-   * @param {string} tenant
-   * @param {string} profile
-   * @returns {string} Resource name string.
-   */
-  profilePath(project: string, tenant: string, profile: string) {
-    return this.pathTemplates.profilePathTemplate.render({
-      project: project,
-      tenant: tenant,
-      profile: profile,
-    });
-  }
-
-  /**
-   * Parse the project from Profile resource.
-   *
-   * @param {string} profileName
-   *   A fully-qualified path representing Profile resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromProfileName(profileName: string) {
-    return this.pathTemplates.profilePathTemplate.match(profileName).project;
-  }
-
-  /**
-   * Parse the tenant from Profile resource.
-   *
-   * @param {string} profileName
-   *   A fully-qualified path representing Profile resource.
-   * @returns {string} A string representing the tenant.
-   */
-  matchTenantFromProfileName(profileName: string) {
-    return this.pathTemplates.profilePathTemplate.match(profileName).tenant;
-  }
-
-  /**
-   * Parse the profile from Profile resource.
-   *
-   * @param {string} profileName
-   *   A fully-qualified path representing Profile resource.
-   * @returns {string} A string representing the profile.
-   */
-  matchProfileFromProfileName(profileName: string) {
-    return this.pathTemplates.profilePathTemplate.match(profileName).profile;
-  }
 
   /**
    * Return a fully-qualified project resource name string.

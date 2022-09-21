@@ -23,6 +23,9 @@
 function main(parent, requestMetadata) {
   // [START jobs_v4beta1_generated_JobService_SearchJobsForAlert_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -55,13 +58,7 @@ function main(parent, requestMetadata) {
    */
   // const enableBroadening = true
   /**
-   *  Controls if the search job request requires the return of a precise
-   *  count of the first 300 results. Setting this to `true` ensures
-   *  consistency in the number of results per page. Best practice is to set this
-   *  value to true if a client allows users to jump directly to a
-   *  non-sequential search results page.
-   *  Enabling this flag may adversely impact performance.
-   *  Defaults to false.
+   *  This field is deprecated.
    */
   // const requirePreciseResultSize = true
   /**
@@ -73,6 +70,7 @@ function main(parent, requestMetadata) {
    *  for each distinct attribute value.
    *  * `count(numeric_histogram_facet, list of buckets)`: Count the number of
    *  matching entities within each bucket.
+   *  A maximum of 200 histogram buckets are supported.
    *  Data types:
    *  * Histogram facet: facet names with format `[a-zA-Z][a-zA-Z0-9_]+`.
    *  * String: string like "any string with backslash escape for quote(\")."
@@ -92,6 +90,9 @@ function main(parent, requestMetadata) {
    *    "FULL_TIME", "PART_TIME".
    *  * company_size: histogram by CompanySize google.cloud.talent.v4beta1.CompanySize, for example, "SMALL",
    *  "MEDIUM", "BIG".
+   *  * publish_time_in_day: histogram by the Job.posting_publish_time google.cloud.talent.v4beta1.Job.posting_publish_time 
+   *    in days.
+   *    Must specify list of numeric buckets in spec.
    *  * publish_time_in_month: histogram by the Job.posting_publish_time google.cloud.talent.v4beta1.Job.posting_publish_time 
    *    in months.
    *    Must specify list of numeric buckets in spec.
@@ -143,7 +144,7 @@ function main(parent, requestMetadata) {
    *  bucket(100000, MAX))`
    *  * `count(string_custom_attribute"some-string-custom-attribute")`
    *  * `count(numeric_custom_attribute"some-numeric-custom-attribute",
-   *    bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")`
+   *    bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"))`
    */
   // const histogramQueries = 1234
   /**
@@ -242,6 +243,12 @@ function main(parent, requestMetadata) {
    */
   // const customRankingInfo = {}
   /**
+   *  This field is deprecated. Please use
+   *  SearchJobsRequest.keyword_match_mode google.cloud.talent.v4beta1.SearchJobsRequest.keyword_match_mode  going forward.
+   *  To migrate, disable_keyword_match set to false maps to
+   *  KeywordMatchMode.KEYWORD_MATCH_ALL google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL, and disable_keyword_match set to
+   *  true maps to KeywordMatchMode.KEYWORD_MATCH_DISABLED google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED. If
+   *  SearchJobsRequest.keyword_match_mode google.cloud.talent.v4beta1.SearchJobsRequest.keyword_match_mode  is set, this field is ignored.
    *  Controls whether to disable exact keyword match on Job.title google.cloud.talent.v4beta1.Job.title,
    *  Job.description google.cloud.talent.v4beta1.Job.description, Job.company_display_name google.cloud.talent.v4beta1.Job.company_display_name, Job.addresses google.cloud.talent.v4beta1.Job.addresses,
    *  Job.qualifications google.cloud.talent.v4beta1.Job.qualifications. When disable keyword match is turned off, a
@@ -260,6 +267,12 @@ function main(parent, requestMetadata) {
    *  Defaults to false.
    */
   // const disableKeywordMatch = true
+  /**
+   *  Controls what keyword match options to use.
+   *  Defaults to KeywordMatchMode.KEYWORD_MATCH_ALL google.cloud.talent.v4beta1.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL  if no value
+   *  is specified.
+   */
+  // const keywordMatchMode = {}
 
   // Imports the Talent library
   const {JobServiceClient} = require('@google-cloud/talent').v4beta1;

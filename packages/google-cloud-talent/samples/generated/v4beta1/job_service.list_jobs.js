@@ -23,6 +23,9 @@
 function main(parent, filter) {
   // [START jobs_v4beta1_generated_JobService_ListJobs_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -36,16 +39,20 @@ function main(parent, filter) {
    *  Required. The filter string specifies the jobs to be enumerated.
    *  Supported operator: =, AND
    *  The fields eligible for filtering are:
-   *  * `companyName` (Required)
+   *  * `companyName`
    *  * `requisitionId`
    *  * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *  OPEN if no value is specified.
+   *  At least one of `companyName` and `requisitionId` must present or an
+   *  INVALID_ARGUMENT error is thrown.
    *  Sample Query:
    *  * companyName = "projects/foo/tenants/bar/companies/baz"
    *  * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *  requisitionId = "req-1"
    *  * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *  status = "EXPIRED"
+   *  * requisitionId = "req-1"
+   *  * requisitionId = "req-1" AND status = "EXPIRED"
    */
   // const filter = 'abc123'
   /**
