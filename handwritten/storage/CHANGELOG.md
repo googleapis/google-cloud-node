@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/storage?activeTab=versions
 
+## [6.5.1](https://github.com/googleapis/nodejs-storage/compare/v6.5.0...v6.5.1) (2022-09-20)
+
+
+### Bug Fixes
+
+* Revert skip validation ([#2023](https://github.com/googleapis/nodejs-storage/issues/2023)) ([70ab224](https://github.com/googleapis/nodejs-storage/commit/70ab22459b51b9781e40b0cc86663c1658e43520))
+
 ## [6.5.0](https://github.com/googleapis/nodejs-storage/compare/v6.4.2...v6.5.0) (2022-09-15)
 
 
