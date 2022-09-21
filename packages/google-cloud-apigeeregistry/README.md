@@ -117,7 +117,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-apigee-registry/blob/main/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/apigeeregistry/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/apigee-registry/latest
 [product-docs]: https://cloud.google.com/apigee/docs/api-hub/get-started-registry-api
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
