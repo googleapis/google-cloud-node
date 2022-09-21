@@ -25,6 +25,21 @@ import * as videointelligenceserviceModule from '../src';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -73,111 +88,113 @@ function stubLongRunningCallWithCallback<ResponseType>(
 }
 
 describe('v1.VideoIntelligenceServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      videointelligenceserviceModule.v1.VideoIntelligenceServiceClient
-        .servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      videointelligenceserviceModule.v1.VideoIntelligenceServiceClient
-        .apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port =
-      videointelligenceserviceModule.v1.VideoIntelligenceServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client =
-      new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client =
-      new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
-        fallback: true,
-      });
-    assert(client);
-  });
-
-  it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
-    await client.initialize();
-    assert(client.videoIntelligenceServiceStub);
-  });
-
-  it('has close method for the initialized client', done => {
-    const client =
-      new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.initialize();
-    assert(client.videoIntelligenceServiceStub);
-    client.close().then(() => {
-      done();
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        videointelligenceserviceModule.v1.VideoIntelligenceServiceClient
+          .servicePath;
+      assert(servicePath);
     });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client =
-      new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
-    client.close().then(() => {
-      done();
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        videointelligenceserviceModule.v1.VideoIntelligenceServiceClient
+          .apiEndpoint;
+      assert(apiEndpoint);
     });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
+    it('has port', () => {
+      const port =
+        videointelligenceserviceModule.v1.VideoIntelligenceServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
+    });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client =
-      new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+    it('should create a client with no option', () => {
+      const client =
+        new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient();
+      assert(client);
+    });
+
+    it('should create a client with gRPC fallback', () => {
+      const client =
+        new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
+          fallback: true,
+        });
+      assert(client);
+    });
+
+    it('has initialize method and supports deferred initialization', async () => {
+      const client =
+        new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
+      await client.initialize();
+      assert(client.videoIntelligenceServiceStub);
+    });
+
+    it('has close method for the initialized client', done => {
+      const client =
+        new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      assert(client.videoIntelligenceServiceStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client =
+        new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.videoIntelligenceServiceStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client =
+        new videointelligenceserviceModule.v1.VideoIntelligenceServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('annotateVideo', () => {
@@ -191,7 +208,6 @@ describe('v1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -200,11 +216,6 @@ describe('v1.VideoIntelligenceServiceClient', () => {
       const [operation] = await client.annotateVideo(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes annotateVideo without error using callback', async () => {
@@ -217,7 +228,6 @@ describe('v1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -247,11 +257,6 @@ describe('v1.VideoIntelligenceServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes annotateVideo with call error', async () => {
@@ -264,18 +269,12 @@ describe('v1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateVideo = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.annotateVideo(request), expectedError);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes annotateVideo with LRO error', async () => {
@@ -288,7 +287,6 @@ describe('v1.VideoIntelligenceServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.videointelligence.v1.AnnotateVideoRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.annotateVideo = stubLongRunningCall(
         undefined,
@@ -297,11 +295,6 @@ describe('v1.VideoIntelligenceServiceClient', () => {
       );
       const [operation] = await client.annotateVideo(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.annotateVideo as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes checkAnnotateVideoProgress without error', async () => {
