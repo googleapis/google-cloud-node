@@ -317,7 +317,7 @@ export class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.language.v1.Document} request.document
-   *   Input document.
+   *   Required. Input document.
    * @param {google.cloud.language.v1.EncodingType} request.encodingType
    *   The encoding type used by the API to calculate sentence offsets.
    * @param {object} [options]
@@ -408,7 +408,7 @@ export class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.language.v1.Document} request.document
-   *   Input document.
+   *   Required. Input document.
    * @param {google.cloud.language.v1.EncodingType} request.encodingType
    *   The encoding type used by the API to calculate offsets.
    * @param {object} [options]
@@ -492,13 +492,15 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeEntities(request, options, callback);
   }
   /**
-   * Finds entities, similar to {@link google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities} in the text and analyzes
-   * sentiment associated with each entity and its mentions.
+   * Finds entities, similar to
+   * {@link google.cloud.language.v1.LanguageService.AnalyzeEntities|AnalyzeEntities}
+   * in the text and analyzes sentiment associated with each entity and its
+   * mentions.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.language.v1.Document} request.document
-   *   Input document.
+   *   Required. Input document.
    * @param {google.cloud.language.v1.EncodingType} request.encodingType
    *   The encoding type used by the API to calculate offsets.
    * @param {object} [options]
@@ -599,7 +601,7 @@ export class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.language.v1.Document} request.document
-   *   Input document.
+   *   Required. Input document.
    * @param {google.cloud.language.v1.EncodingType} request.encodingType
    *   The encoding type used by the API to calculate offsets.
    * @param {object} [options]
@@ -682,7 +684,10 @@ export class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.language.v1.Document} request.document
-   *   Input document.
+   *   Required. Input document.
+   * @param {google.cloud.language.v1.ClassificationModelOptions} request.classificationModelOptions
+   *   Model options to use for classification. Defaults to v1 options if not
+   *   specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -764,9 +769,9 @@ export class LanguageServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.language.v1.Document} request.document
-   *   Input document.
+   *   Required. Input document.
    * @param {google.cloud.language.v1.AnnotateTextRequest.Features} request.features
-   *   The enabled features.
+   *   Required. The enabled features.
    * @param {google.cloud.language.v1.EncodingType} request.encodingType
    *   The encoding type used by the API to calculate offsets.
    * @param {object} [options]

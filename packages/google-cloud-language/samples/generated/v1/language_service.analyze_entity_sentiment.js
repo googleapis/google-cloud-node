@@ -29,7 +29,7 @@ function main(document) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Input document.
+   *  Required. Input document.
    */
   // const document = {}
   /**

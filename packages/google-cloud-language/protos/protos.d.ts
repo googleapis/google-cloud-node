@@ -407,6 +407,14 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** EncodingType enum. */
+                enum EncodingType {
+                    NONE = 0,
+                    UTF8 = 1,
+                    UTF16 = 2,
+                    UTF32 = 3
+                }
+
                 /** Properties of an Entity. */
                 interface IEntity {
 
@@ -552,14 +560,6 @@ export namespace google {
                         NUMBER = 12,
                         PRICE = 13
                     }
-                }
-
-                /** EncodingType enum. */
-                enum EncodingType {
-                    NONE = 0,
-                    UTF8 = 1,
-                    UTF16 = 2,
-                    UTF32 = 3
                 }
 
                 /** Properties of a Token. */
@@ -1594,6 +1594,313 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ClassificationModelOptions. */
+                interface IClassificationModelOptions {
+
+                    /** ClassificationModelOptions v1Model */
+                    v1Model?: (google.cloud.language.v1.ClassificationModelOptions.IV1Model|null);
+
+                    /** ClassificationModelOptions v2Model */
+                    v2Model?: (google.cloud.language.v1.ClassificationModelOptions.IV2Model|null);
+                }
+
+                /** Represents a ClassificationModelOptions. */
+                class ClassificationModelOptions implements IClassificationModelOptions {
+
+                    /**
+                     * Constructs a new ClassificationModelOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.language.v1.IClassificationModelOptions);
+
+                    /** ClassificationModelOptions v1Model. */
+                    public v1Model?: (google.cloud.language.v1.ClassificationModelOptions.IV1Model|null);
+
+                    /** ClassificationModelOptions v2Model. */
+                    public v2Model?: (google.cloud.language.v1.ClassificationModelOptions.IV2Model|null);
+
+                    /** ClassificationModelOptions modelType. */
+                    public modelType?: ("v1Model"|"v2Model");
+
+                    /**
+                     * Creates a new ClassificationModelOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClassificationModelOptions instance
+                     */
+                    public static create(properties?: google.cloud.language.v1.IClassificationModelOptions): google.cloud.language.v1.ClassificationModelOptions;
+
+                    /**
+                     * Encodes the specified ClassificationModelOptions message. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.verify|verify} messages.
+                     * @param message ClassificationModelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.language.v1.IClassificationModelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClassificationModelOptions message, length delimited. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.verify|verify} messages.
+                     * @param message ClassificationModelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.language.v1.IClassificationModelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClassificationModelOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClassificationModelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1.ClassificationModelOptions;
+
+                    /**
+                     * Decodes a ClassificationModelOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClassificationModelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1.ClassificationModelOptions;
+
+                    /**
+                     * Verifies a ClassificationModelOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClassificationModelOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClassificationModelOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.language.v1.ClassificationModelOptions;
+
+                    /**
+                     * Creates a plain object from a ClassificationModelOptions message. Also converts values to other types if specified.
+                     * @param message ClassificationModelOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.language.v1.ClassificationModelOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClassificationModelOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClassificationModelOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ClassificationModelOptions {
+
+                    /** Properties of a V1Model. */
+                    interface IV1Model {
+                    }
+
+                    /** Represents a V1Model. */
+                    class V1Model implements IV1Model {
+
+                        /**
+                         * Constructs a new V1Model.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.language.v1.ClassificationModelOptions.IV1Model);
+
+                        /**
+                         * Creates a new V1Model instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns V1Model instance
+                         */
+                        public static create(properties?: google.cloud.language.v1.ClassificationModelOptions.IV1Model): google.cloud.language.v1.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Encodes the specified V1Model message. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V1Model.verify|verify} messages.
+                         * @param message V1Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.language.v1.ClassificationModelOptions.IV1Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified V1Model message, length delimited. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V1Model.verify|verify} messages.
+                         * @param message V1Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.language.v1.ClassificationModelOptions.IV1Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a V1Model message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns V1Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Decodes a V1Model message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns V1Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Verifies a V1Model message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a V1Model message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns V1Model
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.language.v1.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Creates a plain object from a V1Model message. Also converts values to other types if specified.
+                         * @param message V1Model
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.language.v1.ClassificationModelOptions.V1Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this V1Model to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for V1Model
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a V2Model. */
+                    interface IV2Model {
+
+                        /** V2Model contentCategoriesVersion */
+                        contentCategoriesVersion?: (google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion|keyof typeof google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion|null);
+                    }
+
+                    /** Represents a V2Model. */
+                    class V2Model implements IV2Model {
+
+                        /**
+                         * Constructs a new V2Model.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.language.v1.ClassificationModelOptions.IV2Model);
+
+                        /** V2Model contentCategoriesVersion. */
+                        public contentCategoriesVersion: (google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion|keyof typeof google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion);
+
+                        /**
+                         * Creates a new V2Model instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns V2Model instance
+                         */
+                        public static create(properties?: google.cloud.language.v1.ClassificationModelOptions.IV2Model): google.cloud.language.v1.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Encodes the specified V2Model message. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V2Model.verify|verify} messages.
+                         * @param message V2Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.language.v1.ClassificationModelOptions.IV2Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified V2Model message, length delimited. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V2Model.verify|verify} messages.
+                         * @param message V2Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.language.v1.ClassificationModelOptions.IV2Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a V2Model message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns V2Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Decodes a V2Model message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns V2Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Verifies a V2Model message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a V2Model message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns V2Model
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.language.v1.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Creates a plain object from a V2Model message. Also converts values to other types if specified.
+                         * @param message V2Model
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.language.v1.ClassificationModelOptions.V2Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this V2Model to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for V2Model
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace V2Model {
+
+                        /** ContentCategoriesVersion enum. */
+                        enum ContentCategoriesVersion {
+                            CONTENT_CATEGORIES_VERSION_UNSPECIFIED = 0,
+                            V1 = 1,
+                            V2 = 2
+                        }
+                    }
+                }
+
                 /** Properties of an AnalyzeSentimentRequest. */
                 interface IAnalyzeSentimentRequest {
 
@@ -2435,6 +2742,9 @@ export namespace google {
 
                     /** ClassifyTextRequest document */
                     document?: (google.cloud.language.v1.IDocument|null);
+
+                    /** ClassifyTextRequest classificationModelOptions */
+                    classificationModelOptions?: (google.cloud.language.v1.IClassificationModelOptions|null);
                 }
 
                 /** Represents a ClassifyTextRequest. */
@@ -2448,6 +2758,9 @@ export namespace google {
 
                     /** ClassifyTextRequest document. */
                     public document?: (google.cloud.language.v1.IDocument|null);
+
+                    /** ClassifyTextRequest classificationModelOptions. */
+                    public classificationModelOptions?: (google.cloud.language.v1.IClassificationModelOptions|null);
 
                     /**
                      * Creates a new ClassifyTextRequest instance using the specified properties.
@@ -2752,6 +3065,9 @@ export namespace google {
 
                         /** Features classifyText */
                         classifyText?: (boolean|null);
+
+                        /** Features classificationModelOptions */
+                        classificationModelOptions?: (google.cloud.language.v1.IClassificationModelOptions|null);
                     }
 
                     /** Represents a Features. */
@@ -2777,6 +3093,9 @@ export namespace google {
 
                         /** Features classifyText. */
                         public classifyText: boolean;
+
+                        /** Features classificationModelOptions. */
+                        public classificationModelOptions?: (google.cloud.language.v1.IClassificationModelOptions|null);
 
                         /**
                          * Creates a new Features instance using the specified properties.
@@ -3152,6 +3471,12 @@ export namespace google {
 
                     /** Document language */
                     language?: (string|null);
+
+                    /** Document referenceWebUri */
+                    referenceWebUri?: (string|null);
+
+                    /** Document boilerplateHandling */
+                    boilerplateHandling?: (google.cloud.language.v1beta2.Document.BoilerplateHandling|keyof typeof google.cloud.language.v1beta2.Document.BoilerplateHandling|null);
                 }
 
                 /** Represents a Document. */
@@ -3174,6 +3499,12 @@ export namespace google {
 
                     /** Document language. */
                     public language: string;
+
+                    /** Document referenceWebUri. */
+                    public referenceWebUri: string;
+
+                    /** Document boilerplateHandling. */
+                    public boilerplateHandling: (google.cloud.language.v1beta2.Document.BoilerplateHandling|keyof typeof google.cloud.language.v1beta2.Document.BoilerplateHandling);
 
                     /** Document source. */
                     public source?: ("content"|"gcsContentUri");
@@ -3263,6 +3594,13 @@ export namespace google {
                         TYPE_UNSPECIFIED = 0,
                         PLAIN_TEXT = 1,
                         HTML = 2
+                    }
+
+                    /** BoilerplateHandling enum. */
+                    enum BoilerplateHandling {
+                        BOILERPLATE_HANDLING_UNSPECIFIED = 0,
+                        SKIP_BOILERPLATE = 1,
+                        KEEP_BOILERPLATE = 2
                     }
                 }
 
@@ -3367,6 +3705,14 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** EncodingType enum. */
+                enum EncodingType {
+                    NONE = 0,
+                    UTF8 = 1,
+                    UTF16 = 2,
+                    UTF32 = 3
                 }
 
                 /** Properties of an Entity. */
@@ -3629,14 +3975,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** EncodingType enum. */
-                enum EncodingType {
-                    NONE = 0,
-                    UTF8 = 1,
-                    UTF16 = 2,
-                    UTF32 = 3
                 }
 
                 /** Properties of a Sentiment. */
@@ -4556,6 +4894,313 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ClassificationModelOptions. */
+                interface IClassificationModelOptions {
+
+                    /** ClassificationModelOptions v1Model */
+                    v1Model?: (google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model|null);
+
+                    /** ClassificationModelOptions v2Model */
+                    v2Model?: (google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model|null);
+                }
+
+                /** Represents a ClassificationModelOptions. */
+                class ClassificationModelOptions implements IClassificationModelOptions {
+
+                    /**
+                     * Constructs a new ClassificationModelOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.language.v1beta2.IClassificationModelOptions);
+
+                    /** ClassificationModelOptions v1Model. */
+                    public v1Model?: (google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model|null);
+
+                    /** ClassificationModelOptions v2Model. */
+                    public v2Model?: (google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model|null);
+
+                    /** ClassificationModelOptions modelType. */
+                    public modelType?: ("v1Model"|"v2Model");
+
+                    /**
+                     * Creates a new ClassificationModelOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ClassificationModelOptions instance
+                     */
+                    public static create(properties?: google.cloud.language.v1beta2.IClassificationModelOptions): google.cloud.language.v1beta2.ClassificationModelOptions;
+
+                    /**
+                     * Encodes the specified ClassificationModelOptions message. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.verify|verify} messages.
+                     * @param message ClassificationModelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.language.v1beta2.IClassificationModelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ClassificationModelOptions message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.verify|verify} messages.
+                     * @param message ClassificationModelOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.language.v1beta2.IClassificationModelOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ClassificationModelOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ClassificationModelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1beta2.ClassificationModelOptions;
+
+                    /**
+                     * Decodes a ClassificationModelOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ClassificationModelOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1beta2.ClassificationModelOptions;
+
+                    /**
+                     * Verifies a ClassificationModelOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ClassificationModelOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ClassificationModelOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.language.v1beta2.ClassificationModelOptions;
+
+                    /**
+                     * Creates a plain object from a ClassificationModelOptions message. Also converts values to other types if specified.
+                     * @param message ClassificationModelOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.language.v1beta2.ClassificationModelOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ClassificationModelOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ClassificationModelOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ClassificationModelOptions {
+
+                    /** Properties of a V1Model. */
+                    interface IV1Model {
+                    }
+
+                    /** Represents a V1Model. */
+                    class V1Model implements IV1Model {
+
+                        /**
+                         * Constructs a new V1Model.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model);
+
+                        /**
+                         * Creates a new V1Model instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns V1Model instance
+                         */
+                        public static create(properties?: google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model): google.cloud.language.v1beta2.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Encodes the specified V1Model message. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.verify|verify} messages.
+                         * @param message V1Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified V1Model message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.verify|verify} messages.
+                         * @param message V1Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a V1Model message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns V1Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1beta2.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Decodes a V1Model message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns V1Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1beta2.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Verifies a V1Model message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a V1Model message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns V1Model
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.language.v1beta2.ClassificationModelOptions.V1Model;
+
+                        /**
+                         * Creates a plain object from a V1Model message. Also converts values to other types if specified.
+                         * @param message V1Model
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.language.v1beta2.ClassificationModelOptions.V1Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this V1Model to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for V1Model
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a V2Model. */
+                    interface IV2Model {
+
+                        /** V2Model contentCategoriesVersion */
+                        contentCategoriesVersion?: (google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion|keyof typeof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion|null);
+                    }
+
+                    /** Represents a V2Model. */
+                    class V2Model implements IV2Model {
+
+                        /**
+                         * Constructs a new V2Model.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model);
+
+                        /** V2Model contentCategoriesVersion. */
+                        public contentCategoriesVersion: (google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion|keyof typeof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion);
+
+                        /**
+                         * Creates a new V2Model instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns V2Model instance
+                         */
+                        public static create(properties?: google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model): google.cloud.language.v1beta2.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Encodes the specified V2Model message. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.verify|verify} messages.
+                         * @param message V2Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified V2Model message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.verify|verify} messages.
+                         * @param message V2Model message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a V2Model message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns V2Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.language.v1beta2.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Decodes a V2Model message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns V2Model
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.language.v1beta2.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Verifies a V2Model message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a V2Model message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns V2Model
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.language.v1beta2.ClassificationModelOptions.V2Model;
+
+                        /**
+                         * Creates a plain object from a V2Model message. Also converts values to other types if specified.
+                         * @param message V2Model
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.language.v1beta2.ClassificationModelOptions.V2Model, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this V2Model to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for V2Model
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace V2Model {
+
+                        /** ContentCategoriesVersion enum. */
+                        enum ContentCategoriesVersion {
+                            CONTENT_CATEGORIES_VERSION_UNSPECIFIED = 0,
+                            V1 = 1,
+                            V2 = 2
+                        }
+                    }
+                }
+
                 /** Properties of an AnalyzeSentimentRequest. */
                 interface IAnalyzeSentimentRequest {
 
@@ -5397,6 +6042,9 @@ export namespace google {
 
                     /** ClassifyTextRequest document */
                     document?: (google.cloud.language.v1beta2.IDocument|null);
+
+                    /** ClassifyTextRequest classificationModelOptions */
+                    classificationModelOptions?: (google.cloud.language.v1beta2.IClassificationModelOptions|null);
                 }
 
                 /** Represents a ClassifyTextRequest. */
@@ -5410,6 +6058,9 @@ export namespace google {
 
                     /** ClassifyTextRequest document. */
                     public document?: (google.cloud.language.v1beta2.IDocument|null);
+
+                    /** ClassifyTextRequest classificationModelOptions. */
+                    public classificationModelOptions?: (google.cloud.language.v1beta2.IClassificationModelOptions|null);
 
                     /**
                      * Creates a new ClassifyTextRequest instance using the specified properties.
@@ -5714,6 +6365,9 @@ export namespace google {
 
                         /** Features classifyText */
                         classifyText?: (boolean|null);
+
+                        /** Features classificationModelOptions */
+                        classificationModelOptions?: (google.cloud.language.v1beta2.IClassificationModelOptions|null);
                     }
 
                     /** Represents a Features. */
@@ -5739,6 +6393,9 @@ export namespace google {
 
                         /** Features classifyText. */
                         public classifyText: boolean;
+
+                        /** Features classificationModelOptions. */
+                        public classificationModelOptions?: (google.cloud.language.v1beta2.IClassificationModelOptions|null);
 
                         /**
                          * Creates a new Features instance using the specified properties.

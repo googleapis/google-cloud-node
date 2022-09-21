@@ -29,11 +29,11 @@ function main(document, features) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Input document.
+   *  Required. Input document.
    */
   // const document = {}
   /**
-   *  The enabled features.
+   *  Required. The enabled features.
    */
   // const features = {}
   /**

@@ -29,9 +29,14 @@ function main(document) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Input document.
+   *  Required. Input document.
    */
   // const document = {}
+  /**
+   *  Model options to use for classification. Defaults to v1 options if not
+   *  specified.
+   */
+  // const classificationModelOptions = {}
 
   // Imports the Language library
   const {LanguageServiceClient} = require('@google-cloud/language').v1;

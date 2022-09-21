@@ -868,6 +868,24 @@
                         return Sentence;
                     })();
     
+                    /**
+                     * EncodingType enum.
+                     * @name google.cloud.language.v1.EncodingType
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} UTF8=1 UTF8 value
+                     * @property {number} UTF16=2 UTF16 value
+                     * @property {number} UTF32=3 UTF32 value
+                     */
+                    v1.EncodingType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "UTF8"] = 1;
+                        values[valuesById[2] = "UTF16"] = 2;
+                        values[valuesById[3] = "UTF32"] = 3;
+                        return values;
+                    })();
+    
                     v1.Entity = (function() {
     
                         /**
@@ -1352,24 +1370,6 @@
                         })();
     
                         return Entity;
-                    })();
-    
-                    /**
-                     * EncodingType enum.
-                     * @name google.cloud.language.v1.EncodingType
-                     * @enum {number}
-                     * @property {number} NONE=0 NONE value
-                     * @property {number} UTF8=1 UTF8 value
-                     * @property {number} UTF16=2 UTF16 value
-                     * @property {number} UTF32=3 UTF32 value
-                     */
-                    v1.EncodingType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "NONE"] = 0;
-                        values[valuesById[1] = "UTF8"] = 1;
-                        values[valuesById[2] = "UTF16"] = 2;
-                        values[valuesById[3] = "UTF32"] = 3;
-                        return values;
                     })();
     
                     v1.Token = (function() {
@@ -4643,6 +4643,680 @@
                         return ClassificationCategory;
                     })();
     
+                    v1.ClassificationModelOptions = (function() {
+    
+                        /**
+                         * Properties of a ClassificationModelOptions.
+                         * @memberof google.cloud.language.v1
+                         * @interface IClassificationModelOptions
+                         * @property {google.cloud.language.v1.ClassificationModelOptions.IV1Model|null} [v1Model] ClassificationModelOptions v1Model
+                         * @property {google.cloud.language.v1.ClassificationModelOptions.IV2Model|null} [v2Model] ClassificationModelOptions v2Model
+                         */
+    
+                        /**
+                         * Constructs a new ClassificationModelOptions.
+                         * @memberof google.cloud.language.v1
+                         * @classdesc Represents a ClassificationModelOptions.
+                         * @implements IClassificationModelOptions
+                         * @constructor
+                         * @param {google.cloud.language.v1.IClassificationModelOptions=} [properties] Properties to set
+                         */
+                        function ClassificationModelOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClassificationModelOptions v1Model.
+                         * @member {google.cloud.language.v1.ClassificationModelOptions.IV1Model|null|undefined} v1Model
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @instance
+                         */
+                        ClassificationModelOptions.prototype.v1Model = null;
+    
+                        /**
+                         * ClassificationModelOptions v2Model.
+                         * @member {google.cloud.language.v1.ClassificationModelOptions.IV2Model|null|undefined} v2Model
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @instance
+                         */
+                        ClassificationModelOptions.prototype.v2Model = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ClassificationModelOptions modelType.
+                         * @member {"v1Model"|"v2Model"|undefined} modelType
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @instance
+                         */
+                        Object.defineProperty(ClassificationModelOptions.prototype, "modelType", {
+                            get: $util.oneOfGetter($oneOfFields = ["v1Model", "v2Model"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ClassificationModelOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1.IClassificationModelOptions=} [properties] Properties to set
+                         * @returns {google.cloud.language.v1.ClassificationModelOptions} ClassificationModelOptions instance
+                         */
+                        ClassificationModelOptions.create = function create(properties) {
+                            return new ClassificationModelOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClassificationModelOptions message. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1.IClassificationModelOptions} message ClassificationModelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClassificationModelOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.v1Model != null && Object.hasOwnProperty.call(message, "v1Model"))
+                                $root.google.cloud.language.v1.ClassificationModelOptions.V1Model.encode(message.v1Model, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.v2Model != null && Object.hasOwnProperty.call(message, "v2Model"))
+                                $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.encode(message.v2Model, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClassificationModelOptions message, length delimited. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1.IClassificationModelOptions} message ClassificationModelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClassificationModelOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClassificationModelOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.language.v1.ClassificationModelOptions} ClassificationModelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClassificationModelOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1.ClassificationModelOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.v1Model = $root.google.cloud.language.v1.ClassificationModelOptions.V1Model.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.v2Model = $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClassificationModelOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.language.v1.ClassificationModelOptions} ClassificationModelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClassificationModelOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClassificationModelOptions message.
+                         * @function verify
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClassificationModelOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.v1Model != null && message.hasOwnProperty("v1Model")) {
+                                properties.modelType = 1;
+                                {
+                                    var error = $root.google.cloud.language.v1.ClassificationModelOptions.V1Model.verify(message.v1Model);
+                                    if (error)
+                                        return "v1Model." + error;
+                                }
+                            }
+                            if (message.v2Model != null && message.hasOwnProperty("v2Model")) {
+                                if (properties.modelType === 1)
+                                    return "modelType: multiple values";
+                                properties.modelType = 1;
+                                {
+                                    var error = $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.verify(message.v2Model);
+                                    if (error)
+                                        return "v2Model." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClassificationModelOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.language.v1.ClassificationModelOptions} ClassificationModelOptions
+                         */
+                        ClassificationModelOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.language.v1.ClassificationModelOptions)
+                                return object;
+                            var message = new $root.google.cloud.language.v1.ClassificationModelOptions();
+                            if (object.v1Model != null) {
+                                if (typeof object.v1Model !== "object")
+                                    throw TypeError(".google.cloud.language.v1.ClassificationModelOptions.v1Model: object expected");
+                                message.v1Model = $root.google.cloud.language.v1.ClassificationModelOptions.V1Model.fromObject(object.v1Model);
+                            }
+                            if (object.v2Model != null) {
+                                if (typeof object.v2Model !== "object")
+                                    throw TypeError(".google.cloud.language.v1.ClassificationModelOptions.v2Model: object expected");
+                                message.v2Model = $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.fromObject(object.v2Model);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClassificationModelOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1.ClassificationModelOptions} message ClassificationModelOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClassificationModelOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.v1Model != null && message.hasOwnProperty("v1Model")) {
+                                object.v1Model = $root.google.cloud.language.v1.ClassificationModelOptions.V1Model.toObject(message.v1Model, options);
+                                if (options.oneofs)
+                                    object.modelType = "v1Model";
+                            }
+                            if (message.v2Model != null && message.hasOwnProperty("v2Model")) {
+                                object.v2Model = $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.toObject(message.v2Model, options);
+                                if (options.oneofs)
+                                    object.modelType = "v2Model";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClassificationModelOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClassificationModelOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClassificationModelOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.language.v1.ClassificationModelOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClassificationModelOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.language.v1.ClassificationModelOptions";
+                        };
+    
+                        ClassificationModelOptions.V1Model = (function() {
+    
+                            /**
+                             * Properties of a V1Model.
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions
+                             * @interface IV1Model
+                             */
+    
+                            /**
+                             * Constructs a new V1Model.
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions
+                             * @classdesc Represents a V1Model.
+                             * @implements IV1Model
+                             * @constructor
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV1Model=} [properties] Properties to set
+                             */
+                            function V1Model(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new V1Model instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV1Model=} [properties] Properties to set
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V1Model} V1Model instance
+                             */
+                            V1Model.create = function create(properties) {
+                                return new V1Model(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified V1Model message. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V1Model.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV1Model} message V1Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V1Model.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified V1Model message, length delimited. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V1Model.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV1Model} message V1Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V1Model.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a V1Model message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V1Model} V1Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V1Model.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1.ClassificationModelOptions.V1Model();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a V1Model message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V1Model} V1Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V1Model.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a V1Model message.
+                             * @function verify
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            V1Model.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a V1Model message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V1Model} V1Model
+                             */
+                            V1Model.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.language.v1.ClassificationModelOptions.V1Model)
+                                    return object;
+                                return new $root.google.cloud.language.v1.ClassificationModelOptions.V1Model();
+                            };
+    
+                            /**
+                             * Creates a plain object from a V1Model message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.V1Model} message V1Model
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            V1Model.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this V1Model to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            V1Model.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for V1Model
+                             * @function getTypeUrl
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            V1Model.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.language.v1.ClassificationModelOptions.V1Model";
+                            };
+    
+                            return V1Model;
+                        })();
+    
+                        ClassificationModelOptions.V2Model = (function() {
+    
+                            /**
+                             * Properties of a V2Model.
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions
+                             * @interface IV2Model
+                             * @property {google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion|null} [contentCategoriesVersion] V2Model contentCategoriesVersion
+                             */
+    
+                            /**
+                             * Constructs a new V2Model.
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions
+                             * @classdesc Represents a V2Model.
+                             * @implements IV2Model
+                             * @constructor
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV2Model=} [properties] Properties to set
+                             */
+                            function V2Model(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * V2Model contentCategoriesVersion.
+                             * @member {google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion} contentCategoriesVersion
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @instance
+                             */
+                            V2Model.prototype.contentCategoriesVersion = 0;
+    
+                            /**
+                             * Creates a new V2Model instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV2Model=} [properties] Properties to set
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V2Model} V2Model instance
+                             */
+                            V2Model.create = function create(properties) {
+                                return new V2Model(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified V2Model message. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V2Model.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV2Model} message V2Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V2Model.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.contentCategoriesVersion != null && Object.hasOwnProperty.call(message, "contentCategoriesVersion"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.contentCategoriesVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified V2Model message, length delimited. Does not implicitly {@link google.cloud.language.v1.ClassificationModelOptions.V2Model.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.IV2Model} message V2Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V2Model.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a V2Model message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V2Model} V2Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V2Model.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1.ClassificationModelOptions.V2Model();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.contentCategoriesVersion = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a V2Model message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V2Model} V2Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V2Model.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a V2Model message.
+                             * @function verify
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            V2Model.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.contentCategoriesVersion != null && message.hasOwnProperty("contentCategoriesVersion"))
+                                    switch (message.contentCategoriesVersion) {
+                                    default:
+                                        return "contentCategoriesVersion: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a V2Model message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.language.v1.ClassificationModelOptions.V2Model} V2Model
+                             */
+                            V2Model.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.language.v1.ClassificationModelOptions.V2Model)
+                                    return object;
+                                var message = new $root.google.cloud.language.v1.ClassificationModelOptions.V2Model();
+                                switch (object.contentCategoriesVersion) {
+                                case "CONTENT_CATEGORIES_VERSION_UNSPECIFIED":
+                                case 0:
+                                    message.contentCategoriesVersion = 0;
+                                    break;
+                                case "V1":
+                                case 1:
+                                    message.contentCategoriesVersion = 1;
+                                    break;
+                                case "V2":
+                                case 2:
+                                    message.contentCategoriesVersion = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a V2Model message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1.ClassificationModelOptions.V2Model} message V2Model
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            V2Model.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.contentCategoriesVersion = options.enums === String ? "CONTENT_CATEGORIES_VERSION_UNSPECIFIED" : 0;
+                                if (message.contentCategoriesVersion != null && message.hasOwnProperty("contentCategoriesVersion"))
+                                    object.contentCategoriesVersion = options.enums === String ? $root.google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] : message.contentCategoriesVersion;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this V2Model to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            V2Model.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for V2Model
+                             * @function getTypeUrl
+                             * @memberof google.cloud.language.v1.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            V2Model.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.language.v1.ClassificationModelOptions.V2Model";
+                            };
+    
+                            /**
+                             * ContentCategoriesVersion enum.
+                             * @name google.cloud.language.v1.ClassificationModelOptions.V2Model.ContentCategoriesVersion
+                             * @enum {number}
+                             * @property {number} CONTENT_CATEGORIES_VERSION_UNSPECIFIED=0 CONTENT_CATEGORIES_VERSION_UNSPECIFIED value
+                             * @property {number} V1=1 V1 value
+                             * @property {number} V2=2 V2 value
+                             */
+                            V2Model.ContentCategoriesVersion = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CONTENT_CATEGORIES_VERSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "V1"] = 1;
+                                values[valuesById[2] = "V2"] = 2;
+                                return values;
+                            })();
+    
+                            return V2Model;
+                        })();
+    
+                        return ClassificationModelOptions;
+                    })();
+    
                     v1.AnalyzeSentimentRequest = (function() {
     
                         /**
@@ -6736,6 +7410,7 @@
                          * @memberof google.cloud.language.v1
                          * @interface IClassifyTextRequest
                          * @property {google.cloud.language.v1.IDocument|null} [document] ClassifyTextRequest document
+                         * @property {google.cloud.language.v1.IClassificationModelOptions|null} [classificationModelOptions] ClassifyTextRequest classificationModelOptions
                          */
     
                         /**
@@ -6760,6 +7435,14 @@
                          * @instance
                          */
                         ClassifyTextRequest.prototype.document = null;
+    
+                        /**
+                         * ClassifyTextRequest classificationModelOptions.
+                         * @member {google.cloud.language.v1.IClassificationModelOptions|null|undefined} classificationModelOptions
+                         * @memberof google.cloud.language.v1.ClassifyTextRequest
+                         * @instance
+                         */
+                        ClassifyTextRequest.prototype.classificationModelOptions = null;
     
                         /**
                          * Creates a new ClassifyTextRequest instance using the specified properties.
@@ -6787,6 +7470,8 @@
                                 writer = $Writer.create();
                             if (message.document != null && Object.hasOwnProperty.call(message, "document"))
                                 $root.google.cloud.language.v1.Document.encode(message.document, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.classificationModelOptions != null && Object.hasOwnProperty.call(message, "classificationModelOptions"))
+                                $root.google.cloud.language.v1.ClassificationModelOptions.encode(message.classificationModelOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -6823,6 +7508,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.document = $root.google.cloud.language.v1.Document.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.classificationModelOptions = $root.google.cloud.language.v1.ClassificationModelOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -6865,6 +7554,11 @@
                                 if (error)
                                     return "document." + error;
                             }
+                            if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions")) {
+                                var error = $root.google.cloud.language.v1.ClassificationModelOptions.verify(message.classificationModelOptions);
+                                if (error)
+                                    return "classificationModelOptions." + error;
+                            }
                             return null;
                         };
     
@@ -6885,6 +7579,11 @@
                                     throw TypeError(".google.cloud.language.v1.ClassifyTextRequest.document: object expected");
                                 message.document = $root.google.cloud.language.v1.Document.fromObject(object.document);
                             }
+                            if (object.classificationModelOptions != null) {
+                                if (typeof object.classificationModelOptions !== "object")
+                                    throw TypeError(".google.cloud.language.v1.ClassifyTextRequest.classificationModelOptions: object expected");
+                                message.classificationModelOptions = $root.google.cloud.language.v1.ClassificationModelOptions.fromObject(object.classificationModelOptions);
+                            }
                             return message;
                         };
     
@@ -6901,10 +7600,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.document = null;
+                                object.classificationModelOptions = null;
+                            }
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1.Document.toObject(message.document, options);
+                            if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions"))
+                                object.classificationModelOptions = $root.google.cloud.language.v1.ClassificationModelOptions.toObject(message.classificationModelOptions, options);
                             return object;
                         };
     
@@ -7452,6 +8155,7 @@
                              * @property {boolean|null} [extractDocumentSentiment] Features extractDocumentSentiment
                              * @property {boolean|null} [extractEntitySentiment] Features extractEntitySentiment
                              * @property {boolean|null} [classifyText] Features classifyText
+                             * @property {google.cloud.language.v1.IClassificationModelOptions|null} [classificationModelOptions] Features classificationModelOptions
                              */
     
                             /**
@@ -7510,6 +8214,14 @@
                             Features.prototype.classifyText = false;
     
                             /**
+                             * Features classificationModelOptions.
+                             * @member {google.cloud.language.v1.IClassificationModelOptions|null|undefined} classificationModelOptions
+                             * @memberof google.cloud.language.v1.AnnotateTextRequest.Features
+                             * @instance
+                             */
+                            Features.prototype.classificationModelOptions = null;
+    
+                            /**
                              * Creates a new Features instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.language.v1.AnnotateTextRequest.Features
@@ -7543,6 +8255,8 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.extractEntitySentiment);
                                 if (message.classifyText != null && Object.hasOwnProperty.call(message, "classifyText"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.classifyText);
+                                if (message.classificationModelOptions != null && Object.hasOwnProperty.call(message, "classificationModelOptions"))
+                                    $root.google.cloud.language.v1.ClassificationModelOptions.encode(message.classificationModelOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 return writer;
                             };
     
@@ -7597,6 +8311,10 @@
                                             message.classifyText = reader.bool();
                                             break;
                                         }
+                                    case 10: {
+                                            message.classificationModelOptions = $root.google.cloud.language.v1.ClassificationModelOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -7647,6 +8365,11 @@
                                 if (message.classifyText != null && message.hasOwnProperty("classifyText"))
                                     if (typeof message.classifyText !== "boolean")
                                         return "classifyText: boolean expected";
+                                if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions")) {
+                                    var error = $root.google.cloud.language.v1.ClassificationModelOptions.verify(message.classificationModelOptions);
+                                    if (error)
+                                        return "classificationModelOptions." + error;
+                                }
                                 return null;
                             };
     
@@ -7672,6 +8395,11 @@
                                     message.extractEntitySentiment = Boolean(object.extractEntitySentiment);
                                 if (object.classifyText != null)
                                     message.classifyText = Boolean(object.classifyText);
+                                if (object.classificationModelOptions != null) {
+                                    if (typeof object.classificationModelOptions !== "object")
+                                        throw TypeError(".google.cloud.language.v1.AnnotateTextRequest.Features.classificationModelOptions: object expected");
+                                    message.classificationModelOptions = $root.google.cloud.language.v1.ClassificationModelOptions.fromObject(object.classificationModelOptions);
+                                }
                                 return message;
                             };
     
@@ -7694,6 +8422,7 @@
                                     object.extractDocumentSentiment = false;
                                     object.extractEntitySentiment = false;
                                     object.classifyText = false;
+                                    object.classificationModelOptions = null;
                                 }
                                 if (message.extractSyntax != null && message.hasOwnProperty("extractSyntax"))
                                     object.extractSyntax = message.extractSyntax;
@@ -7705,6 +8434,8 @@
                                     object.extractEntitySentiment = message.extractEntitySentiment;
                                 if (message.classifyText != null && message.hasOwnProperty("classifyText"))
                                     object.classifyText = message.classifyText;
+                                if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions"))
+                                    object.classificationModelOptions = $root.google.cloud.language.v1.ClassificationModelOptions.toObject(message.classificationModelOptions, options);
                                 return object;
                             };
     
@@ -8405,6 +9136,8 @@
                          * @property {string|null} [content] Document content
                          * @property {string|null} [gcsContentUri] Document gcsContentUri
                          * @property {string|null} [language] Document language
+                         * @property {string|null} [referenceWebUri] Document referenceWebUri
+                         * @property {google.cloud.language.v1beta2.Document.BoilerplateHandling|null} [boilerplateHandling] Document boilerplateHandling
                          */
     
                         /**
@@ -8454,6 +9187,22 @@
                          */
                         Document.prototype.language = "";
     
+                        /**
+                         * Document referenceWebUri.
+                         * @member {string} referenceWebUri
+                         * @memberof google.cloud.language.v1beta2.Document
+                         * @instance
+                         */
+                        Document.prototype.referenceWebUri = "";
+    
+                        /**
+                         * Document boilerplateHandling.
+                         * @member {google.cloud.language.v1beta2.Document.BoilerplateHandling} boilerplateHandling
+                         * @memberof google.cloud.language.v1beta2.Document
+                         * @instance
+                         */
+                        Document.prototype.boilerplateHandling = 0;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -8500,6 +9249,10 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.gcsContentUri);
                             if (message.language != null && Object.hasOwnProperty.call(message, "language"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.language);
+                            if (message.referenceWebUri != null && Object.hasOwnProperty.call(message, "referenceWebUri"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.referenceWebUri);
+                            if (message.boilerplateHandling != null && Object.hasOwnProperty.call(message, "boilerplateHandling"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.boilerplateHandling);
                             return writer;
                         };
     
@@ -8548,6 +9301,14 @@
                                     }
                                 case 4: {
                                         message.language = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.referenceWebUri = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.boilerplateHandling = reader.int32();
                                         break;
                                     }
                                 default:
@@ -8610,6 +9371,18 @@
                             if (message.language != null && message.hasOwnProperty("language"))
                                 if (!$util.isString(message.language))
                                     return "language: string expected";
+                            if (message.referenceWebUri != null && message.hasOwnProperty("referenceWebUri"))
+                                if (!$util.isString(message.referenceWebUri))
+                                    return "referenceWebUri: string expected";
+                            if (message.boilerplateHandling != null && message.hasOwnProperty("boilerplateHandling"))
+                                switch (message.boilerplateHandling) {
+                                default:
+                                    return "boilerplateHandling: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -8645,6 +9418,22 @@
                                 message.gcsContentUri = String(object.gcsContentUri);
                             if (object.language != null)
                                 message.language = String(object.language);
+                            if (object.referenceWebUri != null)
+                                message.referenceWebUri = String(object.referenceWebUri);
+                            switch (object.boilerplateHandling) {
+                            case "BOILERPLATE_HANDLING_UNSPECIFIED":
+                            case 0:
+                                message.boilerplateHandling = 0;
+                                break;
+                            case "SKIP_BOILERPLATE":
+                            case 1:
+                                message.boilerplateHandling = 1;
+                                break;
+                            case "KEEP_BOILERPLATE":
+                            case 2:
+                                message.boilerplateHandling = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -8664,6 +9453,8 @@
                             if (options.defaults) {
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 object.language = "";
+                                object.referenceWebUri = "";
+                                object.boilerplateHandling = options.enums === String ? "BOILERPLATE_HANDLING_UNSPECIFIED" : 0;
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.language.v1beta2.Document.Type[message.type] : message.type;
@@ -8679,6 +9470,10 @@
                             }
                             if (message.language != null && message.hasOwnProperty("language"))
                                 object.language = message.language;
+                            if (message.referenceWebUri != null && message.hasOwnProperty("referenceWebUri"))
+                                object.referenceWebUri = message.referenceWebUri;
+                            if (message.boilerplateHandling != null && message.hasOwnProperty("boilerplateHandling"))
+                                object.boilerplateHandling = options.enums === String ? $root.google.cloud.language.v1beta2.Document.BoilerplateHandling[message.boilerplateHandling] : message.boilerplateHandling;
                             return object;
                         };
     
@@ -8721,6 +9516,22 @@
                             values[valuesById[0] = "TYPE_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "PLAIN_TEXT"] = 1;
                             values[valuesById[2] = "HTML"] = 2;
+                            return values;
+                        })();
+    
+                        /**
+                         * BoilerplateHandling enum.
+                         * @name google.cloud.language.v1beta2.Document.BoilerplateHandling
+                         * @enum {number}
+                         * @property {number} BOILERPLATE_HANDLING_UNSPECIFIED=0 BOILERPLATE_HANDLING_UNSPECIFIED value
+                         * @property {number} SKIP_BOILERPLATE=1 SKIP_BOILERPLATE value
+                         * @property {number} KEEP_BOILERPLATE=2 KEEP_BOILERPLATE value
+                         */
+                        Document.BoilerplateHandling = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "BOILERPLATE_HANDLING_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SKIP_BOILERPLATE"] = 1;
+                            values[valuesById[2] = "KEEP_BOILERPLATE"] = 2;
                             return values;
                         })();
     
@@ -8962,6 +9773,24 @@
                         };
     
                         return Sentence;
+                    })();
+    
+                    /**
+                     * EncodingType enum.
+                     * @name google.cloud.language.v1beta2.EncodingType
+                     * @enum {number}
+                     * @property {number} NONE=0 NONE value
+                     * @property {number} UTF8=1 UTF8 value
+                     * @property {number} UTF16=2 UTF16 value
+                     * @property {number} UTF32=3 UTF32 value
+                     */
+                    v1beta2.EncodingType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "NONE"] = 0;
+                        values[valuesById[1] = "UTF8"] = 1;
+                        values[valuesById[2] = "UTF16"] = 2;
+                        values[valuesById[3] = "UTF32"] = 3;
+                        return values;
                     })();
     
                     v1beta2.Entity = (function() {
@@ -9736,24 +10565,6 @@
                         };
     
                         return Token;
-                    })();
-    
-                    /**
-                     * EncodingType enum.
-                     * @name google.cloud.language.v1beta2.EncodingType
-                     * @enum {number}
-                     * @property {number} NONE=0 NONE value
-                     * @property {number} UTF8=1 UTF8 value
-                     * @property {number} UTF16=2 UTF16 value
-                     * @property {number} UTF32=3 UTF32 value
-                     */
-                    v1beta2.EncodingType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "NONE"] = 0;
-                        values[valuesById[1] = "UTF8"] = 1;
-                        values[valuesById[2] = "UTF16"] = 2;
-                        values[valuesById[3] = "UTF32"] = 3;
-                        return values;
                     })();
     
                     v1beta2.Sentiment = (function() {
@@ -12739,6 +13550,680 @@
                         return ClassificationCategory;
                     })();
     
+                    v1beta2.ClassificationModelOptions = (function() {
+    
+                        /**
+                         * Properties of a ClassificationModelOptions.
+                         * @memberof google.cloud.language.v1beta2
+                         * @interface IClassificationModelOptions
+                         * @property {google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model|null} [v1Model] ClassificationModelOptions v1Model
+                         * @property {google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model|null} [v2Model] ClassificationModelOptions v2Model
+                         */
+    
+                        /**
+                         * Constructs a new ClassificationModelOptions.
+                         * @memberof google.cloud.language.v1beta2
+                         * @classdesc Represents a ClassificationModelOptions.
+                         * @implements IClassificationModelOptions
+                         * @constructor
+                         * @param {google.cloud.language.v1beta2.IClassificationModelOptions=} [properties] Properties to set
+                         */
+                        function ClassificationModelOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ClassificationModelOptions v1Model.
+                         * @member {google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model|null|undefined} v1Model
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @instance
+                         */
+                        ClassificationModelOptions.prototype.v1Model = null;
+    
+                        /**
+                         * ClassificationModelOptions v2Model.
+                         * @member {google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model|null|undefined} v2Model
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @instance
+                         */
+                        ClassificationModelOptions.prototype.v2Model = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ClassificationModelOptions modelType.
+                         * @member {"v1Model"|"v2Model"|undefined} modelType
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @instance
+                         */
+                        Object.defineProperty(ClassificationModelOptions.prototype, "modelType", {
+                            get: $util.oneOfGetter($oneOfFields = ["v1Model", "v2Model"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ClassificationModelOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IClassificationModelOptions=} [properties] Properties to set
+                         * @returns {google.cloud.language.v1beta2.ClassificationModelOptions} ClassificationModelOptions instance
+                         */
+                        ClassificationModelOptions.create = function create(properties) {
+                            return new ClassificationModelOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ClassificationModelOptions message. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IClassificationModelOptions} message ClassificationModelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClassificationModelOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.v1Model != null && Object.hasOwnProperty.call(message, "v1Model"))
+                                $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.encode(message.v1Model, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.v2Model != null && Object.hasOwnProperty.call(message, "v2Model"))
+                                $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.encode(message.v2Model, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ClassificationModelOptions message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1beta2.IClassificationModelOptions} message ClassificationModelOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ClassificationModelOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ClassificationModelOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.language.v1beta2.ClassificationModelOptions} ClassificationModelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClassificationModelOptions.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1beta2.ClassificationModelOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.v1Model = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.v2Model = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ClassificationModelOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.language.v1beta2.ClassificationModelOptions} ClassificationModelOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ClassificationModelOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ClassificationModelOptions message.
+                         * @function verify
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ClassificationModelOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.v1Model != null && message.hasOwnProperty("v1Model")) {
+                                properties.modelType = 1;
+                                {
+                                    var error = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.verify(message.v1Model);
+                                    if (error)
+                                        return "v1Model." + error;
+                                }
+                            }
+                            if (message.v2Model != null && message.hasOwnProperty("v2Model")) {
+                                if (properties.modelType === 1)
+                                    return "modelType: multiple values";
+                                properties.modelType = 1;
+                                {
+                                    var error = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.verify(message.v2Model);
+                                    if (error)
+                                        return "v2Model." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ClassificationModelOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.language.v1beta2.ClassificationModelOptions} ClassificationModelOptions
+                         */
+                        ClassificationModelOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.language.v1beta2.ClassificationModelOptions)
+                                return object;
+                            var message = new $root.google.cloud.language.v1beta2.ClassificationModelOptions();
+                            if (object.v1Model != null) {
+                                if (typeof object.v1Model !== "object")
+                                    throw TypeError(".google.cloud.language.v1beta2.ClassificationModelOptions.v1Model: object expected");
+                                message.v1Model = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.fromObject(object.v1Model);
+                            }
+                            if (object.v2Model != null) {
+                                if (typeof object.v2Model !== "object")
+                                    throw TypeError(".google.cloud.language.v1beta2.ClassificationModelOptions.v2Model: object expected");
+                                message.v2Model = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.fromObject(object.v2Model);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ClassificationModelOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {google.cloud.language.v1beta2.ClassificationModelOptions} message ClassificationModelOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ClassificationModelOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.v1Model != null && message.hasOwnProperty("v1Model")) {
+                                object.v1Model = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.toObject(message.v1Model, options);
+                                if (options.oneofs)
+                                    object.modelType = "v1Model";
+                            }
+                            if (message.v2Model != null && message.hasOwnProperty("v2Model")) {
+                                object.v2Model = $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.toObject(message.v2Model, options);
+                                if (options.oneofs)
+                                    object.modelType = "v2Model";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ClassificationModelOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ClassificationModelOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ClassificationModelOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ClassificationModelOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.language.v1beta2.ClassificationModelOptions";
+                        };
+    
+                        ClassificationModelOptions.V1Model = (function() {
+    
+                            /**
+                             * Properties of a V1Model.
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                             * @interface IV1Model
+                             */
+    
+                            /**
+                             * Constructs a new V1Model.
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                             * @classdesc Represents a V1Model.
+                             * @implements IV1Model
+                             * @constructor
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model=} [properties] Properties to set
+                             */
+                            function V1Model(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Creates a new V1Model instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model=} [properties] Properties to set
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V1Model} V1Model instance
+                             */
+                            V1Model.create = function create(properties) {
+                                return new V1Model(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified V1Model message. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model} message V1Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V1Model.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified V1Model message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V1Model.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV1Model} message V1Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V1Model.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a V1Model message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V1Model} V1Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V1Model.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a V1Model message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V1Model} V1Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V1Model.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a V1Model message.
+                             * @function verify
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            V1Model.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a V1Model message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V1Model} V1Model
+                             */
+                            V1Model.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model)
+                                    return object;
+                                return new $root.google.cloud.language.v1beta2.ClassificationModelOptions.V1Model();
+                            };
+    
+                            /**
+                             * Creates a plain object from a V1Model message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.V1Model} message V1Model
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            V1Model.toObject = function toObject() {
+                                return {};
+                            };
+    
+                            /**
+                             * Converts this V1Model to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            V1Model.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for V1Model
+                             * @function getTypeUrl
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V1Model
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            V1Model.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.language.v1beta2.ClassificationModelOptions.V1Model";
+                            };
+    
+                            return V1Model;
+                        })();
+    
+                        ClassificationModelOptions.V2Model = (function() {
+    
+                            /**
+                             * Properties of a V2Model.
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                             * @interface IV2Model
+                             * @property {google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion|null} [contentCategoriesVersion] V2Model contentCategoriesVersion
+                             */
+    
+                            /**
+                             * Constructs a new V2Model.
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions
+                             * @classdesc Represents a V2Model.
+                             * @implements IV2Model
+                             * @constructor
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model=} [properties] Properties to set
+                             */
+                            function V2Model(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * V2Model contentCategoriesVersion.
+                             * @member {google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion} contentCategoriesVersion
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @instance
+                             */
+                            V2Model.prototype.contentCategoriesVersion = 0;
+    
+                            /**
+                             * Creates a new V2Model instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model=} [properties] Properties to set
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V2Model} V2Model instance
+                             */
+                            V2Model.create = function create(properties) {
+                                return new V2Model(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified V2Model message. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model} message V2Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V2Model.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.contentCategoriesVersion != null && Object.hasOwnProperty.call(message, "contentCategoriesVersion"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.contentCategoriesVersion);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified V2Model message, length delimited. Does not implicitly {@link google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.IV2Model} message V2Model message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            V2Model.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a V2Model message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V2Model} V2Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V2Model.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.contentCategoriesVersion = reader.int32();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a V2Model message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V2Model} V2Model
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            V2Model.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a V2Model message.
+                             * @function verify
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            V2Model.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.contentCategoriesVersion != null && message.hasOwnProperty("contentCategoriesVersion"))
+                                    switch (message.contentCategoriesVersion) {
+                                    default:
+                                        return "contentCategoriesVersion: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a V2Model message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.language.v1beta2.ClassificationModelOptions.V2Model} V2Model
+                             */
+                            V2Model.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model)
+                                    return object;
+                                var message = new $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model();
+                                switch (object.contentCategoriesVersion) {
+                                case "CONTENT_CATEGORIES_VERSION_UNSPECIFIED":
+                                case 0:
+                                    message.contentCategoriesVersion = 0;
+                                    break;
+                                case "V1":
+                                case 1:
+                                    message.contentCategoriesVersion = 1;
+                                    break;
+                                case "V2":
+                                case 2:
+                                    message.contentCategoriesVersion = 2;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a V2Model message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {google.cloud.language.v1beta2.ClassificationModelOptions.V2Model} message V2Model
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            V2Model.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.contentCategoriesVersion = options.enums === String ? "CONTENT_CATEGORIES_VERSION_UNSPECIFIED" : 0;
+                                if (message.contentCategoriesVersion != null && message.hasOwnProperty("contentCategoriesVersion"))
+                                    object.contentCategoriesVersion = options.enums === String ? $root.google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion[message.contentCategoriesVersion] : message.contentCategoriesVersion;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this V2Model to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            V2Model.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for V2Model
+                             * @function getTypeUrl
+                             * @memberof google.cloud.language.v1beta2.ClassificationModelOptions.V2Model
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            V2Model.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.language.v1beta2.ClassificationModelOptions.V2Model";
+                            };
+    
+                            /**
+                             * ContentCategoriesVersion enum.
+                             * @name google.cloud.language.v1beta2.ClassificationModelOptions.V2Model.ContentCategoriesVersion
+                             * @enum {number}
+                             * @property {number} CONTENT_CATEGORIES_VERSION_UNSPECIFIED=0 CONTENT_CATEGORIES_VERSION_UNSPECIFIED value
+                             * @property {number} V1=1 V1 value
+                             * @property {number} V2=2 V2 value
+                             */
+                            V2Model.ContentCategoriesVersion = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CONTENT_CATEGORIES_VERSION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "V1"] = 1;
+                                values[valuesById[2] = "V2"] = 2;
+                                return values;
+                            })();
+    
+                            return V2Model;
+                        })();
+    
+                        return ClassificationModelOptions;
+                    })();
+    
                     v1beta2.AnalyzeSentimentRequest = (function() {
     
                         /**
@@ -14832,6 +16317,7 @@
                          * @memberof google.cloud.language.v1beta2
                          * @interface IClassifyTextRequest
                          * @property {google.cloud.language.v1beta2.IDocument|null} [document] ClassifyTextRequest document
+                         * @property {google.cloud.language.v1beta2.IClassificationModelOptions|null} [classificationModelOptions] ClassifyTextRequest classificationModelOptions
                          */
     
                         /**
@@ -14856,6 +16342,14 @@
                          * @instance
                          */
                         ClassifyTextRequest.prototype.document = null;
+    
+                        /**
+                         * ClassifyTextRequest classificationModelOptions.
+                         * @member {google.cloud.language.v1beta2.IClassificationModelOptions|null|undefined} classificationModelOptions
+                         * @memberof google.cloud.language.v1beta2.ClassifyTextRequest
+                         * @instance
+                         */
+                        ClassifyTextRequest.prototype.classificationModelOptions = null;
     
                         /**
                          * Creates a new ClassifyTextRequest instance using the specified properties.
@@ -14883,6 +16377,8 @@
                                 writer = $Writer.create();
                             if (message.document != null && Object.hasOwnProperty.call(message, "document"))
                                 $root.google.cloud.language.v1beta2.Document.encode(message.document, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.classificationModelOptions != null && Object.hasOwnProperty.call(message, "classificationModelOptions"))
+                                $root.google.cloud.language.v1beta2.ClassificationModelOptions.encode(message.classificationModelOptions, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -14919,6 +16415,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.document = $root.google.cloud.language.v1beta2.Document.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.classificationModelOptions = $root.google.cloud.language.v1beta2.ClassificationModelOptions.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -14961,6 +16461,11 @@
                                 if (error)
                                     return "document." + error;
                             }
+                            if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions")) {
+                                var error = $root.google.cloud.language.v1beta2.ClassificationModelOptions.verify(message.classificationModelOptions);
+                                if (error)
+                                    return "classificationModelOptions." + error;
+                            }
                             return null;
                         };
     
@@ -14981,6 +16486,11 @@
                                     throw TypeError(".google.cloud.language.v1beta2.ClassifyTextRequest.document: object expected");
                                 message.document = $root.google.cloud.language.v1beta2.Document.fromObject(object.document);
                             }
+                            if (object.classificationModelOptions != null) {
+                                if (typeof object.classificationModelOptions !== "object")
+                                    throw TypeError(".google.cloud.language.v1beta2.ClassifyTextRequest.classificationModelOptions: object expected");
+                                message.classificationModelOptions = $root.google.cloud.language.v1beta2.ClassificationModelOptions.fromObject(object.classificationModelOptions);
+                            }
                             return message;
                         };
     
@@ -14997,10 +16507,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.document = null;
+                                object.classificationModelOptions = null;
+                            }
                             if (message.document != null && message.hasOwnProperty("document"))
                                 object.document = $root.google.cloud.language.v1beta2.Document.toObject(message.document, options);
+                            if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions"))
+                                object.classificationModelOptions = $root.google.cloud.language.v1beta2.ClassificationModelOptions.toObject(message.classificationModelOptions, options);
                             return object;
                         };
     
@@ -15548,6 +17062,7 @@
                              * @property {boolean|null} [extractDocumentSentiment] Features extractDocumentSentiment
                              * @property {boolean|null} [extractEntitySentiment] Features extractEntitySentiment
                              * @property {boolean|null} [classifyText] Features classifyText
+                             * @property {google.cloud.language.v1beta2.IClassificationModelOptions|null} [classificationModelOptions] Features classificationModelOptions
                              */
     
                             /**
@@ -15606,6 +17121,14 @@
                             Features.prototype.classifyText = false;
     
                             /**
+                             * Features classificationModelOptions.
+                             * @member {google.cloud.language.v1beta2.IClassificationModelOptions|null|undefined} classificationModelOptions
+                             * @memberof google.cloud.language.v1beta2.AnnotateTextRequest.Features
+                             * @instance
+                             */
+                            Features.prototype.classificationModelOptions = null;
+    
+                            /**
                              * Creates a new Features instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.language.v1beta2.AnnotateTextRequest.Features
@@ -15639,6 +17162,8 @@
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.extractEntitySentiment);
                                 if (message.classifyText != null && Object.hasOwnProperty.call(message, "classifyText"))
                                     writer.uint32(/* id 6, wireType 0 =*/48).bool(message.classifyText);
+                                if (message.classificationModelOptions != null && Object.hasOwnProperty.call(message, "classificationModelOptions"))
+                                    $root.google.cloud.language.v1beta2.ClassificationModelOptions.encode(message.classificationModelOptions, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                                 return writer;
                             };
     
@@ -15693,6 +17218,10 @@
                                             message.classifyText = reader.bool();
                                             break;
                                         }
+                                    case 10: {
+                                            message.classificationModelOptions = $root.google.cloud.language.v1beta2.ClassificationModelOptions.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -15743,6 +17272,11 @@
                                 if (message.classifyText != null && message.hasOwnProperty("classifyText"))
                                     if (typeof message.classifyText !== "boolean")
                                         return "classifyText: boolean expected";
+                                if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions")) {
+                                    var error = $root.google.cloud.language.v1beta2.ClassificationModelOptions.verify(message.classificationModelOptions);
+                                    if (error)
+                                        return "classificationModelOptions." + error;
+                                }
                                 return null;
                             };
     
@@ -15768,6 +17302,11 @@
                                     message.extractEntitySentiment = Boolean(object.extractEntitySentiment);
                                 if (object.classifyText != null)
                                     message.classifyText = Boolean(object.classifyText);
+                                if (object.classificationModelOptions != null) {
+                                    if (typeof object.classificationModelOptions !== "object")
+                                        throw TypeError(".google.cloud.language.v1beta2.AnnotateTextRequest.Features.classificationModelOptions: object expected");
+                                    message.classificationModelOptions = $root.google.cloud.language.v1beta2.ClassificationModelOptions.fromObject(object.classificationModelOptions);
+                                }
                                 return message;
                             };
     
@@ -15790,6 +17329,7 @@
                                     object.extractDocumentSentiment = false;
                                     object.extractEntitySentiment = false;
                                     object.classifyText = false;
+                                    object.classificationModelOptions = null;
                                 }
                                 if (message.extractSyntax != null && message.hasOwnProperty("extractSyntax"))
                                     object.extractSyntax = message.extractSyntax;
@@ -15801,6 +17341,8 @@
                                     object.extractEntitySentiment = message.extractEntitySentiment;
                                 if (message.classifyText != null && message.hasOwnProperty("classifyText"))
                                     object.classifyText = message.classifyText;
+                                if (message.classificationModelOptions != null && message.hasOwnProperty("classificationModelOptions"))
+                                    object.classificationModelOptions = $root.google.cloud.language.v1beta2.ClassificationModelOptions.toObject(message.classificationModelOptions, options);
                                 return object;
                             };
     
