@@ -198,7 +198,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],
@@ -210,6 +210,10 @@
                     {
                         "name": "document",
                         "type": ".google.cloud.language.v1.Document"
+                    },
+                    {
+                        "name": "classification_model_options",
+                        "type": ".google.cloud.language.v1.ClassificationModelOptions"
                     }
                 ],
                 "resultType": ".google.cloud.language.v1.ClassifyTextResponse",

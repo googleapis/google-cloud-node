@@ -147,7 +147,7 @@
             "regionTag": "language_v1beta2_generated_LanguageService_AnalyzeSyntax_async",
             "title": "LanguageService analyzeSyntax Sample",
             "origin": "API_DEFINITION",
-            "description": " Analyzes the syntax of the text and provides sentence boundaries and tokenization along with part-of-speech tags, dependency trees, and other properties.",
+            "description": " Analyzes the syntax of the text and provides sentence boundaries and tokenization along with part of speech tags, dependency trees, and other properties.",
             "canonical": true,
             "file": "language_service.analyze_syntax.js",
             "language": "JAVASCRIPT",
@@ -198,7 +198,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 53,
+                    "end": 58,
                     "type": "FULL"
                 }
             ],
@@ -210,6 +210,10 @@
                     {
                         "name": "document",
                         "type": ".google.cloud.language.v1beta2.Document"
+                    },
+                    {
+                        "name": "classification_model_options",
+                        "type": ".google.cloud.language.v1beta2.ClassificationModelOptions"
                     }
                 ],
                 "resultType": ".google.cloud.language.v1beta2.ClassifyTextResponse",

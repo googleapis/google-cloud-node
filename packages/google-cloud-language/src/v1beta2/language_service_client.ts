@@ -594,7 +594,7 @@ export class LanguageServiceClient {
   }
   /**
    * Analyzes the syntax of the text and provides sentence boundaries and
-   * tokenization along with part-of-speech tags, dependency trees, and other
+   * tokenization along with part of speech tags, dependency trees, and other
    * properties.
    *
    * @param {Object} request
@@ -690,6 +690,9 @@ export class LanguageServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.language.v1beta2.Document} request.document
    *   Required. Input document.
+   * @param {google.cloud.language.v1beta2.ClassificationModelOptions} request.classificationModelOptions
+   *   Model options to use for classification. Defaults to v1 options if not
+   *   specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

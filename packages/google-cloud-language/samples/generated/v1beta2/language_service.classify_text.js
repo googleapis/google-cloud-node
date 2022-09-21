@@ -32,6 +32,11 @@ function main(document) {
    *  Required. Input document.
    */
   // const document = {}
+  /**
+   *  Model options to use for classification. Defaults to v1 options if not
+   *  specified.
+   */
+  // const classificationModelOptions = {}
 
   // Imports the Language library
   const {LanguageServiceClient} = require('@google-cloud/language').v1beta2;
