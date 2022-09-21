@@ -23,6 +23,9 @@
 function main(name) {
   // [START dataplex_v1_generated_MetadataService_DeletePartition_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -34,7 +37,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The etag associated with the partition if it was previously retrieved.
+   *  Optional. The etag associated with the partition.
    */
   // const etag = 'abc123'
 

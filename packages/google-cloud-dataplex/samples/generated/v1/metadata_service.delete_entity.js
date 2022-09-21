@@ -23,6 +23,9 @@
 function main(name, etag) {
   // [START dataplex_v1_generated_MetadataService_DeleteEntity_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -31,7 +34,8 @@ function main(name, etag) {
    */
   // const name = 'abc123'
   /**
-   *  Required. The etag associated with the partition if it was previously retrieved.
+   *  Required. The etag associated with the entity, which can be retrieved with a
+   *  GetEntity   request.
    */
   // const etag = 'abc123'
 

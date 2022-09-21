@@ -17,18 +17,18 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
   ClientOptions,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -37,7 +37,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './metadata_service_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
@@ -63,6 +62,7 @@ export class MetadataServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   metadataServiceStub?: Promise<{[name: string]: Function}>;
 
@@ -98,8 +98,18 @@ export class MetadataServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new MetadataServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MetadataServiceClient;
     const servicePath =
@@ -119,8 +129,13 @@ export class MetadataServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -141,6 +156,10 @@ export class MetadataServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -237,7 +256,7 @@ export class MetadataServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -302,7 +321,8 @@ export class MetadataServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -449,8 +469,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createEntity(request, options, callback);
@@ -537,8 +557,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'entity.name': request.entity!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'entity.name': request.entity!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateEntity(request, options, callback);
@@ -552,7 +572,8 @@ export class MetadataServiceClient {
    *   Required. The resource name of the entity:
    *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
    * @param {string} request.etag
-   *   Required. The etag associated with the partition if it was previously retrieved.
+   *   Required. The etag associated with the entity, which can be retrieved with a
+   *   {@link |GetEntity} request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -625,8 +646,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteEntity(request, options, callback);
@@ -712,8 +733,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEntity(request, options, callback);
@@ -809,8 +830,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createPartition(request, options, callback);
@@ -827,7 +848,7 @@ export class MetadataServiceClient {
    *   The {partition_value_path} segment consists of an ordered sequence of
    *   partition values separated by "/". All values must be provided.
    * @param {string} [request.etag]
-   *   Optional. The etag associated with the partition if it was previously retrieved.
+   *   Optional. The etag associated with the partition.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -906,8 +927,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deletePartition(request, options, callback);
@@ -994,8 +1015,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getPartition(request, options, callback);
@@ -1027,8 +1048,8 @@ export class MetadataServiceClient {
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
    *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter=”hive_compatible=true”
-   *   - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+   *   - Is HIVE compatible: ?filter="hive_compatible=true"
+   *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1104,8 +1125,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listEntities(request, options, callback);
@@ -1136,8 +1157,8 @@ export class MetadataServiceClient {
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
    *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter=”hive_compatible=true”
-   *   - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+   *   - Is HIVE compatible: ?filter="hive_compatible=true"
+   *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1159,14 +1180,14 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEntities'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntities.createStream(
-      this.innerApiCalls.listEntities as gax.GaxCall,
+      this.innerApiCalls.listEntities as GaxCall,
       request,
       callSettings
     );
@@ -1199,8 +1220,8 @@ export class MetadataServiceClient {
    *   - Entity ID: ?filter="id=entityID"
    *   - Asset ID: ?filter="asset=assetID"
    *   - Data path ?filter="data_path=gs://my-bucket"
-   *   - Is HIVE compatible: ?filter=”hive_compatible=true”
-   *   - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+   *   - Is HIVE compatible: ?filter="hive_compatible=true"
+   *   - Is BigQuery compatible: ?filter="bigquery_compatible=true"
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1223,15 +1244,15 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEntities'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEntities.asyncIterate(
       this.innerApiCalls['listEntities'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEntity>;
   }
@@ -1253,14 +1274,14 @@ export class MetadataServiceClient {
    *   provided to `ListPartitions` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key vslue pair
-   *   expression. The filter expression supports:
+   *   Optional. Filter the partitions returned to the caller using a key value pair
+   *   expression. Supported operators and syntax:
    *
-   *   - logical operators: AND, OR
+   *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
    *   - LIKE operators:
-   *       - The right hand of a LIKE operator supports “.” and
-   *         “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
+   *     - The right hand of a LIKE operator supports "." and
+   *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
    *   - parenthetical grouping: ( )
    *
    *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
@@ -1353,8 +1374,8 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listPartitions(request, options, callback);
@@ -1377,14 +1398,14 @@ export class MetadataServiceClient {
    *   provided to `ListPartitions` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key vslue pair
-   *   expression. The filter expression supports:
+   *   Optional. Filter the partitions returned to the caller using a key value pair
+   *   expression. Supported operators and syntax:
    *
-   *   - logical operators: AND, OR
+   *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
    *   - LIKE operators:
-   *       - The right hand of a LIKE operator supports “.” and
-   *         “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
+   *     - The right hand of a LIKE operator supports "." and
+   *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
    *   - parenthetical grouping: ( )
    *
    *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
@@ -1417,14 +1438,14 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPartitions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPartitions.createStream(
-      this.innerApiCalls.listPartitions as gax.GaxCall,
+      this.innerApiCalls.listPartitions as GaxCall,
       request,
       callSettings
     );
@@ -1449,14 +1470,14 @@ export class MetadataServiceClient {
    *   provided to `ListPartitions` must match the call that provided the
    *   page token.
    * @param {string} [request.filter]
-   *   Optional. Filter the partitions returned to the caller using a key vslue pair
-   *   expression. The filter expression supports:
+   *   Optional. Filter the partitions returned to the caller using a key value pair
+   *   expression. Supported operators and syntax:
    *
-   *   - logical operators: AND, OR
+   *   - logic operators: AND, OR
    *   - comparison operators: <, >, >=, <= ,=, !=
    *   - LIKE operators:
-   *       - The right hand of a LIKE operator supports “.” and
-   *         “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
+   *     - The right hand of a LIKE operator supports "." and
+   *       "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
    *   - parenthetical grouping: ( )
    *
    *   Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
@@ -1490,18 +1511,98 @@ export class MetadataServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listPartitions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listPartitions.asyncIterate(
       this.innerApiCalls['listPartitions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IPartition>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2556,6 +2657,7 @@ export class MetadataServiceClient {
       return this.metadataServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
       });
     }
     return Promise.resolve();

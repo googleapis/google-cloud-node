@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START dataplex_v1_generated_DataplexService_GetTask_async]
+function main(resource) {
+  // [START dataplex_v1_generated_ContentService_GetIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,35 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the task:
-   *  `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`.
+   *  REQUIRED: The resource for which the policy is being requested.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const name = 'abc123'
+  // const resource = 'abc123'
+  /**
+   *  OPTIONAL: A `GetPolicyOptions` object for specifying options to
+   *  `GetIamPolicy`.
+   */
+  // const options = {}
 
   // Imports the Dataplex library
-  const {DataplexServiceClient} = require('@google-cloud/dataplex').v1;
+  const {ContentServiceClient} = require('@google-cloud/dataplex').v1;
 
   // Instantiates a client
-  const dataplexClient = new DataplexServiceClient();
+  const dataplexClient = new ContentServiceClient();
 
-  async function callGetTask() {
+  async function callGetIamPolicy() {
     // Construct request
     const request = {
-      name,
+      resource,
     };
 
     // Run request
-    const response = await dataplexClient.getTask(request);
+    const response = await dataplexClient.getIamPolicy(request);
     console.log(response);
   }
 
-  callGetTask();
-  // [END dataplex_v1_generated_DataplexService_GetTask_async]
+  callGetIamPolicy();
+  // [END dataplex_v1_generated_ContentService_GetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

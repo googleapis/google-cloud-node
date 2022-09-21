@@ -25,7 +25,22 @@ import * as contentserviceModule from '../src';
 
 import {PassThrough} from 'stream';
 
-import {protobuf} from 'google-gax';
+import {protobuf, LocationProtos} from 'google-gax';
+
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -113,101 +128,103 @@ function stubAsyncIterationCall<ResponseType>(
 }
 
 describe('v1.ContentServiceClient', () => {
-  it('has servicePath', () => {
-    const servicePath =
-      contentserviceModule.v1.ContentServiceClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint =
-      contentserviceModule.v1.ContentServiceClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = contentserviceModule.v1.ContentServiceClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new contentserviceModule.v1.ContentServiceClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new contentserviceModule.v1.ContentServiceClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        contentserviceModule.v1.ContentServiceClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new contentserviceModule.v1.ContentServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        contentserviceModule.v1.ContentServiceClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.contentServiceStub, undefined);
-    await client.initialize();
-    assert(client.contentServiceStub);
-  });
 
-  it('has close method for the initialized client', done => {
-    const client = new contentserviceModule.v1.ContentServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = contentserviceModule.v1.ContentServiceClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.initialize();
-    assert(client.contentServiceStub);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client = new contentserviceModule.v1.ContentServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client = new contentserviceModule.v1.ContentServiceClient();
+      assert(client);
     });
-    assert.strictEqual(client.contentServiceStub, undefined);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new contentserviceModule.v1.ContentServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('should create a client with gRPC fallback', () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        fallback: true,
+      });
+      assert(client);
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new contentserviceModule.v1.ContentServiceClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
-      projectId: 'bogus',
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.contentServiceStub, undefined);
+      await client.initialize();
+      assert(client.contentServiceStub);
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    it('has close method for the initialized client', done => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      assert(client.contentServiceStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.contentServiceStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('createContent', () => {
@@ -220,26 +237,26 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CreateContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Content()
       );
       client.innerApiCalls.createContent = stubSimpleCall(expectedResponse);
       const [response] = await client.createContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createContent without error using callback', async () => {
@@ -251,15 +268,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CreateContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Content()
       );
@@ -282,11 +296,14 @@ describe('v1.ContentServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createContent with error', async () => {
@@ -298,26 +315,26 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CreateContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.createContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createContent with closed client', async () => {
@@ -329,7 +346,11 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.CreateContentRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.CreateContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createContent(request), expectedError);
@@ -346,27 +367,27 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateContentRequest()
       );
-      request.content = {};
-      request.content.name = '';
-      const expectedHeaderRequestParams = 'content.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.content ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.UpdateContentRequest',
+        ['content', 'name']
+      );
+      request.content.name = defaultValue1;
+      const expectedHeaderRequestParams = `content.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Content()
       );
       client.innerApiCalls.updateContent = stubSimpleCall(expectedResponse);
       const [response] = await client.updateContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateContent without error using callback', async () => {
@@ -378,16 +399,13 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateContentRequest()
       );
-      request.content = {};
-      request.content.name = '';
-      const expectedHeaderRequestParams = 'content.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.content ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.UpdateContentRequest',
+        ['content', 'name']
+      );
+      request.content.name = defaultValue1;
+      const expectedHeaderRequestParams = `content.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Content()
       );
@@ -410,11 +428,14 @@ describe('v1.ContentServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateContent with error', async () => {
@@ -426,27 +447,27 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateContentRequest()
       );
-      request.content = {};
-      request.content.name = '';
-      const expectedHeaderRequestParams = 'content.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.content ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.UpdateContentRequest',
+        ['content', 'name']
+      );
+      request.content.name = defaultValue1;
+      const expectedHeaderRequestParams = `content.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateContent with closed client', async () => {
@@ -458,8 +479,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.UpdateContentRequest()
       );
-      request.content = {};
-      request.content.name = '';
+      request.content ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.UpdateContentRequest',
+        ['content', 'name']
+      );
+      request.content.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateContent(request), expectedError);
@@ -476,26 +501,26 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.DeleteContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteContent = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteContent without error using callback', async () => {
@@ -507,15 +532,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.DeleteContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -538,11 +560,14 @@ describe('v1.ContentServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteContent with error', async () => {
@@ -554,26 +579,26 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.DeleteContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteContent with closed client', async () => {
@@ -585,7 +610,11 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.DeleteContentRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.DeleteContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteContent(request), expectedError);
@@ -602,26 +631,26 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.GetContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Content()
       );
       client.innerApiCalls.getContent = stubSimpleCall(expectedResponse);
       const [response] = await client.getContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getContent without error using callback', async () => {
@@ -633,15 +662,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.GetContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.Content()
       );
@@ -664,11 +690,14 @@ describe('v1.ContentServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getContent with error', async () => {
@@ -680,26 +709,26 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.GetContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.getContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getContent with closed client', async () => {
@@ -711,10 +740,405 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.GetContentRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.GetContentRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getContent(request), expectedError);
+    });
+  });
+
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.IPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes getIamPolicy with closed client', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.GetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.getIamPolicy(request), expectedError);
+    });
+  });
+
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.setIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.Policy()
+      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setIamPolicy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.IPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes setIamPolicy with closed client', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.SetIamPolicyRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setIamPolicy(request), expectedError);
+    });
+  });
+
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.testIamPermissions(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedResponse = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsResponse()
+      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.testIamPermissions(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.iam.v1.ITestIamPermissionsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedHeaderRequestParams = `resource=${defaultValue1}`;
+      const expectedError = new Error('expected');
+      client.innerApiCalls.testIamPermissions = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.testIamPermissions(request), expectedError);
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+    });
+
+    it('invokes testIamPermissions with closed client', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.iam.v1.TestIamPermissionsRequest()
+      );
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
+      request.resource = defaultValue1;
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.testIamPermissions(request), expectedError);
     });
   });
 
@@ -728,15 +1152,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.ListContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
@@ -745,11 +1166,14 @@ describe('v1.ContentServiceClient', () => {
       client.innerApiCalls.listContent = stubSimpleCall(expectedResponse);
       const [response] = await client.listContent(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listContent without error using callback', async () => {
@@ -761,15 +1185,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.ListContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
@@ -794,11 +1215,14 @@ describe('v1.ContentServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listContent with error', async () => {
@@ -810,26 +1234,26 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.ListContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listContent = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listContent(request), expectedError);
-      assert(
-        (client.innerApiCalls.listContent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listContent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listContent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listContentStream without error', async () => {
@@ -841,8 +1265,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.ListContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
@@ -873,11 +1301,12 @@ describe('v1.ContentServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listContent, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listContent.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listContent.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -890,8 +1319,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.ListContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listContent.createStream = stubPageStreamingCall(
         undefined,
@@ -919,11 +1352,12 @@ describe('v1.ContentServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listContent, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listContent.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listContent.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -936,8 +1370,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.ListContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
         generateSampleMessage(new protos.google.cloud.dataplex.v1.Content()),
@@ -957,11 +1395,12 @@ describe('v1.ContentServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listContent.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listContent.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -974,8 +1413,12 @@ describe('v1.ContentServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataplex.v1.ListContentRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataplex.v1.ListContentRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listContent.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -994,11 +1437,210 @@ describe('v1.ContentServiceClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listContent.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listContent.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+  });
+  describe('getLocation', () => {
+    it('invokes getLocation without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = stubSimpleCall(expectedResponse);
+      const response = await client.getLocation(request, expectedOptions);
+      assert.deepStrictEqual(response, [expectedResponse]);
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+    it('invokes getLocation without error using callback', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new LocationProtos.google.cloud.location.Location()
+      );
+      client.locationsClient.getLocation = sinon
+        .stub()
+        .callsArgWith(2, null, expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getLocation(
+          request,
+          expectedOptions,
+          (
+            err?: Error | null,
+            result?: LocationProtos.google.cloud.location.ILocation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert((client.locationsClient.getLocation as SinonStub).getCall(0));
+    });
+    it('invokes getLocation with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.GetLocationRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.locationsClient.getLocation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getLocation(request, expectedOptions),
+        expectedError
+      );
+      assert(
+        (client.locationsClient.getLocation as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+  describe('listLocationsAsync', () => {
+    it('uses async iteration with listLocations without error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+        generateSampleMessage(
+          new LocationProtos.google.cloud.location.Location()
+        ),
+      ];
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+      const iterable = client.listLocationsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
+      );
+    });
+    it('uses async iteration with listLocations with error', async () => {
+      const client = new contentserviceModule.v1.ContentServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new LocationProtos.google.cloud.location.ListLocationsRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedError = new Error('expected');
+      client.locationsClient.descriptors.page.listLocations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listLocationsAsync(request);
+      await assert.rejects(async () => {
+        const responses: LocationProtos.google.cloud.location.ILocation[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert(
+        (
+          client.locationsClient.descriptors.page.listLocations
+            .asyncIterate as SinonStub
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

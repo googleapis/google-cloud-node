@@ -23,6 +23,9 @@
 function main(parent, view) {
   // [START dataplex_v1_generated_MetadataService_ListEntities_async]
   /**
+   * This snippet has been automatically generated and should be regarded as a code template only.
+   * It will require modifications to work.
+   * It may require correct/in-range values for request initialization.
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
@@ -53,8 +56,8 @@ function main(parent, view) {
    *  - Entity ID: ?filter="id=entityID"
    *  - Asset ID: ?filter="asset=assetID"
    *  - Data path ?filter="data_path=gs://my-bucket"
-   *  - Is HIVE compatible: ?filter=”hive_compatible=true”
-   *  - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+   *  - Is HIVE compatible: ?filter="hive_compatible=true"
+   *  - Is BigQuery compatible: ?filter="bigquery_compatible=true"
    */
   // const filter = 'abc123'
 

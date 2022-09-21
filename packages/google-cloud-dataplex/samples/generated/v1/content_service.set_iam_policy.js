@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(name) {
-  // [START dataplex_v1_generated_DataplexService_GetTask_async]
+function main(resource, policy) {
+  // [START dataplex_v1_generated_ContentService_SetIamPolicy_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,30 +29,45 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource name of the task:
-   *  `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`.
+   *  REQUIRED: The resource for which the policy is being specified.
+   *  See the operation documentation for the appropriate value for this field.
    */
-  // const name = 'abc123'
+  // const resource = 'abc123'
+  /**
+   *  REQUIRED: The complete policy to be applied to the `resource`. The size of
+   *  the policy is limited to a few 10s of KB. An empty policy is a
+   *  valid policy but certain Cloud Platform services (such as Projects)
+   *  might reject them.
+   */
+  // const policy = {}
+  /**
+   *  OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+   *  the fields in the mask will be modified. If no mask is provided, the
+   *  following default mask is used:
+   *  `paths: "bindings, etag"`
+   */
+  // const updateMask = {}
 
   // Imports the Dataplex library
-  const {DataplexServiceClient} = require('@google-cloud/dataplex').v1;
+  const {ContentServiceClient} = require('@google-cloud/dataplex').v1;
 
   // Instantiates a client
-  const dataplexClient = new DataplexServiceClient();
+  const dataplexClient = new ContentServiceClient();
 
-  async function callGetTask() {
+  async function callSetIamPolicy() {
     // Construct request
     const request = {
-      name,
+      resource,
+      policy,
     };
 
     // Run request
-    const response = await dataplexClient.getTask(request);
+    const response = await dataplexClient.setIamPolicy(request);
     console.log(response);
   }
 
-  callGetTask();
-  // [END dataplex_v1_generated_DataplexService_GetTask_async]
+  callSetIamPolicy();
+  // [END dataplex_v1_generated_ContentService_SetIamPolicy_async]
 }
 
 process.on('unhandledRejection', err => {

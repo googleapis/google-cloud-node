@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -27,10 +27,10 @@ import {
   LROperation,
   PaginationCallback,
   GaxCall,
+  LocationsClient,
+  LocationProtos,
 } from 'google-gax';
-
 import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -39,15 +39,14 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './dataplex_service_client_config.json';
-import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
  *  Dataplex service provides data lakes as a service. The primary resources
  *  offered by this service are Lakes, Zones and Assets which collectively allow
- *  a data adminstrator to organize, manage, secure and catalog data across their
- *  organization located across cloud projects in a variety of storage systems
- *  including Cloud Storage and BigQuery.
+ *  a data administrator to organize, manage, secure and catalog data across
+ *  their organization located across cloud projects in a variety of storage
+ *  systems including Cloud Storage and BigQuery.
  * @class
  * @memberof v1
  */
@@ -68,6 +67,7 @@ export class DataplexServiceClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
+  locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
   operationsClient: gax.OperationsClient;
   dataplexServiceStub?: Promise<{[name: string]: Function}>;
@@ -104,8 +104,18 @@ export class DataplexServiceClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new DataplexServiceClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof DataplexServiceClient;
     const servicePath =
@@ -125,8 +135,13 @@ export class DataplexServiceClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -147,6 +162,10 @@ export class DataplexServiceClient {
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
     }
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
 
     // Determine the client header string.
     const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
@@ -307,9 +326,6 @@ export class DataplexServiceClient {
             {
               get: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:getIamPolicy',
             },
-            {
-              get: '/v1/{resource=projects/*/locations/*/lakes/*/content/*}:getIamPolicy',
-            },
           ],
         },
         {
@@ -333,10 +349,6 @@ export class DataplexServiceClient {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:setIamPolicy',
               body: '*',
             },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/content/*}:setIamPolicy',
-              body: '*',
-            },
           ],
         },
         {
@@ -358,10 +370,6 @@ export class DataplexServiceClient {
             },
             {
               post: '/v1/{resource=projects/*/locations/*/lakes/*/environments/*}:testIamPermissions',
-              body: '*',
-            },
-            {
-              post: '/v1/{resource=projects/*/locations/*/lakes/*/content/*}:testIamPermissions',
               body: '*',
             },
           ],
@@ -571,7 +579,7 @@ export class DataplexServiceClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -662,7 +670,8 @@ export class DataplexServiceClient {
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
-        descriptor
+        descriptor,
+        this._opts.fallback
       );
 
       this.innerApiCalls[methodName] = apiCall;
@@ -802,8 +811,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getLake(request, options, callback);
@@ -886,8 +895,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getZone(request, options, callback);
@@ -970,8 +979,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAsset(request, options, callback);
@@ -983,7 +992,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the task:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1054,8 +1063,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getTask(request, options, callback);
@@ -1138,8 +1147,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getJob(request, options, callback);
@@ -1222,8 +1231,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.cancelJob(request, options, callback);
@@ -1235,7 +1244,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the environment:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}
+   *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1308,8 +1317,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEnvironment(request, options, callback);
@@ -1428,8 +1437,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createLake(request, options, callback);
@@ -1454,14 +1463,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createLake,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Lake,
@@ -1571,8 +1581,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'lake.name': request.lake!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'lake.name': request.lake!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateLake(request, options, callback);
@@ -1597,14 +1607,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateLake,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Lake,
@@ -1619,7 +1630,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the lake:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1710,8 +1721,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteLake(request, options, callback);
@@ -1736,14 +1747,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteLake,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -1863,8 +1875,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createZone(request, options, callback);
@@ -1889,14 +1901,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createZone,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Zone,
@@ -2006,8 +2019,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'zone.name': request.zone!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'zone.name': request.zone!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateZone(request, options, callback);
@@ -2032,14 +2045,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateZone,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Zone,
@@ -2145,8 +2159,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteZone(request, options, callback);
@@ -2171,14 +2185,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteZone,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2192,7 +2207,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent zone:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
    * @param {string} request.assetId
    *   Required. Asset identifier.
    *   This ID will be used to generate names such as table names when publishing
@@ -2297,8 +2312,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createAsset(request, options, callback);
@@ -2323,14 +2338,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createAsset,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Asset,
@@ -2440,8 +2456,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'asset.name': request.asset!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'asset.name': request.asset!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateAsset(request, options, callback);
@@ -2466,14 +2482,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateAsset,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Asset,
@@ -2579,8 +2596,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteAsset(request, options, callback);
@@ -2605,14 +2622,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteAsset,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -2724,8 +2742,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createTask(request, options, callback);
@@ -2750,14 +2768,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createTask,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Task,
@@ -2867,8 +2886,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'task.name': request.task!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'task.name': request.task!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateTask(request, options, callback);
@@ -2893,14 +2912,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateTask,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Task,
@@ -3005,8 +3025,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteTask(request, options, callback);
@@ -3031,14 +3051,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteTask,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3052,7 +3073,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
    * @param {string} request.environmentId
    *   Required. Environment identifier.
    *   * Must contain only lowercase letters, numbers and hyphens.
@@ -3155,8 +3176,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createEnvironment(request, options, callback);
@@ -3181,14 +3202,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.createEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Environment,
@@ -3298,8 +3320,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        'environment.name': request.environment!.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        'environment.name': request.environment!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.updateEnvironment(request, options, callback);
@@ -3324,14 +3346,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.updateEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.cloud.dataplex.v1.Environment,
@@ -3346,7 +3369,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the environment:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`
+   *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3437,8 +3460,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
+      this._gaxModule.routingHeader.fromParams({
+        name: request.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.deleteEnvironment(request, options, callback);
@@ -3463,14 +3486,15 @@ export class DataplexServiceClient {
       protos.google.cloud.dataplex.v1.OperationMetadata
     >
   > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
+    const request =
+      new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest(
+        {name}
+      );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
+    const decodeOperation = new this._gaxModule.Operation(
       operation,
       this.descriptors.longrunning.deleteEnvironment,
-      gax.createDefaultBackoffSettings()
+      this._gaxModule.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
@@ -3571,8 +3595,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listLakes(request, options, callback);
@@ -3619,14 +3643,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listLakes.createStream(
-      this.innerApiCalls.listLakes as gax.GaxCall,
+      this.innerApiCalls.listLakes as GaxCall,
       request,
       callSettings
     );
@@ -3676,15 +3700,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listLakes'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listLakes.asyncIterate(
       this.innerApiCalls['listLakes'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.ILake>;
   }
@@ -3695,7 +3719,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent lake:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of actions to return. The service may return fewer than this
    *   value. If unspecified, at most 10 actions will be returned. The maximum
@@ -3780,8 +3804,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listLakeActions(request, options, callback);
@@ -3793,7 +3817,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent lake:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of actions to return. The service may return fewer than this
    *   value. If unspecified, at most 10 actions will be returned. The maximum
@@ -3824,14 +3848,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listLakeActions.createStream(
-      this.innerApiCalls.listLakeActions as gax.GaxCall,
+      this.innerApiCalls.listLakeActions as GaxCall,
       request,
       callSettings
     );
@@ -3845,7 +3869,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent lake:
-   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of actions to return. The service may return fewer than this
    *   value. If unspecified, at most 10 actions will be returned. The maximum
@@ -3877,15 +3901,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listLakeActions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listLakeActions.asyncIterate(
       this.innerApiCalls['listLakeActions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAction>;
   }
@@ -3982,8 +4006,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listZones(request, options, callback);
@@ -4029,14 +4053,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listZones.createStream(
-      this.innerApiCalls.listZones as gax.GaxCall,
+      this.innerApiCalls.listZones as GaxCall,
       request,
       callSettings
     );
@@ -4085,15 +4109,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listZones'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listZones.asyncIterate(
       this.innerApiCalls['listZones'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IZone>;
   }
@@ -4189,8 +4213,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listZoneActions(request, options, callback);
@@ -4233,14 +4257,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listZoneActions.createStream(
-      this.innerApiCalls.listZoneActions as gax.GaxCall,
+      this.innerApiCalls.listZoneActions as GaxCall,
       request,
       callSettings
     );
@@ -4286,15 +4310,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listZoneActions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listZoneActions.asyncIterate(
       this.innerApiCalls['listZoneActions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAction>;
   }
@@ -4394,8 +4418,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAssets(request, options, callback);
@@ -4442,14 +4466,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssets.createStream(
-      this.innerApiCalls.listAssets as gax.GaxCall,
+      this.innerApiCalls.listAssets as GaxCall,
       request,
       callSettings
     );
@@ -4499,15 +4523,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssets'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssets.asyncIterate(
       this.innerApiCalls['listAssets'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAsset>;
   }
@@ -4603,8 +4627,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listAssetActions(request, options, callback);
@@ -4647,14 +4671,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssetActions.createStream(
-      this.innerApiCalls.listAssetActions as gax.GaxCall,
+      this.innerApiCalls.listAssetActions as GaxCall,
       request,
       callSettings
     );
@@ -4700,15 +4724,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listAssetActions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listAssetActions.asyncIterate(
       this.innerApiCalls['listAssetActions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IAction>;
   }
@@ -4805,8 +4829,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listTasks(request, options, callback);
@@ -4852,14 +4876,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTasks.createStream(
-      this.innerApiCalls.listTasks as gax.GaxCall,
+      this.innerApiCalls.listTasks as GaxCall,
       request,
       callSettings
     );
@@ -4908,15 +4932,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listTasks'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listTasks.asyncIterate(
       this.innerApiCalls['listTasks'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.ITask>;
   }
@@ -5010,8 +5034,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listJobs(request, options, callback);
@@ -5054,14 +5078,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.createStream(
-      this.innerApiCalls.listJobs as gax.GaxCall,
+      this.innerApiCalls.listJobs as GaxCall,
       request,
       callSettings
     );
@@ -5107,15 +5131,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listJobs'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listJobs.asyncIterate(
       this.innerApiCalls['listJobs'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IJob>;
   }
@@ -5126,7 +5150,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of environments to return. The service may return fewer than
    *   this value. If unspecified, at most 10 environments will be returned. The
@@ -5221,8 +5245,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listEnvironments(request, options, callback);
@@ -5234,7 +5258,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of environments to return. The service may return fewer than
    *   this value. If unspecified, at most 10 environments will be returned. The
@@ -5269,14 +5293,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.createStream(
-      this.innerApiCalls.listEnvironments as gax.GaxCall,
+      this.innerApiCalls.listEnvironments as GaxCall,
       request,
       callSettings
     );
@@ -5290,7 +5314,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent lake:
-   *   projects/{project_id}/locations/{location_id}/lakes/{lake_id}
+   *   `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of environments to return. The service may return fewer than
    *   this value. If unspecified, at most 10 environments will be returned. The
@@ -5326,15 +5350,15 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listEnvironments'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listEnvironments.asyncIterate(
       this.innerApiCalls['listEnvironments'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.IEnvironment>;
   }
@@ -5345,7 +5369,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent environment:
-   *   projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of sessions to return. The service may return fewer than
    *   this value. If unspecified, at most 10 sessions will be returned. The
@@ -5355,6 +5379,16 @@ export class DataplexServiceClient {
    *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListSessions` must match the call that provided the page
    *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request. The following `mode` filter is supported to return only the
+   *   sessions belonging to the requester when the mode is USER and return
+   *   sessions of all the users when the mode is ADMIN. When no filter is sent
+   *   default to USER mode.
+   *   NOTE: When the mode is ADMIN, the requester should have
+   *   `dataplex.environments.listAllSessions` permission to list all sessions,
+   *   in absence of the permission, the request fails.
+   *
+   *   mode = ADMIN | USER
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5430,8 +5464,8 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listSessions(request, options, callback);
@@ -5443,7 +5477,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent environment:
-   *   projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of sessions to return. The service may return fewer than
    *   this value. If unspecified, at most 10 sessions will be returned. The
@@ -5453,6 +5487,16 @@ export class DataplexServiceClient {
    *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListSessions` must match the call that provided the page
    *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request. The following `mode` filter is supported to return only the
+   *   sessions belonging to the requester when the mode is USER and return
+   *   sessions of all the users when the mode is ADMIN. When no filter is sent
+   *   default to USER mode.
+   *   NOTE: When the mode is ADMIN, the requester should have
+   *   `dataplex.environments.listAllSessions` permission to list all sessions,
+   *   in absence of the permission, the request fails.
+   *
+   *   mode = ADMIN | USER
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5474,14 +5518,14 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSessions.createStream(
-      this.innerApiCalls.listSessions as gax.GaxCall,
+      this.innerApiCalls.listSessions as GaxCall,
       request,
       callSettings
     );
@@ -5495,7 +5539,7 @@ export class DataplexServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The resource name of the parent environment:
-   *   projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}
+   *   `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
    * @param {number} [request.pageSize]
    *   Optional. Maximum number of sessions to return. The service may return fewer than
    *   this value. If unspecified, at most 10 sessions will be returned. The
@@ -5505,6 +5549,16 @@ export class DataplexServiceClient {
    *   retrieve the subsequent page. When paginating, all other parameters
    *   provided to `ListSessions` must match the call that provided the page
    *   token.
+   * @param {string} [request.filter]
+   *   Optional. Filter request. The following `mode` filter is supported to return only the
+   *   sessions belonging to the requester when the mode is USER and return
+   *   sessions of all the users when the mode is ADMIN. When no filter is sent
+   *   default to USER mode.
+   *   NOTE: When the mode is ADMIN, the requester should have
+   *   `dataplex.environments.listAllSessions` permission to list all sessions,
+   *   in absence of the permission, the request fails.
+   *
+   *   mode = ADMIN | USER
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5527,18 +5581,98 @@ export class DataplexServiceClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
+      this._gaxModule.routingHeader.fromParams({
+        parent: request.parent ?? '',
       });
     const defaultCallSettings = this._defaults['listSessions'];
     const callSettings = defaultCallSettings.merge(options);
     this.initialize();
     return this.descriptors.page.listSessions.asyncIterate(
       this.innerApiCalls['listSessions'] as GaxCall,
-      request as unknown as RequestType,
+      request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.dataplex.v1.ISession>;
   }
+  /**
+   * Gets information about a location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Resource name for the location.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Location]{@link google.cloud.location.Location}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const [response] = await client.getLocation(request);
+   * ```
+   */
+  getLocation(
+    request: LocationProtos.google.cloud.location.IGetLocationRequest,
+    options?:
+      | gax.CallOptions
+      | Callback<
+          LocationProtos.google.cloud.location.ILocation,
+          | LocationProtos.google.cloud.location.IGetLocationRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LocationProtos.google.cloud.location.ILocation,
+      | LocationProtos.google.cloud.location.IGetLocationRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.getLocation(request, options, callback);
+  }
+
+  /**
+   * Lists information about the supported locations for this service. Returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   The resource that owns the locations collection, if applicable.
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Location]{@link google.cloud.location.Location}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * ```
+   * const iterable = client.listLocationsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   * ```
+   */
+  listLocationsAsync(
+    request: LocationProtos.google.cloud.location.IListLocationsRequest,
+    options?: CallOptions
+  ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
+    return this.locationsClient.listLocationsAsync(request, options);
+  }
+
   // --------------------
   // -- Path templates --
   // --------------------
@@ -6629,6 +6763,7 @@ export class DataplexServiceClient {
       return this.dataplexServiceStub.then(stub => {
         this._terminated = true;
         stub.close();
+        this.locationsClient.close();
         this.operationsClient.close();
       });
     }
