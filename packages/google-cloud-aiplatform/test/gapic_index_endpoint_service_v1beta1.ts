@@ -286,9 +286,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -317,9 +318,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -364,9 +366,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -395,9 +398,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -417,10 +421,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
       request.indexEndpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
-        'indexEndpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest',
+        ['indexEndpoint', 'name']
+      );
       request.indexEndpoint.name = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -451,10 +455,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
       request.indexEndpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
-        'indexEndpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest',
+        ['indexEndpoint', 'name']
+      );
       request.indexEndpoint.name = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -500,10 +504,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
       request.indexEndpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
-        'indexEndpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest',
+        ['indexEndpoint', 'name']
+      );
       request.indexEndpoint.name = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -533,10 +537,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest()
       );
       request.indexEndpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIndexEndpointRequest', [
-        'indexEndpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateIndexEndpointRequest',
+        ['indexEndpoint', 'name']
+      );
       request.indexEndpoint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -555,9 +559,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -588,9 +593,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -642,9 +648,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -673,9 +680,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIndexEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateIndexEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -751,9 +759,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -784,9 +793,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -838,9 +848,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -869,9 +880,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIndexEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteIndexEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -947,9 +959,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -979,9 +992,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1033,9 +1047,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1064,9 +1079,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1139,9 +1155,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UndeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1172,9 +1189,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UndeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1226,9 +1244,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UndeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1257,9 +1276,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.UndeployIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UndeployIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1335,9 +1355,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1368,9 +1389,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1422,9 +1444,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1453,9 +1476,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MutateDeployedIndexRequest', [
-        'indexEndpoint',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.MutateDeployedIndexRequest',
+        ['indexEndpoint']
+      );
       request.indexEndpoint = defaultValue1;
       const expectedHeaderRequestParams = `index_endpoint=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1531,9 +1555,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1571,9 +1596,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1628,9 +1654,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1659,9 +1686,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1720,9 +1748,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1770,9 +1799,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1820,9 +1850,10 @@ describe('v1beta1.IndexEndpointServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIndexEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListIndexEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -5255,6 +5255,10 @@
                         "invalidRowCount": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "timestampOutsideRetentionRowsCount": {
+                          "type": "int64",
+                          "id": 4
                         }
                       }
                     },
@@ -5785,6 +5789,10 @@
                         "invalidRowCount": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "timestampOutsideRetentionRowsCount": {
+                          "type": "int64",
+                          "id": 7
                         }
                       }
                     },
@@ -9893,6 +9901,26 @@
                             }
                           ]
                         },
+                        "RemoveContextChildren": {
+                          "requestType": "RemoveContextChildrenRequest",
+                          "responseType": "RemoveContextChildrenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{context=projects/*/locations/*/metadataStores/*/contexts/*}:removeContextChildren",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "context,child_contexts"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{context=projects/*/locations/*/metadataStores/*/contexts/*}:removeContextChildren",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "context,child_contexts"
+                            }
+                          ]
+                        },
                         "QueryContextLineageSubgraph": {
                           "requestType": "QueryContextLineageSubgraphRequest",
                           "responseType": "LineageSubgraph",
@@ -10314,6 +10342,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -10477,6 +10509,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -10642,6 +10678,29 @@
                     "AddContextChildrenResponse": {
                       "fields": {}
                     },
+                    "RemoveContextChildrenRequest": {
+                      "fields": {
+                        "context": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        },
+                        "childContexts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveContextChildrenResponse": {
+                      "fields": {}
+                    },
                     "QueryContextLineageSubgraphRequest": {
                       "fields": {
                         "context": {
@@ -10710,6 +10769,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -23639,6 +23702,10 @@
                         "invalidRowCount": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "timestampOutsideRetentionRowsCount": {
+                          "type": "int64",
+                          "id": 4
                         }
                       }
                     },
@@ -24169,6 +24236,10 @@
                         "invalidRowCount": {
                           "type": "int64",
                           "id": 6
+                        },
+                        "timestampOutsideRetentionRowsCount": {
+                          "type": "int64",
+                          "id": 7
                         }
                       }
                     },
@@ -24224,7 +24295,8 @@
                       "oneofs": {
                         "DeleteOption": {
                           "oneof": [
-                            "selectEntity"
+                            "selectEntity",
+                            "selectTimeRangeAndFeature"
                           ]
                         }
                       },
@@ -24232,6 +24304,10 @@
                         "selectEntity": {
                           "type": "SelectEntity",
                           "id": 2
+                        },
+                        "selectTimeRangeAndFeature": {
+                          "type": "SelectTimeRangeAndFeature",
+                          "id": 3
                         },
                         "entityType": {
                           "type": "string",
@@ -24251,6 +24327,28 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            }
+                          }
+                        },
+                        "SelectTimeRangeAndFeature": {
+                          "fields": {
+                            "timeRange": {
+                              "type": "google.type.Interval",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "featureSelector": {
+                              "type": "FeatureSelector",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "skipOnlineStorageDelete": {
+                              "type": "bool",
+                              "id": 3
                             }
                           }
                         }
@@ -24635,6 +24733,10 @@
                         "measurementSelectionType": {
                           "type": "MeasurementSelectionType",
                           "id": 7
+                        },
+                        "transferLearningConfig": {
+                          "type": "TransferLearningConfig",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -24971,6 +25073,22 @@
                             "useSeconds": {
                               "type": "bool",
                               "id": 5
+                            }
+                          }
+                        },
+                        "TransferLearningConfig": {
+                          "fields": {
+                            "disableTransferLearning": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "priorStudyNames": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -27890,6 +28008,26 @@
                             }
                           ]
                         },
+                        "RemoveContextChildren": {
+                          "requestType": "RemoveContextChildrenRequest",
+                          "responseType": "RemoveContextChildrenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{context=projects/*/locations/*/metadataStores/*/contexts/*}:removeContextChildren",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "context,child_contexts"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{context=projects/*/locations/*/metadataStores/*/contexts/*}:removeContextChildren",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "context,child_contexts"
+                            }
+                          ]
+                        },
                         "QueryContextLineageSubgraph": {
                           "requestType": "QueryContextLineageSubgraphRequest",
                           "responseType": "LineageSubgraph",
@@ -28311,6 +28449,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -28474,6 +28616,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -28639,6 +28785,29 @@
                     "AddContextChildrenResponse": {
                       "fields": {}
                     },
+                    "RemoveContextChildrenRequest": {
+                      "fields": {
+                        "context": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        },
+                        "childContexts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveContextChildrenResponse": {
+                      "fields": {}
+                    },
                     "QueryContextLineageSubgraphRequest": {
                       "fields": {
                         "context": {
@@ -28707,6 +28876,10 @@
                         "filter": {
                           "type": "string",
                           "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     },
@@ -30563,6 +30736,28 @@
                             "failurePolicy": {
                               "type": "PipelineFailurePolicy",
                               "id": 4
+                            },
+                            "inputArtifacts": {
+                              "keyType": "string",
+                              "type": "InputArtifact",
+                              "id": 5
+                            }
+                          },
+                          "nested": {
+                            "InputArtifact": {
+                              "oneofs": {
+                                "kind": {
+                                  "oneof": [
+                                    "artifactId"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "artifactId": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
                             }
                           }
                         }
@@ -31223,6 +31418,10 @@
                         "orderBy": {
                           "type": "string",
                           "id": 6
+                        },
+                        "readMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 7
                         }
                       }
                     },
@@ -37483,6 +37682,18 @@
                 "nanos": {
                   "type": "int32",
                   "id": 3
+                }
+              }
+            },
+            "Interval": {
+              "fields": {
+                "startTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 1
+                },
+                "endTime": {
+                  "type": "google.protobuf.Timestamp",
+                  "id": 2
                 }
               }
             },

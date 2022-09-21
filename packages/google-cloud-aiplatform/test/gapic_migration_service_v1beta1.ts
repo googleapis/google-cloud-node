@@ -277,7 +277,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchMigrateResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -310,7 +310,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchMigrateResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -364,7 +364,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchMigrateResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -398,7 +398,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchMigrateResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.BatchMigrateResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -474,7 +474,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchMigratableResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -514,7 +514,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchMigratableResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -571,7 +571,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchMigratableResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -605,7 +605,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchMigratableResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -674,7 +674,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchMigratableResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -732,7 +732,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchMigratableResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -786,7 +786,7 @@ describe('v1beta1.MigrationServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchMigratableResourcesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchMigratableResourcesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

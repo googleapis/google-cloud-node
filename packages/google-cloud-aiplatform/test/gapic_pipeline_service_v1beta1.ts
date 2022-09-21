@@ -276,7 +276,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -308,7 +308,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -355,7 +355,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -389,7 +389,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateTrainingPipelineRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -412,9 +412,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -443,9 +444,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -489,9 +491,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -519,9 +522,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrainingPipelineRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrainingPipelineRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -540,7 +544,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -572,7 +576,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -619,7 +623,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -653,7 +657,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -676,9 +680,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -706,9 +711,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -752,9 +758,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -782,9 +789,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePipelineJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreatePipelineJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -802,9 +810,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -832,9 +841,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -878,9 +888,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -908,9 +919,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -928,9 +940,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -958,9 +971,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1004,9 +1018,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1034,9 +1049,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelPipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1055,7 +1071,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1088,7 +1104,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1142,7 +1158,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1176,7 +1192,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTrainingPipelineRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteTrainingPipelineRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1251,9 +1267,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1283,9 +1300,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1336,9 +1354,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1366,9 +1385,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePipelineJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeletePipelineJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1442,7 +1462,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1482,7 +1502,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1539,7 +1559,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1573,7 +1593,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1642,7 +1662,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1700,7 +1720,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1754,7 +1774,7 @@ describe('v1beta1.PipelineServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTrainingPipelinesRequest',
+        '.google.cloud.aiplatform.v1beta1.ListTrainingPipelinesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1800,9 +1820,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1838,9 +1859,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1894,9 +1916,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1924,9 +1947,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1984,9 +2008,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2033,9 +2058,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2082,9 +2108,10 @@ describe('v1beta1.PipelineServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPipelineJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListPipelineJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -1046,6 +1046,11 @@
                 "addContextChildren"
               ]
             },
+            "RemoveContextChildren": {
+              "methods": [
+                "removeContextChildren"
+              ]
+            },
             "QueryContextLineageSubgraph": {
               "methods": [
                 "queryContextLineageSubgraph"
@@ -1214,6 +1219,11 @@
             "AddContextChildren": {
               "methods": [
                 "addContextChildren"
+              ]
+            },
+            "RemoveContextChildren": {
+              "methods": [
+                "removeContextChildren"
               ]
             },
             "QueryContextLineageSubgraph": {

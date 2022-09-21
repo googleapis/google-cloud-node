@@ -3882,9 +3882,12 @@ export class FeaturestoreServiceClient {
    *   The request object that will be sent.
    * @param {google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest.SelectEntity} request.selectEntity
    *   Select feature values to be deleted by specifying entities.
+   * @param {google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature} request.selectTimeRangeAndFeature
+   *   Select feature values to be deleted by specifying time range and
+   *   features.
    * @param {string} request.entityType
-   *   Required. The resource name of the EntityType grouping the Features for
-   *   which values are being deleted from. Format:
+   *   Required. The resource name of the EntityType grouping the Features for which values
+   *   are being deleted from. Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

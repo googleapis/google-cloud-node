@@ -302,7 +302,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -337,7 +337,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -387,7 +387,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -424,7 +424,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.GetDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -451,7 +451,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -487,7 +487,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -544,7 +544,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -581,7 +581,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDeploymentResourcePoolRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -667,7 +667,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -703,7 +703,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -760,7 +760,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -797,7 +797,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeploymentResourcePoolRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDeploymentResourcePoolRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -883,7 +883,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -926,7 +926,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -986,7 +986,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1023,7 +1023,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1095,7 +1095,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1156,7 +1156,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1213,7 +1213,7 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeploymentResourcePoolsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListDeploymentResourcePoolsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1262,9 +1262,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryDeployedModelsRequest', [
-        'deploymentResourcePool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
+      );
       request.deploymentResourcePool = defaultValue1;
       const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
@@ -1304,9 +1305,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryDeployedModelsRequest', [
-        'deploymentResourcePool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
+      );
       request.deploymentResourcePool = defaultValue1;
       const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
@@ -1363,9 +1365,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryDeployedModelsRequest', [
-        'deploymentResourcePool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
+      );
       request.deploymentResourcePool = defaultValue1;
       const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1396,9 +1399,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryDeployedModelsRequest', [
-        'deploymentResourcePool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
+      );
       request.deploymentResourcePool = defaultValue1;
       const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
@@ -1459,9 +1463,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryDeployedModelsRequest', [
-        'deploymentResourcePool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
+      );
       request.deploymentResourcePool = defaultValue1;
       const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1511,9 +1516,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryDeployedModelsRequest', [
-        'deploymentResourcePool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
+      );
       request.deploymentResourcePool = defaultValue1;
       const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedResponse = [
@@ -1563,9 +1569,10 @@ describe('v1beta1.DeploymentResourcePoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryDeployedModelsRequest', [
-        'deploymentResourcePool',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.QueryDeployedModelsRequest',
+        ['deploymentResourcePool']
+      );
       request.deploymentResourcePool = defaultValue1;
       const expectedHeaderRequestParams = `deployment_resource_pool=${defaultValue1}`;
       const expectedError = new Error('expected');

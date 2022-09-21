@@ -275,9 +275,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -305,9 +306,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -351,9 +353,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -381,9 +384,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -401,7 +405,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -429,7 +436,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -473,7 +483,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -498,7 +511,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -516,7 +532,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -544,7 +563,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -588,7 +610,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -616,7 +641,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStudyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteStudyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -634,9 +662,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LookupStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.LookupStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -664,9 +693,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LookupStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.LookupStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -710,9 +740,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LookupStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.LookupStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -740,9 +771,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.LookupStudyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LookupStudyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.LookupStudyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -760,9 +792,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTrialRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateTrialRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -790,9 +823,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTrialRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateTrialRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -836,9 +870,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTrialRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateTrialRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -866,9 +901,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTrialRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateTrialRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -886,7 +922,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -914,7 +953,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -958,7 +1000,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -983,7 +1028,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1001,9 +1049,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddTrialMeasurementRequest', [
-        'trialName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest',
+        ['trialName']
+      );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1032,9 +1081,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddTrialMeasurementRequest', [
-        'trialName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest',
+        ['trialName']
+      );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1078,9 +1128,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddTrialMeasurementRequest', [
-        'trialName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest',
+        ['trialName']
+      );
       request.trialName = defaultValue1;
       const expectedHeaderRequestParams = `trial_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1108,9 +1159,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddTrialMeasurementRequest', [
-        'trialName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.AddTrialMeasurementRequest',
+        ['trialName']
+      );
       request.trialName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1128,9 +1180,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CompleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteTrialRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CompleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1158,9 +1211,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CompleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteTrialRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CompleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1204,9 +1258,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CompleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteTrialRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CompleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1234,9 +1289,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CompleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteTrialRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CompleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1254,7 +1310,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1282,7 +1341,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1326,7 +1388,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1354,7 +1419,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1372,7 +1440,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.StopTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StopTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1400,7 +1471,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.StopTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StopTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1444,7 +1518,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.StopTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StopTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1469,7 +1546,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.StopTrialRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopTrialRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.StopTrialRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1487,9 +1567,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOptimalTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1517,9 +1598,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOptimalTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1563,9 +1645,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOptimalTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1593,9 +1676,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOptimalTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListOptimalTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1613,9 +1697,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1645,9 +1730,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1698,9 +1784,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1728,9 +1815,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuggestTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.SuggestTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1804,7 +1892,7 @@ describe('v1beta1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckTrialEarlyStoppingStateRequest',
+        '.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest',
         ['trialName']
       );
       request.trialName = defaultValue1;
@@ -1837,7 +1925,7 @@ describe('v1beta1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckTrialEarlyStoppingStateRequest',
+        '.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest',
         ['trialName']
       );
       request.trialName = defaultValue1;
@@ -1891,7 +1979,7 @@ describe('v1beta1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckTrialEarlyStoppingStateRequest',
+        '.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest',
         ['trialName']
       );
       request.trialName = defaultValue1;
@@ -1925,7 +2013,7 @@ describe('v1beta1.VizierServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CheckTrialEarlyStoppingStateRequest',
+        '.google.cloud.aiplatform.v1beta1.CheckTrialEarlyStoppingStateRequest',
         ['trialName']
       );
       request.trialName = defaultValue1;
@@ -2001,9 +2089,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListStudiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStudiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListStudiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2039,9 +2128,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListStudiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStudiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListStudiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2093,9 +2183,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListStudiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStudiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListStudiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2123,9 +2214,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListStudiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStudiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListStudiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2182,9 +2274,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListStudiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStudiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListStudiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2232,9 +2325,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListStudiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStudiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListStudiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2280,9 +2374,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListStudiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStudiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListStudiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2323,9 +2418,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2361,9 +2457,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2415,9 +2512,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2445,9 +2543,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2504,9 +2603,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2554,9 +2654,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2602,9 +2703,10 @@ describe('v1beta1.VizierServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListTrialsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTrialsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListTrialsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

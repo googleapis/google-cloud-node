@@ -273,7 +273,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -301,7 +304,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,7 +351,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -370,7 +379,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -389,10 +401,10 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -421,10 +433,10 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -469,10 +481,10 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -501,10 +513,10 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,9 +534,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.MergeVersionAliasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MergeVersionAliasesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.MergeVersionAliasesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -553,9 +566,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.MergeVersionAliasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MergeVersionAliasesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.MergeVersionAliasesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -599,9 +613,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.MergeVersionAliasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MergeVersionAliasesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.MergeVersionAliasesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -629,9 +644,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.MergeVersionAliasesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MergeVersionAliasesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.MergeVersionAliasesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -650,7 +666,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ImportModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportModelEvaluationRequest',
+        '.google.cloud.aiplatform.v1.ImportModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -682,7 +698,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ImportModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportModelEvaluationRequest',
+        '.google.cloud.aiplatform.v1.ImportModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -729,7 +745,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ImportModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportModelEvaluationRequest',
+        '.google.cloud.aiplatform.v1.ImportModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -763,7 +779,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ImportModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportModelEvaluationRequest',
+        '.google.cloud.aiplatform.v1.ImportModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -787,7 +803,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchImportModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -819,7 +835,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchImportModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -866,7 +882,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchImportModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -900,7 +916,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchImportModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -923,9 +939,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -954,9 +971,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1000,9 +1018,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1030,9 +1049,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1051,7 +1071,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelEvaluationSliceRequest',
+        '.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1083,7 +1103,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelEvaluationSliceRequest',
+        '.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1130,7 +1150,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelEvaluationSliceRequest',
+        '.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1164,7 +1184,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelEvaluationSliceRequest',
+        '.google.cloud.aiplatform.v1.GetModelEvaluationSliceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1187,9 +1207,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UploadModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UploadModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UploadModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1218,9 +1239,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UploadModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UploadModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UploadModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1271,9 +1293,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UploadModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UploadModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UploadModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1301,9 +1324,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.UploadModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UploadModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UploadModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1373,7 +1397,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1402,7 +1429,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1453,7 +1483,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1481,7 +1514,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1551,9 +1587,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1583,9 +1620,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1636,9 +1674,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1666,9 +1705,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteModelVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteModelVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1741,7 +1781,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1770,7 +1813,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1821,7 +1867,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1849,7 +1898,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1919,9 +1971,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1951,9 +2004,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1999,9 +2053,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2029,9 +2084,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2082,9 +2138,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2132,9 +2189,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2174,9 +2232,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2217,9 +2276,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelVersionsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelVersionsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
@@ -2249,9 +2309,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelVersionsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelVersionsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
@@ -2297,9 +2358,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelVersionsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelVersionsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2327,9 +2389,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelVersionsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelVersionsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
@@ -2380,9 +2443,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelVersionsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelVersionsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2428,9 +2492,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelVersionsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelVersionsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
@@ -2470,9 +2535,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelVersionsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelVersionsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2511,9 +2577,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2550,9 +2617,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2604,9 +2672,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2634,9 +2703,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2694,9 +2764,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2743,9 +2814,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2792,9 +2864,10 @@ describe('v1.ModelServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2835,7 +2908,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2875,7 +2948,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2932,7 +3005,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2966,7 +3039,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3035,7 +3108,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3093,7 +3166,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3147,7 +3220,7 @@ describe('v1.ModelServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelEvaluationSlicesRequest',
+        '.google.cloud.aiplatform.v1.ListModelEvaluationSlicesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

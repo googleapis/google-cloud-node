@@ -273,9 +273,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -303,9 +304,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -349,9 +351,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -379,9 +382,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateCustomJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -399,9 +403,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -429,9 +434,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -475,9 +481,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -505,9 +512,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -525,9 +533,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -555,9 +564,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -601,9 +611,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -631,9 +642,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CancelCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -652,7 +664,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -684,7 +696,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -731,7 +743,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -765,7 +777,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateDataLabelingJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -788,9 +800,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataLabelingJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -819,9 +832,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataLabelingJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -865,9 +879,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataLabelingJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -895,9 +910,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataLabelingJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDataLabelingJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -916,7 +932,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -948,7 +964,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -995,7 +1011,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1029,7 +1045,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1053,7 +1069,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1085,7 +1101,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1132,7 +1148,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1166,7 +1182,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateHyperparameterTuningJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1190,7 +1206,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1222,7 +1238,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1269,7 +1285,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1303,7 +1319,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1327,7 +1343,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1359,7 +1375,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1406,7 +1422,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1440,7 +1456,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1464,7 +1480,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1496,7 +1512,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1543,7 +1559,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1577,7 +1593,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateBatchPredictionJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1601,7 +1617,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1633,7 +1649,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1680,7 +1696,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1714,7 +1730,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1738,7 +1754,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1770,7 +1786,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1817,7 +1833,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1851,7 +1867,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CancelBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CancelBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1875,7 +1891,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1909,7 +1925,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1956,7 +1972,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1990,7 +2006,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.CreateModelDeploymentMonitoringJobRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2014,7 +2030,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2046,7 +2062,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2093,7 +2109,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2127,7 +2143,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.GetModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2151,7 +2167,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2185,7 +2201,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2232,7 +2248,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2266,7 +2282,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.PauseModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2290,7 +2306,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2324,7 +2340,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2371,7 +2387,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2405,7 +2421,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.ResumeModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2428,9 +2444,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2460,9 +2477,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2513,9 +2531,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2543,9 +2562,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteCustomJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2619,7 +2639,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2652,7 +2672,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2706,7 +2726,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2740,7 +2760,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDataLabelingJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteDataLabelingJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2816,7 +2836,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2849,7 +2869,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2903,7 +2923,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2937,7 +2957,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteHyperparameterTuningJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteHyperparameterTuningJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3014,7 +3034,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3047,7 +3067,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3101,7 +3121,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3135,7 +3155,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteBatchPredictionJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteBatchPredictionJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3213,7 +3233,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.modelDeploymentMonitoringJob ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobRequest',
         ['modelDeploymentMonitoringJob', 'name']
       );
       request.modelDeploymentMonitoringJob.name = defaultValue1;
@@ -3249,7 +3269,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.modelDeploymentMonitoringJob ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobRequest',
         ['modelDeploymentMonitoringJob', 'name']
       );
       request.modelDeploymentMonitoringJob.name = defaultValue1;
@@ -3304,7 +3324,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.modelDeploymentMonitoringJob ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobRequest',
         ['modelDeploymentMonitoringJob', 'name']
       );
       request.modelDeploymentMonitoringJob.name = defaultValue1;
@@ -3337,7 +3357,7 @@ describe('v1beta1.JobServiceClient', () => {
       );
       request.modelDeploymentMonitoringJob ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.UpdateModelDeploymentMonitoringJobRequest',
         ['modelDeploymentMonitoringJob', 'name']
       );
       request.modelDeploymentMonitoringJob.name = defaultValue1;
@@ -3413,7 +3433,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3448,7 +3468,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3502,7 +3522,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3534,7 +3554,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteModelDeploymentMonitoringJobRequest',
+        '.google.cloud.aiplatform.v1beta1.DeleteModelDeploymentMonitoringJobRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3609,9 +3629,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3647,9 +3668,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3701,9 +3723,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3731,9 +3754,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3791,9 +3815,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3840,9 +3865,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3888,9 +3914,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListCustomJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3930,9 +3957,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataLabelingJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3969,9 +3997,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataLabelingJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4025,9 +4054,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataLabelingJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4055,9 +4085,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataLabelingJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4117,9 +4148,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataLabelingJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4168,9 +4200,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataLabelingJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4217,9 +4250,10 @@ describe('v1beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataLabelingJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataLabelingJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4260,7 +4294,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListHyperparameterTuningJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4300,7 +4334,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListHyperparameterTuningJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4357,7 +4391,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListHyperparameterTuningJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4391,7 +4425,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListHyperparameterTuningJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4463,7 +4497,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListHyperparameterTuningJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4524,7 +4558,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListHyperparameterTuningJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4578,7 +4612,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListHyperparameterTuningJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListHyperparameterTuningJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4625,7 +4659,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListBatchPredictionJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4665,7 +4699,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListBatchPredictionJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4722,7 +4756,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListBatchPredictionJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4756,7 +4790,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListBatchPredictionJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4825,7 +4859,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListBatchPredictionJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4883,7 +4917,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListBatchPredictionJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4937,7 +4971,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListBatchPredictionJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListBatchPredictionJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4984,7 +5018,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchModelDeploymentMonitoringStatsAnomaliesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest',
         ['modelDeploymentMonitoringJob']
       );
       request.modelDeploymentMonitoringJob = defaultValue1;
@@ -5027,7 +5061,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchModelDeploymentMonitoringStatsAnomaliesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest',
         ['modelDeploymentMonitoringJob']
       );
       request.modelDeploymentMonitoringJob = defaultValue1;
@@ -5086,7 +5120,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchModelDeploymentMonitoringStatsAnomaliesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest',
         ['modelDeploymentMonitoringJob']
       );
       request.modelDeploymentMonitoringJob = defaultValue1;
@@ -5120,7 +5154,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchModelDeploymentMonitoringStatsAnomaliesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest',
         ['modelDeploymentMonitoringJob']
       );
       request.modelDeploymentMonitoringJob = defaultValue1;
@@ -5193,7 +5227,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchModelDeploymentMonitoringStatsAnomaliesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest',
         ['modelDeploymentMonitoringJob']
       );
       request.modelDeploymentMonitoringJob = defaultValue1;
@@ -5255,7 +5289,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchModelDeploymentMonitoringStatsAnomaliesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest',
         ['modelDeploymentMonitoringJob']
       );
       request.modelDeploymentMonitoringJob = defaultValue1;
@@ -5310,7 +5344,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchModelDeploymentMonitoringStatsAnomaliesRequest',
+        '.google.cloud.aiplatform.v1beta1.SearchModelDeploymentMonitoringStatsAnomaliesRequest',
         ['modelDeploymentMonitoringJob']
       );
       request.modelDeploymentMonitoringJob = defaultValue1;
@@ -5358,7 +5392,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelDeploymentMonitoringJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5400,7 +5434,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelDeploymentMonitoringJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5457,7 +5491,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelDeploymentMonitoringJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5491,7 +5525,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelDeploymentMonitoringJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5563,7 +5597,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelDeploymentMonitoringJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5624,7 +5658,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelDeploymentMonitoringJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5678,7 +5712,7 @@ describe('v1beta1.JobServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListModelDeploymentMonitoringJobsRequest',
+        '.google.cloud.aiplatform.v1beta1.ListModelDeploymentMonitoringJobsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

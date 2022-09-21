@@ -2206,7 +2206,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 60,
+                    "end": 65,
                     "type": "FULL"
                 }
             ],
@@ -2218,6 +2218,10 @@
                     {
                         "name": "select_entity",
                         "type": ".google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest.SelectEntity"
+                    },
+                    {
+                        "name": "select_time_range_and_feature",
+                        "type": ".google.cloud.aiplatform.v1beta1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature"
                     },
                     {
                         "name": "entity_type",
@@ -3054,7 +3058,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 85,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -3274,7 +3278,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 91,
+                    "end": 96,
                     "type": "FULL"
                 }
             ],
@@ -3498,7 +3502,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 85,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -3718,7 +3722,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 86,
+                    "end": 91,
                     "type": "FULL"
                 }
             ],
@@ -4006,7 +4010,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 82,
+                    "end": 87,
                     "type": "FULL"
                 }
             ],
@@ -4494,7 +4498,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 97,
+                    "end": 106,
                     "type": "FULL"
                 }
             ],
@@ -4517,6 +4521,10 @@
                     },
                     {
                         "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -4774,7 +4782,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 100,
+                    "end": 109,
                     "type": "FULL"
                 }
             ],
@@ -4797,6 +4805,10 @@
                     },
                     {
                         "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -5052,6 +5064,50 @@
             }
         },
         {
+            "regionTag": "aiplatform_v1beta1_generated_MetadataService_RemoveContextChildren_async",
+            "title": "DatasetService removeContextChildren Sample",
+            "origin": "API_DEFINITION",
+            "description": " Remove a set of children contexts from a parent Context. If any of the child Contexts were NOT added to the parent Context, they are simply skipped.",
+            "canonical": true,
+            "file": "metadata_service.remove_context_children.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 59,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "RemoveContextChildren",
+                "fullName": "google.cloud.aiplatform.v1beta1.MetadataService.RemoveContextChildren",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "context",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "child_contexts",
+                        "type": "TYPE_STRING[]"
+                    }
+                ],
+                "resultType": ".google.cloud.aiplatform.v1beta1.RemoveContextChildrenResponse",
+                "client": {
+                    "shortName": "MetadataServiceClient",
+                    "fullName": "google.cloud.aiplatform.v1beta1.MetadataServiceClient"
+                },
+                "method": {
+                    "shortName": "RemoveContextChildren",
+                    "fullName": "google.cloud.aiplatform.v1beta1.MetadataService.RemoveContextChildren",
+                    "service": {
+                        "shortName": "MetadataService",
+                        "fullName": "google.cloud.aiplatform.v1beta1.MetadataService"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "aiplatform_v1beta1_generated_MetadataService_QueryContextLineageSubgraph_async",
             "title": "DatasetService queryContextLineageSubgraph Sample",
             "origin": "API_DEFINITION",
@@ -5190,7 +5246,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 97,
+                    "end": 106,
                     "type": "FULL"
                 }
             ],
@@ -5213,6 +5269,10 @@
                     },
                     {
                         "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "order_by",
                         "type": "TYPE_STRING"
                     }
                 ],
@@ -6574,7 +6634,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 87,
+                    "end": 90,
                     "type": "FULL"
                 }
             ],
@@ -6798,7 +6858,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 114,
+                    "end": 118,
                     "type": "FULL"
                 }
             ],
@@ -6826,6 +6886,10 @@
                     {
                         "name": "order_by",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "read_mask",
+                        "type": ".google.protobuf.FieldMask"
                     }
                 ],
                 "resultType": ".google.cloud.aiplatform.v1beta1.ListPipelineJobsResponse",

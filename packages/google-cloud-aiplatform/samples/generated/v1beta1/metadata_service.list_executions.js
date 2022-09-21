@@ -74,6 +74,15 @@ function main(parent) {
    *  For example: `display_name = "test" AND metadata.field1.bool_value = true`.
    */
   // const filter = 'abc123'
+  /**
+   *  How the list of messages is ordered. Specify the values to order by and an
+   *  ordering operation. The default sorting order is ascending. To specify
+   *  descending order for a field, users append a " desc" suffix; for example:
+   *  "foo desc, bar".
+   *  Subfields are specified with a `.` character, such as foo.bar.
+   *  see https://google.aip.dev/132#ordering for more details.
+   */
+  // const orderBy = 'abc123'
 
   // Imports the Aiplatform library
   const {MetadataServiceClient} = require('@google-cloud/aiplatform').v1beta1;

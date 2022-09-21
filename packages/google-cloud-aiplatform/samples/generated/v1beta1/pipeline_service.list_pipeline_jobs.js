@@ -91,6 +91,10 @@ function main(parent) {
    *    * `start_time`
    */
   // const orderBy = 'abc123'
+  /**
+   *  Mask specifying which fields to read.
+   */
+  // const readMask = {}
 
   // Imports the Aiplatform library
   const {PipelineServiceClient} = require('@google-cloud/aiplatform').v1beta1;

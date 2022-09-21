@@ -41,6 +41,9 @@ function main(parent) {
    *    * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
    *    * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
    *      `create_time` must be in RFC 3339 format.
+   *    * `labels` supports general map functions that is:
+   *      `labels.key=value` - key:value equality
+   *      `labels.key:* - key existence
    *  Some examples of using the filter are:
    *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
    *    * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`

@@ -284,9 +284,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -315,9 +316,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -362,9 +364,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -393,9 +396,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.GetSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.GetSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -414,9 +418,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpecialistPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -447,9 +452,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpecialistPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -501,9 +507,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpecialistPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -532,9 +539,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSpecialistPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.CreateSpecialistPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -610,9 +618,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -643,9 +652,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -697,9 +707,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -728,9 +739,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSpecialistPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.DeleteSpecialistPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -807,10 +819,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
       );
       request.specialistPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpecialistPoolRequest', [
-        'specialistPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest',
+        ['specialistPool', 'name']
+      );
       request.specialistPool.name = defaultValue1;
       const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -842,10 +854,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
       );
       request.specialistPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpecialistPoolRequest', [
-        'specialistPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest',
+        ['specialistPool', 'name']
+      );
       request.specialistPool.name = defaultValue1;
       const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -898,10 +910,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
       );
       request.specialistPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpecialistPoolRequest', [
-        'specialistPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest',
+        ['specialistPool', 'name']
+      );
       request.specialistPool.name = defaultValue1;
       const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -931,10 +943,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
         new protos.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest()
       );
       request.specialistPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSpecialistPoolRequest', [
-        'specialistPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.UpdateSpecialistPoolRequest',
+        ['specialistPool', 'name']
+      );
       request.specialistPool.name = defaultValue1;
       const expectedHeaderRequestParams = `specialist_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1010,9 +1022,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpecialistPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1050,9 +1063,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpecialistPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1105,9 +1119,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpecialistPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1136,9 +1151,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpecialistPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1197,9 +1213,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpecialistPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1247,9 +1264,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpecialistPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1296,9 +1314,10 @@ describe('v1.SpecialistPoolServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSpecialistPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1.ListSpecialistPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

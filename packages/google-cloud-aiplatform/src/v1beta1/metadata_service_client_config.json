@@ -107,6 +107,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "RemoveContextChildren": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "QueryContextLineageSubgraph": {
           "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",

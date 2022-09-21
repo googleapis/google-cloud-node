@@ -1442,6 +1442,7 @@ export class MetadataServiceClient {
       'purgeContexts',
       'addContextArtifactsAndExecutions',
       'addContextChildren',
+      'removeContextChildren',
       'queryContextLineageSubgraph',
       'createExecution',
       'getExecution',
@@ -2434,6 +2435,110 @@ export class MetadataServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.addContextChildren(request, options, callback);
+  }
+  /**
+   * Remove a set of children contexts from a parent Context. If any of the
+   * child Contexts were NOT added to the parent Context, they are
+   * simply skipped.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.context
+   *   Required. The resource name of the parent Context.
+   *
+   *   Format:
+   *   `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+   * @param {string[]} request.childContexts
+   *   The resource names of the child Contexts.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [RemoveContextChildrenResponse]{@link google.cloud.aiplatform.v1.RemoveContextChildrenResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/metadata_service.remove_context_children.js</caption>
+   * region_tag:aiplatform_v1_generated_MetadataService_RemoveContextChildren_async
+   */
+  removeContextChildren(
+    request?: protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+      (
+        | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  removeContextChildren(
+    request: protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+      | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeContextChildren(
+    request: protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+      | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeContextChildren(
+    request?: protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+          | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+      | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IRemoveContextChildrenResponse,
+      (
+        | protos.google.cloud.aiplatform.v1.IRemoveContextChildrenRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        context: request.context ?? '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeContextChildren(request, options, callback);
   }
   /**
    * Retrieves Artifacts and Executions within the specified Context, connected
@@ -4820,6 +4925,13 @@ export class MetadataServiceClient {
    *   logical operators (`AND` & `OR`).
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -4954,6 +5066,13 @@ export class MetadataServiceClient {
    *   logical operators (`AND` & `OR`).
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5036,6 +5155,13 @@ export class MetadataServiceClient {
    *   logical operators (`AND` & `OR`).
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5121,6 +5247,13 @@ export class MetadataServiceClient {
    *   logical operators (`AND` & `OR`).
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5259,6 +5392,13 @@ export class MetadataServiceClient {
    *   logical operators (`AND` & `OR`).
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5345,6 +5485,13 @@ export class MetadataServiceClient {
    *   logical operators (`AND` & `OR`).
    *
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -5425,6 +5572,13 @@ export class MetadataServiceClient {
    *   Each of the above supported filters can be combined together using
    *   logical operators (`AND` & `OR`).
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -5558,6 +5712,13 @@ export class MetadataServiceClient {
    *   Each of the above supported filters can be combined together using
    *   logical operators (`AND` & `OR`).
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -5639,6 +5800,13 @@ export class MetadataServiceClient {
    *   Each of the above supported filters can be combined together using
    *   logical operators (`AND` & `OR`).
    *   For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+   * @param {string} request.orderBy
+   *   How the list of messages is ordered. Specify the values to order by and an
+   *   ordering operation. The default sorting order is ascending. To specify
+   *   descending order for a field, users append a " desc" suffix; for example:
+   *   "foo desc, bar".
+   *   Subfields are specified with a `.` character, such as foo.bar.
+   *   see https://google.aip.dev/132#ordering for more details.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

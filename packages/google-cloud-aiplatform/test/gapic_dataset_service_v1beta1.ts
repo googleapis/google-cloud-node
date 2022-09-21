@@ -275,7 +275,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -303,7 +306,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -347,7 +353,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,7 +384,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -394,10 +406,10 @@ describe('v1beta1.DatasetServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -426,10 +438,10 @@ describe('v1beta1.DatasetServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -474,10 +486,10 @@ describe('v1beta1.DatasetServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -506,10 +518,10 @@ describe('v1beta1.DatasetServiceClient', () => {
         new protos.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -527,9 +539,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -557,9 +570,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -603,9 +617,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -633,9 +648,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -653,9 +669,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -685,9 +702,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -738,9 +756,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -768,9 +787,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -843,9 +863,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -875,9 +896,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -928,9 +950,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -958,9 +981,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1033,7 +1057,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1062,7 +1089,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1113,7 +1143,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1141,7 +1174,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1211,7 +1247,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1240,7 +1279,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1291,7 +1333,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1319,7 +1364,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1389,9 +1437,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1427,9 +1476,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1481,9 +1531,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1511,9 +1562,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1570,9 +1622,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1620,9 +1673,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1668,9 +1722,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1709,9 +1764,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1747,9 +1803,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1801,9 +1858,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1831,9 +1889,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1890,9 +1949,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1938,9 +1998,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1986,9 +2047,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2028,9 +2090,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2066,9 +2129,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2120,9 +2184,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2150,9 +2215,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2210,9 +2276,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2259,9 +2326,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2308,9 +2376,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2350,9 +2419,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2388,9 +2458,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2442,9 +2513,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2472,9 +2544,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2532,9 +2605,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2581,9 +2655,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2630,9 +2705,10 @@ describe('v1beta1.DatasetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAnnotationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.aiplatform.v1beta1.ListAnnotationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

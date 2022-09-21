@@ -2437,6 +2437,9 @@ export class PipelineServiceClient {
    *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
    *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
    *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
@@ -2559,6 +2562,9 @@ export class PipelineServiceClient {
    *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
    *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
    *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
@@ -2629,6 +2635,9 @@ export class PipelineServiceClient {
    *     * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
    *     * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
    *       `create_time` must be in RFC 3339 format.
+   *     * `labels` supports general map functions that is:
+   *       `labels.key=value` - key:value equality
+   *       `labels.key:* - key existence
    *
    *   Some examples of using the filter are:
    *
@@ -2744,6 +2753,8 @@ export class PipelineServiceClient {
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2895,6 +2906,8 @@ export class PipelineServiceClient {
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2994,6 +3007,8 @@ export class PipelineServiceClient {
    *     * `update_time`
    *     * `end_time`
    *     * `start_time`
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

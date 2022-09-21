@@ -33,8 +33,13 @@ function main(entityType) {
    */
   // const selectEntity = {}
   /**
-   *  Required. The resource name of the EntityType grouping the Features for
-   *  which values are being deleted from. Format:
+   *  Select feature values to be deleted by specifying time range and
+   *  features.
+   */
+  // const selectTimeRangeAndFeature = {}
+  /**
+   *  Required. The resource name of the EntityType grouping the Features for which values
+   *  are being deleted from. Format:
    *  `projects/{project}/locations/{location}/featurestores/{featurestore}/entityTypes/{entityType}`
    */
   // const entityType = 'abc123'
