@@ -25,6 +25,21 @@ import * as imageannotatorModule from '../src';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -191,15 +206,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateImagesResponse()
       );
@@ -207,11 +219,14 @@ describe('v1.ImageAnnotatorClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchAnnotateImages(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchAnnotateImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchAnnotateImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchAnnotateImages without error using callback', async () => {
@@ -223,15 +238,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateImagesResponse()
       );
@@ -254,11 +266,14 @@ describe('v1.ImageAnnotatorClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchAnnotateImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchAnnotateImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchAnnotateImages with error', async () => {
@@ -270,26 +285,26 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchAnnotateImages = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.batchAnnotateImages(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchAnnotateImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchAnnotateImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchAnnotateImages with closed client', async () => {
@@ -301,7 +316,11 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateImagesRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchAnnotateImages(request), expectedError);
@@ -318,15 +337,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateFilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateFilesResponse()
       );
@@ -334,11 +350,14 @@ describe('v1.ImageAnnotatorClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchAnnotateFiles(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchAnnotateFiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchAnnotateFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchAnnotateFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchAnnotateFiles without error using callback', async () => {
@@ -350,15 +369,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateFilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateFilesResponse()
       );
@@ -381,11 +397,14 @@ describe('v1.ImageAnnotatorClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchAnnotateFiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchAnnotateFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchAnnotateFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchAnnotateFiles with error', async () => {
@@ -397,26 +416,26 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateFilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchAnnotateFiles = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.batchAnnotateFiles(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchAnnotateFiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchAnnotateFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchAnnotateFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchAnnotateFiles with closed client', async () => {
@@ -428,7 +447,11 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.BatchAnnotateFilesRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.BatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.batchAnnotateFiles(request), expectedError);
@@ -445,15 +468,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -462,11 +482,14 @@ describe('v1.ImageAnnotatorClient', () => {
       const [operation] = await client.asyncBatchAnnotateImages(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asyncBatchAnnotateImages without error using callback', async () => {
@@ -478,15 +501,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -516,11 +536,14 @@ describe('v1.ImageAnnotatorClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asyncBatchAnnotateImages with call error', async () => {
@@ -532,15 +555,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asyncBatchAnnotateImages = stubLongRunningCall(
         undefined,
@@ -550,11 +570,14 @@ describe('v1.ImageAnnotatorClient', () => {
         client.asyncBatchAnnotateImages(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asyncBatchAnnotateImages with LRO error', async () => {
@@ -566,15 +589,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asyncBatchAnnotateImages = stubLongRunningCall(
         undefined,
@@ -583,11 +603,14 @@ describe('v1.ImageAnnotatorClient', () => {
       );
       const [operation] = await client.asyncBatchAnnotateImages(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkAsyncBatchAnnotateImagesProgress without error', async () => {
@@ -643,15 +666,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -660,11 +680,14 @@ describe('v1.ImageAnnotatorClient', () => {
       const [operation] = await client.asyncBatchAnnotateFiles(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asyncBatchAnnotateFiles without error using callback', async () => {
@@ -676,15 +699,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -714,11 +734,14 @@ describe('v1.ImageAnnotatorClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asyncBatchAnnotateFiles with call error', async () => {
@@ -730,15 +753,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asyncBatchAnnotateFiles = stubLongRunningCall(
         undefined,
@@ -748,11 +768,14 @@ describe('v1.ImageAnnotatorClient', () => {
         client.asyncBatchAnnotateFiles(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes asyncBatchAnnotateFiles with LRO error', async () => {
@@ -764,15 +787,12 @@ describe('v1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AsyncBatchAnnotateFilesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.asyncBatchAnnotateFiles = stubLongRunningCall(
         undefined,
@@ -781,11 +801,14 @@ describe('v1.ImageAnnotatorClient', () => {
       );
       const [operation] = await client.asyncBatchAnnotateFiles(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.asyncBatchAnnotateFiles as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkAsyncBatchAnnotateFilesProgress without error', async () => {

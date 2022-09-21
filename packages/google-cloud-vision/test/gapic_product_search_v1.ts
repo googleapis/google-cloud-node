@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -254,26 +269,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductSetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
       client.innerApiCalls.createProductSet = stubSimpleCall(expectedResponse);
       const [response] = await client.createProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProductSet without error using callback', async () => {
@@ -285,15 +300,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductSetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
@@ -316,11 +328,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProductSet with error', async () => {
@@ -332,26 +347,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductSetRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductSetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProductSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createProductSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.createProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProductSet with closed client', async () => {
@@ -363,7 +378,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductSetRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductSetRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProductSet(request), expectedError);
@@ -380,26 +399,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
       client.innerApiCalls.getProductSet = stubSimpleCall(expectedResponse);
       const [response] = await client.getProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProductSet without error using callback', async () => {
@@ -411,15 +430,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
@@ -442,11 +458,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProductSet with error', async () => {
@@ -458,26 +477,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProductSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getProductSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.getProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProductSet with closed client', async () => {
@@ -489,7 +508,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductSetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProductSet(request), expectedError);
@@ -506,27 +529,27 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductSetRequest()
       );
-      request.productSet = {};
-      request.productSet.name = '';
-      const expectedHeaderRequestParams = 'product_set.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.productSet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductSetRequest',
+        ['productSet', 'name']
+      );
+      request.productSet.name = defaultValue1;
+      const expectedHeaderRequestParams = `product_set.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
       client.innerApiCalls.updateProductSet = stubSimpleCall(expectedResponse);
       const [response] = await client.updateProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProductSet without error using callback', async () => {
@@ -538,16 +561,13 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductSetRequest()
       );
-      request.productSet = {};
-      request.productSet.name = '';
-      const expectedHeaderRequestParams = 'product_set.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.productSet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductSetRequest',
+        ['productSet', 'name']
+      );
+      request.productSet.name = defaultValue1;
+      const expectedHeaderRequestParams = `product_set.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ProductSet()
       );
@@ -570,11 +590,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProductSet with error', async () => {
@@ -586,27 +609,27 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductSetRequest()
       );
-      request.productSet = {};
-      request.productSet.name = '';
-      const expectedHeaderRequestParams = 'product_set.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.productSet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductSetRequest',
+        ['productSet', 'name']
+      );
+      request.productSet.name = defaultValue1;
+      const expectedHeaderRequestParams = `product_set.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProductSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateProductSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProductSet with closed client', async () => {
@@ -618,8 +641,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductSetRequest()
       );
-      request.productSet = {};
-      request.productSet.name = '';
+      request.productSet ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductSetRequest',
+        ['productSet', 'name']
+      );
+      request.productSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProductSet(request), expectedError);
@@ -636,26 +663,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteProductSet = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProductSet without error using callback', async () => {
@@ -667,15 +694,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -698,11 +722,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProductSet with error', async () => {
@@ -714,26 +741,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProductSet = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteProductSet(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProductSet with closed client', async () => {
@@ -745,7 +772,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductSetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProductSet(request), expectedError);
@@ -762,26 +793,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
       client.innerApiCalls.createProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.createProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProduct without error using callback', async () => {
@@ -793,15 +824,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
@@ -824,11 +852,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProduct with error', async () => {
@@ -840,26 +871,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.createProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProduct with closed client', async () => {
@@ -871,7 +902,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateProductRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateProductRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProduct(request), expectedError);
@@ -888,26 +923,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
       client.innerApiCalls.getProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.getProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProduct without error using callback', async () => {
@@ -919,15 +954,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
@@ -950,11 +982,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProduct with error', async () => {
@@ -966,26 +1001,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.getProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProduct with closed client', async () => {
@@ -997,7 +1032,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetProductRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProduct(request), expectedError);
@@ -1014,27 +1053,27 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductRequest',
+        ['product', 'name']
+      );
+      request.product.name = defaultValue1;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
       client.innerApiCalls.updateProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.updateProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProduct without error using callback', async () => {
@@ -1046,16 +1085,13 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductRequest',
+        ['product', 'name']
+      );
+      request.product.name = defaultValue1;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.Product()
       );
@@ -1078,11 +1114,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProduct with error', async () => {
@@ -1094,27 +1133,27 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
-      const expectedHeaderRequestParams = 'product.name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductRequest',
+        ['product', 'name']
+      );
+      request.product.name = defaultValue1;
+      const expectedHeaderRequestParams = `product.name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateProduct with closed client', async () => {
@@ -1126,8 +1165,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.UpdateProductRequest()
       );
-      request.product = {};
-      request.product.name = '';
+      request.product ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.UpdateProductRequest',
+        ['product', 'name']
+      );
+      request.product.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateProduct(request), expectedError);
@@ -1144,26 +1187,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
       client.innerApiCalls.deleteProduct = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteProduct(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProduct without error using callback', async () => {
@@ -1175,15 +1218,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1206,11 +1246,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProduct with error', async () => {
@@ -1222,26 +1265,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProduct = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteProduct(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteProduct as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProduct as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProduct with closed client', async () => {
@@ -1253,7 +1296,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteProductRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteProductRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteProduct(request), expectedError);
@@ -1270,15 +1317,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateReferenceImageRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateReferenceImageRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ReferenceImage()
       );
@@ -1286,11 +1330,14 @@ describe('v1.ProductSearchClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.createReferenceImage(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createReferenceImage without error using callback', async () => {
@@ -1302,15 +1349,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateReferenceImageRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateReferenceImageRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ReferenceImage()
       );
@@ -1333,11 +1377,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createReferenceImage with error', async () => {
@@ -1349,26 +1396,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateReferenceImageRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateReferenceImageRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReferenceImage = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createReferenceImage(request), expectedError);
-      assert(
-        (client.innerApiCalls.createReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createReferenceImage with closed client', async () => {
@@ -1380,7 +1427,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.CreateReferenceImageRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.CreateReferenceImageRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createReferenceImage(request), expectedError);
@@ -1397,15 +1448,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteReferenceImageRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1413,11 +1461,14 @@ describe('v1.ProductSearchClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteReferenceImage(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteReferenceImage without error using callback', async () => {
@@ -1429,15 +1480,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteReferenceImageRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1460,11 +1508,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteReferenceImage with error', async () => {
@@ -1476,26 +1527,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteReferenceImageRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteReferenceImage = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteReferenceImage(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteReferenceImage with closed client', async () => {
@@ -1507,7 +1558,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.DeleteReferenceImageRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.DeleteReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteReferenceImage(request), expectedError);
@@ -1524,26 +1579,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetReferenceImageRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ReferenceImage()
       );
       client.innerApiCalls.getReferenceImage = stubSimpleCall(expectedResponse);
       const [response] = await client.getReferenceImage(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getReferenceImage without error using callback', async () => {
@@ -1555,15 +1610,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetReferenceImageRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1.ReferenceImage()
       );
@@ -1586,11 +1638,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getReferenceImage with error', async () => {
@@ -1602,26 +1657,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetReferenceImageRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getReferenceImage = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getReferenceImage(request), expectedError);
-      assert(
-        (client.innerApiCalls.getReferenceImage as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getReferenceImage as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getReferenceImage as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getReferenceImage with closed client', async () => {
@@ -1633,7 +1688,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.GetReferenceImageRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.GetReferenceImageRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getReferenceImage(request), expectedError);
@@ -1650,15 +1709,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AddProductToProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AddProductToProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1666,11 +1722,14 @@ describe('v1.ProductSearchClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.addProductToProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addProductToProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addProductToProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addProductToProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addProductToProductSet without error using callback', async () => {
@@ -1682,15 +1741,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AddProductToProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AddProductToProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1713,11 +1769,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addProductToProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addProductToProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addProductToProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addProductToProductSet with error', async () => {
@@ -1729,15 +1788,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AddProductToProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AddProductToProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addProductToProductSet = stubSimpleCall(
         undefined,
@@ -1747,11 +1803,14 @@ describe('v1.ProductSearchClient', () => {
         client.addProductToProductSet(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.addProductToProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addProductToProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addProductToProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addProductToProductSet with closed client', async () => {
@@ -1763,7 +1822,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.AddProductToProductSetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.AddProductToProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1783,15 +1846,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.RemoveProductFromProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.RemoveProductFromProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1799,11 +1859,14 @@ describe('v1.ProductSearchClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.removeProductFromProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeProductFromProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeProductFromProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeProductFromProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeProductFromProductSet without error using callback', async () => {
@@ -1815,15 +1878,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.RemoveProductFromProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.RemoveProductFromProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
@@ -1846,11 +1906,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeProductFromProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeProductFromProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeProductFromProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeProductFromProductSet with error', async () => {
@@ -1862,15 +1925,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.RemoveProductFromProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.RemoveProductFromProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeProductFromProductSet = stubSimpleCall(
         undefined,
@@ -1880,11 +1940,14 @@ describe('v1.ProductSearchClient', () => {
         client.removeProductFromProductSet(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.removeProductFromProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeProductFromProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeProductFromProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeProductFromProductSet with closed client', async () => {
@@ -1896,7 +1959,11 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.RemoveProductFromProductSetRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.RemoveProductFromProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1916,15 +1983,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ImportProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ImportProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1933,11 +1997,14 @@ describe('v1.ProductSearchClient', () => {
       const [operation] = await client.importProductSets(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importProductSets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importProductSets without error using callback', async () => {
@@ -1949,15 +2016,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ImportProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ImportProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1987,11 +2051,14 @@ describe('v1.ProductSearchClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.importProductSets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importProductSets with call error', async () => {
@@ -2003,26 +2070,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ImportProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ImportProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProductSets = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.importProductSets(request), expectedError);
-      assert(
-        (client.innerApiCalls.importProductSets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes importProductSets with LRO error', async () => {
@@ -2034,15 +2101,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ImportProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ImportProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.importProductSets = stubLongRunningCall(
         undefined,
@@ -2051,11 +2115,14 @@ describe('v1.ProductSearchClient', () => {
       );
       const [operation] = await client.importProductSets(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.importProductSets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.importProductSets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkImportProductSetsProgress without error', async () => {
@@ -2110,15 +2177,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.PurgeProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2127,11 +2191,14 @@ describe('v1.ProductSearchClient', () => {
       const [operation] = await client.purgeProducts(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes purgeProducts without error using callback', async () => {
@@ -2143,15 +2210,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.PurgeProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2181,11 +2245,14 @@ describe('v1.ProductSearchClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes purgeProducts with call error', async () => {
@@ -2197,26 +2264,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.PurgeProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeProducts = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.purgeProducts(request), expectedError);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes purgeProducts with LRO error', async () => {
@@ -2228,15 +2295,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.PurgeProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.PurgeProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.purgeProducts = stubLongRunningCall(
         undefined,
@@ -2245,11 +2309,14 @@ describe('v1.ProductSearchClient', () => {
       );
       const [operation] = await client.purgeProducts(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.purgeProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.purgeProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkPurgeProductsProgress without error', async () => {
@@ -2304,15 +2371,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
@@ -2321,11 +2385,14 @@ describe('v1.ProductSearchClient', () => {
       client.innerApiCalls.listProductSets = stubSimpleCall(expectedResponse);
       const [response] = await client.listProductSets(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProductSets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProductSets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProductSets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductSets without error using callback', async () => {
@@ -2337,15 +2404,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
@@ -2370,11 +2434,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProductSets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProductSets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProductSets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductSets with error', async () => {
@@ -2386,26 +2453,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProductSets = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listProductSets(request), expectedError);
-      assert(
-        (client.innerApiCalls.listProductSets as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProductSets as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProductSets as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductSetsStream without error', async () => {
@@ -2417,8 +2484,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
@@ -2449,11 +2520,12 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProductSets, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProductSets.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProductSets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2466,8 +2538,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductSets.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2493,11 +2569,12 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProductSets, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProductSets.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProductSets.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2510,8 +2587,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
         generateSampleMessage(new protos.google.cloud.vision.v1.ProductSet()),
@@ -2531,11 +2612,12 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProductSets.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProductSets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2548,8 +2630,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductSetsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductSetsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductSets.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2566,11 +2652,12 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProductSets.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProductSets.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2585,15 +2672,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -2602,11 +2686,14 @@ describe('v1.ProductSearchClient', () => {
       client.innerApiCalls.listProducts = stubSimpleCall(expectedResponse);
       const [response] = await client.listProducts(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProducts without error using callback', async () => {
@@ -2618,15 +2705,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -2651,11 +2735,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProducts with error', async () => {
@@ -2667,26 +2754,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProducts = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listProducts(request), expectedError);
-      assert(
-        (client.innerApiCalls.listProducts as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProducts as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductsStream without error', async () => {
@@ -2698,8 +2785,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -2727,11 +2818,12 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProducts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2744,8 +2836,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.createStream = stubPageStreamingCall(
         undefined,
@@ -2770,11 +2866,12 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProducts, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2787,8 +2884,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -2808,11 +2909,12 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2825,8 +2927,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProducts.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -2843,11 +2949,12 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProducts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProducts.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2862,15 +2969,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListReferenceImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListReferenceImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1.ReferenceImage()
@@ -2886,11 +2990,14 @@ describe('v1.ProductSearchClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listReferenceImages(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listReferenceImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReferenceImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReferenceImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReferenceImages without error using callback', async () => {
@@ -2902,15 +3009,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListReferenceImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListReferenceImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1.ReferenceImage()
@@ -2941,11 +3045,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listReferenceImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReferenceImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReferenceImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReferenceImages with error', async () => {
@@ -2957,26 +3064,26 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListReferenceImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListReferenceImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReferenceImages = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listReferenceImages(request), expectedError);
-      assert(
-        (client.innerApiCalls.listReferenceImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReferenceImages as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReferenceImages as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReferenceImagesStream without error', async () => {
@@ -2988,8 +3095,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListReferenceImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListReferenceImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1.ReferenceImage()
@@ -3026,11 +3137,12 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listReferenceImages, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferenceImages.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferenceImages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3043,8 +3155,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListReferenceImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListReferenceImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferenceImages.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3070,11 +3186,12 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listReferenceImages, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferenceImages.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferenceImages.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3087,8 +3204,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListReferenceImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListReferenceImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.vision.v1.ReferenceImage()
@@ -3114,11 +3235,12 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferenceImages.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferenceImages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3131,8 +3253,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListReferenceImagesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListReferenceImagesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferenceImages.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3149,11 +3275,12 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferenceImages.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferenceImages.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3168,15 +3295,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsInProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsInProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -3186,11 +3310,14 @@ describe('v1.ProductSearchClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listProductsInProductSet(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProductsInProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProductsInProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProductsInProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductsInProductSet without error using callback', async () => {
@@ -3202,15 +3329,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsInProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsInProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -3235,11 +3359,14 @@ describe('v1.ProductSearchClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProductsInProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProductsInProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProductsInProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductsInProductSet with error', async () => {
@@ -3251,15 +3378,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsInProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsInProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProductsInProductSet = stubSimpleCall(
         undefined,
@@ -3269,11 +3393,14 @@ describe('v1.ProductSearchClient', () => {
         client.listProductsInProductSet(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listProductsInProductSet as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProductsInProductSet as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProductsInProductSet as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProductsInProductSetStream without error', async () => {
@@ -3285,8 +3412,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsInProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsInProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -3317,12 +3448,15 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProductsInProductSet, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProductsInProductSet
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3335,8 +3469,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsInProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsInProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductsInProductSet.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3362,12 +3500,15 @@ describe('v1.ProductSearchClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProductsInProductSet, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProductsInProductSet
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3380,8 +3521,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsInProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsInProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
         generateSampleMessage(new protos.google.cloud.vision.v1.Product()),
@@ -3402,12 +3547,15 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProductsInProductSet
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3420,8 +3568,12 @@ describe('v1.ProductSearchClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1.ListProductsInProductSetRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vision.v1.ListProductsInProductSetRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProductsInProductSet.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3439,12 +3591,15 @@ describe('v1.ProductSearchClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProductsInProductSet
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

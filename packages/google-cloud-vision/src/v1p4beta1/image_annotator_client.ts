@@ -199,13 +199,7 @@ export class ImageAnnotatorClient {
     };
     if (opts.fallback === 'rest') {
       lroOptions.protoJson = protoFilesRoot;
-      lroOptions.httpRules = [
-        {
-          selector: 'google.longrunning.Operations.GetOperation',
-          get: '/v1/{name=operations/*}',
-          additional_bindings: [{get: '/v1/{name=locations/*/operations/*}'}],
-        },
-      ];
+      lroOptions.httpRules = [];
     }
     this.operationsClient = this._gaxModule
       .lro(lroOptions)

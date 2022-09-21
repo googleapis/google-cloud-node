@@ -25,6 +25,21 @@ import * as imageannotatorModule from '../src';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -159,7 +174,6 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse()
       );
@@ -167,11 +181,6 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchAnnotateImages(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes batchAnnotateImages without error using callback', async () => {
@@ -183,7 +192,6 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse()
       );
@@ -206,11 +214,6 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes batchAnnotateImages with error', async () => {
@@ -222,18 +225,12 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vision.v1p1beta1.BatchAnnotateImagesRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.batchAnnotateImages = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.batchAnnotateImages(request), expectedError);
-      assert(
-        (client.innerApiCalls.batchAnnotateImages as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes batchAnnotateImages with closed client', async () => {
