@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.2](https://github.com/googleapis/nodejs-functions/compare/v2.2.1...v2.2.2) (2022-09-21)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#187](https://github.com/googleapis/nodejs-functions/issues/187)) ([57b025c](https://github.com/googleapis/nodejs-functions/commit/57b025c07d850812a246db7e61521a968f0cd20a))
+
 ## [2.2.1](https://github.com/googleapis/nodejs-functions/compare/v2.2.0...v2.2.1) (2022-09-01)
 
 
