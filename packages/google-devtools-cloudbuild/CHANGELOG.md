@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.1.1...v3.1.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#344](https://github.com/googleapis/nodejs-cloudbuild/issues/344)) ([004810d](https://github.com/googleapis/nodejs-cloudbuild/commit/004810d748249c000e8df308b70c03097e65fc25))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-cloudbuild/compare/v3.1.0...v3.1.1) (2022-09-01)
 
 
