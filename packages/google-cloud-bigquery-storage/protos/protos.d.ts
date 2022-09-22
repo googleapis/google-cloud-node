@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Long = require("long");
 import type {protobuf as $protobuf} from "google-gax";
+import Long = require("long");
 /** Namespace google. */
 export namespace google {
 
@@ -2483,6 +2483,9 @@ export namespace google {
 
                         /** GetWriteStreamRequest name */
                         name?: (string|null);
+
+                        /** GetWriteStreamRequest view */
+                        view?: (google.cloud.bigquery.storage.v1.WriteStreamView|keyof typeof google.cloud.bigquery.storage.v1.WriteStreamView|null);
                     }
 
                     /** Represents a GetWriteStreamRequest. */
@@ -2496,6 +2499,9 @@ export namespace google {
 
                         /** GetWriteStreamRequest name. */
                         public name: string;
+
+                        /** GetWriteStreamRequest view. */
+                        public view: (google.cloud.bigquery.storage.v1.WriteStreamView|keyof typeof google.cloud.bigquery.storage.v1.WriteStreamView);
 
                         /**
                          * Creates a new GetWriteStreamRequest instance using the specified properties.
@@ -3901,6 +3907,13 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** WriteStreamView enum. */
+                    enum WriteStreamView {
+                        WRITE_STREAM_VIEW_UNSPECIFIED = 0,
+                        BASIC = 1,
+                        FULL = 2
+                    }
+
                     /** Properties of a WriteStream. */
                     interface IWriteStream {
 
@@ -3921,6 +3934,9 @@ export namespace google {
 
                         /** WriteStream writeMode */
                         writeMode?: (google.cloud.bigquery.storage.v1.WriteStream.WriteMode|keyof typeof google.cloud.bigquery.storage.v1.WriteStream.WriteMode|null);
+
+                        /** WriteStream location */
+                        location?: (string|null);
                     }
 
                     /** Represents a WriteStream. */
@@ -3949,6 +3965,9 @@ export namespace google {
 
                         /** WriteStream writeMode. */
                         public writeMode: (google.cloud.bigquery.storage.v1.WriteStream.WriteMode|keyof typeof google.cloud.bigquery.storage.v1.WriteStream.WriteMode);
+
+                        /** WriteStream location. */
+                        public location: string;
 
                         /**
                          * Creates a new WriteStream instance using the specified properties.
@@ -8662,6 +8681,9 @@ export namespace google {
 
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
+
+            /** FieldOptions .google.cloud.bigquery.storage.v1.columnName */
+            ".google.cloud.bigquery.storage.v1.columnName"?: (string|null);
 
             /** FieldOptions .google.api.fieldBehavior */
             ".google.api.fieldBehavior"?: (google.api.FieldBehavior[]|null);

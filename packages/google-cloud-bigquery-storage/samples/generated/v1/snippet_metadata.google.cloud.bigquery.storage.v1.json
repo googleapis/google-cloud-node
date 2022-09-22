@@ -258,7 +258,7 @@
             "segments": [
                 {
                     "start": 25,
-                    "end": 54,
+                    "end": 59,
                     "type": "FULL"
                 }
             ],
@@ -270,6 +270,10 @@
                     {
                         "name": "name",
                         "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "view",
+                        "type": ".google.cloud.bigquery.storage.v1.WriteStreamView"
                     }
                 ],
                 "resultType": ".google.cloud.bigquery.storage.v1.WriteStream",

@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/bigquery/storage/v1/annotations.proto",
   "../../protos/google/cloud/bigquery/storage/v1/arrow.proto",
   "../../protos/google/cloud/bigquery/storage/v1/avro.proto",
   "../../protos/google/cloud/bigquery/storage/v1/protobuf.proto",

@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -180,27 +195,27 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateReadSessionRequest()
       );
-      request.readSession = {};
-      request.readSession.table = '';
-      const expectedHeaderRequestParams = 'read_session.table=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.readSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateReadSessionRequest',
+        ['readSession', 'table']
+      );
+      request.readSession.table = defaultValue1;
+      const expectedHeaderRequestParams = `read_session.table=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.ReadSession()
       );
       client.innerApiCalls.createReadSession = stubSimpleCall(expectedResponse);
       const [response] = await client.createReadSession(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createReadSession as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createReadSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReadSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createReadSession without error using callback', async () => {
@@ -212,16 +227,13 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateReadSessionRequest()
       );
-      request.readSession = {};
-      request.readSession.table = '';
-      const expectedHeaderRequestParams = 'read_session.table=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.readSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateReadSessionRequest',
+        ['readSession', 'table']
+      );
+      request.readSession.table = defaultValue1;
+      const expectedHeaderRequestParams = `read_session.table=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.ReadSession()
       );
@@ -244,11 +256,14 @@ describe('v1.BigQueryReadClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createReadSession as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createReadSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReadSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createReadSession with error', async () => {
@@ -260,27 +275,27 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateReadSessionRequest()
       );
-      request.readSession = {};
-      request.readSession.table = '';
-      const expectedHeaderRequestParams = 'read_session.table=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      request.readSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateReadSessionRequest',
+        ['readSession', 'table']
+      );
+      request.readSession.table = defaultValue1;
+      const expectedHeaderRequestParams = `read_session.table=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createReadSession = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createReadSession(request), expectedError);
-      assert(
-        (client.innerApiCalls.createReadSession as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createReadSession as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createReadSession as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createReadSession with closed client', async () => {
@@ -292,8 +307,12 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateReadSessionRequest()
       );
-      request.readSession = {};
-      request.readSession.table = '';
+      request.readSession ??= {};
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateReadSessionRequest',
+        ['readSession', 'table']
+      );
+      request.readSession.table = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createReadSession(request), expectedError);
@@ -310,26 +329,26 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.SplitReadStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.SplitReadStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.SplitReadStreamResponse()
       );
       client.innerApiCalls.splitReadStream = stubSimpleCall(expectedResponse);
       const [response] = await client.splitReadStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.splitReadStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.splitReadStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.splitReadStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes splitReadStream without error using callback', async () => {
@@ -341,15 +360,12 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.SplitReadStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.SplitReadStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.SplitReadStreamResponse()
       );
@@ -372,11 +388,14 @@ describe('v1.BigQueryReadClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.splitReadStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.splitReadStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.splitReadStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes splitReadStream with error', async () => {
@@ -388,26 +407,26 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.SplitReadStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.SplitReadStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.splitReadStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.splitReadStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.splitReadStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.splitReadStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.splitReadStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes splitReadStream with closed client', async () => {
@@ -419,7 +438,11 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.SplitReadStreamRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.SplitReadStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.splitReadStream(request), expectedError);
@@ -436,15 +459,12 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.ReadRowsRequest()
       );
-      request.readStream = '';
-      const expectedHeaderRequestParams = 'read_stream=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.ReadRowsRequest',
+        ['readStream']
+      );
+      request.readStream = defaultValue1;
+      const expectedHeaderRequestParams = `read_stream=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.ReadRowsResponse()
       );
@@ -465,11 +485,14 @@ describe('v1.BigQueryReadClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.readRows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readRows with error', async () => {
@@ -481,15 +504,12 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.ReadRowsRequest()
       );
-      request.readStream = '';
-      const expectedHeaderRequestParams = 'read_stream=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.ReadRowsRequest',
+        ['readStream']
+      );
+      request.readStream = defaultValue1;
+      const expectedHeaderRequestParams = `read_stream=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.readRows = stubServerStreamingCall(
         undefined,
@@ -510,11 +530,14 @@ describe('v1.BigQueryReadClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
-      assert(
-        (client.innerApiCalls.readRows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions)
-      );
+      const actualRequest = (
+        client.innerApiCalls.readRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.readRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes readRows with closed client', async () => {
@@ -526,7 +549,11 @@ describe('v1.BigQueryReadClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.ReadRowsRequest()
       );
-      request.readStream = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.ReadRowsRequest',
+        ['readStream']
+      );
+      request.readStream = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       const stream = client.readRows(request);

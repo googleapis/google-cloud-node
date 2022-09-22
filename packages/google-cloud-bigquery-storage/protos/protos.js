@@ -693,6 +693,12 @@
                                     return object;
                                 var message = new $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions();
                                 switch (object.bufferCompression) {
+                                default:
+                                    if (typeof object.bufferCompression === "number") {
+                                        message.bufferCompression = object.bufferCompression;
+                                        break;
+                                    }
+                                    break;
                                 case "COMPRESSION_UNSPECIFIED":
                                 case 0:
                                     message.bufferCompression = 0;
@@ -725,7 +731,7 @@
                                 if (options.defaults)
                                     object.bufferCompression = options.enums === String ? "COMPRESSION_UNSPECIFIED" : 0;
                                 if (message.bufferCompression != null && message.hasOwnProperty("bufferCompression"))
-                                    object.bufferCompression = options.enums === String ? $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec[message.bufferCompression] : message.bufferCompression;
+                                    object.bufferCompression = options.enums === String ? $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec[message.bufferCompression] === undefined ? message.bufferCompression : $root.google.cloud.bigquery.storage.v1.ArrowSerializationOptions.CompressionCodec[message.bufferCompression] : message.bufferCompression;
                                 return object;
                             };
     
@@ -5631,6 +5637,7 @@
                              * @memberof google.cloud.bigquery.storage.v1
                              * @interface IGetWriteStreamRequest
                              * @property {string|null} [name] GetWriteStreamRequest name
+                             * @property {google.cloud.bigquery.storage.v1.WriteStreamView|null} [view] GetWriteStreamRequest view
                              */
     
                             /**
@@ -5655,6 +5662,14 @@
                              * @instance
                              */
                             GetWriteStreamRequest.prototype.name = "";
+    
+                            /**
+                             * GetWriteStreamRequest view.
+                             * @member {google.cloud.bigquery.storage.v1.WriteStreamView} view
+                             * @memberof google.cloud.bigquery.storage.v1.GetWriteStreamRequest
+                             * @instance
+                             */
+                            GetWriteStreamRequest.prototype.view = 0;
     
                             /**
                              * Creates a new GetWriteStreamRequest instance using the specified properties.
@@ -5682,6 +5697,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.view);
                                 return writer;
                             };
     
@@ -5718,6 +5735,10 @@
                                     switch (tag >>> 3) {
                                     case 1: {
                                             message.name = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.view = reader.int32();
                                             break;
                                         }
                                     default:
@@ -5758,6 +5779,15 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.view != null && message.hasOwnProperty("view"))
+                                    switch (message.view) {
+                                    default:
+                                        return "view: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
                                 return null;
                             };
     
@@ -5775,6 +5805,26 @@
                                 var message = new $root.google.cloud.bigquery.storage.v1.GetWriteStreamRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                switch (object.view) {
+                                default:
+                                    if (typeof object.view === "number") {
+                                        message.view = object.view;
+                                        break;
+                                    }
+                                    break;
+                                case "WRITE_STREAM_VIEW_UNSPECIFIED":
+                                case 0:
+                                    message.view = 0;
+                                    break;
+                                case "BASIC":
+                                case 1:
+                                    message.view = 1;
+                                    break;
+                                case "FULL":
+                                case 2:
+                                    message.view = 2;
+                                    break;
+                                }
                                 return message;
                             };
     
@@ -5791,10 +5841,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.view = options.enums === String ? "WRITE_STREAM_VIEW_UNSPECIFIED" : 0;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.view != null && message.hasOwnProperty("view"))
+                                    object.view = options.enums === String ? $root.google.cloud.bigquery.storage.v1.WriteStreamView[message.view] === undefined ? message.view : $root.google.cloud.bigquery.storage.v1.WriteStreamView[message.view] : message.view;
                                 return object;
                             };
     
@@ -7391,6 +7445,12 @@
                                     return object;
                                 var message = new $root.google.cloud.bigquery.storage.v1.StorageError();
                                 switch (object.code) {
+                                default:
+                                    if (typeof object.code === "number") {
+                                        message.code = object.code;
+                                        break;
+                                    }
+                                    break;
                                 case "STORAGE_ERROR_CODE_UNSPECIFIED":
                                 case 0:
                                     message.code = 0;
@@ -7458,7 +7518,7 @@
                                     object.errorMessage = "";
                                 }
                                 if (message.code != null && message.hasOwnProperty("code"))
-                                    object.code = options.enums === String ? $root.google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode[message.code] : message.code;
+                                    object.code = options.enums === String ? $root.google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode[message.code] === undefined ? message.code : $root.google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode[message.code] : message.code;
                                 if (message.entity != null && message.hasOwnProperty("entity"))
                                     object.entity = message.entity;
                                 if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
@@ -7725,6 +7785,12 @@
                                     else if (typeof object.index === "object")
                                         message.index = new $util.LongBits(object.index.low >>> 0, object.index.high >>> 0).toNumber();
                                 switch (object.code) {
+                                default:
+                                    if (typeof object.code === "number") {
+                                        message.code = object.code;
+                                        break;
+                                    }
+                                    break;
                                 case "ROW_ERROR_CODE_UNSPECIFIED":
                                 case 0:
                                     message.code = 0;
@@ -7767,7 +7833,7 @@
                                     else
                                         object.index = options.longs === String ? $util.Long.prototype.toString.call(message.index) : options.longs === Number ? new $util.LongBits(message.index.low >>> 0, message.index.high >>> 0).toNumber() : message.index;
                                 if (message.code != null && message.hasOwnProperty("code"))
-                                    object.code = options.enums === String ? $root.google.cloud.bigquery.storage.v1.RowError.RowErrorCode[message.code] : message.code;
+                                    object.code = options.enums === String ? $root.google.cloud.bigquery.storage.v1.RowError.RowErrorCode[message.code] === undefined ? message.code : $root.google.cloud.bigquery.storage.v1.RowError.RowErrorCode[message.code] : message.code;
                                 if (message.message != null && message.hasOwnProperty("message"))
                                     object.message = message.message;
                                 return object;
@@ -8218,6 +8284,12 @@
                                     message.expireTime = $root.google.protobuf.Timestamp.fromObject(object.expireTime);
                                 }
                                 switch (object.dataFormat) {
+                                default:
+                                    if (typeof object.dataFormat === "number") {
+                                        message.dataFormat = object.dataFormat;
+                                        break;
+                                    }
+                                    break;
                                 case "DATA_FORMAT_UNSPECIFIED":
                                 case 0:
                                     message.dataFormat = 0;
@@ -8311,7 +8383,7 @@
                                 if (message.expireTime != null && message.hasOwnProperty("expireTime"))
                                     object.expireTime = $root.google.protobuf.Timestamp.toObject(message.expireTime, options);
                                 if (message.dataFormat != null && message.hasOwnProperty("dataFormat"))
-                                    object.dataFormat = options.enums === String ? $root.google.cloud.bigquery.storage.v1.DataFormat[message.dataFormat] : message.dataFormat;
+                                    object.dataFormat = options.enums === String ? $root.google.cloud.bigquery.storage.v1.DataFormat[message.dataFormat] === undefined ? message.dataFormat : $root.google.cloud.bigquery.storage.v1.DataFormat[message.dataFormat] : message.dataFormat;
                                 if (message.avroSchema != null && message.hasOwnProperty("avroSchema")) {
                                     object.avroSchema = $root.google.cloud.bigquery.storage.v1.AvroSchema.toObject(message.avroSchema, options);
                                     if (options.oneofs)
@@ -9109,6 +9181,22 @@
                             return ReadStream;
                         })();
     
+                        /**
+                         * WriteStreamView enum.
+                         * @name google.cloud.bigquery.storage.v1.WriteStreamView
+                         * @enum {number}
+                         * @property {number} WRITE_STREAM_VIEW_UNSPECIFIED=0 WRITE_STREAM_VIEW_UNSPECIFIED value
+                         * @property {number} BASIC=1 BASIC value
+                         * @property {number} FULL=2 FULL value
+                         */
+                        v1.WriteStreamView = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "WRITE_STREAM_VIEW_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "BASIC"] = 1;
+                            values[valuesById[2] = "FULL"] = 2;
+                            return values;
+                        })();
+    
                         v1.WriteStream = (function() {
     
                             /**
@@ -9121,6 +9209,7 @@
                              * @property {google.protobuf.ITimestamp|null} [commitTime] WriteStream commitTime
                              * @property {google.cloud.bigquery.storage.v1.ITableSchema|null} [tableSchema] WriteStream tableSchema
                              * @property {google.cloud.bigquery.storage.v1.WriteStream.WriteMode|null} [writeMode] WriteStream writeMode
+                             * @property {string|null} [location] WriteStream location
                              */
     
                             /**
@@ -9187,6 +9276,14 @@
                             WriteStream.prototype.writeMode = 0;
     
                             /**
+                             * WriteStream location.
+                             * @member {string} location
+                             * @memberof google.cloud.bigquery.storage.v1.WriteStream
+                             * @instance
+                             */
+                            WriteStream.prototype.location = "";
+    
+                            /**
                              * Creates a new WriteStream instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.storage.v1.WriteStream
@@ -9222,6 +9319,8 @@
                                     $root.google.cloud.bigquery.storage.v1.TableSchema.encode(message.tableSchema, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                                 if (message.writeMode != null && Object.hasOwnProperty.call(message, "writeMode"))
                                     writer.uint32(/* id 7, wireType 0 =*/56).int32(message.writeMode);
+                                if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                    writer.uint32(/* id 8, wireType 2 =*/66).string(message.location);
                                 return writer;
                             };
     
@@ -9278,6 +9377,10 @@
                                         }
                                     case 7: {
                                             message.writeMode = reader.int32();
+                                            break;
+                                        }
+                                    case 8: {
+                                            message.location = reader.string();
                                             break;
                                         }
                                     default:
@@ -9351,6 +9454,9 @@
                                     case 1:
                                         break;
                                     }
+                                if (message.location != null && message.hasOwnProperty("location"))
+                                    if (!$util.isString(message.location))
+                                        return "location: string expected";
                                 return null;
                             };
     
@@ -9369,6 +9475,12 @@
                                 if (object.name != null)
                                     message.name = String(object.name);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -9402,6 +9514,12 @@
                                     message.tableSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.fromObject(object.tableSchema);
                                 }
                                 switch (object.writeMode) {
+                                default:
+                                    if (typeof object.writeMode === "number") {
+                                        message.writeMode = object.writeMode;
+                                        break;
+                                    }
+                                    break;
                                 case "WRITE_MODE_UNSPECIFIED":
                                 case 0:
                                     message.writeMode = 0;
@@ -9411,6 +9529,8 @@
                                     message.writeMode = 1;
                                     break;
                                 }
+                                if (object.location != null)
+                                    message.location = String(object.location);
                                 return message;
                             };
     
@@ -9434,11 +9554,12 @@
                                     object.commitTime = null;
                                     object.tableSchema = null;
                                     object.writeMode = options.enums === String ? "WRITE_MODE_UNSPECIFIED" : 0;
+                                    object.location = "";
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.bigquery.storage.v1.WriteStream.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.bigquery.storage.v1.WriteStream.Type[message.type] === undefined ? message.type : $root.google.cloud.bigquery.storage.v1.WriteStream.Type[message.type] : message.type;
                                 if (message.createTime != null && message.hasOwnProperty("createTime"))
                                     object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                                 if (message.commitTime != null && message.hasOwnProperty("commitTime"))
@@ -9446,7 +9567,9 @@
                                 if (message.tableSchema != null && message.hasOwnProperty("tableSchema"))
                                     object.tableSchema = $root.google.cloud.bigquery.storage.v1.TableSchema.toObject(message.tableSchema, options);
                                 if (message.writeMode != null && message.hasOwnProperty("writeMode"))
-                                    object.writeMode = options.enums === String ? $root.google.cloud.bigquery.storage.v1.WriteStream.WriteMode[message.writeMode] : message.writeMode;
+                                    object.writeMode = options.enums === String ? $root.google.cloud.bigquery.storage.v1.WriteStream.WriteMode[message.writeMode] === undefined ? message.writeMode : $root.google.cloud.bigquery.storage.v1.WriteStream.WriteMode[message.writeMode] : message.writeMode;
+                                if (message.location != null && message.hasOwnProperty("location"))
+                                    object.location = message.location;
                                 return object;
                             };
     
@@ -10049,6 +10172,12 @@
                                 if (object.name != null)
                                     message.name = String(object.name);
                                 switch (object.type) {
+                                default:
+                                    if (typeof object.type === "number") {
+                                        message.type = object.type;
+                                        break;
+                                    }
+                                    break;
                                 case "TYPE_UNSPECIFIED":
                                 case 0:
                                     message.type = 0;
@@ -10115,6 +10244,12 @@
                                     break;
                                 }
                                 switch (object.mode) {
+                                default:
+                                    if (typeof object.mode === "number") {
+                                        message.mode = object.mode;
+                                        break;
+                                    }
+                                    break;
                                 case "MODE_UNSPECIFIED":
                                 case 0:
                                     message.mode = 0;
@@ -10213,9 +10348,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
                                 if (message.type != null && message.hasOwnProperty("type"))
-                                    object.type = options.enums === String ? $root.google.cloud.bigquery.storage.v1.TableFieldSchema.Type[message.type] : message.type;
+                                    object.type = options.enums === String ? $root.google.cloud.bigquery.storage.v1.TableFieldSchema.Type[message.type] === undefined ? message.type : $root.google.cloud.bigquery.storage.v1.TableFieldSchema.Type[message.type] : message.type;
                                 if (message.mode != null && message.hasOwnProperty("mode"))
-                                    object.mode = options.enums === String ? $root.google.cloud.bigquery.storage.v1.TableFieldSchema.Mode[message.mode] : message.mode;
+                                    object.mode = options.enums === String ? $root.google.cloud.bigquery.storage.v1.TableFieldSchema.Mode[message.mode] === undefined ? message.mode : $root.google.cloud.bigquery.storage.v1.TableFieldSchema.Mode[message.mode] : message.mode;
                                 if (message.fields && message.fields.length) {
                                     object.fields = [];
                                     for (var j = 0; j < message.fields.length; ++j)
@@ -12511,6 +12646,12 @@
                                     message.tableModifiers = $root.google.cloud.bigquery.storage.v1beta1.TableModifiers.fromObject(object.tableModifiers);
                                 }
                                 switch (object.shardingStrategy) {
+                                default:
+                                    if (typeof object.shardingStrategy === "number") {
+                                        message.shardingStrategy = object.shardingStrategy;
+                                        break;
+                                    }
+                                    break;
                                 case "SHARDING_STRATEGY_UNSPECIFIED":
                                 case 0:
                                     message.shardingStrategy = 0;
@@ -12573,7 +12714,7 @@
                                 if (message.tableModifiers != null && message.hasOwnProperty("tableModifiers"))
                                     object.tableModifiers = $root.google.cloud.bigquery.storage.v1beta1.TableModifiers.toObject(message.tableModifiers, options);
                                 if (message.shardingStrategy != null && message.hasOwnProperty("shardingStrategy"))
-                                    object.shardingStrategy = options.enums === String ? $root.google.cloud.bigquery.storage.v1beta1.ShardingStrategy[message.shardingStrategy] : message.shardingStrategy;
+                                    object.shardingStrategy = options.enums === String ? $root.google.cloud.bigquery.storage.v1beta1.ShardingStrategy[message.shardingStrategy] === undefined ? message.shardingStrategy : $root.google.cloud.bigquery.storage.v1beta1.ShardingStrategy[message.shardingStrategy] : message.shardingStrategy;
                                 return object;
                             };
     
@@ -12901,6 +13042,12 @@
                                     message.readOptions = $root.google.cloud.bigquery.storage.v1beta1.TableReadOptions.fromObject(object.readOptions);
                                 }
                                 switch (object.format) {
+                                default:
+                                    if (typeof object.format === "number") {
+                                        message.format = object.format;
+                                        break;
+                                    }
+                                    break;
                                 case "DATA_FORMAT_UNSPECIFIED":
                                 case 0:
                                     message.format = 0;
@@ -12915,6 +13062,12 @@
                                     break;
                                 }
                                 switch (object.shardingStrategy) {
+                                default:
+                                    if (typeof object.shardingStrategy === "number") {
+                                        message.shardingStrategy = object.shardingStrategy;
+                                        break;
+                                    }
+                                    break;
                                 case "SHARDING_STRATEGY_UNSPECIFIED":
                                 case 0:
                                     message.shardingStrategy = 0;
@@ -12962,11 +13115,11 @@
                                 if (message.readOptions != null && message.hasOwnProperty("readOptions"))
                                     object.readOptions = $root.google.cloud.bigquery.storage.v1beta1.TableReadOptions.toObject(message.readOptions, options);
                                 if (message.format != null && message.hasOwnProperty("format"))
-                                    object.format = options.enums === String ? $root.google.cloud.bigquery.storage.v1beta1.DataFormat[message.format] : message.format;
+                                    object.format = options.enums === String ? $root.google.cloud.bigquery.storage.v1beta1.DataFormat[message.format] === undefined ? message.format : $root.google.cloud.bigquery.storage.v1beta1.DataFormat[message.format] : message.format;
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
                                 if (message.shardingStrategy != null && message.hasOwnProperty("shardingStrategy"))
-                                    object.shardingStrategy = options.enums === String ? $root.google.cloud.bigquery.storage.v1beta1.ShardingStrategy[message.shardingStrategy] : message.shardingStrategy;
+                                    object.shardingStrategy = options.enums === String ? $root.google.cloud.bigquery.storage.v1beta1.ShardingStrategy[message.shardingStrategy] === undefined ? message.shardingStrategy : $root.google.cloud.bigquery.storage.v1beta1.ShardingStrategy[message.shardingStrategy] : message.shardingStrategy;
                                 return object;
                             };
     
@@ -18438,6 +18591,12 @@
                     if (object.number != null)
                         message.number = object.number | 0;
                     switch (object.label) {
+                    default:
+                        if (typeof object.label === "number") {
+                            message.label = object.label;
+                            break;
+                        }
+                        break;
                     case "LABEL_OPTIONAL":
                     case 1:
                         message.label = 1;
@@ -18452,6 +18611,12 @@
                         break;
                     }
                     switch (object.type) {
+                    default:
+                        if (typeof object.type === "number") {
+                            message.type = object.type;
+                            break;
+                        }
+                        break;
                     case "TYPE_DOUBLE":
                     case 1:
                         message.type = 1;
@@ -18578,9 +18743,9 @@
                     if (message.number != null && message.hasOwnProperty("number"))
                         object.number = message.number;
                     if (message.label != null && message.hasOwnProperty("label"))
-                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
+                        object.label = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Label[message.label] === undefined ? message.label : $root.google.protobuf.FieldDescriptorProto.Label[message.label] : message.label;
                     if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
+                        object.type = options.enums === String ? $root.google.protobuf.FieldDescriptorProto.Type[message.type] === undefined ? message.type : $root.google.protobuf.FieldDescriptorProto.Type[message.type] : message.type;
                     if (message.typeName != null && message.hasOwnProperty("typeName"))
                         object.typeName = message.typeName;
                     if (message.defaultValue != null && message.hasOwnProperty("defaultValue"))
@@ -20927,6 +21092,12 @@
                     if (object.javaStringCheckUtf8 != null)
                         message.javaStringCheckUtf8 = Boolean(object.javaStringCheckUtf8);
                     switch (object.optimizeFor) {
+                    default:
+                        if (typeof object.optimizeFor === "number") {
+                            message.optimizeFor = object.optimizeFor;
+                            break;
+                        }
+                        break;
                     case "SPEED":
                     case 1:
                         message.optimizeFor = 1;
@@ -21035,7 +21206,7 @@
                     if (message.javaOuterClassname != null && message.hasOwnProperty("javaOuterClassname"))
                         object.javaOuterClassname = message.javaOuterClassname;
                     if (message.optimizeFor != null && message.hasOwnProperty("optimizeFor"))
-                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
+                        object.optimizeFor = options.enums === String ? $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] === undefined ? message.optimizeFor : $root.google.protobuf.FileOptions.OptimizeMode[message.optimizeFor] : message.optimizeFor;
                     if (message.javaMultipleFiles != null && message.hasOwnProperty("javaMultipleFiles"))
                         object.javaMultipleFiles = message.javaMultipleFiles;
                     if (message.goPackage != null && message.hasOwnProperty("goPackage"))
@@ -21488,6 +21659,7 @@
                  * @property {boolean|null} [deprecated] FieldOptions deprecated
                  * @property {boolean|null} [weak] FieldOptions weak
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
+                 * @property {string|null} [".google.cloud.bigquery.storage.v1.columnName"] FieldOptions .google.cloud.bigquery.storage.v1.columnName
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
                  */
@@ -21574,6 +21746,14 @@
                 FieldOptions.prototype.uninterpretedOption = $util.emptyArray;
     
                 /**
+                 * FieldOptions .google.cloud.bigquery.storage.v1.columnName.
+                 * @member {string} .google.cloud.bigquery.storage.v1.columnName
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype[".google.cloud.bigquery.storage.v1.columnName"] = null;
+    
+                /**
                  * FieldOptions .google.api.fieldBehavior.
                  * @member {Array.<google.api.FieldBehavior>} .google.api.fieldBehavior
                  * @memberof google.protobuf.FieldOptions
@@ -21638,6 +21818,8 @@
                     }
                     if (message[".google.api.resourceReference"] != null && Object.hasOwnProperty.call(message, ".google.api.resourceReference"))
                         $root.google.api.ResourceReference.encode(message[".google.api.resourceReference"], writer.uint32(/* id 1055, wireType 2 =*/8442).fork()).ldelim();
+                    if (message[".google.cloud.bigquery.storage.v1.columnName"] != null && Object.hasOwnProperty.call(message, ".google.cloud.bigquery.storage.v1.columnName"))
+                        writer.uint32(/* id 454943157, wireType 2 =*/3639545258).string(message[".google.cloud.bigquery.storage.v1.columnName"]);
                     return writer;
                 };
     
@@ -21704,6 +21886,10 @@
                                 if (!(message.uninterpretedOption && message.uninterpretedOption.length))
                                     message.uninterpretedOption = [];
                                 message.uninterpretedOption.push($root.google.protobuf.UninterpretedOption.decode(reader, reader.uint32()));
+                                break;
+                            }
+                        case 454943157: {
+                                message[".google.cloud.bigquery.storage.v1.columnName"] = reader.string();
                                 break;
                             }
                         case 1052: {
@@ -21798,6 +21984,9 @@
                                 return "uninterpretedOption." + error;
                         }
                     }
+                    if (message[".google.cloud.bigquery.storage.v1.columnName"] != null && message.hasOwnProperty(".google.cloud.bigquery.storage.v1.columnName"))
+                        if (!$util.isString(message[".google.cloud.bigquery.storage.v1.columnName"]))
+                            return ".google.cloud.bigquery.storage.v1.columnName: string expected";
                     if (message[".google.api.fieldBehavior"] != null && message.hasOwnProperty(".google.api.fieldBehavior")) {
                         if (!Array.isArray(message[".google.api.fieldBehavior"]))
                             return ".google.api.fieldBehavior: array expected";
@@ -21837,6 +22026,12 @@
                         return object;
                     var message = new $root.google.protobuf.FieldOptions();
                     switch (object.ctype) {
+                    default:
+                        if (typeof object.ctype === "number") {
+                            message.ctype = object.ctype;
+                            break;
+                        }
+                        break;
                     case "STRING":
                     case 0:
                         message.ctype = 0;
@@ -21853,6 +22048,12 @@
                     if (object.packed != null)
                         message.packed = Boolean(object.packed);
                     switch (object.jstype) {
+                    default:
+                        if (typeof object.jstype === "number") {
+                            message.jstype = object.jstype;
+                            break;
+                        }
+                        break;
                     case "JS_NORMAL":
                     case 0:
                         message.jstype = 0;
@@ -21884,6 +22085,8 @@
                             message.uninterpretedOption[i] = $root.google.protobuf.UninterpretedOption.fromObject(object.uninterpretedOption[i]);
                         }
                     }
+                    if (object[".google.cloud.bigquery.storage.v1.columnName"] != null)
+                        message[".google.cloud.bigquery.storage.v1.columnName"] = String(object[".google.cloud.bigquery.storage.v1.columnName"]);
                     if (object[".google.api.fieldBehavior"]) {
                         if (!Array.isArray(object[".google.api.fieldBehavior"]))
                             throw TypeError(".google.protobuf.FieldOptions..google.api.fieldBehavior: array expected");
@@ -21891,6 +22094,10 @@
                         for (var i = 0; i < object[".google.api.fieldBehavior"].length; ++i)
                             switch (object[".google.api.fieldBehavior"][i]) {
                             default:
+                                if (typeof object[".google.api.fieldBehavior"][i] === "number") {
+                                    message[".google.api.fieldBehavior"][i] = object[".google.api.fieldBehavior"][i];
+                                    break;
+                                }
                             case "FIELD_BEHAVIOR_UNSPECIFIED":
                             case 0:
                                 message[".google.api.fieldBehavior"][i] = 0;
@@ -21959,9 +22166,10 @@
                         object.weak = false;
                         object.unverifiedLazy = false;
                         object[".google.api.resourceReference"] = null;
+                        object[".google.cloud.bigquery.storage.v1.columnName"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
-                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
+                        object.ctype = options.enums === String ? $root.google.protobuf.FieldOptions.CType[message.ctype] === undefined ? message.ctype : $root.google.protobuf.FieldOptions.CType[message.ctype] : message.ctype;
                     if (message.packed != null && message.hasOwnProperty("packed"))
                         object.packed = message.packed;
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
@@ -21969,7 +22177,7 @@
                     if (message.lazy != null && message.hasOwnProperty("lazy"))
                         object.lazy = message.lazy;
                     if (message.jstype != null && message.hasOwnProperty("jstype"))
-                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
+                        object.jstype = options.enums === String ? $root.google.protobuf.FieldOptions.JSType[message.jstype] === undefined ? message.jstype : $root.google.protobuf.FieldOptions.JSType[message.jstype] : message.jstype;
                     if (message.weak != null && message.hasOwnProperty("weak"))
                         object.weak = message.weak;
                     if (message.unverifiedLazy != null && message.hasOwnProperty("unverifiedLazy"))
@@ -21982,10 +22190,12 @@
                     if (message[".google.api.fieldBehavior"] && message[".google.api.fieldBehavior"].length) {
                         object[".google.api.fieldBehavior"] = [];
                         for (var j = 0; j < message[".google.api.fieldBehavior"].length; ++j)
-                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
+                            object[".google.api.fieldBehavior"][j] = options.enums === String ? $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] === undefined ? message[".google.api.fieldBehavior"][j] : $root.google.api.FieldBehavior[message[".google.api.fieldBehavior"][j]] : message[".google.api.fieldBehavior"][j];
                     }
                     if (message[".google.api.resourceReference"] != null && message.hasOwnProperty(".google.api.resourceReference"))
                         object[".google.api.resourceReference"] = $root.google.api.ResourceReference.toObject(message[".google.api.resourceReference"], options);
+                    if (message[".google.cloud.bigquery.storage.v1.columnName"] != null && message.hasOwnProperty(".google.cloud.bigquery.storage.v1.columnName"))
+                        object[".google.cloud.bigquery.storage.v1.columnName"] = message[".google.cloud.bigquery.storage.v1.columnName"];
                     return object;
                 };
     
@@ -23339,6 +23549,12 @@
                     if (object.deprecated != null)
                         message.deprecated = Boolean(object.deprecated);
                     switch (object.idempotencyLevel) {
+                    default:
+                        if (typeof object.idempotencyLevel === "number") {
+                            message.idempotencyLevel = object.idempotencyLevel;
+                            break;
+                        }
+                        break;
                     case "IDEMPOTENCY_UNKNOWN":
                     case 0:
                         message.idempotencyLevel = 0;
@@ -23402,7 +23618,7 @@
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
                     if (message.idempotencyLevel != null && message.hasOwnProperty("idempotencyLevel"))
-                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
+                        object.idempotencyLevel = options.enums === String ? $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] === undefined ? message.idempotencyLevel : $root.google.protobuf.MethodOptions.IdempotencyLevel[message.idempotencyLevel] : message.idempotencyLevel;
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -25155,6 +25371,12 @@
                         if (object.end != null)
                             message.end = object.end | 0;
                         switch (object.semantic) {
+                        default:
+                            if (typeof object.semantic === "number") {
+                                message.semantic = object.semantic;
+                                break;
+                            }
+                            break;
                         case "NONE":
                         case 0:
                             message.semantic = 0;
@@ -25204,7 +25426,7 @@
                         if (message.end != null && message.hasOwnProperty("end"))
                             object.end = message.end;
                         if (message.semantic != null && message.hasOwnProperty("semantic"))
-                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
+                            object.semantic = options.enums === String ? $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] === undefined ? message.semantic : $root.google.protobuf.GeneratedCodeInfo.Annotation.Semantic[message.semantic] : message.semantic;
                         return object;
                     };
     
@@ -29077,6 +29299,12 @@
                     if (object.nameField != null)
                         message.nameField = String(object.nameField);
                     switch (object.history) {
+                    default:
+                        if (typeof object.history === "number") {
+                            message.history = object.history;
+                            break;
+                        }
+                        break;
                     case "HISTORY_UNSPECIFIED":
                     case 0:
                         message.history = 0;
@@ -29101,6 +29329,10 @@
                         for (var i = 0; i < object.style.length; ++i)
                             switch (object.style[i]) {
                             default:
+                                if (typeof object.style[i] === "number") {
+                                    message.style[i] = object.style[i];
+                                    break;
+                                }
                             case "STYLE_UNSPECIFIED":
                             case 0:
                                 message.style[i] = 0;
@@ -29148,7 +29380,7 @@
                     if (message.nameField != null && message.hasOwnProperty("nameField"))
                         object.nameField = message.nameField;
                     if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] === undefined ? message.history : $root.google.api.ResourceDescriptor.History[message.history] : message.history;
                     if (message.plural != null && message.hasOwnProperty("plural"))
                         object.plural = message.plural;
                     if (message.singular != null && message.hasOwnProperty("singular"))
@@ -29156,7 +29388,7 @@
                     if (message.style && message.style.length) {
                         object.style = [];
                         for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] === undefined ? message.style[j] : $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
                     }
                     return object;
                 };

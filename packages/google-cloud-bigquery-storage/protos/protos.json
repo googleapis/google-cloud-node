@@ -12,14 +12,27 @@
                       "options": {
                         "csharp_namespace": "Google.Cloud.BigQuery.Storage.V1",
                         "go_package": "google.golang.org/genproto/googleapis/cloud/bigquery/storage/v1;storage",
+                        "java_package": "com.google.cloud.bigquery.storage.v1",
                         "java_multiple_files": true,
                         "java_outer_classname": "TableProto",
-                        "java_package": "com.google.cloud.bigquery.storage.v1",
                         "php_namespace": "Google\\Cloud\\BigQuery\\Storage\\V1",
                         "(google.api.resource_definition).type": "bigquery.googleapis.com/Table",
                         "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}/tables/{table}"
                       },
                       "nested": {
+                        "_columnName": {
+                          "oneof": [
+                            "columnName"
+                          ]
+                        },
+                        "columnName": {
+                          "type": "string",
+                          "id": 454943157,
+                          "extend": "google.protobuf.FieldOptions",
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "ArrowSchema": {
                           "fields": {
                             "serializedSchema": {
@@ -566,6 +579,10 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "bigquerystorage.googleapis.com/WriteStream"
                               }
+                            },
+                            "view": {
+                              "type": "WriteStreamView",
+                              "id": 3
                             }
                           }
                         },
@@ -864,6 +881,13 @@
                             }
                           }
                         },
+                        "WriteStreamView": {
+                          "values": {
+                            "WRITE_STREAM_VIEW_UNSPECIFIED": 0,
+                            "BASIC": 1,
+                            "FULL": 2
+                          }
+                        },
                         "WriteStream": {
                           "options": {
                             "(google.api.resource).type": "bigquerystorage.googleapis.com/WriteStream",
@@ -908,6 +932,13 @@
                             "writeMode": {
                               "type": "WriteMode",
                               "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "IMMUTABLE"
+                              }
+                            },
+                            "location": {
+                              "type": "string",
+                              "id": 8,
                               "options": {
                                 "(google.api.field_behavior)": "IMMUTABLE"
                               }

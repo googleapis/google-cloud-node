@@ -33,6 +33,11 @@ function main(name) {
    *  `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
    */
   // const name = 'abc123'
+  /**
+   *  Indicates whether to get full or partial view of the WriteStream. If
+   *  not set, view returned will be basic.
+   */
+  // const view = {}
 
   // Imports the Storage library
   const {BigQueryWriteClient} = require('@google-cloud/bigquery-storage').v1;

@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -175,26 +190,26 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
       client.innerApiCalls.createWriteStream = stubSimpleCall(expectedResponse);
       const [response] = await client.createWriteStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWriteStream without error using callback', async () => {
@@ -206,15 +221,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
@@ -237,11 +249,14 @@ describe('v1.BigQueryWriteClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWriteStream with error', async () => {
@@ -253,26 +268,26 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createWriteStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createWriteStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.createWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createWriteStream with closed client', async () => {
@@ -284,7 +299,11 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.CreateWriteStreamRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createWriteStream(request), expectedError);
@@ -301,26 +320,26 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.GetWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
       client.innerApiCalls.getWriteStream = stubSimpleCall(expectedResponse);
       const [response] = await client.getWriteStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWriteStream without error using callback', async () => {
@@ -332,15 +351,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.GetWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.WriteStream()
       );
@@ -363,11 +379,14 @@ describe('v1.BigQueryWriteClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWriteStream with error', async () => {
@@ -379,26 +398,26 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.GetWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getWriteStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getWriteStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.getWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getWriteStream with closed client', async () => {
@@ -410,7 +429,11 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.GetWriteStreamRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.GetWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getWriteStream(request), expectedError);
@@ -427,15 +450,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse()
       );
@@ -443,11 +463,14 @@ describe('v1.BigQueryWriteClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.finalizeWriteStream(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.finalizeWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finalizeWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finalizeWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finalizeWriteStream without error using callback', async () => {
@@ -459,15 +482,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamResponse()
       );
@@ -490,11 +510,14 @@ describe('v1.BigQueryWriteClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.finalizeWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finalizeWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finalizeWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finalizeWriteStream with error', async () => {
@@ -506,26 +529,26 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.finalizeWriteStream = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.finalizeWriteStream(request), expectedError);
-      assert(
-        (client.innerApiCalls.finalizeWriteStream as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.finalizeWriteStream as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.finalizeWriteStream as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes finalizeWriteStream with closed client', async () => {
@@ -537,7 +560,11 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FinalizeWriteStreamRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.finalizeWriteStream(request), expectedError);
@@ -554,15 +581,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse()
       );
@@ -570,11 +594,14 @@ describe('v1.BigQueryWriteClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.batchCommitWriteStreams(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchCommitWriteStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchCommitWriteStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCommitWriteStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchCommitWriteStreams without error using callback', async () => {
@@ -586,15 +613,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsResponse()
       );
@@ -617,11 +641,14 @@ describe('v1.BigQueryWriteClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchCommitWriteStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchCommitWriteStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCommitWriteStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchCommitWriteStreams with error', async () => {
@@ -633,15 +660,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchCommitWriteStreams = stubSimpleCall(
         undefined,
@@ -651,11 +675,14 @@ describe('v1.BigQueryWriteClient', () => {
         client.batchCommitWriteStreams(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.batchCommitWriteStreams as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchCommitWriteStreams as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchCommitWriteStreams as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchCommitWriteStreams with closed client', async () => {
@@ -667,7 +694,11 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -687,26 +718,26 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
       );
-      request.writeStream = '';
-      const expectedHeaderRequestParams = 'write_stream=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FlushRowsRequest',
+        ['writeStream']
+      );
+      request.writeStream = defaultValue1;
+      const expectedHeaderRequestParams = `write_stream=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FlushRowsResponse()
       );
       client.innerApiCalls.flushRows = stubSimpleCall(expectedResponse);
       const [response] = await client.flushRows(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.flushRows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.flushRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.flushRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes flushRows without error using callback', async () => {
@@ -718,15 +749,12 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
       );
-      request.writeStream = '';
-      const expectedHeaderRequestParams = 'write_stream=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FlushRowsRequest',
+        ['writeStream']
+      );
+      request.writeStream = defaultValue1;
+      const expectedHeaderRequestParams = `write_stream=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FlushRowsResponse()
       );
@@ -749,11 +777,14 @@ describe('v1.BigQueryWriteClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.flushRows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.flushRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.flushRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes flushRows with error', async () => {
@@ -765,23 +796,23 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
       );
-      request.writeStream = '';
-      const expectedHeaderRequestParams = 'write_stream=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FlushRowsRequest',
+        ['writeStream']
+      );
+      request.writeStream = defaultValue1;
+      const expectedHeaderRequestParams = `write_stream=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.flushRows = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.flushRows(request), expectedError);
-      assert(
-        (client.innerApiCalls.flushRows as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.flushRows as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.flushRows as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes flushRows with closed client', async () => {
@@ -793,7 +824,11 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.FlushRowsRequest()
       );
-      request.writeStream = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.storage.v1.FlushRowsRequest',
+        ['writeStream']
+      );
+      request.writeStream = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.flushRows(request), expectedError);
@@ -810,6 +845,7 @@ describe('v1.BigQueryWriteClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.AppendRowsRequest()
       );
+
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.storage.v1.AppendRowsResponse()
       );

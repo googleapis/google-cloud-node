@@ -473,8 +473,8 @@ export class BigQueryStorageClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'table_reference.project_id': request.tableReference!.projectId || '',
-        'table_reference.dataset_id': request.tableReference!.datasetId || '',
+        'table_reference.project_id': request.tableReference!.projectId ?? '',
+        'table_reference.dataset_id': request.tableReference!.datasetId ?? '',
       });
     this.initialize();
     return this.innerApiCalls.createReadSession(request, options, callback);
@@ -578,7 +578,7 @@ export class BigQueryStorageClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'session.name': request.session!.name || '',
+        'session.name': request.session!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.batchCreateReadSessionStreams(
@@ -692,7 +692,7 @@ export class BigQueryStorageClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'stream.name': request.stream!.name || '',
+        'stream.name': request.stream!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.finalizeStream(request, options, callback);
@@ -809,7 +809,7 @@ export class BigQueryStorageClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'original_stream.name': request.originalStream!.name || '',
+        'original_stream.name': request.originalStream!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.splitReadStream(request, options, callback);
@@ -852,7 +852,7 @@ export class BigQueryStorageClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        'read_position.stream.name': request.readPosition!.stream!.name || '',
+        'read_position.stream.name': request.readPosition!.stream!.name ?? '',
       });
     this.initialize();
     return this.innerApiCalls.readRows(request, options);
