@@ -269,7 +269,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -297,7 +300,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -341,7 +347,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -366,7 +375,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -384,7 +396,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -412,7 +427,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -456,7 +474,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -484,7 +505,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBatchRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteBatchRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -502,9 +526,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBatchRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateBatchRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -533,9 +558,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBatchRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateBatchRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -586,9 +612,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBatchRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateBatchRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -616,9 +643,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateBatchRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBatchRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateBatchRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -688,9 +716,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBatchesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListBatchesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -720,9 +749,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBatchesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListBatchesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -768,9 +798,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBatchesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListBatchesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -798,9 +829,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBatchesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListBatchesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -848,9 +880,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBatchesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListBatchesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -895,9 +928,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBatchesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListBatchesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -937,9 +971,10 @@ describe('v1.BatchControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListBatchesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBatchesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListBatchesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

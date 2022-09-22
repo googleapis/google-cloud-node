@@ -281,7 +281,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -314,7 +314,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -362,7 +362,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -397,7 +397,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.CreateWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -421,9 +421,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetWorkflowTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetWorkflowTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -453,9 +454,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetWorkflowTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetWorkflowTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -500,9 +502,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetWorkflowTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetWorkflowTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -531,9 +534,10 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetWorkflowTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetWorkflowTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -554,7 +558,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       );
       request.template ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.UpdateWorkflowTemplateRequest',
         ['template', 'name']
       );
       request.template.name = defaultValue1;
@@ -588,7 +592,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       );
       request.template ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.UpdateWorkflowTemplateRequest',
         ['template', 'name']
       );
       request.template.name = defaultValue1;
@@ -637,7 +641,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       );
       request.template ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.UpdateWorkflowTemplateRequest',
         ['template', 'name']
       );
       request.template.name = defaultValue1;
@@ -673,7 +677,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
       );
       request.template ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.UpdateWorkflowTemplateRequest',
         ['template', 'name']
       );
       request.template.name = defaultValue1;
@@ -698,7 +702,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -731,7 +735,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -779,7 +783,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -814,7 +818,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.DeleteWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -839,7 +843,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -873,7 +877,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -928,7 +932,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -963,7 +967,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateWorkflowTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1043,7 +1047,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateInlineWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1079,7 +1083,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateInlineWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1134,7 +1138,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateInlineWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1167,7 +1171,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InstantiateInlineWorkflowTemplateRequest',
+        '.google.cloud.dataproc.v1.InstantiateInlineWorkflowTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1246,7 +1250,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowTemplatesRequest',
+        '.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1287,7 +1291,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowTemplatesRequest',
+        '.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1343,7 +1347,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowTemplatesRequest',
+        '.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1378,7 +1382,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowTemplatesRequest',
+        '.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1446,7 +1450,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowTemplatesRequest',
+        '.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1503,7 +1507,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowTemplatesRequest',
+        '.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1557,7 +1561,7 @@ describe('v1.WorkflowTemplateServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListWorkflowTemplatesRequest',
+        '.google.cloud.dataproc.v1.ListWorkflowTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

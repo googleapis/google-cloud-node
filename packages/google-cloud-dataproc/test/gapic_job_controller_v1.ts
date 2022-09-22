@@ -269,11 +269,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -301,11 +305,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -349,11 +357,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -378,11 +390,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -400,11 +416,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -432,11 +457,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -480,11 +514,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -509,11 +552,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -531,13 +583,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -565,13 +624,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -615,13 +681,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -646,13 +719,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -670,13 +750,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -704,13 +791,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -754,13 +848,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -785,13 +886,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CancelJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CancelJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -809,13 +917,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -843,13 +958,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -893,13 +1015,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -924,13 +1053,20 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -948,11 +1084,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -982,11 +1122,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1037,11 +1181,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1069,11 +1217,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.SubmitJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SubmitJobRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.SubmitJobRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1146,11 +1298,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1180,11 +1336,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1230,11 +1390,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1259,11 +1423,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1311,11 +1479,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1360,11 +1532,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1403,11 +1579,15 @@ describe('v1.JobControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListJobsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

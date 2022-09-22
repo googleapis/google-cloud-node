@@ -11295,6 +11295,7 @@
                          * @property {google.cloud.dataproc.v1.ILifecycleConfig|null} [lifecycleConfig] ClusterConfig lifecycleConfig
                          * @property {google.cloud.dataproc.v1.IEndpointConfig|null} [endpointConfig] ClusterConfig endpointConfig
                          * @property {google.cloud.dataproc.v1.IMetastoreConfig|null} [metastoreConfig] ClusterConfig metastoreConfig
+                         * @property {google.cloud.dataproc.v1.IDataprocMetricConfig|null} [dataprocMetricConfig] ClusterConfig dataprocMetricConfig
                          */
     
                         /**
@@ -11426,6 +11427,14 @@
                         ClusterConfig.prototype.metastoreConfig = null;
     
                         /**
+                         * ClusterConfig dataprocMetricConfig.
+                         * @member {google.cloud.dataproc.v1.IDataprocMetricConfig|null|undefined} dataprocMetricConfig
+                         * @memberof google.cloud.dataproc.v1.ClusterConfig
+                         * @instance
+                         */
+                        ClusterConfig.prototype.dataprocMetricConfig = null;
+    
+                        /**
                          * Creates a new ClusterConfig instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataproc.v1.ClusterConfig
@@ -11478,6 +11487,8 @@
                                 $root.google.cloud.dataproc.v1.EndpointConfig.encode(message.endpointConfig, writer.uint32(/* id 19, wireType 2 =*/154).fork()).ldelim();
                             if (message.metastoreConfig != null && Object.hasOwnProperty.call(message, "metastoreConfig"))
                                 $root.google.cloud.dataproc.v1.MetastoreConfig.encode(message.metastoreConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.dataprocMetricConfig != null && Object.hasOwnProperty.call(message, "dataprocMetricConfig"))
+                                $root.google.cloud.dataproc.v1.DataprocMetricConfig.encode(message.dataprocMetricConfig, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                             return writer;
                         };
     
@@ -11568,6 +11579,10 @@
                                     }
                                 case 20: {
                                         message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.dataprocMetricConfig = $root.google.cloud.dataproc.v1.DataprocMetricConfig.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -11675,6 +11690,11 @@
                                 if (error)
                                     return "metastoreConfig." + error;
                             }
+                            if (message.dataprocMetricConfig != null && message.hasOwnProperty("dataprocMetricConfig")) {
+                                var error = $root.google.cloud.dataproc.v1.DataprocMetricConfig.verify(message.dataprocMetricConfig);
+                                if (error)
+                                    return "dataprocMetricConfig." + error;
+                            }
                             return null;
                         };
     
@@ -11759,6 +11779,11 @@
                                     throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.metastoreConfig: object expected");
                                 message.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.fromObject(object.metastoreConfig);
                             }
+                            if (object.dataprocMetricConfig != null) {
+                                if (typeof object.dataprocMetricConfig !== "object")
+                                    throw TypeError(".google.cloud.dataproc.v1.ClusterConfig.dataprocMetricConfig: object expected");
+                                message.dataprocMetricConfig = $root.google.cloud.dataproc.v1.DataprocMetricConfig.fromObject(object.dataprocMetricConfig);
+                            }
                             return message;
                         };
     
@@ -11791,6 +11816,7 @@
                                 object.autoscalingConfig = null;
                                 object.endpointConfig = null;
                                 object.metastoreConfig = null;
+                                object.dataprocMetricConfig = null;
                             }
                             if (message.configBucket != null && message.hasOwnProperty("configBucket"))
                                 object.configBucket = message.configBucket;
@@ -11823,6 +11849,8 @@
                                 object.endpointConfig = $root.google.cloud.dataproc.v1.EndpointConfig.toObject(message.endpointConfig, options);
                             if (message.metastoreConfig != null && message.hasOwnProperty("metastoreConfig"))
                                 object.metastoreConfig = $root.google.cloud.dataproc.v1.MetastoreConfig.toObject(message.metastoreConfig, options);
+                            if (message.dataprocMetricConfig != null && message.hasOwnProperty("dataprocMetricConfig"))
+                                object.dataprocMetricConfig = $root.google.cloud.dataproc.v1.DataprocMetricConfig.toObject(message.dataprocMetricConfig, options);
                             return object;
                         };
     
@@ -18057,6 +18085,535 @@
                         };
     
                         return MetastoreConfig;
+                    })();
+    
+                    v1.Metric = (function() {
+    
+                        /**
+                         * Properties of a Metric.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IMetric
+                         * @property {google.cloud.dataproc.v1.Metric.MetricSource|null} [metricSource] Metric metricSource
+                         * @property {Array.<string>|null} [metricOverrides] Metric metricOverrides
+                         */
+    
+                        /**
+                         * Constructs a new Metric.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a Metric.
+                         * @implements IMetric
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IMetric=} [properties] Properties to set
+                         */
+                        function Metric(properties) {
+                            this.metricOverrides = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Metric metricSource.
+                         * @member {google.cloud.dataproc.v1.Metric.MetricSource} metricSource
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @instance
+                         */
+                        Metric.prototype.metricSource = 0;
+    
+                        /**
+                         * Metric metricOverrides.
+                         * @member {Array.<string>} metricOverrides
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @instance
+                         */
+                        Metric.prototype.metricOverrides = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Metric instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IMetric=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.Metric} Metric instance
+                         */
+                        Metric.create = function create(properties) {
+                            return new Metric(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Metric message. Does not implicitly {@link google.cloud.dataproc.v1.Metric.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IMetric} message Metric message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metric.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metricSource != null && Object.hasOwnProperty.call(message, "metricSource"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.metricSource);
+                            if (message.metricOverrides != null && message.metricOverrides.length)
+                                for (var i = 0; i < message.metricOverrides.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.metricOverrides[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Metric message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.Metric.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IMetric} message Metric message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Metric.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Metric message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.Metric} Metric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metric.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.Metric();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.metricSource = reader.int32();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (!(message.metricOverrides && message.metricOverrides.length))
+                                            message.metricOverrides = [];
+                                        message.metricOverrides.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Metric message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.Metric} Metric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Metric.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Metric message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Metric.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.metricSource != null && message.hasOwnProperty("metricSource"))
+                                switch (message.metricSource) {
+                                default:
+                                    return "metricSource: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                    break;
+                                }
+                            if (message.metricOverrides != null && message.hasOwnProperty("metricOverrides")) {
+                                if (!Array.isArray(message.metricOverrides))
+                                    return "metricOverrides: array expected";
+                                for (var i = 0; i < message.metricOverrides.length; ++i)
+                                    if (!$util.isString(message.metricOverrides[i]))
+                                        return "metricOverrides: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Metric message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.Metric} Metric
+                         */
+                        Metric.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.Metric)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.Metric();
+                            switch (object.metricSource) {
+                            case "METRIC_SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.metricSource = 0;
+                                break;
+                            case "MONITORING_AGENT_DEFAULTS":
+                            case 1:
+                                message.metricSource = 1;
+                                break;
+                            case "HDFS":
+                            case 2:
+                                message.metricSource = 2;
+                                break;
+                            case "SPARK":
+                            case 3:
+                                message.metricSource = 3;
+                                break;
+                            case "YARN":
+                            case 4:
+                                message.metricSource = 4;
+                                break;
+                            case "SPARK_HISTORY_SERVER":
+                            case 5:
+                                message.metricSource = 5;
+                                break;
+                            case "HIVESERVER2":
+                            case 6:
+                                message.metricSource = 6;
+                                break;
+                            }
+                            if (object.metricOverrides) {
+                                if (!Array.isArray(object.metricOverrides))
+                                    throw TypeError(".google.cloud.dataproc.v1.Metric.metricOverrides: array expected");
+                                message.metricOverrides = [];
+                                for (var i = 0; i < object.metricOverrides.length; ++i)
+                                    message.metricOverrides[i] = String(object.metricOverrides[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Metric message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {google.cloud.dataproc.v1.Metric} message Metric
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Metric.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.metricOverrides = [];
+                            if (options.defaults)
+                                object.metricSource = options.enums === String ? "METRIC_SOURCE_UNSPECIFIED" : 0;
+                            if (message.metricSource != null && message.hasOwnProperty("metricSource"))
+                                object.metricSource = options.enums === String ? $root.google.cloud.dataproc.v1.Metric.MetricSource[message.metricSource] : message.metricSource;
+                            if (message.metricOverrides && message.metricOverrides.length) {
+                                object.metricOverrides = [];
+                                for (var j = 0; j < message.metricOverrides.length; ++j)
+                                    object.metricOverrides[j] = message.metricOverrides[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Metric to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Metric.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Metric
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.Metric
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Metric.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.Metric";
+                        };
+    
+                        /**
+                         * MetricSource enum.
+                         * @name google.cloud.dataproc.v1.Metric.MetricSource
+                         * @enum {number}
+                         * @property {number} METRIC_SOURCE_UNSPECIFIED=0 METRIC_SOURCE_UNSPECIFIED value
+                         * @property {number} MONITORING_AGENT_DEFAULTS=1 MONITORING_AGENT_DEFAULTS value
+                         * @property {number} HDFS=2 HDFS value
+                         * @property {number} SPARK=3 SPARK value
+                         * @property {number} YARN=4 YARN value
+                         * @property {number} SPARK_HISTORY_SERVER=5 SPARK_HISTORY_SERVER value
+                         * @property {number} HIVESERVER2=6 HIVESERVER2 value
+                         */
+                        Metric.MetricSource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METRIC_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "MONITORING_AGENT_DEFAULTS"] = 1;
+                            values[valuesById[2] = "HDFS"] = 2;
+                            values[valuesById[3] = "SPARK"] = 3;
+                            values[valuesById[4] = "YARN"] = 4;
+                            values[valuesById[5] = "SPARK_HISTORY_SERVER"] = 5;
+                            values[valuesById[6] = "HIVESERVER2"] = 6;
+                            return values;
+                        })();
+    
+                        return Metric;
+                    })();
+    
+                    v1.DataprocMetricConfig = (function() {
+    
+                        /**
+                         * Properties of a DataprocMetricConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @interface IDataprocMetricConfig
+                         * @property {Array.<google.cloud.dataproc.v1.IMetric>|null} [metrics] DataprocMetricConfig metrics
+                         */
+    
+                        /**
+                         * Constructs a new DataprocMetricConfig.
+                         * @memberof google.cloud.dataproc.v1
+                         * @classdesc Represents a DataprocMetricConfig.
+                         * @implements IDataprocMetricConfig
+                         * @constructor
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig=} [properties] Properties to set
+                         */
+                        function DataprocMetricConfig(properties) {
+                            this.metrics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataprocMetricConfig metrics.
+                         * @member {Array.<google.cloud.dataproc.v1.IMetric>} metrics
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @instance
+                         */
+                        DataprocMetricConfig.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * Creates a new DataprocMetricConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig=} [properties] Properties to set
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig instance
+                         */
+                        DataprocMetricConfig.create = function create(properties) {
+                            return new DataprocMetricConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataprocMetricConfig message. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig} message DataprocMetricConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataprocMetricConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.cloud.dataproc.v1.Metric.encode(message.metrics[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataprocMetricConfig message, length delimited. Does not implicitly {@link google.cloud.dataproc.v1.DataprocMetricConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.IDataprocMetricConfig} message DataprocMetricConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataprocMetricConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataprocMetricConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataprocMetricConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.metrics && message.metrics.length))
+                                            message.metrics = [];
+                                        message.metrics.push($root.google.cloud.dataproc.v1.Metric.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataprocMetricConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataprocMetricConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataprocMetricConfig message.
+                         * @function verify
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataprocMetricConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.cloud.dataproc.v1.Metric.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataprocMetricConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataproc.v1.DataprocMetricConfig} DataprocMetricConfig
+                         */
+                        DataprocMetricConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataproc.v1.DataprocMetricConfig)
+                                return object;
+                            var message = new $root.google.cloud.dataproc.v1.DataprocMetricConfig();
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.cloud.dataproc.v1.DataprocMetricConfig.metrics: object expected");
+                                    message.metrics[i] = $root.google.cloud.dataproc.v1.Metric.fromObject(object.metrics[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataprocMetricConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {google.cloud.dataproc.v1.DataprocMetricConfig} message DataprocMetricConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataprocMetricConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.metrics = [];
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.cloud.dataproc.v1.Metric.toObject(message.metrics[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataprocMetricConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataprocMetricConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataprocMetricConfig
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataproc.v1.DataprocMetricConfig
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataprocMetricConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataproc.v1.DataprocMetricConfig";
+                        };
+    
+                        return DataprocMetricConfig;
                     })();
     
                     v1.ClusterMetrics = (function() {

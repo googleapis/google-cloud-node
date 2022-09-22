@@ -249,7 +249,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -282,7 +282,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -330,7 +330,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -365,7 +365,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.CreateAutoscalingPolicyRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -391,7 +391,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.policy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
@@ -425,7 +425,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.policy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
@@ -474,7 +474,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.policy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
@@ -510,7 +510,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       );
       request.policy ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.UpdateAutoscalingPolicyRequest',
         ['policy', 'name']
       );
       request.policy.name = defaultValue1;
@@ -534,9 +534,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -566,9 +567,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -613,9 +615,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -644,9 +647,10 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalingPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetAutoscalingPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -666,7 +670,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -699,7 +703,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -747,7 +751,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -782,7 +786,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAutoscalingPolicyRequest',
+        '.google.cloud.dataproc.v1.DeleteAutoscalingPolicyRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -807,7 +811,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAutoscalingPoliciesRequest',
+        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -848,7 +852,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAutoscalingPoliciesRequest',
+        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -904,7 +908,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAutoscalingPoliciesRequest',
+        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -939,7 +943,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAutoscalingPoliciesRequest',
+        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1007,7 +1011,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAutoscalingPoliciesRequest',
+        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1064,7 +1068,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAutoscalingPoliciesRequest',
+        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1119,7 +1123,7 @@ describe('v1.AutoscalingPolicyServiceClient', () => {
         new protos.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAutoscalingPoliciesRequest',
+        '.google.cloud.dataproc.v1.ListAutoscalingPoliciesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

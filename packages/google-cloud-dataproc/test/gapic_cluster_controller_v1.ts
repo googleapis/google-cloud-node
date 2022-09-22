@@ -269,17 +269,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -307,17 +310,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -361,17 +367,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -399,17 +408,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.GetClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -427,13 +439,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -463,13 +477,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -520,13 +536,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -554,13 +572,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.CreateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -633,17 +653,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -673,17 +696,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -734,17 +760,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -772,17 +801,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.UpdateClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -855,17 +887,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -894,17 +929,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -955,17 +993,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -993,17 +1034,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StopClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StopClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1073,17 +1117,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1112,17 +1159,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1173,17 +1223,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1211,17 +1264,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.StartClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.StartClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1291,17 +1347,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1331,17 +1390,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1392,17 +1454,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1430,17 +1495,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DeleteClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1513,17 +1581,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1553,17 +1624,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1614,17 +1688,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1652,17 +1729,20 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.DiagnoseClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DiagnoseClusterRequest', [
-        'clusterName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.DiagnoseClusterRequest',
+        ['clusterName']
+      );
       request.clusterName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}&cluster_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1735,13 +1815,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1771,13 +1853,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1823,13 +1907,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1857,13 +1943,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1914,13 +2002,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1968,13 +2058,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2014,13 +2106,15 @@ describe('v1.ClusterControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dataproc.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.dataproc.v1.ListClustersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

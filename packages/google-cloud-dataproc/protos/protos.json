@@ -1658,6 +1658,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "dataprocMetricConfig": {
+                          "type": "DataprocMetricConfig",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -2335,6 +2342,50 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        }
+                      }
+                    },
+                    "Metric": {
+                      "fields": {
+                        "metricSource": {
+                          "type": "MetricSource",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metricOverrides": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MetricSource": {
+                          "values": {
+                            "METRIC_SOURCE_UNSPECIFIED": 0,
+                            "MONITORING_AGENT_DEFAULTS": 1,
+                            "HDFS": 2,
+                            "SPARK": 3,
+                            "YARN": 4,
+                            "SPARK_HISTORY_SERVER": 5,
+                            "HIVESERVER2": 6
+                          }
+                        }
+                      }
+                    },
+                    "DataprocMetricConfig": {
+                      "fields": {
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "Metric",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
