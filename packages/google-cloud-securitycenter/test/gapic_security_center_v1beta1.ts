@@ -269,9 +269,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -299,9 +300,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,9 +378,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -395,9 +399,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateFindingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -425,9 +430,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateFindingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -471,9 +477,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateFindingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -501,9 +508,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.CreateFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFindingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.CreateFindingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -521,9 +529,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -551,9 +560,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -597,9 +607,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -627,9 +638,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -648,7 +660,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -680,7 +692,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -727,7 +739,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -761,7 +773,7 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.GetOrganizationSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -784,7 +796,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -812,7 +827,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -856,7 +874,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -881,7 +902,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -899,9 +923,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.SetFindingStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -929,9 +954,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.SetFindingStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -975,9 +1001,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.SetFindingStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1005,9 +1032,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.SetFindingStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetFindingStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.SetFindingStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1025,9 +1053,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1055,9 +1084,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1101,9 +1131,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1131,9 +1162,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1151,9 +1183,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1182,9 +1215,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1228,9 +1262,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1258,9 +1293,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1279,10 +1315,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
       request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
-        'finding',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateFindingRequest',
+        ['finding', 'name']
+      );
       request.finding.name = defaultValue1;
       const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1311,10 +1347,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
       request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
-        'finding',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateFindingRequest',
+        ['finding', 'name']
+      );
       request.finding.name = defaultValue1;
       const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1359,10 +1395,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
       request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
-        'finding',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateFindingRequest',
+        ['finding', 'name']
+      );
       request.finding.name = defaultValue1;
       const expectedHeaderRequestParams = `finding.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1391,10 +1427,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateFindingRequest()
       );
       request.finding ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFindingRequest', [
-        'finding',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateFindingRequest',
+        ['finding', 'name']
+      );
       request.finding.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1414,7 +1450,7 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.organizationSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest',
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
@@ -1447,7 +1483,7 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.organizationSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest',
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
@@ -1495,7 +1531,7 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.organizationSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest',
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
@@ -1530,7 +1566,7 @@ describe('v1beta1.SecurityCenterClient', () => {
       );
       request.organizationSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOrganizationSettingsRequest',
+        '.google.cloud.securitycenter.v1beta1.UpdateOrganizationSettingsRequest',
         ['organizationSettings', 'name']
       );
       request.organizationSettings.name = defaultValue1;
@@ -1554,10 +1590,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1586,10 +1622,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1634,10 +1670,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1666,10 +1702,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1688,10 +1724,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
       request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
-        'securityMarks',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest',
+        ['securityMarks', 'name']
+      );
       request.securityMarks.name = defaultValue1;
       const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1721,10 +1757,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
       request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
-        'securityMarks',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest',
+        ['securityMarks', 'name']
+      );
       request.securityMarks.name = defaultValue1;
       const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1769,10 +1805,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
       request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
-        'securityMarks',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest',
+        ['securityMarks', 'name']
+      );
       request.securityMarks.name = defaultValue1;
       const expectedHeaderRequestParams = `security_marks.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1801,10 +1837,10 @@ describe('v1beta1.SecurityCenterClient', () => {
         new protos.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest()
       );
       request.securityMarks ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecurityMarksRequest', [
-        'securityMarks',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.UpdateSecurityMarksRequest',
+        ['securityMarks', 'name']
+      );
       request.securityMarks.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1822,9 +1858,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1854,9 +1891,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1907,9 +1945,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1937,9 +1976,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunAssetDiscoveryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.RunAssetDiscoveryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2012,9 +2052,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2050,9 +2091,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2106,9 +2148,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2136,9 +2179,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2198,9 +2242,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2251,9 +2296,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2300,9 +2346,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2344,9 +2391,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2382,9 +2430,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2438,9 +2487,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2468,9 +2518,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2530,9 +2581,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2581,9 +2633,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2630,9 +2683,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.GroupFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GroupFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.GroupFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2672,9 +2726,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2710,9 +2765,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2766,9 +2822,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2796,9 +2853,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2858,9 +2916,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2911,9 +2970,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2960,9 +3020,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3004,9 +3065,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3042,9 +3104,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3098,9 +3161,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3128,9 +3192,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3188,9 +3253,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3239,9 +3305,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3288,9 +3355,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3330,9 +3398,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3368,9 +3437,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3422,9 +3492,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3452,9 +3523,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3512,9 +3584,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3563,9 +3636,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3612,9 +3686,10 @@ describe('v1beta1.SecurityCenterClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.securitycenter.v1beta1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.securitycenter.v1beta1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
