@@ -206,9 +206,10 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportPhishingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -239,9 +240,10 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportPhishingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -288,9 +290,10 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportPhishingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -321,9 +324,10 @@ describe('v1beta1.PhishingProtectionServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportPhishingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.phishingprotection.v1beta1.ReportPhishingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
