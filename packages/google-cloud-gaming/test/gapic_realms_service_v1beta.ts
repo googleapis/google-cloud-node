@@ -269,7 +269,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.GetRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -297,7 +300,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.GetRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -341,7 +347,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.GetRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -366,7 +375,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.GetRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.GetRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,10 +397,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -418,10 +430,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -466,10 +478,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -498,10 +510,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('PreviewRealmUpdateRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.PreviewRealmUpdateRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -519,9 +531,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.CreateRealmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -550,9 +563,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.CreateRealmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -603,9 +617,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.CreateRealmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -633,9 +648,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.CreateRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRealmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.CreateRealmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -705,7 +721,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.DeleteRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -734,7 +753,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.DeleteRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -785,7 +807,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.DeleteRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -813,7 +838,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.DeleteRealmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRealmRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.DeleteRealmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -884,10 +912,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.UpdateRealmRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.UpdateRealmRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -917,10 +945,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.UpdateRealmRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.UpdateRealmRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -972,10 +1000,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.UpdateRealmRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.UpdateRealmRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1004,10 +1032,10 @@ describe('v1beta.RealmsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.UpdateRealmRequest()
       );
       request.realm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRealmRequest', [
-        'realm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.UpdateRealmRequest',
+        ['realm', 'name']
+      );
       request.realm.name = defaultValue1;
       const expectedHeaderRequestParams = `realm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1077,9 +1105,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.ListRealmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1109,9 +1138,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.ListRealmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1157,9 +1187,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.ListRealmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1187,9 +1218,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.ListRealmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1240,9 +1272,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.ListRealmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1290,9 +1323,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.ListRealmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1332,9 +1366,10 @@ describe('v1beta.RealmsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.ListRealmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRealmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.ListRealmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

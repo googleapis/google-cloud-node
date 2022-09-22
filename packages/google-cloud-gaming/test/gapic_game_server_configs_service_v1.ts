@@ -280,9 +280,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -312,9 +313,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -359,9 +361,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -390,9 +393,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -412,7 +416,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerConfigRequest',
+        '.google.cloud.gaming.v1.CreateGameServerConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -446,7 +450,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerConfigRequest',
+        '.google.cloud.gaming.v1.CreateGameServerConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -501,7 +505,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerConfigRequest',
+        '.google.cloud.gaming.v1.CreateGameServerConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -536,7 +540,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerConfigRequest',
+        '.google.cloud.gaming.v1.CreateGameServerConfigRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -615,7 +619,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerConfigRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -649,7 +653,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerConfigRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -704,7 +708,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerConfigRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -739,7 +743,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerConfigRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -818,7 +822,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerConfigsRequest',
+        '.google.cloud.gaming.v1.ListGameServerConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -859,7 +863,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerConfigsRequest',
+        '.google.cloud.gaming.v1.ListGameServerConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -915,7 +919,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerConfigsRequest',
+        '.google.cloud.gaming.v1.ListGameServerConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -950,7 +954,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerConfigsRequest',
+        '.google.cloud.gaming.v1.ListGameServerConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1017,7 +1021,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerConfigsRequest',
+        '.google.cloud.gaming.v1.ListGameServerConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1073,7 +1077,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerConfigsRequest',
+        '.google.cloud.gaming.v1.ListGameServerConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1127,7 +1131,7 @@ describe('v1.GameServerConfigsServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerConfigsRequest',
+        '.google.cloud.gaming.v1.ListGameServerConfigsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

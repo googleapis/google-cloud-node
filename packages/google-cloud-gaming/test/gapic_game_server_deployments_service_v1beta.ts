@@ -296,7 +296,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -331,7 +331,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -381,7 +381,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -418,7 +418,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -445,7 +445,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -480,7 +480,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -530,7 +530,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -567,7 +567,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.GetGameServerDeploymentRolloutRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -595,7 +595,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -633,7 +633,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -684,7 +684,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -722,7 +722,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.PreviewGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -748,9 +748,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.FetchDeploymentStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -782,9 +783,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.FetchDeploymentStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -831,9 +833,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.FetchDeploymentStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -864,9 +867,10 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.FetchDeploymentStateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchDeploymentStateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1beta.FetchDeploymentStateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -888,7 +892,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -924,7 +928,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -981,7 +985,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1018,7 +1022,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.CreateGameServerDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1104,7 +1108,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1140,7 +1144,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1197,7 +1201,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1234,7 +1238,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.DeleteGameServerDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1321,7 +1325,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.gameServerDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest',
         ['gameServerDeployment', 'name']
       );
       request.gameServerDeployment.name = defaultValue1;
@@ -1358,7 +1362,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.gameServerDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest',
         ['gameServerDeployment', 'name']
       );
       request.gameServerDeployment.name = defaultValue1;
@@ -1416,7 +1420,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.gameServerDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest',
         ['gameServerDeployment', 'name']
       );
       request.gameServerDeployment.name = defaultValue1;
@@ -1454,7 +1458,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.gameServerDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRequest',
         ['gameServerDeployment', 'name']
       );
       request.gameServerDeployment.name = defaultValue1;
@@ -1541,7 +1545,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -1580,7 +1584,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -1638,7 +1642,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -1674,7 +1678,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
       );
       request.rollout ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerDeploymentRolloutRequest',
+        '.google.cloud.gaming.v1beta.UpdateGameServerDeploymentRolloutRequest',
         ['rollout', 'name']
       );
       request.rollout.name = defaultValue1;
@@ -1759,7 +1763,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerDeploymentsRequest',
+        '.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1802,7 +1806,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerDeploymentsRequest',
+        '.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1862,7 +1866,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerDeploymentsRequest',
+        '.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1899,7 +1903,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerDeploymentsRequest',
+        '.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1971,7 +1975,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerDeploymentsRequest',
+        '.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2032,7 +2036,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerDeploymentsRequest',
+        '.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2089,7 +2093,7 @@ describe('v1beta.GameServerDeploymentsServiceClient', () => {
         new protos.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerDeploymentsRequest',
+        '.google.cloud.gaming.v1beta.ListGameServerDeploymentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

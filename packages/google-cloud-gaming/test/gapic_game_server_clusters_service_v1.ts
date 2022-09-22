@@ -280,9 +280,10 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -312,9 +313,10 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -359,9 +361,10 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -390,9 +393,10 @@ describe('v1.GameServerClustersServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGameServerClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gaming.v1.GetGameServerClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -412,7 +416,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewCreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -445,7 +449,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewCreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -493,7 +497,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewCreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -528,7 +532,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewCreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -553,7 +557,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewDeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -586,7 +590,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewDeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -634,7 +638,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewDeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -669,7 +673,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewDeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewDeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -695,7 +699,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewUpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -729,7 +733,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewUpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -778,7 +782,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewUpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -814,7 +818,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'PreviewUpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.PreviewUpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -839,7 +843,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.CreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -873,7 +877,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.CreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -928,7 +932,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.CreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -963,7 +967,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.CreateGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.CreateGameServerClusterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1043,7 +1047,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1077,7 +1081,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1132,7 +1136,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1167,7 +1171,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.DeleteGameServerClusterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGameServerClusterRequest',
+        '.google.cloud.gaming.v1.DeleteGameServerClusterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1248,7 +1252,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.UpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -1283,7 +1287,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.UpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -1339,7 +1343,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.UpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -1375,7 +1379,7 @@ describe('v1.GameServerClustersServiceClient', () => {
       );
       request.gameServerCluster ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGameServerClusterRequest',
+        '.google.cloud.gaming.v1.UpdateGameServerClusterRequest',
         ['gameServerCluster', 'name']
       );
       request.gameServerCluster.name = defaultValue1;
@@ -1455,7 +1459,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerClustersRequest',
+        '.google.cloud.gaming.v1.ListGameServerClustersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1496,7 +1500,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerClustersRequest',
+        '.google.cloud.gaming.v1.ListGameServerClustersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1552,7 +1556,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerClustersRequest',
+        '.google.cloud.gaming.v1.ListGameServerClustersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1587,7 +1591,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerClustersRequest',
+        '.google.cloud.gaming.v1.ListGameServerClustersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1654,7 +1658,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerClustersRequest',
+        '.google.cloud.gaming.v1.ListGameServerClustersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1710,7 +1714,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerClustersRequest',
+        '.google.cloud.gaming.v1.ListGameServerClustersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1764,7 +1768,7 @@ describe('v1.GameServerClustersServiceClient', () => {
         new protos.google.cloud.gaming.v1.ListGameServerClustersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGameServerClustersRequest',
+        '.google.cloud.gaming.v1.ListGameServerClustersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
