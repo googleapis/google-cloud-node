@@ -32,6 +32,21 @@ import {
   LocationProtos,
 } from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -270,26 +285,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessResponse()
       );
       client.innerApiCalls.processDocument = stubSimpleCall(expectedResponse);
       const [response] = await client.processDocument(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.processDocument as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.processDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.processDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes processDocument without error using callback', async () => {
@@ -302,15 +317,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessResponse()
       );
@@ -333,11 +345,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.processDocument as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.processDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.processDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes processDocument with error', async () => {
@@ -350,26 +365,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.processDocument = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.processDocument(request), expectedError);
-      assert(
-        (client.innerApiCalls.processDocument as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.processDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.processDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes processDocument with closed client', async () => {
@@ -382,7 +397,11 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.processDocument(request), expectedError);
@@ -400,15 +419,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.FetchProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesResponse()
       );
@@ -416,11 +432,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.fetchProcessorTypes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchProcessorTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchProcessorTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchProcessorTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchProcessorTypes without error using callback', async () => {
@@ -433,15 +452,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.FetchProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesResponse()
       );
@@ -464,11 +480,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.fetchProcessorTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchProcessorTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchProcessorTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchProcessorTypes with error', async () => {
@@ -481,26 +500,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.FetchProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.fetchProcessorTypes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.fetchProcessorTypes(request), expectedError);
-      assert(
-        (client.innerApiCalls.fetchProcessorTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.fetchProcessorTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.fetchProcessorTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes fetchProcessorTypes with closed client', async () => {
@@ -513,7 +532,11 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.FetchProcessorTypesRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.FetchProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.fetchProcessorTypes(request), expectedError);
@@ -531,26 +554,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
       client.innerApiCalls.getProcessor = stubSimpleCall(expectedResponse);
       const [response] = await client.getProcessor(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProcessor without error using callback', async () => {
@@ -563,15 +586,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
@@ -594,11 +614,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProcessor with error', async () => {
@@ -611,26 +634,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProcessor = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getProcessor(request), expectedError);
-      assert(
-        (client.innerApiCalls.getProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProcessor with closed client', async () => {
@@ -643,7 +666,11 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProcessor(request), expectedError);
@@ -661,15 +688,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessorVersion()
       );
@@ -677,11 +701,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getProcessorVersion(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProcessorVersion without error using callback', async () => {
@@ -694,15 +721,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ProcessorVersion()
       );
@@ -725,11 +749,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProcessorVersion with error', async () => {
@@ -742,26 +769,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getProcessorVersion = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getProcessorVersion(request), expectedError);
-      assert(
-        (client.innerApiCalls.getProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getProcessorVersion with closed client', async () => {
@@ -774,7 +801,11 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.GetProcessorVersionRequest()
       );
-      request.name = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.GetProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getProcessorVersion(request), expectedError);
@@ -792,26 +823,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.CreateProcessorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.CreateProcessorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
       client.innerApiCalls.createProcessor = stubSimpleCall(expectedResponse);
       const [response] = await client.createProcessor(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProcessor without error using callback', async () => {
@@ -824,15 +855,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.CreateProcessorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.CreateProcessorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.documentai.v1.Processor()
       );
@@ -855,11 +883,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProcessor with error', async () => {
@@ -872,26 +903,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.CreateProcessorRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.CreateProcessorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createProcessor = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createProcessor(request), expectedError);
-      assert(
-        (client.innerApiCalls.createProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createProcessor with closed client', async () => {
@@ -904,7 +935,11 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.CreateProcessorRequest()
       );
-      request.parent = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.CreateProcessorRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createProcessor(request), expectedError);
@@ -922,15 +957,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.BatchProcessRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.BatchProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -939,11 +971,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.batchProcessDocuments(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchProcessDocuments as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchProcessDocuments without error using callback', async () => {
@@ -956,15 +991,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.BatchProcessRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.BatchProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -994,11 +1026,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.batchProcessDocuments as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchProcessDocuments with call error', async () => {
@@ -1011,15 +1046,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.BatchProcessRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.BatchProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchProcessDocuments = stubLongRunningCall(
         undefined,
@@ -1029,11 +1061,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         client.batchProcessDocuments(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.batchProcessDocuments as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes batchProcessDocuments with LRO error', async () => {
@@ -1046,15 +1081,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.BatchProcessRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.BatchProcessRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.batchProcessDocuments = stubLongRunningCall(
         undefined,
@@ -1063,11 +1095,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.batchProcessDocuments(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.batchProcessDocuments as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.batchProcessDocuments as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkBatchProcessDocumentsProgress without error', async () => {
@@ -1125,15 +1160,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1142,11 +1174,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.deleteProcessorVersion(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProcessorVersion without error using callback', async () => {
@@ -1159,15 +1194,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1197,11 +1229,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProcessorVersion with call error', async () => {
@@ -1214,15 +1249,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1232,11 +1264,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         client.deleteProcessorVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deleteProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProcessorVersion with LRO error', async () => {
@@ -1249,15 +1284,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1266,11 +1298,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.deleteProcessorVersion(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteProcessorVersionProgress without error', async () => {
@@ -1328,15 +1363,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1345,11 +1377,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.deployProcessorVersion(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployProcessorVersion without error using callback', async () => {
@@ -1362,15 +1397,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1400,11 +1432,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployProcessorVersion with call error', async () => {
@@ -1417,15 +1452,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1435,11 +1467,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         client.deployProcessorVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deployProcessorVersion with LRO error', async () => {
@@ -1452,15 +1487,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1469,11 +1501,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.deployProcessorVersion(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeployProcessorVersionProgress without error', async () => {
@@ -1531,15 +1566,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.UndeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.UndeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1548,11 +1580,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.undeployProcessorVersion(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployProcessorVersion without error using callback', async () => {
@@ -1565,15 +1600,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.UndeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.UndeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1603,11 +1635,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.undeployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployProcessorVersion with call error', async () => {
@@ -1620,15 +1655,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.UndeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.UndeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1638,11 +1670,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         client.undeployProcessorVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.undeployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes undeployProcessorVersion with LRO error', async () => {
@@ -1655,15 +1690,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.UndeployProcessorVersionRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.UndeployProcessorVersionRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.undeployProcessorVersion = stubLongRunningCall(
         undefined,
@@ -1672,11 +1704,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.undeployProcessorVersion(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.undeployProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.undeployProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkUndeployProcessorVersionProgress without error', async () => {
@@ -1735,15 +1770,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1752,11 +1784,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.deleteProcessor(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProcessor without error using callback', async () => {
@@ -1769,15 +1804,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1807,11 +1839,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProcessor with call error', async () => {
@@ -1824,26 +1859,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessor = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteProcessor(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteProcessor with LRO error', async () => {
@@ -1856,15 +1891,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DeleteProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DeleteProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteProcessor = stubLongRunningCall(
         undefined,
@@ -1873,11 +1905,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.deleteProcessor(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.deleteProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDeleteProcessorProgress without error', async () => {
@@ -1935,15 +1970,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.EnableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.EnableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -1952,11 +1984,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.enableProcessor(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableProcessor without error using callback', async () => {
@@ -1969,15 +2004,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.EnableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.EnableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2007,11 +2039,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.enableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableProcessor with call error', async () => {
@@ -2024,26 +2059,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.EnableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.EnableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableProcessor = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.enableProcessor(request), expectedError);
-      assert(
-        (client.innerApiCalls.enableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes enableProcessor with LRO error', async () => {
@@ -2056,15 +2091,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.EnableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.EnableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.enableProcessor = stubLongRunningCall(
         undefined,
@@ -2073,11 +2105,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.enableProcessor(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.enableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.enableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkEnableProcessorProgress without error', async () => {
@@ -2135,15 +2170,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DisableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DisableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2152,11 +2184,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.disableProcessor(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.disableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableProcessor without error using callback', async () => {
@@ -2169,15 +2204,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DisableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DisableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2207,11 +2239,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.disableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableProcessor with call error', async () => {
@@ -2224,26 +2259,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DisableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DisableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableProcessor = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.disableProcessor(request), expectedError);
-      assert(
-        (client.innerApiCalls.disableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes disableProcessor with LRO error', async () => {
@@ -2256,15 +2291,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.DisableProcessorRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.DisableProcessorRequest',
+        ['name']
+      );
+      request.name = defaultValue1;
+      const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.disableProcessor = stubLongRunningCall(
         undefined,
@@ -2273,11 +2305,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.disableProcessor(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.disableProcessor as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.disableProcessor as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkDisableProcessorProgress without error', async () => {
@@ -2335,15 +2370,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest()
       );
-      request.processor = '';
-      const expectedHeaderRequestParams = 'processor=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest',
+        ['processor']
+      );
+      request.processor = defaultValue1;
+      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2352,11 +2384,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.setDefaultProcessorVersion(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDefaultProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDefaultProcessorVersion without error using callback', async () => {
@@ -2369,15 +2404,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest()
       );
-      request.processor = '';
-      const expectedHeaderRequestParams = 'processor=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest',
+        ['processor']
+      );
+      request.processor = defaultValue1;
+      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2407,11 +2439,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDefaultProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDefaultProcessorVersion with call error', async () => {
@@ -2424,15 +2459,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest()
       );
-      request.processor = '';
-      const expectedHeaderRequestParams = 'processor=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest',
+        ['processor']
+      );
+      request.processor = defaultValue1;
+      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDefaultProcessorVersion = stubLongRunningCall(
         undefined,
@@ -2442,11 +2474,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         client.setDefaultProcessorVersion(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.setDefaultProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDefaultProcessorVersion with LRO error', async () => {
@@ -2459,15 +2494,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest()
       );
-      request.processor = '';
-      const expectedHeaderRequestParams = 'processor=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.SetDefaultProcessorVersionRequest',
+        ['processor']
+      );
+      request.processor = defaultValue1;
+      const expectedHeaderRequestParams = `processor=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDefaultProcessorVersion = stubLongRunningCall(
         undefined,
@@ -2476,11 +2508,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.setDefaultProcessorVersion(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.setDefaultProcessorVersion as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDefaultProcessorVersion as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkSetDefaultProcessorVersionProgress without error', async () => {
@@ -2539,15 +2574,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ReviewDocumentRequest()
       );
-      request.humanReviewConfig = '';
-      const expectedHeaderRequestParams = 'human_review_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ReviewDocumentRequest',
+        ['humanReviewConfig']
+      );
+      request.humanReviewConfig = defaultValue1;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2556,11 +2588,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const [operation] = await client.reviewDocument(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reviewDocument as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reviewDocument without error using callback', async () => {
@@ -2573,15 +2608,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ReviewDocumentRequest()
       );
-      request.humanReviewConfig = '';
-      const expectedHeaderRequestParams = 'human_review_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ReviewDocumentRequest',
+        ['humanReviewConfig']
+      );
+      request.humanReviewConfig = defaultValue1;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
@@ -2611,11 +2643,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reviewDocument as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reviewDocument with call error', async () => {
@@ -2628,26 +2663,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ReviewDocumentRequest()
       );
-      request.humanReviewConfig = '';
-      const expectedHeaderRequestParams = 'human_review_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ReviewDocumentRequest',
+        ['humanReviewConfig']
+      );
+      request.humanReviewConfig = defaultValue1;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reviewDocument = stubLongRunningCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.reviewDocument(request), expectedError);
-      assert(
-        (client.innerApiCalls.reviewDocument as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reviewDocument with LRO error', async () => {
@@ -2660,15 +2695,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ReviewDocumentRequest()
       );
-      request.humanReviewConfig = '';
-      const expectedHeaderRequestParams = 'human_review_config=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ReviewDocumentRequest',
+        ['humanReviewConfig']
+      );
+      request.humanReviewConfig = defaultValue1;
+      const expectedHeaderRequestParams = `human_review_config=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reviewDocument = stubLongRunningCall(
         undefined,
@@ -2677,11 +2709,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       );
       const [operation] = await client.reviewDocument(request);
       await assert.rejects(operation.promise(), expectedError);
-      assert(
-        (client.innerApiCalls.reviewDocument as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reviewDocument as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes checkReviewDocumentProgress without error', async () => {
@@ -2739,15 +2774,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -2763,11 +2795,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listProcessorTypes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProcessorTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessorTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessorTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessorTypes without error using callback', async () => {
@@ -2780,15 +2815,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -2819,11 +2851,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProcessorTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessorTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessorTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessorTypes with error', async () => {
@@ -2836,26 +2871,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProcessorTypes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listProcessorTypes(request), expectedError);
-      assert(
-        (client.innerApiCalls.listProcessorTypes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessorTypes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessorTypes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessorTypesStream without error', async () => {
@@ -2868,8 +2903,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -2906,11 +2945,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProcessorTypes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessorTypes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessorTypes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2924,8 +2964,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorTypes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -2951,11 +2995,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProcessorTypes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessorTypes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessorTypes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2969,8 +3014,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorType()
@@ -2996,11 +3045,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3014,8 +3064,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorTypesRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorTypesRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorTypes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3033,11 +3087,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessorTypes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3053,15 +3108,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -3076,11 +3128,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       client.innerApiCalls.listProcessors = stubSimpleCall(expectedResponse);
       const [response] = await client.listProcessors(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProcessors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessors without error using callback', async () => {
@@ -3093,15 +3148,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -3132,11 +3184,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProcessors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessors with error', async () => {
@@ -3149,26 +3204,26 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProcessors = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listProcessors(request), expectedError);
-      assert(
-        (client.innerApiCalls.listProcessors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessorsStream without error', async () => {
@@ -3181,8 +3236,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -3219,11 +3278,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProcessors, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessors.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3237,8 +3297,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessors.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3264,11 +3328,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProcessors, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessors.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3282,8 +3347,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.Processor()
@@ -3309,11 +3378,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessors.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3327,8 +3397,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessors.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3345,11 +3419,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listProcessors.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listProcessors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3365,15 +3440,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -3389,11 +3461,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listProcessorVersions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProcessorVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessorVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessorVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessorVersions without error using callback', async () => {
@@ -3406,15 +3481,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -3447,11 +3519,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listProcessorVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessorVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessorVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessorVersions with error', async () => {
@@ -3464,15 +3539,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listProcessorVersions = stubSimpleCall(
         undefined,
@@ -3482,11 +3554,14 @@ describe('v1.DocumentProcessorServiceClient', () => {
         client.listProcessorVersions(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listProcessorVersions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listProcessorVersions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listProcessorVersions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listProcessorVersionsStream without error', async () => {
@@ -3499,8 +3574,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -3541,12 +3620,15 @@ describe('v1.DocumentProcessorServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProcessorVersions, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProcessorVersions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3560,8 +3642,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorVersions.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3591,12 +3677,15 @@ describe('v1.DocumentProcessorServiceClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listProcessorVersions, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProcessorVersions
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3610,8 +3699,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.documentai.v1.ProcessorVersion()
@@ -3639,12 +3732,15 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProcessorVersions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3658,8 +3754,12 @@ describe('v1.DocumentProcessorServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.documentai.v1.ListProcessorVersionsRequest()
       );
-      request.parent = '';
-      const expectedHeaderRequestParams = 'parent=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.documentai.v1.ListProcessorVersionsRequest',
+        ['parent']
+      );
+      request.parent = defaultValue1;
+      const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listProcessorVersions.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3678,12 +3778,15 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listProcessorVersions
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3838,12 +3941,15 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
     it('uses async iteration with listLocations with error', async () => {
@@ -3875,12 +3981,15 @@ describe('v1.DocumentProcessorServiceClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.locationsClient.descriptors.page.listLocations
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
