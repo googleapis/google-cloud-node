@@ -235,7 +235,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -263,7 +266,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -307,7 +313,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -332,7 +341,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -350,9 +362,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQueueRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateQueueRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -380,9 +393,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQueueRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateQueueRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -426,9 +440,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQueueRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateQueueRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -456,9 +471,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateQueueRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateQueueRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -477,10 +493,10 @@ describe('v2beta2.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta2.UpdateQueueRequest()
       );
       request.queue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateQueueRequest', [
-        'queue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.UpdateQueueRequest',
+        ['queue', 'name']
+      );
       request.queue.name = defaultValue1;
       const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -509,10 +525,10 @@ describe('v2beta2.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta2.UpdateQueueRequest()
       );
       request.queue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateQueueRequest', [
-        'queue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.UpdateQueueRequest',
+        ['queue', 'name']
+      );
       request.queue.name = defaultValue1;
       const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -557,10 +573,10 @@ describe('v2beta2.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta2.UpdateQueueRequest()
       );
       request.queue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateQueueRequest', [
-        'queue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.UpdateQueueRequest',
+        ['queue', 'name']
+      );
       request.queue.name = defaultValue1;
       const expectedHeaderRequestParams = `queue.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -589,10 +605,10 @@ describe('v2beta2.CloudTasksClient', () => {
         new protos.google.cloud.tasks.v2beta2.UpdateQueueRequest()
       );
       request.queue ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateQueueRequest', [
-        'queue',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.UpdateQueueRequest',
+        ['queue', 'name']
+      );
       request.queue.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -610,7 +626,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -638,7 +657,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -682,7 +704,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -710,7 +735,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -728,7 +756,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PurgeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PurgeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -756,7 +787,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PurgeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PurgeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -800,7 +834,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PurgeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PurgeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -828,7 +865,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PurgeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PurgeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PurgeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -846,7 +886,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PauseQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PauseQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -874,7 +917,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PauseQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PauseQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -918,7 +964,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PauseQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PauseQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -946,7 +995,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.PauseQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.PauseQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -964,7 +1016,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ResumeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ResumeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -992,7 +1047,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ResumeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ResumeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1036,7 +1094,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ResumeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ResumeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1064,7 +1125,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ResumeQueueRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeQueueRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ResumeQueueRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1082,9 +1146,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1112,9 +1177,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1158,9 +1224,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1188,9 +1255,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1208,9 +1276,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1238,9 +1307,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1284,9 +1354,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1314,9 +1385,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1334,9 +1406,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1365,9 +1438,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1411,9 +1485,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1441,9 +1516,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1461,7 +1537,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1489,7 +1568,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1533,7 +1615,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1558,7 +1643,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.GetTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.GetTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1576,9 +1664,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaskRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateTaskRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1606,9 +1695,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaskRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateTaskRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1652,9 +1742,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaskRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateTaskRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1682,9 +1773,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CreateTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaskRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CreateTaskRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1702,7 +1794,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1730,7 +1825,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1774,7 +1872,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1802,7 +1903,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.DeleteTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.DeleteTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1820,9 +1924,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.LeaseTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LeaseTasksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.LeaseTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1850,9 +1955,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.LeaseTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LeaseTasksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.LeaseTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1896,9 +2002,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.LeaseTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LeaseTasksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.LeaseTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1926,9 +2033,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.LeaseTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LeaseTasksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.LeaseTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1946,9 +2054,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AcknowledgeTaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1976,9 +2085,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AcknowledgeTaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2022,9 +2132,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AcknowledgeTaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2052,9 +2163,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AcknowledgeTaskRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.AcknowledgeTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2072,7 +2184,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RenewLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RenewLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RenewLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2100,7 +2215,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RenewLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RenewLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RenewLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2144,7 +2262,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RenewLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RenewLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RenewLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2172,7 +2293,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RenewLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RenewLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RenewLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2190,7 +2314,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CancelLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CancelLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2218,7 +2345,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CancelLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CancelLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2262,7 +2392,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CancelLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CancelLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2290,7 +2423,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.CancelLeaseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelLeaseRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.CancelLeaseRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2308,7 +2444,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RunTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RunTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2336,7 +2475,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RunTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RunTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2380,7 +2522,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RunTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RunTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2405,7 +2550,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.RunTaskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTaskRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.RunTaskRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2423,9 +2571,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListQueuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListQueuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListQueuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2455,9 +2604,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListQueuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListQueuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListQueuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2503,9 +2653,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListQueuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListQueuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListQueuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2533,9 +2684,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListQueuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListQueuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListQueuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2586,9 +2738,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListQueuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListQueuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListQueuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2636,9 +2789,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListQueuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListQueuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListQueuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2678,9 +2832,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListQueuesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListQueuesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListQueuesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2721,7 +2876,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2751,7 +2909,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2797,7 +2958,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2822,7 +2986,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2873,7 +3040,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2921,7 +3091,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2960,7 +3133,10 @@ describe('v2beta2.CloudTasksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.ListTasksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTasksRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tasks.v2beta2.ListTasksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
