@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.2](https://github.com/googleapis/nodejs-game-servers/compare/v3.1.1...v3.1.2) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#313](https://github.com/googleapis/nodejs-game-servers/issues/313)) ([8f345d7](https://github.com/googleapis/nodejs-game-servers/commit/8f345d7c91748fbea14862ebb250e0c84e3f8dda))
+
 ## [3.1.1](https://github.com/googleapis/nodejs-game-servers/compare/v3.1.0...v3.1.1) (2022-09-01)
 
 
