@@ -189,9 +189,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -221,9 +222,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -269,9 +271,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -298,9 +301,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -320,9 +324,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunPivotReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPivotReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunPivotReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -352,9 +357,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunPivotReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPivotReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunPivotReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -400,9 +406,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunPivotReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPivotReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunPivotReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -432,9 +439,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunPivotReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPivotReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunPivotReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -454,9 +462,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -486,9 +495,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -534,9 +544,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -566,9 +577,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -588,9 +600,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunPivotReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunPivotReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunPivotReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -621,9 +634,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunPivotReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunPivotReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunPivotReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -669,9 +683,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunPivotReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunPivotReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunPivotReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -701,9 +716,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.BatchRunPivotReportsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchRunPivotReportsRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.BatchRunPivotReportsRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -723,7 +739,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.GetMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.GetMetadataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -753,7 +772,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.GetMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.GetMetadataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -799,7 +821,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.GetMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.GetMetadataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -829,7 +854,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.GetMetadataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetadataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.GetMetadataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -849,9 +877,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunRealtimeReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunRealtimeReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunRealtimeReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -881,9 +910,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunRealtimeReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunRealtimeReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunRealtimeReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -929,9 +959,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunRealtimeReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunRealtimeReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunRealtimeReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -961,9 +992,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.RunRealtimeReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunRealtimeReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.RunRealtimeReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -983,9 +1015,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckCompatibilityRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.CheckCompatibilityRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1016,9 +1049,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckCompatibilityRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.CheckCompatibilityRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1064,9 +1098,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckCompatibilityRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.CheckCompatibilityRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1096,9 +1131,10 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckCompatibilityRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1beta.CheckCompatibilityRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

@@ -183,9 +183,10 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunFunnelReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.RunFunnelReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -214,9 +215,10 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunFunnelReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.RunFunnelReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -261,9 +263,10 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunFunnelReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.RunFunnelReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedHeaderRequestParams = `property=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -292,9 +295,10 @@ describe('v1alpha.AlphaAnalyticsDataClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.data.v1alpha.RunFunnelReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunFunnelReportRequest', [
-        'property',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.data.v1alpha.RunFunnelReportRequest',
+        ['property']
+      );
       request.property = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
