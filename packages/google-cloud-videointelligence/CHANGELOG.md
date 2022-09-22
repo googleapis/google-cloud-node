@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+## [4.1.0](https://github.com/googleapis/nodejs-video-intelligence/compare/v4.0.0...v4.1.0) (2022-09-21)
+
+
+### Features
+
+* Accept google-gax instance as a parameter ([#743](https://github.com/googleapis/nodejs-video-intelligence/issues/743)) ([293e571](https://github.com/googleapis/nodejs-video-intelligence/commit/293e5716344149040135a897dc46ca1b298c01b4))
+
+
+### Bug Fixes
+
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-video-intelligence/issues/1553)) ([#747](https://github.com/googleapis/nodejs-video-intelligence/issues/747)) ([5fc9e71](https://github.com/googleapis/nodejs-video-intelligence/commit/5fc9e71daaef572b3b077cefd165eac1d2d97841))
+
 ## [4.0.0](https://github.com/googleapis/nodejs-video-intelligence/compare/v3.4.1...v4.0.0) (2022-06-29)
 
 
