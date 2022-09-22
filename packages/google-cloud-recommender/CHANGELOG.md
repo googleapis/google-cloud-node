@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.0.2](https://github.com/googleapis/nodejs-recommender/compare/v5.0.1...v5.0.2) (2022-08-27)
+
+
+### Bug Fixes
+
+* do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-recommender/issues/1553)) ([#242](https://github.com/googleapis/nodejs-recommender/issues/242)) ([ecc0511](https://github.com/googleapis/nodejs-recommender/commit/ecc05119d6119f1e9840ad1819c45fb7640515e2))
+* use google-gax v3.3.0 ([ecc0511](https://github.com/googleapis/nodejs-recommender/commit/ecc05119d6119f1e9840ad1819c45fb7640515e2))
+
 ## [5.0.1](https://github.com/googleapis/nodejs-recommender/compare/v5.0.0...v5.0.1) (2022-08-23)
 
 
