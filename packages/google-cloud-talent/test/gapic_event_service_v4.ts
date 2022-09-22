@@ -172,9 +172,10 @@ describe('v4.EventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateClientEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClientEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateClientEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -202,9 +203,10 @@ describe('v4.EventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateClientEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClientEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateClientEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -248,9 +250,10 @@ describe('v4.EventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateClientEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClientEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateClientEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -278,9 +281,10 @@ describe('v4.EventServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateClientEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClientEventRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateClientEventRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

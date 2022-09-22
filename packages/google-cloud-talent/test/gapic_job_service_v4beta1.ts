@@ -267,7 +267,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -382,7 +394,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -410,7 +425,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -454,7 +472,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -479,7 +500,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -498,10 +522,10 @@ describe('v4beta1.JobServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -530,10 +554,10 @@ describe('v4beta1.JobServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -578,10 +602,10 @@ describe('v4beta1.JobServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -607,10 +631,10 @@ describe('v4beta1.JobServiceClient', () => {
         new protos.google.cloud.talent.v4beta1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -628,7 +652,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -656,7 +683,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -700,7 +730,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -725,7 +758,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -743,9 +779,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchDeleteJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -773,9 +810,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchDeleteJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -819,9 +857,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchDeleteJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -849,9 +888,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchDeleteJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchDeleteJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -869,9 +909,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -899,9 +940,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -945,9 +987,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -975,9 +1018,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -995,9 +1039,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1026,9 +1071,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1072,9 +1118,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1102,9 +1149,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.SearchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.SearchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1122,9 +1170,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchCreateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1154,9 +1203,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchCreateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1207,9 +1257,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchCreateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1237,9 +1288,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchCreateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchCreateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1312,9 +1364,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchUpdateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1344,9 +1397,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchUpdateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1397,9 +1451,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchUpdateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1427,9 +1482,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.BatchUpdateJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.BatchUpdateJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1502,7 +1558,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1532,7 +1591,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1578,7 +1640,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1603,7 +1668,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1654,7 +1722,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1702,7 +1773,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1741,7 +1815,10 @@ describe('v4beta1.JobServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4beta1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4beta1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

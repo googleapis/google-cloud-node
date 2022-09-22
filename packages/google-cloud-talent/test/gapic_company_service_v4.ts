@@ -237,9 +237,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCompanyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateCompanyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCompanyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateCompanyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCompanyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateCompanyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCompanyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateCompanyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,7 +367,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompanyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,7 +398,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompanyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -435,7 +445,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompanyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -463,7 +476,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCompanyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -482,10 +498,10 @@ describe('v4.CompanyServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateCompanyRequest()
       );
       request.company ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCompanyRequest', [
-        'company',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateCompanyRequest',
+        ['company', 'name']
+      );
       request.company.name = defaultValue1;
       const expectedHeaderRequestParams = `company.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -514,10 +530,10 @@ describe('v4.CompanyServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateCompanyRequest()
       );
       request.company ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCompanyRequest', [
-        'company',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateCompanyRequest',
+        ['company', 'name']
+      );
       request.company.name = defaultValue1;
       const expectedHeaderRequestParams = `company.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -562,10 +578,10 @@ describe('v4.CompanyServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateCompanyRequest()
       );
       request.company ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCompanyRequest', [
-        'company',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateCompanyRequest',
+        ['company', 'name']
+      );
       request.company.name = defaultValue1;
       const expectedHeaderRequestParams = `company.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -594,10 +610,10 @@ describe('v4.CompanyServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateCompanyRequest()
       );
       request.company ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCompanyRequest', [
-        'company',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateCompanyRequest',
+        ['company', 'name']
+      );
       request.company.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -615,9 +631,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCompanyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -645,9 +662,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCompanyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -691,9 +709,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCompanyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -721,9 +740,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteCompanyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCompanyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteCompanyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -741,9 +761,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListCompaniesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCompaniesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListCompaniesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -773,9 +794,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListCompaniesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCompaniesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListCompaniesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -821,9 +843,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListCompaniesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCompaniesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListCompaniesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -851,9 +874,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListCompaniesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCompaniesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListCompaniesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -901,9 +925,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListCompaniesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCompaniesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListCompaniesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -946,9 +971,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListCompaniesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCompaniesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListCompaniesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -988,9 +1014,10 @@ describe('v4.CompanyServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListCompaniesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCompaniesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListCompaniesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -172,9 +172,10 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'tenant',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CompleteQueryRequest',
+        ['tenant']
+      );
       request.tenant = defaultValue1;
       const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -202,9 +203,10 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'tenant',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CompleteQueryRequest',
+        ['tenant']
+      );
       request.tenant = defaultValue1;
       const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -248,9 +250,10 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'tenant',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CompleteQueryRequest',
+        ['tenant']
+      );
       request.tenant = defaultValue1;
       const expectedHeaderRequestParams = `tenant=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -278,9 +281,10 @@ describe('v4.CompletionClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CompleteQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteQueryRequest', [
-        'tenant',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CompleteQueryRequest',
+        ['tenant']
+      );
       request.tenant = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

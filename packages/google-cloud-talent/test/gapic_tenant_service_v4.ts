@@ -237,9 +237,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTenantRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateTenantRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTenantRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateTenantRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTenantRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateTenantRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.CreateTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTenantRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.CreateTenantRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,7 +367,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTenantRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,7 +398,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTenantRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -435,7 +445,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTenantRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -460,7 +473,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.GetTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTenantRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.GetTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -479,10 +495,10 @@ describe('v4.TenantServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
       request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTenantRequest', [
-        'tenant',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateTenantRequest',
+        ['tenant', 'name']
+      );
       request.tenant.name = defaultValue1;
       const expectedHeaderRequestParams = `tenant.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -511,10 +527,10 @@ describe('v4.TenantServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
       request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTenantRequest', [
-        'tenant',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateTenantRequest',
+        ['tenant', 'name']
+      );
       request.tenant.name = defaultValue1;
       const expectedHeaderRequestParams = `tenant.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -559,10 +575,10 @@ describe('v4.TenantServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
       request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTenantRequest', [
-        'tenant',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateTenantRequest',
+        ['tenant', 'name']
+      );
       request.tenant.name = defaultValue1;
       const expectedHeaderRequestParams = `tenant.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -591,10 +607,10 @@ describe('v4.TenantServiceClient', () => {
         new protos.google.cloud.talent.v4.UpdateTenantRequest()
       );
       request.tenant ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTenantRequest', [
-        'tenant',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.UpdateTenantRequest',
+        ['tenant', 'name']
+      );
       request.tenant.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -612,9 +628,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTenantRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -642,9 +659,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTenantRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -688,9 +706,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTenantRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -718,9 +737,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.DeleteTenantRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTenantRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.DeleteTenantRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -738,9 +758,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTenantsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListTenantsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -770,9 +791,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTenantsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListTenantsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -818,9 +840,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTenantsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListTenantsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -848,9 +871,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTenantsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListTenantsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -898,9 +922,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTenantsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListTenantsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -945,9 +970,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTenantsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListTenantsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -987,9 +1013,10 @@ describe('v4.TenantServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.talent.v4.ListTenantsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTenantsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.talent.v4.ListTenantsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
