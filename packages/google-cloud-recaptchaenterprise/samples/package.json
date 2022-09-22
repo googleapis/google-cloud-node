@@ -13,7 +13,7 @@
     "test": "echo add tests"
   },
   "dependencies": {
-    "@google-cloud/recaptcha-enterprise": "^3.0.3"
+    "@google-cloud/recaptcha-enterprise": "^3.0.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",

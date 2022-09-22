@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [3.0.4](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.3...v3.0.4) (2022-09-22)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#403](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/403)) ([4e53af0](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/4e53af0efb857467f4100700243c269c2d35b2fd))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/1553)) ([#402](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/402)) ([a0508d7](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/a0508d77f3d4e46338b714555163b85c4d6871af))
+* Preserve default values in x-goog-request-params header ([#408](https://github.com/googleapis/nodejs-recaptcha-enterprise/issues/408)) ([53d8757](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/53d8757169e872522d8b1e6d2854bf75aac375fa))
+* use google-gax v3.3.0 ([a0508d7](https://github.com/googleapis/nodejs-recaptcha-enterprise/commit/a0508d77f3d4e46338b714555163b85c4d6871af))
+
 ## [3.0.3](https://github.com/googleapis/nodejs-recaptcha-enterprise/compare/v3.0.2...v3.0.3) (2022-08-23)
 
 
