@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.4](https://github.com/googleapis/nodejs-media-translation/compare/v3.0.3...v3.0.4) (2022-09-14)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#251](https://github.com/googleapis/nodejs-media-translation/issues/251)) ([8257ade](https://github.com/googleapis/nodejs-media-translation/commit/8257ade7fd05bd65161d7a8c156e6c04fc09bfbe))
+
 ## [3.0.3](https://github.com/googleapis/nodejs-media-translation/compare/v3.0.2...v3.0.3) (2022-09-01)
 
 
