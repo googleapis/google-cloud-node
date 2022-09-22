@@ -252,9 +252,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -284,9 +285,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -332,9 +334,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,9 +367,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetDataSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -386,9 +390,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -419,9 +424,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -467,9 +473,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -499,9 +506,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTransferConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,10 +530,10 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
       request.transferConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
-        'transferConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest',
+        ['transferConfig', 'name']
+      );
       request.transferConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `transfer_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -557,10 +565,10 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
       request.transferConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
-        'transferConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest',
+        ['transferConfig', 'name']
+      );
       request.transferConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `transfer_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -607,10 +615,10 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
       request.transferConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
-        'transferConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest',
+        ['transferConfig', 'name']
+      );
       request.transferConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `transfer_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -641,10 +649,10 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest()
       );
       request.transferConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferConfigRequest', [
-        'transferConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.UpdateTransferConfigRequest',
+        ['transferConfig', 'name']
+      );
       request.transferConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -664,9 +672,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -697,9 +706,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -745,9 +755,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -777,9 +788,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -799,9 +811,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -831,9 +844,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -879,9 +893,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -911,9 +926,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -934,9 +950,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -969,9 +986,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1019,9 +1037,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1053,9 +1072,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ScheduleTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1077,7 +1097,7 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartManualTransferRunsRequest',
+        '.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1111,7 +1131,7 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartManualTransferRunsRequest',
+        '.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1160,7 +1180,7 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartManualTransferRunsRequest',
+        '.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1196,7 +1216,7 @@ describe('v1.DataTransferServiceClient', () => {
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartManualTransferRunsRequest',
+        '.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1221,9 +1241,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1253,9 +1274,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1301,9 +1323,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1333,9 +1356,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.GetTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1355,9 +1379,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1387,9 +1412,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1435,9 +1461,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1467,9 +1494,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.DeleteTransferRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1489,9 +1517,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1521,9 +1550,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1569,9 +1599,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1601,9 +1632,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckValidCredsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.CheckValidCredsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1623,9 +1655,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1655,9 +1688,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1703,9 +1737,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1735,9 +1770,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnrollDataSourcesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.EnrollDataSourcesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1757,9 +1793,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1797,9 +1834,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1855,9 +1893,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1887,9 +1926,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1951,9 +1991,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2004,9 +2045,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2055,9 +2097,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListDataSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2099,9 +2142,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2140,9 +2184,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2198,9 +2243,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2230,9 +2276,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2294,9 +2341,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2347,9 +2395,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2398,9 +2447,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2442,9 +2492,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2482,9 +2533,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2540,9 +2592,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2572,9 +2625,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2636,9 +2690,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2689,9 +2744,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2740,9 +2796,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2784,9 +2841,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2824,9 +2882,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2882,9 +2941,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2914,9 +2974,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2978,9 +3039,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3031,9 +3093,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3082,9 +3145,10 @@ describe('v1.DataTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTransferLogsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.datatransfer.v1.ListTransferLogsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
