@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.1.1](https://github.com/googleapis/nodejs-iot/compare/v3.1.0...v3.1.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#584](https://github.com/googleapis/nodejs-iot/issues/584)) ([4bbcd42](https://github.com/googleapis/nodejs-iot/commit/4bbcd422ea06028139f416d1a1a1cf9b48ff3909))
+* Better support for fallback mode ([#580](https://github.com/googleapis/nodejs-iot/issues/580)) ([8a387d0](https://github.com/googleapis/nodejs-iot/commit/8a387d06c3cf806644c78552c286d7893e73eb74))
+* Change import long to require ([#581](https://github.com/googleapis/nodejs-iot/issues/581)) ([2ad4aac](https://github.com/googleapis/nodejs-iot/commit/2ad4aac2aca20dc61fe9e85c5d12fb1631c266de))
+* **deps:** Update dependency @google-cloud/iot to v3 ([#576](https://github.com/googleapis/nodejs-iot/issues/576)) ([12bf4a7](https://github.com/googleapis/nodejs-iot/commit/12bf4a77880200f564c26224f2d4aecaacbf6a03))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-iot/issues/1553)) ([#583](https://github.com/googleapis/nodejs-iot/issues/583)) ([24729a5](https://github.com/googleapis/nodejs-iot/commit/24729a57621676b297aa4cdcc32fe536a468b580))
+* Preserve default values in x-goog-request-params header ([#586](https://github.com/googleapis/nodejs-iot/issues/586)) ([cced8e7](https://github.com/googleapis/nodejs-iot/commit/cced8e788357647819aee81589b776f962e67289))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-iot/issues/1546)) ([#582](https://github.com/googleapis/nodejs-iot/issues/582)) ([c6bb3f9](https://github.com/googleapis/nodejs-iot/commit/c6bb3f9b0b60009873f5d4b7f06fb47c9d8f6cc8))
+* use google-gax v3.3.0 ([24729a5](https://github.com/googleapis/nodejs-iot/commit/24729a57621676b297aa4cdcc32fe536a468b580))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-iot/compare/v3.0.0...v3.1.0) (2022-07-05)
 
 
