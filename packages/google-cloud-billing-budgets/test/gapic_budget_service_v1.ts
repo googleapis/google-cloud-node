@@ -237,9 +237,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.CreateBudgetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.CreateBudgetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.CreateBudgetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.CreateBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBudgetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.CreateBudgetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -364,10 +368,10 @@ describe('v1.BudgetServiceClient', () => {
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
       request.budget ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
-        'budget',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.UpdateBudgetRequest',
+        ['budget', 'name']
+      );
       request.budget.name = defaultValue1;
       const expectedHeaderRequestParams = `budget.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -396,10 +400,10 @@ describe('v1.BudgetServiceClient', () => {
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
       request.budget ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
-        'budget',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.UpdateBudgetRequest',
+        ['budget', 'name']
+      );
       request.budget.name = defaultValue1;
       const expectedHeaderRequestParams = `budget.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -444,10 +448,10 @@ describe('v1.BudgetServiceClient', () => {
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
       request.budget ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
-        'budget',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.UpdateBudgetRequest',
+        ['budget', 'name']
+      );
       request.budget.name = defaultValue1;
       const expectedHeaderRequestParams = `budget.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -476,10 +480,10 @@ describe('v1.BudgetServiceClient', () => {
         new protos.google.cloud.billing.budgets.v1.UpdateBudgetRequest()
       );
       request.budget ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBudgetRequest', [
-        'budget',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.UpdateBudgetRequest',
+        ['budget', 'name']
+      );
       request.budget.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -497,7 +501,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.GetBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -525,7 +532,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.GetBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -569,7 +579,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.GetBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -594,7 +607,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.GetBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBudgetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.GetBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -612,9 +628,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.DeleteBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -642,9 +659,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.DeleteBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -688,9 +706,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.DeleteBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -718,9 +737,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.DeleteBudgetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBudgetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.DeleteBudgetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -738,9 +758,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.ListBudgetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -776,9 +797,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.ListBudgetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -830,9 +852,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.ListBudgetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -860,9 +883,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.ListBudgetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -919,9 +943,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.ListBudgetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -969,9 +994,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.ListBudgetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1017,9 +1043,10 @@ describe('v1.BudgetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.budgets.v1.ListBudgetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBudgetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.budgets.v1.ListBudgetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
