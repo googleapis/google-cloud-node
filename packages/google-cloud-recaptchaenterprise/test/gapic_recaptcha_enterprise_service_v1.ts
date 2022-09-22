@@ -263,9 +263,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -296,9 +297,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -378,9 +381,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -401,9 +405,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -435,9 +440,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -484,9 +490,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -517,9 +524,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -540,7 +548,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -571,7 +582,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -618,7 +632,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -646,7 +663,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.CreateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.CreateKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -667,7 +687,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -698,7 +721,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -745,7 +771,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -773,7 +802,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -795,10 +827,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -830,10 +862,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -881,10 +913,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedHeaderRequestParams = `key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -913,10 +945,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest()
       );
       request.key ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateKeyRequest', [
-        'key',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.UpdateKeyRequest',
+        ['key', 'name']
+      );
       request.key.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -937,7 +969,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -968,7 +1003,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1015,7 +1053,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1043,7 +1084,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.DeleteKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1064,7 +1108,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MigrateKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1095,7 +1142,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MigrateKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1142,7 +1192,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MigrateKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1173,7 +1226,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MigrateKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.MigrateKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1194,7 +1250,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetricsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetMetricsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1225,7 +1284,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetricsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetMetricsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1272,7 +1334,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetricsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetMetricsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1303,7 +1368,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.GetMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMetricsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.GetMetricsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1324,7 +1392,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1363,7 +1434,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1418,7 +1492,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1446,7 +1523,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1506,7 +1586,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1557,7 +1640,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1605,7 +1691,10 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1.ListKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeysRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1.ListKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1649,7 +1738,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1692,7 +1781,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1752,7 +1841,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1789,7 +1878,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1861,7 +1950,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1922,7 +2011,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1979,7 +2068,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2029,7 +2118,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2074,7 +2163,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2134,7 +2223,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2171,7 +2260,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2246,7 +2335,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2310,7 +2399,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2367,7 +2456,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.ListRelatedAccountGroupMembershipsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2417,7 +2506,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2462,7 +2551,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2522,7 +2611,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2557,7 +2646,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2632,7 +2721,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2696,7 +2785,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2754,7 +2843,7 @@ describe('v1.RecaptchaEnterpriseServiceClient', () => {
         new protos.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchRelatedAccountGroupMembershipsRequest',
+        '.google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest',
         ['project']
       );
       request.project = defaultValue1;

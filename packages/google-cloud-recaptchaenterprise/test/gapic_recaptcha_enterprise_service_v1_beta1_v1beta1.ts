@@ -206,9 +206,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -239,9 +240,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -288,9 +290,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -321,9 +324,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssessmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.CreateAssessmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -344,9 +348,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -378,9 +383,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -427,9 +433,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -460,9 +467,10 @@ describe('v1beta1.RecaptchaEnterpriseServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnnotateAssessmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
