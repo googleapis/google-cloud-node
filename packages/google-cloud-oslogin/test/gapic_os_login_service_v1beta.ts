@@ -174,9 +174,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeletePosixAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePosixAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeletePosixAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -205,9 +206,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeletePosixAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePosixAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeletePosixAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -251,9 +253,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeletePosixAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePosixAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeletePosixAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -281,9 +284,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeletePosixAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePosixAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeletePosixAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -301,9 +305,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -332,9 +337,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -378,9 +384,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -408,9 +415,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.DeleteSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -428,9 +436,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetLoginProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLoginProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetLoginProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -458,9 +467,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetLoginProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLoginProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetLoginProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -504,9 +514,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetLoginProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLoginProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetLoginProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -534,9 +545,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetLoginProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLoginProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetLoginProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -554,9 +566,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -584,9 +597,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -630,9 +644,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -660,9 +675,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.GetSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -680,9 +696,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportSshPublicKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -711,9 +728,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportSshPublicKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -757,9 +775,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportSshPublicKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -787,9 +806,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportSshPublicKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.ImportSshPublicKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -807,9 +827,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -838,9 +859,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -884,9 +906,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -914,9 +937,10 @@ describe('v1beta.OsLoginServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateSshPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.oslogin.v1beta.UpdateSshPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
