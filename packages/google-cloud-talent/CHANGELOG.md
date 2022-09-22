@@ -4,6 +4,24 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [5.0.0](https://github.com/googleapis/nodejs-talent/compare/v4.1.1...v5.0.0) (2022-09-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove LRO mixin methods where not needed (#443)
+* Remove application and profile services from v4beta1 (#440)
+
+### Bug Fixes
+
+* Change import long to require ([#435](https://github.com/googleapis/nodejs-talent/issues/435)) ([27a132a](https://github.com/googleapis/nodejs-talent/commit/27a132aff0249d1edc05a10d4be16de6f8acc69f))
+* **deps:** Update dependency uuid to v9 ([#439](https://github.com/googleapis/nodejs-talent/issues/439)) ([ea9f3aa](https://github.com/googleapis/nodejs-talent/commit/ea9f3aa73bcffb0fc82555494fdf7207892fb798))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-talent/issues/1553)) ([#438](https://github.com/googleapis/nodejs-talent/issues/438)) ([d59378e](https://github.com/googleapis/nodejs-talent/commit/d59378e52295af4ef5757d8ae3e740b4fec0da44))
+* Remove application and profile services from v4beta1 ([#440](https://github.com/googleapis/nodejs-talent/issues/440)) ([c5fd3aa](https://github.com/googleapis/nodejs-talent/commit/c5fd3aa18796c9baeb6c0df2d67b8a6f0c01c954))
+* Remove LRO mixin methods where not needed ([#443](https://github.com/googleapis/nodejs-talent/issues/443)) ([bb6bd48](https://github.com/googleapis/nodejs-talent/commit/bb6bd48c42da8987f294f88959253d075204b1e8))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-talent/issues/1546)) ([#437](https://github.com/googleapis/nodejs-talent/issues/437)) ([f641557](https://github.com/googleapis/nodejs-talent/commit/f6415579ec3b8822f5d4a05004ee154b0870ecb8))
+* use google-gax v3.3.0 ([d59378e](https://github.com/googleapis/nodejs-talent/commit/d59378e52295af4ef5757d8ae3e740b4fec0da44))
+
 ## [4.1.1](https://github.com/googleapis/nodejs-talent/compare/v4.1.0...v4.1.1) (2022-07-12)
 
 
