@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.3](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.2...v3.0.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#237](https://github.com/googleapis/nodejs-analytics-data/issues/237)) ([ae646a5](https://github.com/googleapis/nodejs-analytics-data/commit/ae646a54bc64abff0cf92625117ffb258e303e8b))
+
 ## [3.0.2](https://github.com/googleapis/nodejs-analytics-data/compare/v3.0.1...v3.0.2) (2022-09-01)
 
 
