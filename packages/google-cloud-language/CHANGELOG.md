@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [5.1.0](https://github.com/googleapis/nodejs-language/compare/v5.0.2...v5.1.0) (2022-09-21)
+
+
+### Features
+
+* Add support for V1 and V2 classification models for the V1Beta2 API ([#697](https://github.com/googleapis/nodejs-language/issues/697)) ([3b87da3](https://github.com/googleapis/nodejs-language/commit/3b87da3a09e4d4fff02e235d3f1f70841906696d))
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#691](https://github.com/googleapis/nodejs-language/issues/691)) ([b5a177d](https://github.com/googleapis/nodejs-language/commit/b5a177d9c6a82ef012ab18c463c796444a34fe1b))
+
 ## [5.0.2](https://github.com/googleapis/nodejs-language/compare/v5.0.1...v5.0.2) (2022-09-01)
 
 
