@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [3.0.4](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.3...v3.0.4) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#411](https://github.com/googleapis/nodejs-phishing-protection/issues/411)) ([61c49e2](https://github.com/googleapis/nodejs-phishing-protection/commit/61c49e2196a3df81f5d2e337a136081efc108282))
+
 ## [3.0.3](https://github.com/googleapis/nodejs-phishing-protection/compare/v3.0.2...v3.0.3) (2022-09-08)
 
 
