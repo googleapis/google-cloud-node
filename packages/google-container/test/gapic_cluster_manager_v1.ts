@@ -237,17 +237,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListClustersRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -275,17 +278,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListClustersRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -329,17 +335,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListClustersRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -367,17 +376,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListClustersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListClustersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListClustersRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListClustersRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListClustersRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -395,17 +407,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -433,17 +453,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -487,17 +515,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -525,17 +561,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetClusterRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetClusterRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -553,17 +597,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -591,17 +638,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -645,17 +695,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -683,17 +736,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateClusterRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -711,21 +767,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -753,21 +813,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -811,21 +875,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -853,21 +921,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -885,25 +957,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -931,25 +1008,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -993,25 +1075,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedError = new Error('expected');
@@ -1039,25 +1126,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('UpdateNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.UpdateNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1076,27 +1168,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -1128,27 +1220,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -1195,27 +1287,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -1249,27 +1341,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolAutoscalingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolAutoscalingRequest',
+        '.google.container.v1.SetNodePoolAutoscalingRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -1292,21 +1384,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1334,21 +1430,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1392,21 +1492,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -1434,21 +1538,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLoggingServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLoggingServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLoggingServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1466,21 +1574,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1509,21 +1621,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1567,21 +1683,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -1609,21 +1729,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMonitoringServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMonitoringServiceRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMonitoringServiceRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1641,21 +1765,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1683,21 +1811,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1741,21 +1873,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -1783,21 +1919,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetAddonsConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetAddonsConfigRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetAddonsConfigRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1816,21 +1956,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLocationsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLocationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLocationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLocationsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1860,21 +2004,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLocationsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLocationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLocationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLocationsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -1920,21 +2068,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLocationsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLocationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLocationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLocationsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -1964,21 +2116,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLocationsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLocationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLocationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLocationsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLocationsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1997,21 +2153,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMasterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateMasterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateMasterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateMasterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2039,21 +2199,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMasterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateMasterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateMasterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateMasterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2097,21 +2261,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMasterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateMasterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateMasterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateMasterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -2139,21 +2307,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.UpdateMasterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMasterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateMasterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateMasterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('UpdateMasterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.UpdateMasterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2171,21 +2343,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2213,21 +2389,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2271,21 +2451,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -2313,21 +2497,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMasterAuthRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMasterAuthRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMasterAuthRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2345,21 +2533,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2387,21 +2579,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2445,21 +2641,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -2487,21 +2687,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteClusterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteClusterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteClusterRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteClusterRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteClusterRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteClusterRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2519,17 +2723,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOperationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListOperationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -2557,17 +2764,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOperationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListOperationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -2611,17 +2821,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOperationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListOperationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -2649,17 +2862,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListOperationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListOperationsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2677,21 +2893,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2719,21 +2939,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2777,21 +3001,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -2819,21 +3047,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2851,21 +3083,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CancelOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2893,21 +3129,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CancelOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -2951,21 +3191,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CancelOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&operation_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -2993,21 +3237,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CancelOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelOperationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelOperationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CancelOperationRequest', [
-        'operationId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CancelOperationRequest',
+        ['operationId']
+      );
       request.operationId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3025,17 +3273,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServerConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetServerConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3063,17 +3314,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServerConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetServerConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3117,17 +3371,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServerConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetServerConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -3155,17 +3412,20 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetServerConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServerConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServerConfigRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetServerConfigRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetServerConfigRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3183,9 +3443,10 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJSONWebKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetJSONWebKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3213,9 +3474,10 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJSONWebKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetJSONWebKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3259,9 +3521,10 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJSONWebKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetJSONWebKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3289,9 +3552,10 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetJSONWebKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJSONWebKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetJSONWebKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3309,21 +3573,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -3351,21 +3619,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -3409,21 +3681,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -3451,21 +3727,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.ListNodePoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('ListNodePoolsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.ListNodePoolsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3483,21 +3763,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodePoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodePoolRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('GetNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -3525,21 +3814,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodePoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodePoolRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('GetNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -3583,21 +3881,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodePoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodePoolRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('GetNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedError = new Error('expected');
@@ -3625,21 +3932,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.GetNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodePoolRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodePoolRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('GetNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('GetNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.GetNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3657,21 +3973,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -3699,21 +4019,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -3757,21 +4081,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `parent=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -3799,21 +4127,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CreateNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CreateNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CreateNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3831,25 +4163,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -3877,25 +4214,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -3939,25 +4281,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedError = new Error('expected');
@@ -3985,25 +4332,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.DeleteNodePoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('DeleteNodePoolRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.DeleteNodePoolRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4022,7 +4374,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CompleteNodePoolUpgradeRequest',
+        '.google.container.v1.CompleteNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4054,7 +4406,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CompleteNodePoolUpgradeRequest',
+        '.google.container.v1.CompleteNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4101,7 +4453,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CompleteNodePoolUpgradeRequest',
+        '.google.container.v1.CompleteNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4135,7 +4487,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.CompleteNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CompleteNodePoolUpgradeRequest',
+        '.google.container.v1.CompleteNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4159,27 +4511,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4211,27 +4563,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4278,27 +4630,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4332,27 +4684,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.RollbackNodePoolUpgradeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'RollbackNodePoolUpgradeRequest',
+        '.google.container.v1.RollbackNodePoolUpgradeRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4376,27 +4728,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4428,27 +4780,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4495,27 +4847,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4549,27 +4901,27 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.SetNodePoolManagementRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['name']
       );
       request.name = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['projectId']
       );
       request.projectId = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['zone']
       );
       request.zone = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['clusterId']
       );
       request.clusterId = defaultValue4;
       const defaultValue5 = getTypeDefaultValue(
-        'SetNodePoolManagementRequest',
+        '.google.container.v1.SetNodePoolManagementRequest',
         ['nodePoolId']
       );
       request.nodePoolId = defaultValue5;
@@ -4592,17 +4944,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLabelsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -4630,17 +4990,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLabelsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -4684,17 +5052,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLabelsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -4719,17 +5095,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLabelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRequest', ['zone']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLabelsRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLabelsRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4747,21 +5131,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -4789,21 +5177,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -4847,21 +5239,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -4889,21 +5285,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLegacyAbacRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetLegacyAbacRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetLegacyAbacRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4921,21 +5321,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('StartIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -4963,21 +5367,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('StartIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -5021,21 +5429,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('StartIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -5063,21 +5475,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.StartIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('StartIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.StartIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5095,21 +5511,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -5138,21 +5558,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -5196,21 +5620,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -5238,21 +5666,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.CompleteIPRotationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('CompleteIPRotationRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.CompleteIPRotationRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5270,25 +5702,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -5316,25 +5753,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedResponse = generateSampleMessage(
@@ -5378,25 +5820,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}&node_pool_id=${defaultValue5}`;
       const expectedError = new Error('expected');
@@ -5424,25 +5871,30 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNodePoolSizeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
-      const defaultValue5 = getTypeDefaultValue('SetNodePoolSizeRequest', [
-        'nodePoolId',
-      ]);
+      const defaultValue5 = getTypeDefaultValue(
+        '.google.container.v1.SetNodePoolSizeRequest',
+        ['nodePoolId']
+      );
       request.nodePoolId = defaultValue5;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5460,21 +5912,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -5502,21 +5958,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -5560,21 +6020,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -5602,21 +6066,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetNetworkPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetNetworkPolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetNetworkPolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5634,21 +6102,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -5677,21 +6149,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedResponse = generateSampleMessage(
@@ -5735,21 +6211,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedHeaderRequestParams = `name=${defaultValue1}&project_id=${defaultValue2}&zone=${defaultValue3}&cluster_id=${defaultValue4}`;
       const expectedError = new Error('expected');
@@ -5777,21 +6257,25 @@ describe('v1.ClusterManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.container.v1.SetMaintenancePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'projectId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'zone',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['zone']
+      );
       request.zone = defaultValue3;
-      const defaultValue4 = getTypeDefaultValue('SetMaintenancePolicyRequest', [
-        'clusterId',
-      ]);
+      const defaultValue4 = getTypeDefaultValue(
+        '.google.container.v1.SetMaintenancePolicyRequest',
+        ['clusterId']
+      );
       request.clusterId = defaultValue4;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5810,7 +6294,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.container.v1.ListUsableSubnetworksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5850,7 +6334,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.container.v1.ListUsableSubnetworksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5905,7 +6389,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.container.v1.ListUsableSubnetworksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5939,7 +6423,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.container.v1.ListUsableSubnetworksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6005,7 +6489,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.container.v1.ListUsableSubnetworksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6060,7 +6544,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.container.v1.ListUsableSubnetworksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6113,7 +6597,7 @@ describe('v1.ClusterManagerClient', () => {
         new protos.google.container.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.container.v1.ListUsableSubnetworksRequest',
         ['parent']
       );
       request.parent = defaultValue1;
