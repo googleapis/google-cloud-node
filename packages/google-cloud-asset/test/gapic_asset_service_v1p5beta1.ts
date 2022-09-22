@@ -237,9 +237,10 @@ describe('v1p5beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -269,9 +270,10 @@ describe('v1p5beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -317,9 +319,10 @@ describe('v1p5beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -347,9 +350,10 @@ describe('v1p5beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -400,9 +404,10 @@ describe('v1p5beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -450,9 +455,10 @@ describe('v1p5beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -492,9 +498,10 @@ describe('v1p5beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p5beta1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p5beta1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

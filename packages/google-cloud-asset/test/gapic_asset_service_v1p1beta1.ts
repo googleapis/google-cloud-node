@@ -237,9 +237,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -276,9 +277,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -332,9 +334,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -362,9 +365,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -424,9 +428,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -475,9 +480,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -524,9 +530,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -566,9 +573,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -605,9 +613,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -661,9 +670,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -691,9 +701,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -753,9 +764,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -804,9 +816,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -853,9 +866,10 @@ describe('v1p1beta1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1p1beta1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');

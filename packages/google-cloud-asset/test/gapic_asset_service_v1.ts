@@ -268,7 +268,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetAssetsHistoryRequest',
+        '.google.cloud.asset.v1.BatchGetAssetsHistoryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -300,7 +300,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetAssetsHistoryRequest',
+        '.google.cloud.asset.v1.BatchGetAssetsHistoryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -347,7 +347,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetAssetsHistoryRequest',
+        '.google.cloud.asset.v1.BatchGetAssetsHistoryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -381,7 +381,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetAssetsHistoryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetAssetsHistoryRequest',
+        '.google.cloud.asset.v1.BatchGetAssetsHistoryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -404,9 +404,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateFeedRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -434,9 +435,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateFeedRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -480,9 +482,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateFeedRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -510,9 +513,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeedRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateFeedRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -530,7 +534,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -558,7 +565,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -602,7 +612,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -627,7 +640,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -645,7 +661,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListFeedsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -673,7 +692,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListFeedsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -717,7 +739,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListFeedsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -742,7 +767,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListFeedsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeedsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListFeedsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -761,10 +789,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
       request.feed ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
-        'feed',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateFeedRequest',
+        ['feed', 'name']
+      );
       request.feed.name = defaultValue1;
       const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -793,10 +821,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
       request.feed ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
-        'feed',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateFeedRequest',
+        ['feed', 'name']
+      );
       request.feed.name = defaultValue1;
       const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -841,10 +869,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
       request.feed ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
-        'feed',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateFeedRequest',
+        ['feed', 'name']
+      );
       request.feed.name = defaultValue1;
       const expectedHeaderRequestParams = `feed.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -873,10 +901,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateFeedRequest()
       );
       request.feed ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFeedRequest', [
-        'feed',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateFeedRequest',
+        ['feed', 'name']
+      );
       request.feed.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -894,7 +922,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -922,7 +953,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -966,7 +1000,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -994,7 +1031,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteFeedRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeedRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteFeedRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1013,10 +1053,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
       request.analysisQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
-        'analysisQuery',
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeIamPolicyRequest',
+        ['analysisQuery', 'scope']
+      );
       request.analysisQuery.scope = defaultValue1;
       const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1045,10 +1085,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
       request.analysisQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
-        'analysisQuery',
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeIamPolicyRequest',
+        ['analysisQuery', 'scope']
+      );
       request.analysisQuery.scope = defaultValue1;
       const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1093,10 +1133,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
       request.analysisQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
-        'analysisQuery',
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeIamPolicyRequest',
+        ['analysisQuery', 'scope']
+      );
       request.analysisQuery.scope = defaultValue1;
       const expectedHeaderRequestParams = `analysis_query.scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1125,10 +1165,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.AnalyzeIamPolicyRequest()
       );
       request.analysisQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('AnalyzeIamPolicyRequest', [
-        'analysisQuery',
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeIamPolicyRequest',
+        ['analysisQuery', 'scope']
+      );
       request.analysisQuery.scope = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1146,9 +1186,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeMoveRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1176,9 +1217,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeMoveRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1222,9 +1264,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeMoveRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1252,9 +1295,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AnalyzeMoveRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.AnalyzeMoveRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1272,9 +1316,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.QueryAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1302,9 +1347,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.QueryAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1348,9 +1394,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.QueryAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1378,9 +1425,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.QueryAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('QueryAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.QueryAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1398,9 +1446,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateSavedQueryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1428,9 +1477,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateSavedQueryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1474,9 +1524,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateSavedQueryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1504,9 +1555,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.CreateSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSavedQueryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.CreateSavedQueryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1524,9 +1576,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1554,9 +1607,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1600,9 +1654,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1630,9 +1685,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.GetSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.GetSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1651,10 +1707,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
       request.savedQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
-        'savedQuery',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateSavedQueryRequest',
+        ['savedQuery', 'name']
+      );
       request.savedQuery.name = defaultValue1;
       const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1683,10 +1739,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
       request.savedQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
-        'savedQuery',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateSavedQueryRequest',
+        ['savedQuery', 'name']
+      );
       request.savedQuery.name = defaultValue1;
       const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1731,10 +1787,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
       request.savedQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
-        'savedQuery',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateSavedQueryRequest',
+        ['savedQuery', 'name']
+      );
       request.savedQuery.name = defaultValue1;
       const expectedHeaderRequestParams = `saved_query.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1763,10 +1819,10 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.UpdateSavedQueryRequest()
       );
       request.savedQuery ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSavedQueryRequest', [
-        'savedQuery',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.UpdateSavedQueryRequest',
+        ['savedQuery', 'name']
+      );
       request.savedQuery.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1784,9 +1840,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1814,9 +1871,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1860,9 +1918,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1890,9 +1949,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.DeleteSavedQueryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSavedQueryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.DeleteSavedQueryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1911,7 +1971,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetEffectiveIamPoliciesRequest',
+        '.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest',
         ['scope']
       );
       request.scope = defaultValue1;
@@ -1943,7 +2003,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetEffectiveIamPoliciesRequest',
+        '.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest',
         ['scope']
       );
       request.scope = defaultValue1;
@@ -1990,7 +2050,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetEffectiveIamPoliciesRequest',
+        '.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest',
         ['scope']
       );
       request.scope = defaultValue1;
@@ -2024,7 +2084,7 @@ describe('v1.AssetServiceClient', () => {
         new protos.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchGetEffectiveIamPoliciesRequest',
+        '.google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest',
         ['scope']
       );
       request.scope = defaultValue1;
@@ -2047,9 +2107,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ExportAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2078,9 +2139,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ExportAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2131,9 +2193,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ExportAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2161,9 +2224,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ExportAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ExportAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2235,7 +2299,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.analysisQuery ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'AnalyzeIamPolicyLongrunningRequest',
+        '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest',
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
@@ -2269,7 +2333,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.analysisQuery ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'AnalyzeIamPolicyLongrunningRequest',
+        '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest',
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
@@ -2324,7 +2388,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.analysisQuery ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'AnalyzeIamPolicyLongrunningRequest',
+        '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest',
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
@@ -2359,7 +2423,7 @@ describe('v1.AssetServiceClient', () => {
       );
       request.analysisQuery ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'AnalyzeIamPolicyLongrunningRequest',
+        '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest',
         ['analysisQuery', 'scope']
       );
       request.analysisQuery.scope = defaultValue1;
@@ -2435,9 +2499,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2467,9 +2532,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2515,9 +2581,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2545,9 +2612,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2595,9 +2663,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2642,9 +2711,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2684,9 +2754,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListAssetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListAssetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2727,9 +2798,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -2766,9 +2838,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -2820,9 +2893,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2850,9 +2924,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -2910,9 +2985,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2959,9 +3035,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -3008,9 +3085,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllResourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllResourcesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllResourcesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3050,9 +3128,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -3089,9 +3168,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -3145,9 +3225,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3175,9 +3256,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -3235,9 +3317,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3284,9 +3367,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedResponse = [
@@ -3333,9 +3417,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.SearchAllIamPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllIamPoliciesRequest', [
-        'scope',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.SearchAllIamPoliciesRequest',
+        ['scope']
+      );
       request.scope = defaultValue1;
       const expectedHeaderRequestParams = `scope=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3375,9 +3460,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3407,9 +3493,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3455,9 +3542,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3485,9 +3573,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3538,9 +3627,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3586,9 +3676,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3628,9 +3719,10 @@ describe('v1.AssetServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.asset.v1.ListSavedQueriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSavedQueriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.asset.v1.ListSavedQueriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
