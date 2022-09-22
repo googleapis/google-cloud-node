@@ -237,9 +237,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReservationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReservationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReservationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateReservationRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateReservationRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,9 +367,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -393,9 +398,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +445,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -469,9 +476,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -489,9 +497,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -519,9 +528,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -565,9 +575,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -595,9 +606,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -616,10 +628,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
       request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
+        ['reservation', 'name']
+      );
       request.reservation.name = defaultValue1;
       const expectedHeaderRequestParams = `reservation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -648,10 +660,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
       request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
+        ['reservation', 'name']
+      );
       request.reservation.name = defaultValue1;
       const expectedHeaderRequestParams = `reservation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -696,10 +708,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
       request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
+        ['reservation', 'name']
+      );
       request.reservation.name = defaultValue1;
       const expectedHeaderRequestParams = `reservation.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -728,10 +740,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateReservationRequest()
       );
       request.reservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateReservationRequest',
+        ['reservation', 'name']
+      );
       request.reservation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -750,7 +762,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -782,7 +794,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -829,7 +841,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -863,7 +875,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -887,7 +899,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -919,7 +931,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -966,7 +978,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1000,7 +1012,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.GetCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1024,7 +1036,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1056,7 +1068,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1103,7 +1115,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1137,7 +1149,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1162,7 +1174,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.capacityCommitment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
         ['capacityCommitment', 'name']
       );
       request.capacityCommitment.name = defaultValue1;
@@ -1195,7 +1207,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.capacityCommitment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
         ['capacityCommitment', 'name']
       );
       request.capacityCommitment.name = defaultValue1;
@@ -1243,7 +1255,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.capacityCommitment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
         ['capacityCommitment', 'name']
       );
       request.capacityCommitment.name = defaultValue1;
@@ -1278,7 +1290,7 @@ describe('v1.ReservationServiceClient', () => {
       );
       request.capacityCommitment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.UpdateCapacityCommitmentRequest',
         ['capacityCommitment', 'name']
       );
       request.capacityCommitment.name = defaultValue1;
@@ -1302,7 +1314,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SplitCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1334,7 +1346,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SplitCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1381,7 +1393,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SplitCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1415,7 +1427,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SplitCapacityCommitmentRequest',
+        '.google.cloud.bigquery.reservation.v1.SplitCapacityCommitmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1439,7 +1451,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'MergeCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1471,7 +1483,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'MergeCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1518,7 +1530,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'MergeCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1552,7 +1564,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'MergeCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1575,9 +1587,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssignmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1605,9 +1618,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssignmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1651,9 +1665,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssignmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1681,9 +1696,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAssignmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.CreateAssignmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1701,9 +1717,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1731,9 +1748,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1777,9 +1795,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1807,9 +1826,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.DeleteAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1827,9 +1847,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1857,9 +1878,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1903,9 +1925,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1933,9 +1956,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveAssignmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.MoveAssignmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1954,10 +1978,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
       request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAssignmentRequest', [
-        'assignment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
+        ['assignment', 'name']
+      );
       request.assignment.name = defaultValue1;
       const expectedHeaderRequestParams = `assignment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1986,10 +2010,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
       request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAssignmentRequest', [
-        'assignment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
+        ['assignment', 'name']
+      );
       request.assignment.name = defaultValue1;
       const expectedHeaderRequestParams = `assignment.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2034,10 +2058,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
       request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAssignmentRequest', [
-        'assignment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
+        ['assignment', 'name']
+      );
       request.assignment.name = defaultValue1;
       const expectedHeaderRequestParams = `assignment.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2066,10 +2090,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest()
       );
       request.assignment ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAssignmentRequest', [
-        'assignment',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest',
+        ['assignment', 'name']
+      );
       request.assignment.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2087,9 +2111,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBiReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2117,9 +2142,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBiReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2163,9 +2189,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBiReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2193,9 +2220,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.GetBiReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBiReservationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.GetBiReservationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2214,10 +2242,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
       request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBiReservationRequest', [
-        'biReservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
+        ['biReservation', 'name']
+      );
       request.biReservation.name = defaultValue1;
       const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2247,10 +2275,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
       request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBiReservationRequest', [
-        'biReservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
+        ['biReservation', 'name']
+      );
       request.biReservation.name = defaultValue1;
       const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2295,10 +2323,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
       request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBiReservationRequest', [
-        'biReservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
+        ['biReservation', 'name']
+      );
       request.biReservation.name = defaultValue1;
       const expectedHeaderRequestParams = `bi_reservation.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2327,10 +2355,10 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest()
       );
       request.biReservation ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBiReservationRequest', [
-        'biReservation',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest',
+        ['biReservation', 'name']
+      );
       request.biReservation.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2348,9 +2376,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2386,9 +2415,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2442,9 +2472,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2472,9 +2503,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2534,9 +2566,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2585,9 +2618,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2634,9 +2668,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListReservationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2677,7 +2712,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2717,7 +2752,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2774,7 +2809,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2808,7 +2843,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2877,7 +2912,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2935,7 +2970,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2989,7 +3024,7 @@ describe('v1.ReservationServiceClient', () => {
         new protos.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCapacityCommitmentsRequest',
+        '.google.cloud.bigquery.reservation.v1.ListCapacityCommitmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3035,9 +3070,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3073,9 +3109,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3129,9 +3166,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3159,9 +3197,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3221,9 +3260,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3272,9 +3312,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3321,9 +3362,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.ListAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3364,9 +3406,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3404,9 +3447,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3462,9 +3506,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3494,9 +3539,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3558,9 +3604,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3611,9 +3658,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3662,9 +3710,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3705,9 +3754,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3744,9 +3794,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3800,9 +3851,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3830,9 +3882,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3892,9 +3945,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3943,9 +3997,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3992,9 +4047,10 @@ describe('v1.ReservationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchAllAssignmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
