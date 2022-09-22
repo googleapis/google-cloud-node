@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-memcache/compare/v2.1.1...v2.1.2) (2022-09-21)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#216](https://github.com/googleapis/nodejs-memcache/issues/216)) ([6d5a65a](https://github.com/googleapis/nodejs-memcache/commit/6d5a65a5fd0881e38d72083aefc614bdd2360f19))
+* Preserve default values in x-goog-request-params header ([#218](https://github.com/googleapis/nodejs-memcache/issues/218)) ([8d8c968](https://github.com/googleapis/nodejs-memcache/commit/8d8c96866345800625f01edee0c42a675710fa22))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-memcache/compare/v2.1.0...v2.1.1) (2022-08-27)
 
 
