@@ -237,9 +237,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecutePatchJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecutePatchJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecutePatchJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ExecutePatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExecutePatchJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ExecutePatchJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,7 +367,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,7 +398,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -435,7 +445,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -463,7 +476,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -481,9 +497,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPatchJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -511,9 +528,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPatchJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -557,9 +575,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPatchJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -587,9 +606,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.CancelPatchJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelPatchJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.CancelPatchJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -608,7 +628,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -640,7 +660,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -687,7 +707,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -721,7 +741,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.CreatePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.CreatePatchDeploymentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -744,9 +764,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -775,9 +796,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -821,9 +843,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -851,9 +874,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.GetPatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.GetPatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -872,7 +896,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -904,7 +928,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -951,7 +975,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -985,7 +1009,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.DeletePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.DeletePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1010,7 +1034,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.patchDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
         ['patchDeployment', 'name']
       );
       request.patchDeployment.name = defaultValue1;
@@ -1043,7 +1067,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.patchDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
         ['patchDeployment', 'name']
       );
       request.patchDeployment.name = defaultValue1;
@@ -1091,7 +1115,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.patchDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
         ['patchDeployment', 'name']
       );
       request.patchDeployment.name = defaultValue1;
@@ -1126,7 +1150,7 @@ describe('v1.OsConfigServiceClient', () => {
       );
       request.patchDeployment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdatePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.UpdatePatchDeploymentRequest',
         ['patchDeployment', 'name']
       );
       request.patchDeployment.name = defaultValue1;
@@ -1149,9 +1173,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PausePatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1180,9 +1205,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PausePatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1226,9 +1252,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PausePatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1256,9 +1283,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.PausePatchDeploymentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PausePatchDeploymentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.PausePatchDeploymentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1277,7 +1305,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1309,7 +1337,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1356,7 +1384,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1390,7 +1418,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ResumePatchDeploymentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumePatchDeploymentRequest',
+        '.google.cloud.osconfig.v1.ResumePatchDeploymentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1413,9 +1441,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1445,9 +1474,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1493,9 +1523,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1523,9 +1554,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1576,9 +1608,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1624,9 +1657,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1666,9 +1700,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1708,7 +1743,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPatchJobInstanceDetailsRequest',
+        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1748,7 +1783,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPatchJobInstanceDetailsRequest',
+        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1805,7 +1840,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPatchJobInstanceDetailsRequest',
+        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1839,7 +1874,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPatchJobInstanceDetailsRequest',
+        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1908,7 +1943,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPatchJobInstanceDetailsRequest',
+        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1966,7 +2001,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPatchJobInstanceDetailsRequest',
+        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2020,7 +2055,7 @@ describe('v1.OsConfigServiceClient', () => {
         new protos.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPatchJobInstanceDetailsRequest',
+        '.google.cloud.osconfig.v1.ListPatchJobInstanceDetailsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2066,9 +2101,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2105,9 +2141,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2159,9 +2196,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2189,9 +2227,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2248,9 +2287,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2296,9 +2336,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2344,9 +2385,10 @@ describe('v1.OsConfigServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1.ListPatchDeploymentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPatchDeploymentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1.ListPatchDeploymentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

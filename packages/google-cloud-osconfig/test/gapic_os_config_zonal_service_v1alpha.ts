@@ -281,7 +281,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -314,7 +314,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -362,7 +362,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -397,7 +397,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -423,7 +423,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInstanceOSPoliciesComplianceRequest',
+        '.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -458,7 +458,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInstanceOSPoliciesComplianceRequest',
+        '.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -508,7 +508,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInstanceOSPoliciesComplianceRequest',
+        '.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -545,7 +545,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInstanceOSPoliciesComplianceRequest',
+        '.google.cloud.osconfig.v1alpha.GetInstanceOSPoliciesComplianceRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -571,7 +571,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -604,7 +604,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -652,7 +652,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -687,7 +687,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetOSPolicyAssignmentReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetOSPolicyAssignmentReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -711,9 +711,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.GetInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInventoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.GetInventoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -742,9 +743,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.GetInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInventoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.GetInventoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -789,9 +791,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.GetInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInventoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.GetInventoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -820,9 +823,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.GetInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInventoryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.GetInventoryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -842,7 +846,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetVulnerabilityReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -875,7 +879,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetVulnerabilityReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -923,7 +927,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetVulnerabilityReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -958,7 +962,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetVulnerabilityReportRequest',
+        '.google.cloud.osconfig.v1alpha.GetVulnerabilityReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -983,7 +987,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1017,7 +1021,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1072,7 +1076,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1107,7 +1111,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.CreateOSPolicyAssignmentRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1188,7 +1192,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       );
       request.osPolicyAssignment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.UpdateOSPolicyAssignmentRequest',
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
@@ -1223,7 +1227,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       );
       request.osPolicyAssignment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.UpdateOSPolicyAssignmentRequest',
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
@@ -1279,7 +1283,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       );
       request.osPolicyAssignment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.UpdateOSPolicyAssignmentRequest',
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
@@ -1315,7 +1319,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       );
       request.osPolicyAssignment ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.UpdateOSPolicyAssignmentRequest',
         ['osPolicyAssignment', 'name']
       );
       request.osPolicyAssignment.name = defaultValue1;
@@ -1395,7 +1399,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1429,7 +1433,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1484,7 +1488,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1519,7 +1523,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteOSPolicyAssignmentRequest',
+        '.google.cloud.osconfig.v1alpha.DeleteOSPolicyAssignmentRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1599,7 +1603,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1640,7 +1644,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1698,7 +1702,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1733,7 +1737,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1803,7 +1807,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1862,7 +1866,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1917,7 +1921,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1965,7 +1969,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentRevisionsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2006,7 +2010,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentRevisionsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2064,7 +2068,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentRevisionsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2099,7 +2103,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentRevisionsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2172,7 +2176,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentRevisionsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2234,7 +2238,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentRevisionsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2289,7 +2293,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentRevisionsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentRevisionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2338,7 +2342,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceOSPoliciesCompliancesRequest',
+        '.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2383,7 +2387,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceOSPoliciesCompliancesRequest',
+        '.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2443,7 +2447,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceOSPoliciesCompliancesRequest',
+        '.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2480,7 +2484,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceOSPoliciesCompliancesRequest',
+        '.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2555,7 +2559,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceOSPoliciesCompliancesRequest',
+        '.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2619,7 +2623,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceOSPoliciesCompliancesRequest',
+        '.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2676,7 +2680,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceOSPoliciesCompliancesRequest',
+        '.google.cloud.osconfig.v1alpha.ListInstanceOSPoliciesCompliancesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2725,7 +2729,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2766,7 +2770,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2824,7 +2828,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2859,7 +2863,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2932,7 +2936,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2994,7 +2998,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3049,7 +3053,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListOSPolicyAssignmentReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListOSPolicyAssignmentReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3096,9 +3100,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.ListInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInventoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.ListInventoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3135,9 +3140,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.ListInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInventoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.ListInventoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3190,9 +3196,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.ListInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInventoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.ListInventoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3221,9 +3228,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.ListInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInventoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.ListInventoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3281,9 +3289,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.ListInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInventoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.ListInventoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3330,9 +3339,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.ListInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInventoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.ListInventoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3379,9 +3389,10 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.osconfig.v1alpha.ListInventoriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInventoriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.osconfig.v1alpha.ListInventoriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3422,7 +3433,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListVulnerabilityReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3463,7 +3474,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListVulnerabilityReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3521,7 +3532,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListVulnerabilityReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3556,7 +3567,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListVulnerabilityReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3626,7 +3637,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListVulnerabilityReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3685,7 +3696,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListVulnerabilityReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3740,7 +3751,7 @@ describe('v1alpha.OsConfigZonalServiceClient', () => {
         new protos.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListVulnerabilityReportsRequest',
+        '.google.cloud.osconfig.v1alpha.ListVulnerabilityReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
