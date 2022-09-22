@@ -29,8 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The resource that the policy is attached to, along with the kind
-   *  of policy to list. Format: `policies/{attachment_point}/denypolicies`
+   *  Required. The resource that the policy is attached to, along with the kind of policy
+   *  to list. Format:
+   *  `policies/{attachment_point}/denypolicies`
    *  The attachment point is identified by its URL-encoded full resource name,
    *  which means that the forward-slash character, `/`, must be written as
    *  `%2F`. For example,
@@ -45,9 +46,8 @@ function main(parent) {
    */
   // const pageSize = 1234
   /**
-   *  A page token received in a
-   *  ListPoliciesResponse google.iam.v2.ListPoliciesResponse. Provide this
-   *  token to retrieve the next page.
+   *  A page token received in a ListPoliciesResponse google.iam.v2.ListPoliciesResponse. Provide this token to
+   *  retrieve the next page.
    */
   // const pageToken = 'abc123'
 
