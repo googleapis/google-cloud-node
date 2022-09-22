@@ -278,9 +278,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,9 +310,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -356,9 +358,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -387,9 +390,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -408,7 +412,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -437,7 +444,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -482,7 +492,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -511,7 +524,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -530,9 +546,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -561,9 +578,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -608,9 +626,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -639,9 +658,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -660,7 +680,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataItemRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDataItemRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -689,7 +712,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataItemRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDataItemRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -734,7 +760,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataItemRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDataItemRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -763,7 +792,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetDataItemRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataItemRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetDataItemRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -782,9 +814,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotatedDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -814,9 +847,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotatedDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -861,9 +895,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotatedDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -892,9 +927,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotatedDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotatedDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -914,7 +950,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotatedDatasetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -947,7 +983,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotatedDatasetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -995,7 +1031,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotatedDatasetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1030,7 +1066,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotatedDatasetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotatedDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1054,7 +1090,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExampleRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetExampleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1083,7 +1122,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExampleRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetExampleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1128,7 +1170,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExampleRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetExampleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1157,7 +1202,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetExampleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExampleRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetExampleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1177,7 +1225,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1210,7 +1258,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1258,7 +1306,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1293,7 +1341,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.CreateAnnotationSpecSetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1317,9 +1365,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1349,9 +1398,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1396,9 +1446,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1427,9 +1478,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetAnnotationSpecSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1449,7 +1501,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1482,7 +1534,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1530,7 +1582,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1565,7 +1617,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAnnotationSpecSetRequest',
+        '.google.cloud.datalabeling.v1beta1.DeleteAnnotationSpecSetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1589,9 +1641,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1620,9 +1673,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1667,9 +1721,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1698,9 +1753,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1719,9 +1775,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1750,9 +1807,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1797,9 +1855,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1828,9 +1887,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstructionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteInstructionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1849,9 +1909,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1880,9 +1941,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1927,9 +1989,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1958,9 +2021,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1979,9 +2043,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEvaluationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2011,9 +2076,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEvaluationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2058,9 +2124,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEvaluationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2089,9 +2156,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEvaluationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateEvaluationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2111,10 +2179,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
       request.evaluationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEvaluationJobRequest', [
-        'evaluationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest',
+        ['evaluationJob', 'name']
+      );
       request.evaluationJob.name = defaultValue1;
       const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2145,10 +2213,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
       request.evaluationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEvaluationJobRequest', [
-        'evaluationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest',
+        ['evaluationJob', 'name']
+      );
       request.evaluationJob.name = defaultValue1;
       const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2194,10 +2262,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
       request.evaluationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEvaluationJobRequest', [
-        'evaluationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest',
+        ['evaluationJob', 'name']
+      );
       request.evaluationJob.name = defaultValue1;
       const expectedHeaderRequestParams = `evaluation_job.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2227,10 +2295,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest()
       );
       request.evaluationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEvaluationJobRequest', [
-        'evaluationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.UpdateEvaluationJobRequest',
+        ['evaluationJob', 'name']
+      );
       request.evaluationJob.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2249,9 +2317,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2280,9 +2349,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2327,9 +2397,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2358,9 +2429,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.GetEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2379,9 +2451,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2411,9 +2484,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2458,9 +2532,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2489,9 +2564,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.PauseEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2510,9 +2586,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2542,9 +2619,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2589,9 +2667,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2620,9 +2699,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ResumeEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2641,9 +2721,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2673,9 +2754,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2720,9 +2802,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2751,9 +2834,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEvaluationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.DeleteEvaluationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2772,7 +2856,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2802,7 +2889,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2854,7 +2944,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2883,7 +2976,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2956,7 +3052,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2986,7 +3085,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3038,7 +3140,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3067,7 +3172,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3140,9 +3248,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3172,9 +3281,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3226,9 +3336,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3257,9 +3368,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3332,9 +3444,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelVideoRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelVideoRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3364,9 +3477,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelVideoRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelVideoRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3418,9 +3532,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelVideoRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelVideoRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3449,9 +3564,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelVideoRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelVideoRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelVideoRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3524,7 +3640,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelTextRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelTextRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3554,7 +3673,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelTextRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelTextRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3606,7 +3728,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelTextRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelTextRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3635,7 +3760,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.LabelTextRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LabelTextRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.LabelTextRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3708,9 +3836,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstructionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateInstructionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3741,9 +3870,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstructionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateInstructionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3795,9 +3925,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstructionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateInstructionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3826,9 +3957,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.CreateInstructionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstructionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.CreateInstructionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3904,9 +4036,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3943,9 +4076,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3998,9 +4132,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4029,9 +4164,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4090,9 +4226,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4142,9 +4279,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4191,9 +4329,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4234,9 +4373,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4273,9 +4413,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4328,9 +4469,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4359,9 +4501,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4420,9 +4563,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4470,9 +4614,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4520,9 +4665,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListDataItemsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataItemsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListDataItemsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4564,7 +4710,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotatedDatasetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4605,7 +4751,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotatedDatasetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4663,7 +4809,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotatedDatasetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4698,7 +4844,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotatedDatasetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4768,7 +4914,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotatedDatasetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4827,7 +4973,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotatedDatasetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4882,7 +5028,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotatedDatasetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4929,9 +5075,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExamplesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListExamplesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4968,9 +5115,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExamplesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListExamplesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5023,9 +5171,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExamplesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListExamplesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5054,9 +5203,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExamplesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListExamplesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5115,9 +5265,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExamplesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListExamplesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5167,9 +5318,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExamplesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListExamplesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5216,9 +5368,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListExamplesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExamplesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListExamplesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5260,7 +5413,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotationSpecSetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5301,7 +5454,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotationSpecSetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5359,7 +5512,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotationSpecSetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5394,7 +5547,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotationSpecSetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5464,7 +5617,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotationSpecSetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5523,7 +5676,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotationSpecSetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5578,7 +5731,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAnnotationSpecSetsRequest',
+        '.google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5625,9 +5778,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstructionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListInstructionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5664,9 +5818,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstructionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListInstructionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5721,9 +5876,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstructionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListInstructionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5752,9 +5908,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstructionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListInstructionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5813,9 +5970,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstructionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListInstructionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5863,9 +6021,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstructionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListInstructionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5913,9 +6072,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListInstructionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstructionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListInstructionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5956,9 +6116,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5995,9 +6156,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6052,9 +6214,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6083,9 +6246,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6144,9 +6308,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6194,9 +6359,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6244,9 +6410,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.SearchEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6288,7 +6455,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchExampleComparisonsRequest',
+        '.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6329,7 +6496,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchExampleComparisonsRequest',
+        '.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6387,7 +6554,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchExampleComparisonsRequest',
+        '.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6422,7 +6589,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchExampleComparisonsRequest',
+        '.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6492,7 +6659,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchExampleComparisonsRequest',
+        '.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6551,7 +6718,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchExampleComparisonsRequest',
+        '.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6606,7 +6773,7 @@ describe('v1beta1.DataLabelingServiceClient', () => {
         new protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchExampleComparisonsRequest',
+        '.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6653,9 +6820,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEvaluationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6693,9 +6861,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEvaluationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6750,9 +6919,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEvaluationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6781,9 +6951,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEvaluationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6844,9 +7015,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEvaluationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6896,9 +7068,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEvaluationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6946,9 +7119,10 @@ describe('v1beta1.DataLabelingServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEvaluationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datalabeling.v1beta1.ListEvaluationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
