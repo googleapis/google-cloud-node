@@ -267,13 +267,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -301,13 +308,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -351,13 +365,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -382,13 +403,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -406,13 +434,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -440,13 +475,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -490,13 +532,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -524,13 +573,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CancelBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CancelBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('CancelBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CancelBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -548,13 +604,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -583,13 +641,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -633,13 +693,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -667,13 +729,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -691,17 +755,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -729,17 +796,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -783,17 +853,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -821,17 +894,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -849,17 +925,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -888,17 +967,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -942,17 +1024,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -980,17 +1065,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1008,19 +1096,21 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
       request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'trigger',
-        'resourceName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['trigger', 'resourceName']
+      );
       request.trigger.resourceName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1049,19 +1139,21 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
       request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'trigger',
-        'resourceName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['trigger', 'resourceName']
+      );
       request.trigger.resourceName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1105,19 +1197,21 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
       request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'trigger',
-        'resourceName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['trigger', 'resourceName']
+      );
       request.trigger.resourceName = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&trigger.resource_name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1145,19 +1239,21 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
       request.trigger ??= {};
-      const defaultValue3 = getTypeDefaultValue('UpdateBuildTriggerRequest', [
-        'trigger',
-        'resourceName',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateBuildTriggerRequest',
+        ['trigger', 'resourceName']
+      );
       request.trigger.resourceName = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1176,17 +1272,17 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['trigger']
       );
       request.trigger = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['name']
       );
       request.name = defaultValue3;
@@ -1218,17 +1314,17 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['trigger']
       );
       request.trigger = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['name']
       );
       request.name = defaultValue3;
@@ -1275,17 +1371,17 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['trigger']
       );
       request.trigger = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['name']
       );
       request.name = defaultValue3;
@@ -1319,17 +1415,17 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['trigger']
       );
       request.trigger = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ReceiveTriggerWebhookRequest',
+        '.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest',
         ['name']
       );
       request.name = defaultValue3;
@@ -1352,9 +1448,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1382,9 +1479,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1428,9 +1526,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1458,9 +1557,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.GetWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1478,13 +1578,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1513,13 +1615,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1570,13 +1674,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1604,13 +1710,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateBuildRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateBuildRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1680,13 +1788,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1715,13 +1830,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1772,13 +1894,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1806,13 +1935,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RetryBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RetryBuildRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RetryBuildRequest', ['id']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['id']
+      );
       request.id = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RetryBuildRequest', ['name']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RetryBuildRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1882,9 +2018,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1913,9 +2050,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1966,9 +2104,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1996,9 +2135,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ApproveBuildRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ApproveBuildRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ApproveBuildRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2068,17 +2208,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -2108,17 +2251,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -2169,17 +2315,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -2207,17 +2356,20 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.RunBuildTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'triggerId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['triggerId']
+      );
       request.triggerId = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('RunBuildTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.RunBuildTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&trigger_id=${defaultValue2}&name=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -2290,9 +2442,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2322,9 +2475,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2375,9 +2529,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2405,9 +2560,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkerPoolRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2480,9 +2636,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2512,9 +2669,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2565,9 +2723,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2595,9 +2754,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkerPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2671,10 +2831,10 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
       request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
-        'workerPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
+        ['workerPool', 'name']
+      );
       request.workerPool.name = defaultValue1;
       const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2705,10 +2865,10 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
       request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
-        'workerPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
+        ['workerPool', 'name']
+      );
       request.workerPool.name = defaultValue1;
       const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2760,10 +2920,10 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
       request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
-        'workerPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
+        ['workerPool', 'name']
+      );
       request.workerPool.name = defaultValue1;
       const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2792,10 +2952,10 @@ describe('v1.CloudBuildClient', () => {
         new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
       );
       request.workerPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkerPoolRequest', [
-        'workerPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest',
+        ['workerPool', 'name']
+      );
       request.workerPool.name = defaultValue1;
       const expectedHeaderRequestParams = `worker_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2868,13 +3028,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -2904,13 +3066,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -2956,13 +3120,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2990,13 +3156,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -3047,13 +3215,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -3101,13 +3271,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -3147,13 +3319,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildsRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildsRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -3194,13 +3368,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -3236,13 +3412,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -3294,13 +3472,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -3328,13 +3508,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -3392,13 +3574,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -3445,13 +3629,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedResponse = [
@@ -3498,13 +3684,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListBuildTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListBuildTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListBuildTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&parent=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -3544,9 +3732,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3582,9 +3771,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3636,9 +3826,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3666,9 +3857,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3725,9 +3917,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3773,9 +3966,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3821,9 +4015,10 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkerPoolsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
