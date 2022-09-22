@@ -174,9 +174,10 @@ describe('v1beta1.LookupServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResolveServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -204,9 +205,10 @@ describe('v1beta1.LookupServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResolveServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -250,9 +252,10 @@ describe('v1beta1.LookupServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResolveServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -280,9 +283,10 @@ describe('v1beta1.LookupServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResolveServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ResolveServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

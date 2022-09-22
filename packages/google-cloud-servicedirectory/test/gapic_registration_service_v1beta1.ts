@@ -246,9 +246,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNamespaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -277,9 +278,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNamespaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -324,9 +326,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNamespaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -355,9 +358,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNamespaceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateNamespaceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -376,9 +380,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -407,9 +412,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -454,9 +460,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -485,9 +492,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -507,10 +515,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
       request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNamespaceRequest', [
-        'namespace',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest',
+        ['namespace', 'name']
+      );
       request.namespace.name = defaultValue1;
       const expectedHeaderRequestParams = `namespace.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -540,10 +548,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
       request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNamespaceRequest', [
-        'namespace',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest',
+        ['namespace', 'name']
+      );
       request.namespace.name = defaultValue1;
       const expectedHeaderRequestParams = `namespace.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -589,10 +597,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
       request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNamespaceRequest', [
-        'namespace',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest',
+        ['namespace', 'name']
+      );
       request.namespace.name = defaultValue1;
       const expectedHeaderRequestParams = `namespace.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -622,10 +630,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest()
       );
       request.namespace ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNamespaceRequest', [
-        'namespace',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateNamespaceRequest',
+        ['namespace', 'name']
+      );
       request.namespace.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -644,9 +652,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -675,9 +684,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -722,9 +732,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -753,9 +764,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNamespaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteNamespaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -774,9 +786,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -805,9 +818,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -852,9 +866,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -883,9 +898,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateServiceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -904,7 +920,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -933,7 +952,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -978,7 +1000,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1007,7 +1032,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1027,10 +1055,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1060,10 +1088,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1109,10 +1137,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedHeaderRequestParams = `service.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1142,10 +1170,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest()
       );
       request.service ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateServiceRequest', [
-        'service',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateServiceRequest',
+        ['service', 'name']
+      );
       request.service.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1164,9 +1192,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1195,9 +1224,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1242,9 +1272,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1273,9 +1304,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1294,9 +1326,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1325,9 +1358,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1372,9 +1406,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1403,9 +1438,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1424,7 +1460,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1453,7 +1492,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1498,7 +1540,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1527,7 +1572,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1547,10 +1595,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
       request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEndpointRequest', [
-        'endpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest',
+        ['endpoint', 'name']
+      );
       request.endpoint.name = defaultValue1;
       const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1580,10 +1628,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
       request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEndpointRequest', [
-        'endpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest',
+        ['endpoint', 'name']
+      );
       request.endpoint.name = defaultValue1;
       const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1629,10 +1677,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
       request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEndpointRequest', [
-        'endpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest',
+        ['endpoint', 'name']
+      );
       request.endpoint.name = defaultValue1;
       const expectedHeaderRequestParams = `endpoint.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1662,10 +1710,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
         new protos.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest()
       );
       request.endpoint ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEndpointRequest', [
-        'endpoint',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.UpdateEndpointRequest',
+        ['endpoint', 'name']
+      );
       request.endpoint.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1684,9 +1732,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1715,9 +1764,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1762,9 +1812,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1793,9 +1844,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1814,9 +1866,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1845,9 +1898,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1892,9 +1946,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1923,9 +1978,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1944,9 +2000,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1975,9 +2032,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2022,9 +2080,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2053,9 +2112,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2074,9 +2134,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2106,9 +2167,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2153,9 +2215,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2184,9 +2247,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2205,9 +2269,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNamespacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2244,9 +2309,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNamespacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2301,9 +2367,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNamespacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2332,9 +2399,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNamespacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2395,9 +2463,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNamespacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2447,9 +2516,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNamespacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2497,9 +2567,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNamespacesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListNamespacesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2540,9 +2611,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2579,9 +2651,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2636,9 +2709,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2667,9 +2741,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2728,9 +2803,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2780,9 +2856,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2830,9 +2907,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2873,9 +2951,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2912,9 +2991,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2969,9 +3049,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3000,9 +3081,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3061,9 +3143,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3111,9 +3194,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3161,9 +3245,10 @@ describe('v1beta1.RegistrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.servicedirectory.v1beta1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
