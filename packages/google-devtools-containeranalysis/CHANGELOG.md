@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [4.3.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.2.0...v4.3.0) (2022-09-22)
+
+
+### Features
+
+* Accept google-gax instance as a parameter ([#433](https://github.com/googleapis/nodejs-containeranalysis/issues/433)) ([51e82fd](https://github.com/googleapis/nodejs-containeranalysis/commit/51e82fd484752113c48efba4ff42ac838b961056))
+
+
+### Bug Fixes
+
+* Better support for fallback mode ([#427](https://github.com/googleapis/nodejs-containeranalysis/issues/427)) ([c63417b](https://github.com/googleapis/nodejs-containeranalysis/commit/c63417b5728a83518ffd83602d94acc3d537328c))
+* Change import long to require ([#428](https://github.com/googleapis/nodejs-containeranalysis/issues/428)) ([4fd0750](https://github.com/googleapis/nodejs-containeranalysis/commit/4fd075018b8fc34cac0712aff3b15c61096016af))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-containeranalysis/issues/1553)) ([#432](https://github.com/googleapis/nodejs-containeranalysis/issues/432)) ([ea51fef](https://github.com/googleapis/nodejs-containeranalysis/commit/ea51fef4bb638eb1e2da9de5817a44e5652e404e))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-containeranalysis/issues/1546)) ([#431](https://github.com/googleapis/nodejs-containeranalysis/issues/431)) ([a0e674f](https://github.com/googleapis/nodejs-containeranalysis/commit/a0e674fcf24bac4a870ead8dfc9357609a868981))
+* use google-gax v3.3.0 ([ea51fef](https://github.com/googleapis/nodejs-containeranalysis/commit/ea51fef4bb638eb1e2da9de5817a44e5652e404e))
+
 ## [4.2.0](https://github.com/googleapis/nodejs-containeranalysis/compare/v4.1.0...v4.2.0) (2022-07-04)
 
 
