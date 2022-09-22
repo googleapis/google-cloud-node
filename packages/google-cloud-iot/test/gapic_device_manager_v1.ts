@@ -237,9 +237,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRegistryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -268,9 +269,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRegistryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -314,9 +316,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRegistryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -344,9 +347,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRegistryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRegistryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -364,9 +368,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -394,9 +399,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -440,9 +446,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -470,9 +477,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -491,10 +499,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
       request.deviceRegistry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
-        'deviceRegistry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRegistryRequest',
+        ['deviceRegistry', 'name']
+      );
       request.deviceRegistry.name = defaultValue1;
       const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -524,10 +532,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
       request.deviceRegistry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
-        'deviceRegistry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRegistryRequest',
+        ['deviceRegistry', 'name']
+      );
       request.deviceRegistry.name = defaultValue1;
       const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -572,10 +580,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
       request.deviceRegistry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
-        'deviceRegistry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRegistryRequest',
+        ['deviceRegistry', 'name']
+      );
       request.deviceRegistry.name = defaultValue1;
       const expectedHeaderRequestParams = `device_registry.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -604,10 +612,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRegistryRequest()
       );
       request.deviceRegistry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRegistryRequest', [
-        'deviceRegistry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRegistryRequest',
+        ['deviceRegistry', 'name']
+      );
       request.deviceRegistry.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -625,9 +633,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -656,9 +665,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -702,9 +712,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -732,9 +743,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRegistryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRegistryRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRegistryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -752,9 +764,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -782,9 +795,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -828,9 +842,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -858,9 +873,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.CreateDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDeviceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.CreateDeviceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -878,7 +894,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -906,7 +925,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -950,7 +972,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -975,7 +1000,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.GetDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDeviceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.GetDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -994,10 +1022,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
       request.device ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
-        'device',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRequest',
+        ['device', 'name']
+      );
       request.device.name = defaultValue1;
       const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1026,10 +1054,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
       request.device ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
-        'device',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRequest',
+        ['device', 'name']
+      );
       request.device.name = defaultValue1;
       const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1074,10 +1102,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
       request.device ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
-        'device',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRequest',
+        ['device', 'name']
+      );
       request.device.name = defaultValue1;
       const expectedHeaderRequestParams = `device.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1106,10 +1134,10 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UpdateDeviceRequest()
       );
       request.device ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDeviceRequest', [
-        'device',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.UpdateDeviceRequest',
+        ['device', 'name']
+      );
       request.device.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1127,9 +1155,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1157,9 +1186,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1203,9 +1233,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1233,9 +1264,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.DeleteDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.DeleteDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1254,7 +1286,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ModifyCloudToDeviceConfigRequest',
+        '.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1286,7 +1318,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ModifyCloudToDeviceConfigRequest',
+        '.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1333,7 +1365,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ModifyCloudToDeviceConfigRequest',
+        '.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1367,7 +1399,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ModifyCloudToDeviceConfigRequest',
+        '.google.cloud.iot.v1.ModifyCloudToDeviceConfigRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1391,7 +1423,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeviceConfigVersionsRequest',
+        '.google.cloud.iot.v1.ListDeviceConfigVersionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1423,7 +1455,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeviceConfigVersionsRequest',
+        '.google.cloud.iot.v1.ListDeviceConfigVersionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1470,7 +1502,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeviceConfigVersionsRequest',
+        '.google.cloud.iot.v1.ListDeviceConfigVersionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1504,7 +1536,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.ListDeviceConfigVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeviceConfigVersionsRequest',
+        '.google.cloud.iot.v1.ListDeviceConfigVersionsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1527,9 +1559,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceStatesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1557,9 +1590,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceStatesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1603,9 +1637,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceStatesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1633,9 +1668,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceStatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceStatesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceStatesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1653,9 +1689,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1683,9 +1720,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1729,9 +1767,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1759,9 +1798,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1779,9 +1819,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1809,9 +1850,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1855,9 +1897,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1885,9 +1928,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1905,9 +1949,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1936,9 +1981,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1982,9 +2028,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2012,9 +2059,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2032,9 +2080,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.SendCommandToDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2063,9 +2112,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.SendCommandToDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2109,9 +2159,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.SendCommandToDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2139,9 +2190,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.SendCommandToDeviceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendCommandToDeviceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.SendCommandToDeviceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2159,9 +2211,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.BindDeviceToGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2190,9 +2243,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.BindDeviceToGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2236,9 +2290,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.BindDeviceToGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2266,9 +2321,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.BindDeviceToGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BindDeviceToGatewayRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.BindDeviceToGatewayRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2287,7 +2343,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UnbindDeviceFromGatewayRequest',
+        '.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2319,7 +2375,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UnbindDeviceFromGatewayRequest',
+        '.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2366,7 +2422,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UnbindDeviceFromGatewayRequest',
+        '.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2400,7 +2456,7 @@ describe('v1.DeviceManagerClient', () => {
         new protos.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UnbindDeviceFromGatewayRequest',
+        '.google.cloud.iot.v1.UnbindDeviceFromGatewayRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2423,9 +2479,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceRegistriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2456,9 +2513,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceRegistriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2504,9 +2562,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceRegistriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2534,9 +2593,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceRegistriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2587,9 +2647,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceRegistriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2635,9 +2696,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceRegistriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2677,9 +2739,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDeviceRegistriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDeviceRegistriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDeviceRegistriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2718,9 +2781,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDevicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2750,9 +2814,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDevicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2798,9 +2863,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDevicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2828,9 +2894,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDevicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2878,9 +2945,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDevicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2925,9 +2993,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDevicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2967,9 +3036,10 @@ describe('v1.DeviceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iot.v1.ListDevicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDevicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iot.v1.ListDevicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
