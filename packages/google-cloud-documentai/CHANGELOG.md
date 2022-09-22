@@ -1,5 +1,28 @@
 # Changelog
 
+## [6.0.0](https://github.com/googleapis/nodejs-document-ai/compare/v5.0.0...v6.0.0) (2022-09-22)
+
+
+### ⚠ BREAKING CHANGES
+
+* Changed the name field for ProcessRequest and BatchProcessorRequest to accept * so the name field can accept Processor and ProcessorVersion.
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#354](https://github.com/googleapis/nodejs-document-ai/issues/354)) ([bfa1e06](https://github.com/googleapis/nodejs-document-ai/commit/bfa1e0694cd8529b04175970cc08035ddf1692c4))
+* Better support for fallback mode ([#348](https://github.com/googleapis/nodejs-document-ai/issues/348)) ([ae5f1ae](https://github.com/googleapis/nodejs-document-ai/commit/ae5f1aef32f87c7a8ca6a1d4189bf12369d0259e))
+* Change import long to require ([#350](https://github.com/googleapis/nodejs-document-ai/issues/350)) ([ba282ff](https://github.com/googleapis/nodejs-document-ai/commit/ba282ff23872947ef2df2dffb31ff978f2a5a6d9))
+* **deps:** Update dependency uuid to v9 ([#356](https://github.com/googleapis/nodejs-document-ai/issues/356)) ([b465fd2](https://github.com/googleapis/nodejs-document-ai/commit/b465fd2088b9e9269e5b5f2b24aa64fd42bdfffb))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-document-ai/issues/1553)) ([#353](https://github.com/googleapis/nodejs-document-ai/issues/353)) ([3e0beda](https://github.com/googleapis/nodejs-document-ai/commit/3e0beda24c8393e1b1b4e81b71a4ca95fee0056b))
+* Preserve default values in x-goog-request-params header ([#357](https://github.com/googleapis/nodejs-document-ai/issues/357)) ([17f61ed](https://github.com/googleapis/nodejs-document-ai/commit/17f61ed8fa6690845826987fb0f7471e289443b7))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-document-ai/issues/1546)) ([#352](https://github.com/googleapis/nodejs-document-ai/issues/352)) ([0624e90](https://github.com/googleapis/nodejs-document-ai/commit/0624e90f6e5944f2ee41294fa1e39d5c0b9916c5))
+* use google-gax v3.3.0 ([3e0beda](https://github.com/googleapis/nodejs-document-ai/commit/3e0beda24c8393e1b1b4e81b71a4ca95fee0056b))
+
+
+### Miscellaneous Chores
+
+* Remove unused proto imports ([#345](https://github.com/googleapis/nodejs-document-ai/issues/345)) ([5da430e](https://github.com/googleapis/nodejs-document-ai/commit/5da430e28bbd1298db8cda588c896873b1614191))
+
 ## [5.0.0](https://github.com/googleapis/nodejs-document-ai/compare/v4.1.0...v5.0.0) (2022-08-12)
 
 
