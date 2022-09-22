@@ -26,6 +26,7 @@ guides.
   * [Create Push Subscription](#create-push-subscription)
   * [Create Subscription](#create-subscription)
   * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
+  * [Create an exactly-once delivery subscription](#create-an-exactly-once-delivery-subscription)
   * [Create Subscription With Filtering](#create-subscription-with-filtering)
   * [Create Subscription with ordering enabled](#create-subscription-with-ordering-enabled)
   * [Create Topic](#create-topic)
@@ -45,6 +46,7 @@ guides.
   * [Listen For Avro Records](#listen-for-avro-records)
   * [Listen For Errors](#listen-for-errors)
   * [Listen For Messages](#listen-for-messages)
+  * [Listen with exactly-once delivery](#listen-with-exactly-once-delivery)
   * [Listen For Protobuf Messages](#listen-for-protobuf-messages)
   * [Listen For Messages With Custom Attributes](#listen-for-messages-with-custom-attributes)
   * [Modify Push Configuration](#modify-push-configuration)
@@ -192,6 +194,25 @@ __Usage:__
 
 
 `node createSubscriptionWithDeadLetterPolicy.js <topic-name-or-id> <subscription-name-or-id> <dead-letter-topic-name-or-id>`
+
+
+-----
+
+
+
+
+### Create an exactly-once delivery subscription
+
+Demonstrates how to create a subscription for exactly-once delivery.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createSubscriptionWithExactlyOnceDelivery.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscriptionWithExactlyOnceDelivery.js,samples/README.md)
+
+__Usage:__
+
+
+`node createSubscriptionWithExactlyOnceDelivery.js <topic-name-or-id> <subscription-name-or-id>`
 
 
 -----
@@ -553,6 +574,25 @@ __Usage:__
 
 
 `node listenForMessages.js <subscription-name-or-id> [timeout-in-seconds]`
+
+
+-----
+
+
+
+
+### Listen with exactly-once delivery
+
+Listen for messages on an exactly-once delivery subscription.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenForMessagesWithExactlyOnceDelivery.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForMessagesWithExactlyOnceDelivery.js,samples/README.md)
+
+__Usage:__
+
+
+`node listenForMessagesWithExactlyOnceDelivery.js <subscription-name-or-id>`
 
 
 -----

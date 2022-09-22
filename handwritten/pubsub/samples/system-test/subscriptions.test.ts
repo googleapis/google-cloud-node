@@ -505,4 +505,43 @@ describe('subscriptions', () => {
       .get();
     assert.strictEqual(subscription.metadata?.enableMessageOrdering, true);
   });
+
+  it('should create an exactly-once delivery sub and listen on it.', async () => {
+    const testId = 'eos';
+    const topic = await createTopic(testId);
+    const subName = reserveSub(testId);
+    const output = execSync(
+      `${commandFor('createSubscriptionWithExactlyOnceDelivery')} ${
+        topic.name
+      } ${subName}`
+    );
+    assert.include(
+      output,
+      `Created subscription ${subName} with exactly-once delivery.`
+    );
+
+    const [subscription] = await pubsub
+      .topic(topic.name)
+      .subscription(subName)
+      .get();
+    assert.strictEqual(subscription.metadata?.enableExactlyOnceDelivery, true);
+
+    const message = Buffer.from('test message');
+    const messageIds = [
+      await topic.publishMessage({
+        data: message,
+      }),
+      await topic.publishMessage({
+        data: message,
+      }),
+    ];
+
+    const output2 = execSync(
+      `${commandFor('listenForMessagesWithExactlyOnceDelivery')} ${subName} 15`
+    );
+
+    for (const id of messageIds) {
+      assert.include(output2, `Ack for message ${id} successful`);
+    }
+  });
 });
