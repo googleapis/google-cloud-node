@@ -430,9 +430,10 @@ describe('v1.WebRiskServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.CreateSubmissionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSubmissionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.webrisk.v1.CreateSubmissionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -460,9 +461,10 @@ describe('v1.WebRiskServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.CreateSubmissionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSubmissionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.webrisk.v1.CreateSubmissionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -506,9 +508,10 @@ describe('v1.WebRiskServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.CreateSubmissionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSubmissionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.webrisk.v1.CreateSubmissionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -536,9 +539,10 @@ describe('v1.WebRiskServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.webrisk.v1.CreateSubmissionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSubmissionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.webrisk.v1.CreateSubmissionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
