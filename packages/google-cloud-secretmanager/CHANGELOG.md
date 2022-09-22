@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.3](https://github.com/googleapis/nodejs-secret-manager/compare/v4.1.2...v4.1.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#403](https://github.com/googleapis/nodejs-secret-manager/issues/403)) ([af162f0](https://github.com/googleapis/nodejs-secret-manager/commit/af162f09e23d2e850c33bf0af8f77e9302b44e61))
+
 ## [4.1.2](https://github.com/googleapis/nodejs-secret-manager/compare/v4.1.1...v4.1.2) (2022-09-01)
 
 
