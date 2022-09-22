@@ -237,9 +237,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.CreateDashboardRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.CreateDashboardRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.CreateDashboardRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.CreateDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDashboardRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.CreateDashboardRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,9 +367,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.GetDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -393,9 +398,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.GetDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +445,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.GetDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -469,9 +476,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.GetDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.GetDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -489,9 +497,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.DeleteDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -519,9 +528,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.DeleteDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -565,9 +575,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.DeleteDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -595,9 +606,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.DeleteDashboardRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDashboardRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.DeleteDashboardRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -616,10 +628,10 @@ describe('v1.DashboardsServiceClient', () => {
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
       request.dashboard ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
-        'dashboard',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.UpdateDashboardRequest',
+        ['dashboard', 'name']
+      );
       request.dashboard.name = defaultValue1;
       const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -648,10 +660,10 @@ describe('v1.DashboardsServiceClient', () => {
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
       request.dashboard ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
-        'dashboard',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.UpdateDashboardRequest',
+        ['dashboard', 'name']
+      );
       request.dashboard.name = defaultValue1;
       const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -696,10 +708,10 @@ describe('v1.DashboardsServiceClient', () => {
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
       request.dashboard ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
-        'dashboard',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.UpdateDashboardRequest',
+        ['dashboard', 'name']
+      );
       request.dashboard.name = defaultValue1;
       const expectedHeaderRequestParams = `dashboard.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -728,10 +740,10 @@ describe('v1.DashboardsServiceClient', () => {
         new protos.google.monitoring.dashboard.v1.UpdateDashboardRequest()
       );
       request.dashboard ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDashboardRequest', [
-        'dashboard',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.UpdateDashboardRequest',
+        ['dashboard', 'name']
+      );
       request.dashboard.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -749,9 +761,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.ListDashboardsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -787,9 +800,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.ListDashboardsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -841,9 +855,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.ListDashboardsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -871,9 +886,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.ListDashboardsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -930,9 +946,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.ListDashboardsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -978,9 +995,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.ListDashboardsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1026,9 +1044,10 @@ describe('v1.DashboardsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.monitoring.dashboard.v1.ListDashboardsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDashboardsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.monitoring.dashboard.v1.ListDashboardsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
