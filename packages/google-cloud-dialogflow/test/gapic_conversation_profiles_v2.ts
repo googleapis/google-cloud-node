@@ -284,7 +284,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.GetConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -317,7 +317,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.GetConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -365,7 +365,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.GetConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -400,7 +400,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.GetConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -425,7 +425,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -458,7 +458,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -506,7 +506,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -541,7 +541,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -567,7 +567,7 @@ describe('v2.ConversationProfilesClient', () => {
       );
       request.conversationProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.UpdateConversationProfileRequest',
         ['conversationProfile', 'name']
       );
       request.conversationProfile.name = defaultValue1;
@@ -601,7 +601,7 @@ describe('v2.ConversationProfilesClient', () => {
       );
       request.conversationProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.UpdateConversationProfileRequest',
         ['conversationProfile', 'name']
       );
       request.conversationProfile.name = defaultValue1;
@@ -650,7 +650,7 @@ describe('v2.ConversationProfilesClient', () => {
       );
       request.conversationProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.UpdateConversationProfileRequest',
         ['conversationProfile', 'name']
       );
       request.conversationProfile.name = defaultValue1;
@@ -686,7 +686,7 @@ describe('v2.ConversationProfilesClient', () => {
       );
       request.conversationProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.UpdateConversationProfileRequest',
         ['conversationProfile', 'name']
       );
       request.conversationProfile.name = defaultValue1;
@@ -711,7 +711,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -744,7 +744,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -792,7 +792,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -827,7 +827,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationProfileRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -852,7 +852,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -886,7 +886,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -941,7 +941,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -976,7 +976,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.SetSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -1056,7 +1056,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ClearSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -1090,7 +1090,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ClearSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -1145,7 +1145,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ClearSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -1180,7 +1180,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ClearSuggestionFeatureConfigRequest',
+        '.google.cloud.dialogflow.v2.ClearSuggestionFeatureConfigRequest',
         ['conversationProfile']
       );
       request.conversationProfile = defaultValue1;
@@ -1260,7 +1260,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationProfilesRequest',
+        '.google.cloud.dialogflow.v2.ListConversationProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1301,7 +1301,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationProfilesRequest',
+        '.google.cloud.dialogflow.v2.ListConversationProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1359,7 +1359,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationProfilesRequest',
+        '.google.cloud.dialogflow.v2.ListConversationProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1394,7 +1394,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationProfilesRequest',
+        '.google.cloud.dialogflow.v2.ListConversationProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1462,7 +1462,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationProfilesRequest',
+        '.google.cloud.dialogflow.v2.ListConversationProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1519,7 +1519,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationProfilesRequest',
+        '.google.cloud.dialogflow.v2.ListConversationProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1574,7 +1574,7 @@ describe('v2.ConversationProfilesClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationProfilesRequest',
+        '.google.cloud.dialogflow.v2.ListConversationProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

@@ -274,9 +274,10 @@ describe('v2.ConversationModelsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetConversationModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -305,9 +306,10 @@ describe('v2.ConversationModelsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetConversationModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -351,9 +353,10 @@ describe('v2.ConversationModelsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetConversationModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -381,9 +384,10 @@ describe('v2.ConversationModelsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetConversationModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversationModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetConversationModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -402,7 +406,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -434,7 +438,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -481,7 +485,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -515,7 +519,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.GetConversationModelEvaluationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -539,7 +543,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -572,7 +576,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -626,7 +630,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -660,7 +664,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -737,7 +741,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -770,7 +774,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -824,7 +828,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -858,7 +862,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -935,7 +939,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -968,7 +972,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1022,7 +1026,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1056,7 +1060,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.DeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1133,7 +1137,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.UndeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.UndeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1166,7 +1170,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.UndeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.UndeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1220,7 +1224,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.UndeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.UndeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1254,7 +1258,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.UndeployConversationModelRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UndeployConversationModelRequest',
+        '.google.cloud.dialogflow.v2.UndeployConversationModelRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1331,7 +1335,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1366,7 +1370,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1420,7 +1424,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1452,7 +1456,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationModelEvaluationRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationModelEvaluationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1528,7 +1532,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1568,7 +1572,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1625,7 +1629,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1659,7 +1663,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1726,7 +1730,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1782,7 +1786,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1836,7 +1840,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1883,7 +1887,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelEvaluationsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1923,7 +1927,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelEvaluationsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1980,7 +1984,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelEvaluationsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2014,7 +2018,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelEvaluationsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2086,7 +2090,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelEvaluationsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2147,7 +2151,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelEvaluationsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2201,7 +2205,7 @@ describe('v2.ConversationModelsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationModelEvaluationsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationModelEvaluationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

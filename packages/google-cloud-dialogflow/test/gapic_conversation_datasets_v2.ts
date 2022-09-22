@@ -284,7 +284,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.GetConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -317,7 +317,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.GetConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -365,7 +365,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.GetConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -400,7 +400,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.GetConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.GetConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -425,7 +425,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationDatasetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -459,7 +459,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationDatasetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -514,7 +514,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationDatasetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -549,7 +549,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.CreateConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.CreateConversationDatasetRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -629,7 +629,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -663,7 +663,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -718,7 +718,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -753,7 +753,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversationDatasetRequest',
+        '.google.cloud.dialogflow.v2.DeleteConversationDatasetRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -833,7 +833,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ImportConversationDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConversationDataRequest',
+        '.google.cloud.dialogflow.v2.ImportConversationDataRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -867,7 +867,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ImportConversationDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConversationDataRequest',
+        '.google.cloud.dialogflow.v2.ImportConversationDataRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -922,7 +922,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ImportConversationDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConversationDataRequest',
+        '.google.cloud.dialogflow.v2.ImportConversationDataRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -957,7 +957,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ImportConversationDataRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConversationDataRequest',
+        '.google.cloud.dialogflow.v2.ImportConversationDataRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1036,7 +1036,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationDatasetsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1077,7 +1077,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationDatasetsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1135,7 +1135,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationDatasetsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1170,7 +1170,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationDatasetsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1238,7 +1238,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationDatasetsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1295,7 +1295,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationDatasetsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1350,7 +1350,7 @@ describe('v2.ConversationDatasetsClient', () => {
         new protos.google.cloud.dialogflow.v2.ListConversationDatasetsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConversationDatasetsRequest',
+        '.google.cloud.dialogflow.v2.ListConversationDatasetsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

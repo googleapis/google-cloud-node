@@ -272,7 +272,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDocumentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GetDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -300,7 +303,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDocumentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GetDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -344,7 +350,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDocumentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GetDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -372,7 +381,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDocumentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.GetDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -390,9 +402,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDocumentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.CreateDocumentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -422,9 +435,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDocumentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.CreateDocumentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -475,9 +489,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDocumentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.CreateDocumentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -505,9 +520,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.CreateDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDocumentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.CreateDocumentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -580,9 +596,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -612,9 +629,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -665,9 +683,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -695,9 +714,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ImportDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -770,9 +790,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -802,9 +823,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -855,9 +877,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -885,9 +908,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.DeleteDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -961,10 +985,10 @@ describe('v2beta1.DocumentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest()
       );
       request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDocumentRequest', [
-        'document',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest',
+        ['document', 'name']
+      );
       request.document.name = defaultValue1;
       const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -995,10 +1019,10 @@ describe('v2beta1.DocumentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest()
       );
       request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDocumentRequest', [
-        'document',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest',
+        ['document', 'name']
+      );
       request.document.name = defaultValue1;
       const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1050,10 +1074,10 @@ describe('v2beta1.DocumentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest()
       );
       request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDocumentRequest', [
-        'document',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest',
+        ['document', 'name']
+      );
       request.document.name = defaultValue1;
       const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1082,10 +1106,10 @@ describe('v2beta1.DocumentsClient', () => {
         new protos.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest()
       );
       request.document ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDocumentRequest', [
-        'document',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.UpdateDocumentRequest',
+        ['document', 'name']
+      );
       request.document.name = defaultValue1;
       const expectedHeaderRequestParams = `document.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1158,9 +1182,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReloadDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1190,9 +1215,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReloadDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1243,9 +1269,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReloadDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1273,9 +1300,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReloadDocumentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ReloadDocumentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1348,9 +1376,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ListDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1386,9 +1415,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ListDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1440,9 +1470,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ListDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1470,9 +1501,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ListDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1529,9 +1561,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ListDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1577,9 +1610,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ListDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1625,9 +1659,10 @@ describe('v2beta1.DocumentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.ListDocumentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDocumentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2beta1.ListDocumentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

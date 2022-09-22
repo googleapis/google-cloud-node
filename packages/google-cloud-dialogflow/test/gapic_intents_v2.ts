@@ -272,7 +272,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIntentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -300,7 +303,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIntentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -344,7 +350,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIntentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -369,7 +378,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIntentRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,9 +399,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIntentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateIntentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -417,9 +430,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIntentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateIntentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -463,9 +477,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIntentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateIntentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -493,9 +508,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIntentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateIntentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -514,10 +530,10 @@ describe('v2.IntentsClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateIntentRequest()
       );
       request.intent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIntentRequest', [
-        'intent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateIntentRequest',
+        ['intent', 'name']
+      );
       request.intent.name = defaultValue1;
       const expectedHeaderRequestParams = `intent.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -546,10 +562,10 @@ describe('v2.IntentsClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateIntentRequest()
       );
       request.intent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIntentRequest', [
-        'intent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateIntentRequest',
+        ['intent', 'name']
+      );
       request.intent.name = defaultValue1;
       const expectedHeaderRequestParams = `intent.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -594,10 +610,10 @@ describe('v2.IntentsClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateIntentRequest()
       );
       request.intent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIntentRequest', [
-        'intent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateIntentRequest',
+        ['intent', 'name']
+      );
       request.intent.name = defaultValue1;
       const expectedHeaderRequestParams = `intent.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -626,10 +642,10 @@ describe('v2.IntentsClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateIntentRequest()
       );
       request.intent ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIntentRequest', [
-        'intent',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateIntentRequest',
+        ['intent', 'name']
+      );
       request.intent.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -647,9 +663,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIntentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -677,9 +694,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIntentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -723,9 +741,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIntentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -753,9 +772,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteIntentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIntentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteIntentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -773,9 +793,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -805,9 +826,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -858,9 +880,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -888,9 +911,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -963,9 +987,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -995,9 +1020,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1048,9 +1074,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1078,9 +1105,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1153,9 +1181,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1185,9 +1214,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1233,9 +1263,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1263,9 +1294,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1316,9 +1348,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1366,9 +1399,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1408,9 +1442,10 @@ describe('v2.IntentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListIntentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIntentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListIntentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

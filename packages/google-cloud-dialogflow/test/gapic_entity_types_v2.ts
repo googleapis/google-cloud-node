@@ -272,9 +272,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -302,9 +303,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -348,9 +350,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -378,9 +381,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.GetEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.GetEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -398,9 +402,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntityTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateEntityTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -428,9 +433,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntityTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateEntityTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -474,9 +480,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntityTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateEntityTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -504,9 +511,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.CreateEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntityTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.CreateEntityTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -525,10 +533,10 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateEntityTypeRequest()
       );
       request.entityType ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntityTypeRequest', [
-        'entityType',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateEntityTypeRequest',
+        ['entityType', 'name']
+      );
       request.entityType.name = defaultValue1;
       const expectedHeaderRequestParams = `entity_type.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -557,10 +565,10 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateEntityTypeRequest()
       );
       request.entityType ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntityTypeRequest', [
-        'entityType',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateEntityTypeRequest',
+        ['entityType', 'name']
+      );
       request.entityType.name = defaultValue1;
       const expectedHeaderRequestParams = `entity_type.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -605,10 +613,10 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateEntityTypeRequest()
       );
       request.entityType ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntityTypeRequest', [
-        'entityType',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateEntityTypeRequest',
+        ['entityType', 'name']
+      );
       request.entityType.name = defaultValue1;
       const expectedHeaderRequestParams = `entity_type.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -637,10 +645,10 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.UpdateEntityTypeRequest()
       );
       request.entityType ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntityTypeRequest', [
-        'entityType',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.UpdateEntityTypeRequest',
+        ['entityType', 'name']
+      );
       request.entityType.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -658,9 +666,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -688,9 +697,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -734,9 +744,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -764,9 +775,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.DeleteEntityTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntityTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.DeleteEntityTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -785,7 +797,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -818,7 +830,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -872,7 +884,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -906,7 +918,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchUpdateEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -982,7 +994,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchDeleteEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1015,7 +1027,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchDeleteEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1069,7 +1081,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchDeleteEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1103,7 +1115,7 @@ describe('v2.EntityTypesClient', () => {
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchDeleteEntityTypesRequest',
+        '.google.cloud.dialogflow.v2.BatchDeleteEntityTypesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1178,9 +1190,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1210,9 +1223,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1263,9 +1277,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1293,9 +1308,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchCreateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1368,9 +1384,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1400,9 +1417,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1453,9 +1471,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1483,9 +1502,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchUpdateEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1558,9 +1578,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1590,9 +1611,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1643,9 +1665,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1673,9 +1696,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteEntitiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.BatchDeleteEntitiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1748,9 +1772,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListEntityTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntityTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListEntityTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1786,9 +1811,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListEntityTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntityTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListEntityTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1840,9 +1866,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListEntityTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntityTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListEntityTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1870,9 +1897,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListEntityTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntityTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListEntityTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1929,9 +1957,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListEntityTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntityTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListEntityTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1977,9 +2006,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListEntityTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntityTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListEntityTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2025,9 +2055,10 @@ describe('v2.EntityTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2.ListEntityTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntityTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.dialogflow.v2.ListEntityTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
