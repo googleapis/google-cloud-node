@@ -235,9 +235,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CreateExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExecutionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CreateExecutionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CreateExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExecutionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CreateExecutionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CreateExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExecutionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CreateExecutionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CreateExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateExecutionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CreateExecutionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.GetExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.GetExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,9 +396,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.GetExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.GetExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -437,9 +443,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.GetExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.GetExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -467,9 +474,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.GetExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.GetExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -487,9 +495,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CancelExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CancelExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -517,9 +526,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CancelExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CancelExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -563,9 +573,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CancelExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CancelExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -593,9 +604,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.CancelExecutionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelExecutionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.CancelExecutionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -613,9 +625,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.ListExecutionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExecutionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.ListExecutionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -651,9 +664,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.ListExecutionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExecutionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.ListExecutionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -707,9 +721,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.ListExecutionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExecutionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.ListExecutionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -737,9 +752,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.ListExecutionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExecutionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.ListExecutionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -799,9 +815,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.ListExecutionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExecutionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.ListExecutionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -850,9 +867,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.ListExecutionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExecutionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.ListExecutionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -899,9 +917,10 @@ describe('v1beta.ExecutionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.executions.v1beta.ListExecutionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListExecutionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.executions.v1beta.ListExecutionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

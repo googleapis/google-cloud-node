@@ -267,7 +267,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.GetWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkflowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.GetWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,9 +397,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -417,9 +430,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -470,9 +484,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -500,9 +515,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.CreateWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkflowRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.CreateWorkflowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -575,9 +591,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -607,9 +624,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -660,9 +678,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -690,9 +709,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.DeleteWorkflowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkflowRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.DeleteWorkflowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -766,10 +786,10 @@ describe('v1beta.WorkflowsClient', () => {
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
       request.workflow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
-        'workflow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name']
+      );
       request.workflow.name = defaultValue1;
       const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -800,10 +820,10 @@ describe('v1beta.WorkflowsClient', () => {
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
       request.workflow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
-        'workflow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name']
+      );
       request.workflow.name = defaultValue1;
       const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -855,10 +875,10 @@ describe('v1beta.WorkflowsClient', () => {
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
       request.workflow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
-        'workflow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name']
+      );
       request.workflow.name = defaultValue1;
       const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -887,10 +907,10 @@ describe('v1beta.WorkflowsClient', () => {
         new protos.google.cloud.workflows.v1beta.UpdateWorkflowRequest()
       );
       request.workflow ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateWorkflowRequest', [
-        'workflow',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.UpdateWorkflowRequest',
+        ['workflow', 'name']
+      );
       request.workflow.name = defaultValue1;
       const expectedHeaderRequestParams = `workflow.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -963,9 +983,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1001,9 +1022,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1055,9 +1077,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1085,9 +1108,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1144,9 +1168,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1192,9 +1217,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1240,9 +1266,10 @@ describe('v1beta.WorkflowsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.workflows.v1beta.ListWorkflowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListWorkflowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.workflows.v1beta.ListWorkflowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
