@@ -237,7 +237,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,7 +268,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,7 +315,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -334,7 +343,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -352,7 +364,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -380,7 +395,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -424,7 +442,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -449,7 +470,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -468,10 +492,10 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -500,10 +524,10 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -548,10 +572,10 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedHeaderRequestParams = `job.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -577,10 +601,10 @@ describe('v1.CloudSchedulerClient', () => {
         new protos.google.cloud.scheduler.v1.UpdateJobRequest()
       );
       request.job ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'job',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.UpdateJobRequest',
+        ['job', 'name']
+      );
       request.job.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -598,7 +622,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -626,7 +653,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -670,7 +700,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -695,7 +728,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -713,7 +749,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.PauseJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -741,7 +780,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.PauseJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -785,7 +827,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.PauseJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -810,7 +855,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.PauseJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.PauseJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -828,7 +876,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ResumeJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -856,7 +907,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ResumeJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -900,7 +954,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ResumeJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -925,7 +982,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ResumeJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ResumeJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -943,7 +1003,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.RunJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -971,7 +1034,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.RunJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1015,7 +1081,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.RunJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1040,7 +1109,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.RunJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.RunJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1058,7 +1130,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1088,7 +1163,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1134,7 +1212,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1159,7 +1240,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1207,7 +1291,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1252,7 +1339,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1291,7 +1381,10 @@ describe('v1.CloudSchedulerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.scheduler.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.scheduler.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
