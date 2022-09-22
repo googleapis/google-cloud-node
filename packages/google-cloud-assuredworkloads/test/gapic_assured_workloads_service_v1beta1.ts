@@ -391,7 +391,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestrictAllowedResourcesRequest',
+        '.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -426,7 +426,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestrictAllowedResourcesRequest',
+        '.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -476,7 +476,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestrictAllowedResourcesRequest',
+        '.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -513,7 +513,7 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
         new protos.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestrictAllowedResourcesRequest',
+        '.google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -539,9 +539,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -572,9 +573,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -621,9 +623,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -654,9 +657,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteWorkloadRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -868,9 +872,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -903,9 +908,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -959,9 +965,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -992,9 +999,10 @@ describe('v1beta1.AssuredWorkloadsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateWorkloadRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
