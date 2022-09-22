@@ -1900,6 +1900,11 @@
                           "oneof": [
                             "threadsPerCore"
                           ]
+                        },
+                        "_visibleCoreCount": {
+                          "oneof": [
+                            "visibleCoreCount"
+                          ]
                         }
                       },
                       "fields": {
@@ -1920,6 +1925,13 @@
                         "threadsPerCore": {
                           "type": "int32",
                           "id": 352611671,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "visibleCoreCount": {
+                          "type": "int32",
+                          "id": 193198684,
                           "options": {
                             "proto3_optional": true
                           }
@@ -4306,6 +4318,91 @@
                         }
                       }
                     },
+                    "AggregatedListSslPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AggregatedListSubnetworksRequest": {
                       "oneofs": {
                         "_filter": {
@@ -5517,6 +5614,11 @@
                             "diskSizeGb"
                           ]
                         },
+                        "_forceAttach": {
+                          "oneof": [
+                            "forceAttach"
+                          ]
+                        },
                         "_index": {
                           "oneof": [
                             "index"
@@ -5597,6 +5699,13 @@
                         "diskSizeGb": {
                           "type": "int64",
                           "id": 316263735,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "forceAttach": {
+                          "type": "bool",
+                          "id": 142758425,
                           "options": {
                             "proto3_optional": true
                           }
@@ -5817,6 +5926,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         },
                         "resourcePolicies": {
                           "rule": "repeated",
@@ -6897,6 +7011,11 @@
                             "cdnPolicy"
                           ]
                         },
+                        "_compressionMode": {
+                          "oneof": [
+                            "compressionMode"
+                          ]
+                        },
                         "_creationTimestamp": {
                           "oneof": [
                             "creationTimestamp"
@@ -6949,6 +7068,13 @@
                         "cdnPolicy": {
                           "type": "BackendBucketCdnPolicy",
                           "id": 213976452,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "compressionMode": {
+                          "type": "string",
+                          "id": 95520988,
                           "options": {
                             "proto3_optional": true
                           }
@@ -7012,6 +7138,15 @@
                           "id": 456214797,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CompressionMode": {
+                          "values": {
+                            "UNDEFINED_COMPRESSION_MODE": 0,
+                            "AUTOMATIC": 165298699,
+                            "DISABLED": 516696700
                           }
                         }
                       }
@@ -7306,6 +7441,11 @@
                             "circuitBreakers"
                           ]
                         },
+                        "_compressionMode": {
+                          "oneof": [
+                            "compressionMode"
+                          ]
+                        },
                         "_connectionDraining": {
                           "oneof": [
                             "connectionDraining"
@@ -7475,6 +7615,13 @@
                         "circuitBreakers": {
                           "type": "CircuitBreakers",
                           "id": 421340061,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "compressionMode": {
+                          "type": "string",
+                          "id": 95520988,
                           "options": {
                             "proto3_optional": true
                           }
@@ -7709,6 +7856,13 @@
                         }
                       },
                       "nested": {
+                        "CompressionMode": {
+                          "values": {
+                            "UNDEFINED_COMPRESSION_MODE": 0,
+                            "AUTOMATIC": 165298699,
+                            "DISABLED": 516696700
+                          }
+                        },
                         "LoadBalancingScheme": {
                           "values": {
                             "UNDEFINED_LOAD_BALANCING_SCHEME": 0,
@@ -9472,6 +9626,11 @@
                             "selfLink"
                           ]
                         },
+                        "_splitSourceCommitment": {
+                          "oneof": [
+                            "splitSourceCommitment"
+                          ]
+                        },
                         "_startTimestamp": {
                           "oneof": [
                             "startTimestamp"
@@ -9550,6 +9709,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "mergeSourceCommitments": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 188093761
+                        },
                         "name": {
                           "type": "string",
                           "id": 3373707,
@@ -9584,6 +9748,13 @@
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "splitSourceCommitment": {
+                          "type": "string",
+                          "id": 402611156,
                           "options": {
                             "proto3_optional": true
                           }
@@ -12397,6 +12568,47 @@
                         }
                       }
                     },
+                    "DeleteRegionSslPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sslPolicy": {
+                          "type": "string",
+                          "id": 295190213,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "DeleteRegionTargetHttpProxyRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -12473,6 +12685,47 @@
                         "targetHttpsProxy": {
                           "type": "string",
                           "id": 52336748,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRegionTargetTcpProxyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetTcpProxy": {
+                          "type": "string",
+                          "id": 503065442,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -13798,6 +14051,11 @@
                             "options"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_physicalBlockSizeBytes": {
                           "oneof": [
                             "physicalBlockSizeBytes"
@@ -13990,6 +14248,13 @@
                         "options": {
                           "type": "string",
                           "id": 361137822,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "DiskParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -14399,6 +14664,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "DiskParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -17891,6 +18165,38 @@
                         }
                       }
                     },
+                    "GetIamPolicyBackendServiceRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetIamPolicyDiskRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
@@ -18194,6 +18500,45 @@
                       }
                     },
                     "GetIamPolicyNodeTemplateRequest": {
+                      "oneofs": {
+                        "_optionsRequestedPolicyVersion": {
+                          "oneof": [
+                            "optionsRequestedPolicyVersion"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "optionsRequestedPolicyVersion": {
+                          "type": "int32",
+                          "id": 499220029,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetIamPolicyRegionBackendServiceRequest": {
                       "oneofs": {
                         "_optionsRequestedPolicyVersion": {
                           "oneof": [
@@ -19495,6 +19840,31 @@
                         }
                       }
                     },
+                    "GetRegionSslPolicyRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sslPolicy": {
+                          "type": "string",
+                          "id": 295190213,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetRegionTargetHttpProxyRequest": {
                       "fields": {
                         "project": {
@@ -19539,6 +19909,31 @@
                         "targetHttpsProxy": {
                           "type": "string",
                           "id": 52336748,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRegionTargetTcpProxyRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetTcpProxy": {
+                          "type": "string",
+                          "id": 503065442,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -24937,6 +25332,47 @@
                         }
                       }
                     },
+                    "InsertRegionSslPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sslPolicyResource": {
+                          "type": "SslPolicy",
+                          "id": 274891848,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "InsertRegionTargetHttpProxyRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -25013,6 +25449,47 @@
                         "targetHttpsProxyResource": {
                           "type": "TargetHttpsProxy",
                           "id": 433657473,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "InsertRegionTargetTcpProxyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetTcpProxyResource": {
+                          "type": "TargetTcpProxy",
+                          "id": 145913931,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -26428,6 +26905,90 @@
                         "warning": {
                           "type": "Warning",
                           "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceConsumptionData": {
+                      "oneofs": {
+                        "_consumptionInfo": {
+                          "oneof": [
+                            "consumptionInfo"
+                          ]
+                        },
+                        "_instance": {
+                          "oneof": [
+                            "instance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "consumptionInfo": {
+                          "type": "InstanceConsumptionInfo",
+                          "id": 146354898,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 18257045,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InstanceConsumptionInfo": {
+                      "oneofs": {
+                        "_guestCpus": {
+                          "oneof": [
+                            "guestCpus"
+                          ]
+                        },
+                        "_localSsdGb": {
+                          "oneof": [
+                            "localSsdGb"
+                          ]
+                        },
+                        "_memoryMb": {
+                          "oneof": [
+                            "memoryMb"
+                          ]
+                        },
+                        "_minNodeCpus": {
+                          "oneof": [
+                            "minNodeCpus"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "guestCpus": {
+                          "type": "int32",
+                          "id": 393356754,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "localSsdGb": {
+                          "type": "int32",
+                          "id": 329237578,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "memoryMb": {
+                          "type": "int32",
+                          "id": 116001171,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "minNodeCpus": {
+                          "type": "int32",
+                          "id": 317231675,
                           "options": {
                             "proto3_optional": true
                           }
@@ -31638,6 +32199,86 @@
                         }
                       }
                     },
+                    "ListAvailableFeaturesRegionSslPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListAvailableFeaturesSslPoliciesRequest": {
                       "oneofs": {
                         "_filter": {
@@ -36830,6 +37471,86 @@
                         }
                       }
                     },
+                    "ListRegionSslPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListRegionTargetHttpProxiesRequest": {
                       "oneofs": {
                         "_filter": {
@@ -36911,6 +37632,86 @@
                       }
                     },
                     "ListRegionTargetHttpsProxiesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListRegionTargetTcpProxiesRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -42342,6 +43143,11 @@
                             "selfLink"
                           ]
                         },
+                        "_shareSettings": {
+                          "oneof": [
+                            "shareSettings"
+                          ]
+                        },
                         "_size": {
                           "oneof": [
                             "size"
@@ -42439,6 +43245,13 @@
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shareSettings": {
+                          "type": "ShareSettings",
+                          "id": 266668163,
                           "options": {
                             "proto3_optional": true
                           }
@@ -42718,6 +43531,11 @@
                     },
                     "NodeGroupNode": {
                       "oneofs": {
+                        "_consumedResources": {
+                          "oneof": [
+                            "consumedResources"
+                          ]
+                        },
                         "_cpuOvercommitType": {
                           "oneof": [
                             "cpuOvercommitType"
@@ -42752,6 +43570,11 @@
                           "oneof": [
                             "status"
                           ]
+                        },
+                        "_totalResources": {
+                          "oneof": [
+                            "totalResources"
+                          ]
                         }
                       },
                       "fields": {
@@ -42759,6 +43582,13 @@
                           "rule": "repeated",
                           "type": "AcceleratorConfig",
                           "id": 269577064
+                        },
+                        "consumedResources": {
+                          "type": "InstanceConsumptionInfo",
+                          "id": 334527118,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "cpuOvercommitType": {
                           "type": "string",
@@ -42771,6 +43601,11 @@
                           "rule": "repeated",
                           "type": "LocalDisk",
                           "id": 95594102
+                        },
+                        "instanceConsumptionData": {
+                          "rule": "repeated",
+                          "type": "InstanceConsumptionData",
+                          "id": 84715576
                         },
                         "instances": {
                           "rule": "repeated",
@@ -42815,6 +43650,13 @@
                         "status": {
                           "type": "string",
                           "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalResources": {
+                          "type": "InstanceConsumptionInfo",
+                          "id": 97406698,
                           "options": {
                             "proto3_optional": true
                           }
@@ -46488,6 +47330,54 @@
                         "securityPolicyResource": {
                           "type": "SecurityPolicy",
                           "id": 216159612,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PatchRegionSslPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sslPolicy": {
+                          "type": "string",
+                          "id": 295190213,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sslPolicyResource": {
+                          "type": "SslPolicy",
+                          "id": 274891848,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -55334,6 +56224,11 @@
                     },
                     "SecurityPolicyAdvancedOptionsConfig": {
                       "oneofs": {
+                        "_jsonCustomConfig": {
+                          "oneof": [
+                            "jsonCustomConfig"
+                          ]
+                        },
                         "_jsonParsing": {
                           "oneof": [
                             "jsonParsing"
@@ -55346,6 +56241,13 @@
                         }
                       },
                       "fields": {
+                        "jsonCustomConfig": {
+                          "type": "SecurityPolicyAdvancedOptionsConfigJsonCustomConfig",
+                          "id": 111570105,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "jsonParsing": {
                           "type": "string",
                           "id": 282493529,
@@ -55375,6 +56277,15 @@
                             "NORMAL": 161067239,
                             "VERBOSE": 532219234
                           }
+                        }
+                      }
+                    },
+                    "SecurityPolicyAdvancedOptionsConfigJsonCustomConfig": {
+                      "fields": {
+                        "contentTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 17428787
                         }
                       }
                     },
@@ -56989,6 +57900,31 @@
                         }
                       }
                     },
+                    "SetIamPolicyBackendServiceRequest": {
+                      "fields": {
+                        "globalSetPolicyRequestResource": {
+                          "type": "GlobalSetPolicyRequest",
+                          "id": 337048498,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetIamPolicyDiskRequest": {
                       "fields": {
                         "project": {
@@ -57229,6 +58165,38 @@
                       }
                     },
                     "SetIamPolicyNodeTemplateRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "regionSetPolicyRequestResource": {
+                          "type": "RegionSetPolicyRequest",
+                          "id": 276489091,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetIamPolicyRegionBackendServiceRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -57573,6 +58541,54 @@
                         }
                       }
                     },
+                    "SetLabelsAddressRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionSetLabelsRequestResource": {
+                          "type": "RegionSetLabelsRequest",
+                          "id": 259357782,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetLabelsDiskRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -57695,6 +58711,32 @@
                         }
                       }
                     },
+                    "SetLabelsGlobalAddressRequest": {
+                      "fields": {
+                        "globalSetLabelsRequestResource": {
+                          "type": "GlobalSetLabelsRequest",
+                          "id": 319917189,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetLabelsGlobalForwardingRuleRequest": {
                       "fields": {
                         "globalSetLabelsRequestResource": {
@@ -57795,6 +58837,80 @@
                         }
                       }
                     },
+                    "SetLabelsInterconnectAttachmentRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionSetLabelsRequestResource": {
+                          "type": "RegionSetLabelsRequest",
+                          "id": 259357782,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetLabelsInterconnectRequest": {
+                      "fields": {
+                        "globalSetLabelsRequestResource": {
+                          "type": "GlobalSetLabelsRequest",
+                          "id": 319917189,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetLabelsRegionDiskRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -57843,6 +58959,32 @@
                         }
                       }
                     },
+                    "SetLabelsSecurityPolicyRequest": {
+                      "fields": {
+                        "globalSetLabelsRequestResource": {
+                          "type": "GlobalSetLabelsRequest",
+                          "id": 319917189,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetLabelsSnapshotRequest": {
                       "fields": {
                         "globalSetLabelsRequestResource": {
@@ -57869,7 +59011,103 @@
                         }
                       }
                     },
+                    "SetLabelsTargetVpnGatewayRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionSetLabelsRequestResource": {
+                          "type": "RegionSetLabelsRequest",
+                          "id": 259357782,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "SetLabelsVpnGatewayRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "regionSetLabelsRequestResource": {
+                          "type": "RegionSetLabelsRequest",
+                          "id": 259357782,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetLabelsVpnTunnelRequest": {
                       "oneofs": {
                         "_requestId": {
                           "oneof": [
@@ -59281,6 +60519,7 @@
                           "values": {
                             "UNDEFINED_SHARE_TYPE": 0,
                             "LOCAL": 72607563,
+                            "ORGANIZATION": 274978099,
                             "SHARE_TYPE_UNSPECIFIED": 494771730,
                             "SPECIFIC_PROJECTS": 347838695
                           }
@@ -60531,6 +61770,94 @@
                         }
                       }
                     },
+                    "SslPoliciesAggregatedList": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "SslPoliciesScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "SslPoliciesList": {
                       "oneofs": {
                         "_id": {
@@ -60611,6 +61938,29 @@
                         }
                       }
                     },
+                    "SslPoliciesScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "sslPolicies": {
+                          "rule": "repeated",
+                          "type": "SslPolicy",
+                          "id": 209941027
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "SslPolicy": {
                       "oneofs": {
                         "_creationTimestamp": {
@@ -60651,6 +62001,11 @@
                         "_profile": {
                           "oneof": [
                             "profile"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
                           ]
                         },
                         "_selfLink": {
@@ -60722,6 +62077,13 @@
                         "profile": {
                           "type": "string",
                           "id": 227445161,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
                           "options": {
                             "proto3_optional": true
                           }
@@ -63819,6 +65181,11 @@
                             "proxyHeader"
                           ]
                         },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -63876,6 +65243,13 @@
                         "proxyHeader": {
                           "type": "string",
                           "id": 160374142,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
                           "options": {
                             "proto3_optional": true
                           }
@@ -69084,6 +70458,30 @@
                               "(google.api.method_signature)": "project,region"
                             }
                           ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsAddressRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/addresses/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/addresses/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
                         }
                       }
                     },
@@ -69581,6 +70979,24 @@
                             }
                           ]
                         },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicyBackendServiceRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/backendServices/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/backendServices/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource"
+                            }
+                          ]
+                        },
                         "Insert": {
                           "requestType": "InsertBackendServiceRequest",
                           "responseType": "Operation",
@@ -69668,6 +71084,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicyBackendServiceRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "global_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/backendServices/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,resource,global_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_set_policy_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/backendServices/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,global_set_policy_request_resource"
                             }
                           ]
                         },
@@ -70992,6 +72428,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsGlobalAddressRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "global_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/addresses/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,resource,global_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/addresses/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,global_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
                             }
                           ]
                         }
@@ -73934,6 +75394,30 @@
                               "(google.cloud.operation_service)": "RegionOperations"
                             }
                           ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsInterconnectAttachmentRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/interconnectAttachments/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/interconnectAttachments/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
                         }
                       }
                     },
@@ -74105,6 +75589,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,interconnect,interconnect_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsInterconnectRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "global_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/interconnects/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,resource,global_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/interconnects/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,global_set_labels_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "GlobalOperations"
@@ -76821,6 +78329,24 @@
                             }
                           ]
                         },
+                        "GetIamPolicy": {
+                          "requestType": "GetIamPolicyRegionBackendServiceRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/backendServices/{resource}/getIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/backendServices/{resource}/getIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource"
+                            }
+                          ]
+                        },
                         "Insert": {
                           "requestType": "InsertRegionBackendServiceRequest",
                           "responseType": "Operation",
@@ -76884,6 +78410,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "SetIamPolicy": {
+                          "requestType": "SetIamPolicyRegionBackendServiceRequest",
+                          "responseType": "Policy",
+                          "options": {
+                            "(google.api.http).body": "region_set_policy_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/backendServices/{resource}/setIamPolicy",
+                            "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_policy_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/backendServices/{resource}/setIamPolicy"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_policy_request_resource"
                             }
                           ]
                         },
@@ -78969,6 +80515,138 @@
                         }
                       }
                     },
+                    "RegionSslPolicies": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Delete": {
+                          "requestType": "DeleteRegionSslPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/{ssl_policy}",
+                            "(google.api.method_signature)": "project,region,ssl_policy",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/{ssl_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,ssl_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRegionSslPolicyRequest",
+                          "responseType": "SslPolicy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/{ssl_policy}",
+                            "(google.api.method_signature)": "project,region,ssl_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/{ssl_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,ssl_policy"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRegionSslPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "ssl_policy_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/sslPolicies",
+                            "(google.api.method_signature)": "project,region,ssl_policy_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "ssl_policy_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/sslPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,ssl_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionSslPoliciesRequest",
+                          "responseType": "SslPoliciesList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/sslPolicies",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/sslPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "ListAvailableFeatures": {
+                          "requestType": "ListAvailableFeaturesRegionSslPoliciesRequest",
+                          "responseType": "SslPoliciesListAvailableFeaturesResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/listAvailableFeatures",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/listAvailableFeatures"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchRegionSslPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "ssl_policy_resource",
+                            "(google.api.http).patch": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/{ssl_policy}",
+                            "(google.api.method_signature)": "project,region,ssl_policy,ssl_policy_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "ssl_policy_resource",
+                                "patch": "/compute/v1/projects/{project}/regions/{region}/sslPolicies/{ssl_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,ssl_policy,ssl_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "RegionTargetHttpProxies": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -79240,6 +80918,96 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "RegionTargetTcpProxies": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Delete": {
+                          "requestType": "DeleteRegionTargetTcpProxyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies/{target_tcp_proxy}",
+                            "(google.api.method_signature)": "project,region,target_tcp_proxy",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies/{target_tcp_proxy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,target_tcp_proxy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRegionTargetTcpProxyRequest",
+                          "responseType": "TargetTcpProxy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies/{target_tcp_proxy}",
+                            "(google.api.method_signature)": "project,region,target_tcp_proxy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies/{target_tcp_proxy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,target_tcp_proxy"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRegionTargetTcpProxyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "target_tcp_proxy_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies",
+                            "(google.api.method_signature)": "project,region,target_tcp_proxy_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "target_tcp_proxy_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,target_tcp_proxy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionTargetTcpProxiesRequest",
+                          "responseType": "TargetTcpProxyList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
                             }
                           ]
                         }
@@ -80364,6 +82132,30 @@
                               "(google.cloud.operation_service)": "GlobalOperations"
                             }
                           ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "global_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/securityPolicies/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,resource,global_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "global_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/securityPolicies/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,global_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
+                            }
+                          ]
                         }
                       }
                     },
@@ -80843,6 +82635,24 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListSslPoliciesRequest",
+                          "responseType": "SslPoliciesAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/aggregated/sslPolicies",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/aggregated/sslPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
                         "Delete": {
                           "requestType": "DeleteSslPolicyRequest",
                           "responseType": "Operation",
@@ -82556,6 +84366,30 @@
                               "(google.api.method_signature)": "project,region"
                             }
                           ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsTargetVpnGatewayRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/targetVpnGateways/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/targetVpnGateways/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
                         }
                       }
                     },
@@ -83032,6 +84866,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "SetLabels": {
+                          "requestType": "SetLabelsVpnTunnelRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "region_set_labels_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/vpnTunnels/{resource}/setLabels",
+                            "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "region_set_labels_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/vpnTunnels/{resource}/setLabels"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,region_set_labels_request_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
                             }
                           ]
                         }

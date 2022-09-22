@@ -77,6 +77,11 @@
                 "insert"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -109,6 +114,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "AggregatedList": {
@@ -359,6 +369,11 @@
                 "getHealth"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -372,6 +387,11 @@
             "SetEdgeSecurityPolicy": {
               "methods": [
                 "setEdgeSecurityPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "SetSecurityPolicy": {
@@ -428,6 +448,11 @@
                 "getHealth"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -441,6 +466,11 @@
             "SetEdgeSecurityPolicy": {
               "methods": [
                 "setEdgeSecurityPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "SetSecurityPolicy": {
@@ -1151,6 +1181,11 @@
                 "insert"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -1176,6 +1211,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "List": {
@@ -2740,6 +2780,11 @@
                 "patch"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -2777,6 +2822,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "AggregatedList": {
@@ -2865,6 +2915,11 @@
                 "patch"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -2900,6 +2955,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "List": {
@@ -4471,6 +4531,11 @@
                 "getHealth"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -4479,6 +4544,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "Update": {
@@ -4513,6 +4583,11 @@
                 "getHealth"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
             "Insert": {
               "methods": [
                 "insert"
@@ -4521,6 +4596,11 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
               ]
             },
             "Update": {
@@ -5765,6 +5845,84 @@
         }
       }
     },
+    "RegionSslPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionSslPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "ListAvailableFeatures": {
+              "methods": [
+                "listAvailableFeatures"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionSslPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "ListAvailableFeatures": {
+              "methods": [
+                "listAvailableFeatures"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "RegionTargetHttpProxies": {
       "clients": {
         "grpc": {
@@ -5908,6 +6066,64 @@
             "SetUrlMap": {
               "methods": [
                 "setUrlMap"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionTargetTcpProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionTargetTcpProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionTargetTcpProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
               ]
             },
             "List": {
@@ -6467,6 +6683,11 @@
                 "removeRule"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -6529,6 +6750,11 @@
             "RemoveRule": {
               "methods": [
                 "removeRule"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "AggregatedList": {
@@ -6861,6 +7087,13 @@
                 "patch"
               ]
             },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -6896,6 +7129,13 @@
             "Patch": {
               "methods": [
                 "patch"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList",
+                "aggregatedListStream",
+                "aggregatedListAsync"
               ]
             },
             "List": {
@@ -7757,6 +7997,11 @@
                 "insert"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -7789,6 +8034,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "AggregatedList": {
@@ -8043,6 +8293,11 @@
                 "insert"
               ]
             },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
             "AggregatedList": {
               "methods": [
                 "aggregatedList",
@@ -8075,6 +8330,11 @@
             "Insert": {
               "methods": [
                 "insert"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
               ]
             },
             "AggregatedList": {

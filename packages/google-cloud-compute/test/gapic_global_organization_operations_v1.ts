@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -261,26 +276,26 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
+      const expectedHeaderRequestParams = `operation=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationResponse()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -295,15 +310,12 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
+      const expectedHeaderRequestParams = `operation=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationResponse()
       );
@@ -326,11 +338,14 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -345,23 +360,23 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
+      const expectedHeaderRequestParams = `operation=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -376,7 +391,11 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -396,26 +415,25 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
+      const expectedHeaderRequestParams = `operation=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -430,15 +448,12 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
+      const expectedHeaderRequestParams = `operation=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -460,11 +475,13 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -479,23 +496,22 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
-      const expectedHeaderRequestParams = 'operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
+      const expectedHeaderRequestParams = `operation=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -510,7 +526,11 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
-      request.operation = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
+        ['operation']
+      );
+      request.operation = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -530,7 +550,6 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
@@ -539,11 +558,6 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes list without error using callback', async () => {
@@ -558,7 +572,6 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
@@ -582,11 +595,6 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
     });
 
     it('invokes list with error', async () => {
@@ -601,15 +609,9 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
-      const expectedOptions = {otherArgs: {headers: {}}};
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
     });
 
     it('invokes listStream without error', async () => {

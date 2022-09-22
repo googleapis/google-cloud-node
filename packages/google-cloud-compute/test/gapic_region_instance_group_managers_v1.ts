@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -261,29 +276,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.abandonInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.abandonInstances(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.abandonInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.abandonInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.abandonInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes abandonInstances without error using callback', async () => {
@@ -298,18 +320,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -332,11 +358,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.abandonInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.abandonInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.abandonInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes abandonInstances with error', async () => {
@@ -351,29 +380,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.abandonInstances = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.abandonInstances(request), expectedError);
-      assert(
-        (client.innerApiCalls.abandonInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.abandonInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.abandonInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes abandonInstances with closed client', async () => {
@@ -388,9 +424,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.abandonInstances(request), expectedError);
@@ -410,18 +458,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -429,11 +481,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.applyUpdatesToInstances(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.applyUpdatesToInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.applyUpdatesToInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.applyUpdatesToInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes applyUpdatesToInstances without error using callback', async () => {
@@ -448,18 +503,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -482,11 +541,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.applyUpdatesToInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.applyUpdatesToInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.applyUpdatesToInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes applyUpdatesToInstances with error', async () => {
@@ -501,18 +563,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.applyUpdatesToInstances = stubSimpleCall(
         undefined,
@@ -522,11 +588,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         client.applyUpdatesToInstances(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.applyUpdatesToInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.applyUpdatesToInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.applyUpdatesToInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes applyUpdatesToInstances with closed client', async () => {
@@ -541,9 +610,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -566,29 +647,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.createInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.createInstances(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.createInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createInstances without error using callback', async () => {
@@ -603,18 +691,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -637,11 +729,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createInstances with error', async () => {
@@ -656,29 +751,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createInstances = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createInstances(request), expectedError);
-      assert(
-        (client.innerApiCalls.createInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createInstances with closed client', async () => {
@@ -693,9 +795,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createInstances(request), expectedError);
@@ -715,29 +829,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -752,18 +873,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -786,11 +911,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -805,26 +933,33 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -839,9 +974,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -861,29 +1008,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.deleteInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteInstances(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteInstances without error using callback', async () => {
@@ -898,18 +1052,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -932,11 +1090,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteInstances with error', async () => {
@@ -951,29 +1112,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteInstances = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteInstances(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteInstances with closed client', async () => {
@@ -988,9 +1156,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteInstances(request), expectedError);
@@ -1010,18 +1190,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1029,11 +1213,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deletePerInstanceConfigs(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePerInstanceConfigs without error using callback', async () => {
@@ -1048,18 +1235,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1082,11 +1273,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deletePerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePerInstanceConfigs with error', async () => {
@@ -1101,18 +1295,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deletePerInstanceConfigs = stubSimpleCall(
         undefined,
@@ -1122,11 +1320,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         client.deletePerInstanceConfigs(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.deletePerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deletePerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deletePerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deletePerInstanceConfigs with closed client', async () => {
@@ -1141,9 +1342,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1166,29 +1379,35 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstanceGroupManager()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -1203,18 +1422,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstanceGroupManager()
       );
@@ -1236,11 +1459,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -1255,26 +1480,32 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -1289,9 +1520,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -1311,27 +1554,31 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert without error using callback', async () => {
@@ -1346,16 +1593,17 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1378,11 +1626,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with error', async () => {
@@ -1397,24 +1648,28 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with closed client', async () => {
@@ -1429,8 +1684,16 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1450,29 +1713,35 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch without error using callback', async () => {
@@ -1487,18 +1756,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1520,11 +1793,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with error', async () => {
@@ -1539,26 +1814,32 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with closed client', async () => {
@@ -1573,9 +1854,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1595,18 +1888,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1614,11 +1911,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.patchPerInstanceConfigs(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.patchPerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.patchPerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patchPerInstanceConfigs without error using callback', async () => {
@@ -1633,18 +1933,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1667,11 +1971,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patchPerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.patchPerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patchPerInstanceConfigs with error', async () => {
@@ -1686,18 +1993,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patchPerInstanceConfigs = stubSimpleCall(
         undefined,
@@ -1707,11 +2018,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         client.patchPerInstanceConfigs(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.patchPerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.patchPerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patchPerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patchPerInstanceConfigs with closed client', async () => {
@@ -1726,9 +2040,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1751,29 +2077,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.recreateInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.recreateInstances(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.recreateInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.recreateInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.recreateInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes recreateInstances without error using callback', async () => {
@@ -1788,18 +2121,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1822,11 +2159,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.recreateInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.recreateInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.recreateInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes recreateInstances with error', async () => {
@@ -1841,29 +2181,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.recreateInstances = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.recreateInstances(request), expectedError);
-      assert(
-        (client.innerApiCalls.recreateInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.recreateInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.recreateInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes recreateInstances with closed client', async () => {
@@ -1878,9 +2225,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.recreateInstances(request), expectedError);
@@ -1900,29 +2259,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.resize = stubSimpleCall(expectedResponse);
       const [response] = await client.resize(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.resize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.resize as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resize without error using callback', async () => {
@@ -1937,18 +2303,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1971,11 +2341,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.resize as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resize with error', async () => {
@@ -1990,26 +2363,33 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resize = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.resize(request), expectedError);
-      assert(
-        (client.innerApiCalls.resize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.resize as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resize with closed client', async () => {
@@ -2024,9 +2404,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -2046,18 +2438,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2065,11 +2461,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.setInstanceTemplate(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setInstanceTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setInstanceTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setInstanceTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setInstanceTemplate without error using callback', async () => {
@@ -2084,18 +2483,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2118,11 +2521,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setInstanceTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setInstanceTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setInstanceTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setInstanceTemplate with error', async () => {
@@ -2137,29 +2543,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setInstanceTemplate = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setInstanceTemplate(request), expectedError);
-      assert(
-        (client.innerApiCalls.setInstanceTemplate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setInstanceTemplate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setInstanceTemplate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setInstanceTemplate with closed client', async () => {
@@ -2174,9 +2587,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setInstanceTemplate(request), expectedError);
@@ -2196,29 +2621,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setTargetPools = stubSimpleCall(expectedResponse);
       const [response] = await client.setTargetPools(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setTargetPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setTargetPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setTargetPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setTargetPools without error using callback', async () => {
@@ -2233,18 +2665,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2267,11 +2703,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setTargetPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setTargetPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setTargetPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setTargetPools with error', async () => {
@@ -2286,29 +2725,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setTargetPools = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setTargetPools(request), expectedError);
-      assert(
-        (client.innerApiCalls.setTargetPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setTargetPools as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setTargetPools as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setTargetPools with closed client', async () => {
@@ -2323,9 +2769,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTargetPools(request), expectedError);
@@ -2345,18 +2803,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2364,11 +2826,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updatePerInstanceConfigs(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePerInstanceConfigs without error using callback', async () => {
@@ -2383,18 +2848,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2417,11 +2886,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePerInstanceConfigs with error', async () => {
@@ -2436,18 +2908,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePerInstanceConfigs = stubSimpleCall(
         undefined,
@@ -2457,11 +2933,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         client.updatePerInstanceConfigs(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updatePerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePerInstanceConfigs with closed client', async () => {
@@ -2476,9 +2955,21 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2501,16 +2992,17 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroupManager()
@@ -2525,11 +3017,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list without error using callback', async () => {
@@ -2544,16 +3038,17 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroupManager()
@@ -2585,11 +3080,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list with error', async () => {
@@ -2604,24 +3101,27 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStream without error', async () => {
@@ -2636,9 +3136,17 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroupManager()
@@ -2676,10 +3184,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2695,9 +3205,17 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -2726,10 +3244,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2745,9 +3265,17 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceGroupManager()
@@ -2773,10 +3301,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2792,9 +3322,17 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2813,10 +3351,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -2834,18 +3374,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceManagedByIgmError()
@@ -2860,11 +3404,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       client.innerApiCalls.listErrors = stubSimpleCall(expectedResponse);
       const [response] = await client.listErrors(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listErrors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listErrors without error using callback', async () => {
@@ -2879,18 +3426,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceManagedByIgmError()
@@ -2923,11 +3474,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listErrors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listErrors with error', async () => {
@@ -2942,29 +3496,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listErrors = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listErrors(request), expectedError);
-      assert(
-        (client.innerApiCalls.listErrors as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listErrors as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listErrors as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listErrorsStream without error', async () => {
@@ -2979,11 +3540,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceManagedByIgmError()
@@ -3023,11 +3595,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listErrors, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listErrors.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listErrors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3043,11 +3616,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listErrors.createStream = stubPageStreamingCall(
         undefined,
@@ -3078,11 +3662,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listErrors, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.listErrors.createStream as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listErrors.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3098,11 +3683,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InstanceManagedByIgmError()
@@ -3129,11 +3725,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listErrors.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listErrors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3149,11 +3746,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listErrors.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -3173,11 +3781,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         ).args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.listErrors.asyncIterate as SinonStub).getCall(
-          0
-        ).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listErrors.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3195,18 +3804,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ManagedInstance()
@@ -3222,11 +3835,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listManagedInstances(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listManagedInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listManagedInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagedInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listManagedInstances without error using callback', async () => {
@@ -3241,18 +3857,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ManagedInstance()
@@ -3283,11 +3903,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listManagedInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listManagedInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagedInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listManagedInstances with error', async () => {
@@ -3302,29 +3925,36 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listManagedInstances = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listManagedInstances(request), expectedError);
-      assert(
-        (client.innerApiCalls.listManagedInstances as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listManagedInstances as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listManagedInstances as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listManagedInstancesStream without error', async () => {
@@ -3339,11 +3969,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ManagedInstance()
@@ -3380,11 +4021,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listManagedInstances, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listManagedInstances.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listManagedInstances.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3400,11 +4042,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listManagedInstances.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3430,11 +4083,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listManagedInstances, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listManagedInstances.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listManagedInstances.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3450,11 +4104,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ManagedInstance()
@@ -3480,11 +4145,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listManagedInstances.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listManagedInstances.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3500,11 +4166,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listManagedInstances.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3521,11 +4198,12 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listManagedInstances.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listManagedInstances.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -3543,18 +4221,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PerInstanceConfig()
@@ -3570,11 +4252,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.listPerInstanceConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPerInstanceConfigs without error using callback', async () => {
@@ -3589,18 +4274,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PerInstanceConfig()
@@ -3631,11 +4320,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPerInstanceConfigs with error', async () => {
@@ -3650,18 +4342,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPerInstanceConfigs = stubSimpleCall(
         undefined,
@@ -3671,11 +4367,14 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         client.listPerInstanceConfigs(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.listPerInstanceConfigs as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPerInstanceConfigs as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPerInstanceConfigs as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPerInstanceConfigsStream without error', async () => {
@@ -3690,11 +4389,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PerInstanceConfig()
@@ -3735,12 +4445,15 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPerInstanceConfigs, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPerInstanceConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3756,11 +4469,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPerInstanceConfigs.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -3790,12 +4514,15 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPerInstanceConfigs, request)
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPerInstanceConfigs
             .createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3811,11 +4538,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.PerInstanceConfig()
@@ -3842,12 +4580,15 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPerInstanceConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -3863,11 +4604,22 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.instanceGroupManager = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&instance_group_manager=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest',
+        ['instanceGroupManager']
+      );
+      request.instanceGroupManager = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&instance_group_manager=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPerInstanceConfigs.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -3886,12 +4638,15 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
+      assert(
         (
           client.descriptors.page.listPerInstanceConfigs
             .asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+        )
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

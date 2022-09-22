@@ -468,6 +468,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_Addresses_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on an Address. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "addresses.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.Addresses.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionSetLabelsRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "AddressesClient",
+                    "fullName": "google.cloud.compute.v1.AddressesClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.Addresses.SetLabels",
+                    "service": {
+                        "shortName": "Addresses",
+                        "fullName": "google.cloud.compute.v1.Addresses"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_Autoscalers_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
@@ -1628,6 +1684,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_BackendServices_GetIamPolicy_async",
+            "title": "AcceleratorTypes getIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+            "canonical": true,
+            "file": "backend_services.get_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 62,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetIamPolicy",
+                "fullName": "google.cloud.compute.v1.BackendServices.GetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "options_requested_policy_version",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "BackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.BackendServicesClient"
+                },
+                "method": {
+                    "shortName": "GetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.BackendServices.GetIamPolicy",
+                    "service": {
+                        "shortName": "BackendServices",
+                        "fullName": "google.cloud.compute.v1.BackendServices"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_BackendServices_Insert_async",
             "title": "AcceleratorTypes insert Sample",
             "origin": "API_DEFINITION",
@@ -1832,6 +1936,54 @@
                 "method": {
                     "shortName": "SetEdgeSecurityPolicy",
                     "fullName": "google.cloud.compute.v1.BackendServices.SetEdgeSecurityPolicy",
+                    "service": {
+                        "shortName": "BackendServices",
+                        "fullName": "google.cloud.compute.v1.BackendServices"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_BackendServices_SetIamPolicy_async",
+            "title": "AcceleratorTypes setIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+            "canonical": true,
+            "file": "backend_services.set_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetIamPolicy",
+                "fullName": "google.cloud.compute.v1.BackendServices.SetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "global_set_policy_request_resource",
+                        "type": ".google.cloud.compute.v1.GlobalSetPolicyRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "BackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.BackendServicesClient"
+                },
+                "method": {
+                    "shortName": "SetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.BackendServices.SetIamPolicy",
                     "service": {
                         "shortName": "BackendServices",
                         "fullName": "google.cloud.compute.v1.BackendServices"
@@ -4928,6 +5080,54 @@
                 "method": {
                     "shortName": "List",
                     "fullName": "google.cloud.compute.v1.GlobalAddresses.List",
+                    "service": {
+                        "shortName": "GlobalAddresses",
+                        "fullName": "google.cloud.compute.v1.GlobalAddresses"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_GlobalAddresses_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "global_addresses.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.GlobalAddresses.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "global_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.GlobalSetLabelsRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "GlobalAddressesClient",
+                    "fullName": "google.cloud.compute.v1.GlobalAddressesClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.GlobalAddresses.SetLabels",
                     "service": {
                         "shortName": "GlobalAddresses",
                         "fullName": "google.cloud.compute.v1.GlobalAddresses"
@@ -12124,6 +12324,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_InterconnectAttachments_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on an InterconnectAttachment. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "interconnect_attachments.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.InterconnectAttachments.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionSetLabelsRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InterconnectAttachmentsClient",
+                    "fullName": "google.cloud.compute.v1.InterconnectAttachmentsClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.InterconnectAttachments.SetLabels",
+                    "service": {
+                        "shortName": "InterconnectAttachments",
+                        "fullName": "google.cloud.compute.v1.InterconnectAttachments"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_InterconnectLocations_Get_async",
             "title": "AcceleratorTypes get Sample",
             "origin": "API_DEFINITION",
@@ -12516,6 +12772,54 @@
                 "method": {
                     "shortName": "Patch",
                     "fullName": "google.cloud.compute.v1.Interconnects.Patch",
+                    "service": {
+                        "shortName": "Interconnects",
+                        "fullName": "google.cloud.compute.v1.Interconnects"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_Interconnects_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on an Interconnect. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "interconnects.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.Interconnects.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "global_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.GlobalSetLabelsRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "InterconnectsClient",
+                    "fullName": "google.cloud.compute.v1.InterconnectsClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.Interconnects.SetLabels",
                     "service": {
                         "shortName": "Interconnects",
                         "fullName": "google.cloud.compute.v1.Interconnects"
@@ -19108,6 +19412,58 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionBackendServices_GetIamPolicy_async",
+            "title": "AcceleratorTypes getIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Gets the access control policy for a resource. May be empty if no such policy or resource exists.",
+            "canonical": true,
+            "file": "region_backend_services.get_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "GetIamPolicy",
+                "fullName": "google.cloud.compute.v1.RegionBackendServices.GetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "options_requested_policy_version",
+                        "type": "TYPE_INT32"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "RegionBackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServicesClient"
+                },
+                "method": {
+                    "shortName": "GetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServices.GetIamPolicy",
+                    "service": {
+                        "shortName": "RegionBackendServices",
+                        "fullName": "google.cloud.compute.v1.RegionBackendServices"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionBackendServices_Insert_async",
             "title": "AcceleratorTypes insert Sample",
             "origin": "API_DEFINITION",
@@ -19272,6 +19628,58 @@
                 "method": {
                     "shortName": "Patch",
                     "fullName": "google.cloud.compute.v1.RegionBackendServices.Patch",
+                    "service": {
+                        "shortName": "RegionBackendServices",
+                        "fullName": "google.cloud.compute.v1.RegionBackendServices"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionBackendServices_SetIamPolicy_async",
+            "title": "AcceleratorTypes setIamPolicy Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the access control policy on the specified resource. Replaces any existing policy.",
+            "canonical": true,
+            "file": "region_backend_services.set_iam_policy.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 68,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetIamPolicy",
+                "fullName": "google.cloud.compute.v1.RegionBackendServices.SetIamPolicy",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_set_policy_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionSetPolicyRequest"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Policy",
+                "client": {
+                    "shortName": "RegionBackendServicesClient",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServicesClient"
+                },
+                "method": {
+                    "shortName": "SetIamPolicy",
+                    "fullName": "google.cloud.compute.v1.RegionBackendServices.SetIamPolicy",
                     "service": {
                         "shortName": "RegionBackendServices",
                         "fullName": "google.cloud.compute.v1.RegionBackendServices"
@@ -24540,6 +24948,342 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_RegionSslPolicies_Delete_async",
+            "title": "AcceleratorTypes delete Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified SSL policy. The SSL policy resource can be deleted only if it is not in use by any TargetHttpsProxy or TargetSslProxy resources.",
+            "canonical": true,
+            "file": "region_ssl_policies.delete.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Delete",
+                "fullName": "google.cloud.compute.v1.RegionSslPolicies.Delete",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ssl_policy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionSslPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSslPoliciesClient"
+                },
+                "method": {
+                    "shortName": "Delete",
+                    "fullName": "google.cloud.compute.v1.RegionSslPolicies.Delete",
+                    "service": {
+                        "shortName": "RegionSslPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSslPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSslPolicies_Get_async",
+            "title": "AcceleratorTypes get Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all of the ordered rules present in a single specified policy.",
+            "canonical": true,
+            "file": "region_ssl_policies.get.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Get",
+                "fullName": "google.cloud.compute.v1.RegionSslPolicies.Get",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ssl_policy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.SslPolicy",
+                "client": {
+                    "shortName": "RegionSslPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSslPoliciesClient"
+                },
+                "method": {
+                    "shortName": "Get",
+                    "fullName": "google.cloud.compute.v1.RegionSslPolicies.Get",
+                    "service": {
+                        "shortName": "RegionSslPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSslPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSslPolicies_Insert_async",
+            "title": "AcceleratorTypes insert Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a new policy in the specified project and region using the data included in the request.",
+            "canonical": true,
+            "file": "region_ssl_policies.insert.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Insert",
+                "fullName": "google.cloud.compute.v1.RegionSslPolicies.Insert",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ssl_policy_resource",
+                        "type": ".google.cloud.compute.v1.SslPolicy"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionSslPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSslPoliciesClient"
+                },
+                "method": {
+                    "shortName": "Insert",
+                    "fullName": "google.cloud.compute.v1.RegionSslPolicies.Insert",
+                    "service": {
+                        "shortName": "RegionSslPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSslPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSslPolicies_List_async",
+            "title": "AcceleratorTypes list Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all the SSL policies that have been configured for the specified project and region.",
+            "canonical": true,
+            "file": "region_ssl_policies.list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "List",
+                "fullName": "google.cloud.compute.v1.RegionSslPolicies.List",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.SslPoliciesList",
+                "client": {
+                    "shortName": "RegionSslPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSslPoliciesClient"
+                },
+                "method": {
+                    "shortName": "List",
+                    "fullName": "google.cloud.compute.v1.RegionSslPolicies.List",
+                    "service": {
+                        "shortName": "RegionSslPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSslPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSslPolicies_ListAvailableFeatures_async",
+            "title": "AcceleratorTypes listAvailableFeatures Sample",
+            "origin": "API_DEFINITION",
+            "description": " Lists all features that can be specified in the SSL policy when using custom profile.",
+            "canonical": true,
+            "file": "region_ssl_policies.list_available_features.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 78,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "ListAvailableFeatures",
+                "fullName": "google.cloud.compute.v1.RegionSslPolicies.ListAvailableFeatures",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.SslPoliciesListAvailableFeaturesResponse",
+                "client": {
+                    "shortName": "RegionSslPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSslPoliciesClient"
+                },
+                "method": {
+                    "shortName": "ListAvailableFeatures",
+                    "fullName": "google.cloud.compute.v1.RegionSslPolicies.ListAvailableFeatures",
+                    "service": {
+                        "shortName": "RegionSslPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSslPolicies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionSslPolicies_Patch_async",
+            "title": "AcceleratorTypes patch Sample",
+            "origin": "API_DEFINITION",
+            "description": " Patches the specified SSL policy with the data included in the request.",
+            "canonical": true,
+            "file": "region_ssl_policies.patch.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Patch",
+                "fullName": "google.cloud.compute.v1.RegionSslPolicies.Patch",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ssl_policy",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "ssl_policy_resource",
+                        "type": ".google.cloud.compute.v1.SslPolicy"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionSslPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.RegionSslPoliciesClient"
+                },
+                "method": {
+                    "shortName": "Patch",
+                    "fullName": "google.cloud.compute.v1.RegionSslPolicies.Patch",
+                    "service": {
+                        "shortName": "RegionSslPolicies",
+                        "fullName": "google.cloud.compute.v1.RegionSslPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_RegionTargetHttpProxies_Delete_async",
             "title": "AcceleratorTypes delete Sample",
             "origin": "API_DEFINITION",
@@ -25191,6 +25935,222 @@
                     "service": {
                         "shortName": "RegionTargetHttpsProxies",
                         "fullName": "google.cloud.compute.v1.RegionTargetHttpsProxies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionTargetTcpProxies_Delete_async",
+            "title": "AcceleratorTypes delete Sample",
+            "origin": "API_DEFINITION",
+            "description": " Deletes the specified TargetTcpProxy resource.",
+            "canonical": true,
+            "file": "region_target_tcp_proxies.delete.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Delete",
+                "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.Delete",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_tcp_proxy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionTargetTcpProxiesClient",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxiesClient"
+                },
+                "method": {
+                    "shortName": "Delete",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.Delete",
+                    "service": {
+                        "shortName": "RegionTargetTcpProxies",
+                        "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionTargetTcpProxies_Get_async",
+            "title": "AcceleratorTypes get Sample",
+            "origin": "API_DEFINITION",
+            "description": " Returns the specified TargetTcpProxy resource.",
+            "canonical": true,
+            "file": "region_target_tcp_proxies.get.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Get",
+                "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.Get",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_tcp_proxy",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.TargetTcpProxy",
+                "client": {
+                    "shortName": "RegionTargetTcpProxiesClient",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxiesClient"
+                },
+                "method": {
+                    "shortName": "Get",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.Get",
+                    "service": {
+                        "shortName": "RegionTargetTcpProxies",
+                        "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionTargetTcpProxies_Insert_async",
+            "title": "AcceleratorTypes insert Sample",
+            "origin": "API_DEFINITION",
+            "description": " Creates a TargetTcpProxy resource in the specified project and region using the data included in the request.",
+            "canonical": true,
+            "file": "region_target_tcp_proxies.insert.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 67,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "Insert",
+                "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.Insert",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "target_tcp_proxy_resource",
+                        "type": ".google.cloud.compute.v1.TargetTcpProxy"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "RegionTargetTcpProxiesClient",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxiesClient"
+                },
+                "method": {
+                    "shortName": "Insert",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.Insert",
+                    "service": {
+                        "shortName": "RegionTargetTcpProxies",
+                        "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_RegionTargetTcpProxies_List_async",
+            "title": "AcceleratorTypes list Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves a list of TargetTcpProxy resources available to the specified project in a given region.",
+            "canonical": true,
+            "file": "region_target_tcp_proxies.list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 80,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "List",
+                "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.List",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.TargetTcpProxyList",
+                "client": {
+                    "shortName": "RegionTargetTcpProxiesClient",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxiesClient"
+                },
+                "method": {
+                    "shortName": "List",
+                    "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies.List",
+                    "service": {
+                        "shortName": "RegionTargetTcpProxies",
+                        "fullName": "google.cloud.compute.v1.RegionTargetTcpProxies"
                     }
                 }
             }
@@ -27912,6 +28872,54 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_SecurityPolicies_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on a security policy. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "security_policies.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 63,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.SecurityPolicies.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "global_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.GlobalSetLabelsRequest"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "SecurityPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.SecurityPoliciesClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.SecurityPolicies.SetLabels",
+                    "service": {
+                        "shortName": "SecurityPolicies",
+                        "fullName": "google.cloud.compute.v1.SecurityPolicies"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_ServiceAttachments_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
@@ -29055,6 +30063,70 @@
                     "service": {
                         "shortName": "SslCertificates",
                         "fullName": "google.cloud.compute.v1.SslCertificates"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_SslPolicies_AggregatedList_async",
+            "title": "AcceleratorTypes aggregatedList Sample",
+            "origin": "API_DEFINITION",
+            "description": " Retrieves the list of all SslPolicy resources, regional and global, available to the specified project.",
+            "canonical": true,
+            "file": "ssl_policies.aggregated_list.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 79,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "AggregatedList",
+                "fullName": "google.cloud.compute.v1.SslPolicies.AggregatedList",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "include_all_scopes",
+                        "type": "TYPE_BOOL"
+                    },
+                    {
+                        "name": "max_results",
+                        "type": "TYPE_UINT32"
+                    },
+                    {
+                        "name": "order_by",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "page_token",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "return_partial_success",
+                        "type": "TYPE_BOOL"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.SslPoliciesAggregatedList",
+                "client": {
+                    "shortName": "SslPoliciesClient",
+                    "fullName": "google.cloud.compute.v1.SslPoliciesClient"
+                },
+                "method": {
+                    "shortName": "AggregatedList",
+                    "fullName": "google.cloud.compute.v1.SslPolicies.AggregatedList",
+                    "service": {
+                        "shortName": "SslPolicies",
+                        "fullName": "google.cloud.compute.v1.SslPolicies"
                     }
                 }
             }
@@ -33176,6 +34248,62 @@
             }
         },
         {
+            "regionTag": "compute_v1_generated_TargetVpnGateways_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on a TargetVpnGateway. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "target_vpn_gateways.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.TargetVpnGateways.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionSetLabelsRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "TargetVpnGatewaysClient",
+                    "fullName": "google.cloud.compute.v1.TargetVpnGatewaysClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.TargetVpnGateways.SetLabels",
+                    "service": {
+                        "shortName": "TargetVpnGateways",
+                        "fullName": "google.cloud.compute.v1.TargetVpnGateways"
+                    }
+                }
+            }
+        },
+        {
             "regionTag": "compute_v1_generated_UrlMaps_AggregatedList_async",
             "title": "AcceleratorTypes aggregatedList Sample",
             "origin": "API_DEFINITION",
@@ -34352,6 +35480,62 @@
                 "method": {
                     "shortName": "List",
                     "fullName": "google.cloud.compute.v1.VpnTunnels.List",
+                    "service": {
+                        "shortName": "VpnTunnels",
+                        "fullName": "google.cloud.compute.v1.VpnTunnels"
+                    }
+                }
+            }
+        },
+        {
+            "regionTag": "compute_v1_generated_VpnTunnels_SetLabels_async",
+            "title": "AcceleratorTypes setLabels Sample",
+            "origin": "API_DEFINITION",
+            "description": " Sets the labels on a VpnTunnel. To learn more about labels, read the Labeling Resources documentation.",
+            "canonical": true,
+            "file": "vpn_tunnels.set_labels.js",
+            "language": "JAVASCRIPT",
+            "segments": [
+                {
+                    "start": 25,
+                    "end": 72,
+                    "type": "FULL"
+                }
+            ],
+            "clientMethod": {
+                "shortName": "SetLabels",
+                "fullName": "google.cloud.compute.v1.VpnTunnels.SetLabels",
+                "async": true,
+                "parameters": [
+                    {
+                        "name": "project",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "region_set_labels_request_resource",
+                        "type": ".google.cloud.compute.v1.RegionSetLabelsRequest"
+                    },
+                    {
+                        "name": "request_id",
+                        "type": "TYPE_STRING"
+                    },
+                    {
+                        "name": "resource",
+                        "type": "TYPE_STRING"
+                    }
+                ],
+                "resultType": ".google.cloud.compute.v1.Operation",
+                "client": {
+                    "shortName": "VpnTunnelsClient",
+                    "fullName": "google.cloud.compute.v1.VpnTunnelsClient"
+                },
+                "method": {
+                    "shortName": "SetLabels",
+                    "fullName": "google.cloud.compute.v1.VpnTunnels.SetLabels",
                     "service": {
                         "shortName": "VpnTunnels",
                         "fullName": "google.cloud.compute.v1.VpnTunnels"

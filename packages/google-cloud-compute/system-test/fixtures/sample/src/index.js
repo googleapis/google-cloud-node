@@ -93,10 +93,13 @@ function main() {
   const regionSecurityPoliciesClient =
     new compute.RegionSecurityPoliciesClient();
   const regionSslCertificatesClient = new compute.RegionSslCertificatesClient();
+  const regionSslPoliciesClient = new compute.RegionSslPoliciesClient();
   const regionTargetHttpProxiesClient =
     new compute.RegionTargetHttpProxiesClient();
   const regionTargetHttpsProxiesClient =
     new compute.RegionTargetHttpsProxiesClient();
+  const regionTargetTcpProxiesClient =
+    new compute.RegionTargetTcpProxiesClient();
   const regionUrlMapsClient = new compute.RegionUrlMapsClient();
   const reservationsClient = new compute.ReservationsClient();
   const resourcePoliciesClient = new compute.ResourcePoliciesClient();

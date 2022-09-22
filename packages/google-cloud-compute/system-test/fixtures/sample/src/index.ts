@@ -76,8 +76,10 @@ import {
   RegionsClient,
   RegionSecurityPoliciesClient,
   RegionSslCertificatesClient,
+  RegionSslPoliciesClient,
   RegionTargetHttpProxiesClient,
   RegionTargetHttpsProxiesClient,
+  RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
   ReservationsClient,
   ResourcePoliciesClient,
@@ -326,6 +328,9 @@ function doStuffWithRegionSslCertificatesClient(
 ) {
   client.close();
 }
+function doStuffWithRegionSslPoliciesClient(client: RegionSslPoliciesClient) {
+  client.close();
+}
 function doStuffWithRegionTargetHttpProxiesClient(
   client: RegionTargetHttpProxiesClient
 ) {
@@ -333,6 +338,11 @@ function doStuffWithRegionTargetHttpProxiesClient(
 }
 function doStuffWithRegionTargetHttpsProxiesClient(
   client: RegionTargetHttpsProxiesClient
+) {
+  client.close();
+}
+function doStuffWithRegionTargetTcpProxiesClient(
+  client: RegionTargetTcpProxiesClient
 ) {
   client.close();
 }
@@ -612,11 +622,17 @@ function main() {
   const regionSslCertificatesClient = new RegionSslCertificatesClient();
   doStuffWithRegionSslCertificatesClient(regionSslCertificatesClient);
   // check that the client instance can be created
+  const regionSslPoliciesClient = new RegionSslPoliciesClient();
+  doStuffWithRegionSslPoliciesClient(regionSslPoliciesClient);
+  // check that the client instance can be created
   const regionTargetHttpProxiesClient = new RegionTargetHttpProxiesClient();
   doStuffWithRegionTargetHttpProxiesClient(regionTargetHttpProxiesClient);
   // check that the client instance can be created
   const regionTargetHttpsProxiesClient = new RegionTargetHttpsProxiesClient();
   doStuffWithRegionTargetHttpsProxiesClient(regionTargetHttpsProxiesClient);
+  // check that the client instance can be created
+  const regionTargetTcpProxiesClient = new RegionTargetTcpProxiesClient();
+  doStuffWithRegionTargetTcpProxiesClient(regionTargetTcpProxiesClient);
   // check that the client instance can be created
   const regionUrlMapsClient = new RegionUrlMapsClient();
   doStuffWithRegionUrlMapsClient(regionUrlMapsClient);

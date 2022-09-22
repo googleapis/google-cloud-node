@@ -142,10 +142,14 @@ const RegionSecurityPoliciesClient = v1.RegionSecurityPoliciesClient;
 type RegionSecurityPoliciesClient = v1.RegionSecurityPoliciesClient;
 const RegionSslCertificatesClient = v1.RegionSslCertificatesClient;
 type RegionSslCertificatesClient = v1.RegionSslCertificatesClient;
+const RegionSslPoliciesClient = v1.RegionSslPoliciesClient;
+type RegionSslPoliciesClient = v1.RegionSslPoliciesClient;
 const RegionTargetHttpProxiesClient = v1.RegionTargetHttpProxiesClient;
 type RegionTargetHttpProxiesClient = v1.RegionTargetHttpProxiesClient;
 const RegionTargetHttpsProxiesClient = v1.RegionTargetHttpsProxiesClient;
 type RegionTargetHttpsProxiesClient = v1.RegionTargetHttpsProxiesClient;
+const RegionTargetTcpProxiesClient = v1.RegionTargetTcpProxiesClient;
+type RegionTargetTcpProxiesClient = v1.RegionTargetTcpProxiesClient;
 const RegionUrlMapsClient = v1.RegionUrlMapsClient;
 type RegionUrlMapsClient = v1.RegionUrlMapsClient;
 const ReservationsClient = v1.ReservationsClient;
@@ -257,8 +261,10 @@ export {
   RegionsClient,
   RegionSecurityPoliciesClient,
   RegionSslCertificatesClient,
+  RegionSslPoliciesClient,
   RegionTargetHttpProxiesClient,
   RegionTargetHttpsProxiesClient,
+  RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
   ReservationsClient,
   ResourcePoliciesClient,
@@ -346,8 +352,10 @@ export default {
   RegionsClient,
   RegionSecurityPoliciesClient,
   RegionSslCertificatesClient,
+  RegionSslPoliciesClient,
   RegionTargetHttpProxiesClient,
   RegionTargetHttpsProxiesClient,
+  RegionTargetTcpProxiesClient,
   RegionUrlMapsClient,
   ReservationsClient,
   ResourcePoliciesClient,
