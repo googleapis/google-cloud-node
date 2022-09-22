@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [7.0.3](https://github.com/googleapis/nodejs-translate/compare/v7.0.2...v7.0.3) (2022-09-22)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#814](https://github.com/googleapis/nodejs-translate/issues/814)) ([ddc93f9](https://github.com/googleapis/nodejs-translate/commit/ddc93f97e2f312287624ef877071aa4e8f8b5309))
+* **deps:** Update dependency @google-cloud/vision to v3 ([#816](https://github.com/googleapis/nodejs-translate/issues/816)) ([331c65b](https://github.com/googleapis/nodejs-translate/commit/331c65b6e91efab89f22c976fb117fb99ed0ff3d))
+* Preserve default values in x-goog-request-params header ([#820](https://github.com/googleapis/nodejs-translate/issues/820)) ([913ac11](https://github.com/googleapis/nodejs-translate/commit/913ac11a735b25ae7182bc0f57f9ce0e2a1c5738))
+
 ## [7.0.2](https://github.com/googleapis/nodejs-translate/compare/v7.0.1...v7.0.2) (2022-08-27)
 
 
