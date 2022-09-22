@@ -246,7 +246,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetKeyRingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -275,7 +278,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetKeyRingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -320,7 +326,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetKeyRingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -349,7 +358,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetKeyRingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetKeyRingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -368,9 +380,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -399,9 +412,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -446,9 +460,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -477,9 +492,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -498,9 +514,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -530,9 +547,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -577,9 +595,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -608,9 +627,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetCryptoKeyVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCryptoKeyVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetCryptoKeyVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -629,9 +649,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -660,9 +681,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -707,9 +729,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -738,9 +761,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetPublicKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPublicKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetPublicKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -759,9 +783,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetImportJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -790,9 +815,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetImportJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -837,9 +863,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetImportJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -868,9 +895,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImportJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetImportJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -889,9 +917,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateKeyRingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -920,9 +949,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateKeyRingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -967,9 +997,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateKeyRingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -998,9 +1029,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateKeyRingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateKeyRingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateKeyRingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1019,9 +1051,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateCryptoKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1050,9 +1083,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateCryptoKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1097,9 +1131,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateCryptoKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1128,9 +1163,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateCryptoKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCryptoKeyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateCryptoKeyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1150,7 +1186,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.CreateCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1183,7 +1219,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.CreateCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1231,7 +1267,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.CreateCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1266,7 +1302,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.CreateCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.CreateCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1291,7 +1327,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.ImportCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1324,7 +1360,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.ImportCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1372,7 +1408,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.ImportCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1407,7 +1443,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ImportCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.ImportCryptoKeyVersionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1431,9 +1467,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateImportJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1462,9 +1499,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateImportJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1509,9 +1547,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateImportJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1540,9 +1579,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateImportJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateImportJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateImportJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1562,10 +1602,10 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
       request.cryptoKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
-        'cryptoKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateCryptoKeyRequest',
+        ['cryptoKey', 'name']
+      );
       request.cryptoKey.name = defaultValue1;
       const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1595,10 +1635,10 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
       request.cryptoKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
-        'cryptoKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateCryptoKeyRequest',
+        ['cryptoKey', 'name']
+      );
       request.cryptoKey.name = defaultValue1;
       const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1644,10 +1684,10 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
       request.cryptoKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
-        'cryptoKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateCryptoKeyRequest',
+        ['cryptoKey', 'name']
+      );
       request.cryptoKey.name = defaultValue1;
       const expectedHeaderRequestParams = `crypto_key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1677,10 +1717,10 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyRequest()
       );
       request.cryptoKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCryptoKeyRequest', [
-        'cryptoKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateCryptoKeyRequest',
+        ['cryptoKey', 'name']
+      );
       request.cryptoKey.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1701,7 +1741,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKeyVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest',
         ['cryptoKeyVersion', 'name']
       );
       request.cryptoKeyVersion.name = defaultValue1;
@@ -1735,7 +1775,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKeyVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest',
         ['cryptoKeyVersion', 'name']
       );
       request.cryptoKeyVersion.name = defaultValue1;
@@ -1784,7 +1824,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKeyVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest',
         ['cryptoKeyVersion', 'name']
       );
       request.cryptoKeyVersion.name = defaultValue1;
@@ -1820,7 +1860,7 @@ describe('v1.KeyManagementServiceClient', () => {
       );
       request.cryptoKeyVersion ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyVersionRequest',
         ['cryptoKeyVersion', 'name']
       );
       request.cryptoKeyVersion.name = defaultValue1;
@@ -1845,7 +1885,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyPrimaryVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1878,7 +1918,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyPrimaryVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1926,7 +1966,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyPrimaryVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1961,7 +2001,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCryptoKeyPrimaryVersionRequest',
+        '.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1986,7 +2026,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DestroyCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2019,7 +2059,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DestroyCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2067,7 +2107,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DestroyCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2102,7 +2142,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DestroyCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2127,7 +2167,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestoreCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2160,7 +2200,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestoreCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2208,7 +2248,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestoreCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2243,7 +2283,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RestoreCryptoKeyVersionRequest',
+        '.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2267,7 +2307,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.EncryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2296,7 +2339,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.EncryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2341,7 +2387,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.EncryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2367,7 +2416,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.EncryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EncryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.EncryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2386,7 +2438,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.DecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2415,7 +2470,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.DecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2460,7 +2518,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.DecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2486,7 +2547,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.DecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DecryptRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.DecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2505,9 +2569,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2536,9 +2601,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2583,9 +2649,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2614,9 +2681,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricSignRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2635,9 +2703,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricDecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2666,9 +2735,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricDecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2713,9 +2783,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricDecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2744,9 +2815,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.AsymmetricDecryptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AsymmetricDecryptRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.AsymmetricDecryptRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2765,7 +2837,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2794,7 +2869,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2839,7 +2917,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2865,7 +2946,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacSignRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacSignRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacSignRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2884,7 +2968,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacVerifyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2913,7 +3000,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacVerifyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2958,7 +3048,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacVerifyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2984,7 +3077,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MacVerifyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.MacVerifyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3003,9 +3099,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GenerateRandomBytesRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3035,9 +3132,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GenerateRandomBytesRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3082,9 +3180,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GenerateRandomBytesRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3113,9 +3212,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateRandomBytesRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GenerateRandomBytesRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3134,9 +3234,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyRingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3167,9 +3268,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyRingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3216,9 +3318,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyRingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3247,9 +3350,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyRingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3298,9 +3402,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyRingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3346,9 +3451,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyRingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3389,9 +3495,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListKeyRingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListKeyRingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListKeyRingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3431,9 +3538,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListCryptoKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3464,9 +3572,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListCryptoKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3513,9 +3622,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListCryptoKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3544,9 +3654,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListCryptoKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3595,9 +3706,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListCryptoKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3641,9 +3753,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListCryptoKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3684,9 +3797,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListCryptoKeysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCryptoKeysRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListCryptoKeysRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3727,7 +3841,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCryptoKeyVersionsRequest',
+        '.google.cloud.kms.v1.ListCryptoKeyVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3768,7 +3882,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCryptoKeyVersionsRequest',
+        '.google.cloud.kms.v1.ListCryptoKeyVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3824,7 +3938,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCryptoKeyVersionsRequest',
+        '.google.cloud.kms.v1.ListCryptoKeyVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3859,7 +3973,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCryptoKeyVersionsRequest',
+        '.google.cloud.kms.v1.ListCryptoKeyVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3926,7 +4040,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCryptoKeyVersionsRequest',
+        '.google.cloud.kms.v1.ListCryptoKeyVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3982,7 +4096,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCryptoKeyVersionsRequest',
+        '.google.cloud.kms.v1.ListCryptoKeyVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4036,7 +4150,7 @@ describe('v1.KeyManagementServiceClient', () => {
         new protos.google.cloud.kms.v1.ListCryptoKeyVersionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCryptoKeyVersionsRequest',
+        '.google.cloud.kms.v1.ListCryptoKeyVersionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4082,9 +4196,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListImportJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4115,9 +4230,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListImportJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4164,9 +4280,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListImportJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4195,9 +4312,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListImportJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4246,9 +4364,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListImportJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4292,9 +4411,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListImportJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4335,9 +4455,10 @@ describe('v1.KeyManagementServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListImportJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImportJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListImportJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

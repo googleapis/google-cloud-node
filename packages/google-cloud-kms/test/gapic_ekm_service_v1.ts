@@ -235,9 +235,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEkmConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetEkmConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEkmConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetEkmConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEkmConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetEkmConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.GetEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEkmConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.GetEkmConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEkmConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -392,9 +397,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEkmConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -438,9 +444,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEkmConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -468,9 +475,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.CreateEkmConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEkmConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.CreateEkmConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -489,10 +497,10 @@ describe('v1.EkmServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
       request.ekmConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEkmConnectionRequest', [
-        'ekmConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
+        ['ekmConnection', 'name']
+      );
       request.ekmConnection.name = defaultValue1;
       const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -522,10 +530,10 @@ describe('v1.EkmServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
       request.ekmConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEkmConnectionRequest', [
-        'ekmConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
+        ['ekmConnection', 'name']
+      );
       request.ekmConnection.name = defaultValue1;
       const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,10 +578,10 @@ describe('v1.EkmServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
       request.ekmConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEkmConnectionRequest', [
-        'ekmConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
+        ['ekmConnection', 'name']
+      );
       request.ekmConnection.name = defaultValue1;
       const expectedHeaderRequestParams = `ekm_connection.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -602,10 +610,10 @@ describe('v1.EkmServiceClient', () => {
         new protos.google.cloud.kms.v1.UpdateEkmConnectionRequest()
       );
       request.ekmConnection ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEkmConnectionRequest', [
-        'ekmConnection',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.UpdateEkmConnectionRequest',
+        ['ekmConnection', 'name']
+      );
       request.ekmConnection.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -623,9 +631,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEkmConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -656,9 +665,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEkmConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -704,9 +714,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEkmConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -734,9 +745,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEkmConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -787,9 +799,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEkmConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -835,9 +848,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEkmConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -877,9 +891,10 @@ describe('v1.EkmServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.kms.v1.ListEkmConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEkmConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.kms.v1.ListEkmConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
