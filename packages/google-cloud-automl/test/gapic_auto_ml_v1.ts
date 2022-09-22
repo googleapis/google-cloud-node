@@ -267,7 +267,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDatasetRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -386,10 +398,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -418,10 +430,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -466,10 +478,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedHeaderRequestParams = `dataset.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -498,10 +510,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateDatasetRequest()
       );
       request.dataset ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDatasetRequest', [
-        'dataset',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateDatasetRequest',
+        ['dataset', 'name']
+      );
       request.dataset.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -519,9 +531,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -549,9 +562,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -595,9 +609,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -625,9 +640,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetAnnotationSpecRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAnnotationSpecRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetAnnotationSpecRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -645,7 +661,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -673,7 +692,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -717,7 +739,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -742,7 +767,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -761,10 +789,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -793,10 +821,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -841,10 +869,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedHeaderRequestParams = `model.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -873,10 +901,10 @@ describe('v1.AutoMlClient', () => {
         new protos.google.cloud.automl.v1.UpdateModelRequest()
       );
       request.model ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateModelRequest', [
-        'model',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UpdateModelRequest',
+        ['model', 'name']
+      );
       request.model.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -894,9 +922,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -925,9 +954,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -971,9 +1001,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1001,9 +1032,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.GetModelEvaluationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetModelEvaluationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.GetModelEvaluationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1021,9 +1053,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1053,9 +1086,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1106,9 +1140,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1136,9 +1171,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDatasetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateDatasetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1211,9 +1247,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1243,9 +1280,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1296,9 +1334,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1326,9 +1365,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteDatasetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDatasetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteDatasetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1401,7 +1441,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1430,7 +1473,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1481,7 +1527,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1509,7 +1558,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ImportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ImportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1579,7 +1631,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1608,7 +1663,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1659,7 +1717,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1687,7 +1748,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportDataRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportDataRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportDataRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1757,9 +1821,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1788,9 +1853,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1841,9 +1907,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1871,9 +1938,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.CreateModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateModelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.CreateModelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1943,7 +2011,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1972,7 +2043,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2023,7 +2097,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2051,7 +2128,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeleteModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeleteModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2121,7 +2201,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2150,7 +2233,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2201,7 +2287,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2229,7 +2318,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.DeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeployModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.DeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2299,9 +2391,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.UndeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UndeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2331,9 +2424,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.UndeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UndeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2384,9 +2478,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.UndeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UndeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2414,9 +2509,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.UndeployModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeployModelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.UndeployModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2489,7 +2585,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2518,7 +2617,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2569,7 +2671,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2597,7 +2702,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ExportModelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportModelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ExportModelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2667,9 +2775,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2699,9 +2808,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2747,9 +2857,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2777,9 +2888,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2827,9 +2939,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2874,9 +2987,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2916,9 +3030,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListDatasetsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDatasetsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListDatasetsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2957,9 +3072,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2989,9 +3105,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3037,9 +3154,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3067,9 +3185,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3117,9 +3236,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3164,9 +3284,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3206,9 +3327,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3249,9 +3371,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3288,9 +3411,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3342,9 +3466,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3372,9 +3497,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3431,9 +3557,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3479,9 +3606,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3527,9 +3655,10 @@ describe('v1.AutoMlClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.ListModelEvaluationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListModelEvaluationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.ListModelEvaluationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

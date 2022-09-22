@@ -206,7 +206,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.PredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -234,7 +237,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.PredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -278,7 +284,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.PredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -303,7 +312,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.PredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PredictRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.PredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -321,9 +333,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.BatchPredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchPredictRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.BatchPredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -352,9 +365,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.BatchPredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchPredictRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.BatchPredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -405,9 +419,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.BatchPredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchPredictRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.BatchPredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -435,9 +450,10 @@ describe('v1.PredictionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1.BatchPredictRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchPredictRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.automl.v1.BatchPredictRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
