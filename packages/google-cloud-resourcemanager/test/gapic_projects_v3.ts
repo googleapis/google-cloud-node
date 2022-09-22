@@ -267,7 +267,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,9 +397,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -415,9 +428,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -461,9 +475,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -491,9 +506,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -511,9 +527,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -541,9 +558,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -587,9 +605,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -617,9 +636,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -637,9 +657,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -668,9 +689,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -714,9 +736,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -744,9 +767,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -903,10 +927,10 @@ describe('v3.ProjectsClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
       );
       request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProjectRequest', [
-        'project',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
+        ['project', 'name']
+      );
       request.project.name = defaultValue1;
       const expectedHeaderRequestParams = `project.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -937,10 +961,10 @@ describe('v3.ProjectsClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
       );
       request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProjectRequest', [
-        'project',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
+        ['project', 'name']
+      );
       request.project.name = defaultValue1;
       const expectedHeaderRequestParams = `project.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -992,10 +1016,10 @@ describe('v3.ProjectsClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
       );
       request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProjectRequest', [
-        'project',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
+        ['project', 'name']
+      );
       request.project.name = defaultValue1;
       const expectedHeaderRequestParams = `project.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1024,10 +1048,10 @@ describe('v3.ProjectsClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateProjectRequest()
       );
       request.project ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateProjectRequest', [
-        'project',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateProjectRequest',
+        ['project', 'name']
+      );
       request.project.name = defaultValue1;
       const expectedHeaderRequestParams = `project.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1100,7 +1124,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1129,7 +1156,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1180,7 +1210,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1208,7 +1241,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveProjectRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1278,9 +1314,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1310,9 +1347,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1363,9 +1401,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1393,9 +1432,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1468,9 +1508,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1500,9 +1541,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1553,9 +1595,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1583,9 +1626,10 @@ describe('v3.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');

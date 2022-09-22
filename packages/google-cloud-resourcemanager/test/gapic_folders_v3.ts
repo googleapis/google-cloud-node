@@ -267,7 +267,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -382,9 +394,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -412,9 +425,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -458,9 +472,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -488,9 +503,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -508,9 +524,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -538,9 +555,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -584,9 +602,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -614,9 +633,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -634,9 +654,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -665,9 +686,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -711,9 +733,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -741,9 +764,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -896,10 +920,10 @@ describe('v3.FoldersClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateFolderRequest()
       );
       request.folder ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFolderRequest', [
-        'folder',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateFolderRequest',
+        ['folder', 'name']
+      );
       request.folder.name = defaultValue1;
       const expectedHeaderRequestParams = `folder.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -929,10 +953,10 @@ describe('v3.FoldersClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateFolderRequest()
       );
       request.folder ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFolderRequest', [
-        'folder',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateFolderRequest',
+        ['folder', 'name']
+      );
       request.folder.name = defaultValue1;
       const expectedHeaderRequestParams = `folder.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -984,10 +1008,10 @@ describe('v3.FoldersClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateFolderRequest()
       );
       request.folder ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFolderRequest', [
-        'folder',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateFolderRequest',
+        ['folder', 'name']
+      );
       request.folder.name = defaultValue1;
       const expectedHeaderRequestParams = `folder.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1016,10 +1040,10 @@ describe('v3.FoldersClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateFolderRequest()
       );
       request.folder ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateFolderRequest', [
-        'folder',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateFolderRequest',
+        ['folder', 'name']
+      );
       request.folder.name = defaultValue1;
       const expectedHeaderRequestParams = `folder.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1089,7 +1113,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1118,7 +1145,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1169,7 +1199,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1197,7 +1230,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.MoveFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFolderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.MoveFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1267,9 +1303,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1298,9 +1335,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1351,9 +1389,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1381,9 +1420,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1453,9 +1493,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1485,9 +1526,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1538,9 +1580,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1568,9 +1611,10 @@ describe('v3.FoldersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.UndeleteFolderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteFolderRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UndeleteFolderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');

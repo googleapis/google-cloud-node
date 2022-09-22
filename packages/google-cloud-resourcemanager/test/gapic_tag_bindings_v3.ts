@@ -405,9 +405,10 @@ describe('v3.TagBindingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagBindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagBindingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagBindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -437,9 +438,10 @@ describe('v3.TagBindingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagBindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagBindingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagBindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -490,9 +492,10 @@ describe('v3.TagBindingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagBindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagBindingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagBindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -520,9 +523,10 @@ describe('v3.TagBindingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagBindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagBindingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagBindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -267,7 +267,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.GetTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagKeyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.GetTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -382,9 +394,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -412,9 +425,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -458,9 +472,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -488,9 +503,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -508,9 +524,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -538,9 +555,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -584,9 +602,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -614,9 +633,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -634,9 +654,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -665,9 +686,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -711,9 +733,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -741,9 +764,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -896,10 +920,10 @@ describe('v3.TagKeysClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
       );
       request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagKeyRequest', [
-        'tagKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
+        ['tagKey', 'name']
+      );
       request.tagKey.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -929,10 +953,10 @@ describe('v3.TagKeysClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
       );
       request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagKeyRequest', [
-        'tagKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
+        ['tagKey', 'name']
+      );
       request.tagKey.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_key.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -984,10 +1008,10 @@ describe('v3.TagKeysClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
       );
       request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagKeyRequest', [
-        'tagKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
+        ['tagKey', 'name']
+      );
       request.tagKey.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1016,10 +1040,10 @@ describe('v3.TagKeysClient', () => {
         new protos.google.cloud.resourcemanager.v3.UpdateTagKeyRequest()
       );
       request.tagKey ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagKeyRequest', [
-        'tagKey',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.UpdateTagKeyRequest',
+        ['tagKey', 'name']
+      );
       request.tagKey.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_key.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1089,9 +1113,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1120,9 +1145,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1173,9 +1199,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1203,9 +1230,10 @@ describe('v3.TagKeysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcemanager.v3.DeleteTagKeyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagKeyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcemanager.v3.DeleteTagKeyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
