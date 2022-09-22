@@ -235,9 +235,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.InspectContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.InspectContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.InspectContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.InspectContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InspectContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.InspectContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.RedactImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,9 +396,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.RedactImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -437,9 +443,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.RedactImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -467,9 +474,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.RedactImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RedactImageRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.RedactImageRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -487,9 +495,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -517,9 +526,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -563,9 +573,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -593,9 +604,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -613,9 +625,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ReidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -643,9 +656,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ReidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -689,9 +703,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ReidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -719,9 +734,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ReidentifyContentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReidentifyContentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ReidentifyContentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -739,9 +755,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -769,9 +786,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -815,9 +833,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -845,9 +864,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -866,7 +886,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.CreateInspectTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -898,7 +918,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.CreateInspectTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -945,7 +965,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.CreateInspectTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -979,7 +999,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.CreateInspectTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1003,7 +1023,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1035,7 +1055,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1082,7 +1102,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1116,7 +1136,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateInspectTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1139,9 +1159,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetInspectTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1170,9 +1191,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetInspectTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1216,9 +1238,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetInspectTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1246,9 +1269,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetInspectTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInspectTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetInspectTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1267,7 +1291,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInspectTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1299,7 +1323,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInspectTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1346,7 +1370,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInspectTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1380,7 +1404,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteInspectTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInspectTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteInspectTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1404,7 +1428,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1436,7 +1460,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1483,7 +1507,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1517,7 +1541,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.CreateDeidentifyTemplateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1541,7 +1565,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1573,7 +1597,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1620,7 +1644,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1654,7 +1678,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.UpdateDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1678,7 +1702,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.GetDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1710,7 +1734,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.GetDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1757,7 +1781,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.GetDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1791,7 +1815,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.GetDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.GetDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1815,7 +1839,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1847,7 +1871,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1894,7 +1918,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1928,7 +1952,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDeidentifyTemplateRequest',
+        '.google.privacy.dlp.v2.DeleteDeidentifyTemplateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1951,9 +1975,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateJobTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1981,9 +2006,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateJobTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2027,9 +2053,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateJobTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2057,9 +2084,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateJobTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2077,9 +2105,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2107,9 +2136,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2153,9 +2183,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2183,9 +2214,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2204,7 +2236,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'HybridInspectJobTriggerRequest',
+        '.google.privacy.dlp.v2.HybridInspectJobTriggerRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2236,7 +2268,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'HybridInspectJobTriggerRequest',
+        '.google.privacy.dlp.v2.HybridInspectJobTriggerRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2283,7 +2315,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'HybridInspectJobTriggerRequest',
+        '.google.privacy.dlp.v2.HybridInspectJobTriggerRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2317,7 +2349,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.HybridInspectJobTriggerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'HybridInspectJobTriggerRequest',
+        '.google.privacy.dlp.v2.HybridInspectJobTriggerRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2340,9 +2372,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2370,9 +2403,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2416,9 +2450,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2446,9 +2481,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2466,9 +2502,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2496,9 +2533,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2542,9 +2580,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2572,9 +2611,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2592,9 +2632,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ActivateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2623,9 +2664,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ActivateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2669,9 +2711,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ActivateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2699,9 +2742,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ActivateJobTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ActivateJobTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ActivateJobTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2719,9 +2763,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateDlpJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2749,9 +2794,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateDlpJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2795,9 +2841,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateDlpJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2825,9 +2872,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDlpJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateDlpJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2845,7 +2893,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2873,7 +2924,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2917,7 +2971,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2942,7 +2999,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDlpJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2960,9 +3020,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2990,9 +3051,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3036,9 +3098,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3066,9 +3129,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3086,9 +3150,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CancelDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3116,9 +3181,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CancelDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3162,9 +3228,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CancelDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3192,9 +3259,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CancelDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CancelDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3212,9 +3280,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateStoredInfoTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3243,9 +3312,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateStoredInfoTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3289,9 +3359,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateStoredInfoTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3319,9 +3390,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.CreateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateStoredInfoTypeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.CreateStoredInfoTypeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3339,9 +3411,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3370,9 +3443,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3416,9 +3490,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3446,9 +3521,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.UpdateStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3466,9 +3542,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3496,9 +3573,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3542,9 +3620,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3572,9 +3651,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.GetStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.GetStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3592,9 +3672,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3623,9 +3704,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3669,9 +3751,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3699,9 +3782,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteStoredInfoTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.DeleteStoredInfoTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3719,9 +3803,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.HybridInspectDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3750,9 +3835,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.HybridInspectDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3796,9 +3882,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.HybridInspectDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3826,9 +3913,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.HybridInspectDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('HybridInspectDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.HybridInspectDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3846,9 +3934,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.FinishDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3876,9 +3965,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.FinishDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3922,9 +4012,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.FinishDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3952,9 +4043,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.FinishDlpJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinishDlpJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.FinishDlpJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3972,9 +4064,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInspectTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4011,9 +4104,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInspectTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4065,9 +4159,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInspectTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4095,9 +4190,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInspectTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4154,9 +4250,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInspectTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4202,9 +4299,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInspectTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4250,9 +4348,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListInspectTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInspectTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListInspectTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4292,7 +4391,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeidentifyTemplatesRequest',
+        '.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4332,7 +4431,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeidentifyTemplatesRequest',
+        '.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4387,7 +4486,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeidentifyTemplatesRequest',
+        '.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4421,7 +4520,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeidentifyTemplatesRequest',
+        '.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4487,7 +4586,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeidentifyTemplatesRequest',
+        '.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4542,7 +4641,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeidentifyTemplatesRequest',
+        '.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4595,7 +4694,7 @@ describe('v2.DlpServiceClient', () => {
         new protos.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDeidentifyTemplatesRequest',
+        '.google.privacy.dlp.v2.ListDeidentifyTemplatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4641,9 +4740,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListJobTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4673,9 +4773,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListJobTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4721,9 +4822,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListJobTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4751,9 +4853,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListJobTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4804,9 +4907,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListJobTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4852,9 +4956,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListJobTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4894,9 +4999,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListJobTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListJobTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4935,9 +5041,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListDlpJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4967,9 +5074,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListDlpJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5015,9 +5123,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListDlpJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5045,9 +5154,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListDlpJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5095,9 +5205,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListDlpJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5142,9 +5253,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListDlpJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5184,9 +5296,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListDlpJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDlpJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListDlpJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5227,9 +5340,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListStoredInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5266,9 +5380,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListStoredInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5320,9 +5435,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListStoredInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5350,9 +5466,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListStoredInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5409,9 +5526,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListStoredInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5457,9 +5575,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListStoredInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5505,9 +5624,10 @@ describe('v2.DlpServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.privacy.dlp.v2.ListStoredInfoTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListStoredInfoTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.privacy.dlp.v2.ListStoredInfoTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
