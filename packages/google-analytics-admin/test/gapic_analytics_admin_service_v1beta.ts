@@ -248,7 +248,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -277,7 +280,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -322,7 +328,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -351,7 +360,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccountRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -370,9 +382,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -401,9 +414,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -448,9 +462,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -479,9 +494,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -501,10 +517,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateAccountRequest()
       );
       request.account ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
-        'account',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateAccountRequest',
+        ['account', 'name']
+      );
       request.account.name = defaultValue1;
       const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -534,10 +550,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateAccountRequest()
       );
       request.account ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
-        'account',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateAccountRequest',
+        ['account', 'name']
+      );
       request.account.name = defaultValue1;
       const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -583,10 +599,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateAccountRequest()
       );
       request.account ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
-        'account',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateAccountRequest',
+        ['account', 'name']
+      );
       request.account.name = defaultValue1;
       const expectedHeaderRequestParams = `account.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -616,10 +632,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateAccountRequest()
       );
       request.account ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccountRequest', [
-        'account',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateAccountRequest',
+        ['account', 'name']
+      );
       request.account.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -732,7 +748,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetPropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetPropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -761,7 +780,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetPropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetPropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -806,7 +828,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetPropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetPropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -835,7 +860,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetPropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPropertyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetPropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -941,9 +969,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeletePropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeletePropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -972,9 +1001,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeletePropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeletePropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1019,9 +1049,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeletePropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeletePropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1050,9 +1081,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeletePropertyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePropertyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeletePropertyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1072,10 +1104,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdatePropertyRequest()
       );
       request.property ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
-        'property',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdatePropertyRequest',
+        ['property', 'name']
+      );
       request.property.name = defaultValue1;
       const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1105,10 +1137,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdatePropertyRequest()
       );
       request.property ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
-        'property',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdatePropertyRequest',
+        ['property', 'name']
+      );
       request.property.name = defaultValue1;
       const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1154,10 +1186,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdatePropertyRequest()
       );
       request.property ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
-        'property',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdatePropertyRequest',
+        ['property', 'name']
+      );
       request.property.name = defaultValue1;
       const expectedHeaderRequestParams = `property.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1187,10 +1219,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdatePropertyRequest()
       );
       request.property ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePropertyRequest', [
-        'property',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdatePropertyRequest',
+        ['property', 'name']
+      );
       request.property.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1209,9 +1241,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateFirebaseLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1241,9 +1274,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateFirebaseLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1288,9 +1322,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateFirebaseLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1319,9 +1354,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFirebaseLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateFirebaseLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1340,9 +1376,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1372,9 +1409,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1419,9 +1457,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1450,9 +1489,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirebaseLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteFirebaseLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1471,9 +1511,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1503,9 +1544,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1550,9 +1592,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1581,9 +1624,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGoogleAdsLinkRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateGoogleAdsLinkRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1603,10 +1647,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest()
       );
       request.googleAdsLink ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
-        'googleAdsLink',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest',
+        ['googleAdsLink', 'name']
+      );
       request.googleAdsLink.name = defaultValue1;
       const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1637,10 +1681,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest()
       );
       request.googleAdsLink ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
-        'googleAdsLink',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest',
+        ['googleAdsLink', 'name']
+      );
       request.googleAdsLink.name = defaultValue1;
       const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1686,10 +1730,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest()
       );
       request.googleAdsLink ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
-        'googleAdsLink',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest',
+        ['googleAdsLink', 'name']
+      );
       request.googleAdsLink.name = defaultValue1;
       const expectedHeaderRequestParams = `google_ads_link.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1719,10 +1763,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest()
       );
       request.googleAdsLink ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGoogleAdsLinkRequest', [
-        'googleAdsLink',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateGoogleAdsLinkRequest',
+        ['googleAdsLink', 'name']
+      );
       request.googleAdsLink.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1741,9 +1785,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1773,9 +1818,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1820,9 +1866,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1851,9 +1898,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGoogleAdsLinkRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteGoogleAdsLinkRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1873,7 +1921,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataSharingSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataSharingSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataSharingSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1906,7 +1954,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataSharingSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataSharingSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataSharingSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1954,7 +2002,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataSharingSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataSharingSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataSharingSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1989,7 +2037,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataSharingSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataSharingSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataSharingSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2014,7 +2062,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2047,7 +2095,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2095,7 +2143,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2130,7 +2178,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.GetMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2155,7 +2203,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2188,7 +2236,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2236,7 +2284,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2271,7 +2319,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.CreateMeasurementProtocolSecretRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2296,7 +2344,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2329,7 +2377,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2377,7 +2425,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2412,7 +2460,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.DeleteMeasurementProtocolSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2438,7 +2486,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.measurementProtocolSecret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.UpdateMeasurementProtocolSecretRequest',
         ['measurementProtocolSecret', 'name']
       );
       request.measurementProtocolSecret.name = defaultValue1;
@@ -2472,7 +2520,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.measurementProtocolSecret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.UpdateMeasurementProtocolSecretRequest',
         ['measurementProtocolSecret', 'name']
       );
       request.measurementProtocolSecret.name = defaultValue1;
@@ -2521,7 +2569,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.measurementProtocolSecret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.UpdateMeasurementProtocolSecretRequest',
         ['measurementProtocolSecret', 'name']
       );
       request.measurementProtocolSecret.name = defaultValue1;
@@ -2557,7 +2605,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.measurementProtocolSecret ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateMeasurementProtocolSecretRequest',
+        '.google.analytics.admin.v1beta.UpdateMeasurementProtocolSecretRequest',
         ['measurementProtocolSecret', 'name']
       );
       request.measurementProtocolSecret.name = defaultValue1;
@@ -2582,7 +2630,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AcknowledgeUserDataCollectionRequest',
+        '.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest',
         ['property']
       );
       request.property = defaultValue1;
@@ -2615,7 +2663,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AcknowledgeUserDataCollectionRequest',
+        '.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest',
         ['property']
       );
       request.property = defaultValue1;
@@ -2663,7 +2711,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AcknowledgeUserDataCollectionRequest',
+        '.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest',
         ['property']
       );
       request.property = defaultValue1;
@@ -2698,7 +2746,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AcknowledgeUserDataCollectionRequest',
+        '.google.analytics.admin.v1beta.AcknowledgeUserDataCollectionRequest',
         ['property']
       );
       request.property = defaultValue1;
@@ -2723,7 +2771,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversionEventRequest',
+        '.google.analytics.admin.v1beta.CreateConversionEventRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2756,7 +2804,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversionEventRequest',
+        '.google.analytics.admin.v1beta.CreateConversionEventRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2804,7 +2852,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversionEventRequest',
+        '.google.analytics.admin.v1beta.CreateConversionEventRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2839,7 +2887,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConversionEventRequest',
+        '.google.analytics.admin.v1beta.CreateConversionEventRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2863,9 +2911,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetConversionEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2895,9 +2944,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetConversionEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2942,9 +2992,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetConversionEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2973,9 +3024,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetConversionEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConversionEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetConversionEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2995,7 +3047,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversionEventRequest',
+        '.google.analytics.admin.v1beta.DeleteConversionEventRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3028,7 +3080,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversionEventRequest',
+        '.google.analytics.admin.v1beta.DeleteConversionEventRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3076,7 +3128,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversionEventRequest',
+        '.google.analytics.admin.v1beta.DeleteConversionEventRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3111,7 +3163,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.DeleteConversionEventRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConversionEventRequest',
+        '.google.analytics.admin.v1beta.DeleteConversionEventRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3136,7 +3188,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.CreateCustomDimensionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3169,7 +3221,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.CreateCustomDimensionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3217,7 +3269,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.CreateCustomDimensionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3252,7 +3304,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.CreateCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.CreateCustomDimensionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3278,7 +3330,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customDimension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.UpdateCustomDimensionRequest',
         ['customDimension', 'name']
       );
       request.customDimension.name = defaultValue1;
@@ -3312,7 +3364,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customDimension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.UpdateCustomDimensionRequest',
         ['customDimension', 'name']
       );
       request.customDimension.name = defaultValue1;
@@ -3361,7 +3413,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customDimension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.UpdateCustomDimensionRequest',
         ['customDimension', 'name']
       );
       request.customDimension.name = defaultValue1;
@@ -3397,7 +3449,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.customDimension ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.UpdateCustomDimensionRequest',
         ['customDimension', 'name']
       );
       request.customDimension.name = defaultValue1;
@@ -3422,7 +3474,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ArchiveCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3455,7 +3507,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ArchiveCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3503,7 +3555,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ArchiveCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3538,7 +3590,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ArchiveCustomDimensionRequest',
+        '.google.analytics.admin.v1beta.ArchiveCustomDimensionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3562,9 +3614,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomDimensionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomDimensionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3594,9 +3647,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomDimensionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomDimensionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3641,9 +3695,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomDimensionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomDimensionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3672,9 +3727,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomDimensionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomDimensionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomDimensionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3693,9 +3749,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateCustomMetricRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3725,9 +3782,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateCustomMetricRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3772,9 +3830,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateCustomMetricRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3803,9 +3862,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomMetricRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateCustomMetricRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3825,10 +3885,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateCustomMetricRequest()
       );
       request.customMetric ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
-        'customMetric',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateCustomMetricRequest',
+        ['customMetric', 'name']
+      );
       request.customMetric.name = defaultValue1;
       const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3859,10 +3919,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateCustomMetricRequest()
       );
       request.customMetric ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
-        'customMetric',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateCustomMetricRequest',
+        ['customMetric', 'name']
+      );
       request.customMetric.name = defaultValue1;
       const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3908,10 +3968,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateCustomMetricRequest()
       );
       request.customMetric ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
-        'customMetric',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateCustomMetricRequest',
+        ['customMetric', 'name']
+      );
       request.customMetric.name = defaultValue1;
       const expectedHeaderRequestParams = `custom_metric.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3941,10 +4001,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateCustomMetricRequest()
       );
       request.customMetric ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomMetricRequest', [
-        'customMetric',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateCustomMetricRequest',
+        ['customMetric', 'name']
+      );
       request.customMetric.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3963,9 +4023,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ArchiveCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ArchiveCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3995,9 +4056,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ArchiveCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ArchiveCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4042,9 +4104,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ArchiveCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ArchiveCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4073,9 +4136,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ArchiveCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ArchiveCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ArchiveCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4094,9 +4158,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4125,9 +4190,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4172,9 +4238,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4203,9 +4270,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetCustomMetricRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomMetricRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetCustomMetricRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4225,7 +4293,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4258,7 +4326,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4306,7 +4374,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4341,7 +4409,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.GetDataRetentionSettingsRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4367,7 +4435,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataRetentionSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.UpdateDataRetentionSettingsRequest',
         ['dataRetentionSettings', 'name']
       );
       request.dataRetentionSettings.name = defaultValue1;
@@ -4401,7 +4469,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataRetentionSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.UpdateDataRetentionSettingsRequest',
         ['dataRetentionSettings', 'name']
       );
       request.dataRetentionSettings.name = defaultValue1;
@@ -4450,7 +4518,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataRetentionSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.UpdateDataRetentionSettingsRequest',
         ['dataRetentionSettings', 'name']
       );
       request.dataRetentionSettings.name = defaultValue1;
@@ -4486,7 +4554,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       );
       request.dataRetentionSettings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDataRetentionSettingsRequest',
+        '.google.analytics.admin.v1beta.UpdateDataRetentionSettingsRequest',
         ['dataRetentionSettings', 'name']
       );
       request.dataRetentionSettings.name = defaultValue1;
@@ -4510,9 +4578,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateDataStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4541,9 +4610,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateDataStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4588,9 +4658,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateDataStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4619,9 +4690,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.CreateDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDataStreamRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.CreateDataStreamRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4640,9 +4712,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4671,9 +4744,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4718,9 +4792,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4749,9 +4824,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.DeleteDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.DeleteDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4771,10 +4847,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateDataStreamRequest()
       );
       request.dataStream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
-        'dataStream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateDataStreamRequest',
+        ['dataStream', 'name']
+      );
       request.dataStream.name = defaultValue1;
       const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4804,10 +4880,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateDataStreamRequest()
       );
       request.dataStream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
-        'dataStream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateDataStreamRequest',
+        ['dataStream', 'name']
+      );
       request.dataStream.name = defaultValue1;
       const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4853,10 +4929,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateDataStreamRequest()
       );
       request.dataStream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
-        'dataStream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateDataStreamRequest',
+        ['dataStream', 'name']
+      );
       request.dataStream.name = defaultValue1;
       const expectedHeaderRequestParams = `data_stream.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4886,10 +4962,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.UpdateDataStreamRequest()
       );
       request.dataStream ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateDataStreamRequest', [
-        'dataStream',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.UpdateDataStreamRequest',
+        ['dataStream', 'name']
+      );
       request.dataStream.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4908,9 +4984,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4939,9 +5016,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4986,9 +5064,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5017,9 +5096,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.GetDataStreamRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDataStreamRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.GetDataStreamRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5761,9 +5841,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListFirebaseLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListFirebaseLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5800,9 +5881,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListFirebaseLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListFirebaseLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5855,9 +5937,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListFirebaseLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListFirebaseLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5886,9 +5969,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListFirebaseLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListFirebaseLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5947,9 +6031,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListFirebaseLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListFirebaseLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5997,9 +6082,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListFirebaseLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListFirebaseLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6047,9 +6133,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListFirebaseLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirebaseLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListFirebaseLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6090,9 +6177,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6130,9 +6218,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6187,9 +6276,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6218,9 +6308,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6279,9 +6370,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6329,9 +6421,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6379,9 +6472,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGoogleAdsLinksRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListGoogleAdsLinksRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6423,7 +6517,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMeasurementProtocolSecretsRequest',
+        '.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6464,7 +6558,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMeasurementProtocolSecretsRequest',
+        '.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6522,7 +6616,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMeasurementProtocolSecretsRequest',
+        '.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6557,7 +6651,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMeasurementProtocolSecretsRequest',
+        '.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6630,7 +6724,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMeasurementProtocolSecretsRequest',
+        '.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6692,7 +6786,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMeasurementProtocolSecretsRequest',
+        '.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6747,7 +6841,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListMeasurementProtocolSecretsRequest',
+        '.google.analytics.admin.v1beta.ListMeasurementProtocolSecretsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6795,7 +6889,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchChangeHistoryEventsRequest',
+        '.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest',
         ['account']
       );
       request.account = defaultValue1;
@@ -6836,7 +6930,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchChangeHistoryEventsRequest',
+        '.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest',
         ['account']
       );
       request.account = defaultValue1;
@@ -6894,7 +6988,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchChangeHistoryEventsRequest',
+        '.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest',
         ['account']
       );
       request.account = defaultValue1;
@@ -6929,7 +7023,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchChangeHistoryEventsRequest',
+        '.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest',
         ['account']
       );
       request.account = defaultValue1;
@@ -6999,7 +7093,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchChangeHistoryEventsRequest',
+        '.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest',
         ['account']
       );
       request.account = defaultValue1;
@@ -7058,7 +7152,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchChangeHistoryEventsRequest',
+        '.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest',
         ['account']
       );
       request.account = defaultValue1;
@@ -7113,7 +7207,7 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
         new protos.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SearchChangeHistoryEventsRequest',
+        '.google.analytics.admin.v1beta.SearchChangeHistoryEventsRequest',
         ['account']
       );
       request.account = defaultValue1;
@@ -7160,9 +7254,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListConversionEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7200,9 +7295,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListConversionEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7257,9 +7353,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListConversionEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7288,9 +7385,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListConversionEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7349,9 +7447,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListConversionEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7399,9 +7498,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListConversionEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7449,9 +7549,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListConversionEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConversionEventsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListConversionEventsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7492,9 +7593,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomDimensionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomDimensionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7532,9 +7634,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomDimensionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomDimensionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7589,9 +7692,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomDimensionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomDimensionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7620,9 +7724,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomDimensionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomDimensionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7681,9 +7786,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomDimensionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomDimensionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7731,9 +7837,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomDimensionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomDimensionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7781,9 +7888,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomDimensionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomDimensionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomDimensionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7824,9 +7932,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomMetricsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7863,9 +7972,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomMetricsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7918,9 +8028,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomMetricsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7949,9 +8060,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomMetricsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8010,9 +8122,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomMetricsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8060,9 +8173,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomMetricsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8110,9 +8224,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListCustomMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomMetricsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListCustomMetricsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8153,9 +8268,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListDataStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListDataStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8192,9 +8308,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListDataStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListDataStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8247,9 +8364,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListDataStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListDataStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8278,9 +8396,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListDataStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListDataStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8338,9 +8457,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListDataStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListDataStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8387,9 +8507,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListDataStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListDataStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8436,9 +8557,10 @@ describe('v1beta.AnalyticsAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.analytics.admin.v1beta.ListDataStreamsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDataStreamsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.analytics.admin.v1beta.ListDataStreamsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
