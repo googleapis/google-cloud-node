@@ -280,7 +280,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.GetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,7 +312,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.GetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -354,7 +360,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.GetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -383,7 +392,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.GetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.GetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -403,7 +415,7 @@ describe('v1.ManagedNotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RefreshRuntimeTokenInternalRequest',
+        '.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -436,7 +448,7 @@ describe('v1.ManagedNotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RefreshRuntimeTokenInternalRequest',
+        '.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -484,7 +496,7 @@ describe('v1.ManagedNotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RefreshRuntimeTokenInternalRequest',
+        '.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -519,7 +531,7 @@ describe('v1.ManagedNotebookServiceClient', () => {
         new protos.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RefreshRuntimeTokenInternalRequest',
+        '.google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -543,9 +555,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.CreateRuntimeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -576,9 +589,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.CreateRuntimeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -630,9 +644,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.CreateRuntimeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -661,9 +676,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.CreateRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRuntimeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.CreateRuntimeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -739,9 +755,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.DeleteRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -772,9 +789,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.DeleteRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -826,9 +844,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.DeleteRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -857,9 +876,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.DeleteRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.DeleteRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -935,9 +955,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StartRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -967,9 +988,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StartRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1021,9 +1043,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StartRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1052,9 +1075,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StartRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StartRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1127,7 +1151,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StopRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1157,7 +1184,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StopRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1209,7 +1239,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StopRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1238,7 +1271,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.StopRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopRuntimeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.StopRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1311,9 +1347,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.SwitchRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1344,9 +1381,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.SwitchRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1398,9 +1436,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.SwitchRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1429,9 +1468,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.SwitchRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SwitchRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.SwitchRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1507,9 +1547,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ResetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1539,9 +1580,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ResetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1593,9 +1635,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ResetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1624,9 +1667,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ResetRuntimeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetRuntimeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ResetRuntimeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1699,9 +1743,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ReportRuntimeEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1732,9 +1777,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ReportRuntimeEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1786,9 +1832,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ReportRuntimeEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1817,9 +1864,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ReportRuntimeEventRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRuntimeEventRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ReportRuntimeEventRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1895,9 +1943,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ListRuntimesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1928,9 +1977,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ListRuntimesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1977,9 +2027,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ListRuntimesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2008,9 +2059,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ListRuntimesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2062,9 +2114,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ListRuntimesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2113,9 +2166,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ListRuntimesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2156,9 +2210,10 @@ describe('v1.ManagedNotebookServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.notebooks.v1.ListRuntimesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.notebooks.v1.ListRuntimesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
