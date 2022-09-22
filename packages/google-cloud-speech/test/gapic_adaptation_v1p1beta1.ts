@@ -237,9 +237,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreatePhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,9 +367,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetPhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -393,9 +398,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetPhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +445,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetPhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -469,9 +476,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetPhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -490,10 +498,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest()
       );
       request.phraseSet ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
-        'phraseSet',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest',
+        ['phraseSet', 'name']
+      );
       request.phraseSet.name = defaultValue1;
       const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -522,10 +530,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest()
       );
       request.phraseSet ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
-        'phraseSet',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest',
+        ['phraseSet', 'name']
+      );
       request.phraseSet.name = defaultValue1;
       const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,10 +578,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest()
       );
       request.phraseSet ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
-        'phraseSet',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest',
+        ['phraseSet', 'name']
+      );
       request.phraseSet.name = defaultValue1;
       const expectedHeaderRequestParams = `phrase_set.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -602,10 +610,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest()
       );
       request.phraseSet ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePhraseSetRequest', [
-        'phraseSet',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdatePhraseSetRequest',
+        ['phraseSet', 'name']
+      );
       request.phraseSet.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -623,9 +631,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -653,9 +662,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -699,9 +709,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -729,9 +740,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePhraseSetRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeletePhraseSetRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -749,9 +761,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreateCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreateCustomClassRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -779,9 +792,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreateCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreateCustomClassRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -825,9 +839,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreateCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreateCustomClassRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -855,9 +870,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CreateCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCustomClassRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.CreateCustomClassRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -875,9 +891,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -905,9 +922,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -951,9 +969,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -981,9 +1000,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.GetCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.GetCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1002,10 +1022,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest()
       );
       request.customClass ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
-        'customClass',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest',
+        ['customClass', 'name']
+      );
       request.customClass.name = defaultValue1;
       const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1034,10 +1054,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest()
       );
       request.customClass ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
-        'customClass',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest',
+        ['customClass', 'name']
+      );
       request.customClass.name = defaultValue1;
       const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1082,10 +1102,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest()
       );
       request.customClass ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
-        'customClass',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest',
+        ['customClass', 'name']
+      );
       request.customClass.name = defaultValue1;
       const expectedHeaderRequestParams = `custom_class.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1114,10 +1134,10 @@ describe('v1p1beta1.AdaptationClient', () => {
         new protos.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest()
       );
       request.customClass ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCustomClassRequest', [
-        'customClass',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.UpdateCustomClassRequest',
+        ['customClass', 'name']
+      );
       request.customClass.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1135,9 +1155,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1165,9 +1186,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1211,9 +1233,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1241,9 +1264,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCustomClassRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.DeleteCustomClassRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1261,9 +1285,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListPhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1299,9 +1324,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListPhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1353,9 +1379,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListPhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1383,9 +1410,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListPhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1442,9 +1470,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListPhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1490,9 +1519,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListPhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1538,9 +1568,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListPhraseSetRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPhraseSetRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListPhraseSetRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1579,9 +1610,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListCustomClassesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListCustomClassesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1617,9 +1649,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListCustomClassesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListCustomClassesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1671,9 +1704,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListCustomClassesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListCustomClassesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1701,9 +1735,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListCustomClassesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListCustomClassesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1761,9 +1796,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListCustomClassesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListCustomClassesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1810,9 +1846,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListCustomClassesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListCustomClassesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1858,9 +1895,10 @@ describe('v1p1beta1.AdaptationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.ListCustomClassesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCustomClassesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.speech.v1p1beta1.ListCustomClassesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
