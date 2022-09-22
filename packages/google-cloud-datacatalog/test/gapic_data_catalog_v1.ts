@@ -235,9 +235,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -391,9 +396,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -437,9 +443,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -467,9 +474,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -488,10 +496,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
-        'entryGroup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        ['entryGroup', 'name']
+      );
       request.entryGroup.name = defaultValue1;
       const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -520,10 +528,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
-        'entryGroup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        ['entryGroup', 'name']
+      );
       request.entryGroup.name = defaultValue1;
       const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -568,10 +576,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
-        'entryGroup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        ['entryGroup', 'name']
+      );
       request.entryGroup.name = defaultValue1;
       const expectedHeaderRequestParams = `entry_group.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -600,10 +608,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryGroupRequest()
       );
       request.entryGroup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryGroupRequest', [
-        'entryGroup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryGroupRequest',
+        ['entryGroup', 'name']
+      );
       request.entryGroup.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -621,9 +629,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -651,9 +660,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -697,9 +707,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -727,9 +738,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -747,9 +759,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -777,9 +790,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -823,9 +837,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -853,9 +868,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEntryRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateEntryRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -874,10 +890,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
       );
       request.entry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
-        'entry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        ['entry', 'name']
+      );
       request.entry.name = defaultValue1;
       const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -906,10 +922,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
       );
       request.entry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
-        'entry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        ['entry', 'name']
+      );
       request.entry.name = defaultValue1;
       const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -954,10 +970,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
       );
       request.entry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
-        'entry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        ['entry', 'name']
+      );
       request.entry.name = defaultValue1;
       const expectedHeaderRequestParams = `entry.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -986,10 +1002,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateEntryRequest()
       );
       request.entry ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateEntryRequest', [
-        'entry',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateEntryRequest',
+        ['entry', 'name']
+      );
       request.entry.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1007,7 +1023,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1035,7 +1054,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1079,7 +1101,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1107,7 +1132,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1125,7 +1153,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1153,7 +1184,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1197,7 +1231,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1222,7 +1259,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1323,9 +1363,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryOverviewRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1354,9 +1395,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryOverviewRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1400,9 +1442,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryOverviewRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1430,9 +1473,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryOverviewRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryOverviewRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1450,9 +1494,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryContactsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1481,9 +1526,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryContactsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1527,9 +1573,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryContactsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1557,9 +1604,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ModifyEntryContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ModifyEntryContactsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ModifyEntryContactsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1577,9 +1625,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1607,9 +1656,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1653,9 +1703,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1683,9 +1734,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1703,9 +1755,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1733,9 +1786,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1779,9 +1833,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1809,9 +1864,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1830,10 +1886,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
-        'tagTemplate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        ['tagTemplate', 'name']
+      );
       request.tagTemplate.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1862,10 +1918,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
-        'tagTemplate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        ['tagTemplate', 'name']
+      );
       request.tagTemplate.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1910,10 +1966,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
-        'tagTemplate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        ['tagTemplate', 'name']
+      );
       request.tagTemplate.name = defaultValue1;
       const expectedHeaderRequestParams = `tag_template.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1942,10 +1998,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateRequest()
       );
       request.tagTemplate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagTemplateRequest', [
-        'tagTemplate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateRequest',
+        ['tagTemplate', 'name']
+      );
       request.tagTemplate.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1963,9 +2019,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1993,9 +2050,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2039,9 +2097,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2069,9 +2128,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2090,7 +2150,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2122,7 +2182,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2169,7 +2229,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2203,7 +2263,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.CreateTagTemplateFieldRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2227,7 +2287,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2259,7 +2319,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2306,7 +2366,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2340,7 +2400,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.UpdateTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2364,7 +2424,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2396,7 +2456,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2443,7 +2503,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2477,7 +2537,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2501,7 +2561,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2533,7 +2593,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2580,7 +2640,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2614,7 +2674,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RenameTagTemplateFieldEnumValueRequest',
+        '.google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2638,7 +2698,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2670,7 +2730,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2717,7 +2777,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2751,7 +2811,7 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTagTemplateFieldRequest',
+        '.google.cloud.datacatalog.v1.DeleteTagTemplateFieldRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2774,7 +2834,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2802,7 +2865,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2846,7 +2912,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2871,7 +2940,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTagRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2890,10 +2962,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2922,10 +2994,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2970,10 +3042,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedHeaderRequestParams = `tag.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2999,10 +3071,10 @@ describe('v1.DataCatalogClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTagRequest()
       );
       request.tag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTagRequest', [
-        'tag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTagRequest',
+        ['tag', 'name']
+      );
       request.tag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3020,7 +3092,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3048,7 +3123,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3092,7 +3170,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3117,7 +3198,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTagRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3135,7 +3219,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.StarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.StarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3163,7 +3250,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.StarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.StarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3207,7 +3297,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.StarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.StarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3232,7 +3325,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.StarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.StarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3250,7 +3346,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnstarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3278,7 +3377,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnstarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3322,7 +3424,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnstarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3350,7 +3455,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.UnstarEntryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UnstarEntryRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UnstarEntryRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3368,9 +3476,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3398,9 +3507,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3444,9 +3554,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3474,9 +3585,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3494,9 +3606,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3524,9 +3637,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3570,9 +3684,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3600,9 +3715,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3620,9 +3736,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3651,9 +3768,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3697,9 +3815,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3727,9 +3846,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3988,9 +4108,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4026,9 +4147,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4080,9 +4202,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4110,9 +4233,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4169,9 +4293,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4217,9 +4342,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4265,9 +4391,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntryGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntryGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntryGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4306,9 +4433,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4338,9 +4466,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4386,9 +4515,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4416,9 +4546,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4469,9 +4600,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4519,9 +4651,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4561,9 +4694,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListEntriesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEntriesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListEntriesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4604,7 +4738,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4634,7 +4771,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4680,7 +4820,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4705,7 +4848,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4756,7 +4902,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4804,7 +4953,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4843,7 +4995,10 @@ describe('v1.DataCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTagsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

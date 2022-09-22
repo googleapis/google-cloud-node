@@ -237,9 +237,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaxonomyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaxonomyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaxonomyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreateTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTaxonomyRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreateTaxonomyRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,9 +367,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaxonomyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -393,9 +398,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaxonomyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +445,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaxonomyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -469,9 +476,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeleteTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTaxonomyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeleteTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -490,10 +498,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
       );
       request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTaxonomyRequest', [
-        'taxonomy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
+        ['taxonomy', 'name']
+      );
       request.taxonomy.name = defaultValue1;
       const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -522,10 +530,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
       );
       request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTaxonomyRequest', [
-        'taxonomy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
+        ['taxonomy', 'name']
+      );
       request.taxonomy.name = defaultValue1;
       const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,10 +578,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
       );
       request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTaxonomyRequest', [
-        'taxonomy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
+        ['taxonomy', 'name']
+      );
       request.taxonomy.name = defaultValue1;
       const expectedHeaderRequestParams = `taxonomy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -602,10 +610,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdateTaxonomyRequest()
       );
       request.taxonomy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTaxonomyRequest', [
-        'taxonomy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdateTaxonomyRequest',
+        ['taxonomy', 'name']
+      );
       request.taxonomy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -623,7 +631,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaxonomyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -651,7 +662,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaxonomyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -695,7 +709,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaxonomyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -723,7 +740,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetTaxonomyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTaxonomyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetTaxonomyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -741,9 +761,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyTagRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -771,9 +792,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyTagRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -817,9 +839,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyTagRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -847,9 +870,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.CreatePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreatePolicyTagRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.CreatePolicyTagRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -867,9 +891,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -897,9 +922,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -943,9 +969,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -973,9 +1000,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.DeletePolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeletePolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.DeletePolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -994,10 +1022,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
       );
       request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyTagRequest', [
-        'policyTag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
+        ['policyTag', 'name']
+      );
       request.policyTag.name = defaultValue1;
       const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1026,10 +1054,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
       );
       request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyTagRequest', [
-        'policyTag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
+        ['policyTag', 'name']
+      );
       request.policyTag.name = defaultValue1;
       const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1074,10 +1102,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
       );
       request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyTagRequest', [
-        'policyTag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
+        ['policyTag', 'name']
+      );
       request.policyTag.name = defaultValue1;
       const expectedHeaderRequestParams = `policy_tag.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1106,10 +1134,10 @@ describe('v1.PolicyTagManagerClient', () => {
         new protos.google.cloud.datacatalog.v1.UpdatePolicyTagRequest()
       );
       request.policyTag ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyTagRequest', [
-        'policyTag',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.UpdatePolicyTagRequest',
+        ['policyTag', 'name']
+      );
       request.policyTag.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1127,9 +1155,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1157,9 +1186,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1203,9 +1233,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1233,9 +1264,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.GetPolicyTagRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyTagRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.GetPolicyTagRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1253,9 +1285,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1283,9 +1316,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1329,9 +1363,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1359,9 +1394,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1379,9 +1415,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1409,9 +1446,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1455,9 +1493,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1485,9 +1524,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1505,9 +1545,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1536,9 +1577,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1582,9 +1624,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1612,9 +1655,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1632,9 +1676,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1670,9 +1715,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1724,9 +1770,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1754,9 +1801,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1813,9 +1861,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1861,9 +1910,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1909,9 +1959,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1950,9 +2001,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPolicyTagsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1988,9 +2040,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPolicyTagsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2042,9 +2095,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPolicyTagsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2072,9 +2126,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPolicyTagsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2131,9 +2186,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPolicyTagsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2179,9 +2235,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPolicyTagsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2227,9 +2284,10 @@ describe('v1.PolicyTagManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1.ListPolicyTagsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPolicyTagsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1.ListPolicyTagsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -200,9 +200,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -233,9 +234,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -282,9 +284,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -315,9 +318,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ImportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -338,9 +342,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -371,9 +376,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -420,9 +426,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -453,9 +460,10 @@ describe('v1beta1.PolicyTagManagerSerializationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportTaxonomiesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.datacatalog.v1beta1.ExportTaxonomiesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
