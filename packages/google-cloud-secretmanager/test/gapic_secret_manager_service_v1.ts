@@ -246,9 +246,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSecretRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -277,9 +278,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSecretRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -324,9 +326,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSecretRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -355,9 +358,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.CreateSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSecretRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.CreateSecretRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -376,9 +380,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddSecretVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -407,9 +412,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddSecretVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -454,9 +460,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddSecretVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -485,9 +492,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AddSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddSecretVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AddSecretVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -506,7 +514,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -535,7 +546,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -580,7 +594,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -606,7 +623,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -626,10 +646,10 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
       );
       request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecretRequest', [
-        'secret',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        ['secret', 'name']
+      );
       request.secret.name = defaultValue1;
       const expectedHeaderRequestParams = `secret.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -659,10 +679,10 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
       );
       request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecretRequest', [
-        'secret',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        ['secret', 'name']
+      );
       request.secret.name = defaultValue1;
       const expectedHeaderRequestParams = `secret.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -708,10 +728,10 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
       );
       request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecretRequest', [
-        'secret',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        ['secret', 'name']
+      );
       request.secret.name = defaultValue1;
       const expectedHeaderRequestParams = `secret.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -741,10 +761,10 @@ describe('v1.SecretManagerServiceClient', () => {
         new protos.google.cloud.secretmanager.v1.UpdateSecretRequest()
       );
       request.secret ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSecretRequest', [
-        'secret',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.UpdateSecretRequest',
+        ['secret', 'name']
+      );
       request.secret.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -763,9 +783,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecretRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -794,9 +815,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecretRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -841,9 +863,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecretRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -872,9 +895,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DeleteSecretRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecretRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DeleteSecretRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -893,9 +917,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -924,9 +949,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -971,9 +997,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1002,9 +1029,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.GetSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.GetSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1023,9 +1051,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AccessSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1055,9 +1084,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AccessSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1102,9 +1132,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AccessSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1133,9 +1164,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.AccessSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AccessSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.AccessSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1154,9 +1186,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1186,9 +1219,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1233,9 +1267,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1264,9 +1299,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DisableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DisableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1285,9 +1321,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1317,9 +1354,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1364,9 +1402,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1395,9 +1434,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.EnableSecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableSecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.EnableSecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1416,9 +1456,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DestroySecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1448,9 +1489,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DestroySecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1495,9 +1537,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DestroySecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1526,9 +1569,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.DestroySecretVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DestroySecretVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.DestroySecretVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1547,9 +1591,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1578,9 +1623,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1625,9 +1671,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1656,9 +1703,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1677,9 +1725,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1708,9 +1757,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1755,9 +1805,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1786,9 +1837,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1807,9 +1859,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1839,9 +1892,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1886,9 +1940,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1917,9 +1972,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1938,9 +1994,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1977,9 +2034,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2032,9 +2090,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2063,9 +2122,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2123,9 +2183,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2174,9 +2235,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2223,9 +2285,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2267,9 +2330,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2307,9 +2371,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2364,9 +2429,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2395,9 +2461,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2456,9 +2523,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2506,9 +2574,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2556,9 +2625,10 @@ describe('v1.SecretManagerServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.secretmanager.v1.ListSecretVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecretVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.secretmanager.v1.ListSecretVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
