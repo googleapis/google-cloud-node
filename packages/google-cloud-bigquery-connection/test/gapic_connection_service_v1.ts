@@ -237,9 +237,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.CreateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.CreateConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -267,9 +268,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.CreateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.CreateConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -313,9 +315,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.CreateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.CreateConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -343,9 +346,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.CreateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.CreateConnectionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -363,9 +367,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.GetConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.GetConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -393,9 +398,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.GetConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.GetConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +445,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.GetConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.GetConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -469,9 +476,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.GetConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.GetConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -489,9 +497,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.UpdateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.UpdateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -519,9 +528,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.UpdateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.UpdateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -565,9 +575,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.UpdateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.UpdateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -595,9 +606,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.UpdateConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.UpdateConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -615,9 +627,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.DeleteConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.DeleteConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -645,9 +658,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.DeleteConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.DeleteConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -691,9 +705,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.DeleteConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.DeleteConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -721,9 +736,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.DeleteConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.DeleteConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -741,9 +757,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -771,9 +788,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -817,9 +835,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -847,9 +866,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -867,9 +887,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -897,9 +918,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -943,9 +965,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -973,9 +996,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -993,9 +1017,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1024,9 +1049,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1070,9 +1096,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1100,9 +1127,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1120,9 +1148,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.ListConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.ListConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1158,9 +1187,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.ListConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.ListConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1214,9 +1244,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.ListConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.ListConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1244,9 +1275,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.ListConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.ListConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1304,9 +1336,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.ListConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.ListConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1353,9 +1386,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.ListConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.ListConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1402,9 +1436,10 @@ describe('v1.ConnectionServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.connection.v1.ListConnectionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.bigquery.connection.v1.ListConnectionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
