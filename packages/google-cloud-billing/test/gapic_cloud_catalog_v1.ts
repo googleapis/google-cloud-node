@@ -444,7 +444,10 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -474,7 +477,10 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -520,7 +526,10 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -545,7 +554,10 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -593,7 +605,10 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -638,7 +653,10 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -677,7 +695,10 @@ describe('v1.CloudCatalogClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.ListSkusRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSkusRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.ListSkusRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

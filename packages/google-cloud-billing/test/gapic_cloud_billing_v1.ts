@@ -235,9 +235,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.GetBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,9 +266,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.GetBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -311,9 +313,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.GetBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -341,9 +344,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.GetBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.GetBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -361,9 +365,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.UpdateBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -392,9 +397,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.UpdateBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -438,9 +444,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.UpdateBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -468,9 +475,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.billing.v1.UpdateBillingAccountRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBillingAccountRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.billing.v1.UpdateBillingAccountRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -573,7 +581,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.GetProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -605,7 +613,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.GetProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -652,7 +660,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.GetProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -686,7 +694,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.GetProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.GetProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -710,7 +718,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.UpdateProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -742,7 +750,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.UpdateProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -789,7 +797,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.UpdateProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -823,7 +831,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.UpdateProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.UpdateProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -846,9 +854,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -876,9 +885,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -922,9 +932,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -952,9 +963,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -972,9 +984,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1002,9 +1015,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1048,9 +1062,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1078,9 +1093,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1098,9 +1114,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1129,9 +1146,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1175,9 +1193,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1205,9 +1224,10 @@ describe('v1.CloudBillingClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1458,7 +1478,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.ListProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1498,7 +1518,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.ListProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1553,7 +1573,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.ListProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1587,7 +1607,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.ListProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1654,7 +1674,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.ListProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1710,7 +1730,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.ListProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1764,7 +1784,7 @@ describe('v1.CloudBillingClient', () => {
         new protos.google.cloud.billing.v1.ListProjectBillingInfoRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListProjectBillingInfoRequest',
+        '.google.cloud.billing.v1.ListProjectBillingInfoRequest',
         ['name']
       );
       request.name = defaultValue1;
