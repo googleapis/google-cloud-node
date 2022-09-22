@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [4.0.3](https://github.com/googleapis/nodejs-text-to-speech/compare/v4.0.2...v4.0.3) (2022-09-14)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#625](https://github.com/googleapis/nodejs-text-to-speech/issues/625)) ([df7fc10](https://github.com/googleapis/nodejs-text-to-speech/commit/df7fc1076fa70c3a41a40f18d677ea3108091e76))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-text-to-speech/issues/1553)) ([#624](https://github.com/googleapis/nodejs-text-to-speech/issues/624)) ([655571f](https://github.com/googleapis/nodejs-text-to-speech/commit/655571f6322adc6fd75fc05b694eddc52b7eccbe))
+* Preserve default values in x-goog-request-params header ([#627](https://github.com/googleapis/nodejs-text-to-speech/issues/627)) ([26a4f84](https://github.com/googleapis/nodejs-text-to-speech/commit/26a4f8456c713272c8f3d0aab45ecbb4392e0fa1))
+* use google-gax v3.3.0 ([655571f](https://github.com/googleapis/nodejs-text-to-speech/commit/655571f6322adc6fd75fc05b694eddc52b7eccbe))
+
 ## [4.0.2](https://github.com/googleapis/nodejs-text-to-speech/compare/v4.0.1...v4.0.2) (2022-08-23)
 
 
