@@ -248,7 +248,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.GetSettingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -277,7 +280,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.GetSettingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -322,7 +328,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.GetSettingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -351,7 +360,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.GetSettingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSettingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.GetSettingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -371,10 +383,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
       request.setting ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
-        'setting',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
+        ['setting', 'name']
+      );
       request.setting.name = defaultValue1;
       const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -404,10 +416,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
       request.setting ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
-        'setting',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
+        ['setting', 'name']
+      );
       request.setting.name = defaultValue1;
       const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -453,10 +465,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
       request.setting ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
-        'setting',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
+        ['setting', 'name']
+      );
       request.setting.name = defaultValue1;
       const expectedHeaderRequestParams = `setting.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -486,10 +498,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
         new protos.google.cloud.resourcesettings.v1.UpdateSettingRequest()
       );
       request.setting ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSettingRequest', [
-        'setting',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.UpdateSettingRequest',
+        ['setting', 'name']
+      );
       request.setting.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -508,9 +520,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -547,9 +560,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -602,9 +616,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -633,9 +648,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -693,9 +709,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -744,9 +761,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -793,9 +811,10 @@ describe('v1.ResourceSettingsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.resourcesettings.v1.ListSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSettingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.resourcesettings.v1.ListSettingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
