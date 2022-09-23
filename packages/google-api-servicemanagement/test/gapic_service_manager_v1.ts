@@ -269,9 +269,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -299,9 +300,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,9 +378,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -395,13 +399,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'configId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['configId']
+      );
       request.configId = defaultValue2;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -429,13 +435,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'configId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['configId']
+      );
       request.configId = defaultValue2;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -476,13 +484,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'configId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['configId']
+      );
       request.configId = defaultValue2;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}&config_id=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -510,13 +520,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceConfigRequest', [
-        'configId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceConfigRequest',
+        ['configId']
+      );
       request.configId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -534,9 +546,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -565,9 +578,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -608,9 +622,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -638,9 +653,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceConfigRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceConfigRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -658,13 +674,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'rolloutId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['rolloutId']
+      );
       request.rolloutId = defaultValue2;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -692,13 +710,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'rolloutId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['rolloutId']
+      );
       request.rolloutId = defaultValue2;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -742,13 +762,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'rolloutId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['rolloutId']
+      );
       request.rolloutId = defaultValue2;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}&rollout_id=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -776,13 +798,15 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GetServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetServiceRolloutRequest', [
-        'rolloutId',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.GetServiceRolloutRequest',
+        ['rolloutId']
+      );
       request.rolloutId = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1022,9 +1046,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.DeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1054,9 +1079,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.DeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1107,9 +1133,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.DeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1137,9 +1164,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.DeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.DeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1212,9 +1240,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.UndeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1244,9 +1273,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.UndeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1297,9 +1327,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.UndeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1327,9 +1358,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.UndeleteServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UndeleteServiceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.UndeleteServiceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1402,9 +1434,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.SubmitConfigSourceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1434,9 +1467,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.SubmitConfigSourceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1487,9 +1521,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.SubmitConfigSourceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1517,9 +1552,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.SubmitConfigSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SubmitConfigSourceRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.SubmitConfigSourceRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1592,9 +1628,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1624,9 +1661,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1677,9 +1715,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1707,9 +1746,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.CreateServiceRolloutRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateServiceRolloutRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.CreateServiceRolloutRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2021,9 +2061,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceConfigsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2054,9 +2095,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceConfigsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2102,9 +2144,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceConfigsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2132,9 +2175,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceConfigsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2182,9 +2226,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceConfigsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2227,9 +2272,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceConfigsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2269,9 +2315,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceConfigsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceConfigsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2310,9 +2357,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceRolloutsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2349,9 +2397,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceRolloutsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2403,9 +2452,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceRolloutsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2433,9 +2483,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceRolloutsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2492,9 +2543,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceRolloutsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2540,9 +2592,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceRolloutsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = [
@@ -2588,9 +2641,10 @@ describe('v1.ServiceManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ListServiceRolloutsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServiceRolloutsRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicemanagement.v1.ListServiceRolloutsRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
