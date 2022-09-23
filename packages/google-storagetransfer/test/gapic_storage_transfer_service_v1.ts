@@ -281,7 +281,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.GetGoogleServiceAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGoogleServiceAccountRequest',
+        '.google.storagetransfer.v1.GetGoogleServiceAccountRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
@@ -314,7 +314,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.GetGoogleServiceAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGoogleServiceAccountRequest',
+        '.google.storagetransfer.v1.GetGoogleServiceAccountRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
@@ -362,7 +362,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.GetGoogleServiceAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGoogleServiceAccountRequest',
+        '.google.storagetransfer.v1.GetGoogleServiceAccountRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
@@ -397,7 +397,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.GetGoogleServiceAccountRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGoogleServiceAccountRequest',
+        '.google.storagetransfer.v1.GetGoogleServiceAccountRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
@@ -508,9 +508,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.UpdateTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -539,9 +540,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.UpdateTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -586,9 +588,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.UpdateTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -617,9 +620,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.UpdateTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -638,9 +642,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -669,9 +674,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -716,9 +722,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -747,9 +754,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -769,7 +777,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.PauseTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseTransferOperationRequest',
+        '.google.storagetransfer.v1.PauseTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -802,7 +810,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.PauseTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseTransferOperationRequest',
+        '.google.storagetransfer.v1.PauseTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -850,7 +858,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.PauseTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseTransferOperationRequest',
+        '.google.storagetransfer.v1.PauseTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -885,7 +893,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.PauseTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PauseTransferOperationRequest',
+        '.google.storagetransfer.v1.PauseTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -910,7 +918,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.ResumeTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeTransferOperationRequest',
+        '.google.storagetransfer.v1.ResumeTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -943,7 +951,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.ResumeTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeTransferOperationRequest',
+        '.google.storagetransfer.v1.ResumeTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -991,7 +999,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.ResumeTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeTransferOperationRequest',
+        '.google.storagetransfer.v1.ResumeTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1026,7 +1034,7 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.ResumeTransferOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResumeTransferOperationRequest',
+        '.google.storagetransfer.v1.ResumeTransferOperationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1050,9 +1058,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1081,9 +1090,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1128,9 +1138,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1159,9 +1170,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1180,9 +1192,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentPoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.CreateAgentPoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1211,9 +1224,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentPoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.CreateAgentPoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1258,9 +1272,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentPoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.CreateAgentPoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1289,9 +1304,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.CreateAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAgentPoolRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.CreateAgentPoolRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1311,10 +1327,10 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
       );
       request.agentPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentPoolRequest', [
-        'agentPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateAgentPoolRequest',
+        ['agentPool', 'name']
+      );
       request.agentPool.name = defaultValue1;
       const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1344,10 +1360,10 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
       );
       request.agentPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentPoolRequest', [
-        'agentPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateAgentPoolRequest',
+        ['agentPool', 'name']
+      );
       request.agentPool.name = defaultValue1;
       const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1393,10 +1409,10 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
       );
       request.agentPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentPoolRequest', [
-        'agentPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateAgentPoolRequest',
+        ['agentPool', 'name']
+      );
       request.agentPool.name = defaultValue1;
       const expectedHeaderRequestParams = `agent_pool.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1426,10 +1442,10 @@ describe('v1.StorageTransferServiceClient', () => {
         new protos.google.storagetransfer.v1.UpdateAgentPoolRequest()
       );
       request.agentPool ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAgentPoolRequest', [
-        'agentPool',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.UpdateAgentPoolRequest',
+        ['agentPool', 'name']
+      );
       request.agentPool.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1448,9 +1464,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1479,9 +1496,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1526,9 +1544,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1557,9 +1576,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.GetAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.GetAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1578,9 +1598,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1609,9 +1630,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1656,9 +1678,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1687,9 +1710,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.DeleteAgentPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAgentPoolRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.DeleteAgentPoolRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1708,9 +1732,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.RunTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.RunTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1741,9 +1766,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.RunTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.RunTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1795,9 +1821,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.RunTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.RunTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1826,9 +1853,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.RunTransferJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunTransferJobRequest', [
-        'jobName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.RunTransferJobRequest',
+        ['jobName']
+      );
       request.jobName = defaultValue1;
       const expectedHeaderRequestParams = `job_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2142,9 +2170,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentPoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.ListAgentPoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -2175,9 +2204,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentPoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.ListAgentPoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -2224,9 +2254,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentPoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.ListAgentPoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2255,9 +2286,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentPoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.ListAgentPoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -2309,9 +2341,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentPoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.ListAgentPoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2358,9 +2391,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentPoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.ListAgentPoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -2401,9 +2435,10 @@ describe('v1.StorageTransferServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.storagetransfer.v1.ListAgentPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAgentPoolsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.storagetransfer.v1.ListAgentPoolsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
