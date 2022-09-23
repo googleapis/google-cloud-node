@@ -246,9 +246,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateScanConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -277,9 +278,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateScanConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -324,9 +326,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateScanConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -355,9 +358,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateScanConfigRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.CreateScanConfigRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -376,9 +380,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -407,9 +412,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -454,9 +460,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -485,9 +492,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.DeleteScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -506,9 +514,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -537,9 +546,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -584,9 +594,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -615,9 +626,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanConfigRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanConfigRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -637,10 +649,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
       request.scanConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateScanConfigRequest', [
-        'scanConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest',
+        ['scanConfig', 'name']
+      );
       request.scanConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `scan_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -670,10 +682,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
       request.scanConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateScanConfigRequest', [
-        'scanConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest',
+        ['scanConfig', 'name']
+      );
       request.scanConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `scan_config.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -719,10 +731,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
       request.scanConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateScanConfigRequest', [
-        'scanConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest',
+        ['scanConfig', 'name']
+      );
       request.scanConfig.name = defaultValue1;
       const expectedHeaderRequestParams = `scan_config.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -752,10 +764,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
         new protos.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest()
       );
       request.scanConfig ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateScanConfigRequest', [
-        'scanConfig',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.UpdateScanConfigRequest',
+        ['scanConfig', 'name']
+      );
       request.scanConfig.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -774,9 +786,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartScanRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -805,9 +818,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartScanRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -852,9 +866,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartScanRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -883,9 +898,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartScanRunRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StartScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -904,7 +920,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -933,7 +952,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -978,7 +1000,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1007,7 +1032,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1026,7 +1054,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1055,7 +1086,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1100,7 +1134,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1129,7 +1166,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopScanRunRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.StopScanRunRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1148,7 +1188,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFindingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetFindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1177,7 +1220,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFindingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetFindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1222,7 +1268,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFindingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetFindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1251,7 +1300,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.GetFindingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFindingRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.GetFindingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1270,9 +1322,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingTypeStatsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1302,9 +1355,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingTypeStatsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1349,9 +1403,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingTypeStatsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1380,9 +1435,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingTypeStatsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingTypeStatsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1401,9 +1457,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1440,9 +1497,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1497,9 +1555,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1528,9 +1587,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1591,9 +1651,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1643,9 +1704,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1693,9 +1755,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanConfigsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanConfigsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1736,9 +1799,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1775,9 +1839,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1832,9 +1897,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1863,9 +1929,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1926,9 +1993,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1980,9 +2048,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2030,9 +2099,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListScanRunsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListScanRunsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2073,9 +2143,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCrawledUrlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2112,9 +2183,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCrawledUrlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2169,9 +2241,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCrawledUrlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2200,9 +2273,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCrawledUrlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2263,9 +2337,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCrawledUrlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2315,9 +2390,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCrawledUrlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2365,9 +2441,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCrawledUrlsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListCrawledUrlsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2408,9 +2485,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2447,9 +2525,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2504,9 +2583,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2535,9 +2615,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2598,9 +2679,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2652,9 +2734,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2702,9 +2785,10 @@ describe('v1alpha.WebSecurityScannerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFindingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.websecurityscanner.v1alpha.ListFindingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
