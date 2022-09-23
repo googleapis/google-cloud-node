@@ -4,6 +4,19 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [4.1.1](https://github.com/googleapis/nodejs-resource-manager/compare/v4.1.0...v4.1.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#470](https://github.com/googleapis/nodejs-resource-manager/issues/470)) ([eaa8877](https://github.com/googleapis/nodejs-resource-manager/commit/eaa887732d228ec85fbcdf72f8f6bd98a22406d4))
+* Better support for fallback mode ([#465](https://github.com/googleapis/nodejs-resource-manager/issues/465)) ([fd689ca](https://github.com/googleapis/nodejs-resource-manager/commit/fd689ca2b95c78666c9703b40b380e155a7c87bc))
+* Change import long to require ([#466](https://github.com/googleapis/nodejs-resource-manager/issues/466)) ([de6e9b8](https://github.com/googleapis/nodejs-resource-manager/commit/de6e9b8ebc0c505722bd92cd7487fdabb177f062))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-resource-manager/issues/1553)) ([#469](https://github.com/googleapis/nodejs-resource-manager/issues/469)) ([189b652](https://github.com/googleapis/nodejs-resource-manager/commit/189b6522c57e3190f741cacb11fc76b8bf96aabb))
+* Preserve default values in x-goog-request-params header ([#471](https://github.com/googleapis/nodejs-resource-manager/issues/471)) ([c9b9564](https://github.com/googleapis/nodejs-resource-manager/commit/c9b95649df8d8a59e0d114100b537e54cfffefa2))
+* Remove pip install statements ([#1546](https://github.com/googleapis/nodejs-resource-manager/issues/1546)) ([#468](https://github.com/googleapis/nodejs-resource-manager/issues/468)) ([07f7a4b](https://github.com/googleapis/nodejs-resource-manager/commit/07f7a4b3e8d28c3cf74debe162f23ba628e5f9fe))
+* use google-gax v3.3.0 ([189b652](https://github.com/googleapis/nodejs-resource-manager/commit/189b6522c57e3190f741cacb11fc76b8bf96aabb))
+
 ## [4.1.0](https://github.com/googleapis/nodejs-resource-manager/compare/v4.0.0...v4.1.0) (2022-06-30)
 
 
