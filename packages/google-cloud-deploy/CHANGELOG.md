@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.2](https://github.com/googleapis/nodejs-deploy/compare/v2.1.1...v2.1.2) (2022-09-21)
+
+
+### Bug Fixes
+
+* Allow passing gax instance to client constructor ([#64](https://github.com/googleapis/nodejs-deploy/issues/64)) ([286143f](https://github.com/googleapis/nodejs-deploy/commit/286143f2e7aff409f57b57f58239c21fa16dc230))
+* Do not import the whole google-gax from proto JS ([#1553](https://github.com/googleapis/nodejs-deploy/issues/1553)) ([#63](https://github.com/googleapis/nodejs-deploy/issues/63)) ([024a0e4](https://github.com/googleapis/nodejs-deploy/commit/024a0e4e4902950fc9b40bfed77f2c2ceacf2fce))
+* Preserve default values in x-goog-request-params header ([#66](https://github.com/googleapis/nodejs-deploy/issues/66)) ([be84a26](https://github.com/googleapis/nodejs-deploy/commit/be84a262c1292cd804d7c3b4e0690e21ff122460))
+* use google-gax v3.3.0 ([024a0e4](https://github.com/googleapis/nodejs-deploy/commit/024a0e4e4902950fc9b40bfed77f2c2ceacf2fce))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-deploy/compare/v2.1.0...v2.1.1) (2022-08-23)
 
 
