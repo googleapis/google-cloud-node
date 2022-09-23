@@ -263,9 +263,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -296,9 +297,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -378,9 +381,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.SetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.SetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -401,9 +405,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -434,9 +439,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -483,9 +489,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -516,9 +523,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.GetIamPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.GetIamPolicyRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -539,9 +547,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -573,9 +582,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -622,9 +632,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -655,9 +666,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TestIamPermissionsRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.v1.TestIamPermissionsRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -678,9 +690,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetIapSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -711,9 +724,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetIapSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -760,9 +774,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetIapSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -793,9 +808,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetIapSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIapSettingsRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetIapSettingsRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -817,10 +833,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
       request.iapSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
-        'iapSettings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.UpdateIapSettingsRequest',
+        ['iapSettings', 'name']
+      );
       request.iapSettings.name = defaultValue1;
       const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -852,10 +868,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
       request.iapSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
-        'iapSettings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.UpdateIapSettingsRequest',
+        ['iapSettings', 'name']
+      );
       request.iapSettings.name = defaultValue1;
       const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -903,10 +919,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
       request.iapSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
-        'iapSettings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.UpdateIapSettingsRequest',
+        ['iapSettings', 'name']
+      );
       request.iapSettings.name = defaultValue1;
       const expectedHeaderRequestParams = `iap_settings.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -938,10 +954,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.UpdateIapSettingsRequest()
       );
       request.iapSettings ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateIapSettingsRequest', [
-        'iapSettings',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.UpdateIapSettingsRequest',
+        ['iapSettings', 'name']
+      );
       request.iapSettings.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -963,7 +979,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.CreateTunnelDestGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -998,7 +1014,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.CreateTunnelDestGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1048,7 +1064,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.CreateTunnelDestGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1085,7 +1101,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.CreateTunnelDestGroupRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1111,9 +1127,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetTunnelDestGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1145,9 +1162,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetTunnelDestGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1194,9 +1212,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetTunnelDestGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1227,9 +1246,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetTunnelDestGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTunnelDestGroupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetTunnelDestGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1251,7 +1271,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.DeleteTunnelDestGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1286,7 +1306,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.DeleteTunnelDestGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1336,7 +1356,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.DeleteTunnelDestGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1373,7 +1393,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteTunnelDestGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.DeleteTunnelDestGroupRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1401,7 +1421,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       );
       request.tunnelDestGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.UpdateTunnelDestGroupRequest',
         ['tunnelDestGroup', 'name']
       );
       request.tunnelDestGroup.name = defaultValue1;
@@ -1437,7 +1457,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       );
       request.tunnelDestGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.UpdateTunnelDestGroupRequest',
         ['tunnelDestGroup', 'name']
       );
       request.tunnelDestGroup.name = defaultValue1;
@@ -1488,7 +1508,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       );
       request.tunnelDestGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.UpdateTunnelDestGroupRequest',
         ['tunnelDestGroup', 'name']
       );
       request.tunnelDestGroup.name = defaultValue1;
@@ -1526,7 +1546,7 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       );
       request.tunnelDestGroup ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateTunnelDestGroupRequest',
+        '.google.cloud.iap.v1.UpdateTunnelDestGroupRequest',
         ['tunnelDestGroup', 'name']
       );
       request.tunnelDestGroup.name = defaultValue1;
@@ -1552,9 +1572,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListTunnelDestGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1588,9 +1609,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListTunnelDestGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1639,9 +1661,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListTunnelDestGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1672,9 +1695,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListTunnelDestGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1728,9 +1752,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListTunnelDestGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1779,9 +1804,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListTunnelDestGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1824,9 +1850,10 @@ describe('v1.IdentityAwareProxyAdminServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListTunnelDestGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTunnelDestGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListTunnelDestGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

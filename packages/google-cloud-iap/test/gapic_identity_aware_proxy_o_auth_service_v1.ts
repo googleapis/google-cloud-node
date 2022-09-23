@@ -263,9 +263,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBrandsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListBrandsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -296,9 +297,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBrandsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListBrandsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBrandsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListBrandsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -378,9 +381,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.ListBrandsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBrandsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.ListBrandsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -401,9 +405,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBrandRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.CreateBrandRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -434,9 +439,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBrandRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.CreateBrandRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -483,9 +489,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBrandRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.CreateBrandRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -516,9 +523,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.CreateBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBrandRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.CreateBrandRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -539,7 +547,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBrandRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetBrandRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,7 +581,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBrandRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetBrandRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -617,7 +631,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBrandRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetBrandRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -645,7 +662,10 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.iap.v1.GetBrandRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBrandRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.iap.v1.GetBrandRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -667,7 +687,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -702,7 +722,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -752,7 +772,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -789,7 +809,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.CreateIdentityAwareProxyClientRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -816,7 +836,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -851,7 +871,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -901,7 +921,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -938,7 +958,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.GetIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -965,7 +985,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetIdentityAwareProxyClientSecretRequest',
+        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1002,7 +1022,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetIdentityAwareProxyClientSecretRequest',
+        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1052,7 +1072,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetIdentityAwareProxyClientSecretRequest',
+        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1089,7 +1109,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetIdentityAwareProxyClientSecretRequest',
+        '.google.cloud.iap.v1.ResetIdentityAwareProxyClientSecretRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1116,7 +1136,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1151,7 +1171,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1201,7 +1221,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1238,7 +1258,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteIdentityAwareProxyClientRequest',
+        '.google.cloud.iap.v1.DeleteIdentityAwareProxyClientRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1265,7 +1285,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListIdentityAwareProxyClientsRequest',
+        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1308,7 +1328,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListIdentityAwareProxyClientsRequest',
+        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1368,7 +1388,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListIdentityAwareProxyClientsRequest',
+        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1405,7 +1425,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListIdentityAwareProxyClientsRequest',
+        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1478,7 +1498,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListIdentityAwareProxyClientsRequest',
+        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1540,7 +1560,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListIdentityAwareProxyClientsRequest',
+        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1597,7 +1617,7 @@ describe('v1.IdentityAwareProxyOAuthServiceClient', () => {
         new protos.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListIdentityAwareProxyClientsRequest',
+        '.google.cloud.iap.v1.ListIdentityAwareProxyClientsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
