@@ -204,9 +204,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.OptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('OptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.OptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -234,9 +235,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.OptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('OptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.OptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -280,9 +282,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.OptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('OptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.OptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -310,9 +313,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.OptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('OptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.OptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -330,9 +334,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.BatchOptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchOptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.BatchOptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -362,9 +367,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.BatchOptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchOptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.BatchOptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -415,9 +421,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.BatchOptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchOptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.BatchOptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -445,9 +452,10 @@ describe('v1.FleetRoutingClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.optimization.v1.BatchOptimizeToursRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchOptimizeToursRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.optimization.v1.BatchOptimizeToursRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
