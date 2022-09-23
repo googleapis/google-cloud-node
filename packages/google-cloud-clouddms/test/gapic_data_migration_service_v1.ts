@@ -278,9 +278,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,9 +310,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -356,9 +358,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -387,9 +390,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -408,9 +412,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateSshScriptRequest', [
-        'migrationJob',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GenerateSshScriptRequest',
+        ['migrationJob']
+      );
       request.migrationJob = defaultValue1;
       const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +444,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateSshScriptRequest', [
-        'migrationJob',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GenerateSshScriptRequest',
+        ['migrationJob']
+      );
       request.migrationJob = defaultValue1;
       const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -486,9 +492,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateSshScriptRequest', [
-        'migrationJob',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GenerateSshScriptRequest',
+        ['migrationJob']
+      );
       request.migrationJob = defaultValue1;
       const expectedHeaderRequestParams = `migration_job=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -517,9 +524,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GenerateSshScriptRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateSshScriptRequest', [
-        'migrationJob',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GenerateSshScriptRequest',
+        ['migrationJob']
+      );
       request.migrationJob = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -538,9 +546,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,9 +579,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -617,9 +627,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -648,9 +659,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.GetConnectionProfileRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectionProfileRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.GetConnectionProfileRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -669,9 +681,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigrationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.CreateMigrationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -702,9 +715,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigrationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.CreateMigrationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -756,9 +770,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigrationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.CreateMigrationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -787,9 +802,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.CreateMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigrationJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.CreateMigrationJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -866,10 +882,10 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
       request.migrationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigrationJobRequest', [
-        'migrationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.UpdateMigrationJobRequest',
+        ['migrationJob', 'name']
+      );
       request.migrationJob.name = defaultValue1;
       const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -901,10 +917,10 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
       request.migrationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigrationJobRequest', [
-        'migrationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.UpdateMigrationJobRequest',
+        ['migrationJob', 'name']
+      );
       request.migrationJob.name = defaultValue1;
       const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -957,10 +973,10 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
       request.migrationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigrationJobRequest', [
-        'migrationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.UpdateMigrationJobRequest',
+        ['migrationJob', 'name']
+      );
       request.migrationJob.name = defaultValue1;
       const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -990,10 +1006,10 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.UpdateMigrationJobRequest()
       );
       request.migrationJob ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigrationJobRequest', [
-        'migrationJob',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.UpdateMigrationJobRequest',
+        ['migrationJob', 'name']
+      );
       request.migrationJob.name = defaultValue1;
       const expectedHeaderRequestParams = `migration_job.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1069,9 +1085,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.DeleteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1102,9 +1119,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.DeleteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1156,9 +1174,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.DeleteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1187,9 +1206,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.DeleteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.DeleteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1265,9 +1285,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1298,9 +1319,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1352,9 +1374,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1383,9 +1406,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1461,9 +1485,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StopMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1494,9 +1519,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StopMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1548,9 +1574,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StopMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1579,9 +1606,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.StopMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.StopMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1657,9 +1685,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ResumeMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1690,9 +1719,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ResumeMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1744,9 +1774,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ResumeMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1775,9 +1806,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ResumeMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ResumeMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1853,9 +1885,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PromoteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.PromoteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1886,9 +1919,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PromoteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.PromoteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1940,9 +1974,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PromoteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.PromoteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1971,9 +2006,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.PromoteMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PromoteMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.PromoteMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2049,9 +2085,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('VerifyMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.VerifyMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2082,9 +2119,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('VerifyMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.VerifyMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2136,9 +2174,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('VerifyMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.VerifyMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2167,9 +2206,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.VerifyMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('VerifyMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.VerifyMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2245,9 +2285,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.RestartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2278,9 +2319,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.RestartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2332,9 +2374,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.RestartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2363,9 +2406,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.RestartMigrationJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartMigrationJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.RestartMigrationJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2442,7 +2486,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2476,7 +2520,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2531,7 +2575,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2566,7 +2610,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.CreateConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.CreateConnectionProfileRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2647,7 +2691,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -2682,7 +2726,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -2738,7 +2782,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -2774,7 +2818,7 @@ describe('v1.DataMigrationServiceClient', () => {
       );
       request.connectionProfile ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.UpdateConnectionProfileRequest',
         ['connectionProfile', 'name']
       );
       request.connectionProfile.name = defaultValue1;
@@ -2854,7 +2898,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2888,7 +2932,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2943,7 +2987,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2978,7 +3022,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.DeleteConnectionProfileRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectionProfileRequest',
+        '.google.cloud.clouddms.v1.DeleteConnectionProfileRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3057,9 +3101,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigrationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ListMigrationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3096,9 +3141,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigrationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ListMigrationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3151,9 +3197,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigrationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ListMigrationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3182,9 +3229,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigrationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ListMigrationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3242,9 +3290,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigrationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ListMigrationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3291,9 +3340,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigrationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ListMigrationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3340,9 +3390,10 @@ describe('v1.DataMigrationServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.clouddms.v1.ListMigrationJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigrationJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.clouddms.v1.ListMigrationJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3383,7 +3434,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.clouddms.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3424,7 +3475,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.clouddms.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3480,7 +3531,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.clouddms.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3515,7 +3566,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.clouddms.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3583,7 +3634,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.clouddms.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3640,7 +3691,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.clouddms.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3695,7 +3746,7 @@ describe('v1.DataMigrationServiceClient', () => {
         new protos.google.cloud.clouddms.v1.ListConnectionProfilesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectionProfilesRequest',
+        '.google.cloud.clouddms.v1.ListConnectionProfilesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
