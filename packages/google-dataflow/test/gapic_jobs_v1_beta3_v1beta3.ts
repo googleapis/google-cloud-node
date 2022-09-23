@@ -237,13 +237,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -271,13 +273,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -321,13 +325,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -352,13 +358,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('CreateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.CreateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -376,11 +384,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['location']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -408,11 +425,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['location']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -456,11 +482,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['location']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -485,11 +520,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['projectId']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobRequest', ['location']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -507,15 +551,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -543,15 +592,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -595,15 +649,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -628,15 +687,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.UpdateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateJobRequest', ['jobId']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.UpdateJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -737,17 +801,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SnapshotJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SnapshotJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SnapshotJobRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -775,17 +842,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SnapshotJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SnapshotJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SnapshotJobRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -829,17 +899,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SnapshotJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SnapshotJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SnapshotJobRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -867,17 +940,20 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.SnapshotJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SnapshotJobRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SnapshotJobRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SnapshotJobRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.SnapshotJobRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -895,13 +971,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = [
@@ -931,13 +1009,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = [
@@ -983,13 +1063,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1014,13 +1096,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = [
@@ -1068,13 +1152,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1119,13 +1205,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = [
@@ -1164,13 +1252,15 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListJobsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1210,9 +1300,10 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1243,9 +1334,10 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1291,9 +1383,10 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1321,9 +1414,10 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1371,9 +1465,10 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1416,9 +1511,10 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedResponse = [
@@ -1458,9 +1554,10 @@ describe('v1beta3.JobsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListJobsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}`;
       const expectedError = new Error('expected');

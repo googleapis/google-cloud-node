@@ -237,17 +237,20 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -275,17 +278,20 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -329,17 +335,20 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -367,17 +376,20 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetJobMetricsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetJobMetricsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetJobMetricsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -396,17 +408,17 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
@@ -446,17 +458,17 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
@@ -511,17 +523,17 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
@@ -555,17 +567,17 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
@@ -631,17 +643,17 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
@@ -696,17 +708,17 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
@@ -759,17 +771,17 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetJobExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetJobExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetJobExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
@@ -815,22 +827,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['stageId']
       );
       request.stageId = defaultValue4;
@@ -870,22 +882,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['stageId']
       );
       request.stageId = defaultValue4;
@@ -940,22 +952,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['stageId']
       );
       request.stageId = defaultValue4;
@@ -989,22 +1001,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['stageId']
       );
       request.stageId = defaultValue4;
@@ -1070,22 +1082,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['stageId']
       );
       request.stageId = defaultValue4;
@@ -1140,22 +1152,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['stageId']
       );
       request.stageId = defaultValue4;
@@ -1208,22 +1220,22 @@ describe('v1beta3.MetricsV1Beta3Client', () => {
         new protos.google.dataflow.v1beta3.GetStageExecutionDetailsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['projectId']
       );
       request.projectId = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['location']
       );
       request.location = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['jobId']
       );
       request.jobId = defaultValue3;
       const defaultValue4 = getTypeDefaultValue(
-        'GetStageExecutionDetailsRequest',
+        '.google.dataflow.v1beta3.GetStageExecutionDetailsRequest',
         ['stageId']
       );
       request.stageId = defaultValue4;

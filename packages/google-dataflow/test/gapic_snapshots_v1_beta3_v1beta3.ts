@@ -175,17 +175,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -213,17 +216,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -267,17 +273,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -305,17 +314,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.GetSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -333,17 +345,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -371,17 +386,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -425,17 +443,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&snapshot_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -463,17 +484,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshotId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.DeleteSnapshotRequest',
+        ['snapshotId']
+      );
       request.snapshotId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -491,17 +515,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -529,17 +556,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -583,17 +613,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}&job_id=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -621,17 +654,20 @@ describe('v1beta3.SnapshotsV1Beta3Client', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['location']
+      );
       request.location = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'jobId',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.ListSnapshotsRequest',
+        ['jobId']
+      );
       request.jobId = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();

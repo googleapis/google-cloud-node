@@ -185,13 +185,15 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -221,13 +223,15 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -272,13 +276,15 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedHeaderRequestParams = `project_id=${defaultValue1}&location=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -307,13 +313,15 @@ describe('v1beta3.FlexTemplatesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.dataflow.v1beta3.LaunchFlexTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'projectId',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['projectId']
+      );
       request.projectId = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('LaunchFlexTemplateRequest', [
-        'location',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.dataflow.v1beta3.LaunchFlexTemplateRequest',
+        ['location']
+      );
       request.location = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
