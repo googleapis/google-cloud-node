@@ -267,7 +267,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -383,7 +395,7 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -415,7 +427,7 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -462,7 +474,7 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -496,7 +508,7 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.cloud.tpu.v2alpha1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -519,9 +531,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -550,9 +563,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -596,9 +610,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -626,9 +641,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetAcceleratorTypeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -646,9 +662,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -676,9 +693,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -722,9 +740,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -752,9 +771,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRuntimeVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetRuntimeVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -772,9 +792,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGuestAttributesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -803,9 +824,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGuestAttributesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -849,9 +871,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGuestAttributesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -879,9 +902,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGuestAttributesRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.GetGuestAttributesRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -899,9 +923,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.CreateNodeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -930,9 +955,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.CreateNodeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -983,9 +1009,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.CreateNodeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1013,9 +1040,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.CreateNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateNodeRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.CreateNodeRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1085,7 +1113,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.DeleteNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1114,7 +1145,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.DeleteNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1165,7 +1199,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.DeleteNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1193,7 +1230,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.DeleteNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.DeleteNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1263,7 +1303,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StopNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1292,7 +1335,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StopNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1343,7 +1389,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StopNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1371,7 +1420,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StopNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StopNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1441,7 +1493,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StartNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1470,7 +1525,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StartNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1521,7 +1579,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StartNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1549,7 +1610,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.StartNodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartNodeRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.StartNodeRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1620,10 +1684,10 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
       request.node ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNodeRequest', [
-        'node',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.UpdateNodeRequest',
+        ['node', 'name']
+      );
       request.node.name = defaultValue1;
       const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1653,10 +1717,10 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
       request.node ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNodeRequest', [
-        'node',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.UpdateNodeRequest',
+        ['node', 'name']
+      );
       request.node.name = defaultValue1;
       const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1708,10 +1772,10 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
       request.node ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNodeRequest', [
-        'node',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.UpdateNodeRequest',
+        ['node', 'name']
+      );
       request.node.name = defaultValue1;
       const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1740,10 +1804,10 @@ describe('v2alpha1.TpuClient', () => {
         new protos.google.cloud.tpu.v2alpha1.UpdateNodeRequest()
       );
       request.node ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateNodeRequest', [
-        'node',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.UpdateNodeRequest',
+        ['node', 'name']
+      );
       request.node.name = defaultValue1;
       const expectedHeaderRequestParams = `node.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1813,7 +1877,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListNodesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1843,7 +1910,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListNodesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1889,7 +1959,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListNodesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1914,7 +1987,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListNodesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1962,7 +2038,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListNodesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2007,7 +2086,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListNodesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2046,7 +2128,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListNodesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListNodesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2086,9 +2171,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2125,9 +2211,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2179,9 +2266,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2209,9 +2297,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2269,9 +2358,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2318,9 +2408,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2366,9 +2457,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListAcceleratorTypesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2408,9 +2500,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimeVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2447,9 +2540,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimeVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2501,9 +2595,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimeVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2531,9 +2626,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimeVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2590,9 +2686,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimeVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2638,9 +2735,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimeVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2686,9 +2784,10 @@ describe('v2alpha1.TpuClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRuntimeVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.tpu.v2alpha1.ListRuntimeVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
