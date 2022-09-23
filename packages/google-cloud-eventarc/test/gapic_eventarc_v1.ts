@@ -267,7 +267,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTriggerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTriggerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTriggerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTriggerRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,7 +397,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -413,7 +428,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -457,7 +475,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -485,7 +506,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -503,7 +527,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProviderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetProviderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -531,7 +558,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProviderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetProviderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -575,7 +605,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProviderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetProviderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -603,7 +636,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetProviderRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProviderRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetProviderRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -621,9 +657,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -652,9 +689,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -698,9 +736,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -728,9 +767,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.GetChannelConnectionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetChannelConnectionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.GetChannelConnectionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -748,9 +788,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -780,9 +821,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -833,9 +875,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -863,9 +906,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTriggerRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateTriggerRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -939,10 +983,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
       request.trigger ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTriggerRequest', [
-        'trigger',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateTriggerRequest',
+        ['trigger', 'name']
+      );
       request.trigger.name = defaultValue1;
       const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -973,10 +1017,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
       request.trigger ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTriggerRequest', [
-        'trigger',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateTriggerRequest',
+        ['trigger', 'name']
+      );
       request.trigger.name = defaultValue1;
       const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1028,10 +1072,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
       request.trigger ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTriggerRequest', [
-        'trigger',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateTriggerRequest',
+        ['trigger', 'name']
+      );
       request.trigger.name = defaultValue1;
       const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1060,10 +1104,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateTriggerRequest()
       );
       request.trigger ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTriggerRequest', [
-        'trigger',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateTriggerRequest',
+        ['trigger', 'name']
+      );
       request.trigger.name = defaultValue1;
       const expectedHeaderRequestParams = `trigger.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1136,9 +1180,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1168,9 +1213,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1221,9 +1267,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1251,9 +1298,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteTriggerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTriggerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteTriggerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1326,9 +1374,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1358,9 +1407,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1411,9 +1461,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1441,9 +1492,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.CreateChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateChannelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.CreateChannelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1517,10 +1569,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1551,10 +1603,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1606,10 +1658,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1638,10 +1690,10 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.UpdateChannelRequest()
       );
       request.channel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateChannelRequest', [
-        'channel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.UpdateChannelRequest',
+        ['channel', 'name']
+      );
       request.channel.name = defaultValue1;
       const expectedHeaderRequestParams = `channel.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1714,9 +1766,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1746,9 +1799,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1799,9 +1853,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1829,9 +1884,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.DeleteChannelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteChannelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.DeleteChannelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1905,7 +1961,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.CreateChannelConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1938,7 +1994,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.CreateChannelConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1992,7 +2048,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.CreateChannelConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2026,7 +2082,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.CreateChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.CreateChannelConnectionRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2103,7 +2159,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.DeleteChannelConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2136,7 +2192,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.DeleteChannelConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2190,7 +2246,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.DeleteChannelConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2224,7 +2280,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.DeleteChannelConnectionRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteChannelConnectionRequest',
+        '.google.cloud.eventarc.v1.DeleteChannelConnectionRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2300,9 +2356,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2332,9 +2389,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2380,9 +2438,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2410,9 +2469,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2463,9 +2523,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2513,9 +2574,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2555,9 +2617,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListTriggersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTriggersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListTriggersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2596,9 +2659,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2628,9 +2692,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2676,9 +2741,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2706,9 +2772,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2759,9 +2826,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2809,9 +2877,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2851,9 +2920,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListChannelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListChannelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListChannelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2892,9 +2962,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProvidersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListProvidersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2924,9 +2995,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProvidersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListProvidersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2972,9 +3044,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProvidersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListProvidersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3002,9 +3075,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProvidersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListProvidersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3055,9 +3129,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProvidersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListProvidersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3103,9 +3178,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProvidersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListProvidersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3145,9 +3221,10 @@ describe('v1.EventarcClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.v1.ListProvidersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListProvidersRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.v1.ListProvidersRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3187,7 +3264,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelConnectionsRequest',
+        '.google.cloud.eventarc.v1.ListChannelConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3227,7 +3304,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelConnectionsRequest',
+        '.google.cloud.eventarc.v1.ListChannelConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3282,7 +3359,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelConnectionsRequest',
+        '.google.cloud.eventarc.v1.ListChannelConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3316,7 +3393,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelConnectionsRequest',
+        '.google.cloud.eventarc.v1.ListChannelConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3383,7 +3460,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelConnectionsRequest',
+        '.google.cloud.eventarc.v1.ListChannelConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3439,7 +3516,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelConnectionsRequest',
+        '.google.cloud.eventarc.v1.ListChannelConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3493,7 +3570,7 @@ describe('v1.EventarcClient', () => {
         new protos.google.cloud.eventarc.v1.ListChannelConnectionsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListChannelConnectionsRequest',
+        '.google.cloud.eventarc.v1.ListChannelConnectionsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
