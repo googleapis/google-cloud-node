@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/googleapis/nodejs-gke-connect-gateway/compare/v2.0.2...v2.0.3) (2022-09-14)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#87](https://github.com/googleapis/nodejs-gke-connect-gateway/issues/87)) ([99112c8](https://github.com/googleapis/nodejs-gke-connect-gateway/commit/99112c89e562b257cae232cc38d7769d77f04731))
+
 ## [2.0.2](https://github.com/googleapis/nodejs-gke-connect-gateway/compare/v2.0.1...v2.0.2) (2022-09-01)
 
 
