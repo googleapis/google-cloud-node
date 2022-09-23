@@ -173,7 +173,7 @@ describe('v1.PublisherClient', () => {
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PublishChannelConnectionEventsRequest',
+        '.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest',
         ['channelConnection']
       );
       request.channelConnection = defaultValue1;
@@ -205,7 +205,7 @@ describe('v1.PublisherClient', () => {
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PublishChannelConnectionEventsRequest',
+        '.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest',
         ['channelConnection']
       );
       request.channelConnection = defaultValue1;
@@ -252,7 +252,7 @@ describe('v1.PublisherClient', () => {
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PublishChannelConnectionEventsRequest',
+        '.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest',
         ['channelConnection']
       );
       request.channelConnection = defaultValue1;
@@ -286,7 +286,7 @@ describe('v1.PublisherClient', () => {
         new protos.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PublishChannelConnectionEventsRequest',
+        '.google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest',
         ['channelConnection']
       );
       request.channelConnection = defaultValue1;
@@ -309,9 +309,10 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
-        'channel',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.publishing.v1.PublishEventsRequest',
+        ['channel']
+      );
       request.channel = defaultValue1;
       const expectedHeaderRequestParams = `channel=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,9 +340,10 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
-        'channel',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.publishing.v1.PublishEventsRequest',
+        ['channel']
+      );
       request.channel = defaultValue1;
       const expectedHeaderRequestParams = `channel=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -385,9 +387,10 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
-        'channel',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.publishing.v1.PublishEventsRequest',
+        ['channel']
+      );
       request.channel = defaultValue1;
       const expectedHeaderRequestParams = `channel=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -415,9 +418,10 @@ describe('v1.PublisherClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.eventarc.publishing.v1.PublishEventsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PublishEventsRequest', [
-        'channel',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.eventarc.publishing.v1.PublishEventsRequest',
+        ['channel']
+      );
       request.channel = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
