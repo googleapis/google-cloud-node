@@ -280,7 +280,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,7 +312,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -354,7 +360,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -383,7 +392,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -402,7 +414,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -431,7 +446,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -476,7 +494,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -502,7 +523,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -521,9 +545,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstanceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateInstanceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -554,9 +579,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstanceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateInstanceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -608,9 +634,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstanceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateInstanceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -639,9 +666,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateInstanceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateInstanceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -718,10 +746,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -753,10 +781,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -809,10 +837,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -842,10 +870,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateInstanceRequest()
       );
       request.instance ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateInstanceRequest',
+        ['instance', 'name']
+      );
       request.instance.name = defaultValue1;
       const expectedHeaderRequestParams = `instance.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -921,9 +949,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.RestoreInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.RestoreInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -954,9 +983,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.RestoreInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.RestoreInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1008,9 +1038,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.RestoreInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.RestoreInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1039,9 +1070,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.RestoreInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestoreInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.RestoreInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1117,9 +1149,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1150,9 +1183,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1204,9 +1238,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1235,9 +1270,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteInstanceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1313,9 +1349,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1345,9 +1382,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1399,9 +1437,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1430,9 +1469,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1505,9 +1545,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1537,9 +1578,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1591,9 +1633,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1622,9 +1665,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1698,10 +1742,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1732,10 +1776,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1788,10 +1832,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1821,10 +1865,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
         new protos.google.cloud.filestore.v1beta1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1897,9 +1941,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1936,9 +1981,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1991,9 +2037,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2022,9 +2069,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2082,9 +2130,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2131,9 +2180,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2180,9 +2230,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListInstancesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2222,9 +2273,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2261,9 +2313,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2316,9 +2369,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2347,9 +2401,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2407,9 +2462,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2458,9 +2514,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2507,9 +2564,10 @@ describe('v1beta1.CloudFilestoreManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.filestore.v1beta1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.filestore.v1beta1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
