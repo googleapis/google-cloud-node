@@ -248,9 +248,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateContactRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -279,9 +280,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateContactRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -326,9 +328,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateContactRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -357,9 +360,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.CreateContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateContactRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.CreateContactRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -379,10 +383,10 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
       request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateContactRequest', [
-        'contact',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
+        ['contact', 'name']
+      );
       request.contact.name = defaultValue1;
       const expectedHeaderRequestParams = `contact.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -412,10 +416,10 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
       request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateContactRequest', [
-        'contact',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
+        ['contact', 'name']
+      );
       request.contact.name = defaultValue1;
       const expectedHeaderRequestParams = `contact.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -461,10 +465,10 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
       request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateContactRequest', [
-        'contact',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
+        ['contact', 'name']
+      );
       request.contact.name = defaultValue1;
       const expectedHeaderRequestParams = `contact.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -494,10 +498,10 @@ describe('v1.EssentialContactsServiceClient', () => {
         new protos.google.cloud.essentialcontacts.v1.UpdateContactRequest()
       );
       request.contact ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateContactRequest', [
-        'contact',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.UpdateContactRequest',
+        ['contact', 'name']
+      );
       request.contact.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -516,7 +520,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetContactRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.GetContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -545,7 +552,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetContactRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.GetContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -590,7 +600,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetContactRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.GetContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -619,7 +632,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.GetContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetContactRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.GetContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -638,9 +654,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteContactRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -669,9 +686,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteContactRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -716,9 +734,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteContactRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -747,9 +766,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.DeleteContactRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteContactRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.DeleteContactRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -768,9 +788,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendTestMessageRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -799,9 +820,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendTestMessageRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -846,9 +868,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendTestMessageRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedHeaderRequestParams = `resource=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -877,9 +900,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.SendTestMessageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SendTestMessageRequest', [
-        'resource',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.SendTestMessageRequest',
+        ['resource']
+      );
       request.resource = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -898,9 +922,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -937,9 +962,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -992,9 +1018,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1023,9 +1050,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1084,9 +1112,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1136,9 +1165,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1185,9 +1215,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ListContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ListContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1228,9 +1259,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ComputeContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1267,9 +1299,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ComputeContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1322,9 +1355,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ComputeContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1353,9 +1387,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ComputeContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1414,9 +1449,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ComputeContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1464,9 +1500,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ComputeContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1513,9 +1550,10 @@ describe('v1.EssentialContactsServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.essentialcontacts.v1.ComputeContactsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ComputeContactsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.essentialcontacts.v1.ComputeContactsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
