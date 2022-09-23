@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/nodejs-dataplex/compare/v2.1.1...v2.2.0) (2022-09-21)
+
+
+### Features
+
+* Custom container, encryption key, cross project for Task, and more ([#51](https://github.com/googleapis/nodejs-dataplex/issues/51)) ([c6ab09d](https://github.com/googleapis/nodejs-dataplex/commit/c6ab09d06acd14bc182de9afda2d2da683a7a041))
+
 ## [2.1.1](https://github.com/googleapis/nodejs-dataplex/compare/v2.1.0...v2.1.1) (2022-08-27)
 
 
