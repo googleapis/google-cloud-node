@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [3.0.4](https://github.com/googleapis/nodejs-tasks/compare/v3.0.3...v3.0.4) (2022-09-22)
+
+
+### Bug Fixes
+
+* **issue-640:** Adding headers in task request samples ([#642](https://github.com/googleapis/nodejs-tasks/issues/642)) ([d334d0d](https://github.com/googleapis/nodejs-tasks/commit/d334d0d6248088bd8695240c603d2f6dc8855c71))
+* Preserve default values in x-goog-request-params header ([#657](https://github.com/googleapis/nodejs-tasks/issues/657)) ([feb5188](https://github.com/googleapis/nodejs-tasks/commit/feb518818beed283b7bfaef5288921d482233a95))
+* Wrapping param inSeconds with parseInt to ensure correct addition ([#655](https://github.com/googleapis/nodejs-tasks/issues/655)) ([efdb0b8](https://github.com/googleapis/nodejs-tasks/commit/efdb0b8b1ad98207340bb5b2314315cd06c95bd7))
+
 ## [3.0.3](https://github.com/googleapis/nodejs-tasks/compare/v3.0.2...v3.0.3) (2022-09-01)
 
 
