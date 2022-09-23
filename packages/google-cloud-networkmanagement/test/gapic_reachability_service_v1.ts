@@ -284,9 +284,10 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -317,9 +318,10 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -365,9 +367,10 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -397,9 +400,10 @@ describe('v1.ReachabilityServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.networkmanagement.v1.GetConnectivityTestRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectivityTestRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.networkmanagement.v1.GetConnectivityTestRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -420,7 +424,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -455,7 +459,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -511,7 +515,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -547,7 +551,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.CreateConnectivityTestRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -630,7 +634,7 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       request.resource ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
@@ -666,7 +670,7 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       request.resource ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
@@ -723,7 +727,7 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       request.resource ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
@@ -760,7 +764,7 @@ describe('v1.ReachabilityServiceClient', () => {
       );
       request.resource ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.UpdateConnectivityTestRequest',
         ['resource', 'name']
       );
       request.resource.name = defaultValue1;
@@ -842,7 +846,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RerunConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -877,7 +881,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RerunConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -933,7 +937,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RerunConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -969,7 +973,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RerunConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.RerunConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1051,7 +1055,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1086,7 +1090,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1142,7 +1146,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1178,7 +1182,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConnectivityTestRequest',
+        '.google.cloud.networkmanagement.v1.DeleteConnectivityTestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -1260,7 +1264,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1302,7 +1306,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1361,7 +1365,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1397,7 +1401,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1468,7 +1472,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1528,7 +1532,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1584,7 +1588,7 @@ describe('v1.ReachabilityServiceClient', () => {
         new protos.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConnectivityTestsRequest',
+        '.google.cloud.networkmanagement.v1.ListConnectivityTestsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
