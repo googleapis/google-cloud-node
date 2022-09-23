@@ -274,9 +274,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -304,9 +305,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -350,9 +352,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -380,9 +383,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -400,9 +404,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -430,9 +435,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -476,9 +482,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -506,9 +513,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -527,7 +535,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -559,7 +567,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -606,7 +614,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -640,7 +648,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.GetCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -663,9 +671,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -694,9 +703,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -740,9 +750,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -770,9 +781,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDnsAuthorizationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.GetDnsAuthorizationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -790,9 +802,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -822,9 +835,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -875,9 +889,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -905,9 +920,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -981,10 +997,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1015,10 +1031,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1070,10 +1086,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1102,10 +1118,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateRequest()
       );
       request.certificate ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateRequest', [
-        'certificate',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateRequest',
+        ['certificate', 'name']
+      );
       request.certificate.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1178,9 +1194,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1210,9 +1227,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1263,9 +1281,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1293,9 +1312,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1368,9 +1388,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1400,9 +1421,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1453,9 +1475,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1483,9 +1506,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCertificateMapRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1559,10 +1583,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
       request.certificateMap ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
-        'certificateMap',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest',
+        ['certificateMap', 'name']
+      );
       request.certificateMap.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1593,10 +1617,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
       request.certificateMap ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
-        'certificateMap',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest',
+        ['certificateMap', 'name']
+      );
       request.certificateMap.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1648,10 +1672,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
       request.certificateMap ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
-        'certificateMap',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest',
+        ['certificateMap', 'name']
+      );
       request.certificateMap.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1680,10 +1704,10 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest()
       );
       request.certificateMap ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateCertificateMapRequest', [
-        'certificateMap',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapRequest',
+        ['certificateMap', 'name']
+      );
       request.certificateMap.name = defaultValue1;
       const expectedHeaderRequestParams = `certificate_map.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1756,9 +1780,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1788,9 +1813,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1841,9 +1867,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1871,9 +1898,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteCertificateMapRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1947,7 +1975,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1980,7 +2008,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2034,7 +2062,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2068,7 +2096,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.CreateCertificateMapEntryRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2146,7 +2174,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.certificateMapEntry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest',
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
@@ -2180,7 +2208,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.certificateMapEntry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest',
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
@@ -2235,7 +2263,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.certificateMapEntry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest',
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
@@ -2270,7 +2298,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.certificateMapEntry ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.UpdateCertificateMapEntryRequest',
         ['certificateMapEntry', 'name']
       );
       request.certificateMapEntry.name = defaultValue1;
@@ -2347,7 +2375,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2380,7 +2408,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2434,7 +2462,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2468,7 +2496,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteCertificateMapEntryRequest',
+        '.google.cloud.certificatemanager.v1.DeleteCertificateMapEntryRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2545,7 +2573,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2578,7 +2606,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2632,7 +2660,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2666,7 +2694,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.CreateDnsAuthorizationRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2743,7 +2771,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.dnsAuthorization ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest',
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
@@ -2777,7 +2805,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.dnsAuthorization ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest',
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
@@ -2832,7 +2860,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.dnsAuthorization ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest',
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
@@ -2867,7 +2895,7 @@ describe('v1.CertificateManagerClient', () => {
       );
       request.dnsAuthorization ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.UpdateDnsAuthorizationRequest',
         ['dnsAuthorization', 'name']
       );
       request.dnsAuthorization.name = defaultValue1;
@@ -2943,7 +2971,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2976,7 +3004,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3030,7 +3058,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3064,7 +3092,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDnsAuthorizationRequest',
+        '.google.cloud.certificatemanager.v1.DeleteDnsAuthorizationRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3139,9 +3167,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3177,9 +3206,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3233,9 +3263,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3263,9 +3294,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3323,9 +3355,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3372,9 +3405,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3421,9 +3455,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3463,9 +3498,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificateMapsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3502,9 +3538,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificateMapsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3558,9 +3595,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificateMapsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3588,9 +3626,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificateMapsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3650,9 +3689,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificateMapsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3701,9 +3741,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificateMapsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3750,9 +3791,10 @@ describe('v1.CertificateManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCertificateMapsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.certificatemanager.v1.ListCertificateMapsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3793,7 +3835,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateMapEntriesRequest',
+        '.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3833,7 +3875,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateMapEntriesRequest',
+        '.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3890,7 +3932,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateMapEntriesRequest',
+        '.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3924,7 +3966,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateMapEntriesRequest',
+        '.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3993,7 +4035,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateMapEntriesRequest',
+        '.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4051,7 +4093,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateMapEntriesRequest',
+        '.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4105,7 +4147,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListCertificateMapEntriesRequest',
+        '.google.cloud.certificatemanager.v1.ListCertificateMapEntriesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4152,7 +4194,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDnsAuthorizationsRequest',
+        '.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4192,7 +4234,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDnsAuthorizationsRequest',
+        '.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4249,7 +4291,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDnsAuthorizationsRequest',
+        '.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4283,7 +4325,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDnsAuthorizationsRequest',
+        '.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4352,7 +4394,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDnsAuthorizationsRequest',
+        '.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4410,7 +4452,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDnsAuthorizationsRequest',
+        '.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4464,7 +4506,7 @@ describe('v1.CertificateManagerClient', () => {
         new protos.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDnsAuthorizationsRequest',
+        '.google.cloud.certificatemanager.v1.ListDnsAuthorizationsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
