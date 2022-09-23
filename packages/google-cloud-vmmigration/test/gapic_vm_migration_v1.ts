@@ -267,7 +267,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -364,7 +373,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSourceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -382,9 +394,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
-        'source',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FetchInventoryRequest',
+        ['source']
+      );
       request.source = defaultValue1;
       const expectedHeaderRequestParams = `source=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -412,9 +425,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
-        'source',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FetchInventoryRequest',
+        ['source']
+      );
       request.source = defaultValue1;
       const expectedHeaderRequestParams = `source=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -458,9 +472,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
-        'source',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FetchInventoryRequest',
+        ['source']
+      );
       request.source = defaultValue1;
       const expectedHeaderRequestParams = `source=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -488,9 +503,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FetchInventoryRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FetchInventoryRequest', [
-        'source',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FetchInventoryRequest',
+        ['source']
+      );
       request.source = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -508,9 +524,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetUtilizationReportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -539,9 +556,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetUtilizationReportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -585,9 +603,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetUtilizationReportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -615,9 +634,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetUtilizationReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUtilizationReportRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetUtilizationReportRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -636,7 +656,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -668,7 +688,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -715,7 +735,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -749,7 +769,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.GetDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -772,9 +792,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -802,9 +823,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -848,9 +870,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -878,9 +901,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -898,7 +922,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -926,7 +953,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -970,7 +1000,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -998,7 +1031,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCloneJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1016,9 +1052,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1046,9 +1083,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1092,9 +1130,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1122,9 +1161,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1142,7 +1182,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1170,7 +1213,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1214,7 +1260,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1239,7 +1288,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1257,9 +1309,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1287,9 +1340,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1333,9 +1387,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1363,9 +1418,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.GetTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.GetTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1383,9 +1439,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1414,9 +1471,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1467,9 +1525,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1497,9 +1556,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateSourceRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateSourceRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1570,10 +1630,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1603,10 +1663,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1658,10 +1718,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1690,10 +1750,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateSourceRequest()
       );
       request.source ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateSourceRequest', [
-        'source',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateSourceRequest',
+        ['source', 'name']
+      );
       request.source.name = defaultValue1;
       const expectedHeaderRequestParams = `source.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1763,9 +1823,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1794,9 +1855,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1847,9 +1909,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1877,9 +1940,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteSourceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSourceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteSourceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1950,7 +2014,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.CreateUtilizationReportRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1983,7 +2047,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.CreateUtilizationReportRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2037,7 +2101,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.CreateUtilizationReportRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2071,7 +2135,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.CreateUtilizationReportRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2148,7 +2212,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2181,7 +2245,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2235,7 +2299,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2269,7 +2333,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteUtilizationReportRequest',
+        '.google.cloud.vmmigration.v1.DeleteUtilizationReportRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2346,7 +2410,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2379,7 +2443,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2433,7 +2497,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2467,7 +2531,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2544,7 +2608,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2577,7 +2641,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2631,7 +2695,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2665,7 +2729,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteDatacenterConnectorRequest',
+        '.google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2741,9 +2805,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
-        'datacenterConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpgradeApplianceRequest',
+        ['datacenterConnector']
+      );
       request.datacenterConnector = defaultValue1;
       const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2773,9 +2838,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
-        'datacenterConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpgradeApplianceRequest',
+        ['datacenterConnector']
+      );
       request.datacenterConnector = defaultValue1;
       const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2826,9 +2892,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
-        'datacenterConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpgradeApplianceRequest',
+        ['datacenterConnector']
+      );
       request.datacenterConnector = defaultValue1;
       const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2856,9 +2923,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.UpgradeApplianceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpgradeApplianceRequest', [
-        'datacenterConnector',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpgradeApplianceRequest',
+        ['datacenterConnector']
+      );
       request.datacenterConnector = defaultValue1;
       const expectedHeaderRequestParams = `datacenter_connector=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2931,9 +2999,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateMigratingVmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2963,9 +3032,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateMigratingVmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3016,9 +3086,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateMigratingVmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3046,9 +3117,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMigratingVmRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateMigratingVmRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3122,10 +3194,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
       request.migratingVm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
-        'migratingVm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateMigratingVmRequest',
+        ['migratingVm', 'name']
+      );
       request.migratingVm.name = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3156,10 +3228,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
       request.migratingVm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
-        'migratingVm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateMigratingVmRequest',
+        ['migratingVm', 'name']
+      );
       request.migratingVm.name = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3211,10 +3283,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
       request.migratingVm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
-        'migratingVm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateMigratingVmRequest',
+        ['migratingVm', 'name']
+      );
       request.migratingVm.name = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3243,10 +3315,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateMigratingVmRequest()
       );
       request.migratingVm ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateMigratingVmRequest', [
-        'migratingVm',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateMigratingVmRequest',
+        ['migratingVm', 'name']
+      );
       request.migratingVm.name = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3319,9 +3391,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3351,9 +3424,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3404,9 +3478,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3434,9 +3509,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteMigratingVmRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMigratingVmRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteMigratingVmRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3509,9 +3585,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.StartMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3541,9 +3618,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.StartMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3594,9 +3672,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.StartMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3624,9 +3703,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.StartMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.StartMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3699,9 +3779,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ResumeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3731,9 +3812,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ResumeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3784,9 +3866,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ResumeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3814,9 +3897,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ResumeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ResumeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3889,9 +3973,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.PauseMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3921,9 +4006,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.PauseMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3974,9 +4060,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.PauseMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4004,9 +4091,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.PauseMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PauseMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.PauseMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4079,9 +4167,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FinalizeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4111,9 +4200,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FinalizeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4164,9 +4254,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FinalizeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4194,9 +4285,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.FinalizeMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('FinalizeMigrationRequest', [
-        'migratingVm',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.FinalizeMigrationRequest',
+        ['migratingVm']
+      );
       request.migratingVm = defaultValue1;
       const expectedHeaderRequestParams = `migrating_vm=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4269,9 +4361,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCloneJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4301,9 +4394,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCloneJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4354,9 +4448,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCloneJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4384,9 +4479,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCloneJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCloneJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4459,9 +4555,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4491,9 +4588,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4544,9 +4642,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4574,9 +4673,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCloneJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCloneJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCloneJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4649,9 +4749,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCutoverJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4681,9 +4782,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCutoverJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4734,9 +4836,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCutoverJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4764,9 +4867,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateCutoverJobRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateCutoverJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4839,9 +4943,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4871,9 +4976,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -4924,9 +5030,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4954,9 +5061,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CancelCutoverJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CancelCutoverJobRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CancelCutoverJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5029,9 +5137,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5060,9 +5169,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5113,9 +5223,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5143,9 +5254,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateGroupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateGroupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5216,10 +5328,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
       request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
-        'group',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateGroupRequest',
+        ['group', 'name']
+      );
       request.group.name = defaultValue1;
       const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5249,10 +5361,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
       request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
-        'group',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateGroupRequest',
+        ['group', 'name']
+      );
       request.group.name = defaultValue1;
       const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5304,10 +5416,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
       request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
-        'group',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateGroupRequest',
+        ['group', 'name']
+      );
       request.group.name = defaultValue1;
       const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5336,10 +5448,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateGroupRequest()
       );
       request.group ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateGroupRequest', [
-        'group',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateGroupRequest',
+        ['group', 'name']
+      );
       request.group.name = defaultValue1;
       const expectedHeaderRequestParams = `group.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5409,7 +5521,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5438,7 +5553,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5489,7 +5607,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5517,7 +5638,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteGroupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteGroupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5587,9 +5711,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.AddGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5619,9 +5744,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.AddGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5672,9 +5798,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.AddGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5702,9 +5829,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.AddGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.AddGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5777,9 +5905,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5809,9 +5938,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5862,9 +5992,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5892,9 +6023,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemoveGroupMigrationRequest', [
-        'group',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.RemoveGroupMigrationRequest',
+        ['group']
+      );
       request.group = defaultValue1;
       const expectedHeaderRequestParams = `group=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5967,9 +6099,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateTargetProjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -5999,9 +6132,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateTargetProjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -6052,9 +6186,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateTargetProjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6082,9 +6217,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.CreateTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateTargetProjectRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.CreateTargetProjectRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6158,10 +6294,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
       request.targetProject ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
-        'targetProject',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateTargetProjectRequest',
+        ['targetProject', 'name']
+      );
       request.targetProject.name = defaultValue1;
       const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -6192,10 +6328,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
       request.targetProject ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
-        'targetProject',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateTargetProjectRequest',
+        ['targetProject', 'name']
+      );
       request.targetProject.name = defaultValue1;
       const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -6247,10 +6383,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
       request.targetProject ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
-        'targetProject',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateTargetProjectRequest',
+        ['targetProject', 'name']
+      );
       request.targetProject.name = defaultValue1;
       const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6279,10 +6415,10 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.UpdateTargetProjectRequest()
       );
       request.targetProject ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateTargetProjectRequest', [
-        'targetProject',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.UpdateTargetProjectRequest',
+        ['targetProject', 'name']
+      );
       request.targetProject.name = defaultValue1;
       const expectedHeaderRequestParams = `target_project.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6355,9 +6491,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -6387,9 +6524,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -6440,9 +6578,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6470,9 +6609,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.DeleteTargetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetProjectRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.DeleteTargetProjectRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6545,9 +6685,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6577,9 +6718,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6625,9 +6767,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6655,9 +6798,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6708,9 +6852,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6758,9 +6903,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -6800,9 +6946,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListSourcesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSourcesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListSourcesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -6844,7 +6991,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUtilizationReportsRequest',
+        '.google.cloud.vmmigration.v1.ListUtilizationReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6884,7 +7031,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUtilizationReportsRequest',
+        '.google.cloud.vmmigration.v1.ListUtilizationReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6941,7 +7088,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUtilizationReportsRequest',
+        '.google.cloud.vmmigration.v1.ListUtilizationReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -6975,7 +7122,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUtilizationReportsRequest',
+        '.google.cloud.vmmigration.v1.ListUtilizationReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7042,7 +7189,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUtilizationReportsRequest',
+        '.google.cloud.vmmigration.v1.ListUtilizationReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7098,7 +7245,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUtilizationReportsRequest',
+        '.google.cloud.vmmigration.v1.ListUtilizationReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7152,7 +7299,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListUtilizationReportsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUtilizationReportsRequest',
+        '.google.cloud.vmmigration.v1.ListUtilizationReportsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7199,7 +7346,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDatacenterConnectorsRequest',
+        '.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7239,7 +7386,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDatacenterConnectorsRequest',
+        '.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7296,7 +7443,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDatacenterConnectorsRequest',
+        '.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7330,7 +7477,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDatacenterConnectorsRequest',
+        '.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7399,7 +7546,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDatacenterConnectorsRequest',
+        '.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7457,7 +7604,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDatacenterConnectorsRequest',
+        '.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7511,7 +7658,7 @@ describe('v1.VmMigrationClient', () => {
         new protos.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListDatacenterConnectorsRequest',
+        '.google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -7557,9 +7704,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListMigratingVmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7595,9 +7743,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListMigratingVmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7649,9 +7798,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListMigratingVmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7679,9 +7829,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListMigratingVmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7738,9 +7889,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListMigratingVmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7786,9 +7938,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListMigratingVmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7834,9 +7987,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListMigratingVmsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMigratingVmsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListMigratingVmsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7875,9 +8029,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCloneJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7913,9 +8068,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCloneJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -7967,9 +8123,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCloneJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -7997,9 +8154,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCloneJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8056,9 +8214,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCloneJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8104,9 +8263,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCloneJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8152,9 +8312,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCloneJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCloneJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCloneJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8193,9 +8354,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCutoverJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8231,9 +8393,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCutoverJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8285,9 +8448,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCutoverJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8315,9 +8479,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCutoverJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8374,9 +8539,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCutoverJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8422,9 +8588,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCutoverJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8470,9 +8637,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListCutoverJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListCutoverJobsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListCutoverJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8511,9 +8679,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8543,9 +8712,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8591,9 +8761,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8621,9 +8792,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8674,9 +8846,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8724,9 +8897,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8766,9 +8940,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGroupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListGroupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8809,9 +8984,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListTargetProjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8848,9 +9024,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListTargetProjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8902,9 +9079,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListTargetProjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -8932,9 +9110,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListTargetProjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -8992,9 +9171,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListTargetProjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -9041,9 +9221,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListTargetProjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -9089,9 +9270,10 @@ describe('v1.VmMigrationClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vmmigration.v1.ListTargetProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetProjectsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vmmigration.v1.ListTargetProjectsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
