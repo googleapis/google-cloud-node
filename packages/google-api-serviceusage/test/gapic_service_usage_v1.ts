@@ -267,7 +267,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,9 +397,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchGetServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchGetServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -415,9 +428,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchGetServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchGetServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -461,9 +475,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchGetServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchGetServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -491,9 +506,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchGetServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchGetServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchGetServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -511,9 +527,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -543,9 +560,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -596,9 +614,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -626,9 +645,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -701,9 +721,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -733,9 +754,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -786,9 +808,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -816,9 +839,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -891,9 +915,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -923,9 +948,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -976,9 +1002,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1006,9 +1033,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1081,9 +1109,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1113,9 +1142,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1161,9 +1191,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1191,9 +1222,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1244,9 +1276,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1294,9 +1327,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1336,9 +1370,10 @@ describe('v1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

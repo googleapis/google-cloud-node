@@ -270,7 +270,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -300,7 +303,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -346,7 +352,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -376,7 +385,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServiceRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.GetServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -396,7 +408,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaMetricRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -428,7 +440,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaMetricRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -475,7 +487,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaMetricRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -509,7 +521,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaMetricRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -533,7 +545,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaLimitRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -565,7 +577,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaLimitRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -612,7 +624,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaLimitRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -646,7 +658,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetConsumerQuotaLimitRequest',
+        '.google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -670,9 +682,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -704,9 +717,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -759,9 +773,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -791,9 +806,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.EnableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -872,9 +888,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -906,9 +923,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -961,9 +979,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -993,9 +1012,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DisableServiceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DisableServiceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1074,9 +1094,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1108,9 +1129,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1163,9 +1185,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1195,9 +1218,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchEnableServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.BatchEnableServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1275,9 +1299,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1307,9 +1332,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1360,9 +1386,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1390,9 +1417,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAdminOverrideRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.CreateAdminOverrideRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1465,9 +1493,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1497,9 +1526,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1550,9 +1580,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1580,9 +1611,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1655,9 +1687,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1687,9 +1720,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1740,9 +1774,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1770,9 +1805,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAdminOverrideRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1845,9 +1881,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1877,9 +1914,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1930,9 +1968,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1960,9 +1999,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ImportAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ImportAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2036,7 +2076,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2069,7 +2109,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2123,7 +2163,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2157,7 +2197,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2233,7 +2273,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2266,7 +2306,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2320,7 +2360,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2354,7 +2394,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2430,7 +2470,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2463,7 +2503,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2517,7 +2557,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2551,7 +2591,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteConsumerOverrideRequest',
+        '.google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2627,7 +2667,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2660,7 +2700,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2714,7 +2754,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2748,7 +2788,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ImportConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2825,7 +2865,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2858,7 +2898,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2912,7 +2952,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2946,7 +2986,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateServiceIdentityRequest',
+        '.google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3023,9 +3063,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3063,9 +3104,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3119,9 +3161,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3151,9 +3194,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3212,9 +3256,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3264,9 +3309,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3314,9 +3360,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListServicesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListServicesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3357,7 +3404,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerQuotaMetricsRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3397,7 +3444,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerQuotaMetricsRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3454,7 +3501,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerQuotaMetricsRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3488,7 +3535,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerQuotaMetricsRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3557,7 +3604,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerQuotaMetricsRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3615,7 +3662,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerQuotaMetricsRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3669,7 +3716,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerQuotaMetricsRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3715,9 +3762,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3754,9 +3802,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3810,9 +3859,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3840,9 +3890,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3900,9 +3951,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3949,9 +4001,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3998,9 +4051,10 @@ describe('v1beta1.ServiceUsageClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListAdminOverridesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAdminOverridesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.serviceusage.v1beta1.ListAdminOverridesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4041,7 +4095,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4081,7 +4135,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4138,7 +4192,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4172,7 +4226,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4239,7 +4293,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4295,7 +4349,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4349,7 +4403,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         new protos.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListConsumerOverridesRequest',
+        '.google.api.serviceusage.v1beta1.ListConsumerOverridesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
