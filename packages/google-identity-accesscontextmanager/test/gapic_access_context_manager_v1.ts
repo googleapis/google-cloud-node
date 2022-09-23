@@ -278,9 +278,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,9 +310,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -356,9 +358,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -387,9 +390,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -408,9 +412,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -439,9 +444,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -486,9 +492,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -517,9 +524,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -538,9 +546,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServicePerimeterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,9 +579,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServicePerimeterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -617,9 +627,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServicePerimeterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -648,9 +659,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetServicePerimeterRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.GetServicePerimeterRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -670,7 +682,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -703,7 +715,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -751,7 +763,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -786,7 +798,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.GetGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -955,10 +967,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessPolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -990,10 +1002,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessPolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1046,10 +1058,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessPolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1079,10 +1091,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessPolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessPolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1158,9 +1170,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1191,9 +1204,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1245,9 +1259,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1276,9 +1291,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessPolicyRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1354,9 +1370,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAccessLevelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1387,9 +1404,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAccessLevelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1441,9 +1459,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAccessLevelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1472,9 +1491,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAccessLevelRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.CreateAccessLevelRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1551,10 +1571,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
       request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessLevelRequest', [
-        'accessLevel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
+        ['accessLevel', 'name']
+      );
       request.accessLevel.name = defaultValue1;
       const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1586,10 +1606,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
       request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessLevelRequest', [
-        'accessLevel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
+        ['accessLevel', 'name']
+      );
       request.accessLevel.name = defaultValue1;
       const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1642,10 +1662,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
       request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessLevelRequest', [
-        'accessLevel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
+        ['accessLevel', 'name']
+      );
       request.accessLevel.name = defaultValue1;
       const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1675,10 +1695,10 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest()
       );
       request.accessLevel ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAccessLevelRequest', [
-        'accessLevel',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.UpdateAccessLevelRequest',
+        ['accessLevel', 'name']
+      );
       request.accessLevel.name = defaultValue1;
       const expectedHeaderRequestParams = `access_level.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1754,9 +1774,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1787,9 +1808,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1841,9 +1863,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1872,9 +1895,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAccessLevelRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.DeleteAccessLevelRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1950,9 +1974,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReplaceAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1983,9 +2008,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReplaceAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2037,9 +2063,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReplaceAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2068,9 +2095,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReplaceAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ReplaceAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2147,7 +2175,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2181,7 +2209,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2236,7 +2264,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2271,7 +2299,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.CreateServicePerimeterRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2351,7 +2379,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.servicePerimeter ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
@@ -2386,7 +2414,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.servicePerimeter ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
@@ -2442,7 +2470,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.servicePerimeter ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
@@ -2478,7 +2506,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.servicePerimeter ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateServicePerimeterRequest',
         ['servicePerimeter', 'name']
       );
       request.servicePerimeter.name = defaultValue1;
@@ -2557,7 +2585,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2591,7 +2619,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2646,7 +2674,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2681,7 +2709,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteServicePerimeterRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteServicePerimeterRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -2760,7 +2788,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2794,7 +2822,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2849,7 +2877,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2884,7 +2912,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ReplaceServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ReplaceServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2964,7 +2992,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -2998,7 +3026,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3053,7 +3081,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3088,7 +3116,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CommitServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3168,7 +3196,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3202,7 +3230,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3257,7 +3285,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3292,7 +3320,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -3373,7 +3401,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.gcpUserAccessBinding ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
@@ -3408,7 +3436,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.gcpUserAccessBinding ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
@@ -3464,7 +3492,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.gcpUserAccessBinding ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
@@ -3500,7 +3528,7 @@ describe('v1.AccessContextManagerClient', () => {
       );
       request.gcpUserAccessBinding ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest',
         ['gcpUserAccessBinding', 'name']
       );
       request.gcpUserAccessBinding.name = defaultValue1;
@@ -3580,7 +3608,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3614,7 +3642,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3669,7 +3697,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -3704,7 +3732,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGcpUserAccessBindingRequest',
+        '.google.identity.accesscontextmanager.v1.DeleteGcpUserAccessBindingRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -4032,9 +4060,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4071,9 +4100,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4128,9 +4158,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4159,9 +4190,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4222,9 +4254,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4274,9 +4307,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4324,9 +4358,10 @@ describe('v1.AccessContextManagerClient', () => {
       const request = generateSampleMessage(
         new protos.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAccessLevelsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.identity.accesscontextmanager.v1.ListAccessLevelsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4368,7 +4403,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4409,7 +4444,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4467,7 +4502,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4502,7 +4537,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4572,7 +4607,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4631,7 +4666,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4686,7 +4721,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListServicePerimetersRequest',
+        '.google.identity.accesscontextmanager.v1.ListServicePerimetersRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4734,7 +4769,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGcpUserAccessBindingsRequest',
+        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4775,7 +4810,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGcpUserAccessBindingsRequest',
+        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4833,7 +4868,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGcpUserAccessBindingsRequest',
+        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4868,7 +4903,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGcpUserAccessBindingsRequest',
+        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4938,7 +4973,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGcpUserAccessBindingsRequest',
+        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -4997,7 +5032,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGcpUserAccessBindingsRequest',
+        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -5052,7 +5087,7 @@ describe('v1.AccessContextManagerClient', () => {
         new protos.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGcpUserAccessBindingsRequest',
+        '.google.identity.accesscontextmanager.v1.ListGcpUserAccessBindingsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
