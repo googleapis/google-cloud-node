@@ -236,7 +236,7 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateIngressRulesRequest',
+        '.google.appengine.v1.BatchUpdateIngressRulesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -268,7 +268,7 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateIngressRulesRequest',
+        '.google.appengine.v1.BatchUpdateIngressRulesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -315,7 +315,7 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateIngressRulesRequest',
+        '.google.appengine.v1.BatchUpdateIngressRulesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -349,7 +349,7 @@ describe('v1.FirewallClient', () => {
         new protos.google.appengine.v1.BatchUpdateIngressRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BatchUpdateIngressRulesRequest',
+        '.google.appengine.v1.BatchUpdateIngressRulesRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -372,9 +372,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIngressRuleRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateIngressRuleRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -402,9 +403,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIngressRuleRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateIngressRuleRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -448,9 +450,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIngressRuleRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateIngressRuleRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -478,9 +481,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateIngressRuleRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateIngressRuleRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -498,9 +502,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -528,9 +533,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -574,9 +580,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -604,9 +611,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -624,9 +632,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -654,9 +663,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -700,9 +710,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -730,9 +741,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -750,9 +762,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -780,9 +793,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -826,9 +840,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -856,9 +871,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteIngressRuleRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteIngressRuleRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteIngressRuleRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -876,9 +892,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIngressRulesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListIngressRulesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -908,9 +925,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIngressRulesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListIngressRulesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -956,9 +974,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIngressRulesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListIngressRulesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -986,9 +1005,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIngressRulesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListIngressRulesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1039,9 +1059,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIngressRulesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListIngressRulesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1087,9 +1108,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIngressRulesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListIngressRulesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1129,9 +1151,10 @@ describe('v1.FirewallClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListIngressRulesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListIngressRulesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListIngressRulesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

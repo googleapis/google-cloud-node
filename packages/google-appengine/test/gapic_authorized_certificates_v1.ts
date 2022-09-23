@@ -249,7 +249,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizedCertificateRequest',
+        '.google.appengine.v1.GetAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -282,7 +282,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizedCertificateRequest',
+        '.google.appengine.v1.GetAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -330,7 +330,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizedCertificateRequest',
+        '.google.appengine.v1.GetAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -365,7 +365,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.GetAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAuthorizedCertificateRequest',
+        '.google.appengine.v1.GetAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -390,7 +390,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizedCertificateRequest',
+        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -423,7 +423,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizedCertificateRequest',
+        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -471,7 +471,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizedCertificateRequest',
+        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -506,7 +506,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.CreateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateAuthorizedCertificateRequest',
+        '.google.appengine.v1.CreateAuthorizedCertificateRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -531,7 +531,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizedCertificateRequest',
+        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -564,7 +564,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizedCertificateRequest',
+        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -612,7 +612,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizedCertificateRequest',
+        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -647,7 +647,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.UpdateAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAuthorizedCertificateRequest',
+        '.google.appengine.v1.UpdateAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -672,7 +672,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizedCertificateRequest',
+        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -705,7 +705,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizedCertificateRequest',
+        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -753,7 +753,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizedCertificateRequest',
+        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -788,7 +788,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.DeleteAuthorizedCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAuthorizedCertificateRequest',
+        '.google.appengine.v1.DeleteAuthorizedCertificateRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -813,7 +813,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedCertificatesRequest',
+        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -854,7 +854,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedCertificatesRequest',
+        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -910,7 +910,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedCertificatesRequest',
+        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -945,7 +945,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedCertificatesRequest',
+        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1013,7 +1013,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedCertificatesRequest',
+        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1070,7 +1070,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedCertificatesRequest',
+        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -1124,7 +1124,7 @@ describe('v1.AuthorizedCertificatesClient', () => {
         new protos.google.appengine.v1.ListAuthorizedCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedCertificatesRequest',
+        '.google.appengine.v1.ListAuthorizedCertificatesRequest',
         ['parent']
       );
       request.parent = defaultValue1;

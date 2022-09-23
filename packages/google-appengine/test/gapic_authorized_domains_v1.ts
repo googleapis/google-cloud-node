@@ -238,7 +238,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedDomainsRequest',
+        '.google.appengine.v1.ListAuthorizedDomainsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -278,7 +278,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedDomainsRequest',
+        '.google.appengine.v1.ListAuthorizedDomainsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -333,7 +333,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedDomainsRequest',
+        '.google.appengine.v1.ListAuthorizedDomainsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -367,7 +367,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedDomainsRequest',
+        '.google.appengine.v1.ListAuthorizedDomainsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -433,7 +433,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedDomainsRequest',
+        '.google.appengine.v1.ListAuthorizedDomainsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -488,7 +488,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedDomainsRequest',
+        '.google.appengine.v1.ListAuthorizedDomainsRequest',
         ['parent']
       );
       request.parent = defaultValue1;
@@ -541,7 +541,7 @@ describe('v1.AuthorizedDomainsClient', () => {
         new protos.google.appengine.v1.ListAuthorizedDomainsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAuthorizedDomainsRequest',
+        '.google.appengine.v1.ListAuthorizedDomainsRequest',
         ['parent']
       );
       request.parent = defaultValue1;

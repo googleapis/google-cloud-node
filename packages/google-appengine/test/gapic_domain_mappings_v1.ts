@@ -269,9 +269,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -299,9 +300,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,9 +378,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -395,9 +399,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDomainMappingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateDomainMappingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -427,9 +432,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDomainMappingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateDomainMappingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -480,9 +486,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDomainMappingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateDomainMappingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -510,9 +517,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateDomainMappingRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateDomainMappingRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -585,9 +593,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -617,9 +626,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -670,9 +680,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -700,9 +711,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -775,9 +787,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -807,9 +820,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -860,9 +874,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -890,9 +905,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteDomainMappingRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteDomainMappingRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteDomainMappingRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -965,9 +981,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListDomainMappingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainMappingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListDomainMappingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -998,9 +1015,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListDomainMappingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainMappingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListDomainMappingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1046,9 +1064,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListDomainMappingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainMappingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListDomainMappingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1076,9 +1095,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListDomainMappingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainMappingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListDomainMappingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1129,9 +1149,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListDomainMappingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainMappingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListDomainMappingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1177,9 +1198,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListDomainMappingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainMappingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListDomainMappingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1219,9 +1241,10 @@ describe('v1.DomainMappingsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListDomainMappingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDomainMappingsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListDomainMappingsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

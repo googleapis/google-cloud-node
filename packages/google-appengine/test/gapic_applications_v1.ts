@@ -204,9 +204,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -234,9 +235,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -280,9 +282,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -310,9 +313,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -468,9 +472,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -500,9 +505,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -553,9 +559,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -583,9 +590,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -658,9 +666,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.RepairApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RepairApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.RepairApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -690,9 +699,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.RepairApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RepairApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.RepairApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -743,9 +753,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.RepairApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RepairApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.RepairApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -773,9 +784,10 @@ describe('v1.ApplicationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.RepairApplicationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RepairApplicationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.RepairApplicationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');

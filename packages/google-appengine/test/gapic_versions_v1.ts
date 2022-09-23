@@ -267,7 +267,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.GetVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVersionRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.GetVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,9 +397,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -417,9 +430,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -470,9 +484,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -500,9 +515,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.CreateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateVersionRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.CreateVersionRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -575,9 +591,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -607,9 +624,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -660,9 +678,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -690,9 +709,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.UpdateVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.UpdateVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -765,9 +785,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -797,9 +818,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -850,9 +872,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -880,9 +903,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.DeleteVersionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVersionRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.DeleteVersionRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -955,9 +979,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -987,9 +1012,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1035,9 +1061,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1065,9 +1092,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1115,9 +1143,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1162,9 +1191,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1204,9 +1234,10 @@ describe('v1.VersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.appengine.v1.ListVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.appengine.v1.ListVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
