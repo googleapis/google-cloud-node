@@ -208,9 +208,10 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPipelineRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.lifesciences.v2beta.RunPipelineRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -240,9 +241,10 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPipelineRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.lifesciences.v2beta.RunPipelineRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -294,9 +296,10 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPipelineRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.lifesciences.v2beta.RunPipelineRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -325,9 +328,10 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RunPipelineRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.lifesciences.v2beta.RunPipelineRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
