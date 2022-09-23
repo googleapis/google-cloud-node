@@ -267,7 +267,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.GetEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEndpointRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.GetEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,9 +397,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -417,9 +430,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -470,9 +484,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -500,9 +515,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.CreateEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEndpointRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.CreateEndpointRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -575,9 +591,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -607,9 +624,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -660,9 +678,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -690,9 +709,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.DeleteEndpointRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEndpointRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.DeleteEndpointRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -765,9 +785,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -797,9 +818,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -845,9 +867,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -875,9 +898,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -925,9 +949,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -970,9 +995,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1012,9 +1038,10 @@ describe('v1.IDSClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.ids.v1.ListEndpointsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEndpointsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.ids.v1.ListEndpointsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
