@@ -174,9 +174,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.CheckRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -203,9 +204,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.CheckRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -247,9 +249,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.CheckRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -273,9 +276,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.CheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.CheckRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -293,9 +297,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.ReportRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -323,9 +328,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.ReportRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -369,9 +375,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.ReportRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -396,9 +403,10 @@ describe('v2.ServiceControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v2.ReportRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ReportRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v2.ReportRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();

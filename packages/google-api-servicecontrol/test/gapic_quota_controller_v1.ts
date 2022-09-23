@@ -174,9 +174,10 @@ describe('v1.QuotaControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.AllocateQuotaRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateQuotaRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v1.AllocateQuotaRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -204,9 +205,10 @@ describe('v1.QuotaControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.AllocateQuotaRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateQuotaRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v1.AllocateQuotaRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -250,9 +252,10 @@ describe('v1.QuotaControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.AllocateQuotaRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateQuotaRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v1.AllocateQuotaRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedHeaderRequestParams = `service_name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -280,9 +283,10 @@ describe('v1.QuotaControllerClient', () => {
       const request = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.AllocateQuotaRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AllocateQuotaRequest', [
-        'serviceName',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.api.servicecontrol.v1.AllocateQuotaRequest',
+        ['serviceName']
+      );
       request.serviceName = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
