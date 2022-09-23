@@ -237,9 +237,10 @@ describe('v1.ImageVersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImageVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -275,9 +276,10 @@ describe('v1.ImageVersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImageVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -331,9 +333,10 @@ describe('v1.ImageVersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImageVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -361,9 +364,10 @@ describe('v1.ImageVersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImageVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -423,9 +427,10 @@ describe('v1.ImageVersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImageVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -474,9 +479,10 @@ describe('v1.ImageVersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImageVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -523,9 +529,10 @@ describe('v1.ImageVersionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImageVersionsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1.ListImageVersionsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

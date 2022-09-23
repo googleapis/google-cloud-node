@@ -269,9 +269,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -299,9 +300,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -345,9 +347,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,9 +378,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.GetEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -395,9 +399,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -427,9 +432,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -480,9 +486,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -510,9 +517,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateEnvironmentRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CreateEnvironmentRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -585,9 +593,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -617,9 +626,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -670,9 +680,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -700,9 +711,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.UpdateEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -775,9 +787,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -807,9 +820,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -860,9 +874,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -890,9 +905,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteEnvironmentRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.DeleteEnvironmentRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -965,9 +981,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartWebServerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -997,9 +1014,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartWebServerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1050,9 +1068,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartWebServerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1080,9 +1099,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RestartWebServerRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.RestartWebServerRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1155,9 +1175,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckUpgradeRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1186,9 +1207,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckUpgradeRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1239,9 +1261,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckUpgradeRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1269,9 +1292,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CheckUpgradeRequest', [
-        'environment',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.CheckUpgradeRequest',
+        ['environment']
+      );
       request.environment = defaultValue1;
       const expectedHeaderRequestParams = `environment=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1341,9 +1365,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1379,9 +1404,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1435,9 +1461,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1465,9 +1492,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1527,9 +1555,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1578,9 +1607,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1627,9 +1657,10 @@ describe('v1beta1.EnvironmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListEnvironmentsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.orchestration.airflow.service.v1beta1.ListEnvironmentsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
