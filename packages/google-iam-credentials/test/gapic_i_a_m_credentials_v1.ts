@@ -174,9 +174,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateAccessTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateAccessTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -205,9 +206,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateAccessTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateAccessTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -251,9 +253,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateAccessTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateAccessTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -281,9 +284,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateAccessTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateAccessTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateAccessTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -301,9 +305,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateIdTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateIdTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -331,9 +336,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateIdTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateIdTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -377,9 +383,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateIdTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateIdTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -407,9 +414,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.GenerateIdTokenRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GenerateIdTokenRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.GenerateIdTokenRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -427,7 +435,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignBlobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignBlobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -455,7 +466,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignBlobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignBlobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -499,7 +513,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignBlobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignBlobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -524,7 +541,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignBlobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignBlobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignBlobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -542,7 +562,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignJwtRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignJwtRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -570,7 +593,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignJwtRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignJwtRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -614,7 +640,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignJwtRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignJwtRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -639,7 +668,10 @@ describe('v1.IAMCredentialsClient', () => {
       const request = generateSampleMessage(
         new protos.google.iam.credentials.v1.SignJwtRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SignJwtRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.iam.credentials.v1.SignJwtRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
