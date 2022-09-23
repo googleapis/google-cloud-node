@@ -175,7 +175,7 @@ describe('v1.ValidationHelperV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ValidateAttestationOccurrenceRequest',
+        '.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest',
         ['attestor']
       );
       request.attestor = defaultValue1;
@@ -207,7 +207,7 @@ describe('v1.ValidationHelperV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ValidateAttestationOccurrenceRequest',
+        '.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest',
         ['attestor']
       );
       request.attestor = defaultValue1;
@@ -254,7 +254,7 @@ describe('v1.ValidationHelperV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ValidateAttestationOccurrenceRequest',
+        '.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest',
         ['attestor']
       );
       request.attestor = defaultValue1;
@@ -288,7 +288,7 @@ describe('v1.ValidationHelperV1Client', () => {
         new protos.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ValidateAttestationOccurrenceRequest',
+        '.google.cloud.binaryauthorization.v1.ValidateAttestationOccurrenceRequest',
         ['attestor']
       );
       request.attestor = defaultValue1;

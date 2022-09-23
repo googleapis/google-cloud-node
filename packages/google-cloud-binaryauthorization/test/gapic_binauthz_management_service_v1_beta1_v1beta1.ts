@@ -269,7 +269,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -300,7 +303,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -347,7 +353,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -375,7 +384,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPolicyRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetPolicyRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -397,10 +409,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -432,10 +444,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -483,10 +495,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedHeaderRequestParams = `policy.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -518,10 +530,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest()
       );
       request.policy ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdatePolicyRequest', [
-        'policy',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdatePolicyRequest',
+        ['policy', 'name']
+      );
       request.policy.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -542,9 +554,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -575,9 +588,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -624,9 +638,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -657,9 +672,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateAttestorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.CreateAttestorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -680,7 +696,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -711,7 +730,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -758,7 +780,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -789,7 +814,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAttestorRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.GetAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -811,10 +839,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
       request.attestor ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
-        'attestor',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest',
+        ['attestor', 'name']
+      );
       request.attestor.name = defaultValue1;
       const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -846,10 +874,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
       request.attestor ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
-        'attestor',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest',
+        ['attestor', 'name']
+      );
       request.attestor.name = defaultValue1;
       const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -897,10 +925,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
       request.attestor ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
-        'attestor',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest',
+        ['attestor', 'name']
+      );
       request.attestor.name = defaultValue1;
       const expectedHeaderRequestParams = `attestor.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -932,10 +960,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
         new protos.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest()
       );
       request.attestor ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateAttestorRequest', [
-        'attestor',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.UpdateAttestorRequest',
+        ['attestor', 'name']
+      );
       request.attestor.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -956,9 +984,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -989,9 +1018,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1038,9 +1068,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1071,9 +1102,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAttestorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.DeleteAttestorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1094,9 +1126,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1135,9 +1168,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1194,9 +1228,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1227,9 +1262,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1292,9 +1328,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1346,9 +1383,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1398,9 +1436,10 @@ describe('v1beta1.BinauthzManagementServiceV1Beta1Client', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAttestorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.binaryauthorization.v1beta1.ListAttestorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
