@@ -267,9 +267,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.SearchDomainsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -297,9 +298,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.SearchDomainsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -343,9 +345,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.SearchDomainsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedHeaderRequestParams = `location=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -373,9 +376,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.SearchDomainsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SearchDomainsRequest', [
-        'location',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.SearchDomainsRequest',
+        ['location']
+      );
       request.location = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -394,7 +398,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveRegisterParametersRequest',
+        '.google.cloud.domains.v1.RetrieveRegisterParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -426,7 +430,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveRegisterParametersRequest',
+        '.google.cloud.domains.v1.RetrieveRegisterParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -473,7 +477,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveRegisterParametersRequest',
+        '.google.cloud.domains.v1.RetrieveRegisterParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -507,7 +511,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveRegisterParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveRegisterParametersRequest',
+        '.google.cloud.domains.v1.RetrieveRegisterParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -531,7 +535,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveTransferParametersRequest',
+        '.google.cloud.domains.v1.RetrieveTransferParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -563,7 +567,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveTransferParametersRequest',
+        '.google.cloud.domains.v1.RetrieveTransferParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -610,7 +614,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveTransferParametersRequest',
+        '.google.cloud.domains.v1.RetrieveTransferParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -644,7 +648,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveTransferParametersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveTransferParametersRequest',
+        '.google.cloud.domains.v1.RetrieveTransferParametersRequest',
         ['location']
       );
       request.location = defaultValue1;
@@ -667,9 +671,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.GetRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -697,9 +702,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.GetRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -743,9 +749,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.GetRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -773,9 +780,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.GetRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.GetRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -794,7 +802,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -826,7 +834,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -873,7 +881,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -907,7 +915,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RetrieveAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.RetrieveAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -931,7 +939,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.ResetAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -963,7 +971,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.ResetAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -1010,7 +1018,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.ResetAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -1044,7 +1052,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ResetAuthorizationCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ResetAuthorizationCodeRequest',
+        '.google.cloud.domains.v1.ResetAuthorizationCodeRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -1067,9 +1075,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.RegisterDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1099,9 +1108,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.RegisterDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1152,9 +1162,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.RegisterDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1182,9 +1193,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.RegisterDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RegisterDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.RegisterDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1257,9 +1269,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.TransferDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1289,9 +1302,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.TransferDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1342,9 +1356,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.TransferDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1372,9 +1387,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.TransferDomainRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('TransferDomainRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.TransferDomainRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1448,10 +1464,10 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
       request.registration ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
-        'registration',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.UpdateRegistrationRequest',
+        ['registration', 'name']
+      );
       request.registration.name = defaultValue1;
       const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1482,10 +1498,10 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
       request.registration ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
-        'registration',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.UpdateRegistrationRequest',
+        ['registration', 'name']
+      );
       request.registration.name = defaultValue1;
       const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1537,10 +1553,10 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
       request.registration ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
-        'registration',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.UpdateRegistrationRequest',
+        ['registration', 'name']
+      );
       request.registration.name = defaultValue1;
       const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1569,10 +1585,10 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.UpdateRegistrationRequest()
       );
       request.registration ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRegistrationRequest', [
-        'registration',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.UpdateRegistrationRequest',
+        ['registration', 'name']
+      );
       request.registration.name = defaultValue1;
       const expectedHeaderRequestParams = `registration.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1646,7 +1662,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureManagementSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureManagementSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -1679,7 +1695,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureManagementSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureManagementSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -1733,7 +1749,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureManagementSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureManagementSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -1767,7 +1783,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureManagementSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureManagementSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureManagementSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -1843,9 +1859,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
-        'registration',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ConfigureDnsSettingsRequest',
+        ['registration']
+      );
       request.registration = defaultValue1;
       const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1875,9 +1892,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
-        'registration',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ConfigureDnsSettingsRequest',
+        ['registration']
+      );
       request.registration = defaultValue1;
       const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1928,9 +1946,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
-        'registration',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ConfigureDnsSettingsRequest',
+        ['registration']
+      );
       request.registration = defaultValue1;
       const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1958,9 +1977,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ConfigureDnsSettingsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ConfigureDnsSettingsRequest', [
-        'registration',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ConfigureDnsSettingsRequest',
+        ['registration']
+      );
       request.registration = defaultValue1;
       const expectedHeaderRequestParams = `registration=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2034,7 +2054,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureContactSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureContactSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -2067,7 +2087,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureContactSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureContactSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -2121,7 +2141,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureContactSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureContactSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -2155,7 +2175,7 @@ describe('v1.DomainsClient', () => {
         new protos.google.cloud.domains.v1.ConfigureContactSettingsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ConfigureContactSettingsRequest',
+        '.google.cloud.domains.v1.ConfigureContactSettingsRequest',
         ['registration']
       );
       request.registration = defaultValue1;
@@ -2231,9 +2251,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ExportRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2263,9 +2284,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ExportRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2316,9 +2338,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ExportRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2346,9 +2369,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ExportRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ExportRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ExportRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2421,9 +2445,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.DeleteRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2453,9 +2478,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.DeleteRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2506,9 +2532,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.DeleteRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2536,9 +2563,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.DeleteRegistrationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegistrationRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.DeleteRegistrationRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2611,9 +2639,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ListRegistrationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2649,9 +2678,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ListRegistrationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2703,9 +2733,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ListRegistrationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2733,9 +2764,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ListRegistrationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2792,9 +2824,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ListRegistrationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2840,9 +2873,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ListRegistrationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2888,9 +2922,10 @@ describe('v1.DomainsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.domains.v1.ListRegistrationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegistrationsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.domains.v1.ListRegistrationsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
