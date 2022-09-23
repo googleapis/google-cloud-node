@@ -237,7 +237,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,7 +268,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,7 +315,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -334,7 +343,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -352,7 +364,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -380,7 +395,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -424,7 +442,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -449,7 +470,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -467,7 +491,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -495,7 +522,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -539,7 +569,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -564,7 +597,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -582,9 +618,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -612,9 +649,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -658,9 +696,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -688,9 +727,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.CreateJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateJobTemplateRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.CreateJobTemplateRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -708,9 +748,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -738,9 +779,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -784,9 +826,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -814,9 +857,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.GetJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.GetJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -834,9 +878,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -864,9 +909,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -910,9 +956,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -940,9 +987,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteJobTemplateRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.DeleteJobTemplateRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -960,7 +1008,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -996,7 +1047,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1048,7 +1102,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1073,7 +1130,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1130,7 +1190,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1178,7 +1241,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1223,7 +1289,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1263,9 +1332,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1301,9 +1371,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1357,9 +1428,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1387,9 +1459,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1447,9 +1520,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1496,9 +1570,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1545,9 +1620,10 @@ describe('v1.TranscoderServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.video.transcoder.v1.ListJobTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListJobTemplatesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.video.transcoder.v1.ListJobTemplatesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
