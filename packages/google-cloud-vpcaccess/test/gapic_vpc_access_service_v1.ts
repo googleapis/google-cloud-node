@@ -274,9 +274,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.GetConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.GetConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -304,9 +305,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.GetConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.GetConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -350,9 +352,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.GetConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.GetConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -380,9 +383,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.GetConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.GetConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -400,9 +404,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.CreateConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.CreateConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -432,9 +437,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.CreateConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.CreateConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -485,9 +491,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.CreateConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.CreateConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -515,9 +522,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.CreateConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateConnectorRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.CreateConnectorRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -590,9 +598,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.DeleteConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.DeleteConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -622,9 +631,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.DeleteConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.DeleteConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -675,9 +685,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.DeleteConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.DeleteConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -705,9 +716,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.DeleteConnectorRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteConnectorRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.DeleteConnectorRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -780,9 +792,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.ListConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.ListConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -812,9 +825,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.ListConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.ListConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -860,9 +874,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.ListConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.ListConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -890,9 +905,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.ListConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.ListConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -943,9 +959,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.ListConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.ListConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -991,9 +1008,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.ListConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.ListConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1033,9 +1051,10 @@ describe('v1.VpcAccessServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.vpcaccess.v1.ListConnectorsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListConnectorsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.vpcaccess.v1.ListConnectorsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
