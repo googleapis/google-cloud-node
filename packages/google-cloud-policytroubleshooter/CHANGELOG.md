@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v2.0.3...v2.0.4) (2022-09-14)
+
+
+### Bug Fixes
+
+* Preserve default values in x-goog-request-params header ([#142](https://github.com/googleapis/nodejs-policy-troubleshooter/issues/142)) ([98500d1](https://github.com/googleapis/nodejs-policy-troubleshooter/commit/98500d13ecdfa585aa500d507760c58e52ccf1bc))
+
 ## [2.0.3](https://github.com/googleapis/nodejs-policy-troubleshooter/compare/v2.0.2...v2.0.3) (2022-09-01)
 
 
