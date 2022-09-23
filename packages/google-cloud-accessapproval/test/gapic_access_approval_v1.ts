@@ -237,9 +237,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.GetApprovalRequestMessage',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -268,9 +269,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.GetApprovalRequestMessage',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -314,9 +316,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.GetApprovalRequestMessage',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -344,9 +347,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.GetApprovalRequestMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('GetApprovalRequestMessage', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.GetApprovalRequestMessage',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -365,7 +369,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ApproveApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -397,7 +401,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ApproveApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -444,7 +448,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ApproveApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -478,7 +482,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ApproveApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.ApproveApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -502,7 +506,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DismissApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.DismissApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -534,7 +538,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DismissApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.DismissApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -581,7 +585,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DismissApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.DismissApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -615,7 +619,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DismissApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DismissApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.DismissApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -639,7 +643,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -671,7 +675,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -718,7 +722,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -752,7 +756,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateApprovalRequestMessage',
+        '.google.cloud.accessapproval.v1.InvalidateApprovalRequestMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -776,7 +780,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -808,7 +812,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -855,7 +859,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -889,7 +893,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -914,7 +918,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.settings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage',
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
@@ -947,7 +951,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.settings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage',
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
@@ -995,7 +999,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.settings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage',
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
@@ -1030,7 +1034,7 @@ describe('v1.AccessApprovalClient', () => {
       );
       request.settings ??= {};
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.UpdateAccessApprovalSettingsMessage',
         ['settings', 'name']
       );
       request.settings.name = defaultValue1;
@@ -1054,7 +1058,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1086,7 +1090,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1133,7 +1137,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1167,7 +1171,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessApprovalSettingsMessage',
+        '.google.cloud.accessapproval.v1.DeleteAccessApprovalSettingsMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1191,7 +1195,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalServiceAccountMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1223,7 +1227,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalServiceAccountMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1270,7 +1274,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalServiceAccountMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1304,7 +1308,7 @@ describe('v1.AccessApprovalClient', () => {
         new protos.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAccessApprovalServiceAccountMessage',
+        '.google.cloud.accessapproval.v1.GetAccessApprovalServiceAccountMessage',
         ['name']
       );
       request.name = defaultValue1;
@@ -1327,9 +1331,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.ListApprovalRequestsMessage',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1366,9 +1371,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.ListApprovalRequestsMessage',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1422,9 +1428,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.ListApprovalRequestsMessage',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1452,9 +1459,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.ListApprovalRequestsMessage',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1512,9 +1520,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.ListApprovalRequestsMessage',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1561,9 +1570,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.ListApprovalRequestsMessage',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1610,9 +1620,10 @@ describe('v1.AccessApprovalClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.accessapproval.v1.ListApprovalRequestsMessage()
       );
-      const defaultValue1 = getTypeDefaultValue('ListApprovalRequestsMessage', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.accessapproval.v1.ListApprovalRequestsMessage',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
