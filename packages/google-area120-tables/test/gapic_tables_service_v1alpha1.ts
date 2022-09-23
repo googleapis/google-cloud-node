@@ -237,7 +237,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTableRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetTableRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -265,7 +268,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTableRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetTableRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -309,7 +315,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTableRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetTableRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -334,7 +343,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetTableRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTableRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetTableRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -352,9 +364,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -382,9 +395,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -428,9 +442,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -458,9 +473,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetWorkspaceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetWorkspaceRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetWorkspaceRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -478,7 +494,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -506,7 +525,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -550,7 +572,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -575,7 +600,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.GetRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.GetRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -593,7 +621,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRowRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.CreateRowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -621,7 +652,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRowRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.CreateRowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -665,7 +699,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRowRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.CreateRowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -690,7 +727,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.CreateRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRowRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.CreateRowRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -708,9 +748,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchCreateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -738,9 +779,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchCreateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -784,9 +826,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchCreateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -814,9 +857,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchCreateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchCreateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchCreateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -835,10 +879,10 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
       request.row ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRowRequest', [
-        'row',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.UpdateRowRequest',
+        ['row', 'name']
+      );
       request.row.name = defaultValue1;
       const expectedHeaderRequestParams = `row.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -867,10 +911,10 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
       request.row ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRowRequest', [
-        'row',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.UpdateRowRequest',
+        ['row', 'name']
+      );
       request.row.name = defaultValue1;
       const expectedHeaderRequestParams = `row.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -915,10 +959,10 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
       request.row ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRowRequest', [
-        'row',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.UpdateRowRequest',
+        ['row', 'name']
+      );
       request.row.name = defaultValue1;
       const expectedHeaderRequestParams = `row.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -944,10 +988,10 @@ describe('v1alpha1.TablesServiceClient', () => {
         new protos.google.area120.tables.v1alpha1.UpdateRowRequest()
       );
       request.row ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRowRequest', [
-        'row',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.UpdateRowRequest',
+        ['row', 'name']
+      );
       request.row.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -965,9 +1009,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchUpdateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -995,9 +1040,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchUpdateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1041,9 +1087,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchUpdateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1071,9 +1118,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchUpdateRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchUpdateRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchUpdateRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1091,7 +1139,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.DeleteRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1119,7 +1170,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.DeleteRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1163,7 +1217,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.DeleteRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1188,7 +1245,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.DeleteRowRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRowRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.DeleteRowRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1206,9 +1266,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchDeleteRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1236,9 +1297,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchDeleteRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1282,9 +1344,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchDeleteRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1312,9 +1375,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.BatchDeleteRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BatchDeleteRowsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.BatchDeleteRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1799,7 +1863,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.ListRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1829,7 +1896,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.ListRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1875,7 +1945,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.ListRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1900,7 +1973,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.ListRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1951,7 +2027,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.ListRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1999,7 +2078,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.ListRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2038,7 +2120,10 @@ describe('v1alpha1.TablesServiceClient', () => {
       const request = generateSampleMessage(
         new protos.google.area120.tables.v1alpha1.ListRowsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRowsRequest', ['parent']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.area120.tables.v1alpha1.ListRowsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
