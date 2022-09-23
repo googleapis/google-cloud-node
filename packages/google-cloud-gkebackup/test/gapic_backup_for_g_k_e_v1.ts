@@ -267,9 +267,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -297,9 +298,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -343,9 +345,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -373,9 +376,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -393,7 +397,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -421,7 +428,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -465,7 +475,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -490,7 +503,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackupRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -508,9 +524,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -538,9 +555,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -584,9 +602,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -614,9 +633,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -634,9 +654,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -664,9 +685,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -710,9 +732,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -740,9 +763,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -760,7 +784,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestoreRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -788,7 +815,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestoreRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -832,7 +862,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestoreRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -860,7 +893,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRestoreRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -878,9 +914,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -908,9 +945,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -954,9 +992,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -984,9 +1023,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.GetVolumeRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVolumeRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.GetVolumeRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1004,9 +1044,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupPlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1036,9 +1077,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupPlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1089,9 +1131,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupPlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1119,9 +1162,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupPlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupPlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1195,10 +1239,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
       );
       request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupPlanRequest', [
-        'backupPlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
+        ['backupPlan', 'name']
+      );
       request.backupPlan.name = defaultValue1;
       const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1229,10 +1273,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
       );
       request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupPlanRequest', [
-        'backupPlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
+        ['backupPlan', 'name']
+      );
       request.backupPlan.name = defaultValue1;
       const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1284,10 +1328,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
       );
       request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupPlanRequest', [
-        'backupPlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
+        ['backupPlan', 'name']
+      );
       request.backupPlan.name = defaultValue1;
       const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1316,10 +1360,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupPlanRequest()
       );
       request.backupPlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupPlanRequest', [
-        'backupPlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupPlanRequest',
+        ['backupPlan', 'name']
+      );
       request.backupPlan.name = defaultValue1;
       const expectedHeaderRequestParams = `backup_plan.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1392,9 +1436,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1424,9 +1469,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1477,9 +1523,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1507,9 +1554,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupPlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupPlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupPlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1582,9 +1630,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1613,9 +1662,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1666,9 +1716,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1696,9 +1747,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateBackupRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateBackupRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1769,10 +1821,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1802,10 +1854,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1857,10 +1909,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1889,10 +1941,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateBackupRequest()
       );
       request.backup ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateBackupRequest', [
-        'backup',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateBackupRequest',
+        ['backup', 'name']
+      );
       request.backup.name = defaultValue1;
       const expectedHeaderRequestParams = `backup.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1962,9 +2014,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1993,9 +2046,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2046,9 +2100,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2076,9 +2131,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteBackupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackupRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteBackupRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2148,9 +2204,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestorePlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2180,9 +2237,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestorePlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2233,9 +2291,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestorePlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2263,9 +2322,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestorePlanRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestorePlanRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2339,10 +2399,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
       );
       request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestorePlanRequest', [
-        'restorePlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
+        ['restorePlan', 'name']
+      );
       request.restorePlan.name = defaultValue1;
       const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2373,10 +2433,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
       );
       request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestorePlanRequest', [
-        'restorePlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
+        ['restorePlan', 'name']
+      );
       request.restorePlan.name = defaultValue1;
       const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2428,10 +2488,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
       );
       request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestorePlanRequest', [
-        'restorePlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
+        ['restorePlan', 'name']
+      );
       request.restorePlan.name = defaultValue1;
       const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2460,10 +2520,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestorePlanRequest()
       );
       request.restorePlan ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestorePlanRequest', [
-        'restorePlan',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestorePlanRequest',
+        ['restorePlan', 'name']
+      );
       request.restorePlan.name = defaultValue1;
       const expectedHeaderRequestParams = `restore_plan.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2536,9 +2596,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2568,9 +2629,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2621,9 +2683,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2651,9 +2714,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestorePlanRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestorePlanRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestorePlanRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2726,9 +2790,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestoreRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2758,9 +2823,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestoreRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2811,9 +2877,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestoreRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2841,9 +2908,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.CreateRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateRestoreRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.CreateRestoreRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2917,10 +2985,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
       );
       request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestoreRequest', [
-        'restore',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
+        ['restore', 'name']
+      );
       request.restore.name = defaultValue1;
       const expectedHeaderRequestParams = `restore.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -2951,10 +3019,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
       );
       request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestoreRequest', [
-        'restore',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
+        ['restore', 'name']
+      );
       request.restore.name = defaultValue1;
       const expectedHeaderRequestParams = `restore.name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3006,10 +3074,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
       );
       request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestoreRequest', [
-        'restore',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
+        ['restore', 'name']
+      );
       request.restore.name = defaultValue1;
       const expectedHeaderRequestParams = `restore.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3038,10 +3106,10 @@ describe('v1.BackupForGKEClient', () => {
         new protos.google.cloud.gkebackup.v1.UpdateRestoreRequest()
       );
       request.restore ??= {};
-      const defaultValue1 = getTypeDefaultValue('UpdateRestoreRequest', [
-        'restore',
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.UpdateRestoreRequest',
+        ['restore', 'name']
+      );
       request.restore.name = defaultValue1;
       const expectedHeaderRequestParams = `restore.name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3114,9 +3182,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3146,9 +3215,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -3199,9 +3269,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3229,9 +3300,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.DeleteRestoreRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRestoreRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.DeleteRestoreRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3304,9 +3376,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupPlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3342,9 +3415,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupPlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3396,9 +3470,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupPlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3426,9 +3501,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupPlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3485,9 +3561,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupPlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3533,9 +3610,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupPlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3581,9 +3659,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupPlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupPlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupPlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3622,9 +3701,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3654,9 +3734,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3702,9 +3783,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3732,9 +3814,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3785,9 +3868,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3835,9 +3919,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3877,9 +3962,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -3920,9 +4006,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -3958,9 +4045,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4012,9 +4100,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4042,9 +4131,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4101,9 +4191,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4149,9 +4240,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4197,9 +4289,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeBackupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeBackupsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeBackupsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4238,9 +4331,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestorePlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4276,9 +4370,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestorePlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4330,9 +4425,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestorePlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4360,9 +4456,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestorePlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4419,9 +4516,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestorePlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4467,9 +4565,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestorePlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4515,9 +4614,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestorePlansRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestorePlansRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestorePlansRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4556,9 +4656,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4588,9 +4689,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4636,9 +4738,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4666,9 +4769,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4719,9 +4823,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4769,9 +4874,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4811,9 +4917,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4852,9 +4959,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4891,9 +4999,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -4945,9 +5054,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -4975,9 +5085,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5034,9 +5145,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -5082,9 +5194,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -5130,9 +5243,10 @@ describe('v1.BackupForGKEClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkebackup.v1.ListVolumeRestoresRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVolumeRestoresRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkebackup.v1.ListVolumeRestoresRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
