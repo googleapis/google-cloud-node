@@ -267,9 +267,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -297,9 +298,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -343,9 +345,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -373,9 +376,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -393,7 +397,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -421,7 +428,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -465,7 +475,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -493,7 +506,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -512,7 +528,7 @@ describe('v1.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1.GenerateConnectManifestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateConnectManifestRequest',
+        '.google.cloud.gkehub.v1.GenerateConnectManifestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -544,7 +560,7 @@ describe('v1.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1.GenerateConnectManifestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateConnectManifestRequest',
+        '.google.cloud.gkehub.v1.GenerateConnectManifestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -591,7 +607,7 @@ describe('v1.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1.GenerateConnectManifestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateConnectManifestRequest',
+        '.google.cloud.gkehub.v1.GenerateConnectManifestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -625,7 +641,7 @@ describe('v1.GkeHubClient', () => {
         new protos.google.cloud.gkehub.v1.GenerateConnectManifestRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GenerateConnectManifestRequest',
+        '.google.cloud.gkehub.v1.GenerateConnectManifestRequest',
         ['name']
       );
       request.name = defaultValue1;
@@ -648,9 +664,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMembershipRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateMembershipRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -680,9 +697,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMembershipRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateMembershipRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -733,9 +751,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMembershipRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateMembershipRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -763,9 +782,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateMembershipRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateMembershipRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -838,9 +858,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -870,9 +891,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -923,9 +945,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -953,9 +976,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1028,9 +1052,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1060,9 +1085,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1113,9 +1139,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1143,9 +1170,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1218,9 +1246,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1250,9 +1279,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1303,9 +1333,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1333,9 +1364,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1408,9 +1440,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1440,9 +1473,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1493,9 +1527,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1523,9 +1558,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateMembershipRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateMembershipRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateMembershipRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1598,9 +1634,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1630,9 +1667,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1683,9 +1721,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1713,9 +1752,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1788,9 +1828,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListMembershipsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMembershipsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListMembershipsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1820,9 +1861,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListMembershipsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMembershipsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListMembershipsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1868,9 +1910,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListMembershipsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMembershipsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListMembershipsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1898,9 +1941,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListMembershipsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMembershipsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListMembershipsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1951,9 +1995,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListMembershipsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMembershipsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListMembershipsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1999,9 +2044,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListMembershipsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMembershipsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListMembershipsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2041,9 +2087,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListMembershipsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMembershipsRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListMembershipsRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2082,9 +2129,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2114,9 +2162,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2162,9 +2211,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2192,9 +2242,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2242,9 +2293,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2289,9 +2341,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -2331,9 +2384,10 @@ describe('v1.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');

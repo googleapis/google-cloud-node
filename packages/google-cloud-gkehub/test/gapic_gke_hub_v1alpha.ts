@@ -267,7 +267,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -295,7 +298,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -339,7 +345,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -367,7 +376,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.GetFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFeatureRequest', ['name']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.GetFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -385,9 +397,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -417,9 +430,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -470,9 +484,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -500,9 +515,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.CreateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('CreateFeatureRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.CreateFeatureRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -575,9 +591,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -607,9 +624,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -660,9 +678,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -690,9 +709,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.DeleteFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.DeleteFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -765,9 +785,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -797,9 +818,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -850,9 +872,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -880,9 +903,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.UpdateFeatureRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFeatureRequest', [
-        'name',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.UpdateFeatureRequest',
+        ['name']
+      );
       request.name = defaultValue1;
       const expectedHeaderRequestParams = `name=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -955,9 +979,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -987,9 +1012,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1035,9 +1061,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1065,9 +1092,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1118,9 +1146,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1168,9 +1197,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedResponse = [
@@ -1210,9 +1240,10 @@ describe('v1alpha.GkeHubClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.gkehub.v1alpha.ListFeaturesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFeaturesRequest', [
-        'parent',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.gkehub.v1alpha.ListFeaturesRequest',
+        ['parent']
+      );
       request.parent = defaultValue1;
       const expectedHeaderRequestParams = `parent=${defaultValue1}`;
       const expectedError = new Error('expected');
